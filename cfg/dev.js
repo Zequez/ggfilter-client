@@ -25,4 +25,14 @@ config.module.loaders.push({
   include: path.join(__dirname, '/../src')
 });
 
+config.module.loaders.push({
+  test: /\.css$/,
+  loader: 'style!css'
+});
+
+config.module.loaders.push({
+  test: /\.sass/,
+  loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
+});
+
 module.exports = config;
