@@ -31,8 +31,8 @@ config.module.loaders.push({
 });
 
 config.module.loaders.push({
-  test: /\.sass/,
-  loader: 'style-loader!css-loader!sass-loader?outputStyle=expanded&indentedSyntax'
+  test: /\.s[ac]ss/,
+  loader: 'style!css!sass?outputStyle=expanded&indentedSyntax'
 });
 
 module.exports = config;

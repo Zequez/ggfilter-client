@@ -22,13 +22,14 @@ module.exports = {
     noInfo: false
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['', '.js', '.jsx', '.sass', '.scss'],
     alias: {
       actions: srcPath + '/actions/',
       components: srcPath + '/components/',
       sources: srcPath + '/sources/',
       stores: srcPath + '/stores/',
-      styles: srcPath + '/styles/'
+      styles: srcPath + '/styles/',
+      compass: 'compass-mixins/lib/compass'
     }
   },
   module: {

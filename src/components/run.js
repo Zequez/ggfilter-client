@@ -1,5 +1,14 @@
-import React from 'react';
-import App from './Main';
+var React = require('react')
+var ReactDOM = require('react-dom')
+var App = require('./App')
+var Provider = require('react-redux').Provider
+var store = require('stores/AppStore')
 
 // Render the main component into the dom
-React.render(<App />, document.getElementById('app'));
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('app')
+)

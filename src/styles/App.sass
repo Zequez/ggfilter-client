@@ -1,29 +1,74 @@
-$dark_blue:   #1A1932
-$blue:        #2A354C
-$ocean_blue:  #3F5864
-$ocean_green: #63807F
-$teal:        #8EA8A1
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,700,300)
 
-$color1: $dark_blue
+@import "~compass/reset"
+@import "~compass/utilities/general/clearfix"
+
+$dark-blue:   #1A1932
+$blue:        #2A354C
+$ocean-blue:  #3F5864
+$ocean-green: #63807F
+$teal:        #8EA8A1
+$white:       lighten($teal, 20%)
+
+$color1: $dark-blue
 $color2: $blue
-$color3: $ocean_blue
-$color4: $ocean_green
+$color3: $ocean-blue
+$color4: $ocean-green
 $color5: $teal
+$color6: $white
+
+$base-font-size: 16px
+$base-line-height: 24px
+$font-unit: 1rem
+$relative-font-sizing: false
+@import "~compass/typography/vertical_rhythm"
+$rhythm-px: $base-line-height
+$rhythm: rhythm()
++establish-baseline()
+
+$font-normal: $base-font-size
+$font-larger: 20px
+$font-x-larger: 24px
+$font-xx-larger: 48px
+$font-smaller: 12px
+$font-x-smaller: 8px
+
+@mixin f($font-size)
+  +adjust-font-size-to($font-size)
 
 body
-  color: #fff
-  background: white
+  color: $white
+  font-family: Roboto, sans-serif
+  font-weight: 300
+  background: $dark-blue
 
-.index img
-  margin: 40px auto
-  border-radius: 4px
-  background: #fff
-  display: block
-
-.index .notice
-  margin: 20px auto
-  padding: 15px 0
+.header
   text-align: center
-  border: 1px solid #000
-  border-width: 1px 0
-  background: #666
+  +f($font-xx-larger)
+  font-weight: bold
+
+.nav
+  +clearfix
+  &-tabs
+    list-style-type: none
+    li
+      float: left
+      padding: 0 $rhythm/2
+      background: $blue
+      +f($font-x-larger)
+      cursor: pointer
+      &.active
+        background: $ocean-blue
+
+.tabs-content
+  +clearfix
+  padding: $rhythm
+  background: $teal
+  color: $dark-blue
+  font-weight: normal
+
+  .filters-toggles-section
+    float: left
+    margin-right: $rhythm
+    h3
+      +f($font-larger)

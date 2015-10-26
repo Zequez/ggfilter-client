@@ -31,7 +31,7 @@ config.module.loaders.push({
 });
 
 config.module.loaders.push({
-  test: /\.sass$/,
+  test: /\.s[ac]ss$/,
   loader: ExtractTextPlugin.extract('style-loader', 'css?sourceMap!sass-loader?outputStyle=expanded&indentedSyntax')
 });
 
