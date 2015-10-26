@@ -6,15 +6,19 @@ var connect = require('react-redux').connect
 var NavTabs = require('./NavTabs')
 var FiltersToggles = require('./tabs/FiltersToggles')
 
-class App extends React.Component {
-  render() {
-    var tabContent = {
-      'filters': ()=> <FiltersToggles toggledFilters={this.props.toggledFilters}/>,
-      'sources': ()=> null,
-      'feedback': ()=> null,
-      'donations': ()=> null,
-    }[this.props.tab]()
+import { Tabs } from 'stores/actions'
 
+class App extends React.Component {
+  tabContent(tab) {
+    switch(tab) {
+      case Tabs.FILTERS: return <FiltersToggles toggledFilters={this.props.toggledFilters}/>
+      case Tabs.SOURCES: return null
+      case Tabs.FEEDBACK: return null
+      case Tabs.DONATIONS: return null
+    }
+  }
+
+  render() {
     return (
       <div className='container'>
         <header className='header'>GGFilter</header>
@@ -23,7 +27,7 @@ class App extends React.Component {
             <NavTabs tab={this.props.tab}/>
           </nav>
           <div className='tabs-content'>
-            {tabContent}
+            {this.tabContent(this.props.tab)}
           </div>
         </main>
       </div>

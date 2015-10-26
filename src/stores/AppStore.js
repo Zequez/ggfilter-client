@@ -1,25 +1,13 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux'
-var tab = require('./tabActions')
+import { logger, crashReporter } from './storeMiddleware'
+import { SELECT_TAB, Tabs } from './actions'
 
-const logger = store => next => action => {
-  console.log('dispatching', action);
-  let result = next(action);
-  console.log('next state', store.getState());
-  return result;
-};
-
-const crashReporter = store => next => action => {
-  try {
-    return next(action);
-  } catch (err) {
-    console.error('Caught an exception!', err);
-    Raven.captureException(err, {
-      extra: {
-        action,
-        state: store.getState()
-      }
-    });
-    throw err;
+function tab(state = Tabs.FILTERS, action) {
+  if(action.type == SELECT_TAB && Tabs[action.tab]) {
+    return action.tab
+  }
+  else {
+    return state
   }
 }
 
