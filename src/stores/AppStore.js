@@ -1,22 +1,13 @@
 import { combineReducers, createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
 import { logger, crashReporter } from './storeMiddleware'
-import { SELECT_TAB, Tabs } from './actions'
+import tab from './tabReducer'
+import toggledFilters from './toggledFiltersReducer'
+import requests from './toggledFiltersReducer'
+import games from './gamesReducer'
 
-function tab(state = Tabs.FILTERS, action) {
-  if(action.type == SELECT_TAB && Tabs[action.tab]) {
-    return action.tab
-  }
-  else {
-    return state
-  }
-}
-
-function toggledFilters(state = {}, action) {
-  return state;
-}
-
-var reducer = combineReducers({ tab, toggledFilters })
-var createStoreWithMiddleware = applyMiddleware(logger, crashReporter)(createStore)
+var reducer = combineReducers({ tab, toggledFilters, games })
+var createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger, crashReporter)(createStore)
 var store = createStoreWithMiddleware(reducer)
 
 export default store

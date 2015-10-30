@@ -1,14 +1,27 @@
 require('styles/App');
+require('es6-promise').polyfill()
+require('isomorphic-fetch')
+window.React = require('react')
+window._ = require('lodash')
 
-var React = require('react')
+var bindActionCreators = require('redux').bindActionCreators
 var connect = require('react-redux').connect
 
 var NavTabs = require('./NavTabs')
 var FiltersToggles = require('./tabs/FiltersToggles')
+var DataTable = require('./DataTable')
 
-import { Tabs } from 'stores/actions'
+import { Tabs, getGames } from 'stores/actions'
 
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+
+    if (!props.games.length) {
+      props.getGames([])
+    }
+  }
+
   tabContent(tab) {
     switch(tab) {
       case Tabs.FILTERS: return <FiltersToggles toggledFilters={this.props.toggledFilters}/>
@@ -19,6 +32,8 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('Render <App/>')
+
     return (
       <div className='container'>
         <header className='header'>GGFilter</header>
@@ -29,6 +44,7 @@ class App extends React.Component {
           <div className='tabs-content'>
             {this.tabContent(this.props.tab)}
           </div>
+          <DataTable games={this.props.games} filters={this.props.toggledFilters}/>
         </main>
       </div>
     )
@@ -38,20 +54,7 @@ class App extends React.Component {
 App.propTypes = {}
 App.defaultProps = {}
 
-function mapStateToProps(state) {
-  return {
-    tab: state.tab,
-    toggledFilters: state.toggledFilters
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-
-  }
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  (state)=>{ return state },
+  (dispatch)=> bindActionCreators({ getGames }, dispatch)
 )(App)

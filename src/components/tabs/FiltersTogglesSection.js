@@ -1,18 +1,13 @@
 var React = require('react')
 var _ = require('lodash')
 
-class FiltersTogglesSection extends React.Component {
-  filterChanged(ev) {
-    console.log(ev)
-  }
+import { toggleFilter } from 'stores/actions'
 
+class FiltersTogglesSection extends React.Component {
   render() {
     var toggles = this.props.filters.map((filter)=>{
       return (
-        <filter.toggle
-          key={filter.title}
-          title={filter.title}
-          onChange={this.filterChanged}/>
+        <filter.toggle key={filter.name} active={true} filter={filter}/>
       )
     })
 

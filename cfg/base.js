@@ -1,7 +1,7 @@
 var path = require('path');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
-var port = 8000;
+var port = 8001;
 var srcPath = path.join(__dirname, '/../src');
 var publicPath = '/assets/';
 

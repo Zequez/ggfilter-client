@@ -6,7 +6,7 @@ var baseConfig = require('./base');
 
 var config = _.merge({
   entry: [
-    'webpack-dev-server/client?http://127.0.0.1:8000',
+    'webpack-dev-server/client?http://127.0.0.1:8001',
     'webpack/hot/only-dev-server',
     './src/components/run'
   ],
@@ -21,7 +21,7 @@ var config = _.merge({
 // Add needed loaders
 config.module.loaders.push({
   test: /\.(js|jsx)$/,
-  loader: 'react-hot!babel-loader',
+  loader: 'react-hot!babel?optional[]=runtime',
   include: path.join(__dirname, '/../src')
 });
 
