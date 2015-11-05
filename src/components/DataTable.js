@@ -1,29 +1,25 @@
 var { Component, PropTypes } = React
 var DataTableFilters = require('./DataTableFilters')
+var DataTableBatch = require('./DataTableBatch')
 var filtersDefinitions = require('sources/filtersDefinitions')
 
 class DataTable extends Component {
   render() {
     console.log('Render <DataTable/>')
 
-    var rows = []
-    var games = this.props.games.list
-    for(let i = 0; i < games.length; ++i){
-      let game = games[i]
-      rows.push(
-        <tr key={i}>
-          <td>{game.id}</td>
-          <td>{game.name}</td>
-        </tr>
+
+    var batches = []
+    var gamesBatches = this.props.games.batches
+    for(let i = 0; i < gamesBatches.length; ++i) {
+      batches.push(
+        <DataTableBatch key={i} games={gamesBatches[i]}/>
       )
     }
 
     return (
       <table className='table'>
         <DataTableFilters filters={this.props.filters} />
-        <tbody>
-          {rows}
-        </tbody>
+        {batches}
       </table>
     )
   }
@@ -34,7 +30,7 @@ DataTable.propTypes = {
   games: PropTypes.shape({
     list: React.PropTypes.array,
     fetching: React.PropTypes.bool,
-    fetching: React.PropTypes.bool
+    failed: React.PropTypes.bool
   }).isRequired
 }
 

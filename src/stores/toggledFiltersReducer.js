@@ -26,7 +26,7 @@ function toggledFiltersReducer(state = initialState, action) {
     }
   }
 
-  console.log(state)
+  // console.log(state)
 
   return state;
 }

@@ -5,7 +5,7 @@ class DataTableFilters extends Component {
   render() {
     var titles = []
     var controls = []
-    console.log(this.props.filters)
+    // console.log(this.props.filters)
     this.props.filters.forEach((filterName)=>{
       var filter = filtersDefinitions[filterName]
 

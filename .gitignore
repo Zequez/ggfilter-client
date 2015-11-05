@@ -1,2 +1,4 @@
 /node_modules
 /gem/app/assets/*
+
+*.log
