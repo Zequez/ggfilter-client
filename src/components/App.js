@@ -17,8 +17,8 @@ class App extends React.Component {
   constructor(props) {
     super(props)
 
-    if (!props.games.length) {
-      props.getGames([])
+    if (!props.games.batches.length) {
+      props.getGames()
     }
   }
 

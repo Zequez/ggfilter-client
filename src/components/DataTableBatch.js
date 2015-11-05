@@ -1,9 +1,13 @@
 var { Component, PropTypes } = React
 
 class DataTableBatch extends Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.games !== this.props.games
+  }
+
   render() {
-    console.log('Render <DataTableBatch/>')
-    
+    console.info('Render <DataTableBatch/>')
+
     var rows = []
     var games = this.props.games
     for(let i = 0; i < games.length; ++i) {

@@ -3,6 +3,8 @@ var filtersDefinitions = require('sources/filtersDefinitions')
 
 class DataTableFilters extends Component {
   render() {
+    console.info('Render <DataTableFilters/>')
+
     var titles = []
     var controls = []
     var filters = this.props.filters

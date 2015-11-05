@@ -5,8 +5,7 @@ var filtersDefinitions = require('sources/filtersDefinitions')
 
 class DataTable extends Component {
   render() {
-    console.log('Render <DataTable/>')
-
+    console.info('Render <DataTable/>')
 
     var batches = []
     var gamesBatches = this.props.games.batches
@@ -30,7 +29,7 @@ class DataTable extends Component {
 DataTable.propTypes = {
   filters: PropTypes.arrayOf(PropTypes.string).isRequired,
   query: PropTypes.shape({
-    filters: PropTypes.arrayOf(PropTypes.object),
+    filters: PropTypes.object,
     sort: PropTypes.arrayOf(PropTypes.string),
     batchSize: PropTypes.number
   }).isRequired,

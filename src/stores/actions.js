@@ -1,4 +1,5 @@
 var connect = require('react-redux').connect
+var qs = require('qs')
 
 if (true) { // Dev
   var Symbol = function(key){
@@ -49,19 +50,26 @@ export const SET_QUERY_SORT = Symbol('SET_QUERY_SORT')
 export const SET_QUERY_BATCH_SIZE = Symbol('SET_QUERY_BATCH_SIZE')
 
 export function setQueryFilter(name, filter, highlight, data) {
-  return { type: SET_QUERY_FILTER, name, filter, highlight, data }
+  return dispatchAndGetGames({ type: SET_QUERY_FILTER, name, filter, highlight, data })
 }
 
 export function removeQueryFilter(name) {
-  return { type: REMOVE_QUERY_FILTER, name }
+  return dispatchAndGetGames({ type: REMOVE_QUERY_FILTER, name })
 }
 
 export function setQuerySort(name) {
-  return { type: SET_QUERY_SORT, name }
+  return dispatchAndGetGames({ type: SET_QUERY_SORT, name })
 }
 
 export function setQueryBatchSize(size) {
   return { type: SET_QUERY_BATCH_SIZE, size }
+}
+
+function dispatchAndGetGames(action) {
+  return function(dispatch, getState) {
+    dispatch(action)
+    getGames()(dispatch, getState)
+  }
 }
 
 /*** GAMES ACTIONS ***/
@@ -71,11 +79,21 @@ export const GET_GAMES_START = Symbol('GET_GAMES_START')
 export const GET_GAMES_END = Symbol('GET_GAMES_END')
 export const GET_GAMES_FAILED = Symbol('GET_GAMES_FAILED')
 
-export function getGames(filters, page = 0) {
-  return function(dispatch) {
+export function getGames(page = 0) {
+  return function(dispatch, getState) {
+    var query = getState().query
     dispatch({type: GET_GAMES_START, page: page})
 
-    return fetch('http://localhost:3000/games.json')
+    var queryString = qs.stringify({
+      filters: query.filters,
+      sort: query.sort,
+      limit: query.batchSize,
+      page: page
+    })
+
+    console.debug(queryString)
+
+    return fetch(`http://localhost:3000/games.json?${queryString}`)
       .then(response => response.json())
       .then(json => dispatch({type: GET_GAMES_END, games: json, page: page}))
       .catch(error => dispatch({type: GET_GAMES_FAILED, page: page}))

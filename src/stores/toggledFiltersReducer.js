@@ -1,7 +1,7 @@
 import { TOGGLE_FILTER } from './actions'
 var filtersSections = require('sources/filtersSectionsDefinitions')
 
-const initialState = ['steam_id', 'steam_price', 'metascore', 'steam_reviews_count']
+const initialState = ['steam_id', 'name', 'steam_price', 'metascore', 'steam_reviews_count']
 
 var filtersOrder = []
 for(var section in filtersSections) {

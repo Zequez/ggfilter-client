@@ -5,10 +5,6 @@ import { setQueryFilter, removeQueryFilter } from 'stores/actions'
 
 class ExactFilter extends Component {
   handleChange(ev) {
-    console.log(setQueryFilter(this.props.filter.name, true, false, {
-      value: ev.target.value
-    }))
-
     if (ev.target.value) {
       this.props.dispatch(setQueryFilter(this.props.filter.name, true, false, {
         value: ev.target.value

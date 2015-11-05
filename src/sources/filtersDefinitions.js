@@ -3,6 +3,13 @@ var RawColumn = require('components/columns/RawColumn')
 var ExactFilter = require('components/filters/ExactFilter')
 
 export default {
+  'name': {
+    name: 'name',
+    title: 'Name',
+    toggle: BaseToggle,
+    filter: ExactFilter,
+    column: RawColumn
+  },
   'steam_id': {
     name: 'steam_id',
     title: 'Steam ID',
