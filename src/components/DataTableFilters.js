@@ -5,18 +5,19 @@ class DataTableFilters extends Component {
   render() {
     var titles = []
     var controls = []
-    // console.log(this.props.filters)
-    this.props.filters.forEach((filterName)=>{
-      var filter = filtersDefinitions[filterName]
+    var filters = this.props.filters
+    for(let i = 0; i < filters.length; ++i) {
+      let filter = filtersDefinitions[filters[i]]
+      let query = this.props.queries[filters[i]] || {}
 
       titles.push(
-        <th key={filter.name}>{filter.title}</th>
+        <th key={i}>{filter.title}</th>
       )
 
       controls.push(
-        <th key={filter.name}><filter.filter/></th>
+        <th key={i}><filter.filter filter={filter} query={query}/></th>
       )
-    })
+    }
 
     return (
       <thead>
@@ -32,7 +33,8 @@ class DataTableFilters extends Component {
 }
 
 DataTableFilters.propTypes = {
-  filters: PropTypes.arrayOf(PropTypes.string).isRequired
+  filters: PropTypes.arrayOf(PropTypes.string).isRequired,
+  queries: PropTypes.object.isRequired
 }
 
 export default DataTableFilters

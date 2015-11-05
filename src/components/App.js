@@ -44,7 +44,10 @@ class App extends React.Component {
           <div className='tabs-content'>
             {this.tabContent(this.props.tab)}
           </div>
-          <DataTable games={this.props.games} filters={this.props.toggledFilters}/>
+          <DataTable
+            games={this.props.games}
+            query={this.props.query}
+            filters={this.props.toggledFilters}/>
         </main>
       </div>
     )

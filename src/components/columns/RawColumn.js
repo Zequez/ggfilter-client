@@ -8,4 +8,8 @@ class RawColumn extends Component {
   }
 }
 
+RawColumn.columns = function(filter) {
+  return filter.name
+}
+
 export default RawColumn

@@ -8,7 +8,7 @@ import games from './gamesReducer'
 import query from './queryReducer'
 
 var reducer = combineReducers({ tab, toggledFilters, games, query })
-var createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger, crashReporter)(createStore)
+var createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(createStore) //crashReporter
 var store = createStoreWithMiddleware(reducer)
 
 var exampleState = {
@@ -26,6 +26,31 @@ var exampleState = {
     sort: [],
     batchSize: 20
   }
+  // filters: {
+  //   sort: [],
+  //   batchSize: 20,
+  //   list: [
+  //     {
+  //       name: 'steam_id',
+  //       query: {
+  //         filter: true,
+  //         highlight: false,
+  //         value: '123'
+  //       }
+  //     },
+  //     {
+  //       name: 'steam_price' // just a column but with the filter deactivated
+  //     },
+  //     {
+  //       name: 'name',
+  //       query: {
+  //         filter: true,
+  //         highlight: false,
+  //         value: 'civ'
+  //       }
+  //     }
+  //   ]
+  // }
 }
 
 export default store

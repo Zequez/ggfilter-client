@@ -18,7 +18,9 @@ class DataTable extends Component {
 
     return (
       <table className='table'>
-        <DataTableFilters filters={this.props.filters} />
+        <DataTableFilters
+          filters={this.props.filters}
+          queries={this.props.query.filters} />
         {batches}
       </table>
     )
@@ -27,10 +29,15 @@ class DataTable extends Component {
 
 DataTable.propTypes = {
   filters: PropTypes.arrayOf(PropTypes.string).isRequired,
+  query: PropTypes.shape({
+    filters: PropTypes.arrayOf(PropTypes.object),
+    sort: PropTypes.arrayOf(PropTypes.string),
+    batchSize: PropTypes.number
+  }).isRequired,
   games: PropTypes.shape({
-    list: React.PropTypes.array,
-    fetching: React.PropTypes.bool,
-    failed: React.PropTypes.bool
+    list: PropTypes.array,
+    fetching: PropTypes.bool,
+    failed: PropTypes.bool
   }).isRequired
 }
 
