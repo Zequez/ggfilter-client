@@ -1,8 +1,6 @@
 require('styles/App');
 require('es6-promise').polyfill()
 require('isomorphic-fetch')
-window.React = require('react')
-window._ = require('lodash')
 
 var bindActionCreators = require('redux').bindActionCreators
 var connect = require('react-redux').connect

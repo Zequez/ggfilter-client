@@ -38,9 +38,9 @@ export default {
     filter: ExactFilter,
     column: RawColumn
   },
-  'metascore': {
-    name: 'metascore',
-    title: 'Metascore',
+  'metacritic': {
+    name: 'metacritic',
+    title: 'Metacritic',
     toggle: BaseToggle,
     filter: ExactFilter,
     column: RawColumn

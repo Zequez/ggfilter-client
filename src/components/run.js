@@ -1,4 +1,5 @@
-var React = require('react')
+window.React = require('react')
+window._ = require('lodash')
 var ReactDOM = require('react-dom')
 var App = require('./App')
 var Provider = require('react-redux').Provider

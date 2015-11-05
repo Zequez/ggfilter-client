@@ -1,5 +1,6 @@
 var connect = require('react-redux').connect
 var qs = require('qs')
+var filtersDefinitions = require('sources/filtersDefinitions')
 
 if (true) { // Dev
   var Symbol = function(key){
@@ -81,15 +82,30 @@ export const GET_GAMES_FAILED = Symbol('GET_GAMES_FAILED')
 
 export function getGames(page = 0) {
   return function(dispatch, getState) {
-    var query = getState().query
+    var state = getState()
+    var filters = state.toggledFilters
+    var query = state.query
     dispatch({type: GET_GAMES_START, page: page})
+
+    // Get the columns to request
+    var columns = []
+    for (let i = 0; i < filters.length; ++i) {
+      let columnColumns = filtersDefinitions[filters[i]].column.columns
+      if (typeof columnColumns === 'function') {
+        columnColumns = columnColumns(filters[i])
+      }
+      columns = columns.concat(columnColumns)
+    }
+
+    console.debug(columns)
 
     var queryString = qs.stringify({
       filters: query.filters,
       sort: query.sort,
       limit: query.batchSize,
+      columns: columns,
       page: page
-    })
+    }, {arrayFormat: 'brackets'})
 
     console.debug(queryString)
 

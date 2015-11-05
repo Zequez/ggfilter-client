@@ -9,7 +9,7 @@ class RawColumn extends Component {
 }
 
 RawColumn.columns = function(filter) {
-  return filter.name
+  return filter
 }
 
 RawColumn.propTypes = {
