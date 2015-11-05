@@ -3,13 +3,18 @@ var { Component, PropTypes } = React
 class RawColumn extends Component {
   render() {
     return (
-      <span>Hello</span>
+      <span>{this.props.game[this.props.name]}</span>
     )
   }
 }
 
 RawColumn.columns = function(filter) {
   return filter.name
+}
+
+RawColumn.propTypes = {
+  game: PropTypes.object.isRequired,
+  name: PropTypes.string.isRequired
 }
 
 export default RawColumn

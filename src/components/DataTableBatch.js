@@ -1,8 +1,9 @@
 var { Component, PropTypes } = React
+var filtersDefinitions = require('sources/filtersDefinitions')
 
 class DataTableBatch extends Component {
   shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.games !== this.props.games
+    return nextProps.games !== this.props.games || nextProps.filters !== this.props.filters
   }
 
   render() {
@@ -10,12 +11,18 @@ class DataTableBatch extends Component {
 
     var rows = []
     var games = this.props.games
+    var filters = this.props.filters
     for(let i = 0; i < games.length; ++i) {
+      let game = this.props.games[i]
+      let cols = []
+      for(let j = 0; j < filters.length; ++j) {
+        let filter = filtersDefinitions[filters[j]]
+        cols.push(
+          <td key={j}><filter.column name={filter.name} game={game}/></td>
+        )
+      }
       rows.push(
-        <tr key={i}>
-          <td>{games[i].id}</td>
-          <td>{games[i].name}</td>
-        </tr>
+        <tr key={i}>{cols}</tr>
       )
     }
 
@@ -28,7 +35,8 @@ class DataTableBatch extends Component {
 }
 
 DataTableBatch.propTypes = {
-  games: PropTypes.array.isRequired
+  games: PropTypes.array.isRequired,
+  filters: PropTypes.arrayOf(PropTypes.string).isRequired
 }
 
 export default DataTableBatch
