@@ -1,39 +1,28 @@
 var { Component, PropTypes } = React
-var connect = require('react-redux').connect
-
-import { setQueryFilter, removeQueryFilter } from 'stores/actions'
 
 class ExactFilter extends Component {
   handleChange(ev) {
-    if (ev.target.value) {
-      this.props.dispatch(setQueryFilter(this.props.filter.name, true, false, {
-        value: ev.target.value
-      }))
-    }
-    else {
-      this.props.dispatch(removeQueryFilter(this.props.filter.name))
-    }
+    var value = ev.target.value
+    this.props.onChange(value ? {value: value} : null)
   }
 
   render() {
     return (
-      <input
-        type='text'
-        value={this.props.query.value}
-        onChange={this.handleChange.bind(this)} />
+      <div>
+        <input
+          type='text'
+          value={this.props.query.value}
+          onChange={this.handleChange.bind(this)} />
+      </div>
     )
   }
 }
 
 ExactFilter.propTypes = {
-  filter: PropTypes.shape({
-    name: PropTypes.string.isRequired
-  }).isRequired,
   query: PropTypes.shape({
-    value: PropTypes.string,
-    filter: PropTypes.bool,
-    highlight: PropTypes.bool
-  }).isRequired
+    value: PropTypes.string
+  }).isRequired,
+  onChange: PropTypes.func.isRequired
 }
 
-export default connect()(ExactFilter)
+export default ExactFilter

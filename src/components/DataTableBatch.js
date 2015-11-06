@@ -17,8 +17,11 @@ class DataTableBatch extends Component {
       let cols = []
       for(let j = 0; j < filters.length; ++j) {
         let filter = filtersDefinitions[filters[j]]
+        let hlClass = game['hl_' + filter.name] ? 'hl' : ''
         cols.push(
-          <td key={j}><filter.column name={filter.name} game={game}/></td>
+          <td key={j} className={hlClass}>
+            <filter.column name={filter.name} game={game}/>
+          </td>
         )
       }
       rows.push(

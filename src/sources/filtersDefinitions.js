@@ -1,69 +1,49 @@
 var BaseToggle = require('components/toggles/BaseToggle')
 var RawColumn = require('components/columns/RawColumn')
+var SteamReviewsColumn = require('components/columns/SteamReviewsColumn')
 var ExactFilter = require('components/filters/ExactFilter')
+var RangeFilter = require('components/filters/RangeFilter')
 
-export default {
+var filtersDefinitions = {
   'name': {
-    name: 'name',
-    title: 'Name',
-    toggle: BaseToggle,
-    filter: ExactFilter,
-    column: RawColumn
+    title: 'Name'
   },
   'steam_id': {
-    name: 'steam_id',
-    title: 'Steam ID',
-    toggle: BaseToggle,
-    filter: ExactFilter,
-    column: RawColumn
+    title: 'Steam ID'
   },
   'images': {
-    name: 'images',
-    title: 'Images',
-    toggle: BaseToggle,
-    filter: ExactFilter,
-    column: RawColumn
+    title: 'Images'
   },
   'lowest_price': {
-    name: 'lowest_price',
-    title: 'Lowest price',
-    toggle: BaseToggle,
-    filter: ExactFilter,
-    column: RawColumn
+    title: 'Lowest price'
   },
   'steam_price': {
-    name: 'steam_price',
-    title: 'Steam price (US)',
-    toggle: BaseToggle,
-    filter: ExactFilter,
-    column: RawColumn
+    title: 'Steam price (US)'
   },
   'metacritic': {
-    name: 'metacritic',
-    title: 'Metacritic',
-    toggle: BaseToggle,
-    filter: ExactFilter,
-    column: RawColumn
+    title: 'Metacritic'
   },
   'steam_reviews_count': {
-    name: 'steam_reviews_count',
     title: '# Steam reviews',
-    toggle: BaseToggle,
-    filter: ExactFilter,
-    column: RawColumn
+    filter: RangeFilter,
+    column: SteamReviewsColumn,
+    sort: 'steam_reviews_ratio'
   },
   'multiplayer': {
-    name: 'multiplayer',
-    title: 'Multiplayer',
-    toggle: BaseToggle,
-    filter: ExactFilter,
-    column: RawColumn
+    title: 'Multiplayer'
   },
   'single_player': {
-    name: 'single_player',
-    title: 'Single player',
-    toggle: BaseToggle,
-    filter: ExactFilter,
-    column: RawColumn
+    title: 'Single player'
   }
 }
+
+for (let filterName in filtersDefinitions) {
+  let filter = filtersDefinitions[filterName]
+  filter.name = filterName
+  if (!filter.sort) filter.sort = filter.name
+  if (!filter.toggle) filter.toggle = BaseToggle
+  if (!filter.filter) filter.filter = ExactFilter
+  if (!filter.column) filter.column = RawColumn
+}
+
+export default filtersDefinitions

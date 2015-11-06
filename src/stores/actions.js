@@ -50,8 +50,8 @@ export const REMOVE_QUERY_FILTER = Symbol('REMOVE_QUERY_FILTER')
 export const SET_QUERY_SORT = Symbol('SET_QUERY_SORT')
 export const SET_QUERY_BATCH_SIZE = Symbol('SET_QUERY_BATCH_SIZE')
 
-export function setQueryFilter(name, filter, highlight, data) {
-  return dispatchAndGetGames({ type: SET_QUERY_FILTER, name, filter, highlight, data })
+export function setQueryFilter(name, data) {
+  return dispatchAndGetGames({ type: SET_QUERY_FILTER, name, data })
 }
 
 export function removeQueryFilter(name) {
@@ -97,17 +97,13 @@ export function getGames(page = 0) {
       columns = columns.concat(columnColumns)
     }
 
-    console.debug(columns)
-
     var queryString = qs.stringify({
-      filters: query.filters,
+      filters: JSON.stringify(query.filters),
       sort: query.sort,
       limit: query.batchSize,
       columns: columns,
       page: page
     }, {arrayFormat: 'brackets'})
-
-    console.debug(queryString)
 
     return fetch(`http://localhost:3000/games.json?${queryString}`)
       .then(response => response.json())

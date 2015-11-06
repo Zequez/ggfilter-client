@@ -1,7 +1,20 @@
 var { Component, PropTypes } = React
+var connect = require('react-redux').connect
+import { setQueryFilter, removeQueryFilter } from 'stores/actions'
 var filtersDefinitions = require('sources/filtersDefinitions')
 
 class DataTableFilters extends Component {
+  handleFilterChange(filterName, data) {
+    if (data) {
+      data.filter = true
+      data.highlight = false
+      this.props.dispatch(setQueryFilter(filterName, data))
+    }
+    else {
+      this.props.dispatch(removeQueryFilter(filterName))
+    }
+  }
+
   render() {
     console.info('Render <DataTableFilters/>')
 
@@ -17,7 +30,11 @@ class DataTableFilters extends Component {
       )
 
       controls.push(
-        <th key={i}><filter.filter filter={filter} query={query}/></th>
+        <th key={i}>
+          <filter.filter
+            query={query}
+            onChange={this.handleFilterChange.bind(this, filter.name)}/>
+        </th>
       )
     }
 
@@ -39,4 +56,4 @@ DataTableFilters.propTypes = {
   queries: PropTypes.object.isRequired
 }
 
-export default DataTableFilters
+export default connect()(DataTableFilters)
