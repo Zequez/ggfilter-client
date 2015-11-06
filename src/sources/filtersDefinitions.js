@@ -17,10 +17,7 @@ var filtersDefinitions = {
   'images': {
     title: 'Images'
   },
-  'lowest_price': {
-    title: 'Lowest price'
-  },
-  'steam_price': {
+  'lowest_steam_price': {
     title: 'Steam price (US)',
     filter: RangeFilter,
     column: PriceColumn,
@@ -29,6 +26,31 @@ var filtersDefinitions = {
       range: [100, 300, 500, 1000, 1500, 2000, 3000, 4000, 5000, 6000],
       rangeLabels: ['$1', '$3', '$5', '$10', '$15', '$20', '$30', '$40', '$50', '$60']
     }
+  },
+  steam_discount: {
+    title: 'Steam sale %',
+    filterOptions: {
+      range: [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90],
+      rangeLabels: ['Not on sale (0%)', 'On sale (1%)', '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%']
+    },
+    filter: RangeFilter,
+    column: RawColumn,
+    columnOptions: { prefix: '%' }
+  },
+  playtime_mean: {
+    title: 'Playtime mean'
+  },
+  playtime_median: {
+    title: 'Playtime median'
+  },
+  playtime_sd: {
+    title: 'Playtime σ'
+  },
+  playtime_rsd: {
+    title: 'Playtime relative σ'
+  },
+  playtime_ftb: {
+    title: 'Playtime / $'
   },
   'metacritic': {
     title: 'Metacritic',

@@ -22,7 +22,15 @@ class RangeFilter extends React.Component {
     for (let i = 0; i < range.length; ++i) {
       let v = range[i]
       var l = rangeLabels ? rangeLabels[i] : v
-      if ((ignoreUp && (!lt || v < lt)) || (!ignoreUp && (!gt || v > gt)) ) {
+
+      if (ignoreUp) {
+        var shouldDraw = lt==null || v < lt
+      }
+      else {
+        var shouldDraw = gt==null || v > gt
+      }
+
+      if (shouldDraw) {
         selectOptions.push(
           <option key={i} value={v}>{l}</option>
         )

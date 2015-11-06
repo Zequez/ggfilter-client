@@ -1,6 +1,7 @@
 export default {
   'Game info': ['steam_id', 'name', 'images'],
-  'Price': ['lowest_price', 'steam_price'],
+  'Price': ['lowest_steam_price', 'steam_discount'],
+  'Playtime': ['playtime_mean', 'playtime_median', 'playtime_sd', 'playtime_rsd', 'playtime_ftb'],
   'Ratings': ['metacritic', 'steam_reviews_count'],
   'Features': ['multiplayer', 'single_player']
 }

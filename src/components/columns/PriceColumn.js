@@ -1,7 +1,14 @@
 class PriceColumn extends React.Component {
   render() {
+    // if (this.props.was) {
+    //     <span className='strike'>{this.props.was}</span>
+    // }
+
     return (
-      <span>${this.props.price/100}</span>
+      <span>
+        {this.props.was ? <span className='strike'>${this.props.was}</span> : ''}
+        ${this.props.price/100}
+      </span>
     )
   }
 }
