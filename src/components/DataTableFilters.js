@@ -1,8 +1,13 @@
-import { setQueryFilter, removeQueryFilter } from 'stores/actions'
+import { setQueryFilter, removeQueryFilter, setQuerySort } from 'stores/actions'
 var connect = require('react-redux').connect
 var filtersDefinitions = require('sources/filtersDefinitions')
+var classNames = require('classnames')
 
 class DataTableFilters extends React.Component {
+  handleTitleClick(filterName, ev) {
+    this.props.dispatch(setQuerySort(filterName))
+  }
+
   handleFilterChange(filterName, data) {
     if (data) {
       data.filter = true
@@ -19,13 +24,31 @@ class DataTableFilters extends React.Component {
 
     var titles = []
     var controls = []
+    var query = this.props.query
     var filters = this.props.filters
     for(let i = 0; i < filters.length; ++i) {
       let filter = filtersDefinitions[filters[i]]
-      let query = this.props.queries[filters[i]] || {}
+      let queryFilter = query.filters[filters[i]] || {}
+
+      // let sortClass = ''
+      // console.log(query.sort, filter.name)
+      // if (query.sort == filter.name) {
+      //   sortClass = 'sort ' + query.sort_asc ? 'asc' : 'desc'
+      // }
+
+      var sorted = query.sort == filter.name
+      var thClass = classNames({
+        sort: sorted,
+        'sort-asc': sorted && query.sort_asc,
+        'sort-desc': sorted && !query.sort_asc
+      })
 
       titles.push(
-        <th key={i}>{filter.title}</th>
+        <th key={i}
+          onClick={this.handleTitleClick.bind(this, filter.name)}
+          classNames={thClass}>
+          {filter.title}
+        </th>
       )
 
       controls.push(
@@ -39,11 +62,11 @@ class DataTableFilters extends React.Component {
     }
 
     return (
-      <thead>
-        <tr>
+      <thead className='data-table-filters'>
+        <tr className='data-table-filters-titles'>
           {titles}
         </tr>
-        <tr>
+        <tr className='data-table-filters-controls'>
           {controls}
         </tr>
       </thead>
@@ -54,7 +77,7 @@ class DataTableFilters extends React.Component {
 var t = React.PropTypes
 DataTableFilters.propTypes = {
   filters: t.arrayOf(t.string).isRequired,
-  queries: t.object.isRequired
+  query: t.object.isRequired,
 }
 
 export default connect()(DataTableFilters)

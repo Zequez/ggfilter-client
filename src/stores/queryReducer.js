@@ -5,7 +5,8 @@ const initialState = {
   filters: {
     name: { value: 'a', filter: false, highlight: true }
   },
-  sort: [],
+  sort: 'playtime_ftb',
+  sort_asc: false,
   batchSize: 20
 }
 
@@ -18,8 +19,13 @@ function queryReducer(state = initialState, action) {
     delete state.filters[action.name]
   }
   else if (action.type == SET_QUERY_SORT) {
-    state = update(state, {sort: {$unshift: [action.name]}})
-    if (state.sort.length > 3) state.sort.pop()
+    if (state.sort == action.name) {
+      state = update(state, {sort_asc: {$set: !state.sort_asc}})
+    }
+    else {
+      state = update(state, {sort: {$set: action.name}, sort_asc: { $set: true }})
+    }
+
   }
   else if (action.type == SET_QUERY_BATCH_SIZE) {
     state = update(state, {batchSize: {$set: action.size}})

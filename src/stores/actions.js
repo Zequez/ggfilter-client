@@ -95,10 +95,10 @@ export function getGames(page = 0) {
         columns.push(columnInputs[k])
       }
     }
-
+    var sort_dir = query.sort_asc ? 'asc' : 'desc'
     var queryString = qs.stringify({
       filters: JSON.stringify(query.filters),
-      sort: query.sort,
+      sort: `${query.sort}_${sort_dir}`,
       limit: query.batchSize,
       columns: columns,
       page: page

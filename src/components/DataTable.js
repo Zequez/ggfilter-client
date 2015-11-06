@@ -18,7 +18,7 @@ class DataTable extends Component {
       <table className='data-table'>
         <DataTableFilters
           filters={this.props.filters}
-          queries={this.props.query.filters} />
+          query={this.props.query} />
         {batches}
       </table>
     )
@@ -29,7 +29,8 @@ DataTable.propTypes = {
   filters: PropTypes.arrayOf(PropTypes.string).isRequired,
   query: PropTypes.shape({
     filters: PropTypes.object,
-    sort: PropTypes.arrayOf(PropTypes.string),
+    sort: PropTypes.string,
+    sort_asc: PropTypes.bool,
     batchSize: PropTypes.number
   }).isRequired,
   games: PropTypes.shape({
