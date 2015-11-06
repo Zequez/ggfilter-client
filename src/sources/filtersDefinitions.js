@@ -1,7 +1,7 @@
 var BaseToggle = require('components/toggles/BaseToggle')
 var RawColumn = require('components/columns/RawColumn')
 var PriceColumn = require('components/columns/PriceColumn')
-var SteamReviewsColumn = require('components/columns/SteamReviewsColumn')
+var RatioColumn = require('components/columns/RatioColumn')
 var LinkColumn = require('components/columns/LinkColumn')
 var ExactFilter = require('components/filters/ExactFilter')
 var NumberFilter = require('components/filters/NumberFilter')
@@ -74,9 +74,17 @@ var filtersDefinitions = {
     title: '# Steam reviews',
     filter: RangeFilter,
     filterOptions: { range: [8, 20, 35, 65, 115, 220, 420, 1020, 4250] },
-    column: SteamReviewsColumn,
-    columnInputs: { up: 'positive_steam_reviews_count', down: 'negative_steam_reviews_count' },
-    sort: 'steam_reviews_ratio'
+    // column: ,
+    // columnInputs: { up: 'positive_steam_reviews_count', down: 'negative_steam_reviews_count' }
+  },
+  'steam_reviews_ratio': {
+    title: 'Steam reviews ratio',
+    filter: RangeFilter,
+    filterOptions: {
+      range: [10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 98, 99],
+      rangeLabels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '95%', '98%', '99%']
+    },
+    column: RatioColumn
   },
   'multiplayer': {
     title: 'Multiplayer'
