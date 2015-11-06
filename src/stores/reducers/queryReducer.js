@@ -1,14 +1,6 @@
-import { SET_QUERY_FILTER, REMOVE_QUERY_FILTER, SET_QUERY_SORT, SET_QUERY_BATCH_SIZE } from './actions'
+import { SET_QUERY_FILTER, REMOVE_QUERY_FILTER, SET_QUERY_SORT, SET_QUERY_BATCH_SIZE } from 'stores/actions'
+var initialState = require('stores/initialState').query
 var update = require('react-addons-update')
-
-const initialState = {
-  filters: {
-    name: { value: 'aaaaaaa', filter: true, highlight: false }
-  },
-  sort: 'playtime_ftb',
-  sort_asc: false,
-  batchSize: 20
-}
 
 function queryReducer(state = initialState, action) {
   if (action.type == SET_QUERY_FILTER) {

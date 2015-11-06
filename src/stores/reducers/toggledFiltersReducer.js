@@ -1,19 +1,17 @@
-import { TOGGLE_FILTER } from './actions'
+import { TOGGLE_FILTER } from 'stores/actions'
+var initialState = require('stores/initialState').toggledFilters
 var filtersSections = require('sources/filtersSectionsDefinitions')
-
-const initialState = [
-  'steam_id',
-  'name',
-  'lowest_steam_price',
-  'steam_discount',
-  'playtime_ftb',
-  'metacritic',
-  'steam_reviews_count']
 
 var filtersOrder = []
 for(var section in filtersSections) {
   filtersOrder = filtersOrder.concat(filtersSections[section])
 }
+
+function defaultOrder(currentFilters, newFilter) {
+  return filtersOrder.filter((v)=> currentFilters.indexOf(v) != -1 || newFilter == v )
+}
+
+initialState = defaultOrder(initialState)
 
 // action.filter string
 // action.force boolean
@@ -29,11 +27,9 @@ function toggledFiltersReducer(state = initialState, action) {
       state.splice(index, 1)
     }
     else if(!currentlyActive && shouldActive) {
-      state = filtersOrder.filter((v)=> state.indexOf(v) != -1 || action.filter == v )
+      state = defaultOrder(state, action.filter)
     }
   }
-
-  // console.log(state)
 
   return state;
 }

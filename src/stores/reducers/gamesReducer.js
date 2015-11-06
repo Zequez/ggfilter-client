@@ -1,10 +1,5 @@
-import { GET_GAMES_START, GET_GAMES_END, GET_GAMES_FAILED } from './actions'
-
-const initialState = {
-  batches: [],
-  fetching: false,
-  failed: false
-}
+import { GET_GAMES_START, GET_GAMES_END, GET_GAMES_FAILED } from 'stores/actions'
+var initialState = require('stores/initialState').games
 
 function gamesReducer(state = initialState, action) {
   if (action.type == GET_GAMES_START) {

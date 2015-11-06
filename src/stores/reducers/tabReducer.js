@@ -1,6 +1,5 @@
-import { SELECT_TAB, Tabs } from './actions'
-
-const initialState = Tabs.FILTERS
+import { SELECT_TAB, Tabs } from 'stores/actions'
+var initialState = require('stores/initialState').tab
 
 function tabReducer(state = initialState, action) {
   if(action.type == SELECT_TAB && Tabs[action.tab]) {
