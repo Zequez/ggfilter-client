@@ -2,13 +2,17 @@ var BaseToggle = require('components/toggles/BaseToggle')
 var RawColumn = require('components/columns/RawColumn')
 var PriceColumn = require('components/columns/PriceColumn')
 var SteamReviewsColumn = require('components/columns/SteamReviewsColumn')
+var LinkColumn = require('components/columns/LinkColumn')
 var ExactFilter = require('components/filters/ExactFilter')
 var NumberFilter = require('components/filters/NumberFilter')
 var RangeFilter = require('components/filters/RangeFilter')
 
 var filtersDefinitions = {
-  'name': {
-    title: 'Name'
+  name: {
+    title: 'Name',
+    column: LinkColumn,
+    columnInputs: { text: 'name', urlValue: 'steam_id' },
+    columnOptions: { urlTemplate: 'http://steampowered.com/app/%s/' }
   },
   'steam_id': {
     title: 'Steam ID',
@@ -35,7 +39,7 @@ var filtersDefinitions = {
     },
     filter: RangeFilter,
     column: RawColumn,
-    columnOptions: { prefix: '%' }
+    columnOptions: { interpolation: '%s%' }
   },
   playtime_mean: {
     title: 'Playtime mean'
@@ -75,13 +79,17 @@ var filtersDefinitions = {
 
 for (let filterName in filtersDefinitions) {
   let filter = filtersDefinitions[filterName]
+
   filter.name = filterName
-  if (!filter.sort) filter.sort = filter.name
+  if (!filter.sort)   filter.sort = filter.name
   if (!filter.toggle) filter.toggle = BaseToggle
-  if (!filter.filter) filter.filter = ExactFilter
+
+  if (!filter.filter)        filter.filter = ExactFilter
   if (!filter.filterOptions) filter.filterOptions = {}
-  if (!filter.column) filter.column = RawColumn
-  if (!filter.columnInputs) filter.columnInputs = { value: filter.name }
+
+  if (!filter.column)        filter.column = RawColumn
+  if (!filter.columnInputs)  filter.columnInputs = { value: filter.name }
+  if (!filter.columnOptions) filter.columnOptions = { }
 }
 
 export default filtersDefinitions

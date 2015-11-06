@@ -40,7 +40,10 @@ class DataTableBatch extends Component {
 
         cols.push(
           <td key={filter.name} className={tdClass}>
-            <filter.column {...this.columnInputs(game, filter)}/>
+            <filter.column
+              options={filter.columnOptions}
+              {...this.columnInputs(game, filter)}
+            />
           </td>
         )
       }
