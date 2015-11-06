@@ -15,7 +15,7 @@ class DataTable extends Component {
     }
 
     return (
-      <table className='table'>
+      <table className='data-table'>
         <DataTableFilters
           filters={this.props.filters}
           queries={this.props.query.filters} />

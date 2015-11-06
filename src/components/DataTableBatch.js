@@ -33,18 +33,16 @@ class DataTableBatch extends Component {
         let filter = filtersDefinitions[filters[j]]
 
         cols.push(
-          <td key={j} className={this.hlClass(game, filter)}>
+          <td key={filter.name} className={this.hlClass(game, filter)}>
             <filter.column {...this.columnInputs(game, filter)}/>
           </td>
         )
       }
 
       rows.push(
-        <tr key={i}>{cols}</tr>
+        <tr key={game.id}>{cols}</tr>
       )
     }
-
-    console.log(rows)
 
     return (
       <tbody>
