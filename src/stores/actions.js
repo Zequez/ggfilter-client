@@ -90,11 +90,10 @@ export function getGames(page = 0) {
     // Get the columns to request
     var columns = []
     for (let i = 0; i < filters.length; ++i) {
-      let columnColumns = filtersDefinitions[filters[i]].column.columns
-      if (typeof columnColumns === 'function') {
-        columnColumns = columnColumns(filters[i])
+      let columnInputs = filtersDefinitions[filters[i]].columnInputs
+      for (let k in columnInputs) {
+        columns.push(columnInputs[k])
       }
-      columns = columns.concat(columnColumns)
     }
 
     var queryString = qs.stringify({

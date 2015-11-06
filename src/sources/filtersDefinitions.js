@@ -1,5 +1,6 @@
 var BaseToggle = require('components/toggles/BaseToggle')
 var RawColumn = require('components/columns/RawColumn')
+var PriceColumn = require('components/columns/PriceColumn')
 var SteamReviewsColumn = require('components/columns/SteamReviewsColumn')
 var ExactFilter = require('components/filters/ExactFilter')
 var RangeFilter = require('components/filters/RangeFilter')
@@ -18,16 +19,26 @@ var filtersDefinitions = {
     title: 'Lowest price'
   },
   'steam_price': {
-    title: 'Steam price (US)'
+    title: 'Steam price (US)',
+    filter: RangeFilter,
+    column: PriceColumn,
+    columnInputs: { price: 'steam_price', was: 'steam_sale_price' },
+    filterOptions: {
+      range: [100, 300, 500, 1000, 1500, 2000, 3000, 4000, 5000, 6000],
+      rangeLabels: ['$1', '$3', '$5', '$10', '$15', '$20', '$30', '$40', '$50', '$60']
+    }
   },
   'metacritic': {
-    title: 'Metacritic'
+    title: 'Metacritic',
+    filter: RangeFilter,
+    filterOptions: { range: [10, 20, 30, 40, 50, 60, 70, 80, 90] }
   },
   'steam_reviews_count': {
     title: '# Steam reviews',
     filter: RangeFilter,
     filterOptions: { range: [8, 20, 35, 65, 115, 220, 420, 1020, 4250] },
     column: SteamReviewsColumn,
+    columnInputs: { up: 'positive_steam_reviews_count', down: 'negative_steam_reviews_count' },
     sort: 'steam_reviews_ratio'
   },
   'multiplayer': {
@@ -46,6 +57,7 @@ for (let filterName in filtersDefinitions) {
   if (!filter.filter) filter.filter = ExactFilter
   if (!filter.filterOptions) filter.filterOptions = {}
   if (!filter.column) filter.column = RawColumn
+  if (!filter.columnInputs) filter.columnInputs = { value: filter.name }
 }
 
 export default filtersDefinitions

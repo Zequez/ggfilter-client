@@ -18,11 +18,13 @@ class RangeFilter extends React.Component {
     var lt = this.props.query.lt
     var selectOptions = []
     var range = this.props.options.range
+    var rangeLabels = this.props.options.rangeLabels
     for (let i = 0; i < range.length; ++i) {
       let v = range[i]
+      var l = rangeLabels ? rangeLabels[i] : v
       if ((ignoreUp && (!lt || v < lt)) || (!ignoreUp && (!gt || v > gt)) ) {
         selectOptions.push(
-          <option key={i} value={v}>{v}</option>
+          <option key={i} value={v}>{l}</option>
         )
       }
     }
