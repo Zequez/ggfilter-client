@@ -1,9 +1,8 @@
-var { Component, PropTypes } = React
-var connect = require('react-redux').connect
 import { setQueryFilter, removeQueryFilter } from 'stores/actions'
+var connect = require('react-redux').connect
 var filtersDefinitions = require('sources/filtersDefinitions')
 
-class DataTableFilters extends Component {
+class DataTableFilters extends React.Component {
   handleFilterChange(filterName, data) {
     if (data) {
       data.filter = true
@@ -51,9 +50,10 @@ class DataTableFilters extends Component {
   }
 }
 
+var t = React.PropTypes
 DataTableFilters.propTypes = {
-  filters: PropTypes.arrayOf(PropTypes.string).isRequired,
-  queries: PropTypes.object.isRequired
+  filters: t.arrayOf(t.string).isRequired,
+  queries: t.object.isRequired
 }
 
 export default connect()(DataTableFilters)

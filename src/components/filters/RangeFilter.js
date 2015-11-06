@@ -1,6 +1,4 @@
-var { Component, PropTypes } = React
-
-class RangeFilter extends Component {
+class RangeFilter extends React.Component {
   handleChange(ev) {
     var gt = parseInt(this.refs.gt.value) || null
     var lt = parseInt(this.refs.lt.value) || null
@@ -25,12 +23,13 @@ class RangeFilter extends Component {
   }
 }
 
+var t = React.PropTypes
 RangeFilter.propTypes = {
-  query: PropTypes.shape({
-    gt: PropTypes.number,
-    lt: PropTypes.number
+  query: t.shape({
+    gt: t.number,
+    lt: t.number
   }).isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: t.func.isRequired
 }
 
 export default RangeFilter

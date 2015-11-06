@@ -1,6 +1,4 @@
-var { Component, PropTypes } = React
-
-class ExactFilter extends Component {
+class ExactFilter extends React.Component {
   handleChange(ev) {
     var value = ev.target.value
     this.props.onChange(value ? {value: value} : null)
@@ -18,11 +16,12 @@ class ExactFilter extends Component {
   }
 }
 
+var t = React.PropTypes
 ExactFilter.propTypes = {
-  query: PropTypes.shape({
-    value: PropTypes.string
+  query: t.shape({
+    value: t.string
   }).isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: t.func.isRequired
 }
 
 export default ExactFilter
