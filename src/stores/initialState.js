@@ -10,7 +10,8 @@ export default {
     'steam_discount',
     'playtime_median_ftb',
     'metacritic',
-    'steam_reviews_count'
+    'steam_reviews_count',
+    'steam_reviews_ratio'
   ],
 
   query: {

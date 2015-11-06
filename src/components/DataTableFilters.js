@@ -4,8 +4,8 @@ var filtersDefinitions = require('sources/filtersDefinitions')
 var classNames = require('classnames')
 
 class DataTableFilters extends React.Component {
-  handleTitleClick(filterName, ev) {
-    this.props.dispatch(setQuerySort(filterName))
+  handleTitleClick(filterSort, ev) {
+    this.props.dispatch(setQuerySort(filterSort))
   }
 
   handleFilterChange(filterName, data) {
@@ -39,7 +39,7 @@ class DataTableFilters extends React.Component {
 
       titles.push(
         <th key={i}
-          onClick={this.handleTitleClick.bind(this, filter.name)}
+          onClick={this.handleTitleClick.bind(this, filter.sort)}
           classNames={thClass}>
           {filter.title}
         </th>

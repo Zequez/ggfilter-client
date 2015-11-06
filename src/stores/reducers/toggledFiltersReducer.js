@@ -1,20 +1,9 @@
 import { TOGGLE_FILTER } from 'stores/actions'
 var initialState = require('stores/initialState').toggledFilters
-var filtersSections = require('sources/filtersSectionsDefinitions')
+var sortFlatDefinitions = require('sources/filtersSectionsFlatSort')
 
-var filtersOrder = []
-for(var section in filtersSections) {
-  filtersOrder = filtersOrder.concat(filtersSections[section])
-}
+initialState = sortFlatDefinitions(initialState)
 
-function defaultOrder(currentFilters, newFilter) {
-  return filtersOrder.filter((v)=> currentFilters.indexOf(v) != -1 || newFilter == v )
-}
-
-initialState = defaultOrder(initialState)
-
-// action.filter string
-// action.force boolean
 function toggledFiltersReducer(state = initialState, action) {
   if (action.type == TOGGLE_FILTER) {
     var index = state.indexOf(action.filter)
@@ -27,7 +16,7 @@ function toggledFiltersReducer(state = initialState, action) {
       state.splice(index, 1)
     }
     else if(!currentlyActive && shouldActive) {
-      state = defaultOrder(state, action.filter)
+      state = sortFlatDefinitions(state, action.filter)
     }
   }
 
