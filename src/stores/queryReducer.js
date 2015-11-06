@@ -3,7 +3,7 @@ var update = require('react-addons-update')
 
 const initialState = {
   filters: {
-    name: { value: 'a', filter: false, highlight: true }
+    name: { value: 'aaaaaaa', filter: true, highlight: false }
   },
   sort: 'playtime_ftb',
   sort_asc: false,

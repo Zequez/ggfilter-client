@@ -42,19 +42,24 @@ var filtersDefinitions = {
     columnOptions: { interpolation: '%s%' }
   },
   playtime_mean: {
-    title: 'Playtime mean'
+    title: 'Playtime mean',
+    columnOptions: { round: 100 }
   },
   playtime_median: {
-    title: 'Playtime median'
+    title: 'Playtime median',
+    columnOptions: { round: 100 }
   },
   playtime_sd: {
-    title: 'Playtime σ'
+    title: 'Playtime σ',
+    columnOptions: { round: 100 }
   },
   playtime_rsd: {
-    title: 'Playtime relative σ'
+    title: 'Playtime relative σ',
+    columnOptions: { round: 100 }
   },
   playtime_ftb: {
-    title: 'Playtime / $'
+    title: 'Playtime / $',
+    columnOptions: { round: 100 }
   },
   'metacritic': {
     title: 'Metacritic',

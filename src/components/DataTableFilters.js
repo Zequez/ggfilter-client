@@ -30,12 +30,6 @@ class DataTableFilters extends React.Component {
       let filter = filtersDefinitions[filters[i]]
       let queryFilter = query.filters[filters[i]] || {}
 
-      // let sortClass = ''
-      // console.log(query.sort, filter.name)
-      // if (query.sort == filter.name) {
-      //   sortClass = 'sort ' + query.sort_asc ? 'asc' : 'desc'
-      // }
-
       var sorted = query.sort == filter.name
       var thClass = classNames({
         sort: sorted,
@@ -54,7 +48,7 @@ class DataTableFilters extends React.Component {
       controls.push(
         <th key={i}>
           <filter.filter
-            query={query}
+            query={queryFilter}
             options={filter.filterOptions}
             onChange={this.handleFilterChange.bind(this, filter.name)}/>
         </th>
