@@ -42,7 +42,7 @@ var filtersDefinitions = {
     columnOptions: { interpolation: '%s%' }
   },
   playtime_mean: {
-    title: 'Playtime mean',
+    title: 'Playtime avg',
     columnOptions: { round: 100 }
   },
   playtime_median: {
@@ -57,8 +57,12 @@ var filtersDefinitions = {
     title: 'Playtime relative σ',
     columnOptions: { round: 100 }
   },
-  playtime_ftb: {
-    title: 'Playtime / $',
+  playtime_mean_ftb: {
+    title: 'Playtime avg / $',
+    columnOptions: { round: 100 }
+  },
+  playtime_median_ftb: {
+    title: 'Playtime median / $',
     columnOptions: { round: 100 }
   },
   'metacritic': {
