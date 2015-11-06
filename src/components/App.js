@@ -30,7 +30,7 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('Render <App/>')
+    console.info('Render <App/>')
 
     return (
       <div className='container'>

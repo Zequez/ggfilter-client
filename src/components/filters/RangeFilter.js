@@ -1,23 +1,45 @@
 class RangeFilter extends React.Component {
   handleChange(ev) {
-    var gt = parseInt(this.refs.gt.value) || null
-    var lt = parseInt(this.refs.lt.value) || null
-    this.props.onChange( (gt || lt) ? {gt: gt, lt: lt} : null )
+    var gt = this.refs.gt.value
+    var lt = this.refs.lt.value
+    if (gt || lt) {
+      gt = gt ? parseInt(gt) : null
+      lt = lt ? parseInt(lt) : null
+
+      this.props.onChange({gt: gt, lt: lt})
+    }
+    else {
+      this.props.onChange(null)
+    }
+  }
+
+  selectOptions(ignoreUp = true) {
+    var gt = this.props.query.gt
+    var lt = this.props.query.lt
+    var selectOptions = []
+    var range = this.props.options.range
+    for (let i = 0; i < range.length; ++i) {
+      let v = range[i]
+      if ((ignoreUp && (!lt || v < lt)) || (!ignoreUp && (!gt || v > gt)) ) {
+        selectOptions.push(
+          <option key={i} value={v}>{v}</option>
+        )
+      }
+    }
+    return selectOptions
   }
 
   render() {
     return (
       <div>
-        <input
-          type='text'
-          value={this.props.query.gt}
-          ref='gt'
-          onChange={this.handleChange.bind(this)} />
-        <input
-          type='text'
-          value={this.props.query.lt}
-          ref='lt'
-          onChange={this.handleChange.bind(this)} />
+        <select ref='gt' value={this.props.gt} onChange={this.handleChange.bind(this)}>
+          <option value=''>Min</option>
+          {this.selectOptions(true)}
+        </select>
+        <select ref='lt' value={this.props.lt} onChange={this.handleChange.bind(this)}>
+          <option value=''>Max</option>
+          {this.selectOptions(false)}
+        </select>
       </div>
     )
   }
@@ -29,6 +51,9 @@ RangeFilter.propTypes = {
     gt: t.number,
     lt: t.number
   }).isRequired,
+  options: t.shape({
+    range: t.arrayOf(t.number)
+  }),
   onChange: t.func.isRequired
 }
 

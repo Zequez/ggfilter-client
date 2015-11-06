@@ -26,6 +26,7 @@ var filtersDefinitions = {
   'steam_reviews_count': {
     title: '# Steam reviews',
     filter: RangeFilter,
+    filterOptions: { range: [8, 20, 35, 65, 115, 220, 420, 1020, 4250] },
     column: SteamReviewsColumn,
     sort: 'steam_reviews_ratio'
   },
@@ -43,6 +44,7 @@ for (let filterName in filtersDefinitions) {
   if (!filter.sort) filter.sort = filter.name
   if (!filter.toggle) filter.toggle = BaseToggle
   if (!filter.filter) filter.filter = ExactFilter
+  if (!filter.filterOptions) filter.filterOptions = {}
   if (!filter.column) filter.column = RawColumn
 }
 

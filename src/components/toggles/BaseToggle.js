@@ -13,7 +13,7 @@ class FilterToggle extends React.Component {
   }
 
   render() {
-    console.log(`Render <BaseToggle/> ${this.props.filter.name}`)
+    console.info(`Render <BaseToggle/> ${this.props.filter.name}`)
     return (
       <li className='filter-toggle'>
         <label>
