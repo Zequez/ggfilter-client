@@ -1,7 +1,12 @@
 class ExactFilter extends React.Component {
   handleChange(ev) {
     var value = ev.target.value
-    this.props.onChange(value ? {value: value} : null)
+    if (value) {
+      this.props.onChange({value: value})
+    }
+    else if (this.props.query.value) {
+      this.props.onChange(null)
+    }
   }
 
   render() {

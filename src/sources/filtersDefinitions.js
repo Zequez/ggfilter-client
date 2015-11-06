@@ -3,6 +3,7 @@ var RawColumn = require('components/columns/RawColumn')
 var PriceColumn = require('components/columns/PriceColumn')
 var SteamReviewsColumn = require('components/columns/SteamReviewsColumn')
 var ExactFilter = require('components/filters/ExactFilter')
+var NumberFilter = require('components/filters/NumberFilter')
 var RangeFilter = require('components/filters/RangeFilter')
 
 var filtersDefinitions = {
@@ -10,7 +11,8 @@ var filtersDefinitions = {
     title: 'Name'
   },
   'steam_id': {
-    title: 'Steam ID'
+    title: 'Steam ID',
+    filter: NumberFilter
   },
   'images': {
     title: 'Images'
