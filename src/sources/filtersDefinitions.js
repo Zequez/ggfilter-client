@@ -12,7 +12,7 @@ var filtersDefinitions = {
     title: 'Name',
     column: LinkColumn,
     columnInputs: { text: 'name', urlValue: 'steam_id' },
-    columnOptions: { urlTemplate: 'http://steampowered.com/app/%s/' }
+    columnOptions: { urlTemplate: 'http://store.steampowered.com/app/%s/' }
   },
   'steam_id': {
     title: 'Steam ID',

@@ -16,9 +16,10 @@ export default {
 
   query: {
     filters: {
-      name: { value: 'aaaaaaa', filter: true, highlight: false }
+      steam_reviews_count: { gt: 65, filter: true, highlight: false },
+      steam_reviews_ratio: { gt: 95, filter: true, highlight: false },
     },
-    sort: 'playtime_ftb',
+    sort: 'playtime_median_ftb',
     sort_asc: false,
     batchSize: 20
   },
