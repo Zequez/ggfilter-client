@@ -1,13 +1,32 @@
 class PriceColumn extends React.Component {
+  priceText(price) {
+    if (price != null) {
+      if (price > 0) {
+        return '$' + price/100
+      }
+      else {
+        return 'Free'
+      }
+    }
+    else {
+      return null
+    }
+  }
+
   render() {
-    // if (this.props.was) {
-    //     <span className='strike'>{this.props.was}</span>
-    // }
+    var wasE
+    if (this.props.was) {
+      let was = this.priceText(this.props.was)
+      wasE = <span className='price-was'>{was}</span>
+    }
+
+    var is = this.priceText(this.props.price)
+    var isE = <span className="price-is">{is}</span>
 
     return (
       <span>
-        {this.props.was ? <span className='price-was'>{'$' + this.props.was/100}</span> : ''}
-        <span className="price-is">{'$' + this.props.price/100}</span>
+        {wasE}
+        {isE}
       </span>
     )
   }
