@@ -12,11 +12,13 @@ var filtersDefinitions = {
     title: 'Name',
     column: LinkColumn,
     columnInputs: { text: 'name', urlValue: 'steam_id' },
-    columnOptions: { urlTemplate: 'http://store.steampowered.com/app/%s/' }
+    columnOptions: { urlTemplate: 'http://store.steampowered.com/app/%s/' },
+    width: 80
   },
   'steam_id': {
     title: 'Steam ID',
-    filter: NumberFilter
+    filter: NumberFilter,
+    width: 40
   },
   'images': {
     title: 'Images'
@@ -29,7 +31,8 @@ var filtersDefinitions = {
     filterOptions: {
       range: [100, 300, 500, 1000, 1500, 2000, 3000, 4000, 5000, 6000],
       rangeLabels: ['$1', '$3', '$5', '$10', '$15', '$20', '$30', '$40', '$50', '$60']
-    }
+    },
+    width: 50
   },
   steam_discount: {
     title: 'Steam sale %',
@@ -39,41 +42,50 @@ var filtersDefinitions = {
     },
     filter: RangeFilter,
     column: RawColumn,
-    columnOptions: { interpolation: '%s%' }
+    columnOptions: { interpolation: '%s%' },
+    width: 30
   },
   playtime_mean: {
     title: 'Playtime avg',
-    columnOptions: { round: 100 }
+    columnOptions: { round: 100 },
+    width: 30
   },
   playtime_median: {
     title: 'Playtime median',
-    columnOptions: { round: 100 }
+    columnOptions: { round: 100 },
+    width: 30
   },
   playtime_sd: {
     title: 'Playtime σ',
-    columnOptions: { round: 100 }
+    columnOptions: { round: 100 },
+    width: 30
   },
   playtime_rsd: {
     title: 'Playtime relative σ',
-    columnOptions: { round: 100 }
+    columnOptions: { round: 100 },
+    width: 30
   },
   playtime_mean_ftb: {
     title: 'Playtime avg / $',
-    columnOptions: { round: 100 }
+    columnOptions: { round: 100 },
+    width: 30
   },
   playtime_median_ftb: {
     title: 'Playtime median / $',
-    columnOptions: { round: 100 }
+    columnOptions: { round: 100 },
+    width: 30
   },
   'metacritic': {
     title: 'Metacritic',
     filter: RangeFilter,
-    filterOptions: { range: [10, 20, 30, 40, 50, 60, 70, 80, 90] }
+    filterOptions: { range: [10, 20, 30, 40, 50, 60, 70, 80, 90] },
+    width: 30
   },
   'steam_reviews_count': {
     title: '# Steam reviews',
     filter: RangeFilter,
     filterOptions: { range: [8, 20, 35, 65, 115, 220, 420, 1020, 4250] },
+    width: 30
   },
   'steam_reviews_ratio': {
     title: 'Steam reviews ratio',
@@ -82,7 +94,8 @@ var filtersDefinitions = {
       range: [10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 98, 99],
       rangeLabels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '95%', '98%', '99%']
     },
-    column: RatioColumn
+    column: RatioColumn,
+    width: 60
   },
   'multiplayer': {
     title: 'Multiplayer'
@@ -98,6 +111,7 @@ for (let filterName in filtersDefinitions) {
   filter.name = filterName
   if (!filter.sort)   filter.sort = filter.name
   if (!filter.toggle) filter.toggle = BaseToggle
+  if (!filter.width)  filter.width = 100
 
   if (!filter.filter)        filter.filter = ExactFilter
   if (!filter.filterOptions) filter.filterOptions = {}

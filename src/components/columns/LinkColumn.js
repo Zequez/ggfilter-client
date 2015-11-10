@@ -5,7 +5,7 @@ class LinkColumn extends React.Component {
       <a
         href={url}
         className='hover-hidden-column'>
-        <span>{this.props.text}</span>
+        {this.props.text}
       </a>
     )
   }

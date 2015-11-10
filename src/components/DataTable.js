@@ -1,24 +1,33 @@
 var { Component, PropTypes } = React
-var DataTableFilters = require('./DataTableFilters')
+var filtersDefinitions = require('sources/filtersDefinitions')
+var DataTableControls = require('./DataTableControls')
+var DataTableTitles = require('./DataTableTitles')
 var DataTableBatch = require('./DataTableBatch')
 
 class DataTable extends Component {
   render() {
     console.info('Render <DataTable/>')
 
+    var filters = this.props.filters.map((f)=>filtersDefinitions[f])
+
     var batches = []
     var gamesBatches = this.props.games.batches
     for(let i = 0; i < gamesBatches.length; ++i) {
       batches.push(
-        <DataTableBatch key={i} games={gamesBatches[i]} filters={this.props.filters}/>
+        <DataTableBatch key={i} games={gamesBatches[i]} filters={filters}/>
       )
     }
 
     return (
       <table className='data-table'>
-        <DataTableFilters
-          filters={this.props.filters}
-          query={this.props.query} />
+        <thead>
+          <DataTableTitles
+            filters={filters}
+            query={this.props.query}/>
+          <DataTableControls
+            filters={filters}
+            query={this.props.query} />
+        </thead>
         {batches}
       </table>
     )

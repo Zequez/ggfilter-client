@@ -1,8 +1,6 @@
-var { Component, PropTypes } = React
-var filtersDefinitions = require('sources/filtersDefinitions')
 var classNames = require('classnames')
 
-class DataTableBatch extends Component {
+class DataTableBatch extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     return nextProps.games !== this.props.games || nextProps.filters !== this.props.filters
   }
@@ -31,7 +29,7 @@ class DataTableBatch extends Component {
       let game = this.props.games[i]
       let cols = []
       for(let j = 0; j < filters.length; ++j) {
-        let filter = filtersDefinitions[filters[j]]
+        let filter = filters[j]
 
         let tdClass = classNames({
           hl: game['hl_' + filter.name],
@@ -42,10 +40,11 @@ class DataTableBatch extends Component {
 
         cols.push(
           <td key={filter.name} className={tdClass}>
-            <filter.column
-              options={filter.columnOptions}
-              {...this.columnInputs(game, filter)}
-            />
+            <div className='overflow-cell'>
+              <filter.column
+                options={filter.columnOptions}
+                {...this.columnInputs(game, filter)}/>
+            </div>
           </td>
         )
       }
@@ -63,9 +62,10 @@ class DataTableBatch extends Component {
   }
 }
 
+var t = React.PropTypes
 DataTableBatch.propTypes = {
-  games: PropTypes.array.isRequired,
-  filters: PropTypes.arrayOf(PropTypes.string).isRequired
+  games: t.array.isRequired,
+  filters: t.arrayOf(t.object).isRequired
 }
 
 export default DataTableBatch

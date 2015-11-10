@@ -6,6 +6,7 @@
   $title-alternate-background: darken($blue, 5%)
   $title-color: $white
 
+  table-layout: fixed
   width: 100%
   background: $background
   color: $color
@@ -21,12 +22,19 @@
   &-batch
     tr:nth-child(even)
       background: $alternate-background
-      .hover-hidden-column > span
+      .overflow-cell
         background: $alternate-background
 
+  .overflow-cell
+    overflow: hidden
+    text-overflow: ellipsis
+    &:hover
+      position: relative
+      display: inline-block
+      overflow: inherit
 
   // Filters titles
-  &-filters-titles
+  &-titles
     color: $title-color
     background: $title-background
     text-shadow: 0px 1px $dark-blue
@@ -34,8 +42,11 @@
   .filter-title
     border-right-color: $title-alternate-background
 
+    .overflow-cell
+      background: $title-background
+
   // Filters controls
-  &-filters-controls
+  &-controls
 
   .filter-control
     input
@@ -55,21 +66,12 @@
 
   // Columns
   .filter-column
-
-  .hover-hidden-column
-    display: block
-    overflow: hidden
-    & > span
-      display: inline-block
-      position: relative
+    .overflow-cell
       background: $background
-    &:hover
-      overflow: inherit
 
   .LinkColumn
-    a
-      max-width: 200px
-      text-align: left
+    text-align: left
+
 
   .PriceColumn
     .price-was
