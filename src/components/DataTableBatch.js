@@ -35,7 +35,9 @@ class DataTableBatch extends Component {
 
         let tdClass = classNames({
           hl: game['hl_' + filter.name],
-          ['column-' + filter.name]: true
+          [filter.name]: true,
+          [filter.columnType]: true,
+          'filter-column': true
         })
 
         cols.push(

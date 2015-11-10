@@ -25,9 +25,11 @@ class RangeFilter extends React.Component {
 
       if (ignoreUp) {
         var shouldDraw = lt==null || v < lt
+        l = '≥' + l
       }
       else {
         var shouldDraw = gt==null || v > gt
+        l = '≤' + l
       }
 
       if (shouldDraw) {

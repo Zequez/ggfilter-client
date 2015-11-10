@@ -9,10 +9,10 @@ class RatioColumn extends React.Component {
     }
 
     var upStyle = {
-      width: ratio
+      width: `${ratio}%`
     }
     var downStyle = {
-      width: 100-ratio
+      width: `${100-ratio}%`
     }
 
     return (

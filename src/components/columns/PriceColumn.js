@@ -6,8 +6,8 @@ class PriceColumn extends React.Component {
 
     return (
       <span>
-        {this.props.was ? <span className='strike'>${this.props.was}</span> : ''}
-        ${this.props.price/100}
+        {this.props.was ? <span className='price-was'>{'$' + this.props.was/100}</span> : ''}
+        <span className="price-is">{'$' + this.props.price/100}</span>
       </span>
     )
   }

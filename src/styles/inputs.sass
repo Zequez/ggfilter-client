@@ -1,0 +1,22 @@
+input[type=text], input[type=number], select
+  position: relative
+  display: block
+  float: left
+  height: $r
+  border: solid 1px $teal
+  border-radius: 0px
+  background: #fafafa
+  line-height: $r
+  z-index: 5
+
+  &:focus
+    outline: none
+    box-shadow: inset 0px 0px 5px rgba($blue, 0.5)
+    z-index: 10
+
+select
+  +appearance(none)
+  background-image: url(~images/dropdown-arrow.png)
+  background-repeat: no-repeat
+  background-position: right $r/4 center
+  text-indent: 5px

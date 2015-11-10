@@ -2,6 +2,7 @@
 
 @import "~compass/reset"
 @import "~compass/utilities/general/clearfix"
+@import "~compass/css3/appearance"
 
 $dark-blue:   #1A1932
 $blue:        #2A354C
@@ -24,6 +25,7 @@ $relative-font-sizing: false
 @import "~compass/typography/vertical_rhythm"
 $rhythm-px: $base-line-height
 $rhythm: rhythm()
+$r: $rhythm
 +establish-baseline()
 
 $font-normal: $base-font-size
@@ -36,11 +38,18 @@ $font-x-smaller: 8px
 @mixin f($font-size)
   +adjust-font-size-to($font-size)
 
+*
+  box-sizing: border-box
+
 body
   color: $white
   font-family: Roboto, sans-serif
   font-weight: 300
   background: $dark-blue
+
+a
+  color: saturate($ocean-blue, 30%)
+  text-decoration: none
 
 .header
   text-align: center
@@ -74,5 +83,6 @@ body
       +f($font-larger)
 
 
+@import "inputs"
 @import "DataTable"
 @import "columns/RatioColumn"

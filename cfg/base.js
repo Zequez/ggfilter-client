@@ -29,6 +29,7 @@ module.exports = {
       sources: srcPath + '/sources/',
       stores: srcPath + '/stores/',
       styles: srcPath + '/styles/',
+      images: srcPath + '/images/',
       compass: 'compass-mixins/lib/compass'
     }
   },

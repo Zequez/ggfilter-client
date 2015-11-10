@@ -74,8 +74,6 @@ var filtersDefinitions = {
     title: '# Steam reviews',
     filter: RangeFilter,
     filterOptions: { range: [8, 20, 35, 65, 115, 220, 420, 1020, 4250] },
-    // column: ,
-    // columnInputs: { up: 'positive_steam_reviews_count', down: 'negative_steam_reviews_count' }
   },
   'steam_reviews_ratio': {
     title: 'Steam reviews ratio',
@@ -107,6 +105,10 @@ for (let filterName in filtersDefinitions) {
   if (!filter.column)        filter.column = RawColumn
   if (!filter.columnInputs)  filter.columnInputs = { value: filter.name }
   if (!filter.columnOptions) filter.columnOptions = { }
+
+  filter.toggleType = filter.toggle.toString().match(/function\s*(\w+)/)[1]
+  filter.filterType = filter.filter.toString().match(/function\s*(\w+)/)[1]
+  filter.columnType = filter.column.toString().match(/function\s*(\w+)/)[1]
 }
 
 export default filtersDefinitions

@@ -30,23 +30,31 @@ class DataTableFilters extends React.Component {
       let filter = filtersDefinitions[filters[i]]
       let queryFilter = query.filters[filters[i]] || {}
 
-      var sorted = query.sort == filter.name
-      var thClass = classNames({
+      let sorted = query.sort == filter.name
+      let titleClass = classNames({
         sort: sorted,
         'sort-asc': sorted && query.sort_asc,
-        'sort-desc': sorted && !query.sort_asc
+        'sort-desc': sorted && !query.sort_asc,
+        [filter.name]: true,
+        'filter-title': true
+      })
+
+      let controlClass = classNames({
+        [filter.name]: true,
+        'filter-control': true,
+        [filter.filterType]: true
       })
 
       titles.push(
-        <th key={i}
+        <th key={filter.name}
           onClick={this.handleTitleClick.bind(this, filter.sort)}
-          classNames={thClass}>
+          className={titleClass}>
           {filter.title}
         </th>
       )
 
       controls.push(
-        <th key={i}>
+        <th key={filter.name} className={controlClass}>
           <filter.filter
             query={queryFilter}
             options={filter.filterOptions}
