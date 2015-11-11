@@ -39,9 +39,10 @@ class DataTableTitles extends React.Component {
       return (
         <th key={filter.name}
           style={{width: width}}
-          className={titleClass}>
-          <div onClick={this.handleTitleClick.bind(this, filter.sort)}
-               className='overflow-cell'>
+          className={titleClass}
+          onClick={this.handleTitleClick.bind(this, filter.sort)}>
+          <div
+            className='overflow-cell'>
             {filter.title}
           </div>
           <ColumnResizeHandle

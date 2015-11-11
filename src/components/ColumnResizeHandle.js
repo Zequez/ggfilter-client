@@ -26,6 +26,10 @@ export default class ColumnResizeHandle extends DraggableCore {
     this.setState({clientX: 0})
   }
 
+  handleClick(ev) {
+    ev.stopPropagation()
+  }
+
   render() {
     let style = {transform: `translateX(${this.state.clientX}px)`}
 
@@ -37,6 +41,7 @@ export default class ColumnResizeHandle extends DraggableCore {
         <div
           className='resize-handle'
           style={style}
+          onClick={this.handleClick.bind(this)}
           onDoubleClick={this.props.onDoubleClick}></div>
       </DraggableCore>
     )
