@@ -24,11 +24,12 @@ export default class GamesLoader extends React.Component {
   }
 
   handleWindowScroll() {
-    var clientHeight = document.documentElement.clientHeight
-    var scrollTop = document.body.scrollTop
+    var clientHeight = window.innerHeight
+    var scrollTop = window.scrollY
     var offsetTop = this.offsetTopDocument()
     var position = clientHeight + scrollTop
     var diff = offsetTop - position
+    console.log(diff)
     if (diff < 100) {
       this.requestMoreGames()
     }
