@@ -7,8 +7,26 @@ var DataTableTitles = require('./DataTableTitles')
 var DataTableBatch = require('./DataTableBatch')
 
 class DataTable extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {filters: []}
+  }
+
   componentDidMount() {
-    window.addEventListener('resize', debounce(250, this.handleWindowResize.bind(this)));
+    window.addEventListener('resize', debounce(250, this.handleWindowResize.bind(this)))
+    this.loadFilters()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.filters !== nextProps.filters) {
+      this.loadFilters(nextProps)
+    }
+  }
+
+  loadFilters(filtersNames = this.props.filters) {
+    this.setState({
+      filters: filtersNames.map((f)=>filtersDefinitions[f])
+    })
   }
 
   handleWindowResize(ev) {
@@ -18,7 +36,7 @@ class DataTable extends Component {
   render() {
     console.info('Render <DataTable/>')
 
-    var filters = this.props.filters.map((f)=>filtersDefinitions[f])
+    var filters = this.state.filters
 
     var batches = []
     var gamesBatches = this.props.games.batches
