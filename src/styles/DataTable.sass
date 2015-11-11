@@ -43,6 +43,21 @@
   .filter-title
     position: relative
     border-right-color: $title-alternate-background
+    cursor: pointer
+
+    &.sort:after
+      position: absolute
+
+      right: 5px
+      top: 0
+      color: $ocean-green
+      font-size: $font-smaller
+
+    &.sort-asc:after
+      content: '▲'
+
+    &.sort-desc:after
+      content: '▼'
 
     .overflow-cell
       background: $title-background
