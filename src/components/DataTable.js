@@ -1,4 +1,5 @@
 var { Component, PropTypes } = React
+var debounce = require('lib/utils').debounce
 var filtersDefinitions = require('sources/filtersDefinitions')
 var TableWidthCalculator = require('lib/TableWidthCalculator')
 var DataTableControls = require('./DataTableControls')
@@ -6,19 +7,12 @@ var DataTableTitles = require('./DataTableTitles')
 var DataTableBatch = require('./DataTableBatch')
 
 class DataTable extends Component {
-  baseTableWidth(filters) {
-    return this._baseTableWidth = this._baseTableWidth ||
-    filters.reduce(function(width, filter){
-      return width + filter.width
-    }, 0)
+  componentDidMount() {
+    window.addEventListener('resize', debounce(250, this.handleWindowResize.bind(this)));
   }
 
-  tableWidth(filters) {
-    return this.baseTableWidth(filters)
-  }
-
-  columnsWidths(baseTableWidth, filters) {
-
+  handleWindowResize(ev) {
+    this.forceUpdate()
   }
 
   render() {
@@ -34,10 +28,10 @@ class DataTable extends Component {
       )
     }
 
-    var calc = new TableWidthCalculator(filters, this.props.columnsWidth)
+    var docSize = document.documentElement.clientWidth
+    var calc = new TableWidthCalculator(filters, this.props.columnsWidth, docSize)
     var columnsWidth = calc.columnsWidth()
     var tableWidth = calc.tableWidth()
-
 
     return (
       <table className='data-table' style={{width: tableWidth}}>
