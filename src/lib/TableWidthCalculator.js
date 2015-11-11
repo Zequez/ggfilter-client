@@ -6,30 +6,37 @@ class TableWidthCalculator {
   }
 
   tableBaseWidth() {
-    return this.columnsBaseWidth().reduce((b, w)=>b + w, 0)
+    return this._tableBaseWidth =
+      this._tableBaseWidth ||
+      this.columnsBaseWidth().reduce((b, w)=>b + w, 0)
   }
 
   tableAdjustedWidth() {
-    return this.columnsAdjustedWidth().reduce((b, w)=>b + w, 0)
+    return this._tableAdjustedWidth =
+      this._tableAdjustedWidth ||
+      this.columnsAdjustedWidth().reduce((b, w)=>b + w, 0)
   }
 
   tableWidth() {
+    if (this._tableWidth) return this._tableWidth
     var adjustedWidth = this.tableAdjustedWidth()
 
-    if (adjustedWidth < this.docWidth) {
-      return this.docWidth
-    }
-    else {
-      return adjustedWidth
-    }
+    this._tableWidth =
+      (adjustedWidth < this.docWidth) ? this.docWidth : adjustedWidth
+
+    return this._tableWidth
   }
 
   columnsBaseWidth() {
-    return this.filters.map((f)=> f.width)
+    return this._columnsBaseWidth =
+      this._columnsBaseWidth ||
+      this.filters.map((f)=> f.width)
   }
 
   columnsAdjustedWidth() {
-    return this.filters.map((f)=> f.width + (this.columnsWidthAdjust[f.name] || 0))
+    return this._columnsAdjustedWidth =
+      this._columnsAdjustedWidth ||
+      this.filters.map((f)=> f.width + (this.columnsWidthAdjust[f.name] || 0))
   }
 
   columnsWidth() {
