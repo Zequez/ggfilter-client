@@ -1,15 +1,12 @@
 import { setQuerySort, adjustColumnWidth, clearColumnWidth } from 'stores/actions'
-var Draggable = require('react-draggable')
 var ColumnResizeHandle = require('components/ColumnResizeHandle')
 var connect = require('react-redux').connect
 var classNames = require('classnames')
-
 
 class DataTableTitles extends React.Component {
   handleTitleClick(filterSort, ev) {
     this.props.dispatch(setQuerySort(filterSort))
   }
-  //
 
   handleResizeDragStop(filterName, deltaX) {
     if (deltaX !== 0) {
@@ -50,21 +47,6 @@ class DataTableTitles extends React.Component {
             onDoubleClick={this.handleDoubleClick.bind(this, filter.sort)}/>
         </th>
       )
-
-      /*
-      <Draggable
-        axis='x'
-        ref='draggable'
-        start={{x: 0, y: 0}}
-        moveOnStartChange={true}
-        onStop={this.handleResizeDragStop.bind(this, filter.name)}
-        onStart={this.handleResizeDragStart.bind(this, filter.name)}>
-        <div
-          className='resize-handle'
-          style={{transform: ''}}
-          onDoubleClick={this.handleDoubleClick.bind(this, filter.name)}></div>
-      </Draggable>
-      */
     })
 
     return (
