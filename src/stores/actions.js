@@ -106,15 +106,24 @@ export function getGames(page = 0) {
 
     return fetch(`http://localhost:3000/games.json?${queryString}`)
       .then(response => response.json())
-      .then(json => dispatch({type: GET_GAMES_END, games: json, page: page}))
+      .then(json => {
+        return dispatch({
+          type: GET_GAMES_END,
+          games: json,
+          page: page,
+          lastPage: json.length < state.query.batchSize})
+      })
       .catch(error => dispatch({type: GET_GAMES_FAILED, page: page}))
   }
 }
 
 export function getMoreGames() {
   return function(dispatch, getState) {
-    var page = getState().games.batches.length
-    return getGames(page)(dispatch, getState)
+    var state = getState()
+    if (!state.games.lastPage) {
+      var page = state.games.batches.length
+      return getGames(page)(dispatch, getState)
+    }
   }
 }
 

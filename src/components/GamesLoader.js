@@ -6,6 +6,7 @@ export default class GamesLoader extends React.Component {
   static propTypes = {
     fetching: t.bool.isRequired,
     failed: t.bool.isRequired,
+    lastPage: t.bool.isRequired,
     onRequestMore: t.func.isRequired
   }
 
@@ -29,7 +30,7 @@ export default class GamesLoader extends React.Component {
     var offsetTop = this.offsetTopDocument()
     var position = clientHeight + scrollTop
     var diff = offsetTop - position
-    console.log(diff)
+
     if (diff < 100) {
       this.requestMoreGames()
     }
@@ -48,7 +49,8 @@ export default class GamesLoader extends React.Component {
   render() {
     let divClass = classNames('games-loader', {
       'games-loader-fetching': this.props.fetching,
-      'games-loader-failed': this.props.failed
+      'games-loader-failed': this.props.failed,
+      'games-loader-lastpage': this.props.lastPage
     })
 
     return (

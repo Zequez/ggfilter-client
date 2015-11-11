@@ -55,6 +55,7 @@ class App extends React.Component {
           <GamesLoader
             fetching={this.props.games.fetching}
             failed={this.props.games.failed}
+            lastPage={this.props.games.lastPage}
             onRequestMore={this.handleRequestMoreGames.bind(this)} />
         </main>
       </div>

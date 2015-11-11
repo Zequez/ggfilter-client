@@ -31,6 +31,7 @@ export default {
   games: {
     batches: [],
     fetching: false,
-    failed: false
+    failed: false,
+    lastPage: false
   }
 }
