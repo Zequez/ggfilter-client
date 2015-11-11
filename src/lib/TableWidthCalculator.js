@@ -51,6 +51,9 @@ class TableWidthCalculator {
     }
 
     propWidths = propWidths.map((w)=> Math.round(w))
+    var propWidthsTotal = propWidths.reduce((b, w)=> b+w, 0)
+    var tableWidth = this.tableWidth()
+    propWidths[propWidths.length-1] -= propWidthsTotal-tableWidth
 
     return propWidths
   }
