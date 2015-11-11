@@ -14,6 +14,10 @@ export default {
     'steam_reviews_ratio'
   ],
 
+  columnsWidth: {
+
+  },
+
   query: {
     filters: {
       steam_reviews_count: { gt: 65, filter: true, highlight: false },

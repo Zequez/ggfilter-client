@@ -1,2 +1,2 @@
-var testsContext = require.context('.', true, /(Test\.js$)|(Helper\.js$)/);
+var testsContext = require.context('.', true, /(Test\..+$)|(Helper\..+$)/);
 testsContext.keys().forEach(testsContext);

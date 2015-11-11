@@ -111,6 +111,20 @@ export function getGames(page = 0) {
   }
 }
 
+/*** COLUMNS WIDTH ACTIONS ***/
+/*****************************/
+
+export const COLUMNS_WIDTH_ADJUST = Symbol('COLUMNS_WIDTH_ADJUST')
+export const COLUMNS_WIDTH_CLEAR = Symbol('COLUMNS_WIDTH_CLEAR')
+
+export function adjustColumnWidth(name, amount) {
+  return { type: COLUMNS_WIDTH_ADJUST, name, amount }
+}
+
+export function clearColumnWidth(name) {
+  return { type: COLUMNS_WIDTH_ADJUST, name }
+}
+
 /*** HELPERS ****/
 /****************/
 

@@ -1,5 +1,7 @@
 var webpackCfg = require('./webpack.config');
 
+// Install karma-cli globally
+
 module.exports = function(config) {
   config.set({
     basePath: '',
@@ -13,7 +15,7 @@ module.exports = function(config) {
     client: {
       mocha: {}
     },
-    singleRun: true,
+    singleRun: false,
     reporters: ['mocha'],
     preprocessors: {
       'test/loadtests.js': ['webpack', 'sourcemap']

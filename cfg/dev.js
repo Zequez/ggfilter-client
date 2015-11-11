@@ -21,7 +21,7 @@ var config = _.merge({
 // Add needed loaders
 config.module.loaders.push({
   test: /\.(js|jsx)$/,
-  loader: 'react-hot!babel?optional[]=runtime',
+  loader: 'react-hot!babel?optional[]=runtime&stage=0',
   include: path.join(__dirname, '/../src')
 });
 

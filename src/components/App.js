@@ -45,6 +45,7 @@ class App extends React.Component {
           <DataTable
             games={this.props.games}
             query={this.props.query}
+            columnsWidth={this.props.columnsWidth}
             filters={this.props.toggledFilters}/>
         </main>
       </div>

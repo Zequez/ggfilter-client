@@ -22,7 +22,7 @@ module.exports = {
     noInfo: false
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.sass', '.scss'],
+    extensions: ['', '.js', '.jsx', '.coffee', '.sass', '.scss'],
     alias: {
       actions: srcPath + '/actions/',
       components: srcPath + '/components/',
@@ -30,6 +30,7 @@ module.exports = {
       stores: srcPath + '/stores/',
       styles: srcPath + '/styles/',
       images: srcPath + '/images/',
+      lib: srcPath + '/lib/',
       compass: 'compass-mixins/lib/compass'
     }
   },
@@ -65,7 +66,8 @@ module.exports = {
       {
         test: /\.(png|jpg|gif|woff|woff2)$/,
         loader: 'url-loader?limit=8192'
-      }
+      },
+      { test: /\.coffee$/, loader: 'coffee' }
     ]
   }
 };

@@ -32,6 +32,7 @@
       position: relative
       display: inline-block
       overflow: inherit
+      z-index: 10
 
   // Filters titles
   &-titles
@@ -40,10 +41,22 @@
     text-shadow: 0px 1px $dark-blue
 
   .filter-title
+    position: relative
     border-right-color: $title-alternate-background
 
     .overflow-cell
       background: $title-background
+
+    .resize-handle
+      position: absolute
+      right: 0
+      top: 0
+      width: 4px
+      height: 100%
+      background: lighten($blue, 5%)
+      cursor: ew-resize
+      z-index: 5
+
 
   // Filters controls
   &-controls

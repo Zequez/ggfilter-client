@@ -21,7 +21,7 @@ var config = _.merge({
 
 config.module.loaders.push({
   test: /\.(js|jsx)$/,
-  loader: 'babel',
+  loader: 'babel?stage=0',
   include: path.join(__dirname, '/../src')
 });
 

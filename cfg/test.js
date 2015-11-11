@@ -11,23 +11,27 @@ module.exports = {
       },
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel-loader',
+        loader: 'babel-loader?stage=0',
         include: [
           path.join(__dirname, '/../src'),
           path.join(__dirname, '/../test')
         ]
-      }
+      },
+      { test: /\.coffee$/, loader: 'coffee' }
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['', '.js', '.jsx', '.coffee'],
     alias: {
       actions: srcPath + 'actions/',
       helpers: path.join(__dirname, '/../test/helpers'),
       components: srcPath + 'components/',
       sources: srcPath + 'sources/',
       stores: srcPath + 'stores/',
-      styles: srcPath + 'styles/'
+      styles: srcPath + 'styles/',
+      images: srcPath + '/images/',
+      lib: srcPath + '/lib/',
+      compass: 'compass-mixins/lib/compass'
     }
   }
 };
