@@ -1,0 +1,36 @@
+@keyframes spin
+  0%
+    transform: rotate(0deg)
+  100%
+    transform: rotate(360deg)
+
+.games-loader
+  width: 100%
+
+  background: $blue
+  text-align: center
+  font-size: 72px
+  line-height: $r*5
+
+  cursor: pointer
+
+  // &:hover:after
+  //   transform: rotate(90deg)
+
+  // &-fetching
+
+  &:after
+    animation-name: spin
+    animation-duration: 1s
+    animation-timing-function: linear
+    animation-iteration-count: infinite
+
+  &:after
+    content: '⟳'
+    display: inline-block
+    transition: transform 0.5s
+    transform-origin: 48% 55%
+
+  &-failed:after
+    content: ':('
+    color: desaturate(red, 50%)

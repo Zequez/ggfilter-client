@@ -111,6 +111,13 @@ export function getGames(page = 0) {
   }
 }
 
+export function getMoreGames() {
+  return function(dispatch, getState) {
+    var page = getState().games.batches.length
+    return getGames(page)(dispatch, getState)
+  }
+}
+
 /*** COLUMNS WIDTH ACTIONS ***/
 /*****************************/
 

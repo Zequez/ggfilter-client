@@ -5,11 +5,12 @@ require('isomorphic-fetch')
 var bindActionCreators = require('redux').bindActionCreators
 var connect = require('react-redux').connect
 
-var NavTabs = require('./NavTabs')
-var FiltersToggles = require('./tabs/FiltersToggles')
-var DataTable = require('./DataTable')
+var NavTabs =        require('components/NavTabs')
+var FiltersToggles = require('components/tabs/FiltersToggles')
+var DataTable =      require('components/DataTable')
+var GamesLoader =    require('components/GamesLoader')
 
-import { Tabs, getGames } from 'stores/actions'
+import { Tabs, getGames, getMoreGames } from 'stores/actions'
 
 class App extends React.Component {
   constructor(props) {
@@ -18,6 +19,10 @@ class App extends React.Component {
     if (!props.games.batches.length) {
       props.getGames()
     }
+  }
+
+  handleRequestMoreGames() {
+    this.props.getMoreGames()
   }
 
   tabContent(tab) {
@@ -47,6 +52,10 @@ class App extends React.Component {
             query={this.props.query}
             columnsWidth={this.props.columnsWidth}
             filters={this.props.toggledFilters}/>
+          <GamesLoader
+            fetching={this.props.games.fetching}
+            failed={this.props.games.failed}
+            onRequestMore={this.handleRequestMoreGames.bind(this)} />
         </main>
       </div>
     )
@@ -58,5 +67,5 @@ App.defaultProps = {}
 
 export default connect(
   (state)=>{ return state },
-  (dispatch)=> bindActionCreators({ getGames }, dispatch)
+  (dispatch)=> bindActionCreators({ getGames, getMoreGames }, dispatch)
 )(App)

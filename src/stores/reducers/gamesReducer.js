@@ -14,6 +14,7 @@ function gamesReducer(state = initialState, action) {
     if (action.page == 0) {
       state.batches = []
     }
+    console.log(action)
     state.batches[action.page] = action.games
   }
   else if(action.type == GET_GAMES_FAILED) {
