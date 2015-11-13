@@ -23,8 +23,8 @@
       border-right: none
 
 .BooleanFilter
-  $_background: $ocean-blue
-  $_color: $white
+  $_background: $blue
+  $_color: rgba(#fff, 0.75)
 
   & > div
     display: table
@@ -39,7 +39,9 @@
     display: none
 
   .boolean-input:checked + label
-    background: $_background
+    background-color: $_background
+    background-image: linear-gradient(rgba($dark-blue, 0.5) 0%, rgba(#000,0) 50%)
+    box-shadow: inset 0px 1px 0px $dark-blue, inset 0px 0px 10px $dark-blue
     color: $_color
 
   i
@@ -54,9 +56,9 @@
     text-align: center
     &:before, &:after
       position: absolute
-      right: 0
+      right: -1px
       height: 50%
-      width: 100%
+      width: 11px
     &:before
       content: '&'
       top: 0
