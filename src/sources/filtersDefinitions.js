@@ -6,6 +6,7 @@ var LinkColumn = require('components/columns/LinkColumn')
 var TextFilter = require('components/filters/TextFilter')
 var NumberFilter = require('components/filters/NumberFilter')
 var RangeFilter = require('components/filters/RangeFilter')
+var BooleanFilter = require('components/filters/BooleanFilter')
 
 var filtersDefinitions = {
   name: {
@@ -98,16 +99,22 @@ var filtersDefinitions = {
     width: 100
   },
   features: {
-    title: 'Steam features'
+    title: 'Steam features',
+    filter: BooleanFilter,
+    filterOptions: { enumType: 'features' }
   },
   platforms: {
-    title: 'Platforms'
+    title: 'Platforms',
+    filter: BooleanFilter,
+    filterOptions: { enumType: 'platforms' }
+  },
+  players: {
+    title: 'Players',
+    filter: BooleanFilter,
+    filterOptions: { enumType: 'players' }
   },
   controller_support: {
     title: 'Controller support'
-  },
-  players: {
-    title: 'Players'
   }
 }
 

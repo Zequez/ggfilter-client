@@ -46,7 +46,7 @@ export default {
     },
 
     players: {
-      single_player:  'Single player'
+      single_player:  'Single player',
       multi_player:   'Multiplayer',
       co_op:          'Co-op',
       local_co_op:    'Local co-op'

@@ -5,8 +5,7 @@ var classNames = require('classnames')
 class DataTableControls extends React.Component {
   handleFilterChange(filterName, data) {
     if (data) {
-      data.filter = true
-      data.highlight = false
+      // data.highlight = false
       this.props.dispatch(setQueryFilter(filterName, data))
     }
     else {
