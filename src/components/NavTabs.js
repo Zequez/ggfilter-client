@@ -6,14 +6,14 @@ import { Tabs, selectTab } from 'stores/actions'
 
 class NavTabs extends React.Component {
   render() {
-    var klass = (tab)=> (tab == this.props.tab) ? 'active' : null
+    var klass = (tab)=> (tab === this.props.tab) ? 'active' : null
 
     return (
       <ul className='nav-tabs'>
-        <li onClick={this.props.selectTab(Tabs.FILTERS)} className={klass('filters')}>Filters</li>
-        <li onClick={this.props.selectTab(Tabs.SOURCES)} className={klass('sources')}>Sources</li>
-        <li onClick={this.props.selectTab(Tabs.FEEDBACK)} className={klass('feedback')}>Feedback</li>
-        <li onClick={this.props.selectTab(Tabs.DONATIONS)} className={klass('donations')}>Donations</li>
+        <li onClick={this.props.selectTab(Tabs.FILTERS)} className={klass(Tabs.FILTERS)}>Filters</li>
+        <li onClick={this.props.selectTab(Tabs.SOURCES)} className={klass(Tabs.SOURCES)}>Sources</li>
+        <li onClick={this.props.selectTab(Tabs.FEEDBACK)} className={klass(Tabs.FEEDBACK)}>Feedback</li>
+        <li onClick={this.props.selectTab(Tabs.DONATIONS)} className={klass(Tabs.DONATIONS)}>Donations</li>
       </ul>
     )
   }

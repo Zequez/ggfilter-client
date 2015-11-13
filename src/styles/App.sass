@@ -60,32 +60,16 @@ a
   +f($font-xx-larger)
   font-weight: bold
 
-.nav
-  +clearfix
-  &-tabs
-    list-style-type: none
-    li
-      float: left
-      padding: 0 $rhythm/2
-      background: $blue
-      +f($font-x-larger)
-      cursor: pointer
-      &.active
-        background: $ocean-blue
+@import "NavTabs"
 
 .tabs-content
   +clearfix
-  padding: $rhythm
-  background: $teal
+  padding: $r
+  border-top: solid 1px lighten($teal, 5%)
+  background-color: $teal
+  background-image: linear-gradient(rgba(#000, 0.10) 0%, rgba(#000, 0) 65%)
   color: $dark-blue
-  font-weight: normal
-
-  .filters-toggles-section
-    float: left
-    margin-right: $rhythm
-    h3
-      +f($font-larger)
-
+  font-weight: 300
 
 @import "icons"
 @import "inputs"
