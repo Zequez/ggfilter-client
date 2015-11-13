@@ -1,0 +1,23 @@
+.TextFilter, .NumberFilter
+  position: relative
+  .timerbar
+    content: ' '
+    position: absolute
+    top: 0
+    right: 0
+    width: 5px
+    height: $r
+    background: $red
+    transform-origin: bottom
+    transform: scaleY(0)
+    z-index: 10
+
+  input
+    width: 100%
+
+.RangeFilter
+  select
+    width: 50%
+    border-left: none
+    &:last-child
+      border-right: none

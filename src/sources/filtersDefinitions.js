@@ -3,7 +3,7 @@ var RawColumn = require('components/columns/RawColumn')
 var PriceColumn = require('components/columns/PriceColumn')
 var RatioColumn = require('components/columns/RatioColumn')
 var LinkColumn = require('components/columns/LinkColumn')
-var ExactFilter = require('components/filters/ExactFilter')
+var TextFilter = require('components/filters/TextFilter')
 var NumberFilter = require('components/filters/NumberFilter')
 var RangeFilter = require('components/filters/RangeFilter')
 
@@ -113,7 +113,7 @@ for (let filterName in filtersDefinitions) {
   if (!filter.toggle) filter.toggle = BaseToggle
   if (!filter.width)  filter.width = 100
 
-  if (!filter.filter)        filter.filter = ExactFilter
+  if (!filter.filter)        filter.filter = TextFilter
   if (!filter.filterOptions) filter.filterOptions = {}
 
   if (!filter.column)        filter.column = RawColumn

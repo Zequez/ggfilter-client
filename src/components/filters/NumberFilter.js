@@ -1,19 +1,7 @@
-var ExactFilter = require('./ExactFilter')
+var TextFilter = require('./TextFilter')
 
-class NumberFilter extends ExactFilter {
+export default class NumberFilter extends TextFilter {
   render() {
-
-    return (
-      <div>
-        <input
-          type='number'
-          value={this.props.query.value}
-          onChange={this.handleChange.bind(this)} />
-      </div>
-    )
+    return super.render({type: 'number'})
   }
 }
-
-NumberFilter.propTypes = ExactFilter.propTypes
-
-export default NumberFilter
