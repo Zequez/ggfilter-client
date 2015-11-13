@@ -31,6 +31,7 @@ class DataTableControls extends React.Component {
         <th key={filter.name} className={controlClass}>
           <filter.filter
             query={queryFilter}
+            name={filter.name}
             options={filter.filterOptions}
             onChange={this.handleFilterChange.bind(this, filter.name)}/>
         </th>

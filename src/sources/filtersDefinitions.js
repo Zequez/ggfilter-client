@@ -104,23 +104,20 @@ var filtersDefinitions = {
   features: {
     title: 'Steam features',
     filter: BooleanFilter,
-    filterOptions: { enumType: 'features' },
     column: BooleanColumn,
-    columnOptions: { enumType: 'features' }
+    width: 144+10
   },
   platforms: {
     title: 'Platforms',
     filter: BooleanFilter,
-    filterOptions: { enumType: 'platforms' },
     column: BooleanColumn,
-    columnOptions: { enumType: 'platforms' }
+    width: 72+10
   },
   players: {
     title: 'Players',
     filter: BooleanFilter,
-    filterOptions: { enumType: 'players' },
     column: BooleanColumn,
-    columnOptions: { enumType: 'players' }
+    width: 96+10
   },
   controller_support: {
     title: 'Controller support',

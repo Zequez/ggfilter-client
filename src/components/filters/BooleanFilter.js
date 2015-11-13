@@ -8,9 +8,7 @@ export default class BooleanFilter extends React.Component {
       value: t.number,
       or: t.bool
     }).isRequired,
-    options: t.shape({
-      enumType: t.string.isRequired
-    }).isRequired,
+    name: t.string.isRequired,
     onChange: t.func.isRequired
   }
 
@@ -27,8 +25,8 @@ export default class BooleanFilter extends React.Component {
     this.state = {
       or: props.query.or,
       value: props.query.value,
-      enumValues: enumColumns.values[props.options.enumType],
-      enumNames: enumColumns.names[props.options.enumType]
+      enumValues: enumColumns.values[props.name],
+      enumNames: enumColumns.names[props.name]
     }
 
     this.state.keys = Object.keys(this.state.enumValues)
@@ -68,7 +66,7 @@ export default class BooleanFilter extends React.Component {
   }
 
   render() {
-    let enumType = this.props.options.enumType
+    let enumType = this.props.name
     let inputs = []
     this.state.keys.forEach((key)=>{
       let val = this.state.enumValues[key]

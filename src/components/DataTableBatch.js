@@ -48,6 +48,7 @@ class DataTableBatch extends React.Component {
             {this.overflowColumnWrap(!filter.column.noOverflowContainer,
               <filter.column
                 options={filter.columnOptions}
+                name={filter.name}
                 {...this.columnInputs(game, filter)}/>
             )}
           </td>
