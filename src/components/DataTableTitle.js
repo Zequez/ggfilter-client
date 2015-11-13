@@ -13,6 +13,37 @@ export default class DataTableTitle extends React.Component {
     active: t.bool.isRequired
   }
 
+  constructor(props) {
+    super(props)
+    this.state = { iconize: false }
+    this.iconizedAt = 0
+  }
+
+  componentDidUpdate() {
+    // Calculate if we need to iconize the title
+    // if it's overflowing
+    setTimeout(()=>{
+      let overflowCell = this.refs.overflowCell
+      let clientWidth = overflowCell.clientWidth
+      let scrollWidth = overflowCell.scrollWidth
+
+      let iconize = clientWidth !== scrollWidth
+
+      if (iconize !== this.state.iconize) {
+        if (iconize) {
+          this.state.iconize = iconize
+          this.iconizedAt = scrollWidth
+          this.refs.th.className += ' iconized'
+        }
+        else if (clientWidth >= this.iconizedAt) {
+          this.state.iconize = iconize
+          this.refs.th.className = this.refs.th.className.replace('iconized', '')
+        }
+
+      }
+    }, 50)
+  }
+
   onSort() {
     this.props.onSort(this.props.filter)
   }
@@ -34,17 +65,22 @@ export default class DataTableTitle extends React.Component {
       'sort-desc': sort === false,
       [filter.name]: true,
       'filter-title': true,
-      'filter-title-active': this.props.active
+      'filter-title-active': this.props.active,
+      iconized: this.state.iconized
     })
     let width = this.props.width
 
     return (
       <th style={{width: width}}
+        ref='th'
         className={titleClass}
+        title={'Sort by ' + filter.title}
         onClick={this.onSort.bind(this)}>
         <div
-          className='overflow-cell'>
-          {filter.title}
+          className='overflow-cell'
+          ref='overflowCell'>
+          <i className={'fa icon-' + filter.name}></i>
+          <span>{filter.title}</span>
         </div>
         <ColumnResizeHandle
           onStop={this.onResize.bind(this)}

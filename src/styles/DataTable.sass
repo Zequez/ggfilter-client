@@ -48,7 +48,23 @@
     border-right-color: $title-alternate-background
     cursor: pointer
 
+    span
+      margin-left: $r/4
 
+    .fa
+      display: none
+
+    &.iconized
+      span
+        display: none
+      .fa
+        display: inline-block
+
+      &:hover
+        span
+          display: inline
+        .fa
+          display: none
 
     &.sort:after
       position: absolute

@@ -4,6 +4,8 @@ $fa-font-path: '~font-awesome/fonts/'
 @import "~font-awesome/scss/_path"
 @import "~font-awesome/scss/_core"
 
+// Boolean filters icons
+
 .icon-steam_achievements:before
   content: $fa-var-certificate
 .icon-steam_trading_cards:before
@@ -33,3 +35,48 @@ $fa-font-path: '~font-awesome/fonts/'
 
 .icon-vive:before
   content: $fa-var-eye
+
+// Base filters icons
+
+.icon-steam_id:before
+  content: $fa-var-steam
+.icon-name:before
+  content: $fa-var-font
+.icon-images:before
+  content: $fa-var-image
+
+.icon-lowest_steam_price:before
+  content: $fa-var-steam + $fa-var-dollar
+.icon-steam_discount:before
+  content: $fa-var-steam + '-' + $fa-var-dollar + '%'
+
+.icon-playtime_mean:before
+  content: 'PTA'
+.icon-playtime_median:before
+  content: 'PTM'
+.icon-playtime_sd:before
+  content: 'PTSD'
+.icon-playtime_rsd:before
+  content: 'PTRSD'
+.icon-playtime_mean_ftb:before
+  content: 'PTA/' + $fa-var-dollar
+.icon-playtime_median_ftb:before
+  content: 'PTM/' + $fa-var-dollar
+
+.icon-metacritic:before
+  content: $fa-var-star
+.icon-steam_reviews_count:before
+  content: $fa-var-steam + $fa-var-comments + "#"
+.icon-steam_reviews_ratio:before
+  content: $fa-var-steam + $fa-var-comments + $fa-var-star
+
+.icon-features:before
+  content: $fa-var-steam + $fa-var-cubes
+.icon-platforms:before
+  content: $fa-var-windows + $fa-var-apple + $fa-var-linux
+.icon-players:before
+  content: $fa-var-group
+.icon-vr:before
+  content: 'VR'
+.icon-controller_support:before
+  content: $fa-var-gamepad
