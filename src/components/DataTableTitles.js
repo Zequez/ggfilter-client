@@ -8,6 +8,7 @@ class DataTableTitles extends React.Component {
     filters: t.arrayOf(t.object).isRequired,
     columnsWidth: t.arrayOf(t.number).isRequired,
     query: t.shape({
+      filters: t.object.isRequired,
       sort: t.string.isRequired,
       sort_asc: t.bool.isRequired
     }).isRequired,
@@ -41,6 +42,7 @@ class DataTableTitles extends React.Component {
           filter={filter}
           width={width}
           sort={sort}
+          active={!!this.props.query.filters[filter.name]}
           onSort={this.onSort.bind(this)}
           onResize={this.onResize.bind(this)}
           onResetResize={this.onResetResize.bind(this)}/>

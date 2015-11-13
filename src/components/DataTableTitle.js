@@ -9,7 +9,8 @@ export default class DataTableTitle extends React.Component {
     sort: t.oneOf([true, false, null]),
     onSort: t.func.isRequired,
     onResize: t.func.isRequired,
-    onResetResize: t.func.isRequired
+    onResetResize: t.func.isRequired,
+    active: t.bool.isRequired
   }
 
   onSort() {
@@ -32,7 +33,8 @@ export default class DataTableTitle extends React.Component {
       'sort-asc': sort === true,
       'sort-desc': sort === false,
       [filter.name]: true,
-      'filter-title': true
+      'filter-title': true,
+      'filter-title-active': this.props.active
     })
     let width = this.props.width
 
