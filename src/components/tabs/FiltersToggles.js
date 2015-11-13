@@ -11,6 +11,10 @@ class FiltersToggles extends React.Component {
     filters: t.arrayOf(t.object).isRequired,
   }
 
+  handleChange = ()=> {
+
+  }
+
   toggleEl(filter) {
     let active = this.props.filters.indexOf(filter) != -1
     return <filter.toggle key={filter.name} active={active} filter={filter}/>

@@ -15,15 +15,15 @@ var filtersDefinitions = {
     columnOptions: { urlTemplate: 'http://store.steampowered.com/app/%s/' },
     width: 150
   },
-  'steam_id': {
+  steam_id: {
     title: 'Steam ID',
     filter: NumberFilter,
     width: 65
   },
-  'images': {
+  images: {
     title: 'Images'
   },
-  'lowest_steam_price': {
+  lowest_steam_price: {
     title: 'Steam price (US)',
     filter: RangeFilter,
     column: PriceColumn,
@@ -75,19 +75,19 @@ var filtersDefinitions = {
     columnOptions: { round: 100 },
     width: 60
   },
-  'metacritic': {
+  metacritic: {
     title: 'Metacritic',
     filter: RangeFilter,
     filterOptions: { range: [10, 20, 30, 40, 50, 60, 70, 80, 90] },
     width: 60
   },
-  'steam_reviews_count': {
+  steam_reviews_count: {
     title: '# Steam reviews',
     filter: RangeFilter,
     filterOptions: { range: [8, 20, 35, 65, 115, 220, 420, 1020, 4250] },
     width: 60
   },
-  'steam_reviews_ratio': {
+  steam_reviews_ratio: {
     title: 'Steam reviews ratio',
     filter: RangeFilter,
     filterOptions: {
@@ -97,11 +97,17 @@ var filtersDefinitions = {
     column: RatioColumn,
     width: 100
   },
-  'multiplayer': {
-    title: 'Multiplayer'
+  features: {
+    title: 'Steam features'
   },
-  'single_player': {
-    title: 'Single player'
+  platforms: {
+    title: 'Platforms'
+  },
+  controller_support: {
+    title: 'Controller support'
+  },
+  players: {
+    title: 'Players'
   }
 }
 

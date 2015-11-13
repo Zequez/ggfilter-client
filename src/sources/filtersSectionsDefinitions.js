@@ -24,8 +24,10 @@ var definitions = {
     'steam_reviews_ratio',
   ],
   'Features': [
-    'multiplayer',
-    'single_player',
+    'features',
+    'platforms',
+    'players',
+    'controller_support'
   ]
 }
 
