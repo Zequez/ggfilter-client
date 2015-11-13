@@ -1,4 +1,5 @@
 var enumColumns = require('sources/enumColumns')
+var classNames = require('classnames')
 
 var t = React.PropTypes
 export default class BooleanFilter extends React.Component {
@@ -24,17 +25,20 @@ export default class BooleanFilter extends React.Component {
     super(props)
 
     this.state = {
+      or: props.query.or,
       value: props.query.value,
       enumValues: enumColumns.values[props.options.enumType],
       enumNames: enumColumns.names[props.options.enumType]
     }
+
+    this.state.keys = Object.keys(this.state.enumValues)
   }
 
   checked(val) {
     return (this.state.value & val) > 0
   }
 
-  onChange = (ev)=>{
+  onValueChange = (ev)=>{
     let checked = ev.target.checked
     let val = ev.target.value
     let currentVal = this.props.query.value
@@ -48,38 +52,65 @@ export default class BooleanFilter extends React.Component {
     }
 
     this.setState({value: newVal})
-    if (newVal === 0) {
-      this.props.onChange(null)
+    if (newVal) {
+      this.props.onChange({value: newVal, or: this.state.or})
     }
     else {
-      this.props.onChange({value: newVal, or: this.props.query.or})
+      this.props.onChange(null)
     }
-
   }
 
-  input(key) {
-    let val = this.state.enumValues[key]
-    return (
-      <input
-        key={key}
-        type='checkbox'
-        className={'boolean-' + key}
-        value={val}
-        checked={this.checked(val)}
-        onChange={this.onChange}
-        title={this.state.enumNames[key]}/>
-    )
+  onOperatorChange = (ev)=>{
+    let or = ev.target.checked
+    let val = this.state.value
+    this.setState({or: or})
+    if (val) this.props.onChange({value: val, or: or})
   }
 
   render() {
-    let vals = this.state.enumValues
-    let names = this.state.enumNames
-    let keys = Object.keys(vals)
+    let enumType = this.props.options.enumType
+    let inputs = []
+    this.state.keys.forEach((key)=>{
+      let val = this.state.enumValues[key]
+      let name = this.state.enumNames[key]
+      let checked = this.checked(val)
+      let labelClass = classNames(`boolean-${enumType}-${key}`, {
+        'boolean-checked': checked
+      })
+      let iconClass = 'fa icon-' + key
+      let id = `boolean-${enumType}-${key}`
 
-    return (
-      <div>
-        {keys.map((key)=> this.input(key))}
-      </div>
-    )
+      inputs.push(
+        <input
+          id={id}
+          className='boolean-input'
+          type='checkbox'
+          value={val}
+          checked={checked}
+          onChange={this.onValueChange}/>
+      )
+
+      inputs.push(
+        <label className={labelClass} title={name} htmlFor={id}>
+          <i className={iconClass}></i>
+          <span>{name}</span>
+        </label>
+      )
+    })
+
+    let opId = `boolean-${enumType}-operator`
+    var opInput =
+      <input
+        type='checkbox'
+        className='boolean-operator-input'
+        checked={this.state.or}
+        id={opId}
+        onChange={this.onOperatorChange}/>
+    var opLabel =
+      <label className='boolean-operator' htmlFor={opId} title='AND/OR'>
+        <span>AND/OR</span>
+      </label>
+
+    return React.createElement('div', null, ...inputs, opInput, opLabel)
   }
 }

@@ -21,3 +21,58 @@
     border-left: none
     &:last-child
       border-right: none
+
+.BooleanFilter
+  $_background: $ocean-blue
+  $_color: $white
+
+  & > div
+    display: table
+    table-layout: fixed
+    width: 100%
+
+  label
+    display: table-cell
+    cursor: pointer
+
+  span, input
+    display: none
+
+  .boolean-input:checked + label
+    background: $_background
+    color: $_color
+
+  i
+    display: inline-block
+    width: 100%
+
+  .boolean-operator
+    position: relative
+    width: 10px
+    font-size: $font-smaller
+    line-height: $r/2
+    text-align: center
+    &:before, &:after
+      position: absolute
+      right: 0
+      height: 50%
+      width: 100%
+    &:before
+      content: '&'
+      top: 0
+      background: $_background
+      color: $_color
+    &:after
+      content: '|'
+      bottom: 0
+
+  .boolean-operator-input:checked + .boolean-operator
+    &:before
+      background: none
+      color: inherit
+    &:after
+      background: $_background
+      color: $_color
+
+
+.icon-steam_achievements
