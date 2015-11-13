@@ -44,11 +44,11 @@ class RangeFilter extends React.Component {
   render() {
     return (
       <div>
-        <select ref='gt' value={this.props.gt} onChange={this.handleChange.bind(this)}>
+        <select ref='gt' value={this.props.query.gt} onChange={this.handleChange.bind(this)}>
           <option value=''>Min</option>
           {this.selectOptions(true)}
         </select>
-        <select ref='lt' value={this.props.lt} onChange={this.handleChange.bind(this)}>
+        <select ref='lt' value={this.props.query.lt} onChange={this.handleChange.bind(this)}>
           <option value=''>Max</option>
           {this.selectOptions(false)}
         </select>
