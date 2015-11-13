@@ -55,7 +55,11 @@ class App extends React.Component {
 
     return (
       <div className='container'>
-        <header className='header'>GGFilter</header>
+        <header className='header'>
+          <div className='logo' title="The Great/Giant/Games/Gaming/Gems Filter. I haven't decided on a name yet.">
+            GGFilter
+          </div>
+        </header>
         <main className='main'>
           <nav className='nav'>
             <NavTabs tab={this.props.tab}/>
