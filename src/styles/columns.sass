@@ -1,0 +1,34 @@
+.LinkColumn
+  text-align: left
+
+
+.PriceColumn
+  .price-was
+    text-decoration: line-through
+    color: lighten(desaturate($color, 50%), 50%)
+    margin-right: $r/4
+
+.RatioColumn
+  .ratio-column
+    width: 100%
+    height: 8px
+
+    &-up
+      float: left
+      height: 100%
+      background: green
+
+    &-down
+      float: left
+      height: 100%
+      background: red
+
+.BooleanColumn
+  padding-right: 10px
+  .icons-list
+    display: table
+    table-layout: fixed
+    width: 100%
+  i
+    display: table-cell
+    line-height: $r

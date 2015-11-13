@@ -15,8 +15,12 @@ export default class DataTableTitle extends React.Component {
 
   constructor(props) {
     super(props)
-    this.state = { iconize: false }
+    this.iconize = false
     this.iconizedAt = 0
+  }
+
+  componentDidMount() {
+    this.componentDidUpdate()
   }
 
   componentDidUpdate() {
@@ -29,14 +33,14 @@ export default class DataTableTitle extends React.Component {
 
       let iconize = clientWidth !== scrollWidth
 
-      if (iconize !== this.state.iconize) {
+      if (iconize !== this.iconize) {
         if (iconize) {
-          this.state.iconize = iconize
+          this.iconize = iconize
           this.iconizedAt = scrollWidth
           this.refs.th.className += ' iconized'
         }
         else if (clientWidth >= this.iconizedAt) {
-          this.state.iconize = iconize
+          this.iconize = iconize
           this.refs.th.className = this.refs.th.className.replace('iconized', '')
         }
 
@@ -66,7 +70,7 @@ export default class DataTableTitle extends React.Component {
       [filter.name]: true,
       'filter-title': true,
       'filter-title-active': this.props.active,
-      iconized: this.state.iconized
+      iconized: this.iconized
     })
     let width = this.props.width
 
