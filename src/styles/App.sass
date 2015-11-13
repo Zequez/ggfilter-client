@@ -57,6 +57,7 @@ a
   text-decoration: none
 
 .header
+  height: $r*3
   text-align: center
   +f($font-xx-larger)
   font-weight: bold
@@ -77,6 +78,10 @@ a
   background-image: linear-gradient(rgba(#000, 0.15) 0%, rgba(#000, 0) 65%)
   color: lighten($white, 10%)
   font-weight: 300
+  .tab-content
+    display: none
+  .tab-content.active
+    display: block
 
 @import "icons"
 @import "inputs"

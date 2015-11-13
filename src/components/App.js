@@ -8,9 +8,11 @@ var connect = require('react-redux').connect
 var filtersDefinitions = require('sources/filtersDefinitions')
 
 var NavTabs =        require('components/NavTabs')
-var FiltersToggles = require('components/tabs/FiltersToggles')
 var DataTable =      require('components/DataTable')
 var GamesLoader =    require('components/GamesLoader')
+
+var FiltersToggles = require('components/tabs/FiltersToggles')
+var SourcesTab     = require('components/tabs/SourcesTab')
 
 import { Tabs, getGames, getMoreGames } from 'stores/actions'
 
@@ -40,14 +42,13 @@ class App extends React.Component {
     this.props.getMoreGames()
   }
 
-  tabContent(tab) {
-    switch(tab) {
-      case Tabs.FILTERS:
-        return <FiltersToggles filters={this.state.filters}/>
-      case Tabs.SOURCES: return null
-      case Tabs.FEEDBACK: return null
-      case Tabs.DONATIONS: return null
-    }
+  tabContent(tab, element) {
+    let activeClass = tab == this.props.tab ? 'active' : ''
+    return (
+      <div className={'tab-content ' + activeClass}>
+        {element}
+      </div>
+    )
   }
 
   render() {
@@ -65,7 +66,8 @@ class App extends React.Component {
             <NavTabs tab={this.props.tab}/>
           </nav>
           <div className='tabs-content'>
-            {this.tabContent(this.props.tab)}
+            {this.tabContent(Tabs.FILTERS, <FiltersToggles filters={this.state.filters}/>)}
+            {this.tabContent(Tabs.SOURCES, <SourcesTab />)}
           </div>
           <DataTable
             games={this.props.games}
