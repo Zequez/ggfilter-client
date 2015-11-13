@@ -26,7 +26,7 @@ class App extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (this.props.toggledFilters !== nextProps.toggledFilters) {
-      this.loadFilters(nextProps)
+      this.loadFilters(nextProps.toggledFilters)
     }
   }
 
