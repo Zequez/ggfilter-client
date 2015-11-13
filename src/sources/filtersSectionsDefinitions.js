@@ -2,9 +2,10 @@ var filtersDefinitions = require('./filtersDefinitions')
 
 var definitions = {
   'Game info': [
+    'steam_thumbnail',
     'steam_id',
     'name',
-    'images',
+    'images'
   ],
   'Price': [
     'lowest_steam_price',

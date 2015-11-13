@@ -5,11 +5,13 @@ var PriceColumn    = require('components/columns/PriceColumn')
 var RatioColumn    = require('components/columns/RatioColumn')
 var LinkColumn     = require('components/columns/LinkColumn')
 var BooleanColumn  = require('components/columns/BooleanColumn')
+var ImagesColumn   = require('components/columns/ImagesColumn')
 
 var TextFilter    = require('components/filters/TextFilter')
 var NumberFilter  = require('components/filters/NumberFilter')
 var RangeFilter   = require('components/filters/RangeFilter')
 var BooleanFilter = require('components/filters/BooleanFilter')
+var NullFilter = require('components/filters/NullFilter')
 
 var filtersDefinitions = {
   name: {
@@ -25,7 +27,10 @@ var filtersDefinitions = {
     width: 65
   },
   images: {
-    title: 'Images'
+    title: 'Images',
+    filter: NullFilter,
+    column: ImagesColumn,
+    sort: false
   },
   lowest_steam_price: {
     title: 'Steam price (US)',
@@ -127,6 +132,13 @@ var filtersDefinitions = {
   },
   controller_support: {
     title: 'Controller support',
+  },
+  steam_thumbnail: {
+    title: 'Thumbnail',
+    filter: NullFilter,
+    column: ImagesColumn,
+    width: 120,
+    sort: false
   }
 }
 
@@ -134,7 +146,7 @@ for (let filterName in filtersDefinitions) {
   let filter = filtersDefinitions[filterName]
 
   filter.name = filterName
-  if (!filter.sort)   filter.sort = filter.name
+  if (filter.sort == null)   filter.sort = filter.name
   if (!filter.toggle) filter.toggle = BaseToggle
   if (!filter.width)  filter.width = 100
 
@@ -144,6 +156,7 @@ for (let filterName in filtersDefinitions) {
   if (!filter.column)        filter.column = RawColumn
   if (!filter.columnInputs)  filter.columnInputs = { value: filter.name }
   if (!filter.columnOptions) filter.columnOptions = { }
+
 
   filter.toggleType = filter.toggle.toString().match(/function\s*(\w+)/)[1]
   filter.filterType = filter.filter.toString().match(/function\s*(\w+)/)[1]

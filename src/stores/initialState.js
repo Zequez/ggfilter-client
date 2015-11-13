@@ -14,7 +14,8 @@ export default {
     'steam_reviews_ratio',
     'platforms',
     'players',
-    'vr'
+    'vr',
+    'steam_thumbnail'
   ],
 
   columnsWidth: {

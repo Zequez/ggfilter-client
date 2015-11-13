@@ -49,7 +49,7 @@ export default class DataTableTitle extends React.Component {
   }
 
   onSort() {
-    this.props.onSort(this.props.filter)
+    if (this.props.filter.sort) this.props.onSort(this.props.filter)
   }
 
   onResize(deltaX) {
