@@ -1,4 +1,14 @@
-class RatioColumn extends React.Component {
+var t = React.PropTypes
+
+export default class RatioColumn extends React.Component {
+  static propTypes = {
+    up: t.number,
+    down: t.number,
+    value: t.number
+  }
+
+  static noOverflowContainer = true
+
   render() {
     var ratio = this.props.value
     if (!ratio) {
@@ -23,11 +33,3 @@ class RatioColumn extends React.Component {
     )
   }
 }
-
-RatioColumn.propTypes = {
-  up: React.PropTypes.number,
-  down: React.PropTypes.number,
-  value: React.PropTypes.number
-}
-
-export default RatioColumn

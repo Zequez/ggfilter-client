@@ -18,6 +18,11 @@ class DataTableBatch extends React.Component {
     return game['hl_' + filter.name] ? 'hl' : ''
   }
 
+  overflowColumnWrap(wrap, el) {
+    if (!wrap) return el
+    return <div className='overflow-cell'>{el}</div>
+  }
+
   render() {
     console.info('Render <DataTableBatch/>')
 
@@ -40,11 +45,11 @@ class DataTableBatch extends React.Component {
 
         cols.push(
           <td key={filter.name} className={tdClass}>
-            <div className='overflow-cell'>
+            {this.overflowColumnWrap(!filter.column.noOverflowContainer,
               <filter.column
                 options={filter.columnOptions}
                 {...this.columnInputs(game, filter)}/>
-            </div>
+            )}
           </td>
         )
       }

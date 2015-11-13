@@ -1,11 +1,14 @@
 var BaseToggle = require('components/toggles/BaseToggle')
-var RawColumn = require('components/columns/RawColumn')
-var PriceColumn = require('components/columns/PriceColumn')
-var RatioColumn = require('components/columns/RatioColumn')
-var LinkColumn = require('components/columns/LinkColumn')
-var TextFilter = require('components/filters/TextFilter')
-var NumberFilter = require('components/filters/NumberFilter')
-var RangeFilter = require('components/filters/RangeFilter')
+
+var RawColumn      = require('components/columns/RawColumn')
+var PriceColumn    = require('components/columns/PriceColumn')
+var RatioColumn    = require('components/columns/RatioColumn')
+var LinkColumn     = require('components/columns/LinkColumn')
+var BooleanColumn  = require('components/columns/BooleanColumn')
+
+var TextFilter    = require('components/filters/TextFilter')
+var NumberFilter  = require('components/filters/NumberFilter')
+var RangeFilter   = require('components/filters/RangeFilter')
 var BooleanFilter = require('components/filters/BooleanFilter')
 
 var filtersDefinitions = {
@@ -101,20 +104,26 @@ var filtersDefinitions = {
   features: {
     title: 'Steam features',
     filter: BooleanFilter,
-    filterOptions: { enumType: 'features' }
+    filterOptions: { enumType: 'features' },
+    column: BooleanColumn,
+    columnOptions: { enumType: 'features' }
   },
   platforms: {
     title: 'Platforms',
     filter: BooleanFilter,
-    filterOptions: { enumType: 'platforms' }
+    filterOptions: { enumType: 'platforms' },
+    column: BooleanColumn,
+    columnOptions: { enumType: 'platforms' }
   },
   players: {
     title: 'Players',
     filter: BooleanFilter,
-    filterOptions: { enumType: 'players' }
+    filterOptions: { enumType: 'players' },
+    column: BooleanColumn,
+    columnOptions: { enumType: 'players' }
   },
   controller_support: {
-    title: 'Controller support'
+    title: 'Controller support',
   }
 }
 
