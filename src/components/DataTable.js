@@ -1,32 +1,32 @@
-var { Component, PropTypes } = React
+var t = React.PropTypes
+
 var debounce = require('lib/utils').debounce
 var filtersDefinitions = require('sources/filtersDefinitions')
 var TableWidthCalculator = require('lib/TableWidthCalculator')
-var DataTableControls = require('./DataTableControls')
-var DataTableTitles = require('./DataTableTitles')
-var DataTableBatch = require('./DataTableBatch')
 
-class DataTable extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {filters: []}
+var DataTableControls = require('components/DataTableControls')
+var DataTableTitles   = require('components/DataTableTitles')
+var DataTableBatch    = require('components/DataTableBatch')
+
+class DataTable extends React.Component {
+  static propTypes = {
+    filters: t.arrayOf(t.object).isRequired,
+    query: t.shape({
+      filters: t.object,
+      sort: t.string,
+      sort_asc: t.bool,
+      batchSize: t.number
+    }).isRequired,
+    columnsWidth: t.object.isRequired,
+    games: t.shape({
+      list: t.array,
+      fetching: t.bool,
+      failed: t.bool
+    }).isRequired
   }
 
   componentDidMount() {
     window.addEventListener('resize', debounce(250, this.handleWindowResize.bind(this)))
-    this.loadFilters()
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (this.props.filters !== nextProps.filters) {
-      this.loadFilters(nextProps)
-    }
-  }
-
-  loadFilters(filtersNames = this.props.filters) {
-    this.setState({
-      filters: filtersNames.map((f)=>filtersDefinitions[f])
-    })
   }
 
   handleWindowResize(ev) {
@@ -36,7 +36,7 @@ class DataTable extends Component {
   render() {
     console.info('Render <DataTable/>')
 
-    var filters = this.state.filters
+    var filters = this.props.filters
 
     var batches = []
     var gamesBatches = this.props.games.batches
@@ -66,22 +66,6 @@ class DataTable extends Component {
       </table>
     )
   }
-}
-
-DataTable.propTypes = {
-  filters: PropTypes.arrayOf(PropTypes.string).isRequired,
-  query: PropTypes.shape({
-    filters: PropTypes.object,
-    sort: PropTypes.string,
-    sort_asc: PropTypes.bool,
-    batchSize: PropTypes.number
-  }).isRequired,
-  columnsWidth: PropTypes.object.isRequired,
-  games: PropTypes.shape({
-    list: PropTypes.array,
-    fetching: PropTypes.bool,
-    failed: PropTypes.bool
-  }).isRequired
 }
 
 export default DataTable

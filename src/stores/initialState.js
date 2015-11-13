@@ -11,7 +11,9 @@ export default {
     'playtime_median_ftb',
     'metacritic',
     'steam_reviews_count',
-    'steam_reviews_ratio'
+    'steam_reviews_ratio',
+    'multiplayer',
+    'single_player'
   ],
 
   columnsWidth: {

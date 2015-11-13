@@ -5,6 +5,8 @@ require('isomorphic-fetch')
 var bindActionCreators = require('redux').bindActionCreators
 var connect = require('react-redux').connect
 
+var filtersDefinitions = require('sources/filtersDefinitions')
+
 var NavTabs =        require('components/NavTabs')
 var FiltersToggles = require('components/tabs/FiltersToggles')
 var DataTable =      require('components/DataTable')
@@ -15,10 +17,23 @@ import { Tabs, getGames, getMoreGames } from 'stores/actions'
 class App extends React.Component {
   constructor(props) {
     super(props)
+    if (!props.games.batches.length) props.getGames()
+  }
 
-    if (!props.games.batches.length) {
-      props.getGames()
+  componentWillMount() {
+    this.loadFilters()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.toggledFilters !== nextProps.toggledFilters) {
+      this.loadFilters(nextProps)
     }
+  }
+
+  loadFilters(filtersNames = this.props.toggledFilters) {
+    this.setState({
+      filters: filtersNames.map((f)=>filtersDefinitions[f])
+    })
   }
 
   handleRequestMoreGames() {
@@ -27,7 +42,8 @@ class App extends React.Component {
 
   tabContent(tab) {
     switch(tab) {
-      case Tabs.FILTERS: return <FiltersToggles toggledFilters={this.props.toggledFilters}/>
+      case Tabs.FILTERS:
+        return <FiltersToggles filters={this.state.filters}/>
       case Tabs.SOURCES: return null
       case Tabs.FEEDBACK: return null
       case Tabs.DONATIONS: return null
@@ -51,7 +67,7 @@ class App extends React.Component {
             games={this.props.games}
             query={this.props.query}
             columnsWidth={this.props.columnsWidth}
-            filters={this.props.toggledFilters}/>
+            filters={this.state.filters}/>
           <GamesLoader
             fetching={this.props.games.fetching}
             failed={this.props.games.failed}
