@@ -27,6 +27,7 @@ var definitions = {
     'features',
     'platforms',
     'players',
+    'vr',
     'controller_support'
   ]
 }

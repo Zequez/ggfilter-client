@@ -12,9 +12,9 @@ export default {
     'metacritic',
     'steam_reviews_count',
     'steam_reviews_ratio',
-    'features',
     'platforms',
-    'players'
+    'players',
+    'vr'
   ],
 
   columnsWidth: {

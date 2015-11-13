@@ -105,7 +105,7 @@ var filtersDefinitions = {
     title: 'Steam features',
     filter: BooleanFilter,
     column: BooleanColumn,
-    width: 144+10
+    width: 120+10
   },
   platforms: {
     title: 'Platforms',
@@ -118,6 +118,12 @@ var filtersDefinitions = {
     filter: BooleanFilter,
     column: BooleanColumn,
     width: 96+10
+  },
+  vr: {
+    title: 'Virtual reality',
+    filter: BooleanFilter,
+    column: BooleanColumn,
+    width: 24+10
   },
   controller_support: {
     title: 'Controller support',
