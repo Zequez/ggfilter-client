@@ -30,6 +30,7 @@ var filtersDefinitions = {
     title: 'Images',
     filter: NullFilter,
     column: ImagesColumn,
+    columnInputs: { 'images': 'images' },
     sort: false
   },
   lowest_steam_price: {
@@ -137,6 +138,7 @@ var filtersDefinitions = {
     title: 'Thumbnail',
     filter: NullFilter,
     column: ImagesColumn,
+    columnInputs: { thumbnail: 'steam_thumbnail', 'images': 'images' },
     width: 120,
     sort: false
   }

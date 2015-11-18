@@ -15,8 +15,8 @@ export default {
     'platforms',
     'players',
     'vr',
-    // 'steam_thumbnail'
-    'images'
+    'steam_thumbnail'
+    // 'images'
   ],
 
   columnsWidth: {

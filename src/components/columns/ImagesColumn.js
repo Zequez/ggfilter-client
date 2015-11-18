@@ -6,34 +6,30 @@ class ImagesColumn extends React.Component {
   static noOverflowContainer = true
 
   static propTypes = {
-    value: t.arrayOf(t.string)
+    thumbnail: t.string,
+    images: t.arrayOf(t.string)
   }
 
-  static defaultProps = { value: [] }
+  static defaultProps = { images: [] }
 
   showLightbox = ()=>{
-    this.props.dispatch(showLightbox(this.props.value, this.thumbnails()))
+    this.props.dispatch(showLightbox(this.props.images, this.imagesThumbnails()))
   }
 
-  thumbnails() {
-    return this.props.value.map((src)=>{
+  imagesThumbnails() {
+    return this.props.images.map((src)=>{
       return src.replace(/\.jpg/, '.116x65.jpg')
     })
   }
 
-  render() {
-    let thumbnails = this.thumbnails()
-    // {this.props.value.map((src, i)=>{
-    //   return <img key={i} src={src} />
-    // })}
-    // let src = this.props.value
-    // if (src && src.forEach) {
-    //   src = src[0].replace(/\.jpg/, '.116x65.jpg')
-    // }
+  thumbnail() {
+    return this.props.thumbnail ? this.props.thumbnail : this.imagesThumbnails()[0]
+  }
 
+  render() {
     return (
       <div>
-        <img src={thumbnails[0]} onClick={this.showLightbox}/>
+        <img src={this.thumbnail()} onClick={this.showLightbox}/>
       </div>
     )
   }
