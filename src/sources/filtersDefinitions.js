@@ -142,6 +142,16 @@ var filtersDefinitions = {
   }
 }
 
+function extractName(component) {
+  let str = component.toString()
+  if (str.match(/function\s*Connect\(/)) {
+    return extractName(component.WrappedComponent)
+  }
+  else {
+    return str.match(/function\s*(\w+)/)[1]
+  }
+}
+
 for (let filterName in filtersDefinitions) {
   let filter = filtersDefinitions[filterName]
 
@@ -160,7 +170,7 @@ for (let filterName in filtersDefinitions) {
 
   filter.toggleType = filter.toggle.toString().match(/function\s*(\w+)/)[1]
   filter.filterType = filter.filter.toString().match(/function\s*(\w+)/)[1]
-  filter.columnType = filter.column.toString().match(/function\s*(\w+)/)[1]
+  filter.columnType = extractName(filter.column)
 }
 
 export default filtersDefinitions

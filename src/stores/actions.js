@@ -105,7 +105,14 @@ export function getGames(page = 0) {
     }, {arrayFormat: 'brackets'})
 
     return fetch(`http://localhost:3000/games.json?${queryString}`)
-      .then(response => response.json())
+      .then(response => {
+        if (response.status >= 200 && response.status <= 300) {
+          return response.json()
+        }
+        else {
+          return dispatch({type: GET_GAMES_FAILED, page: page})
+        }
+      })
       .then(json => {
         return dispatch({
           type: GET_GAMES_END,
@@ -113,7 +120,9 @@ export function getGames(page = 0) {
           page: page,
           lastPage: json.length < state.query.batchSize})
       })
-      .catch(error => dispatch({type: GET_GAMES_FAILED, page: page}))
+      // .catch(error => {
+      //   return dispatch({type: GET_GAMES_FAILED, page: page})
+      // })
   }
 }
 
@@ -139,6 +148,15 @@ export function adjustColumnWidth(name, amount) {
 
 export function clearColumnWidth(name) {
   return { type: COLUMNS_WIDTH_ADJUST, name }
+}
+
+/*** LIGHTBOX ACTIONS ***/
+/************************/
+
+export const SHOW_LIGHTBOX = Symbol('SHOW_LIGHTBOX')
+
+export function showLightbox(media, thumbnails) {
+  return { type: SHOW_LIGHTBOX, media, thumbnails }
 }
 
 /*** HELPERS ****/

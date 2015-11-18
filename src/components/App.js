@@ -10,11 +10,12 @@ var filtersDefinitions = require('sources/filtersDefinitions')
 var NavTabs =        require('components/NavTabs')
 var DataTable =      require('components/DataTable')
 var GamesLoader =    require('components/GamesLoader')
+var Lightbox =       require('components/Lightbox')
 
 var FiltersToggles = require('components/tabs/FiltersToggles')
 var SourcesTab     = require('components/tabs/SourcesTab')
 
-import { Tabs, getGames, getMoreGames } from 'stores/actions'
+import { Tabs, getGames, getMoreGames, showLightbox } from 'stores/actions'
 
 class App extends React.Component {
   constructor(props) {
@@ -51,6 +52,10 @@ class App extends React.Component {
     )
   }
 
+  onLightboxClose = ()=>{
+    this.props.showLightbox([], [])
+  }
+
   render() {
     console.info('Render <App/>')
 
@@ -80,6 +85,10 @@ class App extends React.Component {
             lastPage={this.props.games.lastPage}
             onRequestMore={this.handleRequestMoreGames.bind(this)} />
         </main>
+        <Lightbox
+          media={this.props.lightbox.media}
+          thumbnails={this.props.lightbox.thumbnails}
+          onClose={this.onLightboxClose}/>
       </div>
     )
   }
@@ -90,5 +99,5 @@ App.defaultProps = {}
 
 export default connect(
   (state)=>{ return state },
-  (dispatch)=> bindActionCreators({ getGames, getMoreGames }, dispatch)
+  (dispatch)=> bindActionCreators({ getGames, getMoreGames, showLightbox }, dispatch)
 )(App)
