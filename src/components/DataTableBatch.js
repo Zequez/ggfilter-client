@@ -51,6 +51,7 @@ class DataTableBatch extends React.Component {
                 options={filter.columnOptions}
                 name={filter.name}
                 dispatch={this.props.dispatch}
+                queryFilter={this.props.query.filters[filter.name]}
                 {...this.columnInputs(game, filter)}/>
             )}
           </td>
@@ -73,7 +74,8 @@ class DataTableBatch extends React.Component {
 var t = React.PropTypes
 DataTableBatch.propTypes = {
   games: t.array.isRequired,
-  filters: t.arrayOf(t.object).isRequired
+  filters: t.arrayOf(t.object).isRequired,
+  query: t.object.isRequired
 }
 
 export default connect()(DataTableBatch)

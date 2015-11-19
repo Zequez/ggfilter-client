@@ -8,6 +8,7 @@ export default class TagsColumn extends React.Component {
     options: t.shape({
       tags: t.arrayOf(t.string)
     }).isRequired,
+    queryFilter: t.object,
     dispatch: t.func.isRequired
   }
 
@@ -17,10 +18,12 @@ export default class TagsColumn extends React.Component {
 
   render() {
     let tags = this.props.options.tags
+    let queryTags = (this.props.queryFilter && this.props.queryFilter.tags) || []
 
     let tagsElements = this.props.value.map((tagId)=>{
+      let liClass = queryTags.indexOf(tagId) === -1 ? '' : 'selected'
       return (
-        <li key={tagId} onClick={partial(this.selectTag, tagId)}>
+        <li key={tagId} onClick={partial(this.selectTag, tagId)} className={liClass}>
           {tags[tagId]}
         </li>
       )

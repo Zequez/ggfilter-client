@@ -154,7 +154,8 @@ var filtersDefinitions = {
     columnOptions: {
       tags: [] // We fill this up later, sadly
     },
-    width: 200
+    width: 200,
+    sort: false
   }
 }
 

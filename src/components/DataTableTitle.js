@@ -70,7 +70,8 @@ export default class DataTableTitle extends React.Component {
       [filter.name]: true,
       'filter-title': true,
       'filter-title-active': this.props.active,
-      iconized: this.iconized
+      iconized: this.iconized,
+      sortable: !!this.props.filter.sort
     })
     let width = this.props.width
 

@@ -43,7 +43,11 @@ class DataTable extends React.Component {
     var gamesBatches = this.props.games.batches
     for(let i = 0; i < gamesBatches.length; ++i) {
       batches.push(
-        <DataTableBatch key={i} games={gamesBatches[i]} filters={filters}/>
+        <DataTableBatch
+          key={i}
+          games={gamesBatches[i]}
+          filters={filters}
+          query={this.props.query}/>
       )
     }
 
