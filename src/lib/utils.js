@@ -35,3 +35,21 @@ export function debounceCountdown(delay, interval, progressFn, fn) {
     return stopFn
   }
 }
+
+export function partial(fun, ...args) {
+  return (...args2)=>fun(...args, ...args2)
+}
+
+export function loopNumber(i, val, array) {
+  let len = array.length
+  i += val
+  if (i < 0) {
+    return len+i
+  }
+  else if (i >= len) {
+    return i-len
+  }
+  else {
+    return i
+  }
+}

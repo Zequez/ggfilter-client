@@ -28,7 +28,8 @@ export default {
     filters: {
       steam_reviews_count: { gt: 65 },
       steam_reviews_ratio: { gt: 95 },
-      platforms: { value: 3 }
+      platforms: { value: 3 },
+      tags: { tags: [83, 2] }
     },
     sort: 'playtime_median_ftb',
     sort_asc: false,

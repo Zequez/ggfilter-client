@@ -79,7 +79,8 @@ class App extends React.Component {
             games={this.props.games}
             query={this.props.query}
             columnsWidth={this.props.columnsWidth}
-            filters={this.state.filters}/>
+            filters={this.state.filters}
+            tags={this.props.tags}/>
           <GamesLoader
             fetching={this.props.games.fetching}
             failed={this.props.games.failed}

@@ -11,7 +11,8 @@ var TextFilter    = require('components/filters/TextFilter')
 var NumberFilter  = require('components/filters/NumberFilter')
 var RangeFilter   = require('components/filters/RangeFilter')
 var BooleanFilter = require('components/filters/BooleanFilter')
-var NullFilter = require('components/filters/NullFilter')
+var NullFilter    = require('components/filters/NullFilter')
+var TagsFilter    = require('components/filters/TagsFilter')
 
 var filtersDefinitions = {
   name: {
@@ -143,7 +144,12 @@ var filtersDefinitions = {
     sort: false
   },
   tags: {
-    title: 'Tags'
+    title: 'Tags',
+    filter: TagsFilter,
+    filterOptions: {
+      tags: [] // We fill this up later, sadly
+    },
+    width: 200
   }
 }
 

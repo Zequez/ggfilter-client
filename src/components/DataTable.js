@@ -22,7 +22,8 @@ class DataTable extends React.Component {
       list: t.array,
       fetching: t.bool,
       failed: t.bool
-    }).isRequired
+    }).isRequired,
+    tags: t.arrayOf(t.string).isRequired
   }
 
   componentDidMount() {
@@ -60,7 +61,8 @@ class DataTable extends React.Component {
             query={this.props.query}/>
           <DataTableControls
             filters={filters}
-            query={this.props.query} />
+            query={this.props.query}
+            tags={this.props.tags}/>
         </thead>
         {batches}
       </table>

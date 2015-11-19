@@ -1,4 +1,24 @@
-class RangeFilter extends React.Component {
+var t = React.PropTypes
+
+export default class RangeFilter extends React.Component {
+  static propTypes = {
+    query: t.shape({
+      gt: t.number,
+      lt: t.number
+    }),
+    options: t.shape({
+      range: t.arrayOf(t.number)
+    }),
+    onChange: t.func.isRequired
+  }
+
+  static defaultProps = {
+    query: {
+      gt: null,
+      lt: null
+    }
+  }
+
   handleChange(ev) {
     var gt = this.refs.gt.value
     var lt = this.refs.lt.value
@@ -56,17 +76,3 @@ class RangeFilter extends React.Component {
     )
   }
 }
-
-var t = React.PropTypes
-RangeFilter.propTypes = {
-  query: t.shape({
-    gt: t.number,
-    lt: t.number
-  }).isRequired,
-  options: t.shape({
-    range: t.arrayOf(t.number)
-  }),
-  onChange: t.func.isRequired
-}
-
-export default RangeFilter

@@ -9,6 +9,8 @@ export default class TextFilter extends React.Component {
     onChange: t.func.isRequired
   }
 
+  static defaultProps = { query: { value: '' } }
+
   constructor(props) {
     super(props)
     this.state = {

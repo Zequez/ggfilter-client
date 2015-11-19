@@ -19,7 +19,7 @@ class DataTableControls extends React.Component {
     let query = this.props.query
     var filters = this.props.filters
     let controls = this.props.filters.map((filter)=>{
-      let queryFilter = query.filters[filter.name] || {}
+      let queryFilter = query.filters[filter.name]
 
       let controlClass = classNames({
         [filter.name]: true,
@@ -27,13 +27,19 @@ class DataTableControls extends React.Component {
         [filter.filterType]: true
       })
 
+      let filterProps = {
+        query: queryFilter,
+        name: filter.name,
+        options: filter.filterOptions,
+        onChange: this.handleFilterChange.bind(this, filter.name)
+      }
+
+      // I'm pretty sure this is a terrible idea
+      if (filter.name === 'tags') filterProps.options.tags = this.props.tags
+
       return (
         <th key={filter.name} className={controlClass}>
-          <filter.filter
-            query={queryFilter}
-            name={filter.name}
-            options={filter.filterOptions}
-            onChange={this.handleFilterChange.bind(this, filter.name)}/>
+          <filter.filter {...filterProps}/>
         </th>
       )
     })
@@ -50,6 +56,7 @@ var t = React.PropTypes
 DataTableControls.propTypes = {
   filters: t.arrayOf(t.object).isRequired,
   query: t.object.isRequired,
+  tags: t.arrayOf(t.string).isRequired
 }
 
 export default connect()(DataTableControls)
