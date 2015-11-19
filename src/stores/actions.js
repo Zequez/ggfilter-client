@@ -66,6 +66,23 @@ export function setQueryBatchSize(size) {
   return { type: SET_QUERY_BATCH_SIZE, size }
 }
 
+export function addQueryTag(tagId) {
+  return function(dispatch, getState) {
+    let tagsFilter = getState().query.filters.tags
+    let newTagsFilter = {}
+
+    if (tagsFilter) {
+      if (tagsFilter.tags.indexOf(tagId) !== -1) return
+      newTagsFilter.tags = tagsFilter.tags.concat([tagId])
+    }
+    else {
+      newTagsFilter.tags = [tagId]
+    }
+
+    dispatch(setQueryFilter('tags', newTagsFilter))
+  }
+}
+
 function dispatchAndGetGames(action) {
   return function(dispatch, getState) {
     dispatch(action)

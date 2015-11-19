@@ -1,5 +1,4 @@
 import { showLightbox } from 'stores/actions'
-var connect = require('react-redux').connect
 var t = React.PropTypes
 
 class ImagesColumn extends React.Component {
@@ -7,7 +6,8 @@ class ImagesColumn extends React.Component {
 
   static propTypes = {
     thumbnail: t.string,
-    images: t.arrayOf(t.string)
+    images: t.arrayOf(t.string),
+    dispatch: t.func.isRequired,
   }
 
   static defaultProps = { images: [] }
@@ -35,4 +35,4 @@ class ImagesColumn extends React.Component {
   }
 }
 
-export default connect()(ImagesColumn)
+export default ImagesColumn

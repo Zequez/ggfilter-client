@@ -32,10 +32,16 @@
     overflow: hidden
     text-overflow: ellipsis
     &:hover
-      display: inline-block
+      // Inline: block doesn't expand to the rest of the thing
+      //         inline-block changes the height
+      display: inline
       position: relative
       overflow: inherit
       z-index: 10
+
+  th .overflow-cell:hover
+    // Because fuck it, we need this on the titles
+    display: inline-block
 
   // Filters titles
   &-titles

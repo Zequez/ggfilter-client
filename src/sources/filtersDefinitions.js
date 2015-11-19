@@ -6,6 +6,7 @@ var RatioColumn    = require('components/columns/RatioColumn')
 var LinkColumn     = require('components/columns/LinkColumn')
 var BooleanColumn  = require('components/columns/BooleanColumn')
 var ImagesColumn   = require('components/columns/ImagesColumn')
+var TagsColumn     = require('components/columns/TagsColumn')
 
 var TextFilter    = require('components/filters/TextFilter')
 var NumberFilter  = require('components/filters/NumberFilter')
@@ -147,6 +148,10 @@ var filtersDefinitions = {
     title: 'Tags',
     filter: TagsFilter,
     filterOptions: {
+      tags: [] // We fill this up later, sadly
+    },
+    column: TagsColumn,
+    columnOptions: {
       tags: [] // We fill this up later, sadly
     },
     width: 200

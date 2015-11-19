@@ -1,3 +1,4 @@
+var connect = require('react-redux').connect
 var classNames = require('classnames')
 
 class DataTableBatch extends React.Component {
@@ -49,6 +50,7 @@ class DataTableBatch extends React.Component {
               <filter.column
                 options={filter.columnOptions}
                 name={filter.name}
+                dispatch={this.props.dispatch}
                 {...this.columnInputs(game, filter)}/>
             )}
           </td>
@@ -74,4 +76,4 @@ DataTableBatch.propTypes = {
   filters: t.arrayOf(t.object).isRequired
 }
 
-export default DataTableBatch
+export default connect()(DataTableBatch)
