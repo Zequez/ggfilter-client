@@ -15,16 +15,18 @@ var Lightbox =       require('components/Lightbox')
 var FiltersToggles = require('components/tabs/FiltersToggles')
 var SourcesTab     = require('components/tabs/SourcesTab')
 
-import { Tabs, getGames, getMoreGames, showLightbox, getTags } from 'stores/actions'
+var t = React.PropTypes
+
+import { Tabs, getGames, getMoreGames, showLightbox } from 'stores/actions'
 
 class App extends React.Component {
-  constructor(props) {
-    super(props)
-    if (!props.games.batches.length) props.getGames()
-    if (!props.tags.length) props.getTags()
+  static propTypes = {
+    tags: t.arrayOf(t.string).isRequired,
+    // And the rest of the store on initialState
   }
 
   componentWillMount() {
+    if (!this.props.games.batches.length) this.props.getGames()
     this.loadFilters()
   }
 
@@ -96,10 +98,9 @@ class App extends React.Component {
   }
 }
 
-App.propTypes = {}
 App.defaultProps = {}
 
 export default connect(
   (state)=>{ return state },
-  (dispatch)=> bindActionCreators({ getGames, getMoreGames, showLightbox, getTags }, dispatch)
+  (dispatch)=> bindActionCreators({ getGames, getMoreGames, showLightbox }, dispatch)
 )(App)

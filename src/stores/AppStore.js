@@ -8,9 +8,8 @@ import games          from './reducers/gamesReducer'
 import query          from './reducers/queryReducer'
 import columnsWidth   from './reducers/columnsWidthReducer'
 import lightbox       from './reducers/lightboxReducer'
-import tags           from './reducers/tagsReducer'
 
-var reducer = combineReducers({ tab, toggledFilters, games, query, columnsWidth, lightbox, tags })
+var reducer = combineReducers({ tab, toggledFilters, games, query, columnsWidth, lightbox })
 var createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(createStore) //crashReporter
 var store = createStoreWithMiddleware(reducer)
 
