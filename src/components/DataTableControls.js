@@ -34,9 +34,6 @@ class DataTableControls extends React.Component {
         onChange: this.handleFilterChange.bind(this, filter.name)
       }
 
-      // I'm pretty sure this is a terrible idea
-      if (filter.name === 'tags') filterProps.options.tags = this.props.tags
-
       return (
         <th key={filter.name} className={controlClass}>
           <filter.filter {...filterProps}/>
