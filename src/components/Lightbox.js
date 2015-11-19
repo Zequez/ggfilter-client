@@ -1,3 +1,4 @@
+import { loopNumber } from 'lib/utils'
 var t = React.PropTypes
 
 export default class Lightbox extends React.Component {
@@ -14,7 +15,7 @@ export default class Lightbox extends React.Component {
   state = { selected: 0 }
 
   componentDidMount() {
-    window.addEventListener('keypress', this.onKeyPress)
+    window.addEventListener('keydown', this.onKeyDown)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -32,7 +33,7 @@ export default class Lightbox extends React.Component {
     ev.stopPropagation()
   }
 
-  onKeyPress = (ev)=>{
+  onKeyDown = (ev)=>{
     let i = this.state.selected
     let key = ev.charCode || ev.keyCode
     switch(key) {
@@ -41,9 +42,7 @@ export default class Lightbox extends React.Component {
         i -= 2
       case 100: // d
       case 39:  // ArrowRight
-        i += 1
-        if (i < 0) i = this.props.media.length
-        else if (i > this.props.media.length-1) i = 0
+        i = loopNumber(i, +1, this.props.media)
         this.setState({selected: i})
       break
 
