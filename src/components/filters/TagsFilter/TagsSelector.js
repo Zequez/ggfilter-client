@@ -42,7 +42,8 @@ export default class TagsSelector extends React.Component {
     this.setState({focusedTag: i})
   }
 
-  select = (tagId)=>{
+  select = (tagId, ev)=>{
+    if (ev) ev.preventDefault()
     this.setState({focusedTag: 0})
     this.props.onSelect(tagId)
   }
