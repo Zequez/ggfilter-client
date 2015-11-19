@@ -47,6 +47,8 @@ export default class GamesLoader extends React.Component {
   }
 
   render() {
+    console.info('Render <GamesLoader/>')
+
     let divClass = classNames('games-loader', {
       'games-loader-fetching': this.props.fetching,
       'games-loader-failed': this.props.failed,

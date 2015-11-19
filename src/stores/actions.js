@@ -159,6 +159,22 @@ export function showLightbox(media, thumbnails) {
   return { type: SHOW_LIGHTBOX, media, thumbnails }
 }
 
+/*** TAGS ACTIONS ***/
+/********************/
+
+export const GET_TAGS_START = Symbol('GET_TAGS_START')
+export const GET_TAGS_END = Symbol('GET_TAGS_END')
+
+export function getTags() {
+  return function(dispatch, getState) {
+    dispatch({type: GET_TAGS_START})
+    return fetch(`http://localhost:3000/tags.json`)
+      .then(response => response.json())
+      .then(tags => dispatch({type: GET_TAGS_END, tags}))
+  }
+}
+
+
 /*** HELPERS ****/
 /****************/
 

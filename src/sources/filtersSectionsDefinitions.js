@@ -5,6 +5,7 @@ var definitions = {
     'steam_thumbnail',
     'steam_id',
     'name',
+    'tags',
     'images'
   ],
   'Price': [

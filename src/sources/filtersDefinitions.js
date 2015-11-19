@@ -141,6 +141,9 @@ var filtersDefinitions = {
     columnInputs: { thumbnail: 'steam_thumbnail', 'images': 'images' },
     width: 120,
     sort: false
+  },
+  tags: {
+    title: 'Tags'
   }
 }
 
@@ -168,7 +171,6 @@ for (let filterName in filtersDefinitions) {
   if (!filter.column)        filter.column = RawColumn
   if (!filter.columnInputs)  filter.columnInputs = { value: filter.name }
   if (!filter.columnOptions) filter.columnOptions = { }
-
 
   filter.toggleType = filter.toggle.toString().match(/function\s*(\w+)/)[1]
   filter.filterType = filter.filter.toString().match(/function\s*(\w+)/)[1]
