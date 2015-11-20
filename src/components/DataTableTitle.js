@@ -13,6 +13,14 @@ export default class DataTableTitle extends React.Component {
     active: t.bool.isRequired
   }
 
+  shouldComponentUpdate(np, ns) {
+    let p = this.props
+    return np.filter !== p.filter
+        || np.width !== p.width
+        || np.sort !== p.sort
+        || np.active !== p.active
+  }
+
   constructor(props) {
     super(props)
     this.iconize = false
@@ -61,6 +69,7 @@ export default class DataTableTitle extends React.Component {
   }
 
   render() {
+    console.info('Render <DataTableTitle/>')
     let filter = this.props.filter
     let sort = this.props.sort
     let titleClass = classNames({
