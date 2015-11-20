@@ -14,7 +14,7 @@ var RangeFilter       = require('components/filters/RangeFilter')
 var BooleanFilter     = require('components/filters/BooleanFilter')
 var NullFilter        = require('components/filters/NullFilter')
 var TagsFilter        = require('components/filters/TagsFilter')
-var FancyRangeFilter2 = require('components/filters/FancyRangeFilter2')
+var FancyRangeFilter = require('components/filters/FancyRangeFilter')
 
 var priceRangeOptions = {
   range: [0, 1, 100, 300, 500, 1000, 1500, 2000, 3000, 4000, 5000, 6000, null],
@@ -59,7 +59,7 @@ var filtersDefinitions = {
   },
   lowest_steam_price: {
     title: 'Steam price (US)',
-    filter: FancyRangeFilter2,
+    filter: FancyRangeFilter,
     column: PriceColumn,
     columnInputs: { price: 'steam_price', was: 'steam_sale_price' },
     filterOptions: priceRangeOptions,

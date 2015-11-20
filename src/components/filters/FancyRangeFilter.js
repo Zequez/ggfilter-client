@@ -1,15 +1,19 @@
 import {elementOffsetLeft} from 'lib/utils'
 var t = React.PropTypes
 
-export default class FancyRangeFilter extends React.Component {
+export default class FancyRangeFilter2 extends React.Component {
   static propTypes = {
     query: t.shape({
       gt: t.number,
       lt: t.number
     }),
     options: t.shape({
-      range: t.arrayOf(t.number).isRequired,
-      rangeLabels: t.arrayOf(t.string)
+      template: t.string,
+      range: t.arrayOf(t.number),
+      rangeLabels: t.arrayOf(t.string),
+      namedRanges: t.object,
+      nullOnFullRange: t.bool,
+      nullifyExtremes: t.bool
     }).isRequired,
     onChange: t.func.isRequired
   }
@@ -21,172 +25,207 @@ export default class FancyRangeFilter extends React.Component {
     }
   }
 
-  handleChange(ev) {
-    var gt = this.refs.gt.value
-    var lt = this.refs.lt.value
-    if (gt || lt) {
-      gt = gt ? parseInt(gt) : null
-      lt = lt ? parseInt(lt) : null
-
-      this.props.onChange({gt: gt, lt: lt})
-    }
-    else {
-      this.props.onChange(null)
-    }
-  }
-
-  selectOptions(ignoreUp = true) {
-    var gt = this.props.query.gt
-    var lt = this.props.query.lt
-    var selectOptions = []
-    var range = this.props.options.range
-    var rangeLabels = this.props.options.rangeLabels
-    for (let i = 0; i < range.length; ++i) {
-      let v = range[i]
-      var l = rangeLabels ? rangeLabels[i] : v
-
-      if (ignoreUp) {
-        var shouldDraw = lt==null || v < lt
-        l = '≥' + l
-      }
-      else {
-        var shouldDraw = gt==null || v > gt
-        l = '≤' + l
-      }
-
-      if (shouldDraw) {
-        selectOptions.push(
-          <option key={i} value={v}>{l}</option>
-        )
-      }
-    }
-    return selectOptions
-  }
-
   state = {
     dragStart: null,
     start: null,
-    end: null
+    end: null,
+    mousePos: null,
+    dragEndPos: null
   }
 
-  getPos(ev, round = 10) {
+  defaultOptions = {
+    range: [1, 2, 3, 4, 5],
+    rangeLabels: null,
+    nullifyStart: true,
+    nullifyEnd: true,
+    allowSingle: false,
+    namedRanges: {}, // eg: {'Free': [0, 0]}
+    mappedRanges: [
+      // eg: [[1, 1], [1, 1]] // Prevents it from mapping to 1-5
+      // eg: [[5, 5],   [1, 5]] // Maps a single 5 to 1-5
+      // eg: [[1, 2], [1, 1]] // Maps to 1 if selecting the range 1-2
+    ]
+  }
+
+  shouldComponentUpdate (np, ns) {
+    let p = this.props
+    let s = this.state
+    return np.query     !== p.query
+        || ns.start     !== s.start
+        || ns.end       !== s.end
+        || ns.mousePos  !== s.mousePos
+        || ns.dragStart !== s.dragStart
+  }
+
+  componentWillMount () {
+    // We know this.props.options won't change
+    // so we can handle them on componentWillMount
+
+    // Extend default options
+    let options = {}
+    let givenOptions = this.props.options
+    let defaultOptions = this.defaultOptions
+    for (let opt in defaultOptions) {
+      options[opt] = givenOptions[opt] == null ? defaultOptions[opt] : givenOptions[opt]
+    }
+
+    this.options = options // = this.optionsTemplates.price // temporal for testing
+
+    this.range        = options.range
+    this.rangeLabels  = options.rangeLabels || options.range
+    this.last         = this.range.length-1
+    this.chunk        = Math.floor(100 / this.range.length * 100) / 100
+
+    this.indexMappedRanges = []
+    for (let mappedRange of options.mappedRanges) {
+      this.indexMappedRanges.push([
+        this.valueRange2IndexRange(mappedRange[0]),
+        this.valueRange2IndexRange(mappedRange[1])
+      ])
+    }
+
+    this.indexNamedRanges = {}
+    for (let name in options.namedRanges) {
+      this.indexNamedRanges[name] = this.valueRange2IndexRange(options.namedRanges[name])
+    }
+
+    this.setState({start: 0, end: this.last})
+  }
+
+  valueRange2IndexRange (valueRange) {
+    return [this.range.indexOf(valueRange[0]), this.range.indexOf(valueRange[1])]
+  }
+
+  resolveRange(start, end, orElse = [start, end]) {
+    let rangeMap = this.indexMappedRanges.find(mp => mp[0][0] === start && mp[0][1] === end)
+    return rangeMap ? rangeMap[1] : orElse
+  }
+
+  getPosIndex (ev) {
     let pxPos = ev.clientX - elementOffsetLeft(this.refs.bar)
-    let pos = Math.floor(pxPos / this.refs.bar.clientWidth * 100 * 10) / 10
-    return this.roundToRanges(pos)
-    return Math.round(pos / round) * round
-  }
-
-  roundToRanges(pos) {
-    let len = this.props.options.range.length
-    let chunk = 100/(len+1)
-    let diff = pos % chunk
-    let roundedPos = diff > chunk/2 ? pos+(chunk-diff) : pos-diff
-    return Math.floor(roundedPos*10)/10
+    let pos = pxPos / this.refs.bar.clientWidth * 100
+    return Math.floor(pos/this.chunk)
   }
 
   onMouseDown = (ev)=>{
-    let pos = this.getPos(ev)
-    this.setState({start: pos, end: pos, dragStart: pos})
+    let pos = this.getPosIndex(ev)
+    this.setState({start: pos, end: pos, dragStart: pos, mousePos: pos, dragEndPos: pos})
   }
 
   onMouseMove = (ev)=>{
+    let pos = this.getPosIndex(ev)
     if (this.state.dragStart != null) {
-      let pos = this.getPos(ev)
-      if (pos > this.state.dragStart) {
-        this.setState({start: this.state.dragStart, end: pos})
-      }
-      else {
-        this.setState({start: pos, end: this.state.dragStart})
+      if (pos >= this.state.dragStart) {
+        this.setState({start: this.state.dragStart, end: pos, dragEndPos: pos})
+      } else {
+        this.setState({start: pos, end: this.state.dragStart, dragEndPos: pos})
       }
     }
+    this.setState({mousePos: pos})
+  }
+
+  onMouseLeave = (ev)=>{
+    this.setState({mousePos: null})
+    this.stopDragging(ev)
   }
 
   stopDragging = (ev)=>{
-    if (this.state.dragStart != null) {
+    if (this.state.dragStart !== null) {
       let start = this.state.start
       let end = this.state.end
 
-      if (start === end) {
-        start = null
-        end = null
+      let newRange = this.resolveRange(start, end, false)
+      if (newRange) {
+        ;[start, end] = newRange
+      } else if (start === end && !this.options.allowSingle) {
+        start = 0
+        end = this.last
       }
 
       this.setState({dragStart: null, start: start, end: end})
 
-      if (start || end) {
-        let range = this.props.options.range
-        let gti = this.valueIndexFromPos(start)
-        let lti = this.valueIndexFromPos(end)
-        let gt = gti==null ? null : range[gti]
-        let lt = lti==null ? null : range[lti]
+      let gt = this.range[start]
+      let lt = this.range[end]
 
-        this.props.onChange({gt: gt, lt: lt})
+      // Nullify start and end only if we are selecting a range that
+      // starts or ends on them. If we are selecting a single value
+      // then we don't want to nullify them.
+      if (start !== end) {
+        if (this.options.nullifyStart && start === 0 && end !== 0) {
+          gt = null
+        }
+
+        if (this.options.nullifyEnd && end === this.last && start !== this.last) {
+          lt = null
+        }
       }
-      else {
-        this.props.onChange(null)
-      }
+
+      setTimeout(()=>{
+        if (gt === null && lt === null) {
+          this.props.onChange(null)
+        } else {
+          this.props.onChange({gt: gt, lt: lt})
+        }
+      }, 100)
     }
   }
 
-  valueIndexFromPos(pos) {
-    if (!pos || pos === 0 || pos === 100) {
-      return null
+  label (start, end) {
+    // Get specific label of named range
+    let namedRanges = this.indexNamedRanges
+    for (let name in namedRanges) {
+      if (namedRanges[name][0] === start && namedRanges[name][1] === end) {
+        return name
+      }
     }
-    else {
-      let len = this.props.options.range.length
-      let chunk = 100/(len+1)
-      return Math.round(pos/chunk-1)
+
+    let gtLabel = this.rangeLabels[start]
+    let ltLabel = this.rangeLabels[end]
+
+    let last = this.range.length-1
+    if (start !== 0 && end === last) {
+      return `≥${gtLabel}`
+    } else if (start === 0 && end !== last) {
+      return `≤${ltLabel}`
+    } else if (start === end) {
+      return gtLabel
+    } else {
+      return `[${gtLabel}, ${ltLabel}]`
     }
   }
 
-  onClick = (ev)=>{
-
-  }
-
-  labelStyle(start, end, left = true) {
-    let centerSize = end - start
-    let sideSize = left ? start : 100-end
-    let sideIsLarger = sideSize > centerSize/2
-    let pos = left ? start : end
-
-    if (left) {
-      if (sideIsLarger) {
-        return { right: `${100-pos}%`, color: 'inherit' }
-      }
-      else {
-        return { left: `${pos}%` }
-      }
-    }
-    else {
-      if (sideIsLarger) {
-        return { left: `${pos}%`, color: 'inherit' }
-      }
-      else {
-        return { right: `${100-pos}%` }
-      }
+  barStyle (start, end) {
+    if (start == null || end == null) return {}
+    let startX = start * this.chunk
+    let endX = end * this.chunk + this.chunk
+    return {
+      left: `${startX}%`,
+      right: `${100-endX}%`
     }
   }
 
   render() {
-    let rangeLabels = this.props.options.rangeLabels || this.props.options.range
+    let start  = this.state.start
+    let end    = this.state.end
+    ;[start, end] = this.resolveRange(start, end)
+    let label  = this.label(start, end)
+    let barStyle = this.barStyle(start, end)
 
-    let start = this.state.start
-    let end = this.state.end
-    if (start == null) start = 0
-    if (end == null) end = 100
+    let mouseStart = this.state.mousePos
+    let mouseEnd = mouseStart
 
-    let gti = this.valueIndexFromPos(this.state.start)
-    let labelLeft = rangeLabels[gti] || 'Min'
-    let lti = this.valueIndexFromPos(this.state.end)
-    let labelRight = rangeLabels[lti] || 'Max'
+    let showMouseLabel =
+      mouseStart !== null
+      && this.state.dragStart === null
 
-    var barStyle = {
-      left: `${start}%`,
-      right: `${100-end}%`
+    let mouseLabel
+    if (showMouseLabel) {
+      ;[mouseStart, mouseEnd] = this.resolveRange(mouseStart, mouseEnd)
+      mouseLabel = this.label(mouseStart, mouseEnd)
     }
 
-    let labelLeftStyle = this.labelStyle(start, end, true)
-    let labelRightStyle = this.labelStyle(start, end, false)
+    let highlightStyle = this.barStyle(mouseStart, mouseEnd)
+    if (!showMouseLabel) highlightStyle.display = 'none'
 
     return (
       <div
@@ -194,17 +233,14 @@ export default class FancyRangeFilter extends React.Component {
         onMouseDown={this.onMouseDown}
         onMouseMove={this.onMouseMove}
         onMouseUp={this.stopDragging}
-        onMouseLeave={this.stopDragging}
-        onClick={this.onClick}
+        onMouseLeave={this.onMouseLeave}
         ref='bar'
         >
         <div className='fancy-rf-bar' style={barStyle}></div>
-        <span className='fancy-rf-label-left' style={labelLeftStyle}>
-          {labelLeft}
-        </span>
-        <span className='fancy-rf-label-right' style={labelRightStyle}>
-          {labelRight}
-        </span>
+        <div className='fancy-rf-highlight' style={highlightStyle}></div>
+        <div className={'fancy-rf-label' + (showMouseLabel ? ' mouse-label' : '')}>
+          <span>{showMouseLabel ? mouseLabel : label}</span>
+        </div>
       </div>
     )
   }
