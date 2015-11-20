@@ -1,9 +1,18 @@
 var connect = require('react-redux').connect
 var classNames = require('classnames')
+var t = React.PropTypes
 
 class DataTableBatch extends React.Component {
-  shouldComponentUpdate(nextProps, nextState) {
-    return nextProps.games !== this.props.games || nextProps.filters !== this.props.filters
+  static propTypes = {
+    games: t.array.isRequired,
+    filters: t.arrayOf(t.object).isRequired,
+    query: t.object.isRequired
+  }
+
+  shouldComponentUpdate(np, ns) {
+    let p = this.props
+    return np.games !== p.games
+        || np.filters !== p.filters
   }
 
   columnInputs(game, filter) {
@@ -69,13 +78,6 @@ class DataTableBatch extends React.Component {
       </tbody>
     )
   }
-}
-
-var t = React.PropTypes
-DataTableBatch.propTypes = {
-  games: t.array.isRequired,
-  filters: t.arrayOf(t.object).isRequired,
-  query: t.object.isRequired
 }
 
 export default connect()(DataTableBatch)
