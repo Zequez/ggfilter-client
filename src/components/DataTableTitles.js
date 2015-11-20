@@ -14,6 +14,13 @@ class DataTableTitles extends React.Component {
     }).isRequired,
   }
 
+  shouldComponentUpdate(np, ns) {
+    let p = this.props
+    return np.filters !== p.filters
+        || np.columnsWidth.toString() !== p.columnsWidth.toString()
+        || np.query !== p.query
+  }
+
   onSort(filter, ev) {
     this.props.dispatch(setQuerySort(filter.sort))
   }

@@ -21,6 +21,7 @@ class FiltersToggles extends React.Component {
   }
 
   render() {
+    console.info('Render <FiltersToggles/>')
     let sectionsElements = []
     for (let sectionName in filtersSections) {
       sectionsElements.push(
