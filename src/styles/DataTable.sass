@@ -55,24 +55,6 @@
     &.sortable
       cursor: pointer
 
-    span
-      margin-left: $r/4
-
-    .fa
-      display: none
-
-    &.iconized
-      span
-        display: none
-      .fa
-        display: inline-block
-
-      &:hover
-        span
-          display: inline
-        .fa
-          display: none
-
     &.sort:after
       position: absolute
 
@@ -87,15 +69,46 @@
     &.sort-desc:after
       content: '▼'
 
-    .overflow-cell
-      background: $title-background
-
     &-active
       background: lighten($title-background, 5%)
-      box-shadow: 0px -1px 0px $white
+      .title-icon, .title-overflow
+        box-shadow: 0px -1px 0px $white
 
-    &-active .overflow-cell
-      background: lighten($title-background, 5%)
+    .title-tooltip
+      display: none
+      position: absolute
+      bottom: 100%
+      left: 50%
+      width: 300px
+      margin-left: -150px
+      z-index: 1
+      span
+        display: inline-block
+        padding: 2px
+        background: rgba(#000, 0.5)
+        border-top-left-radius: 2px
+        border-top-right-radius: 2px
+
+    .title-icon
+      display: none
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      z-index: 3
+
+    .title-overflow
+      overflow: hidden
+      z-index: 2
+
+    &.overflowed
+      .title-overflow
+        visibility: hidden
+      .title-icon
+        display: inline-block
+      &:hover .title-tooltip
+        display: block
 
     .resize-handle
       position: absolute
