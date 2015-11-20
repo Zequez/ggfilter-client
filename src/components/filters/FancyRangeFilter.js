@@ -39,6 +39,7 @@ export default class FancyRangeFilter2 extends React.Component {
     nullifyStart: true,
     nullifyEnd: true,
     allowSingle: false,
+    fallbackRange: null, // [first, last]
     namedRanges: {}, // eg: {'Free': [0, 0]}
     mappedRanges: [
       // eg: [[1, 1], [1, 1]] // Prevents it from mapping to 1-5
@@ -88,6 +89,10 @@ export default class FancyRangeFilter2 extends React.Component {
     for (let name in options.namedRanges) {
       this.indexNamedRanges[name] = this.valueRange2IndexRange(options.namedRanges[name])
     }
+
+    this.indexFallbackRange = this.options.fallbackRange
+      ? this.valueRange2IndexRange(this.options.fallbackRange)
+      : [0, this.last]
 
     this.readQuery()
   }
@@ -150,8 +155,7 @@ export default class FancyRangeFilter2 extends React.Component {
       if (newRange) {
         ;[start, end] = newRange
       } else if (start === end && !this.options.allowSingle) {
-        start = 0
-        end = this.last
+        ;[start, end] = this.indexFallbackRange
       }
 
       this.setState({dragStart: null, start: start, end: end})
