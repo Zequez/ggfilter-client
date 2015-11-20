@@ -89,16 +89,28 @@ export default class FancyRangeFilter2 extends React.Component {
       this.indexNamedRanges[name] = this.valueRange2IndexRange(options.namedRanges[name])
     }
 
-    this.setState({start: 0, end: this.last})
+    this.readQuery()
+  }
+
+  componentWillReceiveProps (np) {
+    this.readQuery(np.query)
   }
 
   valueRange2IndexRange (valueRange) {
     return [this.range.indexOf(valueRange[0]), this.range.indexOf(valueRange[1])]
   }
 
-  resolveRange(start, end, orElse = [start, end]) {
+  resolveRange (start, end, orElse = [start, end]) {
     let rangeMap = this.indexMappedRanges.find(mp => mp[0][0] === start && mp[0][1] === end)
     return rangeMap ? rangeMap[1] : orElse
+  }
+
+  readQuery (query = this.props.query) {
+    let start = 0
+    let end = this.last
+    if (query.gt != null) start = this.range.indexOf(query.gt)
+    if (query.lt != null) end = this.range.indexOf(query.lt)
+    this.setState({start: start, end: end})
   }
 
   getPosIndex (ev) {
