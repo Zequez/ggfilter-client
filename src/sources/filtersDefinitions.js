@@ -8,13 +8,14 @@ var BooleanColumn  = require('components/columns/BooleanColumn')
 var ImagesColumn   = require('components/columns/ImagesColumn')
 var TagsColumn     = require('components/columns/TagsColumn')
 
-var TextFilter       = require('components/filters/TextFilter')
-var NumberFilter     = require('components/filters/NumberFilter')
-var RangeFilter      = require('components/filters/RangeFilter')
-var BooleanFilter    = require('components/filters/BooleanFilter')
-var NullFilter       = require('components/filters/NullFilter')
-var TagsFilter       = require('components/filters/TagsFilter')
-var FancyRangeFilter = require('components/filters/FancyRangeFilter')
+var TextFilter        = require('components/filters/TextFilter')
+var NumberFilter      = require('components/filters/NumberFilter')
+var RangeFilter       = require('components/filters/RangeFilter')
+var BooleanFilter     = require('components/filters/BooleanFilter')
+var NullFilter        = require('components/filters/NullFilter')
+var TagsFilter        = require('components/filters/TagsFilter')
+var FancyRangeFilter  = require('components/filters/FancyRangeFilter')
+var FancyRangeFilter2 = require('components/filters/FancyRangeFilter2')
 
 var filtersDefinitions = {
   name: {
@@ -38,20 +39,27 @@ var filtersDefinitions = {
   },
   lowest_steam_price: {
     title: 'Steam price (US)',
-    filter: FancyRangeFilter,
+    filter: FancyRangeFilter2,
     column: PriceColumn,
     columnInputs: { price: 'steam_price', was: 'steam_sale_price' },
     filterOptions: {
-      range: [100, 300, 500, 1000, 1500, 2000, 3000, 4000, 5000, 6000],
-      rangeLabels: ['$1', '$3', '$5', '$10', '$15', '$20', '$30', '$40', '$50', '$60']
+      template: 'price'
     },
     width: 100
   },
   steam_discount: {
     title: 'Steam sale %',
     filterOptions: {
-      range: [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90],
-      rangeLabels: ['Not on sale (0%)', 'On sale (1%)', '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%']
+      range: [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+      rangeLabels: ['0%', '1%', '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
+      min: '0%',
+      max: '100%',
+      namedRanges: {
+        'Not on sale': [null, 0],
+        'On sale': [1, null],
+        'All': [null, null],
+        'FREE!?': [100, null]
+      }
     },
     filter: RangeFilter,
     column: RawColumn,

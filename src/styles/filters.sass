@@ -174,3 +174,75 @@
       bottom: 0
       left: 0
       background: $ocean-blue
+
+.FancyRangeFilter2
+  position: relative
+
+  .fancy-rf
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    background-color: $input-white
+    border-bottom: solid 1px $teal
+    font-size: $font-smaller
+    cursor: default
+
+    -webkit-touch-callout: none
+    -webkit-user-select: none
+    -khtml-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+
+    &-label
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      text-align: center
+      z-index: 5
+
+      & > span
+        position: relative
+        top: -1px
+        padding: 2px
+        border: dashed 1px transparent
+        border-radius: 2px
+        background: rgba(#000, 0.5)
+        line-height: $r/3
+        color: $white
+
+      &.mouse-label > span
+        border-color: $blue
+        background-color: rgba(#000, 0.2)
+        color: $dark-blue
+
+    &-bar
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      background: $green
+      box-shadow: inset rgba(#000, 0.5) 0 0 10px, $blue 1px 0, $blue -1px 0
+      z-index: 3
+
+    &-highlight
+      position: absolute
+      left: 0
+      top: 0
+      bottom: 0
+      right: 100%
+      background-image: url(~images/dashes.png)
+      box-shadow: rgba(#000, 0.3) 1px 0, rgba(#000, 0.3) -1px 0
+      // background-image: repeating-linear-gradient(45deg, rgba(#000, 0.3), rgba(#000, 0.3) 2px, rgba(#000, 0.1) 2px, rgba(#000, 0.1) 4px)
+      text-align: left
+      z-index: 4
+    //   & > span
+    //     @extend %label
+    //     position: absolute
+    //     top: 100%
+    //     border-top-left-radius: 0
