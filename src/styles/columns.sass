@@ -1,3 +1,9 @@
+.text-deco
+  color: rgba($dark-blue, 0.6)
+  font-size: $font-smaller
+
+.RawColumn
+
 .LinkColumn
   text-align: left
 
@@ -5,7 +11,8 @@
 .PriceColumn
   .price-was
     text-decoration: line-through
-    color: lighten(desaturate($color, 50%), 50%)
+    &, .text-deco
+      color: rgba($dark-blue, 0.3)
     margin-right: $r/4
 
 .RatioColumn

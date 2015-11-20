@@ -92,6 +92,7 @@ export default class DataTableTitle extends React.Component {
         <div className='title-tooltip'>
           <span>{filter.title}</span>
         </div>
+        <div className='title-highlight-border'></div>
         <ColumnResizeHandle
           onStop={this.onResize.bind(this)}
           onDoubleClick={this.onResetResize.bind(this)}/>

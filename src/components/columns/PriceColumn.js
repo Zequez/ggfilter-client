@@ -1,40 +1,23 @@
-class PriceColumn extends React.Component {
-  priceText(price) {
-    if (price != null) {
-      if (price > 0) {
-        return '$' + price/100
-      }
-      else {
-        return 'Free'
-      }
-    }
-    else {
-      return null
-    }
+export default class PriceColumn extends React.Component {
+  static propTypes = {
+    price: React.PropTypes.number.isRequired,
+    was: React.PropTypes.number
   }
 
-  render() {
-    var wasE
-    if (this.props.was) {
-      let was = this.priceText(this.props.was)
-      wasE = <span className='price-was'>{was}</span>
-    }
+  elem (val, className) {
+    return (val != null ?
+      <span className={className}>
+        {val > 0 ? <span><span className='text-deco'>$</span>{val/100}</span> : 'Free'}
+      </span>
+    : null)
+  }
 
-    var is = this.priceText(this.props.price)
-    var isE = <span className="price-is">{is}</span>
-
+  render () {
     return (
       <span>
-        {wasE}
-        {isE}
+        {this.elem(this.props.was, 'price-was')}
+        {this.elem(this.props.price, 'price-is')}
       </span>
     )
   }
 }
-
-PriceColumn.propTypes = {
-  price: React.PropTypes.number.isRequired,
-  was: React.PropTypes.number
-}
-
-export default PriceColumn

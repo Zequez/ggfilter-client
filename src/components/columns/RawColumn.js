@@ -1,29 +1,32 @@
-class RawColumn extends React.Component {
-  render() {
+export default class RawColumn extends React.Component {
+  static propTypes = {
+    value: React.PropTypes.any,
+    options: React.PropTypes.shape({
+      interpolation: React.PropTypes.string,
+      round: React.PropTypes.number
+    })
+  }
+
+  render () {
     var interp = this.props.options.interpolation
     var round = this.props.options.round
 
-    var v = this.props.value
+    let d1 = null
+    let v = this.props.value
+    let d2 = null
     if (v) {
       if (round) v = Math.floor(v*round)/round
-      if (interp) v = interp.replace('%s', v)
-    }
-    else {
+      if (interp) [d1, d2] = interp.split('%s')
+    } else {
       v = '-'
     }
 
     return (
-      <span>{v}</span>
+      <span>
+        {d1 ? <span className='text-deco'>{p1}</span> : null}
+        {v}
+        {d2 ? <span className='text-deco'>{d2}</span> : null}
+      </span>
     )
   }
 }
-
-RawColumn.propTypes = {
-  value: React.PropTypes.any,
-  options: React.PropTypes.shape({
-    interpolation: React.PropTypes.string,
-    round: React.PropTypes.number
-  })
-}
-
-export default RawColumn
