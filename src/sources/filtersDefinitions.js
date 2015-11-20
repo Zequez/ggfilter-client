@@ -14,8 +14,28 @@ var RangeFilter       = require('components/filters/RangeFilter')
 var BooleanFilter     = require('components/filters/BooleanFilter')
 var NullFilter        = require('components/filters/NullFilter')
 var TagsFilter        = require('components/filters/TagsFilter')
-var FancyRangeFilter  = require('components/filters/FancyRangeFilter')
 var FancyRangeFilter2 = require('components/filters/FancyRangeFilter2')
+
+var priceRangeOptions = {
+  range: [0, 1, 100, 300, 500, 1000, 1500, 2000, 3000, 4000, 5000, 6000, null],
+  rangeLabels: ['Free', '$0.01', '$1', '$3', '$5', '$10', '$15', '$20', '$30', '$40', '$50', '$60', '∞'],
+  namedRanges: {
+    'Free': [0, 0],
+    'Non-free': [1, null],
+    'Any price': [0, null]
+  },
+  monoRanges: {
+    0: [0, 0],
+    1: [1, null],
+    [null]: [1, null]
+  },
+  mappedRanges: [
+    [[0, 0],         [0, 0]],
+    [[0, 1],         [0, 0]],
+    [[null, null],   [1, null]],
+    [[1, 1],         [1, null]],
+  ]
+}
 
 var filtersDefinitions = {
   name: {
@@ -42,9 +62,7 @@ var filtersDefinitions = {
     filter: FancyRangeFilter2,
     column: PriceColumn,
     columnInputs: { price: 'steam_price', was: 'steam_sale_price' },
-    filterOptions: {
-      template: 'price'
-    },
+    filterOptions: priceRangeOptions,
     width: 100
   },
   steam_discount: {

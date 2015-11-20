@@ -139,52 +139,30 @@
           background: $ocean-blue
           color: $white
 
-.FancyRangeFilter
-  position: relative
-  .fancy-rf
-    position: absolute
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
-    background-color: $input-white
-    border-bottom: solid 1px $teal
-    // border-top: solid 1px $teal
-    // color: $black
-    cursor: default
-
-    -webkit-touch-callout: none
-    -webkit-user-select: none
-    -khtml-user-select: none
-    -moz-user-select: none
-    -ms-user-select: none
-    user-select: none
-
-    &-label-left, &-label-right
-      position: absolute
-      top: 0
-      padding: 0 2px
-      font-size: $font-smaller
-      color: $white
-
-    &-bar
-      position: absolute
-      top: 0
-      right: 0
-      bottom: 0
-      left: 0
-      background: $ocean-blue
-
 .FancyRangeFilter2
   position: relative
 
+  // Quick hack
+  &.lowest_steam_price
+    .fancy-rf:after
+      content: 'Free'
+      position: absolute
+      top: 0
+      right: 100%
+      width: $r
+      line-height: 10px
+      font-size: 10px
+      font-weight: bold
+      transform-origin: top right
+      transform: rotate(-90deg)
+
   .fancy-rf
     position: absolute
     top: 0
     right: 0
     bottom: 0
     left: 0
-    background-color: $input-white
+    background-color: mix($green, $input-white, 30%)
     border-bottom: solid 1px $teal
     font-size: $font-smaller
     cursor: default
@@ -219,6 +197,7 @@
         border-color: $blue
         background-color: rgba(#000, 0.2)
         color: $dark-blue
+        font-weight: bold
 
     &-bar
       position: absolute
@@ -238,11 +217,5 @@
       right: 100%
       background-image: url(~images/dashes.png)
       box-shadow: rgba(#000, 0.3) 1px 0, rgba(#000, 0.3) -1px 0
-      // background-image: repeating-linear-gradient(45deg, rgba(#000, 0.3), rgba(#000, 0.3) 2px, rgba(#000, 0.1) 2px, rgba(#000, 0.1) 4px)
       text-align: left
       z-index: 4
-    //   & > span
-    //     @extend %label
-    //     position: absolute
-    //     top: 100%
-    //     border-top-left-radius: 0

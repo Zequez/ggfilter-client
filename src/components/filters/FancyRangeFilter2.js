@@ -12,8 +12,8 @@ export default class FancyRangeFilter2 extends React.Component {
       range: t.arrayOf(t.number),
       rangeLabels: t.arrayOf(t.string),
       namedRanges: t.object,
-      min: t.string,
-      max: t.string
+      nullOnFullRange: t.bool,
+      nullifyExtremes: t.bool
     }).isRequired,
     onChange: t.func.isRequired
   }
@@ -30,40 +30,75 @@ export default class FancyRangeFilter2 extends React.Component {
     start: null,
     end: null,
     mousePos: null,
-    dragEndPos: null,
-    movedAfterDragEnd: true
+    dragEndPos: null
+  }
+
+  defaultOptions = {
+    range: [1, 2, 3, 4, 5],
+    rangeLabels: null,
+    nullifyStart: true,
+    nullifyEnd: true,
+    allowSingle: false,
+    namedRanges: {}, // eg: {'Free': [0, 0]}
+    mappedRanges: [
+      // eg: [[1, 1], [1, 1]] // Prevents it from mapping to 1-5
+      // eg: [[5, 5],   [1, 5]] // Maps a single 5 to 1-5
+      // eg: [[1, 2], [1, 1]] // Maps to 1 if selecting the range 1-2
+    ]
+  }
+
+  shouldComponentUpdate (np, ns) {
+    let p = this.props
+    let s = this.state
+    return np.query     !== p.query
+        || ns.start     !== s.start
+        || ns.end       !== s.end
+        || ns.mousePos  !== s.mousePos
+        || ns.dragStart !== s.dragStart
   }
 
   componentWillMount () {
-    let options = this.props.options
-    if (options.template === 'price') {
-      options = {
-        range: [0, 1, 100, 300, 500, 1000, 1500, 2000, 3000, 4000, 5000, 6000, null],
-        rangeLabels: ['Free', '$0.01', '$1', '$3', '$5', '$10', '$15', '$20', '$30', '$40', '$50', '$60', '∞'],
-        namedRanges: {
-          'Free': [0, 0],
-          'Non-free': [1, null],
-          'Any price': [0, null]
-        },
-        monoRanges: {
-          0: [0, 0],
-          1: [1, null],
-          [null]: [1, null]
-        }
-      }
+    // We know this.props.options won't change
+    // so we can handle them on componentWillMount
+
+    // Extend default options
+    let options = {}
+    let givenOptions = this.props.options
+    let defaultOptions = this.defaultOptions
+    for (let opt in defaultOptions) {
+      options[opt] = givenOptions[opt] == null ? defaultOptions[opt] : givenOptions[opt]
     }
 
-    // We know this.props.options won't change
-    let min = options.min || 'Min'
-    let max = options.max || 'Max'
+    this.options = options // = this.optionsTemplates.price // temporal for testing
 
-    this.monoRanges = options.monoRanges || {}
-    this.namedRanges = options.namedRanges || {}
-    this.range = options.range //[null, ...options.range, null]
-    this.rangeLabels = options.rangeLabels // [min, ...options.rangeLabels, max]
-    this.chunk = Math.floor(100 / this.range.length * 100) / 100
+    this.range        = options.range
+    this.rangeLabels  = options.rangeLabels || options.range
+    this.last         = this.range.length-1
+    this.chunk        = Math.floor(100 / this.range.length * 100) / 100
 
-    this.setState({start: 0, end: this.range.length-1})
+    this.indexMappedRanges = []
+    for (let mappedRange of options.mappedRanges) {
+      this.indexMappedRanges.push([
+        this.valueRange2IndexRange(mappedRange[0]),
+        this.valueRange2IndexRange(mappedRange[1])
+      ])
+    }
+
+    this.indexNamedRanges = {}
+    for (let name in options.namedRanges) {
+      this.indexNamedRanges[name] = this.valueRange2IndexRange(options.namedRanges[name])
+    }
+
+    this.setState({start: 0, end: this.last})
+  }
+
+  valueRange2IndexRange (valueRange) {
+    return [this.range.indexOf(valueRange[0]), this.range.indexOf(valueRange[1])]
+  }
+
+  resolveRange(start, end, orElse = [start, end]) {
+    let rangeMap = this.indexMappedRanges.find(mp => mp[0][0] === start && mp[0][1] === end)
+    return rangeMap ? rangeMap[1] : orElse
   }
 
   getPosIndex (ev) {
@@ -82,13 +117,9 @@ export default class FancyRangeFilter2 extends React.Component {
     if (this.state.dragStart != null) {
       if (pos >= this.state.dragStart) {
         this.setState({start: this.state.dragStart, end: pos, dragEndPos: pos})
-      }
-      else {
+      } else {
         this.setState({start: pos, end: this.state.dragStart, dragEndPos: pos})
       }
-    }
-    else if (!this.state.movedAfterDragEnd && this.state.dragEndPos !== pos) {
-      this.setState({movedAfterDragEnd: true})
     }
     this.setState({mousePos: pos})
   }
@@ -99,49 +130,51 @@ export default class FancyRangeFilter2 extends React.Component {
   }
 
   stopDragging = (ev)=>{
-    if (this.state.dragStart != null) {
+    if (this.state.dragStart !== null) {
       let start = this.state.start
       let end = this.state.end
+
+      let newRange = this.resolveRange(start, end, false)
+      if (newRange) {
+        ;[start, end] = newRange
+      } else if (start === end && !this.options.allowSingle) {
+        start = 0
+        end = this.last
+      }
+
+      this.setState({dragStart: null, start: start, end: end})
 
       let gt = this.range[start]
       let lt = this.range[end]
 
-      if (gt === lt) {
-        let newRange
-        if ((newRange = this.monoRanges[gt])) {
-          gt = newRange[0]
-          lt = newRange[1]
-          start = this.range.indexOf(gt)
-          end = this.range.indexOf(lt)
-        } else {
-          start = 0
-          end = this.range.length-1
-          gt = this.range[start]
-          lt = this.range[end]
+      // Nullify start and end only if we are selecting a range that
+      // starts or ends on them. If we are selecting a single value
+      // then we don't want to nullify them.
+      if (start !== end) {
+        if (this.options.nullifyStart && start === 0 && end !== 0) {
+          gt = null
+        }
+
+        if (this.options.nullifyEnd && end === this.last && start !== this.last) {
+          lt = null
         }
       }
 
-      this.setState({dragStart: null, start: start, end: end, movedAfterDragEnd: false})
-
-
-      // setTimeout(()=>{
-      //   if (gt === null && lt === null) {
-      //     this.props.onChange(null)
-      //   }
-      //   else {
-      //     this.props.onChange({gt: gt, lt: lt})
-      //   }
-      // }, 100)
-
+      setTimeout(()=>{
+        if (gt === null && lt === null) {
+          this.props.onChange(null)
+        } else {
+          this.props.onChange({gt: gt, lt: lt})
+        }
+      }, 100)
     }
   }
 
   label (start, end) {
-    let gt = this.range[start]
-    let lt = this.range[end]
-
-    for (let name in this.namedRanges) {
-      if (this.namedRanges[name][0] === gt && this.namedRanges[name][1] === lt) {
+    // Get specific label of named range
+    let namedRanges = this.indexNamedRanges
+    for (let name in namedRanges) {
+      if (namedRanges[name][0] === start && namedRanges[name][1] === end) {
         return name
       }
     }
@@ -149,11 +182,12 @@ export default class FancyRangeFilter2 extends React.Component {
     let gtLabel = this.rangeLabels[start]
     let ltLabel = this.rangeLabels[end]
 
-    if (gt !== null && lt === null) {
+    let last = this.range.length-1
+    if (start !== 0 && end === last) {
       return `≥${gtLabel}`
-    } else if (gt === null && lt !== null) {
+    } else if (start === 0 && end !== last) {
       return `≤${ltLabel}`
-    } else if (gt === lt) {
+    } else if (start === end) {
       return gtLabel
     } else {
       return `[${gtLabel}, ${ltLabel}]`
@@ -170,19 +204,10 @@ export default class FancyRangeFilter2 extends React.Component {
     }
   }
 
-  resolveStartEnd(start, end) {
-    let monoRange
-    if (start === end && (monoRange = this.monoRanges[this.range[start]])) {
-      return [this.range.indexOf(monoRange[0]), this.range.indexOf(monoRange[1])]
-    } else {
-      return [start, end]
-    }
-  }
-
   render() {
     let start  = this.state.start
     let end    = this.state.end
-    ;[start, end] = this.resolveStartEnd(start, end)
+    ;[start, end] = this.resolveRange(start, end)
     let label  = this.label(start, end)
     let barStyle = this.barStyle(start, end)
 
@@ -192,11 +217,10 @@ export default class FancyRangeFilter2 extends React.Component {
     let showMouseLabel =
       mouseStart !== null
       && this.state.dragStart === null
-      && this.state.movedAfterDragEnd
 
     let mouseLabel
     if (showMouseLabel) {
-      ;[mouseStart, mouseEnd] = this.resolveStartEnd(mouseStart, mouseEnd)
+      ;[mouseStart, mouseEnd] = this.resolveRange(mouseStart, mouseEnd)
       mouseLabel = this.label(mouseStart, mouseEnd)
     }
 
