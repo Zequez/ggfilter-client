@@ -26,14 +26,15 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    // This is really hacky and we shouldn't do it,
-    // but it's the cleanest way.
+    if (!this.props.games.batches.length) this.props.getGames()
+    this.fillStaticFiltersDefinitionsOptions()
+    this.loadFilters()
+  }
+
+  // This is hacky, but it's now the convention
+  fillStaticFiltersDefinitionsOptions() {
     filtersDefinitions.tags.filterOptions.tags = this.props.tags
     filtersDefinitions.tags.columnOptions.tags = this.props.tags
-
-    if (!this.props.games.batches.length) this.props.getGames()
-
-    this.loadFilters()
   }
 
   componentWillReceiveProps(nextProps) {

@@ -138,3 +138,39 @@
         &.focused
           background: $ocean-blue
           color: $white
+
+.FancyRangeFilter
+  position: relative
+  .fancy-rf
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    background-color: $input-white
+    border-bottom: solid 1px $teal
+    // border-top: solid 1px $teal
+    // color: $black
+    cursor: default
+
+    -webkit-touch-callout: none
+    -webkit-user-select: none
+    -khtml-user-select: none
+    -moz-user-select: none
+    -ms-user-select: none
+    user-select: none
+
+    &-label-left, &-label-right
+      position: absolute
+      top: 0
+      padding: 0 2px
+      font-size: $font-smaller
+      color: $white
+
+    &-bar
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      background: $ocean-blue

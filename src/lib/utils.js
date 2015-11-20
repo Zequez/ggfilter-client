@@ -53,3 +53,21 @@ export function loopNumber(i, val, array) {
     return i
   }
 }
+
+export function elementOffsetTop(el) {
+  let offset = 0
+  while (el) {
+    offset += el.offsetTop
+    el = el.offsetParent
+  }
+  return offset
+}
+
+export function elementOffsetLeft(el) {
+  let offset = 0
+  while (el) {
+    offset += el.offsetLeft
+    el = el.offsetParent
+  }
+  return offset
+}

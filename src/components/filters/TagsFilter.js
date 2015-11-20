@@ -31,7 +31,13 @@ export default class TagsFilter extends React.Component {
     let i = this.props.query.tags.indexOf(tagId)
     let newTags = this.props.query.tags.concat([])
     newTags.splice(i, 1)
-    this.props.onChange({tags: newTags})
+    if (newTags.length) {
+      this.props.onChange({tags: newTags})
+    }
+    else {
+      this.props.onChange(null)
+    }
+
   }
 
   onTextChange = (ev)=>{

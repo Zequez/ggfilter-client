@@ -8,6 +8,9 @@ class RawColumn extends React.Component {
       if (round) v = Math.floor(v*round)/round
       if (interp) v = interp.replace('%s', v)
     }
+    else {
+      v = '-'
+    }
 
     return (
       <span>{v}</span>

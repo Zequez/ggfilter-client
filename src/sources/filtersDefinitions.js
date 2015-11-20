@@ -8,12 +8,13 @@ var BooleanColumn  = require('components/columns/BooleanColumn')
 var ImagesColumn   = require('components/columns/ImagesColumn')
 var TagsColumn     = require('components/columns/TagsColumn')
 
-var TextFilter    = require('components/filters/TextFilter')
-var NumberFilter  = require('components/filters/NumberFilter')
-var RangeFilter   = require('components/filters/RangeFilter')
-var BooleanFilter = require('components/filters/BooleanFilter')
-var NullFilter    = require('components/filters/NullFilter')
-var TagsFilter    = require('components/filters/TagsFilter')
+var TextFilter       = require('components/filters/TextFilter')
+var NumberFilter     = require('components/filters/NumberFilter')
+var RangeFilter      = require('components/filters/RangeFilter')
+var BooleanFilter    = require('components/filters/BooleanFilter')
+var NullFilter       = require('components/filters/NullFilter')
+var TagsFilter       = require('components/filters/TagsFilter')
+var FancyRangeFilter = require('components/filters/FancyRangeFilter')
 
 var filtersDefinitions = {
   name: {
@@ -37,7 +38,7 @@ var filtersDefinitions = {
   },
   lowest_steam_price: {
     title: 'Steam price (US)',
-    filter: RangeFilter,
+    filter: FancyRangeFilter,
     column: PriceColumn,
     columnInputs: { price: 'steam_price', was: 'steam_sale_price' },
     filterOptions: {
@@ -60,6 +61,11 @@ var filtersDefinitions = {
   playtime_mean: {
     title: 'Playtime avg',
     columnOptions: { round: 100 },
+    filter: RangeFilter,
+    filterOptions: {
+      range: [],
+      rangeLabels: []
+    },
     width: 60
   },
   playtime_median: {
