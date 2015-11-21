@@ -40,6 +40,8 @@ export default class FancyRangeFilter2 extends React.Component {
     nullifyEnd: true,
     allowSingle: false,
     fallbackRange: null, // [first, last]
+    fallbackRangeTo: 'all', // 'left' || 'right' || 'all' || 'no'
+    projectFallbackMap: false,
     namedRanges: {}, // eg: {'Free': [0, 0]}
     mappedRanges: [
       // eg: [[1, 1], [1, 1]] // Prevents it from mapping to 1-5
@@ -105,9 +107,17 @@ export default class FancyRangeFilter2 extends React.Component {
     return [this.range.indexOf(valueRange[0]), this.range.indexOf(valueRange[1])]
   }
 
-  resolveRange (start, end, orElse = [start, end]) {
+  resolveRange (start, end, resolveFallback = false) {
     let rangeMap = this.indexMappedRanges.find(mp => mp[0][0] === start && mp[0][1] === end)
-    return rangeMap ? rangeMap[1] : orElse
+    if (!rangeMap && start === end && (this.options.projectFallbackMap || resolveFallback)) {
+      switch (this.options.fallbackRangeTo) {
+        case 'no': break
+        case 'all': return [0, this.last]
+        case 'left': return [0, end]
+        case 'right': return [start, this.last]
+      }
+    }
+    return rangeMap ? rangeMap[1] : [start, end]
   }
 
   readQuery (query = this.props.query) {
@@ -151,12 +161,21 @@ export default class FancyRangeFilter2 extends React.Component {
       let start = this.state.start
       let end = this.state.end
 
-      let newRange = this.resolveRange(start, end, false)
-      if (newRange) {
-        ;[start, end] = newRange
-      } else if (start === end && !this.options.allowSingle) {
-        ;[start, end] = this.indexFallbackRange
-      }
+      ;[start, end] = this.resolveRange(start, end, true)
+      // if (newRange) {
+      //   ;[start, end] = newRange
+      // } else if (start === end && !this.options.allowSingle) {
+      //   let fallbackRange
+      //   if (this.options.fallbackRangeTo == null) {
+      //     fallbackRange = this.indexFallbackRange
+      //   } else if (this.options.fallbackRangeTo === false) { // Left
+      //     fallbackRange = [0, end]
+      //   } else if (this.options.fallbackRangeTo === true) { // Right
+      //     fallbackRange = [start, this.last]
+      //   }
+      //   console.log(fallbackRange)
+      //   ;[start, end] = fallbackRange
+      // }
 
       this.setState({dragStart: null, start: start, end: end})
 
@@ -198,13 +217,12 @@ export default class FancyRangeFilter2 extends React.Component {
     let gtLabel = this.rangeLabels[start]
     let ltLabel = this.rangeLabels[end]
 
-    let last = this.range.length-1
-    if (start !== 0 && end === last) {
-      return `≥${gtLabel}`
-    } else if (start === 0 && end !== last) {
-      return `≤${ltLabel}`
-    } else if (start === end) {
+    if (start === end) {
       return gtLabel
+    } else if (start === 0 && end !== this.last) {
+      return `≤${ltLabel}`
+    } else if (end === this.last && start !== 0) {
+      return `≥${gtLabel}`
     } else {
       return `[${gtLabel}, ${ltLabel}]`
     }
