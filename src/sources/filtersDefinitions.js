@@ -113,14 +113,14 @@ var filtersDefinitions = {
   playtime_sd: {
     title: 'Playtime σ',
     filter: FancyRangeFilter,
-    filterOptions: options.filters.range.right([0, 1.7, 3.2, 4.9, 7.2, 10.4, 15.5, 24.2, 40.2, 76.5, null]),
+    filterOptions: options.filters.range.left([0, 1.7, 3.2, 4.9, 7.2, 10.4, 15.5, 24.2, 40.2, 76.5, null]),
     columnOptions: { round: 100 },
     width: 60
   },
   playtime_rsd: {
     title: 'Playtime relative σ',
     filter: FancyRangeFilter,
-    filterOptions: options.filters.range.right([0, 70.6, 89.7, 106.4, 122.3, 136.7, 154.9, 176.7, 209.8, 271.4, null]),
+    filterOptions: options.filters.range.left([0, 70.6, 89.7, 106.4, 122.3, 136.7, 154.9, 176.7, 209.8, 271.4, null]),
     columnOptions: { round: 100 },
     width: 60
   },
@@ -183,6 +183,12 @@ var filtersDefinitions = {
   },
   controller_support: {
     title: 'Controller support',
+    filter: FancyRangeFilter,
+    filterOptions: {
+      range: [1, 2, 3],
+      rangeLabels: ['No', 'Partial', 'Full'],
+      fallbackRangeTo: 'no',
+    }
   },
   steam_thumbnail: {
     title: 'Thumbnail',

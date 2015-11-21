@@ -43,7 +43,16 @@ export default {
         }
         if (interpol) r.labelInterpolation = interpol
         return r
-      }
+      },
+      left: function(range, interpol) {
+        let r = {
+          range: range,
+          fallbackRangeTo: 'left',
+          projectFallbackMap: true
+        }
+        if (interpol) r.labelInterpolation = interpol
+        return r
+      },
     }
   }
 }

@@ -17,7 +17,8 @@ export default {
     'vr',
     'steam_thumbnail',
     'tags',
-    'playtime_median'
+    'playtime_median',
+    'controller_support'
     // 'images'
   ],
 
