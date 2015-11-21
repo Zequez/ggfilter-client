@@ -71,3 +71,14 @@ export function elementOffsetLeft(el) {
   }
   return offset
 }
+
+export function merge(from, to) {
+  let result = {}
+  for (let n in from) {
+    result[n] = from[n]
+  }
+  for (let n in to) {
+    result[n] = to[n]
+  }
+  return result
+}

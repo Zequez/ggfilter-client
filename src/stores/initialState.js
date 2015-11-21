@@ -16,7 +16,8 @@ export default {
     'players',
     'vr',
     'steam_thumbnail',
-    'tags'
+    'tags',
+    'playtime_median'
     // 'images'
   ],
 

@@ -1,3 +1,5 @@
+var options = require('sources/filtersOptions')
+
 var BaseToggle = require('components/toggles/BaseToggle')
 
 var RawColumn      = require('components/columns/RawColumn')
@@ -16,26 +18,47 @@ var NullFilter        = require('components/filters/NullFilter')
 var TagsFilter        = require('components/filters/TagsFilter')
 var FancyRangeFilter = require('components/filters/FancyRangeFilter')
 
-var priceRangeOptions = {
-  range: [0, 1, 100, 300, 500, 1000, 1500, 2000, 3000, 4000, 5000, 6000, null],
-  rangeLabels: ['Free', '$0.01', '$1', '$3', '$5', '$10', '$15', '$20', '$30', '$40', '$50', '$60', '∞'],
-  namedRanges: {
-    'Free': [0, 0],
-    'Non-free': [1, null],
-    'Any price': [0, null]
-  },
-  monoRanges: {
-    0: [0, 0],
-    1: [1, null],
-    [null]: [1, null]
-  },
-  mappedRanges: [
-    [[0, 0],         [0, 0]],
-    [[0, 1],         [0, 0]],
-    [[null, null],   [1, null]],
-    [[1, 1],         [1, null]],
-  ]
-}
+// var priceRangeOptions = {
+//   range: [0, 1, 100, 300, 500, 1000, 1500, 2000, 3000, 4000, 5000, 6000, null],
+//   rangeLabels: ['Free', '$0.01', '$1', '$3', '$5', '$10', '$15', '$20', '$30', '$40', '$50', '$60', '∞'],
+//   namedRanges: {
+//     'Free': [0, 0],
+//     'Non-free': [1, null],
+//     'Any price': [0, null]
+//   },
+//   mappedRanges: [
+//     [[0, 0],         [0, 0]],
+//     [[0, 1],         [0, 0]],
+//     [[null, null],   [1, null]],
+//     [[1, 1],         [1, null]],
+//   ]
+// }
+
+// var discountRangeOptions = {
+//   range: [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+//   labelInterpolation: '%s%',
+//   namedRanges: {
+//     'NotOnSale': [0, 0],
+//     'On sale':     [1, 100],
+//     'Any':         [0, 100],
+//     'FREE!?':      [100, 100]
+//   },
+//   mappedRanges: [
+//     [[0, 0],     [0, 0]],
+//     [[0, 1],     [0, 0]],
+//     [[100, 100], [100, 100]],
+//     [[1, 1],     [1, 100]],
+//   ],
+//   fallbackRange: [1, 100]
+// }
+//
+// var fillRightRangeOptions = {
+//   return {
+//     range: [0, 1.7, 2.8, 3.9, 5.3, 7.0, 9.5, 13.3, 20.6, 38.9, null],
+//     fallbackRangeTo: 'right',
+//     projectFallbackMap: true
+//   }
+// }
 
 var filtersDefinitions = {
   name: {
@@ -60,84 +83,77 @@ var filtersDefinitions = {
   lowest_steam_price: {
     title: 'Steam price (US)',
     filter: FancyRangeFilter,
+    filterOptions: options.filters.range.price,
     column: PriceColumn,
     columnInputs: { price: 'steam_price', was: 'steam_sale_price' },
-    filterOptions: priceRangeOptions,
     width: 100
   },
   steam_discount: {
     title: 'Steam sale %',
-    filterOptions: {
-      range: [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-      rangeLabels: ['0%', '1%', '10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%'],
-      min: '0%',
-      max: '100%',
-      namedRanges: {
-        'Not on sale': [null, 0],
-        'On sale': [1, null],
-        'All': [null, null],
-        'FREE!?': [100, null]
-      }
-    },
-    filter: RangeFilter,
+    filter: FancyRangeFilter,
+    filterOptions: options.filters.range.discount,
     column: RawColumn,
     columnOptions: { interpolation: '%s%' },
     width: 50
   },
   playtime_mean: {
     title: 'Playtime avg',
+    filter: FancyRangeFilter,
+    filterOptions: options.filters.range.right([0, 1.5, 3, 4, 5, 7, 9, 13, 21, 39, null]),
     columnOptions: { round: 100 },
-    filter: RangeFilter,
-    filterOptions: {
-      range: [],
-      rangeLabels: []
-    },
     width: 60
   },
   playtime_median: {
     title: 'Playtime median',
-    columnOptions: { round: 100 },
+    filter: FancyRangeFilter,
+    filterOptions: options.filters.range.right([0, 0.7, 1.3, 1.9, 2.7, 3.5, 4.7, 6.7, 9.7, 16.6, null]),
+    columnOptions: { round: 100, interpolation: '%shs' },
     width: 60
   },
   playtime_sd: {
     title: 'Playtime σ',
+    filter: FancyRangeFilter,
+    filterOptions: options.filters.range.right([0, 1.7, 3.2, 4.9, 7.2, 10.4, 15.5, 24.2, 40.2, 76.5, null]),
     columnOptions: { round: 100 },
     width: 60
   },
   playtime_rsd: {
     title: 'Playtime relative σ',
+    filter: FancyRangeFilter,
+    filterOptions: options.filters.range.right([0, 70.6, 89.7, 106.4, 122.3, 136.7, 154.9, 176.7, 209.8, 271.4, null]),
     columnOptions: { round: 100 },
     width: 60
   },
   playtime_mean_ftb: {
     title: 'Playtime avg / $',
-    columnOptions: { round: 100 },
+    filter: FancyRangeFilter,
+    filterOptions: options.filters.range.right([0, 0.2, 0.4, 0.5, 0.6, 0.8, 1.0, 1.4, 1.9, 3.1, null]),
+    columnOptions: { round: 100, interpolation: '%shs/$' },
     width: 60
   },
   playtime_median_ftb: {
     title: 'Playtime median / $',
-    columnOptions: { round: 100 },
+    filter: FancyRangeFilter,
+    filterOptions: options.filters.range.right([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.9, 1.5, null]),
+    columnOptions: { round: 100, interpolation: '%shs/$' },
     width: 60
   },
   metacritic: {
     title: 'Metacritic',
-    filter: RangeFilter,
-    filterOptions: { range: [10, 20, 30, 40, 50, 60, 70, 80, 90] },
+    filter: FancyRangeFilter,
+    filterOptions: options.filters.range.right([0, 10, 20, 30, 40, 50, 60, 70, 80, 90, null]),
     width: 60
   },
   steam_reviews_count: {
     title: '# Steam reviews',
-    filter: RangeFilter,
-    filterOptions: { range: [8, 20, 35, 65, 115, 220, 420, 1020, 4250] },
+    filter: FancyRangeFilter,
+    filterOptions: options.filters.range.right([0, 8, 20, 35, 65, 115, 220, 420, 1020, 4250, null]),
     width: 60
   },
   steam_reviews_ratio: {
     title: 'Steam reviews ratio',
-    filter: RangeFilter,
-    filterOptions: {
-      range: [10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 98, 99],
-      rangeLabels: ['10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '95%', '98%', '99%']
-    },
+    filter: FancyRangeFilter,
+    filterOptions: options.filters.range.right([0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 98, 99, null], '%s%'),
     column: RatioColumn,
     width: 100
   },

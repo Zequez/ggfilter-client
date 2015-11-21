@@ -139,7 +139,7 @@
           background: $ocean-blue
           color: $white
 
-.FancyRangeFilter2
+.FancyRangeFilter
   position: relative
 
   // Quick hack
@@ -155,6 +155,7 @@
       font-weight: bold
       transform-origin: top right
       transform: rotate(-90deg)
+      z-index: 10
 
   .fancy-rf
     position: absolute
@@ -216,6 +217,7 @@
       bottom: 0
       right: 100%
       background-image: url(~images/dashes.png)
+      background-position: 100% 100%
       box-shadow: rgba(#000, 0.3) 1px 0, rgba(#000, 0.3) -1px 0
       text-align: left
       z-index: 4

@@ -1,7 +1,7 @@
 import {elementOffsetLeft} from 'lib/utils'
 var t = React.PropTypes
 
-export default class FancyRangeFilter2 extends React.Component {
+export default class FancyRangeFilter extends React.Component {
   static propTypes = {
     query: t.shape({
       gt: t.number,
@@ -41,6 +41,8 @@ export default class FancyRangeFilter2 extends React.Component {
     fallbackRange: null, // [first, last]
     fallbackRangeTo: 'all', // 'left' || 'right' || 'all' || 'no'
     projectFallbackMap: false,
+    labelInterpolation: '%s',
+    fullRangeName: 'Any',
     namedRanges: {}, // eg: {'Free': [0, 0]}
     mappedRanges: [
       // eg: [[1, 1], [1, 1]] // Prevents it from mapping to 1-5
@@ -74,7 +76,7 @@ export default class FancyRangeFilter2 extends React.Component {
     this.options = options // = this.optionsTemplates.price // temporal for testing
 
     this.range        = options.range
-    this.rangeLabels  = options.rangeLabels || options.range
+    this.rangeLabels  = options.rangeLabels || options.range.map(r => options.labelInterpolation.replace('%s', r))
     this.last         = this.range.length-1
     this.chunk        = Math.floor(100 / this.range.length * 100) / 100
 
@@ -90,6 +92,7 @@ export default class FancyRangeFilter2 extends React.Component {
     for (let name in options.namedRanges) {
       this.indexNamedRanges[name] = this.valueRange2IndexRange(options.namedRanges[name])
     }
+    if (options.fullRangeName) this.indexNamedRanges[options.fullRangeName] = [0, this.last]
 
     this.indexFallbackRange = this.options.fallbackRange
       ? this.valueRange2IndexRange(this.options.fallbackRange)
