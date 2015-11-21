@@ -38,7 +38,6 @@ export default class FancyRangeFilter2 extends React.Component {
     rangeLabels: null,
     nullifyStart: true,
     nullifyEnd: true,
-    allowSingle: false,
     fallbackRange: null, // [first, last]
     fallbackRangeTo: 'all', // 'left' || 'right' || 'all' || 'no'
     projectFallbackMap: false,
@@ -113,8 +112,8 @@ export default class FancyRangeFilter2 extends React.Component {
       switch (this.options.fallbackRangeTo) {
         case 'no': break
         case 'all': return [0, this.last]
-        case 'left': return [0, end]
-        case 'right': return [start, this.last]
+        case 'left': return end !== 0 ? [0, end] : [0, this.last]
+        case 'right': return start !== this.last ? [start, this.last] : [0, this.last]
       }
     }
     return rangeMap ? rangeMap[1] : [start, end]
@@ -135,6 +134,7 @@ export default class FancyRangeFilter2 extends React.Component {
   }
 
   onMouseDown = (ev)=>{
+    if (ev.button !== 0) return
     let pos = this.getPosIndex(ev)
     this.setState({start: pos, end: pos, dragStart: pos, mousePos: pos, dragEndPos: pos})
   }
@@ -162,20 +162,6 @@ export default class FancyRangeFilter2 extends React.Component {
       let end = this.state.end
 
       ;[start, end] = this.resolveRange(start, end, true)
-      // if (newRange) {
-      //   ;[start, end] = newRange
-      // } else if (start === end && !this.options.allowSingle) {
-      //   let fallbackRange
-      //   if (this.options.fallbackRangeTo == null) {
-      //     fallbackRange = this.indexFallbackRange
-      //   } else if (this.options.fallbackRangeTo === false) { // Left
-      //     fallbackRange = [0, end]
-      //   } else if (this.options.fallbackRangeTo === true) { // Right
-      //     fallbackRange = [start, this.last]
-      //   }
-      //   console.log(fallbackRange)
-      //   ;[start, end] = fallbackRange
-      // }
 
       this.setState({dragStart: null, start: start, end: end})
 
@@ -203,6 +189,14 @@ export default class FancyRangeFilter2 extends React.Component {
         }
       }, 100)
     }
+  }
+
+  onRightClick = (ev)=>{
+    ev.preventDefault()
+    this.setState({start: 0, end: this.last})
+    setTimeout(()=>{
+      this.props.onChange(null)
+    }, 100)
   }
 
   label (start, end) {
@@ -268,6 +262,7 @@ export default class FancyRangeFilter2 extends React.Component {
         onMouseMove={this.onMouseMove}
         onMouseUp={this.stopDragging}
         onMouseLeave={this.onMouseLeave}
+        onContextMenu={this.onRightClick}
         ref='bar'
         >
         <div className='fancy-rf-bar' style={barStyle}></div>
