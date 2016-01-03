@@ -6,7 +6,8 @@ var definitions = {
     'steam_id',
     'name',
     'tags',
-    'images'
+    'images',
+    'sysreq_video_index'
   ],
   'Price': [
     'lowest_steam_price',
@@ -31,6 +32,9 @@ var definitions = {
     'players',
     'vr',
     'controller_support'
+  ],
+  'Other': [
+    'system_requirements'
   ]
 }
 

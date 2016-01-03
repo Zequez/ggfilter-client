@@ -1,3 +1,4 @@
+var config = require('sources/config')
 var connect = require('react-redux').connect
 var qs = require('qs')
 var filtersDefinitions = require('sources/filtersDefinitions')
@@ -25,7 +26,7 @@ export const Tabs = {
   FILTERS: Symbol('FILTERS'),
   SOURCES: Symbol('SOURCES'),
   FEEDBACK: Symbol('FEEDBACK'),
-  DONATIONS: Symbol('DONATIONS')
+  DONATIONS: Symbol('DONATIONS'),
 }
 
 export function selectTab(tab) {
@@ -121,7 +122,7 @@ export function getGames(page = 0) {
       page: page
     }, {arrayFormat: 'brackets'})
 
-    return fetch(`http://localhost:3000/games.json?${queryString}`)
+    return fetch(`${config.HOST}/games.json?${queryString}`)
       .then(response => {
         if (response.status >= 200 && response.status <= 300) {
           return response.json()
@@ -175,7 +176,6 @@ export const SHOW_LIGHTBOX = Symbol('SHOW_LIGHTBOX')
 export function showLightbox(media, thumbnails) {
   return { type: SHOW_LIGHTBOX, media, thumbnails }
 }
-
 
 /*** HELPERS ****/
 /****************/

@@ -6,6 +6,7 @@ export default {
   toggledFilters: [
     'steam_id',
     'name',
+    // 'system_requirements',
     'lowest_steam_price',
     'steam_discount',
     'playtime_median_ftb',
@@ -15,11 +16,12 @@ export default {
     'platforms',
     'players',
     'vr',
-    'steam_thumbnail',
+    // 'steam_thumbnail',
     'tags',
     'playtime_median',
-    'controller_support'
+    'controller_support',
     // 'images'
+    'sysreq_video_index'
   ],
 
   columnsWidth: {
@@ -28,13 +30,13 @@ export default {
 
   query: {
     filters: {
-      steam_reviews_count: { gt: 65 },
-      steam_reviews_ratio: { gt: 95 },
-      platforms: { value: 3 },
-      tags: { tags: [83] },
+      // steam_reviews_count: { gt: 65 },
+      // steam_reviews_ratio: { gt: 95 },
+      // platforms: { value: 3 },
+      // tags: { tags: [83] },
       // lowest_steam_price: { gt: 500, lt: 6000 }
     },
-    sort: 'playtime_median_ftb',
+    sort: 'name',
     sort_asc: false,
     batchSize: 20
   },
@@ -55,5 +57,5 @@ export default {
       // 'http://cdn.akamai.steamstatic.com/steam/apps/367570/ss_063380bd66c443e5f3aab8d9059bb9481cf60f95.116x65.jpg?t=1440428576',
       // 'http://cdn.akamai.steamstatic.com/steam/apps/57300/ss_2bf5b6775bbc3857f0b607cb298885c5f3651556.116x65.jpg?t=1417769927'
     ]
-  }
+  },
 }

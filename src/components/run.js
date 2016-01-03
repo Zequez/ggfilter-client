@@ -1,3 +1,4 @@
+window.DEBUG = true
 window.React = require('react')
 window._ = require('lodash')
 var ReactDOM = require('react-dom')

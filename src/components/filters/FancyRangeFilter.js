@@ -76,7 +76,7 @@ export default class FancyRangeFilter extends React.Component {
     this.options = options // = this.optionsTemplates.price // temporal for testing
 
     this.range        = options.range
-    this.rangeLabels  = options.rangeLabels || options.range.map(r => options.labelInterpolation.replace('%s', r))
+    this.rangeLabels  = options.rangeLabels || options.range.map(r => r == null ? '∞' : options.labelInterpolation.replace('%s', r))
     this.last         = this.range.length-1
     this.chunk        = Math.floor(100 / this.range.length * 100) / 100
 

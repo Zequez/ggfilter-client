@@ -68,3 +68,22 @@
       &.selected
         background: $ocean-green
         cursor: default
+
+.SystemReqColumn
+  text-align: left
+  strong
+    font-weight: bold
+
+  .string, .tokens
+    display: block
+    width: 50%
+    float: left
+    white-space: normal
+
+  .string
+    border-right: solid 2px black
+    &.no-tokens
+      border-right-color: red
+
+  ul
+    padding-left: $r

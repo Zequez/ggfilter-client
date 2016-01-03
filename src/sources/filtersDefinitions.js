@@ -2,13 +2,14 @@ var options = require('sources/filtersOptions')
 
 var BaseToggle = require('components/toggles/BaseToggle')
 
-var RawColumn      = require('components/columns/RawColumn')
-var PriceColumn    = require('components/columns/PriceColumn')
-var RatioColumn    = require('components/columns/RatioColumn')
-var LinkColumn     = require('components/columns/LinkColumn')
-var BooleanColumn  = require('components/columns/BooleanColumn')
-var ImagesColumn   = require('components/columns/ImagesColumn')
-var TagsColumn     = require('components/columns/TagsColumn')
+var RawColumn       = require('components/columns/RawColumn')
+var PriceColumn     = require('components/columns/PriceColumn')
+var RatioColumn     = require('components/columns/RatioColumn')
+var LinkColumn      = require('components/columns/LinkColumn')
+var BooleanColumn   = require('components/columns/BooleanColumn')
+var ImagesColumn    = require('components/columns/ImagesColumn')
+var TagsColumn      = require('components/columns/TagsColumn')
+var SystemReqColumn = require('components/columns/SystemReqColumn')
 
 var TextFilter        = require('components/filters/TextFilter')
 var NumberFilter      = require('components/filters/NumberFilter')
@@ -16,49 +17,7 @@ var RangeFilter       = require('components/filters/RangeFilter')
 var BooleanFilter     = require('components/filters/BooleanFilter')
 var NullFilter        = require('components/filters/NullFilter')
 var TagsFilter        = require('components/filters/TagsFilter')
-var FancyRangeFilter = require('components/filters/FancyRangeFilter')
-
-// var priceRangeOptions = {
-//   range: [0, 1, 100, 300, 500, 1000, 1500, 2000, 3000, 4000, 5000, 6000, null],
-//   rangeLabels: ['Free', '$0.01', '$1', '$3', '$5', '$10', '$15', '$20', '$30', '$40', '$50', '$60', '∞'],
-//   namedRanges: {
-//     'Free': [0, 0],
-//     'Non-free': [1, null],
-//     'Any price': [0, null]
-//   },
-//   mappedRanges: [
-//     [[0, 0],         [0, 0]],
-//     [[0, 1],         [0, 0]],
-//     [[null, null],   [1, null]],
-//     [[1, 1],         [1, null]],
-//   ]
-// }
-
-// var discountRangeOptions = {
-//   range: [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-//   labelInterpolation: '%s%',
-//   namedRanges: {
-//     'NotOnSale': [0, 0],
-//     'On sale':     [1, 100],
-//     'Any':         [0, 100],
-//     'FREE!?':      [100, 100]
-//   },
-//   mappedRanges: [
-//     [[0, 0],     [0, 0]],
-//     [[0, 1],     [0, 0]],
-//     [[100, 100], [100, 100]],
-//     [[1, 1],     [1, 100]],
-//   ],
-//   fallbackRange: [1, 100]
-// }
-//
-// var fillRightRangeOptions = {
-//   return {
-//     range: [0, 1.7, 2.8, 3.9, 5.3, 7.0, 9.5, 13.3, 20.6, 38.9, null],
-//     fallbackRangeTo: 'right',
-//     projectFallbackMap: true
-//   }
-// }
+var FancyRangeFilter  = require('components/filters/FancyRangeFilter')
 
 var filtersDefinitions = {
   name: {
@@ -210,6 +169,19 @@ var filtersDefinitions = {
     },
     width: 200,
     sort: false
+  },
+  system_requirements: {
+    title: 'System Requirements',
+    column: SystemReqColumn,
+    width: 600
+  },
+  sysreq_video_index: {
+    title: 'System Requirements Index®',
+    filter: FancyRangeFilter,
+    filterOptions: {
+      range: [0, 100, 200, 300, 500, 750, 1000, 2000, 3000, 4000, 5000, 6000, null],
+    },
+    width: 300
   }
 }
 
