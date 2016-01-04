@@ -1,7 +1,5 @@
-var config = require('sources/config')
+var gamesFetcher = require('sources/gamesFetcher')
 var connect = require('react-redux').connect
-var qs = require('qs')
-var filtersDefinitions = require('sources/filtersDefinitions')
 
 if (true) { // Dev
   var Symbol = function(key){
@@ -24,6 +22,7 @@ export const SELECT_TAB = Symbol('SELECT_TAB')
 
 export const Tabs = {
   FILTERS: Symbol('FILTERS'),
+  SYSREQ: Symbol('SYSREQ'),
   SOURCES: Symbol('SOURCES'),
   FEEDBACK: Symbol('FEEDBACK'),
   DONATIONS: Symbol('DONATIONS'),
@@ -101,36 +100,9 @@ export const GET_GAMES_FAILED = Symbol('GET_GAMES_FAILED')
 export function getGames(page = 0) {
   return function(dispatch, getState) {
     var state = getState()
-    var filters = state.toggledFilters
-    var query = state.query
     dispatch({type: GET_GAMES_START, page: page})
 
-    // Get the columns to request
-    var columns = []
-    for (let i = 0; i < filters.length; ++i) {
-      let columnInputs = filtersDefinitions[filters[i]].columnInputs
-      for (let k in columnInputs) {
-        columns.push(columnInputs[k])
-      }
-    }
-    var sort_dir = query.sort_asc ? 'asc' : 'desc'
-    var queryString = qs.stringify({
-      filters: JSON.stringify(query.filters),
-      sort: `${query.sort}_${sort_dir}`,
-      limit: query.batchSize,
-      columns: columns,
-      page: page
-    }, {arrayFormat: 'brackets'})
-
-    return fetch(`${config.HOST}/games.json?${queryString}`)
-      .then(response => {
-        if (response.status >= 200 && response.status <= 300) {
-          return response.json()
-        }
-        else {
-          return dispatch({type: GET_GAMES_FAILED, page: page})
-        }
-      })
+    return gamesFetcher(state.toggledFilters, state.query, page)
       .then(json => {
         return dispatch({
           type: GET_GAMES_END,
@@ -138,9 +110,9 @@ export function getGames(page = 0) {
           page: page,
           lastPage: json.length < state.query.batchSize})
       })
-      // .catch(error => {
-      //   return dispatch({type: GET_GAMES_FAILED, page: page})
-      // })
+      .catch(error => {
+        return dispatch({type: GET_GAMES_FAILED, page: page})
+      })
   }
 }
 
