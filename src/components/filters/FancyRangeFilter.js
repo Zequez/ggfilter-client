@@ -42,6 +42,9 @@ export default class FancyRangeFilter extends React.Component {
     fallbackRangeTo: 'all', // 'left' || 'right' || 'all' || 'no'
     projectFallbackMap: false,
     labelInterpolation: '%s',
+    gtInterpolation: '≥%s',
+    ltInterpolation: '≤%s',
+    rangeInterpolation: '[%s, %s]',
     fullRangeName: 'Any',
     namedRanges: {}, // eg: {'Free': [0, 0]}
     mappedRanges: [
@@ -217,9 +220,9 @@ export default class FancyRangeFilter extends React.Component {
     if (start === end) {
       return gtLabel
     } else if (start === 0 && end !== this.last) {
-      return `≤${ltLabel}`
+      return this.options.ltInterpolation.replace('%s', ltLabel)
     } else if (end === this.last && start !== 0) {
-      return `≥${gtLabel}`
+      return this.options.gtInterpolation.replace('%s', gtLabel)
     } else {
       return `[${gtLabel}, ${ltLabel}]`
     }

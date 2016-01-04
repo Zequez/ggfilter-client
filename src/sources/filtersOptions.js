@@ -1,5 +1,29 @@
 import {merge} from 'lib/utils'
 
+var yearsAgo = function (years) {
+  return Math.floor(new Date(new Date() - 365*24*60*60*1000*years) / 1000)
+}
+
+var generateDatesBack = function (years) {
+  var hash = {
+    range: [null, yearsAgo(1/12), yearsAgo(3/12), yearsAgo(6/12), yearsAgo(1)],
+    rangeLabels: ['Now', '1 month', '3 months', '6 months', '1 year'],
+    fallbackRangeTo: 'right',
+    projectFallbackMap: true,
+    gtInterpolation: 'Last %s',
+    ltInterpolation: 'Older than %s',
+  }
+
+  for (var i = 2; i < years; i++) {
+    hash.range.push(yearsAgo(i))
+    hash.rangeLabels.push(`${i} years`)
+  }
+
+  hash.range = hash.range.reverse()
+  hash.rangeLabels = hash.rangeLabels.reverse()
+  return hash
+}
+
 export default {
   filters: {
     range: {
@@ -53,6 +77,7 @@ export default {
         if (interpol) r.labelInterpolation = interpol
         return r
       },
+      dateBack: generateDatesBack(12),
     }
   }
 }

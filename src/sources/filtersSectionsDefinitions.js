@@ -5,6 +5,7 @@ var definitions = {
     'steam_thumbnail',
     'steam_id',
     'name',
+    'released_at',
     'tags',
     'images',
     'sysreq_index_centile'

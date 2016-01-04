@@ -21,7 +21,8 @@ export default {
     'playtime_median',
     'controller_support',
     // 'images'
-    'sysreq_index_centile'
+    'sysreq_index_centile',
+    'released_at'
   ],
 
   columnsWidth: {
