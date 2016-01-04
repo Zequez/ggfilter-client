@@ -10,6 +10,7 @@ var BooleanColumn   = require('components/columns/BooleanColumn')
 var ImagesColumn    = require('components/columns/ImagesColumn')
 var TagsColumn      = require('components/columns/TagsColumn')
 var SystemReqColumn = require('components/columns/SystemReqColumn')
+var TimeAgoColumn   = require('components/columns/TimeAgoColumn')
 
 var TextFilter        = require('components/filters/TextFilter')
 var NumberFilter      = require('components/filters/NumberFilter')
@@ -25,7 +26,7 @@ var filtersDefinitions = {
     column: LinkColumn,
     columnInputs: { text: 'name', urlValue: 'steam_id' },
     columnOptions: { urlTemplate: 'http://store.steampowered.com/app/%s/' },
-    width: 150
+    width: 200
   },
   steam_id: {
     title: 'Steam ID',
@@ -181,12 +182,14 @@ var filtersDefinitions = {
     filterOptions: {
       range: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100],
     },
-    width: 300
+    width: 150
   },
   released_at: {
     title: 'Release date',
     filter: FancyRangeFilter,
-    filterOptions: options.filters.range.dateBack
+    filterOptions: options.filters.range.dateBack,
+    column: TimeAgoColumn,
+    width: 150
   }
 }
 
