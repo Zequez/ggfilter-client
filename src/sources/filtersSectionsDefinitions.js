@@ -7,7 +7,7 @@ var definitions = {
     'name',
     'tags',
     'images',
-    'sysreq_video_index'
+    'sysreq_index_centile'
   ],
   'Price': [
     'lowest_steam_price',

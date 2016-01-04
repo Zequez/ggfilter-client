@@ -175,11 +175,11 @@ var filtersDefinitions = {
     column: SystemReqColumn,
     width: 600
   },
-  sysreq_video_index: {
-    title: 'System Requirements Index®',
+  sysreq_index_centile: {
+    title: 'SysReq. Index®',
     filter: FancyRangeFilter,
     filterOptions: {
-      range: [0, 100, 200, 300, 500, 750, 1000, 2000, 3000, 4000, 5000, 6000, null],
+      range: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100],
     },
     width: 300
   }
