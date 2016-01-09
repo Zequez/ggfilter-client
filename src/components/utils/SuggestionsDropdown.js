@@ -58,6 +58,13 @@ export default class SuggestionsDropdown extends React.Component {
     this.props.onSelect(value)
   }
 
+  componentWillReceiveProps (np) {
+    if (this.state.focused + 1 > np.list.length) {
+      let focused = np.list.length ? np.list.length - 1 : 0
+      this.setState({focused: focused})
+    }
+  }
+
   render() {
     let list = this.props.list
     let listValues = this.props.listValues || list

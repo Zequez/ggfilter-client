@@ -11,6 +11,8 @@ class SysreqCalc extends React.Component {
   }
 
   filterGames = (value)=>{
+    if (!value) return []
+
     return gamesFetcher(
       ['name', 'sysreq_index_centile'],
       {
