@@ -102,6 +102,7 @@ class SysreqCalc extends React.Component {
                 <div className='sysreq-calc-game-name'>{game.name}</div>
                 <div className='sysreq-calc-game-separator'></div>
                 <div className='sysreq-calc-game-value'>{game.sysreq_index_centile}</div>
+                <div className='sysreq-calc-game-remove' onClick={this.removeGame.bind(this, game)}>&times;</div>
               </li>
             )
           })}
