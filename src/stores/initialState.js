@@ -1,7 +1,7 @@
 import { Tabs } from './actions'
 
 export default {
-  tab: Tabs.FILTERS,
+  tab: Tabs.SYSREQ,
 
   toggledFilters: [
     'steam_id',
@@ -59,4 +59,9 @@ export default {
       // 'http://cdn.akamai.steamstatic.com/steam/apps/57300/ss_2bf5b6775bbc3857f0b607cb298885c5f3651556.116x65.jpg?t=1417769927'
     ]
   },
+
+  sysreqCalc: {
+    query: '',
+    result: []
+  }
 }

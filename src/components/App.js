@@ -14,6 +14,7 @@ var Lightbox =       require('components/Lightbox')
 
 var FiltersToggles = require('components/tabs/FiltersToggles')
 var SourcesTab     = require('components/tabs/SourcesTab')
+var SysreqCalc     = require('components/tabs/SysreqCalc')
 
 var t = React.PropTypes
 
@@ -82,6 +83,7 @@ class App extends React.Component {
           </nav>
           <div className='tabs-content'>
             {this.tabContent(Tabs.FILTERS, <FiltersToggles filters={this.state.filters}/>)}
+            {this.tabContent(Tabs.SYSREQ, <SysreqCalc/>)}
             {this.tabContent(Tabs.SOURCES, <SourcesTab />)}
           </div>
           <DataTable

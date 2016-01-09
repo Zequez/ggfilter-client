@@ -11,6 +11,7 @@ class NavTabs extends React.Component {
     return (
       <ul className='nav-tabs'>
         <li onClick={this.props.selectTab(Tabs.FILTERS)} className={klass(Tabs.FILTERS)}>Filters</li>
+        <li onClick={this.props.selectTab(Tabs.SYSREQ)} className={klass(Tabs.SYSREQ)}>SysReq Calculator</li>
         <li onClick={this.props.selectTab(Tabs.SOURCES)} className={klass(Tabs.SOURCES)}>Sources</li>
         <li onClick={this.props.selectTab(Tabs.FEEDBACK)} className={klass(Tabs.FEEDBACK)}>Feedback</li>
         <li onClick={this.props.selectTab(Tabs.DONATIONS)} className={klass(Tabs.DONATIONS)}>Donations</li>
