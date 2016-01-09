@@ -1,4 +1,5 @@
 import { setQueryFilter } from 'stores/actions'
+import { snapTo } from 'lib/utils'
 var gamesFetcher = require('sources/gamesFetcher')
 var SuggestionsBox = require('components/utils/SuggestionsBox')
 var connect = require('react-redux').connect
@@ -43,17 +44,27 @@ class SysreqCalc extends React.Component {
     this.state.games.sort((g1, g2)=> g1.sysreq_index_centile - g2.sysreq_index_centile)
     this.setState({games: this.state.games})
     this.refs.box.clean()
+    this.submitFilter()
   }
 
   removeGame = (game)=>{
     this.state.games.splice(this.state.games.indexOf(game), 1)
     this.setState({games: this.state.games})
+    this.submitFilter()
+  }
+
+  submitFilter () {
+    let calcs = this.calculatedValues()
+    if (!calcs.mean) return
+    let gt = Math.max(0, calcs.mean - calcs.deviation)
+    let lt = Math.min(100, calcs.mean + calcs.deviation)
+    this.props.dispatch(setQueryFilter('sysreq_index_centile', {gt: snapTo(gt, 5), lt: snapTo(lt, 5)}))
   }
 
   calculatedValues () {
     let games = this.state.games
     if (!games.length) return {}
-    if (games.length === 1) return {mean: games[0].sysreq_index_centile}
+    if (games.length === 1) return {mean: games[0].sysreq_index_centile, deviation: 10}
 
     let values = games.map(g => g.sysreq_index_centile)
     let len = values.length

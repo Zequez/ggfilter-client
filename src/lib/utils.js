@@ -82,3 +82,8 @@ export function merge(from, to) {
   }
   return result
 }
+
+export function snapTo(val, snap) {
+  let valr = val % snap
+  return valr > snap/2 ? (val - valr + snap) : (val - valr)
+}
