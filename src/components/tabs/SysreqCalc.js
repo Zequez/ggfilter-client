@@ -27,7 +27,7 @@ class SysreqCalc extends React.Component {
       var ids = this.state.games.map((g)=> g.id)
       return games
         .filter((game)=> ids.indexOf(game.id) === -1)
-        .map((game)=> [game.name, game])
+        .map((game)=> [`${game.name} --- ${game.sysreq_index_centile}`, game])
     })
   }
 
