@@ -6,14 +6,6 @@ var connect = require('react-redux').connect
 var t = React.PropTypes
 
 class SysreqCalc extends React.Component {
-  // static propTypes = {
-  //   query: t.string.isRequired,
-  //   result: t.arrayOf(t.shape({
-  //     name: t.string.isRequired,
-  //     sysreq_index_centile: t.number.isRequired,
-  //   })).isRequired
-  // }
-
   state = {
     games: []
   }
@@ -27,7 +19,7 @@ class SysreqCalc extends React.Component {
         },
         sort: 'name',
         sort_asc: true,
-        batchSize: 5
+        batchSize: 8
       },
       0
     )
@@ -41,7 +33,7 @@ class SysreqCalc extends React.Component {
 
   selectGame = (game)=>{
     this.state.games.push(game)
-    this.state.games.sort((g1, g2)=> g1.sysreq_index_centile - g2.sysreq_index_centile)
+    this.state.games.sort((g1, g2)=> g2.sysreq_index_centile - g1.sysreq_index_centile)
     this.setState({games: this.state.games})
     this.refs.box.clean()
     this.submitFilter()
