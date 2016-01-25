@@ -2,22 +2,22 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 window.React = React
-window._ = require('lodash')
 
 import { Router, Route, IndexRoute } from 'react-router'
 import { createHistory } from 'history'
 import { syncReduxAndRouter } from 'redux-simple-router'
+import { Provider } from 'react-redux'
 
-var App = require('./App')
-var Provider = require('react-redux').Provider
-var store = require('stores/AppStore')
 import { setAllTags } from 'stores/actions'
+var store = require('stores/AppStore')
 var routes = require('stores/routes')
 var getTags = require('sources/getTags')
 
-var FiltersToggles = require('components/tabs/FiltersToggles')
-var SourcesTab = require('components/tabs/SourcesTab')
-var SysreqCalc = require('components/tabs/SysreqCalc')
+const App            = require('components/App')
+const FiltersToggles = require('components/tabs/FiltersToggles')
+const SourcesTab     = require('components/tabs/SourcesTab')
+const SysreqCalc     = require('components/tabs/SysreqCalc')
+const ShareTab       = require('components/tabs/ShareTab')
 
 const history = createHistory()
 syncReduxAndRouter(history, store)
@@ -29,7 +29,7 @@ getTags((tags)=>{
   ReactDOM.render(
     <Provider store={store}>
       <Router history={history}>
-        <Route path='' component={App}>
+        <Route path='/' component={App}>
           <IndexRoute component={FiltersToggles}/>
           {/*<Route path='share'/>*/}
           <Route name='filtersToggles' path='columns' component={FiltersToggles}/>
@@ -39,11 +39,10 @@ getTags((tags)=>{
           <Route name='sources' path='sources' component={SourcesTab}/>
           {/*<Route path='feedback'/>*/}
           {/*<Route path='sponsors'/>*/}
-          <Route name='namedFilter' path='filter/:filterName'/>
-          <Route name='filter' path='filter'/>
+          <Route name='namedFilter' path='filter/:filterName' component={ShareTab}/>
+          <Route name='filter' path='filter' component={ShareTab}/>
         </Route>
       </Router>
-      {/*<App tags={tags}/>*/}
     </Provider>, document.getElementById('app')
   )
 })
