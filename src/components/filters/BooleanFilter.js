@@ -1,8 +1,9 @@
+import { Component, PropTypes as t } from 'react'
+
 var enumColumns = require('sources/enumColumns')
 var classNames = require('classnames')
 
-var t = React.PropTypes
-export default class BooleanFilter extends React.Component {
+export default class BooleanFilter extends Component {
   static propTypes = {
     query: t.shape({
       value: t.number,

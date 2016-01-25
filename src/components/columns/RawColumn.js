@@ -1,9 +1,11 @@
-export default class RawColumn extends React.Component {
+import { Component, PropTypes as t } from 'react'
+
+export default class RawColumn extends Component {
   static propTypes = {
-    value: React.PropTypes.any,
-    options: React.PropTypes.shape({
-      interpolation: React.PropTypes.string,
-      round: React.PropTypes.number
+    value: t.any,
+    options: t.shape({
+      interpolation: t.string,
+      round: t.number
     })
   }
 

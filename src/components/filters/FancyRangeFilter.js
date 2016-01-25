@@ -1,7 +1,8 @@
-import {elementOffsetLeft} from 'lib/utils'
-var t = React.PropTypes
+import { Component, PropTypes as t } from 'react'
 
-export default class FancyRangeFilter extends React.Component {
+import {elementOffsetLeft} from 'lib/utils'
+
+export default class FancyRangeFilter extends Component {
   static propTypes = {
     query: t.shape({
       gt: t.number,

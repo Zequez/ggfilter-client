@@ -1,4 +1,6 @@
-class LinkColumn extends React.Component {
+import { Component, PropTypes as t } from 'react'
+
+class LinkColumn extends Component {
   render() {
     var url = this.props.options.urlTemplate.replace('%s', this.props.urlValue)
     return (
@@ -12,10 +14,10 @@ class LinkColumn extends React.Component {
 }
 
 LinkColumn.propTypes = {
-  text: React.PropTypes.string,
-  urlValue: React.PropTypes.any,
-  options: React.PropTypes.shape({
-    urlTemplate: React.PropTypes.string
+  text: t.string,
+  urlValue: t.any,
+  options: t.shape({
+    urlTemplate: t.string
   }).isRequired
 }
 

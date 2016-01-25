@@ -1,8 +1,9 @@
+import { Component, PropTypes as t } from 'react'
+
 var SelectedTags = require('./TagsFilter/SelectedTags')
 var TagsSelector = require('./TagsFilter/TagsSelector')
-var t = React.PropTypes
 
-export default class TagsFilter extends React.Component {
+export default class TagsFilter extends Component {
   static propTypes = {
     query: t.shape({
       tags: t.arrayOf(t.number)
@@ -82,16 +83,18 @@ export default class TagsFilter extends React.Component {
       paddingLeft: this.state.selectedWidth
     }
 
+    let tags = this.props.options.tags || [] // FIIIIIXX!
+
     return (
       <div className='tags-filter'>
         <SelectedTags
-          tags={this.props.options.tags}
+          tags={tags}
           selectedTags={this.state.tags}
           onWidthChange={this.onSelectedWidthChange}
           onRemove={this.onRemoveTag}/>
 
         <TagsSelector
-          tags={this.props.options.tags}
+          tags={tags}
           selectedTags={this.state.tags}
           value={this.state.text}
           onSelect={this.selectTag}>

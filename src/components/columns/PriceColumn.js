@@ -1,7 +1,9 @@
-export default class PriceColumn extends React.Component {
+import { Component, PropTypes as t } from 'react'
+
+export default class PriceColumn extends Component {
   static propTypes = {
-    price: React.PropTypes.number.isRequired,
-    was: React.PropTypes.number
+    price: t.number.isRequired,
+    was: t.number
   }
 
   elem (val, className) {

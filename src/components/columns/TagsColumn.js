@@ -1,8 +1,9 @@
+import { Component, PropTypes as t } from 'react'
+
 import {addQueryTag} from 'stores/actions'
 import {partial} from 'lib/utils'
-var t = React.PropTypes
 
-export default class TagsColumn extends React.Component {
+export default class TagsColumn extends Component {
   static propTypes = {
     value: t.arrayOf(t.number).isRequired,
     options: t.shape({

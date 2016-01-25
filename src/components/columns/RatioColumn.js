@@ -1,6 +1,6 @@
-var t = React.PropTypes
+import { Component, PropTypes as t } from 'react'
 
-export default class RatioColumn extends React.Component {
+export default class RatioColumn extends Component {
   static propTypes = {
     up: t.number,
     down: t.number,

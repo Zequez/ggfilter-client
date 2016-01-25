@@ -1,8 +1,8 @@
+import { Component, PropTypes as t } from 'react'
 var enumColumns = require('sources/enumColumns')
 var classNames = require('classnames')
-var t = React.PropTypes
 
-export default class BooleanColumn extends React.Component {
+export default class BooleanColumn extends Component {
   static propTypes = {
     value: t.number.isRequired,
     name: t.string.isRequired

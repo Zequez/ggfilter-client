@@ -1,6 +1,6 @@
-var t = React.PropTypes
+import { Component, PropTypes as t } from 'react'
 
-export default class SelectedTags extends React.Component {
+export default class SelectedTags extends Component {
   static propTypes = {
     tags: t.arrayOf(t.string).isRequired,
     selectedTags: t.arrayOf(t.number).isRequired,

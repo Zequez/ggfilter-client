@@ -1,6 +1,6 @@
-var t = React.PropTypes
+import { Component, PropTypes as t } from 'react'
 
-export default class RangeFilter extends React.Component {
+export default class RangeFilter extends Component {
   static propTypes = {
     query: t.shape({
       gt: t.number,

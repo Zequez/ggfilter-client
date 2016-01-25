@@ -1,4 +1,6 @@
-export default class SystemReqColumn extends React.Component {
+import { Component, PropTypes as t } from 'react'
+
+export default class SystemReqColumn extends Component {
   requirementsList (req, label) {
     let st = JSON.stringify
 

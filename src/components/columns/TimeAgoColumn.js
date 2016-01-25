@@ -1,13 +1,15 @@
+import { Component, PropTypes as t } from 'react'
+
 var plural = function (num) {
   return num == 1 ? '' : 's'
 }
 
-export default class RawColumn extends React.Component {
+export default class RawColumn extends Component {
   static propTypes = {
-    value: React.PropTypes.any,
-    options: React.PropTypes.shape({
-      interpolation: React.PropTypes.string,
-      round: React.PropTypes.number
+    value: t.any,
+    options: t.shape({
+      interpolation: t.string,
+      round: t.number
     })
   }
 

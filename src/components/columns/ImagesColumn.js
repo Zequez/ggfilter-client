@@ -1,7 +1,7 @@
+import { Component, PropTypes as t } from 'react'
 import { showLightbox } from 'stores/actions'
-var t = React.PropTypes
 
-class ImagesColumn extends React.Component {
+class ImagesColumn extends Component {
   static noOverflowContainer = true
 
   static propTypes = {

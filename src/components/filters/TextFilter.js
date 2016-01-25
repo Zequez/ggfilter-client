@@ -1,7 +1,7 @@
+import { Component, PropTypes as t } from 'react'
 var debounceCountdown = require('lib/utils').debounceCountdown
-var t = React.PropTypes
 
-export default class TextFilter extends React.Component {
+export default class TextFilter extends Component {
   static propTypes = {
     query: t.shape({
       value: t.string
