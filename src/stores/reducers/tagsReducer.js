@@ -1,5 +1,5 @@
 import { SET_ALL_TAGS } from 'stores/actions'
-var initialState = require('stores/initialState').tags
+import { tags as initialState } from 'stores/initialState'
 
 export default function tagsReducer (state = initialState, action) {
   if (action.type == SET_ALL_TAGS) {

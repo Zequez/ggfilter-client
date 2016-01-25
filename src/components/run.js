@@ -1,7 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-window.DEBUG = true
 window.React = React
 window._ = require('lodash')
 
@@ -23,8 +22,6 @@ var SysreqCalc = require('components/tabs/SysreqCalc')
 const history = createHistory()
 syncReduxAndRouter(history, store)
 
-// console.log(store)
-console.log('sartisarnitrns')
 getTags((tags)=>{
   store.dispatch(setAllTags(tags))
 

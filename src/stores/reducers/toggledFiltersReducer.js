@@ -1,10 +1,10 @@
 import { TOGGLE_FILTER } from 'stores/actions'
-var initialState = require('stores/initialState').toggledFilters
-var sortFlatDefinitions = require('sources/filtersSectionsFlatSort')
+import { toggledFilters as initialState } from 'stores/initialState'
+import filtersSectionsFlatSort from 'sources/filtersSectionsFlatSort'
 
-initialState = sortFlatDefinitions(initialState)
+const sortedInitialState = filtersSectionsFlatSort(initialState)
 
-function toggledFiltersReducer(state = initialState, action) {
+export default function toggledFiltersReducer(state = sortedInitialState, action) {
   if (action.type == TOGGLE_FILTER) {
     var index = state.indexOf(action.filter)
     var currentlyActive = index != -1
@@ -16,11 +16,9 @@ function toggledFiltersReducer(state = initialState, action) {
       state.splice(index, 1)
     }
     else if(!currentlyActive && shouldActive) {
-      state = sortFlatDefinitions(state, action.filter)
+      state = filtersSectionsFlatSort(state, action.filter)
     }
   }
 
   return state;
 }
-
-export default toggledFiltersReducer

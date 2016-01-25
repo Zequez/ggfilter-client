@@ -1,7 +1,7 @@
 import { SELECT_TAB, Tabs } from 'stores/actions'
-var initialState = require('stores/initialState').tab
+import { tab as initialState } from 'stores/initialState'
 
-function tabReducer(state = initialState, action) {
+export default function tabReducer(state = initialState, action) {
   if(action.type == SELECT_TAB && Tabs[action.tab]) {
     return action.tab
   }
@@ -9,5 +9,3 @@ function tabReducer(state = initialState, action) {
     return state
   }
 }
-
-export default tabReducer
