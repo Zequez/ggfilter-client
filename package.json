@@ -64,6 +64,7 @@
     "classnames": "^2.2.0",
     "es6-promise": "^3.0.2",
     "font-awesome": "^4.4.0",
+    "history": "^1.17.0",
     "isomorphic-fetch": "^2.2.0",
     "lodash": "^3.10.1",
     "normalize.css": "^3.0.3",
@@ -73,7 +74,9 @@
     "react-dom": "^0.14.2",
     "react-draggable": "^1.0.2",
     "react-redux": "^4.0.0",
+    "react-router": "^1.0.3",
     "redux": "^3.0.4",
+    "redux-simple-router": "^1.0.2",
     "redux-thunk": "^1.0.0"
   }
 }

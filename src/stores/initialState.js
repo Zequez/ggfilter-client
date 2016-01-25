@@ -1,7 +1,7 @@
 import { Tabs } from './actions'
 
 export default {
-  tab: Tabs.SYSREQ,
+  tab: Tabs.FILTERS,
 
   toggledFilters: [
     'steam_id',
@@ -63,5 +63,7 @@ export default {
   sysreqCalc: {
     query: '',
     result: []
-  }
+  },
+
+  tags: [],
 }

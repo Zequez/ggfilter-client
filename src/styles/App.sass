@@ -58,17 +58,22 @@ a
   color: saturate($ocean-blue, 30%)
   text-decoration: none
 
+em
+  font-style: italic
+
 .header
   height: $r*3
   text-align: center
-  +f($font-xx-larger)
-  font-weight: bold
   .logo
     width: 280px
     height: 100px
     margin: 0 auto
-    text-indent: -9999px
     background-image: url(~images/logo-small.png)
+    text-indent: -9999px
+    +f($font-xx-larger)
+    font-weight: bold
+  .slogan
+
 
 @import "NavTabs"
 

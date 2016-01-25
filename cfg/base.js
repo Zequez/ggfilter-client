@@ -19,7 +19,8 @@ module.exports = {
     hot: true,
     port: port,
     publicPath: publicPath,
-    noInfo: false
+    noInfo: true,
+    stats: { colors: true },
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.coffee', '.sass', '.scss'],

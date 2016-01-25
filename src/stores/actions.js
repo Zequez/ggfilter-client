@@ -149,6 +149,15 @@ export function showLightbox(media, thumbnails) {
   return { type: SHOW_LIGHTBOX, media, thumbnails }
 }
 
+/***** TAGS ACTIONS *****/
+/************************/
+
+export const SET_ALL_TAGS = Symbol('SET_ALL_TAGS')
+
+export function setAllTags(tags) {
+  return { type: SET_ALL_TAGS, tags }
+}
+
 /*** HELPERS ****/
 /****************/
 

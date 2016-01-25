@@ -4,8 +4,11 @@ require('isomorphic-fetch')
 
 var bindActionCreators = require('redux').bindActionCreators
 var connect = require('react-redux').connect
+import { Link } from 'react-router'
 
 var filtersDefinitions = require('sources/filtersDefinitions')
+
+var Layout = require('components/Layout')
 
 var NavTabs =        require('components/NavTabs')
 var DataTable =      require('components/DataTable')
@@ -22,8 +25,7 @@ import { Tabs, getGames, getMoreGames, showLightbox } from 'stores/actions'
 
 class App extends React.Component {
   static propTypes = {
-    tags: t.arrayOf(t.string).isRequired,
-    // And the rest of the store on initialState
+    // The store on initialState
   }
 
   componentWillMount() {
@@ -54,15 +56,6 @@ class App extends React.Component {
     this.props.getMoreGames()
   }
 
-  tabContent(tab, element) {
-    let activeClass = tab == this.props.tab ? 'active' : ''
-    return (
-      <div className={'tab-content ' + activeClass}>
-        {element}
-      </div>
-    )
-  }
-
   onLightboxClose = ()=>{
     this.props.showLightbox([], [])
   }
@@ -71,38 +64,26 @@ class App extends React.Component {
     console.info('Render <App/>')
 
     return (
-      <div className='container'>
-        <header className='header'>
-          <div className='logo' title="The Great/Giant/Games/Gaming/Gems Filter. I haven't decided on a name yet.">
-            GGFilter
-          </div>
-        </header>
-        <main className='main'>
-          <nav className='nav'>
-            <NavTabs tab={this.props.tab}/>
-          </nav>
-          <div className='tabs-content'>
-            {this.tabContent(Tabs.FILTERS, <FiltersToggles filters={this.state.filters}/>)}
-            {this.tabContent(Tabs.SYSREQ, <SysreqCalc/>)}
-            {this.tabContent(Tabs.SOURCES, <SourcesTab />)}
-          </div>
-          <DataTable
-            games={this.props.games}
-            query={this.props.query}
-            columnsWidth={this.props.columnsWidth}
-            filters={this.state.filters}
-            tags={this.props.tags}/>
-          <GamesLoader
-            fetching={this.props.games.fetching}
-            failed={this.props.games.failed}
-            lastPage={this.props.games.lastPage}
-            onRequestMore={this.handleRequestMoreGames.bind(this)} />
-        </main>
+      <Layout>
+        <div className='tabs-content'>
+          {this.props.children}
+        </div>
+        <DataTable
+          games={this.props.games}
+          query={this.props.query}
+          columnsWidth={this.props.columnsWidth}
+          filters={this.state.filters}
+          tags={this.props.tags}/>
+        <GamesLoader
+          fetching={this.props.games.fetching}
+          failed={this.props.games.failed}
+          lastPage={this.props.games.lastPage}
+          onRequestMore={this.handleRequestMoreGames.bind(this)} />
         <Lightbox
           media={this.props.lightbox.media}
           thumbnails={this.props.lightbox.thumbnails}
           onClose={this.onLightboxClose}/>
-      </div>
+      </Layout>
     )
   }
 }

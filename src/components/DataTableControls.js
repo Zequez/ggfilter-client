@@ -1,8 +1,15 @@
 import { setQueryFilter, removeQueryFilter } from 'stores/actions'
 var connect = require('react-redux').connect
 var classNames = require('classnames')
+var t = React.PropTypes
 
 class DataTableControls extends React.Component {
+  static propTypes = {
+    filters: t.arrayOf(t.object).isRequired,
+    query: t.object.isRequired,
+    tags: t.arrayOf(t.string).isRequired
+  }
+
   handleFilterChange(filterName, data) {
     if (data) {
       // data.highlight = false
@@ -47,13 +54,6 @@ class DataTableControls extends React.Component {
       </tr>
     )
   }
-}
-
-var t = React.PropTypes
-DataTableControls.propTypes = {
-  filters: t.arrayOf(t.object).isRequired,
-  query: t.object.isRequired,
-  tags: t.arrayOf(t.string).isRequired
 }
 
 export default connect()(DataTableControls)
