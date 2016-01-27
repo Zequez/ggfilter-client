@@ -49,6 +49,7 @@ export const SET_QUERY_FILTER = Symbol('SET_QUERY_FILTER')
 export const REMOVE_QUERY_FILTER = Symbol('REMOVE_QUERY_FILTER')
 export const SET_QUERY_SORT = Symbol('SET_QUERY_SORT')
 export const SET_QUERY_BATCH_SIZE = Symbol('SET_QUERY_BATCH_SIZE')
+export const SET_FULL_QUERY = Symbol('SET_FULL_QUERY')
 
 export function setQueryFilter(name, data) {
   return dispatchAndGetGames({ type: SET_QUERY_FILTER, name, data })
@@ -64,6 +65,10 @@ export function setQuerySort(name) {
 
 export function setQueryBatchSize(size) {
   return { type: SET_QUERY_BATCH_SIZE, size }
+}
+
+export function setFullQuery (query) {
+  return { type: SET_FULL_QUERY, query }
 }
 
 export function addQueryTag(tagId) {

@@ -13,12 +13,17 @@ export default class TextFilter extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-      value: props.query.value,
-      changeTimeoutProgress: 0
-    }
-
     this.debouncedSubmit = debounceCountdown(500, 20, this.handleCountdown, this.submit)
+  }
+
+  state = {
+    value: '',
+    changeTimeoutProgress: 0
+  }
+
+  componentWillMount (np) { this.componentWillReceiveProps(this.props) }
+  componentWillReceiveProps (np) {
+    this.setState({value: np.query.value})
   }
 
   onKeyUp = (ev)=> {

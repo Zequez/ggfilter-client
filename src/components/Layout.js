@@ -29,22 +29,25 @@ export default class Layout extends Component {
         <main className='main'>
           <nav className='nav'>
             <ul className='nav-tabs'>
-              {/*<li className=''><a href='/share'>Share</a></li>*/}
-              <li className=''>
-                <Link to='columns' activeClassName='active'>Columns</Link>
+              <li>
+                <Link to='/share' activeClassName='active'>
+                  <i className='fa icon-share'></i>
+                </Link>
               </li>
-              <li className=''>
-                <Link to='system-requirements' activeClassName='active'>Sysreq Calculator</Link>
+              <li>
+                <Link to='/columns' activeClassName='active'>Columns</Link>
+              </li>
+              <li>
+                <Link to='/system-requirements' activeClassName='active'>Sysreq Calculator</Link>
               </li>
               {/*<li className=''><a href='/popular-filters'>Popular Filters</a></li>*/}
               {/*<li className=''><a href='/email-alerts'>Email Alerts</a></li>*/}
-              <li className=''>
-                <Link to='sources' activeClassName='active'>Sources</Link>
+              <li>
+                <Link to='/sources' activeClassName='active'>Sources</Link>
               </li>
               {/*<li className=''><a href='/feedback'>Feedback</a></li>*/}
               {/*<li className=''><a href='/sponsor'>Sponsor</a></li>*/}
             </ul>
-            {/*<NavTabs tab={this.props.tab}/>*/}
           </nav>
           {this.props.children}
         </main>

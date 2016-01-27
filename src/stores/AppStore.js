@@ -2,6 +2,7 @@ import { combineReducers, createStore, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { logger, crashReporter } from './storeMiddleware'
 import { syncReduxAndRouter, routeReducer as routing} from 'redux-simple-router'
+import { createHistory } from 'history'
 
 import tab            from './reducers/tabReducer'
 import toggledFilters from './reducers/toggledFiltersReducer'
@@ -13,6 +14,10 @@ import tags           from './reducers/tagsReducer'
 
 var reducer = combineReducers({ tab, toggledFilters, games, query, columnsWidth, lightbox, routing, tags })
 var createStoreWithMiddleware = applyMiddleware(thunkMiddleware, logger)(createStore) //crashReporter
-var store = createStoreWithMiddleware(reducer, {tags: [,,,,'potato']})
+var store = createStoreWithMiddleware(reducer, {})
 
-export default store
+var history = createHistory()
+syncReduxAndRouter(history, store)
+
+export var history
+export var store
