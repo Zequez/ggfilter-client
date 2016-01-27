@@ -1,16 +1,7 @@
 import { Component, PropTypes as t } from 'react'
-import { Link } from 'react-router'
 
-var App = require('components/App')
-
-var NavTabs =        require('components/NavTabs')
-var DataTable =      require('components/DataTable')
-var GamesLoader =    require('components/GamesLoader')
-var Lightbox =       require('components/Lightbox')
-
-var FiltersToggles = require('components/tabs/FiltersToggles')
-var SourcesTab     = require('components/tabs/SourcesTab')
-var SysreqCalc     = require('components/tabs/SysreqCalc')
+const App     = require('components/App')
+const NavTabs = require('components/NavTabs')
 
 export default class Layout extends Component {
   render () {
@@ -28,26 +19,7 @@ export default class Layout extends Component {
         </header>
         <main className='main'>
           <nav className='nav'>
-            <ul className='nav-tabs'>
-              <li>
-                <Link to='/share' activeClassName='active'>
-                  <i className='fa icon-share'></i>
-                </Link>
-              </li>
-              <li>
-                <Link to='/columns' activeClassName='active'>Columns</Link>
-              </li>
-              <li>
-                <Link to='/system-requirements' activeClassName='active'>Sysreq Calculator</Link>
-              </li>
-              {/*<li className=''><a href='/popular-filters'>Popular Filters</a></li>*/}
-              {/*<li className=''><a href='/email-alerts'>Email Alerts</a></li>*/}
-              <li>
-                <Link to='/sources' activeClassName='active'>Sources</Link>
-              </li>
-              {/*<li className=''><a href='/feedback'>Feedback</a></li>*/}
-              {/*<li className=''><a href='/sponsor'>Sponsor</a></li>*/}
-            </ul>
+            <NavTabs/>
           </nav>
           {this.props.children}
         </main>

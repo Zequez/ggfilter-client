@@ -7,5 +7,9 @@ export function encode (state) {
 }
 
 export function decode (base64filter) {
-  return JSON.parse(atob(base64filter))
+  try {
+    return JSON.parse(atob(base64filter))
+  } catch (e) {
+    return null
+  }
 }

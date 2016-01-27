@@ -1,5 +1,6 @@
 import { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
+import { history } from 'stores/AppStore'
 import { setFullQuery } from 'stores/actions'
 import * as urlificator from 'lib/urlificator'
 
@@ -7,7 +8,11 @@ import * as urlificator from 'lib/urlificator'
 export default class FilterTab extends Component {
   componentWillMount () {
     let stateChange = urlificator.decode(this.props.routeParams.filterName)
-    this.props.dispatch(setFullQuery(stateChange.query))
+    if (stateChange) {
+      this.props.dispatch(setFullQuery(stateChange.query))
+    } else {
+      history.push('/')
+    }
     // Changes the state, but doesn't change the controls for some reason.
   }
 

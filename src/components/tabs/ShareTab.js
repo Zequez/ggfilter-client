@@ -8,8 +8,11 @@ import * as urlificator from 'lib/urlificator'
 }))
 export default class ShareTab extends Component {
   componentWillMount () {
-    console.log(this.props)
     this.props.params
+  }
+
+  selectAll (ev) {
+    ev.target.select()
   }
 
   render () {
@@ -18,7 +21,7 @@ export default class ShareTab extends Component {
 
     return (
       <div className='sharer'>
-        <input value={url} className='sharer-url' readOnly={true}/>
+        <input value={url} onClick={this.selectAll} className='sharer-url' readOnly={true}/>
       </div>
     )
   }

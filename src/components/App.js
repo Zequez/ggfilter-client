@@ -66,7 +66,9 @@ class App extends React.Component {
     return (
       <Layout>
         <div className='tabs-content'>
-          {this.props.children}
+          <div className='tabs-content-container'>
+            {this.props.children}
+          </div>
         </div>
         <DataTable
           games={this.props.games}
