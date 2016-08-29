@@ -1,4 +1,4 @@
-import { Component, PropTypes as t } from 'react'
+import React, { Component, PropTypes as t } from 'react'
 
 import {addQueryTag} from 'stores/actions'
 import {partial} from 'lib/utils'

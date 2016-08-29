@@ -1,5 +1,5 @@
-var connect = require('react-redux').connect
-var t = React.PropTypes
+import React, { Component, PropTypes as t } from 'react'
+import { connect } from 'react-redux'
 
 var filtersDefinitions = require('sources/filtersDefinitions')
 var filtersSections = require('sources/filtersSectionsDefinitions')
@@ -7,7 +7,7 @@ var filtersSections = require('sources/filtersSectionsDefinitions')
 import { toggleFilter } from 'stores/actions'
 
 @connect((state) => { return {toggledFilters: state.toggledFilters}})
-export default class FiltersToggles extends React.Component {
+export default class FiltersToggles extends Component {
   static propTypes = {
     toggledFilters: t.arrayOf(t.string).isRequired,
   }

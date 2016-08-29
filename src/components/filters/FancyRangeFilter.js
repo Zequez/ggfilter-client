@@ -1,6 +1,6 @@
-import { Component, PropTypes as t } from 'react'
+import React, { Component, PropTypes as t } from 'react'
 
-import {elementOffsetLeft} from 'lib/utils'
+import { elementOffsetLeft } from 'lib/utils'
 
 export default class FancyRangeFilter extends Component {
   static propTypes = {

@@ -1,7 +1,7 @@
+import React, { Component, PropTypes as t } from 'react'
 import { loopNumber } from 'lib/utils'
-var t = React.PropTypes
 
-export default class Lightbox extends React.Component {
+export default class Lightbox extends Component {
   static propTypes = {
     media: t.arrayOf(t.string).isRequired,
     thumbnails: t.arrayOf(t.string).isRequired,

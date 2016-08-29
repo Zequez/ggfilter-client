@@ -1,9 +1,9 @@
-var React = require('react')
-var connect = require('react-redux').connect
+import React, { Component, PropTypes as t } from 'react'
+import { connect } from 'react-redux'
 
 import { connectActions, toggleFilter } from 'stores/actions'
 
-class FilterToggle extends React.Component {
+class FilterToggle extends Component {
   onChange(ev) {
     this.toggleFilter(!this.props.active)
   }
@@ -29,8 +29,8 @@ class FilterToggle extends React.Component {
 }
 
 FilterToggle.propTypes = {
-  filter: React.PropTypes.object.isRequired,
-  active: React.PropTypes.bool.isRequired
+  filter: t.object.isRequired,
+  active: t.bool.isRequired
 }
 
 export default connect()(FilterToggle)

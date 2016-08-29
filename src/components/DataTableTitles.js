@@ -1,9 +1,10 @@
+import React, { Component, PropTypes as t } from 'react'
+
 import { setQuerySort, adjustColumnWidth, clearColumnWidth } from 'stores/actions'
 var DataTableTitle = require('components/DataTableTitle')
 var connect = require('react-redux').connect
-var t = React.PropTypes
 
-class DataTableTitles extends React.Component {
+class DataTableTitles extends Component {
   static propTypes = {
     filters: t.arrayOf(t.object).isRequired,
     columnsWidth: t.arrayOf(t.number).isRequired,

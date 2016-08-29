@@ -1,4 +1,4 @@
-import { Component, PropTypes as t } from 'react'
+import React, { Component, PropTypes as t } from 'react'
 var enumColumns = require('sources/enumColumns')
 var classNames = require('classnames')
 

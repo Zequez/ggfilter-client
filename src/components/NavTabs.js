@@ -1,4 +1,4 @@
-import { Component, PropTypes as t } from 'react'
+import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import { history } from 'stores/AppStore'

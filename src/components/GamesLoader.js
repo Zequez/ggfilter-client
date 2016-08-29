@@ -1,8 +1,9 @@
-var t = React.PropTypes
+import React, { Component, PropTypes as t } from 'react'
+
 var classNames = require('classnames')
 var debounce = require('lib/utils').debounce
 
-export default class GamesLoader extends React.Component {
+export default class GamesLoader extends Component {
   static propTypes = {
     fetching: t.bool.isRequired,
     failed: t.bool.isRequired,

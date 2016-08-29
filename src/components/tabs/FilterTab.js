@@ -1,4 +1,4 @@
-import { Component, PropTypes as t } from 'react'
+import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { history } from 'stores/AppStore'
 import { setFullQuery } from 'stores/actions'

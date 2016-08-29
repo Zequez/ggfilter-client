@@ -1,4 +1,4 @@
-import { Component, PropTypes as t } from 'react'
+import React, { Component, PropTypes as t } from 'react'
 
 var SelectedTags = require('./TagsFilter/SelectedTags')
 var TagsSelector = require('./TagsFilter/TagsSelector')

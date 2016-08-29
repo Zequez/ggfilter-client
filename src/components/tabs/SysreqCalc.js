@@ -1,11 +1,11 @@
+import React, { Component, PropTypes as t } from 'react'
+import { connect } from 'react-redux'
 import { setQueryFilter } from 'stores/actions'
 import { snapTo } from 'lib/utils'
 var gamesFetcher = require('sources/gamesFetcher')
 var SuggestionsBox = require('components/utils/SuggestionsBox')
-var connect = require('react-redux').connect
-var t = React.PropTypes
 
-class SysreqCalc extends React.Component {
+class SysreqCalc extends Component {
   state = {
     games: []
   }

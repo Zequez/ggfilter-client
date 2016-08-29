@@ -1,9 +1,10 @@
+import React, { Component, PropTypes as t } from 'react'
 import { setQueryFilter, removeQueryFilter } from 'stores/actions'
+
 var connect = require('react-redux').connect
 var classNames = require('classnames')
-var t = React.PropTypes
 
-class DataTableControls extends React.Component {
+class DataTableControls extends Component {
   static propTypes = {
     filters: t.arrayOf(t.object).isRequired,
     query: t.object.isRequired,

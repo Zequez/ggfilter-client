@@ -1,4 +1,4 @@
-import { Component, PropTypes as t } from 'react'
+import React, { Component, PropTypes as t } from 'react'
 
 import { partial, loopNumber } from 'lib/utils'
 var TagsFinder = require('lib/TagsFinder')

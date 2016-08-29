@@ -1,7 +1,7 @@
+import React, { Component, PropTypes as t } from 'react'
 var SuggestionsDropdown = require('./SuggestionsDropdown')
-var t = React.PropTypes
 
-export default class SuggestionsBox extends React.Component {
+export default class SuggestionsBox extends Component {
   static propTypes = {
     filter: t.func.isRequired,
     onSelect: t.func.isRequired,

@@ -1,4 +1,4 @@
-var t = React.PropTypes
+import React, { Component, PropTypes as t } from 'react'
 
 var debounce = require('lib/utils').debounce
 var filtersDefinitions = require('sources/filtersDefinitions')

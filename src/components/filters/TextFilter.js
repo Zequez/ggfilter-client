@@ -1,4 +1,4 @@
-import { Component, PropTypes as t } from 'react'
+import React, { Component, PropTypes as t } from 'react'
 var debounceCountdown = require('lib/utils').debounceCountdown
 
 export default class TextFilter extends Component {

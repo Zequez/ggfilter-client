@@ -1,8 +1,8 @@
+import React, { Component, PropTypes as t } from 'react'
 import { partial, loopNumber } from 'lib/utils'
 var TagsFinder = require('lib/TagsFinder')
-var t = React.PropTypes
 
-export default class SuggestionsDropdown extends React.Component {
+export default class SuggestionsDropdown extends Component {
   static propTypes = {
     /**
      * List of strings to search in

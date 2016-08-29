@@ -1,8 +1,9 @@
+import React, { Component, PropTypes as t } from 'react'
+
 var connect = require('react-redux').connect
 var classNames = require('classnames')
-var t = React.PropTypes
 
-class DataTableBatch extends React.Component {
+class DataTableBatch extends Component {
   static propTypes = {
     games: t.array.isRequired,
     filters: t.arrayOf(t.object).isRequired,

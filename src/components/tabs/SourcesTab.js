@@ -1,4 +1,6 @@
-export default class SourcesTabs extends React.Component {
+import React, { Component } from 'react'
+
+export default class SourcesTabs extends Component {
   render() {
     return (
       <div>

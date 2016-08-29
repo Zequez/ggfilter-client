@@ -1,9 +1,10 @@
-import {debounce} from 'lib/utils'
+import React, { Component, PropTypes as t } from 'react'
+
+import { debounce } from 'lib/utils'
 var ColumnResizeHandle = require('components/ColumnResizeHandle')
 var classNames = require('classnames')
 
-var t = React.PropTypes
-export default class DataTableTitle extends React.Component {
+export default class DataTableTitle extends Component {
   static propTypes = {
     filter: t.object.isRequired,
     width: t.number.isRequired,

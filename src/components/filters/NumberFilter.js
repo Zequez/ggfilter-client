@@ -1,4 +1,4 @@
-import { Component, PropTypes as t } from 'react'
+import React, { Component, PropTypes as t } from 'react'
 var TextFilter = require('./TextFilter')
 
 export default class NumberFilter extends TextFilter {

@@ -1,3 +1,5 @@
+import React, { PropTypes as t } from 'react'
+
 var DraggableCore = require('react-draggable').DraggableCore
 // var DraggableCore = require('react-draggable').CReateTRans
 // import {DraggableCore} from 'react-draggable'
@@ -9,8 +11,8 @@ export default class ColumnResizeHandle extends DraggableCore {
   }
 
   static propTypes = {
-    onStop: React.PropTypes.func.isRequired,
-    onDoubleClick: React.PropTypes.func.isRequired
+    onStop: t.func.isRequired,
+    onDoubleClick: t.func.isRequired
   }
 
   onDrag(ev, cEv) {

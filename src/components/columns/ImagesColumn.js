@@ -1,4 +1,4 @@
-import { Component, PropTypes as t } from 'react'
+import React, { Component, PropTypes as t } from 'react'
 import { showLightbox } from 'stores/actions'
 
 class ImagesColumn extends Component {

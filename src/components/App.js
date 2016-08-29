@@ -1,29 +1,26 @@
 require('styles/App');
-require('es6-promise').polyfill()
-require('isomorphic-fetch')
 
+import React, { Component, PropTypes as t } from 'react'
+import { connect} from 'react-redux'
 var bindActionCreators = require('redux').bindActionCreators
-var connect = require('react-redux').connect
 import { Link } from 'react-router'
 
 var filtersDefinitions = require('sources/filtersDefinitions')
 
 var Layout = require('components/Layout')
 
-var NavTabs =        require('components/NavTabs')
-var DataTable =      require('components/DataTable')
-var GamesLoader =    require('components/GamesLoader')
-var Lightbox =       require('components/Lightbox')
+var NavTabs = require('components/NavTabs')
+var DataTable = require('components/DataTable')
+var GamesLoader = require('components/GamesLoader')
+var Lightbox = require('components/Lightbox')
 
 var FiltersToggles = require('components/tabs/FiltersToggles')
-var SourcesTab     = require('components/tabs/SourcesTab')
-var SysreqCalc     = require('components/tabs/SysreqCalc')
-
-var t = React.PropTypes
+var SourcesTab = require('components/tabs/SourcesTab')
+var SysreqCalc = require('components/tabs/SysreqCalc')
 
 import { Tabs, getGames, getMoreGames, showLightbox } from 'stores/actions'
 
-class App extends React.Component {
+class App extends Component {
   static propTypes = {
     // The store on initialState
   }
