@@ -6,7 +6,7 @@ import { browserHistory } from 'react-router'
 
 import tab from './reducers/tabReducer'
 import toggledFilters from './reducers/toggledFiltersReducer'
-import games './reducers/gamesReducer'
+import games from './reducers/gamesReducer'
 import query from './reducers/queryReducer'
 import columnsWidth from './reducers/columnsWidthReducer'
 import lightbox from './reducers/lightboxReducer'

@@ -1,63 +1,60 @@
-require('styles/App');
+require('styles/App')
 
 import React, { Component, PropTypes as t } from 'react'
-import { connect} from 'react-redux'
-var bindActionCreators = require('redux').bindActionCreators
-import { Link } from 'react-router'
+import { connect } from 'react-redux'
 
 var filtersDefinitions = require('sources/filtersDefinitions')
 
 var Layout = require('components/Layout')
 
-var NavTabs = require('components/NavTabs')
 var DataTable = require('components/DataTable')
 var GamesLoader = require('components/GamesLoader')
 var Lightbox = require('components/Lightbox')
 
-var FiltersToggles = require('components/tabs/FiltersToggles')
-var SourcesTab = require('components/tabs/SourcesTab')
-var SysreqCalc = require('components/tabs/SysreqCalc')
+import { getGames, getMoreGames, showLightbox } from 'stores/actions'
 
-import { Tabs, getGames, getMoreGames, showLightbox } from 'stores/actions'
-
-class App extends Component {
+@connect(
+  (s) => s,
+  { getGames, getMoreGames, showLightbox }
+)
+export default class App extends Component {
   static propTypes = {
     // The store on initialState
   }
 
-  componentWillMount() {
+  componentWillMount () {
     if (!this.props.games.batches.length) this.props.getGames()
     this.fillStaticFiltersDefinitionsOptions()
     this.loadFilters()
   }
 
   // This is hacky, but it's now the convention
-  fillStaticFiltersDefinitionsOptions() {
+  fillStaticFiltersDefinitionsOptions () {
     filtersDefinitions.tags.filterOptions.tags = this.props.tags
     filtersDefinitions.tags.columnOptions.tags = this.props.tags
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (this.props.toggledFilters !== nextProps.toggledFilters) {
       this.loadFilters(nextProps.toggledFilters)
     }
   }
 
-  loadFilters(filtersNames = this.props.toggledFilters) {
+  loadFilters (filtersNames = this.props.toggledFilters) {
     this.setState({
-      filters: filtersNames.map((f)=>filtersDefinitions[f])
+      filters: filtersNames.map((f) => filtersDefinitions[f])
     })
   }
 
-  handleRequestMoreGames() {
+  handleRequestMoreGames () {
     this.props.getMoreGames()
   }
 
-  onLightboxClose = ()=>{
+  onLightboxClose = () => {
     this.props.showLightbox([], [])
   }
 
-  render() {
+  render () {
     console.info('Render <App/>')
 
     return (
@@ -86,10 +83,3 @@ class App extends Component {
     )
   }
 }
-
-App.defaultProps = {}
-
-export default connect(
-  (state)=>{ return state },
-  (dispatch)=> bindActionCreators({ getGames, getMoreGames, showLightbox }, dispatch)
-)(App)

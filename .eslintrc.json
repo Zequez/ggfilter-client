@@ -1,0 +1,16 @@
+{
+  "parser": "babel-eslint",
+  "plugins": ["react"],
+  "extends": "standard",
+  "globals": {
+    "expect": true,
+    "describe": true,
+    "it": true,
+    "beforeEach": true,
+    "afterEach": true
+  },
+  "rules": {
+    "react/jsx-uses-react": 2,
+    "react/jsx-uses-vars": 2
+  }
+}
