@@ -8,7 +8,7 @@ var config = _.merge({
   entry: [
     'webpack-dev-server/client?http://127.0.0.1:8001',
     'webpack/hot/only-dev-server',
-    './src/components/run'
+    './src/run'
   ],
   cache: true,
   devtool: 'eval',

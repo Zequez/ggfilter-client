@@ -6,7 +6,7 @@ var _ = require('lodash');
 var baseConfig = require('./base');
 
 var config = _.merge({
-  entry: path.join(__dirname, '../src/components/run'),
+  entry: path.join(__dirname, '../src/run'),
   cache: false,
   devtool: 'sourcemap',
   plugins: [
