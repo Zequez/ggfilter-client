@@ -15,23 +15,6 @@ else {
   })()
 }
 
-/***** TAB ACTIONS *****/
-/***********************/
-
-export const SELECT_TAB = Symbol('SELECT_TAB')
-
-export const Tabs = {
-  FILTERS: Symbol('FILTERS'),
-  SYSREQ: Symbol('SYSREQ'),
-  SOURCES: Symbol('SOURCES'),
-  FEEDBACK: Symbol('FEEDBACK'),
-  DONATIONS: Symbol('DONATIONS'),
-}
-
-export function selectTab(tab) {
-  return { type: SELECT_TAB, tab }
-}
-
 /*** FILTERS TOGGLES ACTIONS ****/
 /********************************/
 
