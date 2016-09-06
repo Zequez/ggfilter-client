@@ -1,5 +1,5 @@
-var gamesFetcher = require('sources/gamesFetcher')
-var connect = require('react-redux').connect
+const gamesFetcher = require('sources/gamesFetcher')
+
 
 if (true) { // Dev
   var Symbol = function(key){
@@ -145,16 +145,3 @@ export const SET_ALL_TAGS = Symbol('SET_ALL_TAGS')
 export function setAllTags(tags) {
   return { type: SET_ALL_TAGS, tags }
 }
-
-/*** HELPERS ****/
-/****************/
-
-// export function connectActions(actions, component) {
-//   return connect(null, function(dispatch) {
-//     for(var action in actions) {
-//       var prevAction = actions[action]
-//       actions[action] = (...args)=> dispatch(prevAction(...args))
-//     }
-//     return actions
-//   })
-// }

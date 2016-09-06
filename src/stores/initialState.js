@@ -1,7 +1,14 @@
-import { Tabs } from './actions'
-
 export default {
-  tab: Tabs.FILTERS,
+  // filter: {
+  //   columns: [],
+  //   filters: {},
+  //   sort: 'name',
+  //   sort_asc: false
+  // },
+  //
+  // options: {
+  //   batchSize: 20
+  // },
 
   toggledFilters: [
     'steam_id',
@@ -65,5 +72,5 @@ export default {
     result: []
   },
 
-  tags: [],
+  tags: []
 }

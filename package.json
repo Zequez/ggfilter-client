@@ -64,6 +64,7 @@
     "webpack-dev-server": "^1.10.1"
   },
   "dependencies": {
+    "axios": "^0.14.0",
     "babel-runtime": "^5.8.29",
     "classnames": "^2.2.0",
     "es6-promise": "^3.0.2",
