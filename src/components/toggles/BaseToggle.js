@@ -1,18 +1,17 @@
 import React, { Component, PropTypes as t } from 'react'
-import { connect } from 'react-redux'
 
-import { connectActions, toggleFilter } from 'stores/actions'
-
-class FilterToggle extends Component {
-  onChange(ev) {
-    this.toggleFilter(!this.props.active)
+export default class FilterToggle extends Component {
+  static propTypes = {
+    filter: t.object.isRequired,
+    active: t.bool.isRequired,
+    toggle: t.func.isRequired
   }
 
-  toggleFilter(status) {
-    this.props.dispatch(toggleFilter(this.props.filter.name, status))
+  toggle (status) {
+    this.props.toggle(this.props.filter.name, !this.props.active)
   }
 
-  render() {
+  render () {
     //console.info(`Render <BaseToggle/> ${this.props.filter.name}`)
     return (
       <li className='filter-toggle'>
@@ -20,17 +19,10 @@ class FilterToggle extends Component {
           <input
             type='checkbox'
             checked={this.props.active}
-            onChange={this.onChange.bind(this)}/>
+            onChange={::this.toggle}/>
           {this.props.filter.title}
         </label>
       </li>
     )
   }
 }
-
-FilterToggle.propTypes = {
-  filter: t.object.isRequired,
-  active: t.bool.isRequired
-}
-
-export default connect()(FilterToggle)

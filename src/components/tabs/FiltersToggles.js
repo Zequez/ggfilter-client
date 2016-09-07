@@ -4,21 +4,24 @@ import { connect } from 'react-redux'
 var filtersDefinitions = require('sources/filtersDefinitions')
 var filtersSections = require('sources/filtersSectionsDefinitions')
 
-import { toggleFilter } from 'stores/actions'
+import { toggle } from 'stores/reducers/filterReducer'
 
-@connect((state) => { return {toggledFilters: state.toggledFilters}})
+@connect((s) => ({toggledFilters: s.filter.visible}), {
+  toggle
+})
 export default class FiltersToggles extends Component {
   static propTypes = {
     toggledFilters: t.arrayOf(t.string).isRequired,
+    toggle: t.func.isRequired
   }
 
-  toggleEl(filterName) {
-    let active = this.props.toggledFilters.indexOf(filterName) != -1
+  toggleEl (filterName) {
+    let active = this.props.toggledFilters.indexOf(filterName) !== -1
     let filter = filtersDefinitions[filterName]
-    return <filter.toggle key={filter.name} active={active} filter={filter}/>
+    return <filter.toggle key={filter.name} toggle={this.props.toggle} active={active} filter={filter}/>
   }
 
-  render() {
+  render () {
     console.info('Render <FiltersToggles/>')
 
     let sectionsElements = []
@@ -27,7 +30,7 @@ export default class FiltersToggles extends Component {
         <li key={sectionName} className='filters-toggles-section'>
           <h3>{sectionName}</h3>
           <ul>
-            {filtersSections[sectionName].map((filterName)=> this.toggleEl(filterName))}
+            {filtersSections[sectionName].map((filterName) => this.toggleEl(filterName))}
           </ul>
         </li>
       )
