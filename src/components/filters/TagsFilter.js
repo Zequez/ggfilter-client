@@ -78,7 +78,7 @@ export default class TagsFilter extends Component {
   }
 
   render () {
-    console.info('Render <TagsFilter/>')
+    console.logRender('TagsFilter')
     let inputStyle = {
       paddingLeft: this.state.selectedWidth
     }

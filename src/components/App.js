@@ -65,7 +65,7 @@ export default class App extends Component {
   }
 
   render () {
-    console.info('Render <App/>')
+    console.logRender('App')
 
     let { children, games, filter, columnsWidth, lightbox } = this.props
     let { filters } = this.state

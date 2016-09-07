@@ -9,6 +9,10 @@ import { browserHistory } from 'react-router'
 
 var getTags = require('sources/getTags')
 
+console.logRender = function (componentName) {
+  console.info(`<${componentName}/>`)
+}
+
 getTags((tags) => {
   let store = getStore()
   store.dispatch(setAllTags(tags))

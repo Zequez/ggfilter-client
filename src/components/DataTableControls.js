@@ -27,7 +27,7 @@ export default class DataTableControls extends Component {
   }
 
   render () {
-    console.info('Render <DataTableControls/>')
+    console.logRender('DataTableControls')
     let { filters, filtersParams } = this.props
 
     let controls = filters.map((filter) => {

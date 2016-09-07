@@ -69,7 +69,7 @@ export default class DataTableTitle extends Component {
   }
 
   render () {
-    console.info('Render <DataTableTitle/>')
+    console.logRender('DataTableTitle')
     let filter = this.props.filter
     let sort = this.props.sort
     let titleClass = classNames('filter-title', filter.name, {

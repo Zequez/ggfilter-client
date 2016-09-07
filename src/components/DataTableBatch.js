@@ -39,7 +39,7 @@ export default class DataTableBatch extends Component {
   }
 
   render () {
-    console.info('Render <DataTableBatch/>')
+    console.logRender('DataTableBatch')
 
     var games = this.props.games
     var filters = this.props.filters

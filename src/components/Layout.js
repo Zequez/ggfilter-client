@@ -4,7 +4,7 @@ const NavTabs = require('components/NavTabs')
 
 export default class Layout extends Component {
   render () {
-    console.info('Render <Layout/>')
+    console.logRender('Layout')
 
     let className = 'container'
     if (this.props.className) className += ' ' + this.props.className

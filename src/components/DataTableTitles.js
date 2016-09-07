@@ -44,7 +44,7 @@ export default class DataTableTitles extends Component {
   }
 
   render () {
-    console.info('Render <DataTableTitles/>')
+    console.logRender('DataTableTitles')
     let { filters, filtersParams, sort, sortAsc, columnsWidth } = this.props
 
     let titles = filters.map((filter, i) => {

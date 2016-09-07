@@ -33,7 +33,7 @@ export default class DataTable extends Component {
   }
 
   render () {
-    console.info('Render <DataTable/>')
+    console.logRender('DataTable')
     let { filter, columnsWidth, games } = this.props
     let filters = this.props.visibleFiltersDefinitions
 

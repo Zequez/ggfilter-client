@@ -22,8 +22,8 @@ export default class NavTabs extends Component {
   }
 
   render () {
+    console.logRender('NavTabs')
     let { navigateToFilterUrl } = this.props
-    console.info('Render <NavTabs/>')
 
     return (
       <ul className='nav-tabs'>
