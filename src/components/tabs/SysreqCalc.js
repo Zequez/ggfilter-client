@@ -1,47 +1,46 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
-import { setQueryFilter } from 'stores/actions'
+import { setFilter } from 'stores/reducers/filterReducer'
 import { snapTo } from 'lib/utils'
 var gamesFetcher = require('sources/gamesFetcher')
 var SuggestionsBox = require('components/utils/SuggestionsBox')
 
-class SysreqCalc extends Component {
+@connect(() => ({}), {
+  setFilter
+})
+export default class SysreqCalc extends Component {
   state = {
     games: []
   }
 
-  filterGames = (value)=>{
+  filterGames = (value) => {
     if (!value) return []
 
-    return gamesFetcher(
-      ['name', 'sysreq_index_centile'],
-      {
-        filters: {
-          name: { value: value }
-        },
-        sort: 'name',
-        sort_asc: true,
-        batchSize: 8
+    return gamesFetcher({
+      visible: ['name', 'sysreq_index_centile'],
+      params: {
+        name: { value: value }
       },
-      0
-    )
-    .then((games)=>{
-      var ids = this.state.games.map((g)=> g.id)
+      sort: 'name',
+      sort_asc: true
+    }, 0, { batchSize: 8 })
+    .then((games) => {
+      var ids = this.state.games.map((g) => g.id)
       return games
-        .filter((game)=> ids.indexOf(game.id) === -1)
-        .map((game)=> [`${game.name} --- ${game.sysreq_index_centile}`, game])
+        .filter((game) => ids.indexOf(game.id) === -1)
+        .map((game) => [`${game.name} --- ${game.sysreq_index_centile}`, game])
     })
   }
 
-  selectGame = (game)=>{
+  selectGame = (game) => {
     this.state.games.push(game)
-    this.state.games.sort((g1, g2)=> g2.sysreq_index_centile - g1.sysreq_index_centile)
+    this.state.games.sort((g1, g2) => g2.sysreq_index_centile - g1.sysreq_index_centile)
     this.setState({games: this.state.games})
     this.refs.box.clean()
     this.submitFilter()
   }
 
-  removeGame = (game)=>{
+  removeGame = (game) => {
     this.state.games.splice(this.state.games.indexOf(game), 1)
     this.setState({games: this.state.games})
     this.submitFilter()
@@ -52,7 +51,7 @@ class SysreqCalc extends Component {
     if (!calcs.mean) return
     let gt = Math.max(0, calcs.mean - calcs.deviation)
     let lt = Math.min(100, calcs.mean + calcs.deviation)
-    this.props.dispatch(setQueryFilter('sysreq_index_centile', {gt: snapTo(gt, 5), lt: snapTo(lt, 5)}))
+    this.props.setFilter('sysreq_index_centile', {gt: snapTo(gt, 5), lt: snapTo(lt, 5)})
   }
 
   calculatedValues () {
@@ -62,10 +61,10 @@ class SysreqCalc extends Component {
 
     let values = games.map(g => g.sysreq_index_centile)
     let len = values.length
-    let sum = values.reduce((a, b)=> a+b, 0)
+    let sum = values.reduce((a, b) => a + b, 0)
     let mean = sum / len
-    let squaredDistanceFromTheMean = values.map((a)=> (mean-a)*(mean-a))
-    let variance = squaredDistanceFromTheMean.reduce((a, b)=> a+b, 0) / len
+    let squaredDistanceFromTheMean = values.map((a) => (mean - a) * (mean - a))
+    let variance = squaredDistanceFromTheMean.reduce((a, b) => a + b, 0) / len
     let deviation = Math.sqrt(variance)
 
     return {
@@ -74,7 +73,7 @@ class SysreqCalc extends Component {
     }
   }
 
-  render() {
+  render () {
     let calcs = this.calculatedValues()
 
     return (
@@ -90,7 +89,7 @@ class SysreqCalc extends Component {
           onSelect={this.selectGame}
           placeholder='Type the most resource-intensive games your computer can run'/>
         <ul className='sysreq-calc-games-list'>
-          {this.state.games.map((game, i)=>{
+          {this.state.games.map((game, i) => {
             return (
               <li key={i} className='sysreq-calc-game'>
                 <div className='sysreq-calc-game-name'>{game.name}</div>
@@ -112,5 +111,3 @@ class SysreqCalc extends Component {
     )
   }
 }
-
-export default connect()(SysreqCalc)
