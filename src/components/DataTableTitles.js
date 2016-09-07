@@ -23,6 +23,7 @@ export default class DataTableTitles extends Component {
     let p = this.props
     return (
       np.filters !== p.filters ||
+      np.filtersParams !== p.filtersParams ||
       np.columnsWidth.toString() !== p.columnsWidth.toString() ||
       np.sort !== p.sort ||
       np.sortAsc !== p.sortAsc
