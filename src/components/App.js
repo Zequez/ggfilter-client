@@ -11,7 +11,8 @@ var DataTable = require('components/DataTable')
 var GamesLoader = require('components/GamesLoader')
 var Lightbox = require('components/Lightbox')
 
-import { getGames, getMoreGames, showLightbox } from 'stores/actions'
+import { showLightbox } from 'stores/actions'
+import { getGames, getMoreGames } from 'stores/reducers/gamesReducer'
 
 @connect(
   (s) => ({

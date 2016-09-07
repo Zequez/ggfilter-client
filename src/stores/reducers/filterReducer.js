@@ -1,5 +1,5 @@
 import { u } from 'lib/utils'
-import { getGames } from 'stores/actions'
+import { getGames } from 'stores/reducers/gamesReducer'
 import filtersSectionsFlatSort from 'sources/filtersSectionsFlatSort'
 
 const initialState = {

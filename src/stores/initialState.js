@@ -1,14 +1,5 @@
 export default {
-  columnsWidth: {
-
-  },
-
-  games: {
-    batches: [],
-    fetching: false,
-    failed: false,
-    lastPage: false
-  },
+  columnsWidth: {},
 
   lightbox: {
     media: [
