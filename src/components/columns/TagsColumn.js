@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 
-import {addQueryTag} from 'stores/actions'
-import {partial} from 'lib/utils'
+import { addQueryTag } from 'stores/reducers/filterReducer'
+import { partial } from 'lib/utils'
 
 export default class TagsColumn extends Component {
   static propTypes = {
@@ -13,15 +13,15 @@ export default class TagsColumn extends Component {
     dispatch: t.func.isRequired
   }
 
-  selectTag = (tagId)=>{
+  selectTag = (tagId) => {
     this.props.dispatch(addQueryTag(tagId))
   }
 
-  render() {
+  render () {
     let tags = this.props.options.tags
     let queryTags = (this.props.queryFilter && this.props.queryFilter.tags) || []
 
-    let tagsElements = this.props.value.map((tagId)=>{
+    let tagsElements = this.props.value.map((tagId) => {
       let liClass = queryTags.indexOf(tagId) === -1 ? '' : 'selected'
       return (
         <li key={tagId} onClick={partial(this.selectTag, tagId)} className={liClass}>

@@ -1,9 +1,5 @@
-export function encode (state) {
-  let urlState = {
-    toggledFilters: state.toggledFilters,
-    query: state.query,
-  }
-  return btoa(JSON.stringify(urlState))
+export function encode (filterState) {
+  return btoa(JSON.stringify(filterState))
 }
 
 export function decode (base64filter) {

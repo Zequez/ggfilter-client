@@ -16,8 +16,9 @@ export default class ShareTab extends Component {
   }
 
   render () {
-    let encodedState = urlificator.encode(this.props)
-    let url = `${location.origin}/filter/${encodedState}`
+    // let encodedState = urlificator.encode(this.props)
+    // let url = `${location.origin}/filter/${encodedState}`
+    let url = '#'
 
     return (
       <div className='sharer'>

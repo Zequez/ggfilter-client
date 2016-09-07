@@ -1,33 +1,37 @@
 import React, { Component, PropTypes as t } from 'react'
-import { setQueryFilter, removeQueryFilter } from 'stores/actions'
+import { connect } from 'react-redux'
+import { setFilter, clearFilter } from 'stores/reducers/filterReducer'
 
-var connect = require('react-redux').connect
-var classNames = require('classnames')
+const classNames = require('classnames')
 
-class DataTableControls extends Component {
+@connect((s) => ({}), {
+  setFilter,
+  clearFilter
+})
+export default class DataTableControls extends Component {
   static propTypes = {
     filters: t.arrayOf(t.object).isRequired,
-    query: t.object.isRequired,
-    tags: t.arrayOf(t.string).isRequired
+    filtersParams: t.object.isRequired,
+
+    setFilter: t.func.isRequired,
+    clearFilter: t.func.isRequired
   }
 
-  handleFilterChange(filterName, data) {
+  handleFilterChange (filterName, data) {
     if (data) {
       // data.highlight = false
-      this.props.dispatch(setQueryFilter(filterName, data))
-    }
-    else {
-      this.props.dispatch(removeQueryFilter(filterName))
+      this.props.setFilter(filterName, data)
+    } else {
+      this.props.clearFilter(filterName)
     }
   }
 
-  render() {
+  render () {
     console.info('Render <DataTableControls/>')
+    let { filters, filtersParams } = this.props
 
-    let query = this.props.query
-    var filters = this.props.filters
-    let controls = this.props.filters.map((filter)=>{
-      let queryFilter = query.filters[filter.name]
+    let controls = filters.map((filter) => {
+      let params = filtersParams[filter.name]
 
       let controlClass = classNames({
         [filter.name]: true,
@@ -36,7 +40,7 @@ class DataTableControls extends Component {
       })
 
       let filterProps = {
-        query: queryFilter,
+        query: params,
         name: filter.name,
         options: filter.filterOptions,
         onChange: this.handleFilterChange.bind(this, filter.name)
@@ -56,5 +60,3 @@ class DataTableControls extends Component {
     )
   }
 }
-
-export default connect()(DataTableControls)

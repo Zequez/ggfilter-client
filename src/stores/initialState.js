@@ -1,52 +1,6 @@
 export default {
-  // filter: {
-  //   columns: [],
-  //   filters: {},
-  //   sort: 'name',
-  //   sort_asc: false
-  // },
-  //
-  // options: {
-  //   batchSize: 20
-  // },
-
-  toggledFilters: [
-    'steam_id',
-    'name',
-    // 'system_requirements',
-    'lowest_steam_price',
-    'steam_discount',
-    'playtime_median_ftb',
-    'metacritic',
-    'steam_reviews_count',
-    'steam_reviews_ratio',
-    'platforms',
-    'players',
-    'vr',
-    // 'steam_thumbnail',
-    'tags',
-    'playtime_median',
-    'controller_support',
-    // 'images'
-    'sysreq_index_centile',
-    'released_at'
-  ],
-
   columnsWidth: {
 
-  },
-
-  query: {
-    filters: {
-      // steam_reviews_count: { gt: 65 },
-      // steam_reviews_ratio: { gt: 95 },
-      // platforms: { value: 3 },
-      // tags: { tags: [83] },
-      // lowest_steam_price: { gt: 500, lt: 6000 }
-    },
-    sort: 'name',
-    sort_asc: false,
-    batchSize: 20
   },
 
   games: {

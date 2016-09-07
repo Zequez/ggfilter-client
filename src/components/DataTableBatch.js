@@ -1,50 +1,54 @@
 import React, { Component, PropTypes as t } from 'react'
+import { connect } from 'react-redux'
 
-var connect = require('react-redux').connect
 var classNames = require('classnames')
 
-class DataTableBatch extends Component {
+@connect()
+export default class DataTableBatch extends Component {
   static propTypes = {
     games: t.array.isRequired,
     filters: t.arrayOf(t.object).isRequired,
-    query: t.object.isRequired
+    filtersParams: t.object
   }
 
-  shouldComponentUpdate(np, ns) {
+  shouldComponentUpdate (np, ns) {
     let p = this.props
-    return np.games !== p.games
-        || np.filters !== p.filters
+    return (
+      np.games !== p.games ||
+      np.filters !== p.filters ||
+      np.filtersParams !== np.filtersParams
+    )
   }
 
-  columnInputs(game, filter) {
+  columnInputs (game, filter) {
     var columnInputs = {}
-    for(let inputName in filter.columnInputs) {
+    for (let inputName in filter.columnInputs) {
       let columnName = filter.columnInputs[inputName]
       columnInputs[inputName] = game[columnName]
     }
     return columnInputs
   }
 
-  hlClass(game, filter) {
+  hlClass (game, filter) {
     return game['hl_' + filter.name] ? 'hl' : ''
   }
 
-  overflowColumnWrap(wrap, el) {
+  overflowColumnWrap (wrap, el) {
     if (!wrap) return el
     return <div className='overflow-cell'>{el}</div>
   }
 
-  render() {
+  render () {
     console.info('Render <DataTableBatch/>')
 
     var games = this.props.games
     var filters = this.props.filters
 
     var rows = []
-    for(let i = 0; i < games.length; ++i) {
+    for (let i = 0; i < games.length; ++i) {
       let game = this.props.games[i]
       let cols = []
-      for(let j = 0; j < filters.length; ++j) {
+      for (let j = 0; j < filters.length; ++j) {
         let filter = filters[j]
 
         let tdClass = classNames({
@@ -61,7 +65,7 @@ class DataTableBatch extends Component {
                 options={filter.columnOptions}
                 name={filter.name}
                 dispatch={this.props.dispatch}
-                queryFilter={this.props.query.filters[filter.name]}
+                queryFilter={this.props.filtersParams[filter.name]}
                 {...this.columnInputs(game, filter)}/>
             )}
           </td>
@@ -80,5 +84,3 @@ class DataTableBatch extends Component {
     )
   }
 }
-
-export default connect()(DataTableBatch)

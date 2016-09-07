@@ -1,8 +1,8 @@
 import React, { Component, PropTypes as t } from 'react'
-
 import { debounce } from 'lib/utils'
-var ColumnResizeHandle = require('components/ColumnResizeHandle')
-var classNames = require('classnames')
+const classNames = require('classnames')
+
+const ColumnResizeHandle = require('components/ColumnResizeHandle')
 
 export default class DataTableTitle extends Component {
   static propTypes = {
@@ -17,10 +17,12 @@ export default class DataTableTitle extends Component {
 
   shouldComponentUpdate (np, ns) {
     let p = this.props
-    return np.filter !== p.filter
-        || np.width !== p.width
-        || np.sort !== p.sort
-        || np.active !== p.active
+    return (
+      np.filter !== p.filter ||
+      np.width !== p.width ||
+      np.sort !== p.sort ||
+      np.active !== p.active
+    )
   }
 
   overflowClass = 'overflowed'
@@ -39,17 +41,16 @@ export default class DataTableTitle extends Component {
     if (this.shouldCheckOverflow) this.checkOverflow()
   }
 
-  checkOverflow = debounce(50, ()=>{
+  checkOverflow = debounce(50, () => {
     this.shouldCheckOverflow = false
     let overflow = this.refs.overflow
     let th = this.refs.th
-    let overflowed = overflow.clientWidth !==  overflow.scrollWidth
+    let overflowed = overflow.clientWidth !== overflow.scrollWidth
     if (overflowed !== this.overflowed) {
       this.overflowed = overflowed
       if (overflowed) {
         th.className += ' ' + this.overflowClass
-      }
-      else {
+      } else {
         th.className = th.className.replace(this.overflowClass, '')
       }
     }

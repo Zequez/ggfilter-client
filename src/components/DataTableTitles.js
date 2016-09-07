@@ -1,59 +1,67 @@
 import React, { Component, PropTypes as t } from 'react'
+import { connect } from 'react-redux'
+import { adjustColumnWidth, clearColumnWidth } from 'stores/actions'
+import { setSort } from 'stores/reducers/filterReducer'
 
-import { setQuerySort, adjustColumnWidth, clearColumnWidth } from 'stores/actions'
-var DataTableTitle = require('components/DataTableTitle')
-var connect = require('react-redux').connect
+const DataTableTitle = require('components/DataTableTitle')
 
-class DataTableTitles extends Component {
+@connect((s) => ({}), {
+  setSort,
+  adjustColumnWidth,
+  clearColumnWidth
+})
+export default class DataTableTitles extends Component {
   static propTypes = {
     filters: t.arrayOf(t.object).isRequired,
-    columnsWidth: t.arrayOf(t.number).isRequired,
-    query: t.shape({
-      filters: t.object.isRequired,
-      sort: t.string.isRequired,
-      sort_asc: t.bool.isRequired
-    }).isRequired,
+    filtersParams: t.object.isRequired,
+    sort: t.string.isRequired,
+    sortAsc: t.bool.isRequired,
+    columnsWidth: t.arrayOf(t.number).isRequired
   }
 
-  shouldComponentUpdate(np, ns) {
+  shouldComponentUpdate (np, ns) {
     let p = this.props
-    return np.filters !== p.filters
-        || np.columnsWidth.toString() !== p.columnsWidth.toString()
-        || np.query !== p.query
+    return (
+      np.filters !== p.filters ||
+      np.columnsWidth.toString() !== p.columnsWidth.toString() ||
+      np.sort !== p.sort ||
+      np.sortAsc !== p.sortAsc
+    )
   }
 
-  onSort(filter, ev) {
-    this.props.dispatch(setQuerySort(filter.sort))
+  onSort (filter, ev) {
+    this.props.setSort(filter.sort)
   }
 
-  onResize(filter, deltaX) {
+  onResize (filter, deltaX) {
     if (deltaX !== 0) {
-      this.props.dispatch(adjustColumnWidth(filter.name, deltaX))
+      this.props.adjustColumnWidth(filter.name, deltaX)
     }
   }
 
-  onResetResize(filter) {
-    this.props.dispatch(clearColumnWidth(filter.name))
+  onResetResize (filter) {
+    this.props.clearColumnWidth(filter.name)
   }
 
-  render() {
+  render () {
     console.info('Render <DataTableTitles/>')
-    let query = this.props.query
+    let { filters, filtersParams, sort, sortAsc, columnsWidth } = this.props
 
-    let titles = this.props.filters.map((filter, i)=>{
-      let sort = (query.sort == filter.name) ? query.sort_asc : null
-      let width = this.props.columnsWidth[i]
+    let titles = filters.map((filter, i) => {
+      let sortStatus = (sort === filter.name) ? sortAsc : null
+      let width = columnsWidth[i]
+      let hasParams = !!filtersParams[filter.name]
 
       return (
         <DataTableTitle
           key={filter.name}
           filter={filter}
           width={width}
-          sort={sort}
-          active={!!this.props.query.filters[filter.name]}
-          onSort={this.onSort.bind(this)}
-          onResize={this.onResize.bind(this)}
-          onResetResize={this.onResetResize.bind(this)}/>
+          sort={sortStatus}
+          active={hasParams}
+          onSort={::this.onSort}
+          onResize={::this.onResize}
+          onResetResize={::this.onResetResize}/>
       )
     })
 
@@ -64,5 +72,3 @@ class DataTableTitles extends Component {
     )
   }
 }
-
-export default connect()(DataTableTitles)

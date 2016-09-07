@@ -1,77 +1,73 @@
 import React, { Component, PropTypes as t } from 'react'
 
 var debounce = require('lib/utils').debounce
-var filtersDefinitions = require('sources/filtersDefinitions')
 var TableWidthCalculator = require('lib/TableWidthCalculator')
 
 var DataTableControls = require('components/DataTableControls')
-var DataTableTitles   = require('components/DataTableTitles')
-var DataTableBatch    = require('components/DataTableBatch')
+var DataTableTitles = require('components/DataTableTitles')
+var DataTableBatch = require('components/DataTableBatch')
 
-class DataTable extends React.Component {
+export default class DataTable extends Component {
   static propTypes = {
-    filters: t.arrayOf(t.object).isRequired,
-    query: t.shape({
-      filters: t.object,
+    visibleFiltersDefinitions: t.arrayOf(t.object).isRequired,
+    filter: t.shape({
+      visible: t.arrayOf(t.string),
+      params: t.object,
       sort: t.string,
-      sort_asc: t.bool,
-      batchSize: t.number
+      sort_asc: t.bool
     }).isRequired,
     columnsWidth: t.object.isRequired,
     games: t.shape({
       list: t.array,
       fetching: t.bool,
       failed: t.bool
-    }).isRequired,
-    tags: t.arrayOf(t.string).isRequired
+    }).isRequired
   }
 
-  componentDidMount() {
+  componentDidMount () {
     window.addEventListener('resize', debounce(250, this.handleWindowResize.bind(this)))
   }
 
-  handleWindowResize(ev) {
+  handleWindowResize (ev) {
     this.forceUpdate()
   }
 
-  render() {
+  render () {
     console.info('Render <DataTable/>')
+    let { filter, columnsWidth, games } = this.props
+    let filters = this.props.visibleFiltersDefinitions
 
-    var filters = this.props.filters
-
-    var batches = []
-    var gamesBatches = this.props.games.batches
-    for(let i = 0; i < gamesBatches.length; ++i) {
+    let batches = []
+    for (let i = 0; i < games.batches.length; ++i) {
       batches.push(
         <DataTableBatch
           key={i}
-          games={gamesBatches[i]}
+          games={games.batches[i]}
           filters={filters}
-          query={this.props.query}/>
+          filtersParams={filter.params}/>
       )
     }
 
-    var docSize = document.documentElement.clientWidth
-    var calc = new TableWidthCalculator(filters, this.props.columnsWidth, docSize)
-    var columnsWidth = calc.columnsWidth()
-    var tableWidth = calc.tableWidth()
+    let docSize = document.documentElement.clientWidth
+    let calc = new TableWidthCalculator(filters, columnsWidth, docSize)
+    let trueColumnsWidth = calc.columnsWidth()
+    let tableWidth = calc.tableWidth()
 
     return (
       <table className='data-table' style={{width: tableWidth}}>
         <thead>
           <DataTableTitles
             filters={filters}
-            columnsWidth={columnsWidth}
-            query={this.props.query}/>
+            filtersParams={filter.params}
+            sort={filter.sort}
+            sortAsc={filter.sort_asc}
+            columnsWidth={trueColumnsWidth}/>
           <DataTableControls
             filters={filters}
-            query={this.props.query}
-            tags={this.props.tags}/>
+            filtersParams={this.props.filter.params}/>
         </thead>
         {batches}
       </table>
     )
   }
 }
-
-export default DataTable

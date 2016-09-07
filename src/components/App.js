@@ -14,7 +14,14 @@ var Lightbox = require('components/Lightbox')
 import { getGames, getMoreGames, showLightbox } from 'stores/actions'
 
 @connect(
-  (s) => s,
+  (s) => ({
+    filter: s.filter,
+    games: s.games,
+    lightbox: s.lightbox,
+    tags: s.tags,
+    columnsWidth: s.columnsWidth,
+    options: s.options
+  }),
   { getGames, getMoreGames, showLightbox }
 )
 export default class App extends Component {
@@ -35,14 +42,14 @@ export default class App extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (this.props.toggledFilters !== nextProps.toggledFilters) {
-      this.loadFilters(nextProps.toggledFilters)
+    if (this.props.filter.visible !== nextProps.filter.visible) {
+      this.loadFilters(nextProps.filter.visible)
     }
   }
 
-  loadFilters (filtersNames = this.props.toggledFilters) {
+  loadFilters (visibleFiltersNames = this.props.filter.visible) {
     this.setState({
-      filters: filtersNames.map((f) => filtersDefinitions[f])
+      filters: visibleFiltersNames.map((f) => filtersDefinitions[f])
     })
   }
 
@@ -56,28 +63,29 @@ export default class App extends Component {
 
   render () {
     console.info('Render <App/>')
+    let { children, games, filter, columnsWidth, lightbox } = this.props
+    let { filters } = this.state
 
     return (
       <Layout>
         <div className='tabs-content'>
           <div className='tabs-content-container'>
-            {this.props.children}
+            {children}
           </div>
         </div>
         <DataTable
-          games={this.props.games}
-          query={this.props.query}
-          columnsWidth={this.props.columnsWidth}
-          filters={this.state.filters}
-          tags={this.props.tags}/>
+          games={games}
+          filter={filter}
+          columnsWidth={columnsWidth}
+          visibleFiltersDefinitions={filters}/>
         <GamesLoader
-          fetching={this.props.games.fetching}
-          failed={this.props.games.failed}
-          lastPage={this.props.games.lastPage}
-          onRequestMore={this.handleRequestMoreGames.bind(this)} />
+          fetching={games.fetching}
+          failed={games.failed}
+          lastPage={games.lastPage}
+          onRequestMore={::this.handleRequestMoreGames} />
         <Lightbox
-          media={this.props.lightbox.media}
-          thumbnails={this.props.lightbox.thumbnails}
+          media={lightbox.media}
+          thumbnails={lightbox.thumbnails}
           onClose={this.onLightboxClose}/>
       </Layout>
     )

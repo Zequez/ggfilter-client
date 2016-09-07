@@ -1,6 +1,6 @@
 import { u } from 'lib/utils'
 import { encode } from 'lib/urlificator'
-import { push } from './routingReducer'
+import { push, ROUTING_RECEIVE } from './routingReducer'
 
 import { TOGGLE_FILTER, SET_QUERY_FILTER, REMOVE_QUERY_FILTER, SET_QUERY_SORT } from 'stores/actions'
 
@@ -17,7 +17,8 @@ export const initialState = {
   type: URLS_TYPES.base64, // sid / base64 / official
   sid: null,
   slug: null,
-  error: null
+  error: null,
+  dirty: false
 }
 
 // User filters stuff and clicks the button -> base64
@@ -37,7 +38,7 @@ export function navigateToFilterUrl () {
     let state = getState()
     let filterUrl = state.filterUrl
     if (filterUrl.type === URLS_TYPES.base64) {
-      dispatch(push('/b/' + encode(state)))
+      dispatch(push('/b/' + encode(state.filter)))
       // go to base64 url
     } else if (filterUrl.type === URLS_TYPES.sid) {
       dispatch(push('/f/' + filterUrl.sid))

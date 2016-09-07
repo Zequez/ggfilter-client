@@ -1,34 +1,39 @@
+const axios = require('axios')
+
 var config = require('sources/config')
 var qs = require('qs')
 var filtersDefinitions = require('sources/filtersDefinitions')
 
-export default function gamesFetcher (filters, query, page) {
-  // Get the columns to request
+function generateQueryFilter (filter, page, options) {
+  // Some filters require more than one column to work,
+  // not neccesarily visible, we need to get all those columns
   var columns = []
-  for (let i = 0; i < filters.length; ++i) {
-    let columnInputs = filtersDefinitions[filters[i]].columnInputs
+  for (let i = 0; i < filter.visible.length; ++i) {
+    let columnInputs = filtersDefinitions[filter.visible[i]].columnInputs
     for (let k in columnInputs) {
       columns.push(columnInputs[k])
     }
   }
-  var sort_dir = query.sort_asc ? 'asc' : 'desc'
-  var queryString = qs.stringify({
-    filters: JSON.stringify(query.filters),
-    sort: `${query.sort}_${sort_dir}`,
-    limit: query.batchSize,
+
+  let sortDir = filter.sort_asc ? 'asc' : 'desc'
+
+  return {
+    filters: JSON.stringify(filter.params),
+    sort: `${filter.sort}_${sortDir}`,
+    limit: options.batchSize,
     columns: columns,
     page: page
-  }, {arrayFormat: 'brackets'})
+  }
+}
 
-  return fetch(`${config.HOST}/games.json?${queryString}`)
-    .then(response => {
-      if (response.status >= 200 && response.status <= 300) {
-        return response.json()
-      }
-      else {
-        var error = new Error(response.statusText)
-        error.response = response
-        throw error
-      }
+export default function gamesFetcher (filter, page, options) {
+  let queryFilter = generateQueryFilter(filter, page, options)
+  let queryString = qs.stringify(queryFilter, {arrayFormat: 'brackets'})
+
+  return axios.get(`${config.HOST}/games.json?${queryString}`)
+    .then((response) => {
+      return response.data
+    }, (error) => {
+      console.error(error)
     })
 }
