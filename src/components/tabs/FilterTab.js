@@ -1,9 +1,6 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { navigateToFilterUrl } from 'stores/reducers/filterUrlReducer'
-// import { history } from 'stores/AppStore'
-// import { setFullQuery } from 'stores/actions'
-// import * as urlificator from 'lib/urlificator'
 
 // Alright, this is pretty hacky, but we have a problem
 // We don't want the URL of the filter to be the source of truth, we already
@@ -22,7 +19,6 @@ export default class FilterTab extends Component {
 
   shouldComponentUpdate (np) {
     let tp = this.props
-    console.log(np.filter !== tp.filter)
     return np.filter !== tp.filter
   }
 
