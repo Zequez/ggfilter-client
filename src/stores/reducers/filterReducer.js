@@ -37,13 +37,19 @@ const initialState = {
 
 initialState.visible = filtersSectionsFlatSort(initialState.visible)
 
+// =============================================================================
+// Actions
+// =============================================================================
+
 export const FILTER_TOGGLE = 'FILTER_TOGGLE'
 export const FILTER_SET = 'FILTER_SET'
 export const FILTER_CLEAR = 'FILTER_CLEAR'
 export const FILTER_SORT = 'FILTER_SORT'
 export const FILTER_SET_FULL = 'FILTER_SET_FULL'
 
+// =============================================================================
 // Helpers
+// =============================================================================
 
 function dispatchAndGetGames (action) {
   return function (dispatch, getState) {
@@ -52,7 +58,9 @@ function dispatchAndGetGames (action) {
   }
 }
 
-// Actions creators
+// =============================================================================
+// Actions Creators
+// =============================================================================
 
 export function toggle (name, force = null) {
   return { type: FILTER_TOGGLE, name, force }
@@ -89,6 +97,10 @@ export function addQueryTag (tagId) {
     dispatch(setFilter('tags', newTagsFilter))
   }
 }
+
+// =============================================================================
+// Reducer
+// =============================================================================
 
 export function reducer (state = initialState, action) {
   switch (action.type) {

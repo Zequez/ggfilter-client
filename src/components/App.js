@@ -13,6 +13,7 @@ var Lightbox = require('components/Lightbox')
 
 import { showLightbox } from 'stores/actions'
 import { getGames, getMoreGames } from 'stores/reducers/gamesReducer'
+import { routesProp } from 'stores/reducers/routingReducer'
 
 @connect(
   (s) => ({
@@ -21,7 +22,8 @@ import { getGames, getMoreGames } from 'stores/reducers/gamesReducer'
     lightbox: s.lightbox,
     tags: s.tags,
     columnsWidth: s.columnsWidth,
-    options: s.options
+    options: s.options,
+    routing: s.routing
   }),
   { getGames, getMoreGames, showLightbox }
 )
@@ -64,11 +66,14 @@ export default class App extends Component {
 
   render () {
     console.info('Render <App/>')
+
     let { children, games, filter, columnsWidth, lightbox } = this.props
     let { filters } = this.state
 
+    let containerClassName = this.props.routing.routes.filter((n) => n).map((n) => `route-${n}`).join(' ')
+
     return (
-      <Layout>
+      <Layout className={containerClassName}>
         <div className='tabs-content'>
           <div className='tabs-content-container'>
             {children}

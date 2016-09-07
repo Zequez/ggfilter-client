@@ -6,8 +6,11 @@ export default class Layout extends Component {
   render () {
     console.info('Render <Layout/>')
 
+    let className = 'container'
+    if (this.props.className) className += ' ' + this.props.className
+
     return (
-      <div className='container'>
+      <div className={className}>
         <header className='header'>
           <div className='logo' title="The Good Game Filter">
             GGFilter

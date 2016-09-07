@@ -22,7 +22,7 @@ export function getRoutes (store, history) {
     <Provider store={store}>
       <Router history={history}>
         <Route path='/' component={App} onEnter={syncRouterWithStore} onChange={syncRouterWithStoreChange}>
-          <IndexRoute component={FiltersToggles}/>
+          <IndexRoute name='toggles' component={FiltersToggles}/>
           <Route name='sysreq' path='system-requirements' component={SysreqCalc}/>
           <Route name='sources' path='sources' component={SourcesTab}/>
           <Route name='share' path='share' component={ShareTab}/>
@@ -30,8 +30,8 @@ export function getRoutes (store, history) {
           {/*<Route path='email-alerts'/>*/}
           {/*<Route path='feedback'/>*/}
           {/*<Route path='sponsors'/>*/}
-          <Route name='b64Filter' path='b/:filterName' component={FilterTab}/>
-          <Route name='idFilter' path='f/:filterName' component={FilterTab}/>
+          <Route name='b64Filter' filterRoute path='b/:filterName' component={FilterTab}/>
+          <Route name='idFilter' filterRoute path='f/:filterName' component={FilterTab}/>
         </Route>
       </Router>
     </Provider>
