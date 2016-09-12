@@ -22,7 +22,7 @@ export default class FiltersToggles extends Component {
   }
 
   render () {
-    console.info('Render <FiltersToggles/>')
+    console.logRender('FiltersToggles')
 
     let sectionsElements = []
     for (let sectionName in filtersSections) {

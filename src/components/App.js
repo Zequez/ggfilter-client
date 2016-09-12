@@ -5,15 +5,20 @@ import { connect } from 'react-redux'
 
 var filtersDefinitions = require('sources/filtersDefinitions')
 
-var Layout = require('components/Layout')
-
-var DataTable = require('components/DataTable')
-var GamesLoader = require('components/GamesLoader')
-var Lightbox = require('components/Lightbox')
-
 import { showLightbox } from 'stores/actions'
 import { getGames, getMoreGames } from 'stores/reducers/gamesReducer'
-import { routesProp } from 'stores/reducers/routingReducer'
+
+import { MODES } from 'stores/reducers/modeReducer'
+
+const Layout = require('components/Layout')
+const DataTable = require('components/DataTable')
+const GamesLoader = require('components/GamesLoader')
+const Lightbox = require('components/Lightbox')
+// Modes
+const FiltersToggles = require('components/tabs/FiltersToggles')
+const SourcesTab = require('components/tabs/SourcesTab')
+const SysreqCalc = require('components/tabs/SysreqCalc')
+const ShareTab = require('components/tabs/ShareTab')
 
 @connect(
   (s) => ({
@@ -23,7 +28,8 @@ import { routesProp } from 'stores/reducers/routingReducer'
     tags: s.tags,
     columnsWidth: s.columnsWidth,
     options: s.options,
-    routing: s.routing
+    routing: s.routing,
+    mode: s.mode
   }),
   { getGames, getMoreGames, showLightbox }
 )
@@ -35,7 +41,7 @@ export default class App extends Component {
   componentWillMount () {
     if (!this.props.games.batches.length) this.props.getGames()
     this.fillStaticFiltersDefinitionsOptions()
-    this.loadFilters()
+    this.cacheFiltersDefinitions()
   }
 
   // This is hacky, but it's now the convention
@@ -44,16 +50,16 @@ export default class App extends Component {
     filtersDefinitions.tags.columnOptions.tags = this.props.tags
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (this.props.filter.visible !== nextProps.filter.visible) {
-      this.loadFilters(nextProps.filter.visible)
+  componentWillReceiveProps (np) {
+    let tp = this.props
+    if (tp.filter.visible !== np.filter.visible) {
+      this.cacheFiltersDefinitions(np)
     }
   }
 
-  loadFilters (visibleFiltersNames = this.props.filter.visible) {
-    this.setState({
-      filters: visibleFiltersNames.map((f) => filtersDefinitions[f])
-    })
+  visibleFilters = []
+  cacheFiltersDefinitions (p = this.props) {
+    this.visibleFilters = p.filter.visible.map((f) => filtersDefinitions[f])
   }
 
   handleRequestMoreGames () {
@@ -64,26 +70,34 @@ export default class App extends Component {
     this.props.showLightbox([], [])
   }
 
+  modeComponent (mode) {
+    switch (mode) {
+      case MODES.share: return <ShareTab/>
+      case MODES.columns: return <FiltersToggles/>
+      case MODES.sources: return <SourcesTab/>
+      case MODES.sysreq: return <SysreqCalc/>
+    }
+    return null
+  }
+
   render () {
     console.logRender('App')
 
-    let { children, games, filter, columnsWidth, lightbox } = this.props
-    let { filters } = this.state
-
-    let containerClassName = this.props.routing.routes.filter((n) => n).map((n) => `route-${n}`).join(' ')
+    let { games, filter, columnsWidth, lightbox, mode } = this.props
+    let containerClassName = `mode-${mode}`
 
     return (
       <Layout className={containerClassName}>
         <div className='tabs-content'>
           <div className='tabs-content-container'>
-            {children}
+            {this.modeComponent(mode)}
           </div>
         </div>
         <DataTable
           games={games}
           filter={filter}
           columnsWidth={columnsWidth}
-          visibleFiltersDefinitions={filters}/>
+          visibleFiltersDefinitions={this.visibleFilters}/>
         <GamesLoader
           fetching={games.fetching}
           failed={games.failed}

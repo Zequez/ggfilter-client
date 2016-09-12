@@ -1,42 +1,33 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 
-import { navigateToFilterUrl } from 'stores/reducers/filterUrlReducer'
-const NavTabButton = require('./NavTabButton')
+import { setMode, MODES } from 'stores/reducers/modeReducer'
+const NavTabLink = require('./NavTabLink')
 
 @connect((s) => ({
   toggledFilters: s.toggledFilters,
   query: s.query,
-  routes: s.routing.routes
+  mode: s.mode
 }), {
-  navigateToFilterUrl
+  setMode
 })
 export default class NavTabs extends Component {
   static propTypes = {
-    navigateToFilterUrl: t.func
-  }
-
-  inFilterRoute () {
-    let r = this.props.routes
-    return !!(~r.indexOf('b64Filter') || ~r.indexOf('idFilter'))
+    setMode: t.func
   }
 
   render () {
     console.logRender('NavTabs')
-    let { navigateToFilterUrl } = this.props
+
+    let { mode, setMode } = this.props
 
     return (
       <ul className='nav-tabs'>
-        <NavTabButton href='/share' icon='share' onDeactivate={navigateToFilterUrl}/>
-        <NavTabButton href='/' text='Columns' onDeactivate={navigateToFilterUrl}/>
-        <NavTabButton href='/system-requirements' text='Sysreq Calculator' onDeactivate={navigateToFilterUrl}/>
-        <NavTabButton href='/sources' text='Sources' onDeactivate={navigateToFilterUrl}/>
-        <NavTabButton icon='link' onActivate={navigateToFilterUrl} active={this.inFilterRoute()}/>
-
-        {/* /popular-filters  Popular Filters */}
-        {/* /email-alerts     Email Alerts */}
-        {/* /feedback         Feedback */}
-        {/* /sponsor          Sponsor */}
+        <NavTabLink icon='share' mode={MODES.share} currentMode={mode} setMode={setMode}/>
+        <NavTabLink text='Columns' mode={MODES.columns} currentMode={mode} setMode={setMode}/>
+        <NavTabLink text='Sysreq' mode={MODES.sysreq} currentMode={mode} setMode={setMode}/>
+        <NavTabLink text='Sources' mode={MODES.sources} currentMode={mode} setMode={setMode}/>
+        <NavTabLink icon='link' mode={MODES.filter} currentMode={mode} setMode={setMode}/>
       </ul>
     )
   }

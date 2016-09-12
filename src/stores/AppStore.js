@@ -7,12 +7,12 @@ import lightbox from './reducers/lightboxReducer'
 import tags from './reducers/tagsReducer'
 import filterUrl from './reducers/filterUrlReducer'
 const games = require('./reducers/gamesReducer').reducer
-const routing = require('./reducers/routingReducer').reducer
 const filter = require('./reducers/filterReducer').reducer
 const options = require('./reducers/optionsReducer').reducer
+const mode = require('./reducers/modeReducer').reducer
 
 export default function getStore () {
-  let reducer = combineReducers({ games, filter, columnsWidth, lightbox, routing, tags, filterUrl, options })
+  let reducer = combineReducers({ mode, games, filter, columnsWidth, lightbox, tags, filterUrl, options })
   let createStoreWithMiddleware = applyMiddleware(
     thunkMiddleware,
     logger

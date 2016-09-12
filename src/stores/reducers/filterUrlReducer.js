@@ -1,24 +1,22 @@
 import { u } from 'lib/utils'
 import { encode } from 'lib/urlificator'
-import { push, ROUTING_RECEIVE } from './routingReducer'
 
 import { TOGGLE_FILTER, SET_QUERY_FILTER, REMOVE_QUERY_FILTER, SET_QUERY_SORT } from 'stores/actions'
 
 const axios = require('axios')
 const config = require('sources/config')
 
-const URLS_TYPES = {
-  base64: 'base64',
+export const URLS_TYPES = {
+  b64: 'b64',
   sid: 'sid',
   official: 'official'
 }
 
 export const initialState = {
-  type: URLS_TYPES.base64, // sid / base64 / official
+  type: URLS_TYPES.b64, // sid / base64 / official
   sid: null,
   slug: null,
-  error: null,
-  dirty: false
+  error: null
 }
 
 // User filters stuff and clicks the button -> base64
@@ -33,22 +31,22 @@ export const FILTER_URL_SID_START = Symbol('FILTER_URL_SID_START')
 export const FILTER_URL_SID_END = Symbol('FILTER_URL_SID_END')
 export const FILTER_URL_SID_ERROR = Symbol('FILTER_URL_SID_ERROR')
 
-export function navigateToFilterUrl () {
-  return function (dispatch, getState) {
-    let state = getState()
-    let filterUrl = state.filterUrl
-    if (filterUrl.type === URLS_TYPES.base64) {
-      dispatch(push('/b/' + encode(state.filter)))
-      // go to base64 url
-    } else if (filterUrl.type === URLS_TYPES.sid) {
-      dispatch(push('/f/' + filterUrl.sid))
-      // go to sid url
-    } else if (filterUrl.type === URLS_TYPES.official) {
-      dispatch(push('/' + filterUrl.slug))
-      // go to official url
-    }
-  }
-}
+// export function navigateToFilterUrl () {
+//   return function (dispatch, getState) {
+//     let state = getState()
+//     let filterUrl = state.filterUrl
+//     if (filterUrl.type === URLS_TYPES.b64) {
+//       dispatch(push('/b/' + encode(state.filter)))
+//       // go to base64 url
+//     } else if (filterUrl.type === URLS_TYPES.sid) {
+//       dispatch(push('/f/' + filterUrl.sid))
+//       // go to sid url
+//     } else if (filterUrl.type === URLS_TYPES.official) {
+//       dispatch(push('/' + filterUrl.slug))
+//       // go to official url
+//     }
+//   }
+// }
 
 export function filterUrlGenerateSid () {
   return function (dispatch, getState) {
@@ -79,7 +77,7 @@ export default function filterUrl (state = initialState, action) {
     case SET_QUERY_FILTER:
     case REMOVE_QUERY_FILTER:
     case SET_QUERY_SORT:
-      state = u(state, { type: {$set: 'base64'} })
+      state = u(state, { type: {$set: URLS_TYPES.b64} })
       break
   }
 
