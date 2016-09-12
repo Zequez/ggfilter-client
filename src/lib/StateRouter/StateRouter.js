@@ -45,10 +45,6 @@ export default class StateRouter {
     let [pathname, search] = path.split('?')
     search = search ? '?' + search : ''
 
-    // let qindex = path.indexOf('?')
-    // let search = ~qindex ? path.slice(qindex) : ''
-    // let pathname = ~qindex ? path.slice(0, qindex) : path
-
     return {
       pathname: pathname,
       search: search,
@@ -71,7 +67,9 @@ export default class StateRouter {
 
     this.history.listen((location, action) => {
       this.location = this._parseDumbLocation(location)
-      this._matchRoute()
+      if (!location.state.stateInduced) {
+        this._matchRoute()
+      }
     })
   }
 
@@ -117,7 +115,7 @@ export default class StateRouter {
       let newPath = route.pattern.stringify(match)
       if (this.location.pathname !== newPath) {
         console.info('STATE-INDUCED-PATH-CHANGE', newPath)
-        this.history.push(newPath)
+        this.history.push(newPath, { stateInduced: true })
       }
       return true
     } else {
