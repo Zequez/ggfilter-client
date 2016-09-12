@@ -40,15 +40,11 @@ export default class StateRouter {
   }
 
   _parseDumbLocation (dumbLocation) {
-    let path = dumbLocation.path
-
-    let [pathname, search] = path.split('?')
-    search = search ? '?' + search : ''
-
     return {
-      pathname: pathname,
-      search: search,
-      query: qs.parse(search)
+      pathname: dumbLocation.pathname,
+      search: dumbLocation.search,
+      query: qs.parse(dumbLocation.search),
+      hash: dumbLocation.hash
     }
   }
 
@@ -62,7 +58,7 @@ export default class StateRouter {
   }
 
   _bindHistory () {
-    this.location = this._parseDumbLocation(this.history.getCurrentLocation())
+    this.location = this._parseDumbLocation(this.history.location)
     this._matchRoute()
 
     this.history.listen((location, action) => {
