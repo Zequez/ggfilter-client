@@ -101,7 +101,7 @@ export function addQueryTag (tagId) {
 }
 
 export function setFilterFromB64 (b64) {
-  return setFullFilter(decode(b64))
+  return { type: FILTER_SET_FULL, filter: decode(b64) }
 }
 
 // =============================================================================
