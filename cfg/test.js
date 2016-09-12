@@ -11,13 +11,13 @@ module.exports = {
       },
       {
         test: /\.(js|jsx)$/,
-        loader: 'babel-loader?stage=0',
+        loader: 'babel',
         include: [
           path.join(__dirname, '/../src'),
           path.join(__dirname, '/../test')
         ]
       },
-      { test: /\.coffee$/, loader: 'coffee' }
+      { test: /\.coffee$/, loader: 'babel!coffee' }
     ]
   },
   resolve: {

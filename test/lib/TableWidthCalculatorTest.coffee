@@ -1,4 +1,4 @@
-TableWidthCalculator = require 'lib/TableWidthCalculator'
+`import TableWidthCalculator from 'lib/TableWidthCalculator'`
 
 describe 'TableWidthCalculator', ->
   calc = null

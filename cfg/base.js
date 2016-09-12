@@ -48,7 +48,7 @@ module.exports = {
         test: /\.(png|jpg|gif|woff|woff2)$/,
         loader: 'url-loader?limit=8192'
       },
-      { test: /\.coffee$/, loader: 'coffee' },
+      { test: /\.coffee$/, loader: 'babel!coffee' },
       { test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=8192" }
     ]
   }

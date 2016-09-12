@@ -1,5 +1,5 @@
-objectBreadcrumbs = require('lib/StateRouter/objectBreadcrumbs')
-StatePattern = require('lib/StateRouter/StatePattern')
+`import objectBreadcrumbs from 'lib/StateRouter/objectBreadcrumbs'`
+`import StatePattern from 'lib/StateRouter/StatePattern'`
 
 describe 'objectBreadcrumbs', ->
   it 'should work with a basic object', ->
