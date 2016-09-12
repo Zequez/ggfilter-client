@@ -1,8 +1,8 @@
-const axios = require('axios')
+import axios from 'axios'
 
-var config = require('sources/config')
-var qs = require('qs')
-var filtersDefinitions = require('sources/filtersDefinitions')
+import config from 'sources/config'
+import qs from 'qs'
+import filtersDefinitions from 'sources/filtersDefinitions'
 
 function generateQueryFilter (filter, page, options) {
   // Some filters require more than one column to work,
@@ -30,7 +30,7 @@ export default function gamesFetcher (filter, page, options) {
   let queryFilter = generateQueryFilter(filter, page, options)
   let queryString = qs.stringify(queryFilter, {arrayFormat: 'brackets'})
 
-  return axios.get(`${config.HOST}/games.json?${queryString}`)
+  return axios.get(`${config.host}/games.json?${queryString}`)
     .then((response) => {
       return response.data
     }, (error) => {

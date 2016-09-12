@@ -1,8 +1,8 @@
 import React, { Component, PropTypes as t } from 'react'
 import { debounce } from 'lib/utils'
-const classNames = require('classnames')
+import classNames from 'classnames'
 
-const ColumnResizeHandle = require('components/ColumnResizeHandle')
+import ColumnResizeHandle from 'components/ColumnResizeHandle'
 
 export default class DataTableTitle extends Component {
   static propTypes = {

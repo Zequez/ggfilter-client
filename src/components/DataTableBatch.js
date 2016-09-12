@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 
-var classNames = require('classnames')
+import classNames from 'classnames'
 
 @connect()
 export default class DataTableBatch extends Component {

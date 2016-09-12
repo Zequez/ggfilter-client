@@ -1,5 +1,5 @@
-var filters = require('./filtersDefinitions')
-var sections = require('./filtersSectionsDefinitions')
+import filters from './filtersDefinitions'
+import sections from './filtersSectionsDefinitions'
 var extra = {}
 
 for (let sectionName in sections) {

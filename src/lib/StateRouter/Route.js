@@ -1,4 +1,4 @@
-const UrlPattern = require('url-pattern')
+import UrlPattern from 'url-pattern'
 import StatePattern from './StatePattern'
 
 export default class Route {

@@ -2,8 +2,8 @@ import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { setFilter } from 'stores/reducers/filterReducer'
 import { snapTo } from 'lib/utils'
-var gamesFetcher = require('sources/gamesFetcher')
-var SuggestionsBox = require('components/utils/SuggestionsBox')
+import gamesFetcher from 'sources/gamesFetcher'
+import SuggestionsBox from 'components/utils/SuggestionsBox'
 
 @connect(() => ({}), {
   setFilter

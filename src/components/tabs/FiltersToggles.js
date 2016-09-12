@@ -1,8 +1,8 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 
-var filtersDefinitions = require('sources/filtersDefinitions')
-var filtersSections = require('sources/filtersSectionsDefinitions')
+import filtersDefinitions from 'sources/filtersDefinitions'
+import filtersSections from 'sources/filtersSectionsDefinitions'
 
 import { toggle } from 'stores/reducers/filterReducer'
 

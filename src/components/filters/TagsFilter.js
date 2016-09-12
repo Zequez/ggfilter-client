@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 
-var SelectedTags = require('./TagsFilter/SelectedTags')
-var TagsSelector = require('./TagsFilter/TagsSelector')
+import SelectedTags from './TagsFilter/SelectedTags'
+import TagsSelector from './TagsFilter/TagsSelector'
 
 export default class TagsFilter extends Component {
   static propTypes = {

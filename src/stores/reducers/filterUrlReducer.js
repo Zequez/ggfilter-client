@@ -3,8 +3,8 @@ import { encode } from 'lib/urlificator'
 
 import { TOGGLE_FILTER, SET_QUERY_FILTER, REMOVE_QUERY_FILTER, SET_QUERY_SORT } from 'stores/actions'
 
-const axios = require('axios')
-const config = require('sources/config')
+import axios from 'axios'
+import config from 'sources/config'
 
 export const URLS_TYPES = {
   b64: 'b64',
@@ -54,7 +54,7 @@ export function filterUrlGenerateSid () {
     // TODO: fix filters and stuff thingy
     let filter = { columns: [], filters: {} }
     dispatch({ type: FILTER_URL_SID_START })
-    axios.post(`${config.HOST}/frozen_filters`, { filter })
+    axios.post(`${config.host}/frozen_filters`, { filter })
       .then((frozenFilter => {
         dispatch({ type: FILTER_URL_SID_END, sid: frozenFilter.sid })
       }, (error) => {

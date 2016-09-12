@@ -1,6 +1,6 @@
-var u = require('react-addons-update')
+import update from 'react-addons-update'
 
-export var u
+export var u = update
 
 export function debounce(delay, fn) {
   var timer = null;

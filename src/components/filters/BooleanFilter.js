@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 
-var enumColumns = require('sources/enumColumns')
-var classNames = require('classnames')
+import enumColumns from 'sources/enumColumns'
+import classNames from 'classnames'
 
 export default class BooleanFilter extends Component {
   static propTypes = {

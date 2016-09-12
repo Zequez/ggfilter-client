@@ -1,5 +1,5 @@
-var definitions = require('./filtersSectionsDefinitions')
-var filters = require('./filtersDefinitions')
+import definitions from './filtersSectionsDefinitions'
+import filters from './filtersDefinitions'
 
 var flatDefinitions = []
 for (let section in definitions) {

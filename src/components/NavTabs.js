@@ -2,7 +2,7 @@ import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 
 import { setMode, MODES } from 'stores/reducers/modeReducer'
-const NavTabLink = require('./NavTabLink')
+import NavTabLink from './NavTabLink'
 
 @connect((s) => ({
   toggledFilters: s.toggledFilters,

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as t } from 'react'
 
-var classNames = require('classnames')
+import classNames from 'classnames'
 var debounce = require('lib/utils').debounce
 
 export default class GamesLoader extends Component {

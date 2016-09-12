@@ -1,4 +1,4 @@
-var filtersDefinitions = require('./filtersDefinitions')
+import filtersDefinitions from './filtersDefinitions'
 
 var definitions = {
   'Game info': [

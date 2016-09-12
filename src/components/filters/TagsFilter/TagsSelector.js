@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 
 import { partial, loopNumber } from 'lib/utils'
-var TagsFinder = require('lib/TagsFinder')
+import TagsFinder from 'lib/TagsFinder'
 
 export default class TagsSelector extends Component {
   static propTypes = {

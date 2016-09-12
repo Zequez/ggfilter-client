@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as t } from 'react'
 
-const NavTabs = require('components/NavTabs')
+import NavTabs from 'components/NavTabs'
 
 export default class Layout extends Component {
   render () {

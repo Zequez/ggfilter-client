@@ -3,22 +3,22 @@ require('styles/App')
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 
-var filtersDefinitions = require('sources/filtersDefinitions')
+import filtersDefinitions from 'sources/filtersDefinitions'
 
 import { showLightbox } from 'stores/actions'
 import { getGames, getMoreGames } from 'stores/reducers/gamesReducer'
 
 import { MODES } from 'stores/reducers/modeReducer'
 
-const Layout = require('components/Layout')
-const DataTable = require('components/DataTable')
-const GamesLoader = require('components/GamesLoader')
-const Lightbox = require('components/Lightbox')
+import Layout from 'components/Layout'
+import DataTable from 'components/DataTable'
+import GamesLoader from 'components/GamesLoader'
+import Lightbox from 'components/Lightbox'
 // Modes
-const FiltersToggles = require('components/tabs/FiltersToggles')
-const SourcesTab = require('components/tabs/SourcesTab')
-const SysreqCalc = require('components/tabs/SysreqCalc')
-const ShareTab = require('components/tabs/ShareTab')
+import FiltersToggles from 'components/tabs/FiltersToggles'
+import SourcesTab from 'components/tabs/SourcesTab'
+import SysreqCalc from 'components/tabs/SysreqCalc'
+import ShareTab from 'components/tabs/ShareTab'
 
 @connect(
   (s) => ({

@@ -1,6 +1,6 @@
 import { u } from 'lib/utils'
 
-const gamesFetcher = require('sources/gamesFetcher')
+import gamesFetcher from 'sources/gamesFetcher'
 
 export const initialState = {
   batches: [],

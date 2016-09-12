@@ -1,1 +1,5 @@
-export const HOST = 'http://localhost:3000'
+const config = {
+  host: 'http://localhost:3000'
+}
+
+export default config

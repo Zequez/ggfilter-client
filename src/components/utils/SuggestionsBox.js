@@ -1,5 +1,5 @@
 import React, { Component, PropTypes as t } from 'react'
-var SuggestionsDropdown = require('./SuggestionsDropdown')
+import SuggestionsDropdown from './SuggestionsDropdown'
 
 export default class SuggestionsBox extends Component {
   static propTypes = {

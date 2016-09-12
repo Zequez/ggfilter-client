@@ -2,7 +2,7 @@ import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { setFilter, clearFilter } from 'stores/reducers/filterReducer'
 
-const classNames = require('classnames')
+import classNames from 'classnames'
 
 @connect((s) => ({}), {
   setFilter,

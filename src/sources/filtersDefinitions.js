@@ -1,24 +1,24 @@
-var options = require('sources/filtersOptions')
+import options from 'sources/filtersOptions'
 
-var BaseToggle = require('components/toggles/BaseToggle')
+import BaseToggle from 'components/toggles/BaseToggle'
 
-var RawColumn       = require('components/columns/RawColumn')
-var PriceColumn     = require('components/columns/PriceColumn')
-var RatioColumn     = require('components/columns/RatioColumn')
-var LinkColumn      = require('components/columns/LinkColumn')
-var BooleanColumn   = require('components/columns/BooleanColumn')
-var ImagesColumn    = require('components/columns/ImagesColumn')
-var TagsColumn      = require('components/columns/TagsColumn')
-var SystemReqColumn = require('components/columns/SystemReqColumn')
-var TimeAgoColumn   = require('components/columns/TimeAgoColumn')
+import RawColumn from 'components/columns/RawColumn'
+import PriceColumn from 'components/columns/PriceColumn'
+import RatioColumn from 'components/columns/RatioColumn'
+import LinkColumn from 'components/columns/LinkColumn'
+import BooleanColumn from 'components/columns/BooleanColumn'
+import ImagesColumn from 'components/columns/ImagesColumn'
+import TagsColumn from 'components/columns/TagsColumn'
+import SystemReqColumn from 'components/columns/SystemReqColumn'
+import TimeAgoColumn from 'components/columns/TimeAgoColumn'
 
-var TextFilter        = require('components/filters/TextFilter')
-var NumberFilter      = require('components/filters/NumberFilter')
-var RangeFilter       = require('components/filters/RangeFilter')
-var BooleanFilter     = require('components/filters/BooleanFilter')
-var NullFilter        = require('components/filters/NullFilter')
-var TagsFilter        = require('components/filters/TagsFilter')
-var FancyRangeFilter  = require('components/filters/FancyRangeFilter')
+import TextFilter from 'components/filters/TextFilter'
+import NumberFilter from 'components/filters/NumberFilter'
+import RangeFilter from 'components/filters/RangeFilter'
+import BooleanFilter from 'components/filters/BooleanFilter'
+import NullFilter from 'components/filters/NullFilter'
+import TagsFilter from 'components/filters/TagsFilter'
+import FancyRangeFilter from 'components/filters/FancyRangeFilter'
 
 var filtersDefinitions = {
   name: {

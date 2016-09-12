@@ -8,11 +8,11 @@ import getStore from 'stores/AppStore'
 import history from 'lib/StateRouter/history'
 import router from 'sources/stateRoutes'
 
-const App = require('components/App')
-const getTags = require('sources/getTags')
+import App from 'components/App'
+import getTags from 'sources/getTags'
 
 console.logRender = function (componentName) {
-  console.info(`<${componentName}/>`)
+  // console.info(`<${componentName}/>`)
 }
 
 getTags((tags) => {
