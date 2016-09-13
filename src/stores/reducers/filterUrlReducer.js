@@ -1,10 +1,10 @@
 import { u } from 'lib/utils'
-import { encode } from 'lib/urlificator'
+import { encode } from 'lib/b64FilterGenerator'
+import { createFilter } from 'sources/api'
 
-import { TOGGLE_FILTER, SET_QUERY_FILTER, REMOVE_QUERY_FILTER, SET_QUERY_SORT } from 'stores/actions'
+import { FILTER_TOGGLE, FILTER_SET, FILTER_CLEAR, FILTER_SORT } from 'stores/reducers/filterReducer'
 
-import axios from 'axios'
-import config from 'sources/config'
+export const WHAT = 'rsaersinaioerast'
 
 export const URLS_TYPES = {
   b64: 'b64',
@@ -27,9 +27,9 @@ export const initialState = {
 // User loads an official filter -> official url
 //   User modifies anything -> base64
 
-export const FILTER_URL_SID_START = Symbol('FILTER_URL_SID_START')
-export const FILTER_URL_SID_END = Symbol('FILTER_URL_SID_END')
-export const FILTER_URL_SID_ERROR = Symbol('FILTER_URL_SID_ERROR')
+export const FILTER_URL_SID_START = 'FILTER_URL_SID_START'
+export const FILTER_URL_SID_END = 'FILTER_URL_SID_END'
+export const FILTER_URL_SID_ERROR = 'FILTER_URL_SID_ERROR'
 
 // export function navigateToFilterUrl () {
 //   return function (dispatch, getState) {
@@ -50,33 +50,32 @@ export const FILTER_URL_SID_ERROR = Symbol('FILTER_URL_SID_ERROR')
 
 export function filterUrlGenerateSid () {
   return function (dispatch, getState) {
-    let state = getState()
-    // TODO: fix filters and stuff thingy
-    let filter = { columns: [], filters: {} }
-    dispatch({ type: FILTER_URL_SID_START })
-    axios.post(`${config.host}/frozen_filters`, { filter })
-      .then((frozenFilter => {
-        dispatch({ type: FILTER_URL_SID_END, sid: frozenFilter.sid })
+    let { filter, filterUrl } = getState()
+    if (filterUrl.type !== URLS_TYPES.sid) {
+      dispatch({ type: FILTER_URL_SID_START })
+      createFilter(filter).then(({sid}) => {
+        dispatch({ type: FILTER_URL_SID_END, sid })
       }, (error) => {
         console.error(error)
-      }))
+      })
+    }
   }
 }
 
-export default function filterUrl (state = initialState, action) {
+export function reducer (state = initialState, action) {
   switch (action.type) {
     case FILTER_URL_SID_START:
       break
     case FILTER_URL_SID_END:
-      state = u(state, { sid: {$set: action.hash} })
+      state = u(state, { type: {$set: URLS_TYPES.sid}, sid: {$set: action.sid} })
       break
     case FILTER_URL_SID_ERROR:
       state = u(state, { error: {$set: 'Some error IDK'} })
       break
-    case TOGGLE_FILTER:
-    case SET_QUERY_FILTER:
-    case REMOVE_QUERY_FILTER:
-    case SET_QUERY_SORT:
+    case FILTER_TOGGLE:
+    case FILTER_SET:
+    case FILTER_CLEAR:
+    case FILTER_SORT:
       state = u(state, { type: {$set: URLS_TYPES.b64} })
       break
   }

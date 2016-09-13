@@ -1,5 +1,5 @@
 import { u } from 'lib/utils'
-import { decode } from 'lib/urlificator'
+import { decode } from 'lib/b64FilterGenerator'
 import { getGames } from 'stores/reducers/gamesReducer'
 // import { dirty } from 'stores/reducers/filterUrlReducer'
 import filtersSectionsFlatSort from 'sources/filtersSectionsFlatSort'
@@ -102,6 +102,10 @@ export function addQueryTag (tagId) {
 
 export function setFilterFromB64 (b64) {
   return { type: FILTER_SET_FULL, filter: decode(b64) }
+}
+
+export function setFilterFromSid (sid) {
+  console.log('SID!', sid)
 }
 
 // =============================================================================

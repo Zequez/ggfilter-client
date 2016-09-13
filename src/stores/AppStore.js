@@ -5,7 +5,7 @@ import { logger, crashReporter } from './storeMiddleware'
 import columnsWidth from './reducers/columnsWidthReducer'
 import lightbox from './reducers/lightboxReducer'
 import tags from './reducers/tagsReducer'
-import filterUrl from './reducers/filterUrlReducer'
+const filterUrl = require('./reducers/filterUrlReducer').reducer
 const games = require('./reducers/gamesReducer').reducer
 const filter = require('./reducers/filterReducer').reducer
 const options = require('./reducers/optionsReducer').reducer
