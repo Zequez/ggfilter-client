@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var _ = require('lodash');
+var CircularDependencyPlugin = require('circular-dependency-plugin')
 
 var baseConfig = require('./base');
 
@@ -14,7 +15,13 @@ var config = _.merge({
   devtool: 'eval',
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new CircularDependencyPlugin({
+      // exclude detection of files based on a RegExp
+      exclude: /node_modules/,
+      // add errors to webpack instead of warnings
+      // failOnError: true
+    })
   ]
 }, baseConfig);
 
