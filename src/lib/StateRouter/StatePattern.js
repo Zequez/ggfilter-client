@@ -23,7 +23,7 @@ export default class StatePattern {
     }
   }
 
-  match (store) {
+  match (store, force = false) {
     let params = {}
 
     for (let i = 0; i < this.storeBreadcrumbs.length; ++i) {
@@ -34,7 +34,7 @@ export default class StatePattern {
 
       if (expectedVal[0] === ':') {
         params[expectedVal.slice(1)] = storeVal
-      } else if (storeVal !== expectedVal) {
+      } else if (storeVal !== expectedVal && !force) {
         return null
       }
     }

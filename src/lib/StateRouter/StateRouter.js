@@ -35,6 +35,14 @@ export default class StateRouter {
     }
   }
 
+  urlGen (name) {
+    let route = this.routesByName[name]
+    if (route) {
+      let params = route.matchState(this.store.getState(), true)
+      return route.stringify(params)
+    }
+  }
+
   route (name) {
     return this.routesByName[name]
   }

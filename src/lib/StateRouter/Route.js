@@ -22,8 +22,8 @@ export default class Route {
     return this.pattern.match(path)
   }
 
-  matchState (state) {
-    let match = this.statePattern.match(state)
+  matchState (state, force) {
+    let match = this.statePattern.match(state, force)
     if (this.stateExtract) match = {...match, ...this.stateExtract(state)}
     return match
   }
