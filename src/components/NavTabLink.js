@@ -28,11 +28,11 @@ export default class NavTabLink extends Component {
   render () {
     let { mode, currentMode, text, icon } = this.props
     let href = router.url(mode)
-    let activeClass = mode === currentMode ? 'active' : ''
+    let activeClass = mode === currentMode ? ' active' : ''
 
     return (
       <li>
-        <a className={activeClass} href={href} onClick={::this.onClick}>
+        <a className={'btn' + activeClass} href={href} onClick={::this.onClick}>
           {icon ? (
               <i className={`fa icon-${icon}`}></i>
           ) : text}
