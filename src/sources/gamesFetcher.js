@@ -30,7 +30,7 @@ export default function gamesFetcher (filter, page, options) {
   let queryFilter = generateQueryFilter(filter, page, options)
   let queryString = qs.stringify(queryFilter, {arrayFormat: 'brackets'})
 
-  return axios.get(`${config.host}/games.json?${queryString}`)
+  return axios.get(`${config.apiHost}/games.json?${queryString}`)
     .then((response) => {
       return response.data
     }, (error) => {

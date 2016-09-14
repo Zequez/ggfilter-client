@@ -2,6 +2,7 @@ import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { encode } from 'lib/b64FilterGenerator'
 import router from 'sources/stateRoutes'
+import config from 'sources/config'
 import { filterUrlGenerateSid, URLS_TYPES } from 'stores/reducers/filterUrlReducer'
 
 @connect((s) => ({
@@ -28,11 +29,15 @@ export default class ShareTab extends Component {
   }
 
   appropiateFilterPath () {
+    let path = ''
     switch (this.props.filterUrlType) {
-      case URLS_TYPES.b64: return router.urlGen('filterB64', encode(this.props.filter))
-      case URLS_TYPES.sid: return router.url('filterSid', this.props.sid)
-      case URLS_TYPES.official: return ''
+      case URLS_TYPES.b64: path = router.urlGen('filterB64', encode(this.props.filter))
+        break
+      case URLS_TYPES.sid: path = router.url('filterSid', this.props.sid)
+        break
+      // case URLS_TYPES.official: return ''
     }
+    return config.origin + path
   }
 
   render () {
