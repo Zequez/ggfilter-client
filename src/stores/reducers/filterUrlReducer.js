@@ -2,7 +2,7 @@ import { u } from 'lib/utils'
 import { encode } from 'lib/b64FilterGenerator'
 import { createFilter } from 'sources/api'
 
-import { FILTER_TOGGLE, FILTER_SET, FILTER_CLEAR, FILTER_SORT } from 'stores/reducers/filterReducer'
+import { FILTER_LOADING_FROM_SID, FILTER_TOGGLE, FILTER_SET, FILTER_CLEAR, FILTER_SORT } from 'stores/reducers/filterReducer'
 
 export const WHAT = 'rsaersinaioerast'
 
@@ -67,6 +67,7 @@ export function reducer (state = initialState, action) {
     case FILTER_URL_SID_START:
       break
     case FILTER_URL_SID_END:
+    case FILTER_LOADING_FROM_SID:
       state = u(state, { type: {$set: URLS_TYPES.sid}, sid: {$set: action.sid} })
       break
     case FILTER_URL_SID_ERROR:

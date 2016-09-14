@@ -37,7 +37,6 @@ export default class App extends Component {
   }
 
   componentWillMount () {
-    if (!this.props.games.batches.length) this.props.getGames()
     this.fillStaticFiltersDefinitionsOptions()
     this.cacheFiltersDefinitions()
   }

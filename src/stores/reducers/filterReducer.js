@@ -1,6 +1,7 @@
 import { u } from 'lib/utils'
 import { decode } from 'lib/b64FilterGenerator'
 import { getGames } from 'stores/reducers/gamesReducer'
+import { getFilter } from 'sources/api'
 // import { dirty } from 'stores/reducers/filterUrlReducer'
 import filtersSectionsFlatSort from 'sources/filtersSectionsFlatSort'
 
@@ -48,6 +49,8 @@ export const FILTER_SET = 'FILTER_SET'
 export const FILTER_CLEAR = 'FILTER_CLEAR'
 export const FILTER_SORT = 'FILTER_SORT'
 export const FILTER_SET_FULL = 'FILTER_SET_FULL'
+export const FILTER_LOADING_FROM_SID = 'FILTER_LOADING_FROM_SID'
+export const FILTER_LOADING_ERROR = 'FILTER_LOADING_ERROR'
 
 // =============================================================================
 // Helpers
@@ -101,11 +104,18 @@ export function addQueryTag (tagId) {
 }
 
 export function setFilterFromB64 (b64) {
-  return { type: FILTER_SET_FULL, filter: decode(b64) }
+  return dispatchAndGetGames({ type: FILTER_SET_FULL, filter: decode(b64) })
 }
 
 export function setFilterFromSid (sid) {
-  console.log('SID!', sid)
+  return function (dispatch, getState) {
+    dispatch({ type: FILTER_LOADING_FROM_SID, sid })
+    getFilter(sid).then(({filter}) => {
+      dispatch(dispatchAndGetGames({ type: FILTER_SET_FULL, filter: JSON.parse(filter) }))
+    }, (error) => {
+      dispatch({ type: FILTER_LOADING_ERROR, error })
+    })
+  }
 }
 
 // =============================================================================

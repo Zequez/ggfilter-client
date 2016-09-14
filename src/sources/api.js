@@ -10,5 +10,7 @@ export function createFilter (filter) {
 }
 
 export function getFilter (sid) {
-  return axios.get(`${config.apiHost}/filters/${sid}`)
+  return axios.get(`${config.apiHost}/filters/${sid}`).then((response) => {
+    return response.data
+  })
 }
