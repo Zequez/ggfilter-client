@@ -1,0 +1,25 @@
+.header
+  height: $r*3
+  text-align: center
+  .logo
+    width: 280px
+    height: $r*4
+    margin: 0 auto
+    background-image: url(~images/logo-small.png)
+    text-indent: -9999px
+    font-size: $font-xx-larger
+    font-weight: bold
+  .slogan
+
+.tabs-content
+  +clearfix
+  padding: $r
+  border-top: solid 1px lighten($ocean-blue, 3%)
+  background-color: $ocean-blue
+  background-image: linear-gradient(rgba(#000, 0.15) 0%, rgba(#000, 0) 65%)
+  color: lighten($white, 10%)
+  font-weight: 300
+  .tab-content
+    display: none
+  .tab-content.active
+    display: block

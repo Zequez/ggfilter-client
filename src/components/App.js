@@ -1,5 +1,3 @@
-require('styles/App')
-
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 
