@@ -46,7 +46,7 @@ export default class ShareTab extends Component {
     return (
       <div className='sharer'>
         <input value={url} onClick={this.selectAll} className='sharer-url' readOnly={true}/>
-        <button onClick={::this.shorten}>Shorten</button>
+        <button className='btn sharer-shorten' onClick={::this.shorten}>Shorten</button>
       </div>
     )
   }
