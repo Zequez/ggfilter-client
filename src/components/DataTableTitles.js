@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
-import { adjustColumnWidth, clearColumnWidth } from 'stores/actions'
+import { adjustColumnWidth, clearColumnWidth } from 'stores/reducers/columnsWidthReducer'
 import { setSort } from 'stores/reducers/filterReducer'
 
 import DataTableTitle from 'components/DataTableTitle'

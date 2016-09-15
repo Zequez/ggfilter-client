@@ -1,7 +1,29 @@
 import { u } from 'lib/utils'
-import { COLUMNS_WIDTH_ADJUST, COLUMNS_WIDTH_CLEAR } from 'stores/actions'
 
-const initialState = {}
+export const initialState = {}
+
+// =============================================================================
+// Actions
+// =============================================================================
+
+export const COLUMNS_WIDTH_ADJUST = 'COLUMNS_WIDTH_ADJUST'
+export const COLUMNS_WIDTH_CLEAR = 'COLUMNS_WIDTH_CLEAR'
+
+// =============================================================================
+// Actions Creators
+// =============================================================================
+
+export function adjustColumnWidth (name, amount) {
+  return { type: COLUMNS_WIDTH_ADJUST, name, amount }
+}
+
+export function clearColumnWidth (name) {
+  return { type: COLUMNS_WIDTH_ADJUST, name }
+}
+
+// =============================================================================
+// Reducer
+// =============================================================================
 
 export default function columnsWidthReducer (state = initialState, action) {
   if (action.type === COLUMNS_WIDTH_ADJUST) {

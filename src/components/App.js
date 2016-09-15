@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import filtersDefinitions from 'sources/filtersDefinitions'
 
-import { showLightbox } from 'stores/actions'
+import { showLightbox } from 'stores/reducers/lightboxReducer'
 import { getGames, getMoreGames } from 'stores/reducers/gamesReducer'
 
 import { MODES } from 'stores/reducers/modeReducer'

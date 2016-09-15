@@ -4,7 +4,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
-import { setAllTags } from 'stores/actions'
+import { setAllTags } from 'stores/reducers/tagsReducer'
 import getStore from 'stores/AppStore'
 
 import history from 'lib/StateRouter/history'

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes as t } from 'react'
-import { showLightbox } from 'stores/actions'
+import { showLightbox } from 'stores/reducers/lightboxReducer'
 
 class ImagesColumn extends Component {
   static noOverflowContainer = true
