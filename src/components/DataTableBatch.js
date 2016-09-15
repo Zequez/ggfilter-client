@@ -1,9 +1,12 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
+import { setFilter } from 'stores/reducers/filterReducer'
 
 import classNames from 'classnames'
 
-@connect()
+@connect((s) => ({}), {
+  setFilter
+})
 export default class DataTableBatch extends Component {
   static propTypes = {
     games: t.array.isRequired,
@@ -38,6 +41,13 @@ export default class DataTableBatch extends Component {
     return <div className='overflow-cell'>{el}</div>
   }
 
+  activeFilterParams (filter) {
+    return filter.columnActive ? {
+      setFilter: this.props.setFilter.bind(this, filter.name),
+      filterParams: this.props.filtersParams[filter.name]
+    } : {}
+  }
+
   render () {
     console.logRender('DataTableBatch')
 
@@ -64,8 +74,7 @@ export default class DataTableBatch extends Component {
               <filter.column
                 options={filter.columnOptions}
                 name={filter.name}
-                dispatch={this.props.dispatch}
-                queryFilter={this.props.filtersParams[filter.name]}
+                {...this.activeFilterParams(filter)}
                 {...this.columnInputs(game, filter)}/>
             )}
           </td>

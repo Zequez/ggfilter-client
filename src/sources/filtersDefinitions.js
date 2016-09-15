@@ -165,6 +165,7 @@ var filtersDefinitions = {
       tags: [] // We fill this up later, sadly
     },
     column: TagsColumn,
+    columnActive: true,
     columnOptions: {
       tags: [] // We fill this up later, sadly
     },
@@ -214,6 +215,7 @@ for (let filterName in filtersDefinitions) {
   if (!filter.filter)        filter.filter = TextFilter
   if (!filter.filterOptions) filter.filterOptions = {}
 
+  if (filter.columnActive == null) filter.columnActive = false
   if (!filter.column)        filter.column = RawColumn
   if (!filter.columnInputs)  filter.columnInputs = { value: filter.name }
   if (!filter.columnOptions) filter.columnOptions = { }

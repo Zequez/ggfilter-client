@@ -1,6 +1,5 @@
 import React, { Component, PropTypes as t } from 'react'
 
-import { addQueryTag } from 'stores/reducers/filterReducer'
 import { partial } from 'lib/utils'
 
 export default class TagsColumn extends Component {
@@ -9,20 +8,28 @@ export default class TagsColumn extends Component {
     options: t.shape({
       tags: t.arrayOf(t.string)
     }).isRequired,
-    queryFilter: t.object,
-    dispatch: t.func.isRequired
+    filterParams: t.object,
+    setFilter: t.func.isRequired
+  }
+
+  paramsTags () {
+    return (this.props.filterParams && this.props.filterParams.tags) || []
   }
 
   selectTag = (tagId) => {
-    this.props.dispatch(addQueryTag(tagId))
+    let paramsTags = this.paramsTags()
+
+    if (paramsTags.indexOf(tagId) === -1) {
+      this.props.setFilter({tags: paramsTags.concat(tagId)})
+    }
   }
 
   render () {
     let tags = this.props.options.tags
-    let queryTags = (this.props.queryFilter && this.props.queryFilter.tags) || []
+    let paramsTags = this.paramsTags()
 
     let tagsElements = this.props.value.map((tagId) => {
-      let liClass = queryTags.indexOf(tagId) === -1 ? '' : 'selected'
+      let liClass = paramsTags.indexOf(tagId) === -1 ? '' : 'selected'
       return (
         <li key={tagId} onClick={partial(this.selectTag, tagId)} className={liClass}>
           {tags[tagId]}

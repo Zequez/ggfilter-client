@@ -46,7 +46,6 @@ initialState.visible = filtersSectionsFlatSort(initialState.visible)
 
 export const FILTER_TOGGLE = 'FILTER_TOGGLE'
 export const FILTER_SET = 'FILTER_SET'
-export const FILTER_CLEAR = 'FILTER_CLEAR'
 export const FILTER_SORT = 'FILTER_SORT'
 export const FILTER_SET_FULL = 'FILTER_SET_FULL'
 export const FILTER_LOADING_FROM_SID = 'FILTER_LOADING_FROM_SID'
@@ -75,10 +74,6 @@ export function setFilter (name, data) {
   return dispatchAndGetGames({ type: FILTER_SET, name, data })
 }
 
-export function clearFilter (name) {
-  return dispatchAndGetGames({ type: FILTER_CLEAR, name })
-}
-
 export function setSort (name) {
   return dispatchAndGetGames({ type: FILTER_SORT, name })
 }
@@ -87,7 +82,7 @@ export function setFullFilter (filter) {
   return dispatchAndGetGames({ type: FILTER_SET_FULL, filter })
 }
 
-export function addQueryTag (tagId) {
+export function addTagFilter (tagId) {
   return function (dispatch, getState) {
     let tagsFilter = getState().filter.params.tags
     let newTagsFilter = {}
@@ -142,11 +137,9 @@ export function reducer (state = initialState, action) {
 
     case FILTER_SET:
       state = u(state, {params: {[action.name]: {$set: action.data}}})
-      break
-
-    case FILTER_CLEAR:
-      state = u(state, {params: {[action.name]: {$set: {}}}})
-      delete state.params[action.name]
+      if (action.data == null) {
+        delete state.params[action.name]
+      }
       break
 
     case FILTER_SORT:
