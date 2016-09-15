@@ -1,4 +1,4 @@
-import { combineReducers, createStore, applyMiddleware } from 'redux'
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { logger, crashReporter } from './storeMiddleware'
 
@@ -13,9 +13,8 @@ const mode = require('./reducers/modeReducer').reducer
 
 export default function getStore () {
   let reducer = combineReducers({ mode, games, filter, columnsWidth, lightbox, tags, filterUrl, options })
-  let createStoreWithMiddleware = applyMiddleware(
-    thunkMiddleware,
-    logger
-  )(createStore) //crashReporter
-  return createStoreWithMiddleware(reducer, {})
+  return createStore(reducer, {}, compose(
+    applyMiddleware(thunkMiddleware, logger), //crashReporter
+    window.devToolsExtension ? window.devToolsExtension() : f => f
+  ))
 }
