@@ -24,40 +24,84 @@ var generateDatesBack = function (years) {
   return hash
 }
 
+// range: [1, 2, 3, 4, 5],
+// rangeLabels: null,
+// nullifyStart: true,
+// nullifyEnd: true,
+// fallbackRange: null, // [first, last]
+// fallbackRangeTo: 'all', // 'left' || 'right' || 'all' || 'no'
+// projectFallbackMap: false,
+// labelInterpolation: '%s',
+// gtInterpolation: '≥%s',
+// ltInterpolation: '≤%s',
+// rangeInterpolation: '[%s to %s]',
+// fullRangeName: 'Any',
+// namedRanges: {}, // eg: {'Free': [0, 0]}
+// mappedRanges: [
+//   // eg: [[1, 1], [1, 1]] // Prevents it from mapping to 1-5
+//   // eg: [[5, 5],   [1, 5]] // Maps a single 5 to 1-5
+//   // eg: [[1, 2], [1, 1]] // Maps to 1 if selecting the range 1-2
+// ]
+
+// class FancyRangeFilterOptions {
+//   // This is the data sent to the server
+//   units = []
+//   unitsLabels = []
+//   rangesLabels = []
+//
+//   null Infinity
+//
+//   rangesMap = []
+//   unitsMap = []
+//
+//   unitLabelInterpolation = '%s'
+//   rangeLabelInterpolation = '%s to %s'
+//
+//   constructor (options) {
+//
+//   }
+// }
+//
+// let priceRange = new FancyRangeFilterOptions(
+//
+// )
+
 export default {
   filters: {
     range: {
       price: {
-        range: [0, 1, 100, 300, 500, 1000, 1500, 2000, 3000, 4000, 5000, 6000, null],
-        rangeLabels: ['Free', '$0.01', '$1', '$3', '$5', '$10', '$15', '$20', '$30', '$40', '$50', '$60', '∞'],
+        range: [0, 1, 100, 300, 500, 1000, 1500, 2000, 3000, 4000, 5000, 6000, Infinity],
         namedRanges: {
-          'Free': [0, 0],
-          'Non-free': [1, null],
-          'Any price': [0, null]
+          '0': 'Free',
+          '1-Infinity': 'Non-free',
+          '1': '$0.01'
         },
-        mappedRanges: [
-          [[0, 0],         [0, 0]],
-          [[0, 1],         [0, 0]],
-          [[null, null],   [1, null]],
-          [[1, 1],         [1, null]],
-        ]
+        label: {
+          fullRangeLabel: 'Any price',
+          interpolation: (v) => '$' + Math.floor(v / 100)
+        },
+        mappedRanges: {
+          '0-1': [0, 0], // Override strictlyRangeMode
+          // '0': [0, 0], // Override autohook
+          // '1': [1, Infinity],
+          // 'Infinity': [1, Infinity]
+        },
+        strictlyRangeMode: true
       },
       discount: {
         range: [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-        labelInterpolation: '%s%',
         namedRanges: {
-          'NotOnSale': [0, 0],
-          'On sale':     [1, 100],
-          'Any':         [0, 100],
-          'FREE!?':      [100, 100]
+          '0': 'NotOnSale',
+          '1-100': 'On sale',
+          '100': 'FREE!?'
         },
-        mappedRanges: [
-          [[0, 0],     [0, 0]],
-          [[0, 1],     [0, 0]],
-          [[100, 100], [100, 100]],
-          [[1, 1],     [1, 100]],
-        ],
-        fallbackRange: [1, 100]
+        mappedRanges: {
+          '0': [0, 0] // Override the autohook
+        },
+        label: {
+          interpolation: '{v}%'
+        },
+        autohook: 100
       },
       right: function(range, interpol) {
         let r = {

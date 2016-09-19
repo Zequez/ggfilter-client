@@ -20,6 +20,44 @@ import NullFilter from 'components/filters/NullFilter'
 import TagsFilter from 'components/filters/TagsFilter'
 import FancyRangeFilter from 'components/filters/FancyRangeFilter'
 
+function componentName (component) {
+  return component.toString().match(/function\s*(\w+)/)[1]
+}
+
+class FilterDefinition {
+  name = ''
+  title = ''
+
+  width = 100
+
+  toggle = BaseToggle
+  toggleType = null
+
+  filter = TextFilter
+  filterType = null
+  filterOptions = {}
+
+  column = RawColumn
+  columnType = null
+  columnActive = false
+  columnInputs = null
+  columnOptions = {}
+
+  constructor (name, args) {
+    this.name = name
+    if (args.sort == null) this.sort = name
+    if (!args.columnInputs) this.columnInputs = {value: name}
+
+    for (let attr in args) {
+      this[attr] = args[attr]
+    }
+
+    this.toggleType = componentName(this.toggle)
+    this.filterType = componentName(this.filter)
+    this.columnType = componentName(this.column)
+  }
+}
+
 var filtersDefinitions = {
   name: {
     title: 'Name',
@@ -59,14 +97,23 @@ var filtersDefinitions = {
   playtime_mean: {
     title: 'Playtime avg',
     filter: FancyRangeFilter,
-    filterOptions: options.filters.range.right([0, 1.5, 3, 4, 5, 7, 9, 13, 21, 39, null]),
+    filterOptions: {
+      range: [0, 1.5, 3, 4, 5, 7, 9, 13, 21, 39, Infinity],
+      autohook: Infinity
+    },
     columnOptions: { round: 100 },
     width: 60
   },
   playtime_median: {
     title: 'Playtime median',
     filter: FancyRangeFilter,
-    filterOptions: options.filters.range.right([0, 0.7, 1.3, 1.9, 2.7, 3.5, 4.7, 6.7, 9.7, 16.6, null]),
+    filterOptions: {
+      range: [0, 0.7, 1.3, 1.9, 2.7, 3.5, 4.7, 6.7, 9.7, 16.6, Infinity],
+      autohook: Infinity
+      // mappedRanges: {
+      //   'Infinity':
+      // }
+    },
     columnOptions: { round: 100, interpolation: '%shs' },
     width: 60
   },
@@ -121,25 +168,25 @@ var filtersDefinitions = {
     title: 'Steam features',
     filter: BooleanFilter,
     column: BooleanColumn,
-    width: 120+10
+    width: 120 + 10
   },
   platforms: {
     title: 'Platforms',
     filter: BooleanFilter,
     column: BooleanColumn,
-    width: 72+10
+    width: 72 + 10
   },
   players: {
     title: 'Players',
     filter: BooleanFilter,
     column: BooleanColumn,
-    width: 96+10
+    width: 96 + 10
   },
   vr: {
     title: 'Virtual reality',
     filter: BooleanFilter,
     column: BooleanColumn,
-    width: 24+10
+    width: 24 + 10
   },
   controller_support: {
     title: 'Controller support',
@@ -148,6 +195,7 @@ var filtersDefinitions = {
       range: [1, 2, 3],
       rangeLabels: ['No', 'Partial', 'Full'],
       fallbackRangeTo: 'no',
+      singleMode: true
     }
   },
   steam_thumbnail: {
@@ -181,7 +229,7 @@ var filtersDefinitions = {
     title: 'SysReq. Index®',
     filter: FancyRangeFilter,
     filterOptions: {
-      range: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100],
+      range: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
     },
     width: 150
   },
@@ -194,35 +242,8 @@ var filtersDefinitions = {
   }
 }
 
-function extractName(component) {
-  let str = component.toString()
-  if (str.match(/function\s*Connect\(/)) {
-    return extractName(component.WrappedComponent)
-  }
-  else {
-    return str.match(/function\s*(\w+)/)[1]
-  }
-}
-
-for (let filterName in filtersDefinitions) {
-  let filter = filtersDefinitions[filterName]
-
-  filter.name = filterName
-  if (filter.sort == null)   filter.sort = filter.name
-  if (!filter.toggle) filter.toggle = BaseToggle
-  if (!filter.width)  filter.width = 100
-
-  if (!filter.filter)        filter.filter = TextFilter
-  if (!filter.filterOptions) filter.filterOptions = {}
-
-  if (filter.columnActive == null) filter.columnActive = false
-  if (!filter.column)        filter.column = RawColumn
-  if (!filter.columnInputs)  filter.columnInputs = { value: filter.name }
-  if (!filter.columnOptions) filter.columnOptions = { }
-
-  filter.toggleType = filter.toggle.toString().match(/function\s*(\w+)/)[1]
-  filter.filterType = filter.filter.toString().match(/function\s*(\w+)/)[1]
-  filter.columnType = extractName(filter.column)
+for (let name in filtersDefinitions) {
+  filtersDefinitions[name] = new FilterDefinition(name, filtersDefinitions[name])
 }
 
 export default filtersDefinitions

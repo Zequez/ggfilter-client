@@ -7,8 +7,8 @@ import filtersSectionsFlatSort from 'sources/filtersSectionsFlatSort'
 
 const initialState = {
   visible: [
-    'steam_id',
-    'name',
+    // 'steam_id',
+    // 'name',
     // 'system_requirements',
     'lowest_steam_price',
     'steam_discount',
@@ -16,11 +16,11 @@ const initialState = {
     'metacritic',
     'steam_reviews_count',
     'steam_reviews_ratio',
-    'platforms',
-    'players',
-    'vr',
+    // 'platforms',
+    // 'players',
+    // 'vr',
     // 'steam_thumbnail',
-    'tags',
+    // 'tags',
     'playtime_median',
     'controller_support',
     // 'images'

@@ -1,5 +1,5 @@
-var path = require('path');
-var srcPath = path.join(__dirname, '/../src/');
+var path = require('path')
+var srcPath = path.join(__dirname, '/../src/')
 
 module.exports = {
   devtool: 'eval',
@@ -18,6 +18,9 @@ module.exports = {
         ]
       },
       { test: /\.coffee$/, loader: 'babel!coffee' }
+    ],
+    noParse: [
+      /node_modules\/sinon\//
     ]
   },
   resolve: {
@@ -31,7 +34,15 @@ module.exports = {
       styles: srcPath + 'styles/',
       images: srcPath + '/images/',
       lib: srcPath + '/lib/',
-      compass: 'compass-mixins/lib/compass'
+      compass: 'compass-mixins/lib/compass',
+      sinon: 'sinon/pkg/sinon'
     }
+  },
+  externals: {
+    'jsdom': 'window',
+    'cheerio': 'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true,
+    'react/addons': true
   }
-};
+}

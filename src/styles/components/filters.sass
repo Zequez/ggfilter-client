@@ -147,9 +147,9 @@
 .FancyRangeFilter
   position: relative
 
-  // Quick hack
+  Quick hack
   &.lowest_steam_price
-    .fancy-rf:after
+    .fancy-rf-sensor:after
       content: 'Free'
       position: absolute
       top: 0
@@ -171,7 +171,7 @@
     background-color: mix($green, $input-white, 30%)
     box-shadow: inset rgba(#000, 0.3) 0 0 10px
     font-size: $font-smaller
-    cursor: default
+    cursor: col-resize
 
     -webkit-touch-callout: none
     -webkit-user-select: none
@@ -179,6 +179,14 @@
     -moz-user-select: none
     -ms-user-select: none
     user-select: none
+
+    &-sensor
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      z-index: 6
 
     &-label
       position: absolute
@@ -201,7 +209,7 @@
 
       &.mouse-label > span
         border-color: $blue
-        background-color: rgba(#000, 0.2)
+        background-color: rgba(#fff, 0.8)
         color: $dark-blue
         font-weight: bold
 
