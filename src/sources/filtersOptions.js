@@ -1,24 +1,33 @@
 var yearsAgo = function (years) {
-  return Math.floor(new Date(new Date() - 365 * 24 * 60 * 60 * 1000 * years) / 1000)
+  return Math.floor(365 * 24 * 60 * 60 * years)
 }
 
 var generateDatesBack = function (years) {
+  let range = [0, yearsAgo(1 / 12), yearsAgo(3 / 12), yearsAgo(6 / 12), yearsAgo(1)]
   var hash = {
-    range: [null, yearsAgo(1 / 12), yearsAgo(3 / 12), yearsAgo(6 / 12), yearsAgo(1)],
-    rangeLabels: ['Now', '1 month', '3 months', '6 months', '1 year'],
-    fallbackRangeTo: 'right',
-    projectFallbackMap: true,
-    gtInterpolation: 'Last %s',
-    ltInterpolation: 'Older than %s'
+    range: range,
+    autohook: 0,
+    label: {
+      gtInterpolation: 'Last {si}',
+      ltInterpolation: 'Older than {ei}',
+      namedRanges: {
+        [range[0]]: 'Now',
+        [range[1]]: '1 month',
+        [range[2]]: '3 months',
+        [range[3]]: '6 months',
+        [range[4]]: '1 year'
+      }
+    }
   }
 
   for (var i = 2; i < years; i++) {
-    hash.range.push(yearsAgo(i))
-    hash.rangeLabels.push(`${i} years`)
+    let ago = yearsAgo(i)
+    hash.range.push(ago)
+    hash.label.namedRanges[ago] = `${i} years`
   }
 
   hash.range = hash.range.reverse()
-  hash.rangeLabels = hash.rangeLabels.reverse()
+  // hash.rangeLabels = hash.rangeLabels.reverse()
   return hash
 }
 
