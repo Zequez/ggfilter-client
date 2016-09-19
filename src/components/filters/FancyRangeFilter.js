@@ -148,8 +148,8 @@ export default class FancyRangeFilter extends Component {
             end={dragging ? draggingEnd : hoverEnd}/>
         ) : null}
         <FancyRangeFilterLabel
-          start={showHighlight ? hoverStart : start}
-          end={showHighlight ? hoverEnd : end}
+          start={showHighlight ? (dragging ? draggingStart : hoverStart) : start}
+          end={showHighlight ? (dragging ? draggingEnd : hoverEnd) : end}
           range={this.options.range}
           options={this.options.label}
           className={showHighlight ? 'mouse-label' : ''}/>
