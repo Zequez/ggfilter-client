@@ -23,7 +23,7 @@ export default class FancyRangeFilterBar extends Component {
 
   render () {
     return (
-      <div className={this.props.className} style={this.barStyle()}></div>
+      <div className={'fancy-rf-bar ' + this.props.className} style={this.barStyle()}></div>
     )
   }
 }

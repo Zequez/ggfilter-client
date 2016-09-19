@@ -5,20 +5,19 @@ export default class FancyRangeFilterLabel extends Component {
     className: t.string,
     start: t.any,
     end: t.any,
-    range: t.arrayOf(t.any),
-    namedRanges: t.object
+    range: t.arrayOf(t.any)
   }
 
   static defaultProps = {
     className: '',
-    options: {},
-    namedRanges: {}
+    options: {}
   }
 
   constructor (props) {
     super(props)
 
     this.options = {
+      namedRanges: {},
       interpolation: '{v}',
       rangeInterpolation: '{si} to {ei}',
       gtInterpolation: '≥{si}',
@@ -50,7 +49,7 @@ export default class FancyRangeFilterLabel extends Component {
   }
 
   interpolateSingle (inter, val) {
-    let { namedRanges } = this.props
+    let { namedRanges } = this.options
     return namedRanges[val]
       ? namedRanges[val]
       : inter.call
@@ -59,8 +58,7 @@ export default class FancyRangeFilterLabel extends Component {
   }
 
   interpolate (inter, val1, val2) {
-    let { namedRanges } = this.props
-    let { interpolation } = this.options
+    let { namedRanges, interpolation } = this.options
     let namedKey = `${val1}-${val2}`
     if (namedRanges[namedKey]) {
       return namedRanges[namedKey]

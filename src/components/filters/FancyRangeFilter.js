@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as t } from 'react'
-import { mapRange, chunkSize, mapChunkRange, paramsToRange, rangeToParams } from 'lib/FancyRangeFilterHelpers'
-import FancyRangeFilterSensor from './FancyRangeFilterSensor'
+import { chunkSize, paramsToRange, rangeToParams } from 'lib/FancyRangeFilterHelpers'
+import FancyRangeFilterMappedSensor from './FancyRangeFilterMappedSensor'
 import FancyRangeFilterBar from './FancyRangeFilterBar'
 import FancyRangeFilterLabel from './FancyRangeFilterLabel'
 
@@ -22,9 +22,11 @@ export default class FancyRangeFilter extends Component {
   }
 
   state = {
-    chunkStart: 0,
-    chunkEnd: 0,
-    chunkPos: 0,
+    hoverPos: 0,
+    hoverStart: 0,
+    hoverEnd: 0,
+    draggingStart: 0,
+    draggingEnd: 0,
     start: 0,
     end: 0,
     dragging: false,
@@ -37,19 +39,13 @@ export default class FancyRangeFilter extends Component {
       range: [1, 2, 3, 4, 5],
       namedRanges: {},
       mappedRanges: {},
-      label: {},
       autohook: undefined,
-      strictlyRangeMode: false,
+      strictlyRangeMode: true,
+      label: {},
       ...this.props.options
     }
 
-    if (this.options.autohook !== undefined && this.options.strictlyRangeMode === true) {
-      console.warn("Autohook won't have any effect with strictlyRangeMode")
-    }
-
-    let { range, strictlyRangeMode } = this.options
-    this.chunkSize = chunkSize(range.length, strictlyRangeMode)
-
+    this.chunkSize = chunkSize(this.options.range.length)
     this.readQuery()
   }
 
@@ -58,34 +54,45 @@ export default class FancyRangeFilter extends Component {
   }
 
   readQuery (query = this.props.query) {
-    let { range, strictlyRangeMode } = this.options
+    let { range } = this.options
+    let { gt, lt } = query
 
-    let [start, end, chunkStart, chunkEnd] = paramsToRange(query, range, strictlyRangeMode)
+    let start = gt == null
+      ? 0
+      : range.indexOf(gt)
+    let end = lt == null
+      ? range.length - 1
+      : range.indexOf(lt)
 
-    this.setState({start, end, chunkStart, chunkEnd})
+    this.setState({start, end})
   }
 
   triggerChange (start, end) {
-    this.props.onChange(rangeToParams(start, end, this.options.range))
+    let { range } = this.options
+    let gt = range[start]
+    let lt = range[end]
+    if (lt === Infinity) lt = null
+    if (gt === null && lt === null || start === 0 && end === range.length - 1) {
+      this.props.onChange(null)
+    } else {
+      this.props.onChange({gt, lt})
+    }
   }
 
-  onSensorHover = (chunkPos) => {
-    this.setState({chunkPos, hovering: true, justFinishedDragging: false})
+  onSensorHover = (hoverStart, hoverEnd, hoverPos) => {
+    this.setState({hoverStart, hoverEnd, hoverPos, hovering: true, justFinishedDragging: false})
   }
 
   onSensorLeave = () => {
     this.setState({hovering: false})
   }
 
-  onSensorDrag = (chunkStart, chunkEnd, status) => {
-    let start, end
-    ;[start, end, chunkStart, chunkEnd] = this.mapChunkRange(chunkStart, chunkEnd)
-
-    this.setState({start, end, chunkStart, chunkEnd})
+  onSensorDrag = (start, end, status) => {
+    this.setState({draggingStart: start, draggingEnd: end})
 
     if (status !== null) this.setState({dragging: status})
     if (status === false) {
-      this.setState({justFinishedDragging: true})
+      this.setState({start, end, justFinishedDragging: true})
       this.triggerChange(start, end)
     }
   }
@@ -94,65 +101,58 @@ export default class FancyRangeFilter extends Component {
     this.props.onChange(null)
   }
 
-  mapChunkRange (chunkStart, chunkEnd) {
-    let o = this.options
-    return mapChunkRange(
-      chunkStart,
-      chunkEnd,
-      o.range,
-      o.mappedRanges,
-      o.autohook,
-      o.strictlyRangeMode
-    )
-  }
-
   render () {
-    let { range } = this.options
-    let { dragging, hovering, start, end, chunkStart, chunkEnd, chunkPos, justFinishedDragging } = this.state
+    let {
+      dragging,
+      hovering,
+      draggingStart,
+      draggingEnd,
+      start,
+      end,
+      hoverStart,
+      hoverEnd,
+      hoverPos,
+      justFinishedDragging } = this.state
 
-    let showHighlightBar = hovering && !dragging && !justFinishedDragging
-    let hmStart, hmEnd, hmChunkStart, hmChunkEnd
-    if (showHighlightBar) {
-      // hm = hoverMapped
-      [hmStart, hmEnd, hmChunkStart, hmChunkEnd] = this.mapChunkRange(chunkPos, chunkPos)
-    }
+    let showCaret = hovering
+    let showHighlight = hovering && !justFinishedDragging
 
     return (
-      <div
-        className='fancy-rf'
-        ref='bar'
-        >
-        <FancyRangeFilterSensor
-          chunkSize={this.chunkSize}
+      <div className='fancy-rf'>
+        <FancyRangeFilterMappedSensor
+          range={this.options.range}
+          mappedRanges={this.options.mappedRanges}
+          autohook={this.options.autohook}
+          multiMode={this.options.strictlyRangeMode}
           onHover={this.onSensorHover}
           onLeave={this.onSensorLeave}
           onDrag={this.onSensorDrag}
           onReset={this.onSensorReset}/>
         <FancyRangeFilterBar
-          className='fancy-rf-bar'
+          className='fancy-rf-bar-main'
           chunkSize={this.chunkSize}
-          start={chunkStart}
-          end={chunkEnd}
-          />
-        {showHighlightBar ? (
+          start={start}
+          end={end}/>
+        {showCaret ? (
           <FancyRangeFilterBar
-            className='fancy-rf-highlight'
+            className='fancy-rf-bar-caret'
             chunkSize={this.chunkSize}
-            start={hmChunkStart}
-            end={hmChunkEnd}
-            />
+            start={hoverPos}
+            end={hoverPos}/>
         ) : null}
-        {/* Debug thingy */}
-        {/*<div className={`fancy-rf-label`}>
-          <span>{chunkStart}-{chunkEnd} / {start}-{end} ({range[start]}-{range[end]})</span>
-        </div>*/}
+        {showHighlight ? (
+          <FancyRangeFilterBar
+            className='fancy-rf-bar-highlight'
+            chunkSize={this.chunkSize}
+            start={dragging ? draggingStart : hoverStart}
+            end={dragging ? draggingEnd : hoverEnd}/>
+        ) : null}
         <FancyRangeFilterLabel
-          start={showHighlightBar ? hmStart : start}
-          end={showHighlightBar ? hmEnd : end}
-          range={range}
-          namedRanges={this.options.namedRanges}
+          start={showHighlight ? hoverStart : start}
+          end={showHighlight ? hoverEnd : end}
+          range={this.options.range}
           options={this.options.label}
-          className={showHighlightBar ? 'mouse-label' : ''}/>
+          className={showHighlight ? 'mouse-label' : ''}/>
       </div>
     )
   }

@@ -1,5 +1,5 @@
 import React, { PropTypes as t, Component } from 'react'
-import { chunkSize, mousePosTo1 } from 'lib/FancyRangeFilterHelpers'
+import { mousePosTo1 } from 'lib/FancyRangeFilterHelpers'
 
 export default class FancyRangeFilterSensor extends Component {
   static propTypes = {
@@ -10,10 +10,7 @@ export default class FancyRangeFilterSensor extends Component {
     onReset: t.func.isRequired
   }
 
-  /**
-   * The size of each range point, from 0 to 1
-   */
-
+  inside = false
   dragging = false
   pos = null
   start = null
@@ -27,23 +24,31 @@ export default class FancyRangeFilterSensor extends Component {
     return Math.floor(mousePosTo1(ev, this.refs.bar) / this.props.chunkSize)
   }
 
+  setHoverPos (ev) {
+    this.pos = this.mousePosToChunkNumber(ev)
+  }
+
   onMouseDown = (ev) => {
     if (ev.button !== 0) return // Return unless using the left mouse button
-    let pos = this.mousePosToChunkNumber(ev)
+    this.pos = this.mousePosToChunkNumber(ev)
     this.dragging = true
-    this.start = this.end = pos
-    this.propagateDrag(this.props.onDrag, true)
+    this.start = this.end = this.pos
+    this.props.onDrag(this.start, this.end, true)
   }
 
   onMouseMove = (ev) => {
-    this.pos = this.mousePosToChunkNumber(ev)
+    let newPos = this.mousePosToChunkNumber(ev)
+    if (newPos !== this.pos || !this.inside) {
+      this.inside = true
+      this.pos = newPos
 
-    if (this.dragging) {
-      this.end = this.pos
-      this.propagateDrag(this.props.onDrag, null)
+      if (this.dragging && this.end !== this.pos) {
+        this.end = this.pos
+        this.props.onDrag(this.start, this.end, null)
+      }
+
+      this.props.onHover(this.pos)
     }
-
-    this.props.onHover(this.pos)
   }
 
   onReset = (ev) => {
@@ -52,6 +57,7 @@ export default class FancyRangeFilterSensor extends Component {
   }
 
   onMouseLeave = (ev) => {
+    this.inside = false
     this.props.onLeave()
     this.stopDragging()
   }
@@ -59,16 +65,12 @@ export default class FancyRangeFilterSensor extends Component {
   stopDragging = (ev) => {
     if (this.dragging) {
       this.dragging = false
-      this.propagateDrag(this.props.onDrag, false)
+      this.props.onDrag(this.start, this.end, false)
     }
   }
 
   propagateDrag (fun, status) {
-    if (this.start <= this.end) {
-      fun(this.start, this.end, status)
-    } else {
-      fun(this.end, this.start, status)
-    }
+    fun(this.start, this.end, status)
   }
 
   render () {

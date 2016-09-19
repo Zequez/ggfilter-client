@@ -110,9 +110,6 @@ var filtersDefinitions = {
     filterOptions: {
       range: [0, 0.7, 1.3, 1.9, 2.7, 3.5, 4.7, 6.7, 9.7, 16.6, Infinity],
       autohook: Infinity
-      // mappedRanges: {
-      //   'Infinity':
-      // }
     },
     columnOptions: { round: 100, interpolation: '%shs' },
     width: 60
@@ -120,47 +117,71 @@ var filtersDefinitions = {
   playtime_sd: {
     title: 'Playtime σ',
     filter: FancyRangeFilter,
-    filterOptions: options.filters.range.left([0, 1.7, 3.2, 4.9, 7.2, 10.4, 15.5, 24.2, 40.2, 76.5, null]),
+    filterOptions: {
+      range: [0, 1.7, 3.2, 4.9, 7.2, 10.4, 15.5, 24.2, 40.2, 76.5],
+      autohook: 0
+    },
     columnOptions: { round: 100 },
     width: 60
   },
   playtime_rsd: {
     title: 'Playtime relative σ',
     filter: FancyRangeFilter,
-    filterOptions: options.filters.range.left([0, 70.6, 89.7, 106.4, 122.3, 136.7, 154.9, 176.7, 209.8, 271.4, null]),
+    filterOptions: {
+      range: [0, 70.6, 89.7, 106.4, 122.3, 136.7, 154.9, 176.7, 209.8, 271.4],
+      autohook: 0
+    },
     columnOptions: { round: 100 },
     width: 60
   },
   playtime_mean_ftb: {
     title: 'Playtime avg / $',
     filter: FancyRangeFilter,
-    filterOptions: options.filters.range.right([0, 0.2, 0.4, 0.5, 0.6, 0.8, 1.0, 1.4, 1.9, 3.1, null]),
+    filterOptions: {
+      range: [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1.0, 1.4, 1.9, 3.1, Infinity],
+      autohook: Infinity
+    },
     columnOptions: { round: 100, interpolation: '%shs/$' },
     width: 60
   },
   playtime_median_ftb: {
     title: 'Playtime median / $',
     filter: FancyRangeFilter,
-    filterOptions: options.filters.range.right([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.9, 1.5, null]),
+    filterOptions: {
+      range: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.9, 1.5, Infinity],
+      autohook: Infinity
+    },
     columnOptions: { round: 100, interpolation: '%shs/$' },
     width: 60
   },
   metacritic: {
     title: 'Metacritic',
     filter: FancyRangeFilter,
-    filterOptions: options.filters.range.right([0, 10, 20, 30, 40, 50, 60, 70, 80, 90, null]),
+    filterOptions: {
+      range: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, Infinity],
+      autohook: Infinity
+    },
     width: 60
   },
   steam_reviews_count: {
     title: '# Steam reviews',
     filter: FancyRangeFilter,
-    filterOptions: options.filters.range.right([0, 8, 20, 35, 65, 115, 220, 420, 1020, 4250, null]),
+    filterOptions: {
+      range: [0, 8, 20, 35, 65, 115, 220, 420, 1020, 4250, Infinity],
+      autohook: Infinity
+    },
     width: 60
   },
   steam_reviews_ratio: {
     title: 'Steam reviews ratio',
     filter: FancyRangeFilter,
-    filterOptions: options.filters.range.right([0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 98, 99, null], '%s%'),
+    filterOptions: {
+      range: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 98, 99, Infinity],
+      autohook: Infinity,
+      label: {
+        interpolation: '{v}%'
+      }
+    },
     column: RatioColumn,
     width: 100
   },
@@ -193,9 +214,15 @@ var filtersDefinitions = {
     filter: FancyRangeFilter,
     filterOptions: {
       range: [1, 2, 3],
-      rangeLabels: ['No', 'Partial', 'Full'],
-      fallbackRangeTo: 'no',
-      singleMode: true
+      label: {
+        namedRanges: {
+          '1': 'No',
+          '2': 'Partial',
+          '3': 'Full'
+        }
+      },
+      autohook: 3,
+      strictlyRangeMode: false
     }
   },
   steam_thumbnail: {
@@ -229,7 +256,8 @@ var filtersDefinitions = {
     title: 'SysReq. Index®',
     filter: FancyRangeFilter,
     filterOptions: {
-      range: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
+      range: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100],
+      strictlyRangeMode: true
     },
     width: 150
   },

@@ -30,7 +30,7 @@
  * mapRange(1, 3, [0, 10, 20, 30, 40, 50], {})
  * // => [1, 3]
  */
-export function mapRange (start, end, range, mappedRanges, autohookVal) {
+export function mapRange (start, end, range, mappedRanges, autohookVal, multiMode) {
   let startVal = range[start]
   let endVal = range[end]
 
@@ -43,10 +43,35 @@ export function mapRange (start, end, range, mappedRanges, autohookVal) {
     return [range.indexOf(newStartVal), range.indexOf(newEndVal)]
   } else if (isSingle && autohookVal !== undefined) {
     let autohook = range.indexOf(autohookVal)
-    return autohook >= start ? [start, autohook] : [autohook, start]
+    ;[start, end] = (autohook >= start ? [start, autohook] : [autohook, start])
+  }
+
+  startVal = range[start]
+  endVal = range[end]
+
+  // return [start, end]
+
+  // console.log(start, end, multiMode)
+
+  if (start === end && (multiMode || startVal === null || startVal === Infinity)) {
+    if (end === range.length - 1) return [start - 1, end]
+    else return [start, end + 1]
+    // if (start === 0) return [start, end + 1]
   } else {
     return [start, end]
   }
+
+  // if (startVal === endVal) {
+  //
+  // }
+  //
+  // if (startVal === null && endVal === null) {
+  //   return [start, start + 1]
+  // } else if (startVal === Infinity && endVal === Infinity) {
+  //   return [start - 1, start]
+  // } else {
+  //   return [start, end]
+  // }
 }
 
 export function mapChunkRange (chunkStart, chunkEnd, range, mappedRanges, autohookVal, strictlyRangeMode) {
@@ -114,7 +139,6 @@ export function mousePosTo1 (ev, el = ev.target) {
   return pxPos / el.clientWidth
 }
 
-export function chunkSize (rangeLength, strictlyRangeMode) {
-  if (strictlyRangeMode) rangeLength--
-  return Math.floor(1 / rangeLength * 10000) / 10000
+export function chunkSize (count) {
+  return Math.floor(1 / count * 10000) / 10000
 }

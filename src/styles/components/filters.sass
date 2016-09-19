@@ -209,9 +209,10 @@
 
       &.mouse-label > span
         border-color: $blue
-        background-color: rgba(#fff, 0.8)
+        background-color: rgba(#fff, 0.5)
         color: $dark-blue
         font-weight: bold
+
 
     &-bar
       position: absolute
@@ -219,18 +220,23 @@
       right: 0
       bottom: 0
       left: 0
+
+    &-bar-main
       background: $green
       box-shadow: inset rgba(#000, 0.5) 0 0 10px, $blue 1px 0, $blue -1px 0
       z-index: 3
 
-    &-highlight
-      position: absolute
-      left: 0
-      top: 0
-      bottom: 0
+    &-bar-highlight
+      right: 100%
+      background-image: url(~images/dashes.png)
+      background-position: 100% 100%
+      opacity: 0.5
+      z-index: 4
+
+    &-bar-caret
       right: 100%
       background-image: url(~images/dashes.png)
       background-position: 100% 100%
       box-shadow: rgba(#000, 0.3) 1px 0, rgba(#000, 0.3) -1px 0
       text-align: left
-      z-index: 4
+      z-index: 5
