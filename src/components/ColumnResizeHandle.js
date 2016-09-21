@@ -1,49 +1,46 @@
 import React, { PropTypes as t } from 'react'
-
-var DraggableCore = require('react-draggable').DraggableCore
-// var DraggableCore = require('react-draggable').CReateTRans
-// import {DraggableCore} from 'react-draggable'
+import { DraggableCore } from 'react-draggable'
 
 export default class ColumnResizeHandle extends DraggableCore {
-  constructor(props) {
-    super(props)
-    this.state.clientX = 0
-  }
-
   static propTypes = {
     onStop: t.func.isRequired,
     onDoubleClick: t.func.isRequired
   }
 
-  onDrag(ev, cEv) {
-    this.setState({clientX: this.state.clientX + cEv.position.deltaX})
+  startX = 0
+  state = {
+    clientX: 0
   }
 
-  onDragStart(ev, cEv) {
-    this.startX = cEv.position.clientX
+  onDrag (ev, cEv) {
+    this.setState({clientX: this.state.clientX + cEv.deltaX})
   }
 
-  onDragStop(ev, cEv) {
-    this.props.onStop(cEv.position.clientX - this.startX)
+  onDragStart (ev, cEv) {
+    this.startX = cEv.x
+  }
+
+  onDragStop (ev, cEv) {
+    this.props.onStop(cEv.x - this.startX)
     this.setState({clientX: 0})
   }
 
-  handleClick(ev) {
+  handleClick (ev) {
     ev.stopPropagation()
   }
 
-  render() {
+  render () {
     let style = {transform: `translateX(${this.state.clientX}px)`}
 
     return (
       <DraggableCore
-        onDrag={this.onDrag.bind(this)}
-        onStart={this.onDragStart.bind(this)}
-        onStop={this.onDragStop.bind(this)}>
+        onDrag={::this.onDrag}
+        onStart={::this.onDragStart}
+        onStop={::this.onDragStop}>
         <div
           className='resize-handle'
           style={style}
-          onClick={this.handleClick.bind(this)}
+          onClick={::this.handleClick}
           onDoubleClick={this.props.onDoubleClick}></div>
       </DraggableCore>
     )
