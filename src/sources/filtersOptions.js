@@ -27,7 +27,6 @@ var generateDatesBack = function (years) {
   }
 
   hash.range = hash.range.reverse()
-  // hash.rangeLabels = hash.rangeLabels.reverse()
   return hash
 }
 
