@@ -271,7 +271,7 @@ var filtersDefinitions = {
     filter: FancyRangeFilter,
     filterOptions: options.filters.range.dateBack,
     column: TimeAgoColumn,
-    width: 150
+    width: 100
   }
 }
 
