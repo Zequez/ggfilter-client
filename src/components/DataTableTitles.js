@@ -1,12 +1,13 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { adjustColumnWidth, clearColumnWidth } from 'stores/reducers/columnsWidthReducer'
-import { setSort } from 'stores/reducers/filterReducer'
+import { setSort, setFilter } from 'stores/reducers/filterReducer'
 
 import DataTableTitle from 'components/DataTableTitle'
 
 @connect((s) => ({}), {
   setSort,
+  setFilter,
   adjustColumnWidth,
   clearColumnWidth
 })
@@ -44,6 +45,15 @@ export default class DataTableTitles extends Component {
     this.props.clearColumnWidth(filter.name)
   }
 
+  onSetHighlightMode (filter, mode) {
+    let params = this.props.filtersParams[filter.name]
+    this.props.setFilter(filter.name, {...params, highlight: mode})
+  }
+
+  onClearFilter (filter) {
+    this.props.setFilter(filter.name, null)
+  }
+
   render () {
     console.logRender('DataTableTitles')
     let { filters, filtersParams, sort, sortAsc, columnsWidth } = this.props
@@ -52,6 +62,7 @@ export default class DataTableTitles extends Component {
       let sortStatus = (sort === filter.name) ? sortAsc : null
       let width = columnsWidth[i]
       let hasParams = !!filtersParams[filter.name]
+      let highlightMode = hasParams ? !!filtersParams[filter.name].highlight : false
 
       return (
         <DataTableTitle
@@ -60,9 +71,12 @@ export default class DataTableTitles extends Component {
           width={width}
           sort={sortStatus}
           active={hasParams}
+          highlightMode={highlightMode}
           onSort={::this.onSort}
           onResize={::this.onResize}
-          onResetResize={::this.onResetResize}/>
+          onResetResize={::this.onResetResize}
+          onClearFilter={this.onClearFilter.bind(this, filter)}
+          onSetHighlightMode={this.onSetHighlightMode.bind(this, filter)}/>
       )
     })
 

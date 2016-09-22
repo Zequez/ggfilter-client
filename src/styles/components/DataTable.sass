@@ -27,6 +27,10 @@
       background: $alternate-background
       .overflow-cell
         background: $alternate-background
+      td.hl, td.hl .overflow-cell
+        background: mix($green, $alternate-background, 25%)
+    td.hl, td.hl .overflow-cell
+      background: mix($green, $background, 25%)
 
   .overflow-cell
     display: block
@@ -83,6 +87,35 @@
       height: 1px
       z-index: 2
 
+    &-buttons
+      position: absolute
+      right: 0
+      top: -$r * 3/4
+      height: $r * 3/4
+      button
+        display: inline-block
+        height: $r * 3/4
+        width: $r * 3/4
+        padding: 0
+        background: $blue
+        border: 0
+        color: $white
+        vertical-align: top
+        cursor: pointer
+        &.active, &:active
+          background: $white
+          color: $blue
+          &:hover
+            background: $white
+        &:hover
+          background: lighten($blue, 10%)
+        &:focus
+          outline: none
+        &:first-child
+          border-top-left-radius: 2px
+        &:last-child
+          border-top-right-radius: 2px
+
     .title-tooltip
       display: none
       position: absolute
@@ -115,7 +148,7 @@
         visibility: hidden
       .title-icon
         display: inline-block
-      &:hover .title-tooltip
+      .title-icon:hover ~ .title-tooltip
         display: block
 
     .resize-handle
@@ -127,7 +160,6 @@
       background: lighten($blue, 5%)
       cursor: ew-resize
       z-index: 5
-
 
   // Filters controls
   &-controls

@@ -3,6 +3,7 @@ import { debounce } from 'lib/utils'
 import classNames from 'classnames'
 
 import ColumnResizeHandle from 'components/ColumnResizeHandle'
+import DataTableTitleFilterButtons from './DataTableTitleFilterButtons'
 
 export default class DataTableTitle extends Component {
   static propTypes = {
@@ -12,7 +13,8 @@ export default class DataTableTitle extends Component {
     onSort: t.func.isRequired,
     onResize: t.func.isRequired,
     onResetResize: t.func.isRequired,
-    active: t.bool.isRequired
+    active: t.bool.isRequired,
+    highlightMode: t.bool.isRequired
   }
 
   shouldComponentUpdate (np, ns) {
@@ -21,7 +23,8 @@ export default class DataTableTitle extends Component {
       np.filter !== p.filter ||
       np.width !== p.width ||
       np.sort !== p.sort ||
-      np.active !== p.active
+      np.active !== p.active ||
+      np.highlightMode !== p.highlightMode
     )
   }
 
@@ -85,19 +88,27 @@ export default class DataTableTitle extends Component {
     return (
       <th style={{width: width}}
         ref='th'
-        className={titleClass}
-        onClick={this.onSort.bind(this)}>
-        <div className='title-overflow' ref='overflow'>{filter.title}</div>
-        <div className='title-icon'>
+        className={titleClass}>
+        <div className='title-overflow' ref='overflow' onClick={::this.onSort}>
+          {filter.title}
+        </div>
+        <div className='title-icon' onClick={::this.onSort}>
           <i className={'fa icon-' + filter.name}></i>
         </div>
         <div className='title-tooltip'>
           <span>{filter.title}</span>
         </div>
+        { this.props.active ? (
+          <DataTableTitleFilterButtons
+            mode={this.props.highlightMode}
+            onSetHighlightMode={this.props.onSetHighlightMode}
+            onClearFilter={this.props.onClearFilter}/>
+        ) : null}
+
         <div className='title-highlight-border'></div>
         <ColumnResizeHandle
-          onStop={this.onResize.bind(this)}
-          onDoubleClick={this.onResetResize.bind(this)}/>
+          onStop={::this.onResize}
+          onDoubleClick={::this.onResetResize}/>
       </th>
     )
   }
