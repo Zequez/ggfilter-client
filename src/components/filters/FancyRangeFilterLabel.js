@@ -5,7 +5,8 @@ export default class FancyRangeFilterLabel extends Component {
     className: t.string,
     start: t.any,
     end: t.any,
-    range: t.arrayOf(t.any)
+    range: t.arrayOf(t.any),
+    options: t.object
   }
 
   static defaultProps = {

@@ -7,12 +7,11 @@ import FancyRangeFilterLabel from 'components/filters/FancyRangeFilterLabel'
 describe('<FancyRangeFilterLabel/>', () => {
   let range = [null, 1, 3, 5, 10, 20, 30, 40, 60, Infinity]
 
-  function render (start, end, range, namedRanges, options) {
+  function render (start, end, range, options = {}) {
     return mount(<FancyRangeFilterLabel
       start={start}
       end={end}
       range={range}
-      namedRanges={namedRanges}
       options={options}/>)
   }
 
@@ -23,21 +22,23 @@ describe('<FancyRangeFilterLabel/>', () => {
     })
 
     it('should render with interpolation', () => {
-      const f = render(2, 2, range, {}, {
+      const f = render(2, 2, range, {
         interpolation: '${v}'
       })
       expect(f.text()).to.equal('$3')
     })
 
     it('should render from the named labels data', () => {
-      const f = render(2, 2, range, {'3': 'Potato!'})
+      const f = render(2, 2, range, {
+        namedRanges: {'3': 'Potato!'}
+      })
       expect(f.text()).to.equal('Potato!')
     })
 
     it('should allow function interpolation', () => {
       let interpolation = sinon.stub()
       interpolation.onFirstCall().returns('Yay!')
-      const f = render(2, 2, range, {}, {
+      const f = render(2, 2, range, {
         interpolation
       })
       expect(interpolation.getCall(0).args[0]).to.equal(3)
@@ -52,7 +53,7 @@ describe('<FancyRangeFilterLabel/>', () => {
     })
 
     it('should render with interpolation', () => {
-      const f = render(2, 7, range, {}, {
+      const f = render(2, 7, range, {
         rangeInterpolation: '{s} potato {e}',
         interpolation: '${v}'
       })
@@ -60,7 +61,7 @@ describe('<FancyRangeFilterLabel/>', () => {
     })
 
     it('should render with individual and range interpolation both', () => {
-      const f = render(2, 7, range, {}, {
+      const f = render(2, 7, range, {
         rangeInterpolation: '{si} tooo {ei}',
         interpolation: '${v}'
       })
@@ -68,19 +69,23 @@ describe('<FancyRangeFilterLabel/>', () => {
     })
 
     it('should render with the individual labels named labels data', () => {
-      const f = render(2, 7, range, {'3': 'FREE!', '40': 'Non-free'})
+      const f = render(2, 7, range, {
+        namedRanges: {'3': 'FREE!', '40': 'Non-free'}
+      })
       expect(f.text()).to.equal('FREE! to Non-free')
     })
 
     it('should render from named labels data', () => {
-      const f = render(2, 7, range, {'3-40': 'Potato!'})
+      const f = render(2, 7, range, {
+        namedRanges: {'3-40': 'Potato!'}
+      })
       expect(f.text()).to.equal('Potato!')
     })
 
     it('should allow function interpolation', () => {
       let rangeInterpolation = sinon.stub()
       rangeInterpolation.onFirstCall().returns('Yay!')
-      const f = render(2, 7, range, {}, {
+      const f = render(2, 7, range, {
         interpolation: '!{v}!',
         rangeInterpolation
       })
@@ -99,7 +104,7 @@ describe('<FancyRangeFilterLabel/>', () => {
     })
 
     it('should render with individual and gt interpolation both', () => {
-      const f = render(2, 9, range, {}, {
+      const f = render(2, 9, range, {
         gtInterpolation: 'more than {si}',
         interpolation: '!{v}!'
       })
@@ -107,7 +112,9 @@ describe('<FancyRangeFilterLabel/>', () => {
     })
 
     it('should render from a named label data', () => {
-      const f = render(2, 9, range, {'3-Infinity': 'Ohhhh'})
+      const f = render(2, 9, range, {
+        namedRanges: {'3-Infinity': 'Ohhhh'}
+      })
       expect(f.text()).to.equal('Ohhhh')
     })
   })
@@ -119,7 +126,7 @@ describe('<FancyRangeFilterLabel/>', () => {
     })
 
     it('should render with individual and lt interpolation both', () => {
-      const f = render(0, 2, range, {}, {
+      const f = render(0, 2, range, {
         ltInterpolation: 'less than {ei}',
         interpolation: '!{v}!'
       })
@@ -127,7 +134,9 @@ describe('<FancyRangeFilterLabel/>', () => {
     })
 
     it('should render from a named label data', () => {
-      const f = render(0, 2, range, {'null-3': 'Yeah!'})
+      const f = render(0, 2, range, {
+        namedRanges: {'null-3': 'Yeah!'}
+      })
       expect(f.text()).to.equal('Yeah!')
     })
   })
