@@ -1,4 +1,6 @@
-export default function generateAutoTitle (params, definitions) {
+import autoTitleDefinitions from 'sources/autoTitleDefinitions'
+
+export default function generateAutoTitle (params, definitions = autoTitleDefinitions) {
   let titles = []
 
   for (let filterName in definitions) {
@@ -17,5 +19,6 @@ export default function generateAutoTitle (params, definitions) {
     }
   }
 
-  return titles.join(', ')
+  let title = titles.join(', ')
+  return 'Games ' + title// && (title[0].toLocaleUpperCase() + title.slice(1))
 }

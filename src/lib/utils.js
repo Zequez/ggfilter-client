@@ -91,3 +91,30 @@ export function snapTo(val, snap) {
   let valr = val % snap
   return valr > snap/2 ? (val - valr + snap) : (val - valr)
 }
+
+export function timeInWords (time) {
+  let timespans = [
+    [1, 'second'],
+    [60, 'minute'],
+    [60 * 60, 'hour'],
+    [60 * 60 * 24, 'day'],
+    [60 * 60 * 24 * 7, 'week'],
+    [60 * 60 * 24 * 30, 'month'],
+    [60 * 60 * 24 * 365, 'year']
+  ]
+
+  return timeInWordsFromTimespans(time, timespans)
+}
+
+export function timeInWordsFromTimespans (time, timespans) {
+  let span = timespans[0]
+  if (time >= span[0] && time < span[0] * 2) {
+    return `1 ${span[1]}`
+  } else if (timespans.length === 1 || (time > span[0] && time < timespans[1][0])) {
+    return `${Math.floor(time / span[0])} ${span[1]}s`
+  }
+
+  timespans.shift()
+
+  return timeInWordsFromTimespans(time, timespans)
+}

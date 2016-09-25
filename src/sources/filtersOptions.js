@@ -3,7 +3,15 @@ var yearsAgo = function (years) {
 }
 
 var generateDatesBack = function (years) {
-  let range = [0, yearsAgo(1 / 12), yearsAgo(3 / 12), yearsAgo(6 / 12), yearsAgo(1)]
+  let range = [
+    0,
+    60 * 60 * 24,
+    60 * 60 * 24 * 7,
+    yearsAgo(1 / 12),
+    yearsAgo(3 / 12),
+    yearsAgo(6 / 12),
+    yearsAgo(1)
+  ]
   var hash = {
     range: range,
     autohook: 0,
@@ -12,19 +20,22 @@ var generateDatesBack = function (years) {
       ltInterpolation: 'Older than {ei}',
       namedRanges: {
         [range[0]]: 'Now',
-        [range[1]]: '1 month',
-        [range[2]]: '3 months',
-        [range[3]]: '6 months',
-        [range[4]]: '1 year'
+        [range[1]]: '24 hours',
+        [range[2]]: '1 week',
+        [range[3]]: '1 month',
+        [range[4]]: '3 months',
+        [range[5]]: '6 months',
+        [range[6]]: '1 year'
       }
     }
   }
 
-  for (var i = 2; i < years; i++) {
+  for (var i = 2; i <= years; i++) {
     let ago = yearsAgo(i)
     hash.range.push(ago)
     hash.label.namedRanges[ago] = `${i} years`
   }
+  hash.range.push(null)
 
   hash.range = hash.range.reverse()
   return hash
@@ -66,7 +77,7 @@ export default {
         },
         autohook: 100
       },
-      dateBack: generateDatesBack(12)
+      dateBack: generateDatesBack(15)
     }
   }
 }

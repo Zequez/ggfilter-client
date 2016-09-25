@@ -5,7 +5,7 @@ describe('generateAutoTitle', () => {
     let title = generateAutoTitle({superFilter: {value: 123}}, {
       superFilter: (p) => 'SUPER TITLE! ' + p.value
     })
-    expect(title).to.equal('SUPER TITLE! 123')
+    expect(title).to.equal('Games SUPER TITLE! 123')
   })
 
   it('should generate a title based on multiple filters', () => {
@@ -13,7 +13,7 @@ describe('generateAutoTitle', () => {
       superFilter: (p) => 'SUPER TITLE! ' + p.value,
       megaTitle: (p) => 'MEGA TITLE! ' + p.value
     })
-    expect(title).to.equal('SUPER TITLE! 123, MEGA TITLE! 321')
+    expect(title).to.equal('Games SUPER TITLE! 123, MEGA TITLE! 321')
   })
 
   it('should use the order of the filter titles definitions', () => {
@@ -21,13 +21,21 @@ describe('generateAutoTitle', () => {
       megaTitle: (p) => 'MEGA TITLE! ' + p.value,
       superFilter: (p) => 'SUPER TITLE! ' + p.value
     })
-    expect(title).to.equal('MEGA TITLE! 321, SUPER TITLE! 123')
+    expect(title).to.equal('Games MEGA TITLE! 321, SUPER TITLE! 123')
   })
 
   it('should allow interpolation of the filters instead o a function', () => {
     let title = generateAutoTitle({superFilter: {value: 123}}, {
       superFilter: 'SUPER TITLE! {value}'
     })
-    expect(title).to.equal('SUPER TITLE! 123')
+    expect(title).to.equal('Games SUPER TITLE! 123')
+  })
+
+  it('should capitalize the first letter of the title', () => {
+    let title = generateAutoTitle({superFilter: {}, megaTitle: {}}, {
+      superFilter: (p) => 'super',
+      megaTitle: (p) => 'mega'
+    })
+    expect(title).to.equal('Games super, mega')
   })
 })

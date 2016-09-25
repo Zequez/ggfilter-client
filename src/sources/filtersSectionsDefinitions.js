@@ -34,9 +34,9 @@ var definitions = {
     'vr',
     'controller_support'
   ],
-  'Other': [
-    'system_requirements'
-  ]
+  // 'Other': [
+  //   'system_requirements'
+  // ]
 }
 
 export default definitions

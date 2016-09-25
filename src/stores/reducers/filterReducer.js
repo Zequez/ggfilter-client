@@ -13,7 +13,7 @@ const initialState = {
     'lowest_steam_price',
     'steam_discount',
     'playtime_median_ftb',
-    'metacritic',
+    // 'metacritic',
     'steam_reviews_count',
     'steam_reviews_ratio',
     'platforms',
@@ -22,9 +22,9 @@ const initialState = {
     // 'steam_thumbnail',
     'tags',
     'playtime_median',
-    'controller_support',
+    // 'controller_support',
     // 'images'
-    'sysreq_index_centile',
+    // 'sysreq_index_centile',
     'released_at'
   ],
   params: {

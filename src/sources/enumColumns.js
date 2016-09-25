@@ -24,7 +24,7 @@ export default {
 
     vr: {
       vive: 1,
-      // oculus: 2,
+      oculus: 2,
       // open: 4
     },
 
@@ -42,12 +42,12 @@ export default {
       // vr_support:          'VR Support',
       steam_workshop:      'Steam Workshop',
       steam_cloud:         'Steam Cloud',
-      valve_anti_cheat:    'VAC (Valve Anti Cheat)'
+      valve_anti_cheat:    'VAC (Valve Anti-Cheat)'
     },
 
     platforms: {
       win:   'Windows',
-      mac:   'OSX',
+      mac:   'Mac',
       linux: 'Linux/SteamOS'
     },
 
@@ -59,8 +59,8 @@ export default {
     },
 
     vr: {
-      vive: 'Virtual Reality', // It's the only one for now, we don't really know if it's the Vive
-      // oculus: 'Oculus Rift',
+      vive: 'HTC Vive',
+      oculus: 'Oculus Rift',
       // open: 'Open VR'
     },
 

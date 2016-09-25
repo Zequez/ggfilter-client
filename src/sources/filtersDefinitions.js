@@ -227,7 +227,6 @@ var filtersDefinitions = {
           '3': 'Full'
         }
       },
-      autohook: 3,
       strictlyRangeMode: false
     }
   },
@@ -253,13 +252,13 @@ var filtersDefinitions = {
     width: 200,
     sort: false
   },
-  system_requirements: {
-    title: 'System Requirements',
-    column: SystemReqColumn,
-    width: 600
-  },
+  // system_requirements: {
+  //   title: 'System Requirements',
+  //   column: SystemReqColumn,
+  //   width: 600
+  // },
   sysreq_index_centile: {
-    title: 'SysReq. Index®',
+    title: 'Sys.Req. Index',
     filter: FancyRangeFilter,
     filterOptions: {
       range: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
