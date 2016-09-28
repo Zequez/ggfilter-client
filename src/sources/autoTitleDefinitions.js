@@ -3,9 +3,9 @@ import { timeInWords, escapeHtml as h } from 'lib/utils'
 
 let p = (cents) => {
   cents = parseInt(cents)
-  if (cents === 1) return '$0.01'
+  if (cents === 1) return '0.01'
   if (cents === 0) return 'Free'
-  return '$' + Math.floor(cents / 100)
+  return Math.floor(cents / 100)
 }
 
 let basicRange = (rangeInterpol, gtInterpol, ltInterpol, equalInterpol = '') => {
@@ -53,12 +53,12 @@ export default {
       return `<free> on Steam`
     } else if (gt === 1 && lt == null) {
       return `<non-free> on Steam`
-    } else if (gt != null && lt != null) {
-      return `with a price <≥${p(gt)}> and <≤${p(lt)}> on Steam`
     } else if (gt != null && lt == null) {
-      return `with a price <≥${p(gt)}> on Steam`
-    } else if (gt == null && lt != null) {
-      return `with a price <≤${p(lt)}> on Steam`
+      return `with a price <≥$${p(gt)}> on Steam`
+    } else if ((gt == null || gt === 0) && lt != null) {
+      return `with a price <≤$${p(lt)}> on Steam`
+    } else if (gt != null && lt != null) {
+      return `with a price of <$${p(gt)}-${p(lt)}> on Steam`
     }
   },
   steam_discount: ({gt, lt}) => {
@@ -70,56 +70,56 @@ export default {
       return `with <100% discount given away for FREE> on Steam`
     } else if (gt === 1 && lt != null) {
       return `<on sale> on Steam with a discount <≤${h(lt)}%>`
-    } else if (gt != null && lt != null) {
-      return `<on sale> on Steam with a discount <≥${h(gt)}%> and <≤${h(lt)}%>`
-    } else if (gt != null && lt == null) {
+    } else if (gt != null && (lt == null || lt === 100)) {
       return `<on sale> on Steam with a discount <≥${h(gt)}%>`
-    } else if (gt == null && lt != null) {
+    } else if ((gt == null || gt === 0) && lt != null) {
       return `with a discount <≤${h(lt)}%> on Steam`
+    } else if (gt != null && lt != null) {
+      return `<on sale> on Steam with a discount of <${h(gt)}-${h(lt)}%>`
     }
   },
   playtime_mean: basicRange(
-    'with an average playtime <≥{gt}hs> and <≤{lt}hs>',
+    'with an average playtime of <{gt}-{lt}hs>',
     'with an average playtime <≥{gt}hs>',
     'with an average playtime <≤{lt}hs>'
   ),
   playtime_median: basicRange(
-    'with a median playtime <≥{gt}hs> and <≤{lt}hs>',
+    'with a median playtime of <{gt}-{lt}hs>',
     'with a median playtime <≥{gt}hs>',
     'with a median playtime <≤{lt}hs>'
   ),
   playtime_sd: basicRange(
-    'with a playtime standard deviation <≥{gt}hs> and <≤{lt}hs>',
+    'with a playtime standard deviation of <{gt}-{lt}hs>',
     'with a playtime standard deviation <≥{gt}hs>',
     'with a playtime standard deviation <≤{lt}hs>'
   ),
   playtime_rsd: basicRange(
-    'with a playtime relative standard deviation <≥{gt}hs> and <≤{lt}hs>',
+    'with a playtime relative standard deviation of <{gt}-{lt}hs>',
     'with a playtime relative standard deviation <≥{gt}hs>',
     'with a playtime relative standard deviation <≤{lt}hs>'
   ),
   playtime_mean_ftb: basicRange(
-    'with an avg. playtime / price <≥{gt}hs/$> and <≤{lt}hs/$>',
+    'with an avg. playtime / price of <{gt}-{lt}hs/$>',
     'with an avg. playtime / price <≥{gt}hs/$>',
     'with an avg. playtime / price <≤{lt}hs/$>'
   ),
   playtime_median_ftb: basicRange(
-    'with a median playtime / price <≥{gt}hs/$> and <≤{lt}hs/$>',
+    'with a median playtime / price of <{gt}-{lt}hs/$>',
     'with a median playtime / price <≥{gt}hs/$>',
     'with a median playtime / price <≤{lt}hs/$>'
   ),
   metacritic: basicRange(
-    'with a Metacritic <≥{gt}> and <≤{lt}>',
+    'with a Metacritic of <{gt}-{lt}>',
     'with a Metacritic <≥{gt}>',
     'with a Metacritic <≤{lt}>'
   ),
   steam_reviews_count: basicRange(
-    'with <≥{gt}> and <≤{lt}> reviews on Steam',
+    'with <{gt}-{lt}> reviews on Steam',
     'with <≥{gt}> reviews on Steam',
     'with <≤{lt}> reviews on Steam'
   ),
   steam_reviews_ratio: basicRange(
-    'with a Steam reviews ratio <≥{gt}%> and <≤{lt}%>',
+    'with a Steam reviews ratio of <{gt}-{lt}%>',
     'with a Steam reviews ratio <≥{gt}%>',
     'with a Steam reviews ratio <≤{lt}%>'
   ),
@@ -148,7 +148,7 @@ export default {
     }
   },
   sysreq_index_centile: basicRange(
-    'with a system requirements index <≥{gt}> and <≤{lt}>',
+    'with a system requirements index of <{gt}-{lt}>',
     'with a system requirements index <≥{gt}>',
     'with a system requirements index <≤{lt}>'
   ),

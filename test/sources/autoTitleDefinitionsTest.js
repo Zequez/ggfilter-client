@@ -30,9 +30,10 @@ describe('autotitle definitions', () => {
 
   describe('lowest_steam_price', () => {
     testMulti('lowest_steam_price', [
-      [{gt: 100, lt: 500}, 'with a price <≥$1> and <≤$5> on Steam'],
+      [{gt: 100, lt: 500}, 'with a price of <$1-5> on Steam'],
       [{gt: 100, lt: null}, 'with a price <≥$1> on Steam'],
       [{gt: null, lt: 400}, 'with a price <≤$4> on Steam'],
+      [{gt: 0, lt: 400}, 'with a price <≤$4> on Steam'],
       [{gt: 0, lt: 0}, '<free> on Steam'],
       [{gt: 1, lt: null}, '<non-free> on Steam']
     ])
@@ -40,9 +41,11 @@ describe('autotitle definitions', () => {
 
   describe('steam_discount', () => {
     testMulti('steam_discount', [
-      [{gt: 10, lt: 50}, '<on sale> on Steam with a discount <≥10%> and <≤50%>'],
+      [{gt: 10, lt: 50}, '<on sale> on Steam with a discount of <10-50%>'],
       [{gt: 20, lt: null}, '<on sale> on Steam with a discount <≥20%>'],
+      [{gt: 20, lt: 100}, '<on sale> on Steam with a discount <≥20%>'],
       [{gt: null, lt: 90}, 'with a discount <≤90%> on Steam'],
+      [{gt: 0, lt: 90}, 'with a discount <≤90%> on Steam'],
       [{gt: 1, lt: 90}, '<on sale> on Steam with a discount <≤90%>'],
       [{gt: 1, lt: null}, '<on sale> on Steam'],
       [{gt: 0, lt: 0}, "that <aren't on sale> on Steam"],
@@ -52,7 +55,7 @@ describe('autotitle definitions', () => {
 
   describe('playtime_mean', () => {
     testMulti('playtime_mean', [
-      [{gt: 1.25, lt: 5.25}, 'with an average playtime <≥1.25hs> and <≤5.25hs>'],
+      [{gt: 1.25, lt: 5.25}, 'with an average playtime of <1.25-5.25hs>'],
       [{gt: 3, lt: null}, 'with an average playtime <≥3hs>'],
       [{gt: null, lt: 2}, 'with an average playtime <≤2hs>']
     ])
@@ -60,7 +63,7 @@ describe('autotitle definitions', () => {
 
   describe('playtime_median', () => {
     testMulti('playtime_median', [
-      [{gt: 1.25, lt: 5.25}, 'with a median playtime <≥1.25hs> and <≤5.25hs>'],
+      [{gt: 1.25, lt: 5.25}, 'with a median playtime of <1.25-5.25hs>'],
       [{gt: 3, lt: null}, 'with a median playtime <≥3hs>'],
       [{gt: null, lt: 2}, 'with a median playtime <≤2hs>']
     ])
@@ -68,7 +71,7 @@ describe('autotitle definitions', () => {
 
   describe('playtime_sd', () => {
     testMulti('playtime_sd', [
-      [{gt: 1.25, lt: 5.25}, 'with a playtime standard deviation <≥1.25hs> and <≤5.25hs>'],
+      [{gt: 1.25, lt: 5.25}, 'with a playtime standard deviation of <1.25-5.25hs>'],
       [{gt: 3, lt: null}, 'with a playtime standard deviation <≥3hs>'],
       [{gt: null, lt: 2}, 'with a playtime standard deviation <≤2hs>']
     ])
@@ -76,7 +79,7 @@ describe('autotitle definitions', () => {
 
   describe('playtime_rsd', () => {
     testMulti('playtime_rsd', [
-      [{gt: 1.25, lt: 5.25}, 'with a playtime relative standard deviation <≥1.25hs> and <≤5.25hs>'],
+      [{gt: 1.25, lt: 5.25}, 'with a playtime relative standard deviation of <1.25-5.25hs>'],
       [{gt: 3, lt: null}, 'with a playtime relative standard deviation <≥3hs>'],
       [{gt: null, lt: 2}, 'with a playtime relative standard deviation <≤2hs>']
     ])
@@ -84,7 +87,7 @@ describe('autotitle definitions', () => {
 
   describe('playtime_mean_ftb', () => {
     testMulti('playtime_mean_ftb', [
-      [{gt: 1.25, lt: 5.25}, 'with an avg. playtime / price <≥1.25hs/$> and <≤5.25hs/$>'],
+      [{gt: 1.25, lt: 5.25}, 'with an avg. playtime / price of <1.25-5.25hs/$>'],
       [{gt: 3, lt: null}, 'with an avg. playtime / price <≥3hs/$>'],
       [{gt: null, lt: 2}, 'with an avg. playtime / price <≤2hs/$>']
     ])
@@ -92,7 +95,7 @@ describe('autotitle definitions', () => {
 
   describe('playtime_median_ftb', () => {
     testMulti('playtime_median_ftb', [
-      [{gt: 1.25, lt: 5.25}, 'with a median playtime / price <≥1.25hs/$> and <≤5.25hs/$>'],
+      [{gt: 1.25, lt: 5.25}, 'with a median playtime / price of <1.25-5.25hs/$>'],
       [{gt: 3, lt: null}, 'with a median playtime / price <≥3hs/$>'],
       [{gt: null, lt: 2}, 'with a median playtime / price <≤2hs/$>']
     ])
@@ -100,7 +103,7 @@ describe('autotitle definitions', () => {
 
   describe('metacritic', () => {
     testMulti('metacritic', [
-      [{gt: 10, lt: 70}, 'with a Metacritic <≥10> and <≤70>'],
+      [{gt: 10, lt: 70}, 'with a Metacritic of <10-70>'],
       [{gt: 90, lt: null}, 'with a Metacritic <≥90>'],
       [{gt: null, lt: 20}, 'with a Metacritic <≤20>']
     ])
@@ -108,7 +111,7 @@ describe('autotitle definitions', () => {
 
   describe('steam_reviews_count', () => {
     testMulti('steam_reviews_count', [
-      [{gt: 10, lt: 70}, 'with <≥10> and <≤70> reviews on Steam'],
+      [{gt: 10, lt: 70}, 'with <10-70> reviews on Steam'],
       [{gt: 90, lt: null}, 'with <≥90> reviews on Steam'],
       [{gt: null, lt: 20}, 'with <≤20> reviews on Steam']
     ])
@@ -116,7 +119,7 @@ describe('autotitle definitions', () => {
 
   describe('steam_reviews_ratio', () => {
     testMulti('steam_reviews_ratio', [
-      [{gt: 10, lt: 70}, 'with a Steam reviews ratio <≥10%> and <≤70%>'],
+      [{gt: 10, lt: 70}, 'with a Steam reviews ratio of <10-70%>'],
       [{gt: 90, lt: null}, 'with a Steam reviews ratio <≥90%>'],
       [{gt: null, lt: 20}, 'with a Steam reviews ratio <≤20%>']
     ])
@@ -206,7 +209,7 @@ describe('autotitle definitions', () => {
 
   describe('sysreq_index_centile', () => {
     testMulti('sysreq_index_centile', [
-      [{gt: 10, lt: 70}, 'with a system requirements index <≥10> and <≤70>'],
+      [{gt: 10, lt: 70}, 'with a system requirements index of <10-70>'],
       [{gt: 90, lt: null}, 'with a system requirements index <≥90>'],
       [{gt: null, lt: 20}, 'with a system requirements index <≤20>']
     ])
