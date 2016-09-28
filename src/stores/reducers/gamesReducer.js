@@ -1,6 +1,6 @@
 import { u } from 'lib/utils'
 
-import gamesFetcher from 'sources/gamesFetcher'
+import { getGames as apiGetGames } from 'sources/api'
 
 export const initialState = {
   batches: [],
@@ -27,7 +27,7 @@ export function getGames (page = 0) {
 
     dispatch({type: GET_GAMES_START, page})
 
-    return gamesFetcher(filter, page, options)
+    return apiGetGames(filter, page, options)
       .then(games => {
         return dispatch({
           type: GET_GAMES_END,

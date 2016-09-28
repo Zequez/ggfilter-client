@@ -14,13 +14,13 @@ import history from 'lib/StateRouter/history'
 import router from 'sources/stateRoutes'
 
 import App from 'components/App'
-import getTags from 'sources/getTags'
+import { getTags } from 'sources/api'
 
 console.logRender = function (componentName) {
   // console.info(`<${componentName}/>`)
 }
 
-getTags((tags) => {
+getTags().then((tags) => {
   let store = getStore()
 
   store.dispatch(setAllTags(tags))

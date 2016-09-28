@@ -2,7 +2,7 @@ import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { setFilter, setSort } from 'stores/reducers/filterReducer'
 import { snapTo } from 'lib/utils'
-import gamesFetcher from 'sources/gamesFetcher'
+import { getGames } from 'sources/api'
 import SuggestionsBox from 'components/utils/SuggestionsBox'
 
 @connect(() => ({}), {
@@ -17,7 +17,7 @@ export default class SysreqCalc extends Component {
   filterGames = (value) => {
     if (!value) return []
 
-    return gamesFetcher({
+    return getGames({
       visible: ['name', 'sysreq_index_centile'],
       params: {
         name: { value: value }

@@ -1,10 +1,6 @@
-import axios from 'axios'
-
-import config from 'sources/config'
-import qs from 'qs'
 import filtersDefinitions from 'sources/filtersDefinitions'
 
-function generateQueryFilter (filter, page, options) {
+export default function gamesQueryGenerator (filter, page, options) {
   // Some filters require more than one column to work,
   // not neccesarily visible, we need to get all those columns
   var columns = []
@@ -24,16 +20,4 @@ function generateQueryFilter (filter, page, options) {
     columns: columns,
     page: page
   }
-}
-
-export default function gamesFetcher (filter, page, options) {
-  let queryFilter = generateQueryFilter(filter, page, options)
-  let queryString = qs.stringify(queryFilter, {arrayFormat: 'brackets'})
-
-  return axios.get(`${config.apiHost}/games.json?${queryString}`)
-    .then((response) => {
-      return response.data
-    }, (error) => {
-      console.error(error)
-    })
 }
