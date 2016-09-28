@@ -1,12 +1,13 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
-import { setFilter } from 'stores/reducers/filterReducer'
+import { setFilter, setSort } from 'stores/reducers/filterReducer'
 import { snapTo } from 'lib/utils'
 import gamesFetcher from 'sources/gamesFetcher'
 import SuggestionsBox from 'components/utils/SuggestionsBox'
 
 @connect(() => ({}), {
-  setFilter
+  setFilter,
+  setSort
 })
 export default class SysreqCalc extends Component {
   state = {
@@ -49,9 +50,10 @@ export default class SysreqCalc extends Component {
   submitFilter () {
     let calcs = this.calculatedValues()
     if (!calcs.mean) return
-    let gt = Math.max(0, calcs.mean - calcs.deviation)
+    // let gt = Math.max(0, calcs.mean - calcs.deviation)
     let lt = Math.min(100, calcs.mean + calcs.deviation)
-    this.props.setFilter('sysreq_index_centile', {gt: snapTo(gt, 5), lt: snapTo(lt, 5)})
+    this.props.setFilter('sysreq_index_centile', {gt: 0, lt: snapTo(lt, 5)})
+    this.props.setSort('sysreq_index_centile', false)
   }
 
   calculatedValues () {

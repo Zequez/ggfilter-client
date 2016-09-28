@@ -71,11 +71,16 @@ export function toggle (name, force = null) {
 }
 
 export function setFilter (name, data) {
-  return dispatchAndGetGames({ type: FILTER_SET, name, data })
+  return function (dispatch, getState) {
+    if (getState().filter.visible.indexOf(name) === -1) {
+      dispatch(toggle(name, true))
+    }
+    dispatchAndGetGames({ type: FILTER_SET, name, data })(dispatch, getState)
+  }
 }
 
-export function setSort (name) {
-  return dispatchAndGetGames({ type: FILTER_SORT, name })
+export function setSort (name, asc) {
+  return dispatchAndGetGames({ type: FILTER_SORT, name, asc })
 }
 
 export function setFullFilter (filter) {
@@ -106,7 +111,7 @@ export function setFilterFromSid (sid) {
   return function (dispatch, getState) {
     dispatch({ type: FILTER_LOADING_FROM_SID, sid })
     return getFilter(sid).then(({filter}) => {
-      return dispatch(dispatchAndGetGames({ type: FILTER_SET_FULL, filter: JSON.parse(filter) }))
+      return dispatchAndGetGames({ type: FILTER_SET_FULL, filter: JSON.parse(filter) })(dispatch, getState)
     }, (error) => {
       dispatch({ type: FILTER_LOADING_ERROR, error })
     })
@@ -148,7 +153,8 @@ export function reducer (state = initialState, action) {
       if (state.sort === action.name) {
         state = u(state, {sort_asc: {$set: !state.sort_asc}})
       } else {
-        state = u(state, {sort: {$set: action.name}, sort_asc: { $set: true }})
+        let asc = action.asc == null ? true : action.asc
+        state = u(state, {sort: {$set: action.name}, sort_asc: { $set: asc }})
       }
       break
 
