@@ -24,13 +24,6 @@ describe('generateAutoTitle', () => {
     expect(title).to.equal('Games MEGA TITLE! 321, SUPER TITLE! 123')
   })
 
-  it('should allow interpolation of the filters instead o a function', () => {
-    let title = generateAutoTitle({superFilter: {value: 123}}, {
-      superFilter: 'SUPER TITLE! {value}'
-    })
-    expect(title).to.equal('Games SUPER TITLE! 123')
-  })
-
   it('should capitalize the first letter of the title', () => {
     let title = generateAutoTitle({superFilter: {}, megaTitle: {}}, {
       superFilter: (p) => 'super',

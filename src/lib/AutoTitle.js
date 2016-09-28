@@ -7,15 +7,7 @@ export default function generateAutoTitle (params, definitions = autoTitleDefini
     let param = params[filterName]
     if (param) {
       let definition = definitions[filterName]
-      if (typeof definition === 'function') {
-        titles.push(definition(param, store))
-      } else {
-        let title = definition
-        for (let p in param) {
-          title = title.replace(`{${p}}`, param[p])
-        }
-        titles.push(title)
-      }
+      titles.push(definition(param, store))
     }
   }
 

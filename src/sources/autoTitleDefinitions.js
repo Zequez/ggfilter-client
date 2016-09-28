@@ -45,8 +45,8 @@ let booleanFilter = (nameKey, wholeInterpol = '%s', valInterpol = '%s') => {
 }
 
 export default {
-  name: 'with the name "{value}"',
-  steam_id: 'with the Steam ID {value}',
+  name: ({value}) => ['with the name "%s"', value],
+  steam_id: ({value}) => ['with the Steam ID %s', value],
   lowest_steam_price: ({gt, lt}) => {
     if (lt === 0 && gt === 0) {
       return `free on Steam`
