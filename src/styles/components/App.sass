@@ -1,15 +1,29 @@
 .header
+  display: flex
   height: $r*3
-  text-align: center
   .logo
-    width: 280px
-    height: $r*4
-    margin: 0 auto
-    background-image: url(~images/logo-small.png)
-    text-indent: -9999px
+    height: $r*3
+    padding-left: $r
+    color: $white
+    line-height: $r*3
     font-size: $font-xx-larger
-    font-weight: bold
+    font-family: Courier, monospace
+    white-space: nowrap
+    i, strong
+      color: mix($white, $blue, 20%)
+      // text-shadow: 0 0 10px $white
+      // text-shadow: 0 1px 0 $white, 1px 0 0 $white, 0 -1px 0 $white, -1px 0 0 $white
+    strong
+      font-weight: bold
   .slogan
+  .filter-title
+    align-self: center
+    flex-grow: 1
+    position: relative
+    bottom: -4px // Magic to visually align to the giant semicolons
+    font-style: italic
+    font-size: $font-larger
+    color: rgba($white, 0.5)
 
 .tabs-content
   +clearfix

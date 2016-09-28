@@ -1,6 +1,7 @@
-import React, { Component, PropTypes as t } from 'react'
+import React, { Component } from 'react'
 
 import NavTabs from 'components/NavTabs'
+import FilterTitle from 'components/FilterTitle'
 
 export default class Layout extends Component {
   render () {
@@ -12,12 +13,12 @@ export default class Layout extends Component {
     return (
       <div className={className}>
         <header className='header'>
-          <div className='logo' title="The Good Game Filter">
-            GGFilter
-          </div>
-          <div className='slogan' title="We have no proof whatsoever of this claim, but we really aspire to!">
-            The Internet's Nº1 source to find good games, <em>allegedly</em>
-          </div>
+          <a className='logo' title="The Good Game Filter" href='/'>
+            <strong>GG</strong>Filter
+            <i className='fa icon-filter'></i>
+            <span className='logo-semicolons'>:</span>
+          </a>
+          <FilterTitle/>
         </header>
         <main className='main'>
           <nav className='nav'>
