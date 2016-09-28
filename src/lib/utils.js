@@ -120,7 +120,7 @@ export function timeInWordsFromTimespans (time, timespans) {
 }
 
 export function escapeHtml (unsafe) {
-  return unsafe
+  return unsafe.toString()
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
