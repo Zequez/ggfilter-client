@@ -50,6 +50,18 @@ export function getMoreGames () {
   }
 }
 
+export function getGamesIfNoGames () {
+  return function (dispatch, getState) {
+    let { games: { batches } } = getState()
+
+    if (batches.length === 0) {
+      return dispatch(getGames())
+    } else {
+      return Promise.resolve()
+    }
+  }
+}
+
 // =============================================================================
 // Reducer
 // =============================================================================

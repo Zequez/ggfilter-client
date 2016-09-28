@@ -24,8 +24,9 @@ export default class StateRouter {
   bind (store, history) {
     this.store = store
     this.history = history
-    this._bindHistory()
+    let promise = this._bindHistory()
     this._bindStore()
+    return promise
   }
 
   url (name, ...params) {
@@ -67,7 +68,7 @@ export default class StateRouter {
 
   _bindHistory () {
     this.location = this._parseDumbLocation(this.history.location)
-    this._matchRoute()
+    let promise = this._matchRoute()
 
     this.history.listen((location, action) => {
       this.location = this._parseDumbLocation(location)
@@ -75,6 +76,7 @@ export default class StateRouter {
         this._matchRoute()
       }
     })
+    return promise
   }
 
   _bindStore () {
@@ -92,15 +94,19 @@ export default class StateRouter {
       if ((match = route.matchRoute(pathname, query))) break
     }
 
+    let promises = []
     if (match) {
       console.info('LOCATION-INDUCED-STATE-CHANGE', route.pathname, route.actions)
       route.actions.forEach((action) => {
         if (typeof action === 'function') {
           action = action(..._values(match))
         }
-        this.store.dispatch(action)
+        let result = this.store.dispatch(action)
+        if (result instanceof Promise) {
+          promises.push(result)
+        }
       })
-      return true
+      return Promise.all(promises)
     } else {
       return false
     }

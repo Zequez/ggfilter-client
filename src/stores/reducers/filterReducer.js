@@ -58,7 +58,7 @@ export const FILTER_LOADING_ERROR = 'FILTER_LOADING_ERROR'
 function dispatchAndGetGames (action) {
   return function (dispatch, getState) {
     dispatch(action)
-    getGames()(dispatch, getState)
+    return getGames()(dispatch, getState)
   }
 }
 
@@ -105,8 +105,8 @@ export function setFilterFromB64 (b64) {
 export function setFilterFromSid (sid) {
   return function (dispatch, getState) {
     dispatch({ type: FILTER_LOADING_FROM_SID, sid })
-    getFilter(sid).then(({filter}) => {
-      dispatch(dispatchAndGetGames({ type: FILTER_SET_FULL, filter: JSON.parse(filter) }))
+    return getFilter(sid).then(({filter}) => {
+      return dispatch(dispatchAndGetGames({ type: FILTER_SET_FULL, filter: JSON.parse(filter) }))
     }, (error) => {
       dispatch({ type: FILTER_LOADING_ERROR, error })
     })
