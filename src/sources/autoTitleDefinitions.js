@@ -46,6 +46,19 @@ let booleanFilter = (nameKey, wholeInterpol = '%s', valInterpol = '%s') => {
 }
 
 export default {
+  platforms: booleanFilter('platforms', 'for %s'),
+  vr: booleanFilter('vr', 'with support for %s', 'the %s'),
+  players: booleanFilter('players', 'with %s support'),
+  features: booleanFilter('features', 'with support for %s'),
+  controller_support: ({gt, lt}) => {
+    let v = enumColumns.values.controller_support
+    if (gt === v.no && lt === v.no) return 'with <no controller support>'
+    if (gt === v.partial && lt === v.partial) return 'with <only partial controller support>'
+    if (gt === v.full && lt === v.full) return 'with <full controller support>'
+    if (gt === v.partial && lt === v.full) return 'with <partial or full controller support>'
+    if (gt === v.no && lt === v.partial) return 'with <partial or no controller support>'
+    return ''
+  },
   name: ({value}) => `with the name <"${h(value)}">`,
   steam_id: ({value}) => `with the Steam ID <${h(value)}>`,
   lowest_steam_price: ({gt, lt}) => {
@@ -123,19 +136,6 @@ export default {
     'with a Steam reviews ratio <≥{gt}%>',
     'with a Steam reviews ratio <≤{lt}%>'
   ),
-  features: booleanFilter('features', 'with support for %s'),
-  platforms: booleanFilter('platforms', 'for %s'),
-  players: booleanFilter('players', 'with %s support'),
-  vr: booleanFilter('vr', 'with support for %s', 'the %s'),
-  controller_support: ({gt, lt}) => {
-    let v = enumColumns.values.controller_support
-    if (gt === v.no && lt === v.no) return 'with <no controller support>'
-    if (gt === v.partial && lt === v.partial) return 'with <only partial controller support>'
-    if (gt === v.full && lt === v.full) return 'with <full controller support>'
-    if (gt === v.partial && lt === v.full) return 'with <partial or full controller support>'
-    if (gt === v.no && lt === v.partial) return 'with <partial or no controller support>'
-    return ''
-  },
   tags: ({tags}, store) => {
     tags = tags.map((id) => '<' + h(store.tags[id]) + '>')
     if (tags.length > 1) {
