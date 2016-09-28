@@ -39,4 +39,18 @@ describe('generateAutoTitle', () => {
 
     expect(title).to.equal('Games YEAAAAH!')
   })
+
+  it('should interpolate and escape the returned values from the definition', () => {
+    let title = generateAutoTitle({superFilter: {value: '<script>rsarsa</script>'}}, {
+      superFilter: (p) => ['Potato! %s', p.value]
+    })
+    expect(title).to.equal('Games Potato! &lt;script&gt;rsarsa&lt;/script&gt;')
+  })
+
+  it('should replace all the values surrounded by <> with <strong>', () => {
+    let title = generateAutoTitle({superFilter: {}}, {
+      superFilter: () => 'SUPER <TITLE>!'
+    })
+    expect(title).to.equal('Games SUPER <strong>TITLE</strong>!')
+  })
 })

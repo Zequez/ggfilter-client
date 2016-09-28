@@ -1,13 +1,24 @@
 import autoTitleDefinitions from 'sources/autoTitleDefinitions'
+import { escapeHtml } from 'lib/utils'
 
 export default function generateAutoTitle (params, definitions = autoTitleDefinitions, store) {
   let titles = []
 
   for (let filterName in definitions) {
-    let param = params[filterName]
-    if (param) {
+    let filterParams = params[filterName]
+    if (filterParams) {
       let definition = definitions[filterName]
-      titles.push(definition(param, store))
+      let title = definition(filterParams, store)
+      if (title instanceof Array) {
+        let escapedTitle = title[0]
+        let vals = title.slice(1)
+        for (let val of vals) {
+          escapedTitle = escapedTitle.replace('%s', escapeHtml(val))
+        }
+        title = escapedTitle
+      }
+      title = title.replace(/(<)|(>)/g, (_, lt, gt) => lt ? '<strong>' : '</strong>')
+      titles.push(title)
     }
   }
 
