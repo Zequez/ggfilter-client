@@ -38,4 +38,12 @@ describe('generateAutoTitle', () => {
     })
     expect(title).to.equal('Games super, mega')
   })
+
+  it('should pass the store to the definition', () => {
+    let title = generateAutoTitle({superFilter: {}}, {
+      superFilter: (p, store) => store.potato
+    }, {potato: 'YEAAAAH!'})
+
+    expect(title).to.equal('Games YEAAAAH!')
+  })
 })

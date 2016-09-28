@@ -135,8 +135,8 @@ export default {
     if (gt === v.no && lt === v.partial) return 'with at most partial controller support'
     return ''
   },
-  tags: ({tags}) => {
-    tags = tags.map((id) => `<tag:${id}>`)
+  tags: ({tags}, store) => {
+    tags = tags.map((id) => store.tags[id])
     if (tags.length > 1) {
       let lastTag = tags.pop()
       return 'tagged as ' + tags.join(', ') + ' and ' + lastTag

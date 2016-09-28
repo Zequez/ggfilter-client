@@ -1,6 +1,6 @@
 import autoTitleDefinitions from 'sources/autoTitleDefinitions'
 
-export default function generateAutoTitle (params, definitions = autoTitleDefinitions) {
+export default function generateAutoTitle (params, definitions = autoTitleDefinitions, store) {
   let titles = []
 
   for (let filterName in definitions) {
@@ -8,7 +8,7 @@ export default function generateAutoTitle (params, definitions = autoTitleDefini
     if (param) {
       let definition = definitions[filterName]
       if (typeof definition === 'function') {
-        titles.push(definition(param))
+        titles.push(definition(param, store))
       } else {
         let title = definition
         for (let p in param) {

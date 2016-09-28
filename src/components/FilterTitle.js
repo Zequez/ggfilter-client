@@ -11,12 +11,20 @@ export default class FilterTitle extends Component {
 
   }
 
+  generateAutoTitle () {
+    return generateAutoTitle(
+      this.props.filter.params,
+      undefined,
+      {tags: this.props.tags}
+    )
+  }
+
   render () {
     let keys = Object.keys(this.props.filter.params)
 
     let title
     if (keys.length) {
-      title = `“${generateAutoTitle(this.props.filter.params)}”`
+      title = `“${this.generateAutoTitle()}”`
     } else {
       title = (
         <h1 title="We have no proof whatsoever of this claim, but we really aspire to!">

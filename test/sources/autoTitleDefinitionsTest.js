@@ -2,17 +2,17 @@ import generateAutoTitle from 'lib/AutoTitle'
 import enumColumns from 'sources/enumColumns'
 
 describe('autotitle definitions', () => {
-  function testBasic (name, params, expectation) {
+  function testBasic (name, params, expectation, store = {}) {
     let jp = JSON.stringify(params)
     it(`should have a "${name}" definition ${jp}`, () => {
-      expect(generateAutoTitle({[name]: params}))
+      expect(generateAutoTitle({[name]: params}, undefined, store))
       .to.equal(expectation)
     })
   }
 
   function testMulti (name, ranges) {
     for (let r of ranges) {
-      testBasic(name, r[0], r[1])
+      testBasic(name, r[0], r[1], r[2])
     }
   }
 
@@ -190,8 +190,8 @@ describe('autotitle definitions', () => {
 
   describe('tags', () => {
     testMulti('tags', [
-      [{tags: [1, 2, 3, 4]}, 'Games tagged as <tag:1>, <tag:2>, <tag:3> and <tag:4>'],
-      [{tags: [1]}, 'Games tagged as <tag:1>']
+      [{tags: [1, 2, 3, 4]}, 'Games tagged as tag1, tag2, tag3 and tag4', {tags: ['', 'tag1', 'tag2', 'tag3', 'tag4']}],
+      [{tags: [1]}, 'Games tagged as tag1', {tags: ['', 'tag1']}]
     ])
   })
 
