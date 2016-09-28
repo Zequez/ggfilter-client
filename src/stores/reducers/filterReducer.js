@@ -50,6 +50,7 @@ export const FILTER_SORT = 'FILTER_SORT'
 export const FILTER_SET_FULL = 'FILTER_SET_FULL'
 export const FILTER_LOADING_FROM_SID = 'FILTER_LOADING_FROM_SID'
 export const FILTER_LOADING_ERROR = 'FILTER_LOADING_ERROR'
+export const FILTER_RESET = 'FILTER_RESET'
 
 // =============================================================================
 // Helpers
@@ -118,6 +119,10 @@ export function setFilterFromSid (sid) {
   }
 }
 
+export function resetFilters () {
+  return dispatchAndGetGames({ type: FILTER_RESET })
+}
+
 // =============================================================================
 // Reducer
 // =============================================================================
@@ -160,6 +165,10 @@ export function reducer (state = initialState, action) {
 
     case FILTER_SET_FULL:
       state = action.filter
+      break
+
+    case FILTER_RESET:
+      state = initialState
       break
   }
 

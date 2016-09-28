@@ -1,7 +1,7 @@
 import { u } from 'lib/utils'
 import { createFilter } from 'sources/api'
 
-import { FILTER_LOADING_FROM_SID, FILTER_TOGGLE, FILTER_SET, FILTER_CLEAR, FILTER_SORT } from 'stores/reducers/filterReducer'
+import { FILTER_LOADING_FROM_SID, FILTER_TOGGLE, FILTER_SET, FILTER_CLEAR, FILTER_SORT, FILTER_RESET } from 'stores/reducers/filterReducer'
 
 export const WHAT = 'rsaersinaioerast'
 
@@ -51,6 +51,7 @@ export function reducer (state = initialState, action) {
     case FILTER_SET:
     case FILTER_CLEAR:
     case FILTER_SORT:
+    case FILTER_RESET:
       state = u(state, { type: {$set: URLS_TYPES.b64} })
       break
   }

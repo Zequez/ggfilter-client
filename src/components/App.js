@@ -5,8 +5,8 @@ import filtersDefinitions from 'sources/filtersDefinitions'
 
 import { showLightbox } from 'stores/reducers/lightboxReducer'
 import { getGames, getMoreGames } from 'stores/reducers/gamesReducer'
-
-import { MODES } from 'stores/reducers/modeReducer'
+import { resetFilters } from 'stores/reducers/filterReducer'
+import { setMode, MODES } from 'stores/reducers/modeReducer'
 
 import Layout from 'components/Layout'
 import DataTable from 'components/DataTable'
@@ -29,7 +29,7 @@ import ShareTab from 'components/tabs/ShareTab'
     routing: s.routing,
     mode: s.mode
   }),
-  { getGames, getMoreGames, showLightbox }
+  { getGames, getMoreGames, showLightbox, resetFilters, setMode }
 )
 export default class App extends Component {
   static propTypes = {
@@ -67,6 +67,11 @@ export default class App extends Component {
     this.props.showLightbox([], [])
   }
 
+  clickOnLogo = () => {
+    this.props.resetFilters()
+    this.props.setMode(MODES.columns)
+  }
+
   modeComponent (mode) {
     switch (mode) {
       case MODES.share: return <ShareTab/>
@@ -84,7 +89,7 @@ export default class App extends Component {
     let containerClassName = `mode-${mode}`
 
     return (
-      <Layout className={containerClassName}>
+      <Layout className={containerClassName} clickOnLogo={this.clickOnLogo}>
         <div className='tabs-content'>
           <div className='tabs-content-container'>
             {this.modeComponent(mode)}
