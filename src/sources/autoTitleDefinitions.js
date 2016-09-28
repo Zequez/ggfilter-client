@@ -1,4 +1,4 @@
-import enumColumns from 'sources/EnumColumns'
+import enumColumns from 'sources/enumColumns'
 import { timeInWords } from 'lib/utils'
 
 let p = (cents) => {
@@ -118,9 +118,9 @@ export default {
     'with ≤{lt} reviews on Steam'
   ),
   steam_reviews_ratio: basicRange(
-    'with a Steam reviews ratio ≥{gt} and ≤{lt}',
-    'with a Steam reviews ratio ≥{gt}',
-    'with a Steam reviews ratio ≤{lt}'
+    'with a Steam reviews ratio ≥{gt}% and ≤{lt}%',
+    'with a Steam reviews ratio ≥{gt}%',
+    'with a Steam reviews ratio ≤{lt}%'
   ),
   features: booleanFilter('features', 'with support for %s'),
   platforms: booleanFilter('platforms', 'for %s'),
@@ -139,9 +139,9 @@ export default {
     tags = tags.map((id) => `<tag:${id}>`)
     if (tags.length > 1) {
       let lastTag = tags.pop()
-      return 'with tags ' + tags.join(', ') + ' and ' + lastTag
+      return 'tagged as ' + tags.join(', ') + ' and ' + lastTag
     } else if (tags.length === 1) {
-      return 'with tag ' + tags[0]
+      return 'tagged as ' + tags[0]
     } else {
       return ''
     }

@@ -1,5 +1,5 @@
 import generateAutoTitle from 'lib/AutoTitle'
-import enumColumns from 'sources/EnumColumns'
+import enumColumns from 'sources/enumColumns'
 
 describe('autotitle definitions', () => {
   function testBasic (name, params, expectation) {
@@ -107,9 +107,9 @@ describe('autotitle definitions', () => {
 
   describe('steam_reviews_ratio', () => {
     testMulti('steam_reviews_ratio', [
-      [{gt: 10, lt: 70}, 'Games with a Steam reviews ratio ≥10 and ≤70'],
-      [{gt: 90, lt: null}, 'Games with a Steam reviews ratio ≥90'],
-      [{gt: null, lt: 20}, 'Games with a Steam reviews ratio ≤20']
+      [{gt: 10, lt: 70}, 'Games with a Steam reviews ratio ≥10% and ≤70%'],
+      [{gt: 90, lt: null}, 'Games with a Steam reviews ratio ≥90%'],
+      [{gt: null, lt: 20}, 'Games with a Steam reviews ratio ≤20%']
     ])
   })
 
@@ -190,8 +190,8 @@ describe('autotitle definitions', () => {
 
   describe('tags', () => {
     testMulti('tags', [
-      [{tags: [1, 2, 3, 4]}, 'Games with tags <tag:1>, <tag:2>, <tag:3> and <tag:4>'],
-      [{tags: [1]}, 'Games with tag <tag:1>']
+      [{tags: [1, 2, 3, 4]}, 'Games tagged as <tag:1>, <tag:2>, <tag:3> and <tag:4>'],
+      [{tags: [1]}, 'Games tagged as <tag:1>']
     ])
   })
 
