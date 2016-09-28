@@ -10,9 +10,9 @@ export default function queryReducer(state = initialState, action) {
     delete state.filters[action.name]
   } else if (action.type === SET_QUERY_SORT) {
     if (state.sort == action.name) {
-      state = u(state, {sort_asc: {$set: !state.sort_asc}})
+      state = u(state, {sortAsc: {$set: !state.sortAsc}})
     } else {
-      state = u(state, {sort: {$set: action.name}, sort_asc: { $set: true }})
+      state = u(state, {sort: {$set: action.name}, sortAsc: { $set: true }})
     }
 
   } else if (action.type === SET_QUERY_BATCH_SIZE) {

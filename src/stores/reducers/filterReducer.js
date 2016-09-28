@@ -35,7 +35,7 @@ export const initialState = {
     // lowest_steam_price: { gt: 500, lt: 6000 }
   },
   sort: 'name',
-  sort_asc: false
+  sortAsc: false
 }
 
 initialState.visible = filtersSectionsFlatSort(initialState.visible)
@@ -151,10 +151,10 @@ export function reducer (state = initialState, action) {
 
     case FILTER_SORT:
       if (state.sort === action.name) {
-        state = u(state, {sort_asc: {$set: !state.sort_asc}})
+        state = u(state, {sortAsc: {$set: !state.sortAsc}})
       } else {
         let asc = action.asc == null ? true : action.asc
-        state = u(state, {sort: {$set: action.name}, sort_asc: { $set: asc }})
+        state = u(state, {sort: {$set: action.name}, sortAsc: { $set: asc }})
       }
       break
 

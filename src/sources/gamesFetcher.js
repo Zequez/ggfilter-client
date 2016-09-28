@@ -15,7 +15,7 @@ function generateQueryFilter (filter, page, options) {
     }
   }
 
-  let sortDir = filter.sort_asc ? 'asc' : 'desc'
+  let sortDir = filter.sortAsc ? 'asc' : 'desc'
 
   return {
     filters: JSON.stringify(filter.params),

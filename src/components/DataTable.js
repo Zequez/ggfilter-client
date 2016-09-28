@@ -14,7 +14,7 @@ export default class DataTable extends Component {
       visible: t.arrayOf(t.string),
       params: t.object,
       sort: t.string,
-      sort_asc: t.bool
+      sortAsc: t.bool
     }).isRequired,
     columnsWidth: t.object.isRequired,
     games: t.shape({
@@ -60,7 +60,7 @@ export default class DataTable extends Component {
             filters={filters}
             filtersParams={filter.params}
             sort={filter.sort}
-            sortAsc={filter.sort_asc}
+            sortAsc={filter.sortAsc}
             columnsWidth={trueColumnsWidth}/>
           <DataTableControls
             filters={filters}

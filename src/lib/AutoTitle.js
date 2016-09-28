@@ -31,7 +31,7 @@ export default function generateAutoTitle (filter, definitions = autoTitleDefini
   }
 
   if (filter.sort && filterDefinitions[filter.sort] && filter.sort !== initialState.sort) {
-    let direction = filter.sort_asc ? 'ascending' : 'descending'
+    let direction = filter.sortAsc ? 'ascending' : 'descending'
     let title = filterDefinitions[filter.sort].title
     titles.push(strongificate(`sorted by <${h(title)} in ${direction} order>`))
   }

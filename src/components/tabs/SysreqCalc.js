@@ -23,7 +23,7 @@ export default class SysreqCalc extends Component {
         name: { value: value }
       },
       sort: 'name',
-      sort_asc: true
+      sortAsc: true
     }, 0, { batchSize: 8 })
     .then((games) => {
       var ids = this.state.games.map((g) => g.id)

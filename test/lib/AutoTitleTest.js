@@ -85,21 +85,21 @@ describe('generateAutoTitle', () => {
     })
 
     it("should not add the sorting order if it's the default", () => {
-      let title = generateAutoTitle({params: {supa: {}}, sort: initialState.sort, sort_asc: true}, {
+      let title = generateAutoTitle({params: {supa: {}}, sort: initialState.sort, sortAsc: true}, {
         supa: () => 'yup'
       })
       expect(title).to.equal('Games yup')
     })
 
     it('should add the sorting order ascending', () => {
-      let title = generateAutoTitle({params: {supa: {}}, sort: 'steam_id', sort_asc: true}, {
+      let title = generateAutoTitle({params: {supa: {}}, sort: 'steam_id', sortAsc: true}, {
         supa: () => 'yup'
       })
       expect(title).to.equal(`Games yup, sorted by <strong>${filtersDefinitions.steam_id.title} in ascending order</strong>`)
     })
 
     it('should add the sorting order descending', () => {
-      let title = generateAutoTitle({params: {supa: {}}, sort: 'steam_id', sort_asc: false}, {
+      let title = generateAutoTitle({params: {supa: {}}, sort: 'steam_id', sortAsc: false}, {
         supa: () => 'yup'
       })
       expect(title).to.equal(`Games yup, sorted by <strong>${filtersDefinitions.steam_id.title} in descending order</strong>`)
