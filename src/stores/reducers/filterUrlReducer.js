@@ -1,5 +1,4 @@
 import { u } from 'lib/utils'
-import { encode } from 'lib/b64FilterGenerator'
 import { createFilter } from 'sources/api'
 
 import { FILTER_LOADING_FROM_SID, FILTER_TOGGLE, FILTER_SET, FILTER_CLEAR, FILTER_SORT } from 'stores/reducers/filterReducer'
@@ -19,34 +18,9 @@ export const initialState = {
   error: null
 }
 
-// User filters stuff and clicks the button -> base64
-// User clicks the shorten-url button on the share tab -> hash
-//   User nows modifies the filter again, back to -> base64
-// User loads a filter with a hash -> hash
-//   User modifies the thing -> base64
-// User loads an official filter -> official url
-//   User modifies anything -> base64
-
 export const FILTER_URL_SID_START = 'FILTER_URL_SID_START'
 export const FILTER_URL_SID_END = 'FILTER_URL_SID_END'
 export const FILTER_URL_SID_ERROR = 'FILTER_URL_SID_ERROR'
-
-// export function navigateToFilterUrl () {
-//   return function (dispatch, getState) {
-//     let state = getState()
-//     let filterUrl = state.filterUrl
-//     if (filterUrl.type === URLS_TYPES.b64) {
-//       dispatch(push('/b/' + encode(state.filter)))
-//       // go to base64 url
-//     } else if (filterUrl.type === URLS_TYPES.sid) {
-//       dispatch(push('/f/' + filterUrl.sid))
-//       // go to sid url
-//     } else if (filterUrl.type === URLS_TYPES.official) {
-//       dispatch(push('/' + filterUrl.slug))
-//       // go to official url
-//     }
-//   }
-// }
 
 export function filterUrlGenerateSid () {
   return function (dispatch, getState) {
