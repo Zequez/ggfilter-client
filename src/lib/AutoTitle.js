@@ -1,27 +1,45 @@
 import autoTitleDefinitions from 'sources/autoTitleDefinitions'
-import { escapeHtml } from 'lib/utils'
+import { escapeHtml as h } from 'lib/utils'
+import { initialState } from 'stores/reducers/filterReducer'
+import filterDefinitions from 'sources/filtersDefinitions'
 
-export default function generateAutoTitle (params, definitions = autoTitleDefinitions, store) {
+function strongificate (text) {
+  return text.replace(/(<)|(>)/g, (_, lt, gt) => lt ? '<strong>' : '</strong>')
+}
+
+export default function generateAutoTitle (filter, definitions = autoTitleDefinitions, store) {
   let titles = []
 
-  for (let filterName in definitions) {
-    let filterParams = params[filterName]
-    if (filterParams) {
-      let definition = definitions[filterName]
-      let title = definition(filterParams, store)
-      if (title instanceof Array) {
-        let escapedTitle = title[0]
-        let vals = title.slice(1)
-        for (let val of vals) {
-          escapedTitle = escapedTitle.replace('%s', escapeHtml(val))
+  if (Object.keys(filter.params).length > 0) {
+    for (let filterName in definitions) {
+      let filterParams = filter.params[filterName]
+      if (filterParams) {
+        let definition = definitions[filterName]
+        let title = definition(filterParams, store)
+        if (title instanceof Array) {
+          let escapedTitle = title[0]
+          let vals = title.slice(1)
+          for (let val of vals) {
+            escapedTitle = escapedTitle.replace('%s', h(val))
+          }
+          title = escapedTitle
         }
-        title = escapedTitle
+        title = strongificate(title)
+        titles.push(title)
       }
-      title = title.replace(/(<)|(>)/g, (_, lt, gt) => lt ? '<strong>' : '</strong>')
-      titles.push(title)
     }
   }
 
-  let title = titles.join(', ')
-  return 'Games ' + title// && (title[0].toLocaleUpperCase() + title.slice(1))
+  if (filter.sort && filterDefinitions[filter.sort] && filter.sort !== initialState.sort) {
+    let direction = filter.sort_asc ? 'ascending' : 'descending'
+    let title = filterDefinitions[filter.sort].title
+    titles.push(strongificate(`sorted by <${h(title)} in ${direction} order>`))
+  }
+
+  if (titles.length) {
+    let title = titles.join(', ')
+    return 'Games ' + title
+  } else {
+    return null
+  }
 }

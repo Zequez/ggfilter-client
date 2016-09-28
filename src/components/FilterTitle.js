@@ -13,35 +13,28 @@ export default class FilterTitle extends Component {
 
   generateAutoTitle () {
     return generateAutoTitle(
-      this.props.filter.params,
+      this.props.filter,
       undefined,
       {tags: this.props.tags}
     )
   }
 
-  generateAutoTitleMarkup () {
-    return {__html: `“${this.generateAutoTitle()}”`}
+  dangerousMarkup (autotitle) {
+    return {__html: `“${autotitle}”`}
   }
 
   render () {
-    let keys = Object.keys(this.props.filter.params)
-
-    let title
-    if (keys.length) {
-      title = (
-        <span dangerouslySetInnerHTML={this.generateAutoTitleMarkup()}></span>
-      )
-    } else {
-      title = (
-        <h1 title="We have no proof whatsoever of this claim, but we really aspire to!">
-          {"The Internet's Nº1 source to find good games, *allegedly*"}
-        </h1>
-      )
-    }
+    let autotitle = this.generateAutoTitle()
 
     return (
       <div className='filter-title'>
-        {title}
+        {autotitle ? (
+          <span dangerouslySetInnerHTML={this.dangerousMarkup(autotitle)}></span>
+        ) : (
+          <h1 title="We have no proof whatsoever of this claim, but we really aspire to!">
+            {"The Internet's Nº1 source to find good games, *allegedly*"}
+          </h1>
+        )}
       </div>
     )
   }

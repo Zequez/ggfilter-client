@@ -5,7 +5,7 @@ import { getFilter } from 'sources/api'
 // import { dirty } from 'stores/reducers/filterUrlReducer'
 import filtersSectionsFlatSort from 'sources/filtersSectionsFlatSort'
 
-const initialState = {
+export const initialState = {
   visible: [
     'steam_id',
     'name',
