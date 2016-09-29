@@ -1,5 +1,5 @@
 import _values from 'lodash/values'
-import qs from 'qs'
+import { parseQuery } from 'lib/utils'
 import Route from './Route'
 
 export default class StateRouter {
@@ -49,10 +49,11 @@ export default class StateRouter {
   }
 
   _parseDumbLocation (dumbLocation) {
+    console.log(dumbLocation)
     return {
       pathname: dumbLocation.pathname,
       search: dumbLocation.search,
-      query: qs.parse(dumbLocation.search),
+      query: parseQuery(dumbLocation.search),
       hash: dumbLocation.hash
     }
   }

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import qs from 'qs'
 import config from 'sources/config'
 import gamesQueryGenerator from 'lib/gamesQueryGenerator'
 
@@ -25,9 +24,10 @@ export function getTags () {
 
 export function getGames (filter, page, options) {
   let queryFilter = gamesQueryGenerator(filter, page, options)
-  let queryString = qs.stringify(queryFilter, {arrayFormat: 'brackets'})
 
-  return axios.get(apiUrl(`games.json?${queryString}`))
+  let jsonQueryFilter = JSON.stringify(queryFilter)
+
+  return axios.get(apiUrl(`games.json?filter=${jsonQueryFilter}`))
     .then((response) => {
       return response.data
     }, (error) => {

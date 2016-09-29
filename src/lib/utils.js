@@ -127,3 +127,21 @@ export function escapeHtml (unsafe) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;')
 }
+
+export function parseQuery (search) {
+  let args = search.substring(1).split('&')
+  let argsParsed = {}
+  let i, arg, kvp, key, value
+  for (i = 0; i < args.length; i++) {
+    arg = args[i]
+    if (arg.indexOf('=') === -1) {
+      argsParsed[decodeURIComponent(arg).trim()] = true
+    } else {
+      kvp = arg.split('=')
+      key = decodeURIComponent(kvp[0]).trim()
+      value = decodeURIComponent(kvp[1]).trim()
+      argsParsed[key] = value
+    }
+  }
+  return argsParsed
+}
