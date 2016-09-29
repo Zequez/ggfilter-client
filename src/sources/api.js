@@ -1,11 +1,8 @@
-import axios from 'axios'
-import config from 'sources/config'
 import gamesQueryGenerator from 'lib/gamesQueryGenerator'
-
-let apiUrl = (path) => `${config.apiHost}/${path}`
+import api from 'lib/apiRequester'
 
 export function createFilter (filter) {
-  return axios.post(apiUrl('/filters.json'), { filter: {
+  return api.post('filters.json', { filter: {
     filter: JSON.stringify(filter)
   }}).then((response) => {
     return response.data
@@ -13,13 +10,13 @@ export function createFilter (filter) {
 }
 
 export function getFilter (sid) {
-  return axios.get(apiUrl(`/filters/${sid}`)).then((response) => {
+  return api.get(`filters/${sid}`).then((response) => {
     return response.data
   })
 }
 
 export function getTags () {
-  return axios.get(apiUrl('tags.json')).then((response) => response.data)
+  return api.get('tags.json').then((response) => response.data)
 }
 
 export function getGames (filter, page, options) {
@@ -27,7 +24,7 @@ export function getGames (filter, page, options) {
 
   let jsonQueryFilter = JSON.stringify(queryFilter)
 
-  return axios.get(apiUrl(`games.json?filter=${jsonQueryFilter}`))
+  return api.get(`games.json`, {params: {filter: jsonQueryFilter}})
     .then((response) => {
       return response.data
     }, (error) => {

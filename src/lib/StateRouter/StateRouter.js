@@ -49,7 +49,6 @@ export default class StateRouter {
   }
 
   _parseDumbLocation (dumbLocation) {
-    console.log(dumbLocation)
     return {
       pathname: dumbLocation.pathname,
       search: dumbLocation.search,
