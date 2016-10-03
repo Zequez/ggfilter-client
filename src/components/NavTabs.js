@@ -23,11 +23,12 @@ export default class NavTabs extends Component {
 
     return (
       <ul className='nav-tabs'>
-        <NavTabLink icon='share' mode={MODES.share} currentMode={mode} setMode={setMode}/>
         <NavTabLink text='Columns' mode={MODES.columns} currentMode={mode} setMode={setMode}/>
-        <NavTabLink text='System Req.' mode={MODES.sysreq} currentMode={mode} setMode={setMode}/>
-        <NavTabLink text='Sources' mode={MODES.sources} currentMode={mode} setMode={setMode}/>
-        <NavTabLink icon='link' mode={MODES.filter} currentMode={mode} setMode={setMode}/>
+        <NavTabLink text='Save/Share' mode={MODES.share} currentMode={mode} setMode={setMode}/>
+        <NavTabLink text='Your saved filters' mode={MODES.share} currentMode={mode} setMode={setMode}/>
+        <NavTabLink text='Options' mode={MODES.share} currentMode={mode} setMode={setMode}/>
+        {/*<NavTabLink text='System Req.' mode={MODES.sysreq} currentMode={mode} setMode={setMode}/>*/}
+        {/*<NavTabLink icon='link' mode={MODES.filter} currentMode={mode} setMode={setMode}/>*/}
       </ul>
     )
   }
