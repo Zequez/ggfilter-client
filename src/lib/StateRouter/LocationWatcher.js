@@ -5,6 +5,7 @@ export default class LocationWatcher {
   routes = []
   onMatch = () => {}
   onStateInducedLocationChange = () => {}
+  unlisten = null
 
   location = null
   watching = 0
@@ -42,10 +43,14 @@ export default class LocationWatcher {
     }
   }
 
+  unbind () {
+    this.unlisten()
+  }
+
   _bindHistory () {
     this.location = this._parseDumbLocation(this.history.location)
 
-    this.history.listen((location, action) => {
+    this.unlisten = this.history.listen((location, action) => {
       this.location = this._parseDumbLocation(location)
       if (this.watching === 0) {
         let matches = this.matchRoute()

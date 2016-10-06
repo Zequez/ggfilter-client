@@ -33,6 +33,11 @@ export default class StateRouter {
     )
   }
 
+  unbind () {
+    this.locationWatcher.unbind()
+    this.stateWatcher.unbind()
+  }
+
   dispatchInitialActions () {
     let matches = this.locationWatcher.matchRoute()
     if (matches) {

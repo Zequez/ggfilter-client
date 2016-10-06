@@ -3,6 +3,7 @@ export default class StateWatcher {
   routes = []
   onMatch = () => {}
   watching = 0
+  unsubscribe = null
 
   constructor (store, routes, onMatch) {
     this.store = store
@@ -19,8 +20,12 @@ export default class StateWatcher {
     this.watching--
   }
 
+  unbind () {
+    this.unsubscribe()
+  }
+
   _bindStore () {
-    this.store.subscribe(() => {
+    this.unsubscribe = this.store.subscribe(() => {
       if (this.watching === 0) {
         this._matchState()
       }
