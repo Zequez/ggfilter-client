@@ -1,7 +1,5 @@
 require('styles/run')
 
-if (module.hot) module.hot.accept()
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
@@ -20,8 +18,11 @@ console.logRender = function (componentName) {
   // console.info(`<${componentName}/>`)
 }
 
+console.warn('RUN RE-RUNNING!')
+
+let store
 getTags().then((tags) => {
-  let store = getStore()
+  store = getStore()
 
   store.dispatch(setAllTags(tags))
   router.bind(store, history)
@@ -29,11 +30,24 @@ getTags().then((tags) => {
   router.dispatchInitialActions().then(() => {
     console.info('Finished initial loading of location-induced actions')
     store.dispatch(getGamesIfNoGames()).then(() => {
-      ReactDOM.render(
-        <Provider store={store}>
-          <App/>
-        </Provider>, document.getElementById('app')
-      )
+      renderWithHot(App)
     })
   })
 })
+
+function renderWithHot (App) {
+  ReactDOM.render(
+    <Provider store={store}>
+      <App/>
+    </Provider>, document.getElementById('app')
+  )
+}
+
+if (module.hot) {
+  module.hot.accept('components/App', () => {
+    const App = require('components/App').default
+    renderWithHot(App)
+  })
+}
+
+export default {}
