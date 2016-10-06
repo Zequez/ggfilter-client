@@ -8,7 +8,9 @@ const games = require('./gamesReducer').reducer
 const filter = require('./filterReducer').reducer
 const options = require('./optionsReducer').reducer
 const mode = require('./modeReducer').reducer
+const sfilter = require('./sFilterReducer').reducer
+const ui = require('./uiReducer').reducer
 
-const reducer = combineReducers({ mode, games, filter, columnsWidth, lightbox, tags, filterUrl, options })
+const reducer = combineReducers({ mode, games, filter, columnsWidth, lightbox, tags, filterUrl, sfilter, options, ui })
 
 export default reducer

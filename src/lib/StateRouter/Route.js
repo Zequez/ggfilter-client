@@ -1,7 +1,33 @@
 import UrlPattern from 'url-pattern'
 import StatePattern from './StatePattern'
 
+export function multiConstructor (routesList = []) {
+  let routes = []
+  let routesByName = {}
+
+  function construct ([path, stateShard, actions, stateExtract], name) {
+    let route = new Route(path, stateShard, actions, stateExtract, name)
+    routes.push(route)
+    if (name) {
+      routesByName[name] = route
+    }
+  }
+
+  if (routesList instanceof Array) {
+    routesList.forEach((r) => {
+      construct(r)
+    })
+  } else {
+    for (let name in routesList) {
+      construct(routesList[name], name)
+    }
+  }
+
+  return [routes, routesByName]
+}
+
 export default class Route {
+  name = null
   path = null
   pattern = null
   statePattern = null
@@ -9,10 +35,11 @@ export default class Route {
   stateExtract = null
   actions = []
 
-  constructor (path, stateShard, actions, stateExtract) {
+  constructor (path, stateShard, actions, stateExtract, name) {
+    this.name = name
     this.path = path
     this.stateShard = stateShard
-    this.actions = actions
+    this.actions = actions.constructor !== Array ? [actions] : actions
     this.stateExtract = stateExtract
     this.pattern = new UrlPattern(path)
     this.statePattern = new StatePattern(stateShard, this.pattern.names)

@@ -24,8 +24,9 @@ getTags().then((tags) => {
   let store = getStore()
 
   store.dispatch(setAllTags(tags))
+  router.bind(store, history)
 
-  router.bind(store, history).then(() => {
+  router.dispatchInitialActions().then(() => {
     console.info('Finished initial loading of location-induced actions')
     store.dispatch(getGamesIfNoGames()).then(() => {
       ReactDOM.render(

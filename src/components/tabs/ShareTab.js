@@ -31,7 +31,7 @@ export default class ShareTab extends Component {
   appropiateFilterPath () {
     let path = ''
     switch (this.props.filterUrlType) {
-      case URLS_TYPES.b64: path = router.urlGen('filterB64', encode(this.props.filter))
+      case URLS_TYPES.b64: path = router.autoUrl('filterB64', encode(this.props.filter))
         break
       case URLS_TYPES.sid: path = router.url('filterSid', this.props.sid)
         break

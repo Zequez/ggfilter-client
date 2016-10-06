@@ -1,6 +1,9 @@
 import _values from 'lodash/values'
-import { parseQuery } from 'lib/utils'
-import Route from './Route'
+import { multiConstructor } from './Route'
+import StateWatcher from './StateWatcher'
+import LocationWatcher from './LocationWatcher'
+
+import { routeChange } from './routeChangeAction'
 
 export default class StateRouter {
   routes = []
@@ -10,23 +13,33 @@ export default class StateRouter {
   location = {}
 
   constructor (routesList = []) {
-    if (routesList instanceof Array) {
-      routesList.forEach((r) => {
-        this._addRoute(r)
-      })
-    } else {
-      for (let name in routesList) {
-        this._addRoute(routesList[name], name)
-      }
-    }
+    ;[this.routes, this.routesByName] = multiConstructor(routesList)
   }
 
   bind (store, history) {
     this.store = store
     this.history = history
-    let promise = this._bindHistory()
-    this._bindStore()
-    return promise
+
+    this.locationWatcher = new LocationWatcher(
+      history,
+      this.routes,
+      ::this._dispatchLocationActions,
+      ::this._receiveStateInducedLocationChange
+    )
+    this.stateWatcher = new StateWatcher(
+      store,
+      this.routes,
+      ::this._dispatchStateLocationPush
+    )
+  }
+
+  dispatchInitialActions () {
+    let matches = this.locationWatcher.matchRoute()
+    if (matches) {
+      return this._dispatchLocationActions(...matches)
+    } else {
+      return Promise.resolve()
+    }
   }
 
   url (name, ...params) {
@@ -36,7 +49,7 @@ export default class StateRouter {
     }
   }
 
-  urlGen (name) {
+  autoUrl (name) {
     let route = this.routesByName[name]
     if (route) {
       let params = route.matchState(this.store.getState(), true)
@@ -48,112 +61,47 @@ export default class StateRouter {
     return this.routesByName[name]
   }
 
-  _parseDumbLocation (dumbLocation) {
-    return {
-      pathname: dumbLocation.pathname,
-      search: dumbLocation.search,
-      query: parseQuery(dumbLocation.search),
-      hash: dumbLocation.hash
+  _dispatchLocationActions (route, match, location) {
+    this.route = route
+    this.location = location
+    console.info('LOCATION-INDUCED-STATE-CHANGE', route.path)
+
+    let actions = route.actions.concat(routeChange(this.route, this.location, false))
+    return this._dispatch(actions, match)
+  }
+
+  _receiveStateInducedLocationChange (location) {
+    console.info('STATE-INDUCED-PATH-CHANGE', location.pathname)
+    this.location = location
+    this._dispatch(routeChange(this.route, location, true))
+  }
+
+  _dispatchStateLocationPush (route, match) {
+    this.route = route
+    let newPath = route.pattern.stringify(match)
+
+    if (this.location.pathname !== newPath) {
+      this.locationWatcher.stop()
+      this.history.push(newPath)
+      this.locationWatcher.start()
     }
   }
 
-  _addRoute ([path, stateShard, actions, stateExtract], name) {
+  _dispatch (actions, match = {}) {
     if (actions.constructor !== Array) actions = [actions]
-    let route = new Route(path, stateShard, actions, stateExtract)
-    this.routes.push(route)
-    if (name) {
-      this.routesByName[name] = route
-    }
-  }
-
-  _bindHistory () {
-    this.location = this._parseDumbLocation(this.history.location)
-    let promise = this._matchRoute()
-
-    this.history.listen((location, action) => {
-      this.location = this._parseDumbLocation(location)
-      if (!location.state.stateInduced) {
-        this._matchRoute()
-      }
-    })
-    return promise
-  }
-
-  _bindStore () {
-    this.store.subscribe(() => {
-      this._matchState()
-    })
-  }
-
-  _matchRoute () {
-    var { pathname, query } = this.location
-    var match
-    let route
-    for (let i = 0; i < this.routes.length; ++i) {
-      route = this.routes[i]
-      if ((match = route.matchRoute(pathname, query))) break
-    }
-
+    this.stateWatcher.stop()
     let promises = []
-    if (match) {
-      console.info('LOCATION-INDUCED-STATE-CHANGE', route.pathname, route.actions)
-      route.actions.forEach((action) => {
-        if (typeof action === 'function') {
-          action = action(..._values(match))
-        }
-        let result = this.store.dispatch(action)
-        if (result instanceof Promise) {
-          promises.push(result)
-        }
-      })
-      return Promise.all(promises)
-    } else {
-      return false
-    }
-  }
-
-  _matchState () {
-    let match
-    let route
-    let state = this.store.getState()
-    for (let i = 0; i < this.routes.length; ++i) {
-      route = this.routes[i]
-      if ((match = route.matchState(state))) break
-    }
-
-    if (match) {
-      let newPath = route.pattern.stringify(match)
-      if (this.location.pathname !== newPath) {
-        console.info('STATE-INDUCED-PATH-CHANGE', newPath)
-        this.history.push(newPath, { stateInduced: true })
+    actions.forEach((action) => {
+      if (typeof action === 'function') {
+        action = action(..._values(match))
       }
-      return true
-    } else {
-      return false
-    }
+      let result = this.store.dispatch(action)
+      if (result instanceof Promise) {
+        promises.push(result)
+      }
+    })
+    let combinedPromises = Promise.all(promises)
+    combinedPromises.then(() => { this.stateWatcher.start() })
+    return combinedPromises
   }
 }
-
-// export const initialState = {}
-//
-// export const ROUTING_SET = 'ROUTING_SET'
-//
-// export function push (path) {
-//
-// }
-//
-// export function routingReducer (state, action) {
-//   if (action.type === ROUTING_SET) {
-//     let l = action.location
-//     state = {
-//       location: {
-//         pathname: l.pathname,
-//         query: l.query,
-//         search: l.search,
-//         hash: l.hash
-//       }
-//     }
-//   }
-//
-//   return state
-// }

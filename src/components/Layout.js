@@ -1,5 +1,6 @@
 import React, { Component, PropTypes as t } from 'react'
 
+import GeneralNav from 'components/GeneralNav'
 import NavTabs from 'components/NavTabs'
 import FilterTitle from 'components/FilterTitle'
 
@@ -30,40 +31,7 @@ export default class Layout extends Component {
           <FilterTitle/>
         </header>
         <main className='main'>
-          <nav className='general-nav'>
-            <ul>
-              <li>
-                <a href=''>
-                  Filter <i className='fa icon-unlock' title='Lock filtering table into view'></i>
-                </a>
-              </li>
-              <li>
-                <a href='/system-requirements-calculator' className='active'>
-                  System Requirements Calculator
-                </a>
-              </li>
-              <li>
-                <a href='/interesting-filters'>
-                  Interesting Filters
-                </a>
-              </li>
-              <li>
-                <a href='/feedback'>
-                  Feedback
-                </a>
-              </li>
-              <li>
-                <a href='/contribute'>
-                  Contribute
-                </a>
-              </li>
-              <li>
-                <a href='/users/login'>
-                  Log In
-                </a>
-              </li>
-            </ul>
-          </nav>
+          <GeneralNav/>
           <nav className='nav'>
             <NavTabs/>
           </nav>

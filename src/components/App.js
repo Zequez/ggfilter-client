@@ -6,17 +6,15 @@ import filtersDefinitions from 'sources/filtersDefinitions'
 import { showLightbox } from 'stores/reducers/lightboxReducer'
 import { getGames, getMoreGames } from 'stores/reducers/gamesReducer'
 import { resetFilters } from 'stores/reducers/filterReducer'
-import { setMode, MODES } from 'stores/reducers/modeReducer'
+import { resetUi } from 'stores/reducers/uiReducer'
 
 import Layout from 'components/Layout'
 import DataTable from 'components/DataTable'
 import GamesLoader from 'components/GamesLoader'
 import Lightbox from 'components/Lightbox'
+import FilterTableTabsContent from 'components/FilterTableTabsContent'
 // Modes
-import FiltersToggles from 'components/tabs/FiltersToggles'
-import SourcesTab from 'components/tabs/SourcesTab'
-import SysreqCalc from 'components/tabs/SysreqCalc'
-import ShareTab from 'components/tabs/ShareTab'
+
 
 @connect(
   (s) => ({
@@ -27,9 +25,16 @@ import ShareTab from 'components/tabs/ShareTab'
     columnsWidth: s.columnsWidth,
     options: s.options,
     routing: s.routing,
-    mode: s.mode
+    mode: s.ui.mode,
+    filterMode: s.ui.filterMode
   }),
-  { getGames, getMoreGames, showLightbox, resetFilters, setMode }
+  {
+    getGames,
+    getMoreGames,
+    showLightbox,
+    resetFilters,
+    resetUi
+  }
 )
 export default class App extends Component {
   static propTypes = {
@@ -69,32 +74,18 @@ export default class App extends Component {
 
   clickOnLogo = () => {
     this.props.resetFilters()
-    this.props.setMode(MODES.columns)
-  }
-
-  modeComponent (mode) {
-    switch (mode) {
-      case MODES.share: return <ShareTab/>
-      case MODES.columns: return <FiltersToggles/>
-      case MODES.sources: return <SourcesTab/>
-      case MODES.sysreq: return <SysreqCalc/>
-    }
-    return null
+    this.props.resetUi()
   }
 
   render () {
     console.logRender('App')
 
-    let { games, filter, columnsWidth, lightbox, mode } = this.props
-    let containerClassName = `mode-${mode}`
+    let { games, filter, columnsWidth, lightbox, mode, filterMode } = this.props
+    let containerClassName = `mode-${mode} filter-mode-${filterMode}`
 
     return (
       <Layout className={containerClassName} clickOnLogo={this.clickOnLogo}>
-        <div className='tabs-content'>
-          <div className='tabs-content-container'>
-            {this.modeComponent(mode)}
-          </div>
-        </div>
+        <FilterTableTabsContent/>
         <DataTable
           games={games}
           filter={filter}
