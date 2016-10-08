@@ -33,7 +33,11 @@ export default class StatePattern {
       let storeVal = _get(store, bc)
 
       if (expectedVal[0] === ':') {
-        params[expectedVal.slice(1)] = storeVal
+        if (storeVal) {
+          params[expectedVal.slice(1)] = storeVal
+        } else {
+          return null
+        }
       } else if (storeVal !== expectedVal && !force) {
         return null
       }

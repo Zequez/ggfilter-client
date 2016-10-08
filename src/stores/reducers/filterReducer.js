@@ -52,6 +52,9 @@ export const FILTER_LOADING_FROM_SID = 'FILTER_LOADING_FROM_SID'
 export const FILTER_LOADING_ERROR = 'FILTER_LOADING_ERROR'
 export const FILTER_RESET = 'FILTER_RESET'
 
+// Quick hack so we don't have a circular dependency, fix later
+export const SFILTER_GET_SUCCESS = 'SFILTER_GET_SUCCESS'
+
 // =============================================================================
 // Helpers
 // =============================================================================
@@ -169,6 +172,10 @@ export function reducer (state = initialState, action) {
 
     case FILTER_RESET:
       state = initialState
+      break
+
+    case SFILTER_GET_SUCCESS:
+      state = JSON.parse(action.response.filter)
       break
   }
 

@@ -1,12 +1,6 @@
 import { u } from 'lib/utils'
 
-import {
-  createFilter,
-  updateFilter,
-  destroyFilter,
-  getFilter,
-  getFilterByOfficialSlug
-} from 'sources/api'
+const api = require('sources/api')
 
 import {
   FILTER_TOGGLE,
@@ -26,7 +20,7 @@ export const initialState = {
     userSlug: null,
     userId: null
   },
-  server: {
+  stageData: {
     sid: null,
     name: null,
     officialSlug: null,
@@ -50,52 +44,50 @@ export const SFILTER_DESTROY_REQUEST = 'SFILTER_DESTROY_REQUEST'
 export const SFILTER_DESTROY_SUCCESS = 'SFILTER_DESTROY_SUCCESS'
 export const SFILTER_DESTROY_FAILURE = 'SFILTER_DESTROY_FAILURE'
 
-export const actions = {
-  change: (attr, value) => ({ type: SFILTER_CHANGE, attr, value }),
-
-  getFromSid: (sid) => ({
-    types: [SFILTER_GET_REQUEST, SFILTER_GET_SUCCESS, SFILTER_GET_FAILURE],
-    callAPI: () => getFilter(sid)
-  }),
-
-  getFromOfficialSlug: (officialSlug) => ({
-    types: [SFILTER_GET_REQUEST, SFILTER_GET_SUCCESS, SFILTER_GET_FAILURE],
-    callAPI: () => getFilterByOfficialSlug(officialSlug)
-  }),
-
-  create: (extraParams) => ({
-    condition: (s) => s.sfilter.dirty,
-    types: [SFILTER_CREATE_REQUEST, SFILTER_CREATE_SUCCESS, SFILTER_CREATE_FAILURE],
-    callAPI: (state) => createFilter(state.sfilter.data, state.filter)
-  }),
-
-  update: (extraParams) => ({
-    condition: (s) => s.sfilter.data.sid && s.sfilter.dirty,
-    types: [SFILTER_UPDATE_REQUEST, SFILTER_UPDATE_SUCCESS, SFILTER_UPDATE_FAILURE],
-    callAPI: (state) => updateFilter(state.sfilter.data, state.filter)
-  }),
-
-  destroy: (sid) => ({
-    types: [SFILTER_DESTROY_REQUEST, SFILTER_DESTROY_SUCCESS, SFILTER_DESTROY_FAILURE],
-    callAPI: (state) => destroyFilter(state.sfilter.data.sid)
-  })
-}
+export const changeAttr = (attr, value) => ({ type: SFILTER_CHANGE, attr, value })
+export const getFromSid = (sid) => ({
+  types: [SFILTER_GET_REQUEST, SFILTER_GET_SUCCESS, SFILTER_GET_FAILURE],
+  callAPI: () => api.getFilter(sid),
+  autoCamelize: true
+})
+export const getFromOfficialSlug = (officialSlug) => ({
+  types: [SFILTER_GET_REQUEST, SFILTER_GET_SUCCESS, SFILTER_GET_FAILURE],
+  callAPI: () => api.getFilterByOfficialSlug(officialSlug),
+  autoCamelize: true
+})
+export const createFilter = (extraParams) => ({
+  condition: (s) => s.sfilter.dirty,
+  types: [SFILTER_CREATE_REQUEST, SFILTER_CREATE_SUCCESS, SFILTER_CREATE_FAILURE],
+  callAPI: (state) => api.createFilter(state.sfilter.stageData, state.filter),
+  autoCamelize: true
+})
+export const updateFilter = (extraParams) => ({
+  condition: (s) => s.sfilter.data.sid && s.sfilter.dirty,
+  types: [SFILTER_UPDATE_REQUEST, SFILTER_UPDATE_SUCCESS, SFILTER_UPDATE_FAILURE],
+  callAPI: (state) => api.updateFilter(state.sfilter.stageData, state.filter),
+  autoCamelize: true
+})
+export const destroyFilter = (sid) => ({
+  types: [SFILTER_DESTROY_REQUEST, SFILTER_DESTROY_SUCCESS, SFILTER_DESTROY_FAILURE],
+  callAPI: (state) => api.destroyFilter(state.sfilter.data.sid)
+})
 
 export function reducer (state = initialState, action) {
   switch (action.type) {
     case SFILTER_CHANGE:
       state = u(state, {
         dirty: {$set: true},
-        data: {[action.attr]: {$set: action.value}}
+        stageData: {[action.attr]: {$set: action.value}}
       })
       break
     case SFILTER_CREATE_SUCCESS:
     case SFILTER_UPDATE_SUCCESS:
+    case SFILTER_GET_SUCCESS:
       state = u(state, {
         dirty: {$set: false},
         error: {$set: null},
         data: {$set: action.response},
-        original: {$set: action.response}
+        stageData: {$set: action.response}
       })
       break
     case FILTER_TOGGLE:

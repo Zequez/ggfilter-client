@@ -4,6 +4,7 @@ import generateAutoTitle from 'lib/AutoTitle'
 
 @connect((s) => ({
   filter: s.filter,
+  filterName: s.sfilter.data.name,
   tags: s.tags
 }))
 export default class FilterTitle extends Component {
@@ -24,7 +25,7 @@ export default class FilterTitle extends Component {
   }
 
   render () {
-    let autotitle = this.generateAutoTitle()
+    let autotitle = this.props.filterName || this.generateAutoTitle()
 
     return (
       <div className='filter-title'>

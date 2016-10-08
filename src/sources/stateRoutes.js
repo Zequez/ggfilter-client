@@ -6,8 +6,6 @@ import { MODES, setMode } from 'stores/reducers/uiReducer'
 import { getFromSid, getFromOfficialSlug } from 'stores/reducers/sFilterReducer'
 
 export default new StateRouter({
-  filter:
-    ['/', {ui: {mode: MODES.filter}}, setMode(MODES.filter)],
   sysreq:
     ['/system-requirements', {ui: {mode: MODES.sysreq}}, setMode(MODES.sysreq)],
   officialFilters:
@@ -19,6 +17,21 @@ export default new StateRouter({
   sources:
     ['/sources', {ui: {mode: MODES.sources}}, setMode(MODES.sources)],
 
+  filterB64: [
+    '/b/:filterB64', {
+      ui: {mode: MODES.filter},
+      sfilter: {dirty: true}
+    },
+    [setMode(MODES.filter), setFilterFromB64],
+    (state) => ({filterB64: encode(state.filter)})
+  ],
+  officialFilter: [
+    '/:officialSlug', {
+      ui: {mode: MODES.filter},
+      sfilter: {data: {officialSlug: ':officialSlug'}}
+    },
+    [setMode(MODES.filter), getFromOfficialSlug]
+  ],
   filterSid: [
     '/f/:filterSid', {
       ui: {mode: MODES.filter},
@@ -26,19 +39,6 @@ export default new StateRouter({
     },
     [setMode(MODES.filter), getFromSid]
   ],
-  officialFilter: [
-    '/:officialSlug', {
-      ui: {mode: MODES.filter},
-      sfilter: {data: {officialSlug: ':officialSlug'}}
-    },
-    [setMode('filter'), getFromOfficialSlug]
-  ],
-  filterB64: [
-    '/b/:filterB64', {
-      ui: {mode: MODES.filter},
-      sfilter: {data: {dirty: true}}
-    },
-    [setMode(MODES.filter), setFilterFromB64],
-    (state) => ({filterB64: encode(state.filter)})
-  ]
+  filter:
+    ['/', {ui: {mode: MODES.filter}}, setMode(MODES.filter)]
 })

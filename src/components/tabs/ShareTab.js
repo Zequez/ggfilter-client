@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { encode } from 'lib/b64FilterGenerator'
 import router from 'sources/stateRoutes'
 import config from 'sources/config'
-import { actions } from 'stores/reducers/sFilterReducer'
+import { createFilter, updateFilter, changeAttr } from 'stores/reducers/sFilterReducer'
 import generateAutoTitle from 'lib/AutoTitle'
 import SFilterForm from './SFilterForm'
 import SFilterFormSimple from './SFilterFormSimple'
@@ -12,13 +12,12 @@ import SFilterFormSimple from './SFilterFormSimple'
   filter: s.filter,
   tags: s.tags,
   dirty: s.sfilter.dirty,
-  sfilter: s.sfilter.data,
-  sid: s.sfilter.data.sid,
-  officialSlug: s.sfilter.officialSlug
+  sfilter: s.sfilter.stageData,
+  currentUser: s.auth.currentUser
 }), {
-  createFilter: actions.create,
-  updateFilter: actions.update,
-  change: actions.change
+  createFilter,
+  updateFilter,
+  changeAttr
 })
 export default class ShareTab extends Component {
   static propTypes = {
@@ -26,14 +25,17 @@ export default class ShareTab extends Component {
     tags: t.array.isRequired,
     createFilter: t.func.isRequired,
     updateFilter: t.func.isRequired,
-    change: t.func.isRequired,
-
+    changeAttr: t.func.isRequired,
     dirty: t.bool,
     sfilter: t.shape({
       sid: t.string,
       name: t.string,
       userSlug: t.string,
       officialSlug: t.string
+    }),
+    currentUser: t.shape({
+      id: t.number.isRequired,
+      isAdmin: t.bool.isRequired
     })
   }
 
@@ -94,11 +96,10 @@ export default class ShareTab extends Component {
   }
 
   render () {
-    let { dirty, sfilter } = this.props
+    let { dirty, sfilter, currentUser } = this.props
     let { advancedMode } = this.state
 
     let autotitle = this.generateAutoTitle()
-    let currentUser = null//{isAdmin: true}
 
     return (
       <div className='sharer form'>
@@ -118,7 +119,7 @@ export default class ShareTab extends Component {
             fixedUrl={this.sidUrl()}
             officialUrl={this.officialUrl()}
             saveToAccount={true}
-            onChange={this.props.change}
+            onChange={this.props.changeAttr}
             onSubmit={this.onSubmit}
             onToggleAccountSave={this.onToggleAccountSave}/>
         ) : (
