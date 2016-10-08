@@ -1,12 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { logger, crashReporter } from './storeMiddleware'
+import callAPIMiddleware from './callAPIMiddleware'
 
 import reducer from './reducers/index'
 
 export default function getStore () {
   let store = createStore(reducer, {}, compose(
-    applyMiddleware(thunkMiddleware, logger), //crashReporter
+    applyMiddleware(thunkMiddleware, callAPIMiddleware, logger), //crashReporter
     window.devToolsExtension ? window.devToolsExtension() : f => f
   ))
 

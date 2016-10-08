@@ -3,7 +3,8 @@ import config from 'sources/config'
 import { start, stop } from 'lib/loadingSpinner'
 
 const api = axios.create({
-  baseURL: config.apiHost + '/'
+  baseURL: config.apiHost + '/',
+  withCredentials: true
 })
 
 api.interceptors.request.use((config) => {

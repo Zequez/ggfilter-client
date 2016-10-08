@@ -2,7 +2,6 @@ import StateRouter from 'lib/StateRouter/StateRouter'
 import { encode } from 'lib/b64FilterGenerator'
 
 import { setFilterFromB64 } from 'stores/reducers/filterReducer'
-import { URLS_TYPES } from 'stores/reducers/filterUrlReducer'
 import { MODES, setMode } from 'stores/reducers/uiReducer'
 import { getFromSid, getFromOfficialSlug } from 'stores/reducers/sFilterReducer'
 
@@ -23,23 +22,23 @@ export default new StateRouter({
   filterSid: [
     '/f/:filterSid', {
       ui: {mode: MODES.filter},
-      filterUrl: {type: URLS_TYPES.sid, sid: ':filterSid'}
+      sfilter: {data: {sid: ':filterSid'}}
     },
     [setMode(MODES.filter), getFromSid]
-  ],
-  filterB64: [
-    '/b/:filterB64', {
-      ui: {mode: MODES.filter},
-      filterUrl: {type: URLS_TYPES.b64}
-    },
-    [setMode(MODES.filter), setFilterFromB64],
-    (state) => ({filterB64: encode(state.filter)})
   ],
   officialFilter: [
     '/:officialSlug', {
       ui: {mode: MODES.filter},
-      filterUrl: {type: URLS_TYPES.official, officialSlug: ':officialSlug'}
+      sfilter: {data: {officialSlug: ':officialSlug'}}
     },
     [setMode('filter'), getFromOfficialSlug]
+  ],
+  filterB64: [
+    '/b/:filterB64', {
+      ui: {mode: MODES.filter},
+      sfilter: {data: {dirty: true}}
+    },
+    [setMode(MODES.filter), setFilterFromB64],
+    (state) => ({filterB64: encode(state.filter)})
   ]
 })
