@@ -1,3 +1,5 @@
+import { camelizeKeys } from 'lib/utils'
+
 export default function callAPIMiddleware ({ dispatch, getState }) {
   return next => action => {
     if (!action.types) {
@@ -10,6 +12,7 @@ export default function callAPIMiddleware ({ dispatch, getState }) {
       callAPI,
       condition,
       after,
+      autoCamelize,
       payload = {}
     } = action
 
@@ -37,6 +40,7 @@ export default function callAPIMiddleware ({ dispatch, getState }) {
 
     return callAPI(state).then(
       response => {
+        if (autoCamelize) response = camelizeKeys(response)
         if (after) after(response)
         return dispatch({...payload, response, type: successType})
       },

@@ -50,3 +50,7 @@ export function getGames (filter, page, options) {
       console.error(error)
     })
 }
+
+export function getCurrentUser () {
+  return api.get(`auth/current_user.json`).then((r) => r.data)
+}

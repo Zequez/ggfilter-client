@@ -1,10 +1,16 @@
 import axios from 'axios'
 import config from 'sources/config'
 import { start, stop } from 'lib/loadingSpinner'
+import { snakeizeKeys } from 'lib/utils'
 
 const api = axios.create({
   baseURL: config.apiHost + '/',
-  withCredentials: true
+  withCredentials: true,
+  xsrfCookieName: 'X-CSRF-Token',
+  xsrfHeaderName: 'csrftoken',
+  transformRequest: [
+    (data) => (data instanceof Object && data.constructor === Object) ? snakeizeKeys(data) : data
+  ].concat(axios.defaults.transformRequest)
 })
 
 api.interceptors.request.use((config) => {

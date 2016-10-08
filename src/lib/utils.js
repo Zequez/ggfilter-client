@@ -145,3 +145,34 @@ export function parseQuery (search) {
   }
   return argsParsed
 }
+
+export function camelizeKeys (obj) {
+  let camelizedObj = {}
+  for (let k in obj) {
+    camelizedObj[camelCase(k)] = obj[k]
+  }
+  return camelizedObj
+}
+
+export function camelCase (snakeCase) {
+  return snakeCase.replace(/(_\w)/g, (m) => m[1].toUpperCase())
+}
+
+export function snakeizeKeys (obj, recursive = true) {
+  let snakeizedObj = {}
+  for (let k in obj) {
+    let key = snakeCase(k)
+    let val = obj[k]
+    if (recursive) {
+      if (obj[k] instanceof Object && !(val instanceof Array)) {
+        val = snakeizeKeys(val, recursive)
+      }
+    }
+    snakeizedObj[key] = val
+  }
+  return snakeizedObj
+}
+
+export function snakeCase (camelCase) {
+  return camelCase.replace(/[A-Z]+/g, (m) => '_' + m.toLowerCase())
+}
