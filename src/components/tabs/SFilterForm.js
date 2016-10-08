@@ -31,6 +31,11 @@ export default class SFilterForm extends Component {
     ev.target.select()
   }
 
+  copyToClipboard (ev) {
+    ev.target.previousSibling.select()
+    document.execCommand('copy')
+  }
+
   update = () => {
     this.props.onSubmit(false)
   }
@@ -54,22 +59,24 @@ export default class SFilterForm extends Component {
             <i className='fa icon-warning'></i> The current filter was modified and is unsaved
           </p>
         ) : null}
-        <div className='form-input'>
+        <div className='form-input form-input-with-button'>
           <label>Dynamic URL:</label>
           <input
             type='text'
             value={dynamicUrl}
             onClick={this.selectAll}
             readOnly={true}/>
+          <button className='btn' onClick={this.copyToClipboard}>Copy</button>
           <p className='form-input-hint'>This URL reflects the current filter, even when unsaved</p>
         </div>
-        <div className='form-input'>
+        <div className='form-input form-input-with-button'>
           <label>Fixed URL:</label>
           <input
             type='text'
             value={fixedUrl}
             onClick={this.selectAll}
             readOnly={true}/>
+          <button className='btn' disabled={!fixedUrl} onClick={this.copyToClipboard}>Copy</button>
           <p className='form-input-hint'>You need to save the filter for this URL to reflect the changes</p>
         </div>
         <div className='form-input'>
