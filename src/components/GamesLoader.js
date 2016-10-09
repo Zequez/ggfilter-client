@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 
 import classNames from 'classnames'
-var debounce = require('lib/utils').debounce
+const debounce = require('lib/utils').debounce
 
 export default class GamesLoader extends Component {
   static propTypes = {
@@ -11,11 +11,11 @@ export default class GamesLoader extends Component {
     onRequestMore: t.func.isRequired
   }
 
-  componentDidMount() {
-    window.addEventListener('scroll', debounce(50, this.handleWindowScroll.bind(this)))
+  componentDidMount () {
+    // window.addEventListener('scroll', debounce(50, this.handleWindowScroll.bind(this)))
   }
 
-  offsetTopDocument() {
+  offsetTopDocument () {
     let el = this.refs.el
     let offset = 0
     while (el) {
@@ -25,7 +25,7 @@ export default class GamesLoader extends Component {
     return offset
   }
 
-  handleWindowScroll() {
+  handleWindowScroll () {
     var clientHeight = window.innerHeight
     var scrollTop = window.scrollY
     var offsetTop = this.offsetTopDocument()
@@ -37,17 +37,17 @@ export default class GamesLoader extends Component {
     }
   }
 
-  handleClick(ev) {
+  handleClick (ev) {
     this.requestMoreGames()
   }
 
-  requestMoreGames() {
+  requestMoreGames () {
     if (!this.props.fetching) {
       this.props.onRequestMore()
     }
   }
 
-  render() {
+  render () {
     console.logRender('GamesLoader')
 
     let divClass = classNames('games-loader', {
