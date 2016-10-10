@@ -7,7 +7,7 @@ import { setFilterMode, FILTER_MODES } from 'stores/reducers/uiReducer'
 }), {
   setFilterMode
 })
-export default class NavTabLink extends Component {
+export default class TableTabsLink extends Component {
   static propTypes = {
     mode: t.string.isRequired,
     text: t.string,

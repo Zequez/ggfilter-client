@@ -19,7 +19,7 @@ import SFilterFormSimple from './SFilterFormSimple'
   updateFilter,
   changeAttr
 })
-export default class ShareTab extends Component {
+export default class SFilterTab extends Component {
   static propTypes = {
     filter: t.object.isRequired,
     tags: t.array.isRequired,

@@ -1,8 +1,8 @@
 import React, { PropTypes as t, Component } from 'react'
 import { MODES } from 'stores/reducers/uiReducer'
-import RouterLink from 'components/RouterLink'
+import RouterLink from 'components/utils/RouterLink'
 
-export default class GeneralNav extends Component {
+export default class Tabs extends Component {
   render () {
     return (
       <nav className='general-nav'>

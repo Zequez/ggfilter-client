@@ -2,11 +2,11 @@ import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
 import { FILTER_MODES } from 'stores/reducers/uiReducer'
 
-import FiltersToggles from 'components/tabs/FiltersToggles'
-import ShareTab from 'components/tabs/ShareTab'
+import FiltersToggles from './FiltersToggles'
+import SFilterTab from './SFilterTab'
 
 @connect((s) => ({mode: s.ui.filterMode}))
-export default class FilterTableTabsContent extends Component {
+export default class FilterTabsContent extends Component {
   static propTypes = {
     mode: t.string.isRequired
   }
@@ -14,7 +14,7 @@ export default class FilterTableTabsContent extends Component {
   modeComponent () {
     switch (this.props.mode) {
       case FILTER_MODES.columns: return <FiltersToggles/>
-      case FILTER_MODES.share: return <ShareTab/>
+      case FILTER_MODES.share: return <SFilterTab/>
       case FILTER_MODES.saved: return 'Saved filters!'
       case FILTER_MODES.options: return 'Options!'
     }
@@ -23,8 +23,8 @@ export default class FilterTableTabsContent extends Component {
 
   render () {
     return (
-      <div className='tabs-content'>
-        <div className='tabs-content-container'>
+      <div className='table-tabs-content'>
+        <div className='table-tabs-content-container'>
           {this.modeComponent()}
         </div>
       </div>

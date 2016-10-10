@@ -1,7 +1,5 @@
 import React, { Component, PropTypes as t } from 'react'
 
-import GeneralNav from 'components/GeneralNav'
-import NavTabs from 'components/NavTabs'
 import FilterTitle from 'components/FilterTitle'
 
 export default class Layout extends Component {
@@ -31,10 +29,6 @@ export default class Layout extends Component {
           <FilterTitle/>
         </header>
         <main className='main'>
-          <GeneralNav/>
-          <nav className='nav'>
-            <NavTabs/>
-          </nav>
           {this.props.children}
         </main>
       </div>

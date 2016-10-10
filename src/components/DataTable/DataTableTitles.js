@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { adjustColumnWidth, clearColumnWidth } from 'stores/reducers/columnsWidthReducer'
 import { setSort, setFilter } from 'stores/reducers/filterReducer'
 
-import DataTableTitle from 'components/DataTableTitle'
+import DataTableTitle from './DataTableTitle'
 
 @connect((s) => ({}), {
   setSort,
