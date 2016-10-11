@@ -65,7 +65,7 @@ export default class SFilterTab extends Component {
 
   officialUrl () {
     if (this.props.sfilter.officialSlug) {
-      return config.origin + router.url('officialFilter', this.props.sfilter.officialSlug)
+      return config.origin + router.url('filterOfficial', this.props.sfilter.officialSlug)
     } else {
       return ''
     }
