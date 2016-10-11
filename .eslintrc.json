@@ -7,7 +7,8 @@
     "describe": true,
     "it": true,
     "beforeEach": true,
-    "afterEach": true
+    "afterEach": true,
+    "localStorage": true
   },
   "rules": {
     "react/jsx-uses-react": 2,
