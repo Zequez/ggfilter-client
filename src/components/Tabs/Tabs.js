@@ -22,17 +22,16 @@ export default class Tabs extends Component {
   render () {
     let filterLockClass = this.props.filterLockedInView ? 'locked' : 'unlocked'
 
+    /*<i
+      className={`fa filter-lock icon-${filterLockClass}`}
+      onClick={::this.handleLockClick}
+      title='Lock filtering table into view'></i>*/
+
     return (
       <nav className='general-nav'>
         <ul>
           <li>
-            <RouterLink to={MODES.filter}>
-              {'Filter '}
-              <i
-                className={`fa filter-lock icon-${filterLockClass}`}
-                onClick={::this.handleLockClick}
-                title='Lock filtering table into view'></i>
-            </RouterLink>
+            <RouterLink to={MODES.filter} text='Filter'></RouterLink>
           </li>
           <li>
             <RouterLink to={MODES.sysreq} text='System Requirements Calculator'/>

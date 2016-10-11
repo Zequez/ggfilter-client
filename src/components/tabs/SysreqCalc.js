@@ -1,13 +1,15 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { setFilter, setSort } from 'stores/reducers/filterReducer'
+import { lockFilterIntoView } from 'stores/reducers/uiReducer'
 import { snapTo } from 'lib/utils'
 import { getGames } from 'sources/api'
 import SuggestionsBox from 'components/utils/SuggestionsBox'
 
 @connect(() => ({}), {
   setFilter,
-  setSort
+  setSort,
+  lockFilterIntoView
 })
 export default class SysreqCalc extends Component {
   state = {
@@ -52,6 +54,7 @@ export default class SysreqCalc extends Component {
     if (!calcs.mean) return
     // let gt = Math.max(0, calcs.mean - calcs.deviation)
     let lt = Math.min(100, calcs.mean + calcs.deviation)
+    this.props.lockFilterIntoView()
     this.props.setFilter('sysreq_index_centile', {gt: 0, lt: snapTo(lt, 5)})
     this.props.setSort('sysreq_index_centile', false)
   }

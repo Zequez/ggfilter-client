@@ -57,7 +57,12 @@ export const resetUi = () => ({ type: UI_RESET })
 // =============================================================================
 
 let reductions = {
-  [UI_SET_MODE]: (s, a) => a.mode !== s.mode ? u(s, { mode: { $set: a.mode } }) : s,
+  [UI_SET_MODE]: (s, a) => (
+    u(s, {
+      mode: { $set: a.mode },
+      filterLockedInView: { $set: a.mode === MODES.filter || s.filterLockedInView }
+    })
+  ),
   [UI_SET_FILTER_MODE]: (s, a) => u(s, { filterMode: { $set: a.mode } }),
   [UI_LOCK_FILTER_INTO_VIEW]: (s) => u(s, { filterLockedInView: { $set: true } }),
   [UI_UNLOCK_FILTER_FROM_VIEW]: (s) => u(s, { filterLockedInView: { $set: false } }),
