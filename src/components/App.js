@@ -6,8 +6,7 @@ import { resetFilters } from 'stores/reducers/filterReducer'
 import { resetUi } from 'stores/reducers/uiReducer'
 
 import Lightbox from 'components/utils/Lightbox'
-import Tabs from 'components/Tabs/Tabs'
-import TabsContent from 'components/Tabs/TabsContent'
+import TabsContainer from 'components/Tabs/TabsContainer'
 import Layout from 'components/Layout'
 
 @connect(
@@ -15,7 +14,8 @@ import Layout from 'components/Layout'
     routing: s.routing,
     mode: s.ui.mode,
     filterMode: s.ui.filterMode,
-    lightbox: s.lightbox
+    lightbox: s.lightbox,
+    filterLockedInView: s.ui.filterLockedInView
   }),
   {
     showLightbox,
@@ -40,13 +40,12 @@ export default class App extends Component {
   render () {
     console.logRender('App')
 
-    let { lightbox, mode, filterMode } = this.props
+    let { lightbox, mode, filterMode, filterLockedInView } = this.props
     let containerClassName = `mode-${mode} filter-mode-${filterMode}`
 
     return (
       <Layout className={containerClassName} clickOnLogo={this.clickOnLogo}>
-        <Tabs/>
-        <TabsContent mode={mode}/>
+        <TabsContainer/>
         <Lightbox
           media={lightbox.media}
           thumbnails={lightbox.thumbnails}

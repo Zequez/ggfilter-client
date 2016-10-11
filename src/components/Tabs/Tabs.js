@@ -3,13 +3,35 @@ import { MODES } from 'stores/reducers/uiReducer'
 import RouterLink from 'components/utils/RouterLink'
 
 export default class Tabs extends Component {
+  static propTypes = {
+    onLockFilter: t.func.isRequired,
+    onUnlockFilter: t.func.isRequired,
+    filterLockedInView: t.bool.isRequired
+  }
+
+  handleLockClick (ev) {
+    ev.stopPropagation()
+    ev.preventDefault()
+    if (this.props.filterLockedInView) {
+      this.props.onUnlockFilter()
+    } else {
+      this.props.onLockFilter()
+    }
+  }
+
   render () {
+    let filterLockClass = this.props.filterLockedInView ? 'locked' : 'unlocked'
+
     return (
       <nav className='general-nav'>
         <ul>
           <li>
             <RouterLink to={MODES.filter}>
-              Filter <i className='fa icon-unlock' title='Lock filtering table into view'></i>
+              {'Filter '}
+              <i
+                className={`fa filter-lock icon-${filterLockClass}`}
+                onClick={::this.handleLockClick}
+                title='Lock filtering table into view'></i>
             </RouterLink>
           </li>
           <li>
