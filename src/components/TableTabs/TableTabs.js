@@ -22,7 +22,7 @@ export default class TableTabs extends Component {
           <TableTabsLink text='Columns' mode={FILTER_MODES.columns}/>
           <TableTabsLink text='Save/Share' mode={FILTER_MODES.share}/>
           {currentUser ? <TableTabsLink text='Your saved filters' mode={FILTER_MODES.saved}/> : null}
-          <TableTabsLink text='Options' mode={FILTER_MODES.options}/>
+          {false ? <TableTabsLink text='Options' mode={FILTER_MODES.options}/> : null}
           {/*<NavTabLink text='System Req.' mode={MODES.sysreq} currentMode={mode} setMode={setMode}/>*/}
           {/*<NavTabLink icon='link' mode={MODES.filter} currentMode={mode} setMode={setMode}/>*/}
         </ul>
