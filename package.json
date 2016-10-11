@@ -67,6 +67,7 @@
     "redux-devtools": "^3.3.1",
     "rimraf": "^2.5.4",
     "sass-loader": "^4.0.2",
+    "sinon": "^1.17.6",
     "style-loader": "^0.13.1",
     "susy": "^2.2.12",
     "url-loader": "^0.5.7",
