@@ -25,7 +25,7 @@ export default new StateRouter({
     [setMode(MODES.filter), setFilterFromB64],
     (state) => ({filterB64: encode(state.filter)})
   ],
-  officialFilter: [
+  filterOfficial: [
     '/:officialSlug', {
       ui: {mode: MODES.filter},
       sfilter: {data: {officialSlug: ':officialSlug'}}

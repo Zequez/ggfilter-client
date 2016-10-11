@@ -7,7 +7,8 @@ import {
   FILTER_SET,
   FILTER_CLEAR,
   FILTER_SORT,
-  FILTER_RESET
+  FILTER_RESET,
+  FILTER_SET_FULL
 } from 'stores/reducers/filterReducer'
 
 export const initialState = {
@@ -94,6 +95,7 @@ export function reducer (state = initialState, action) {
     case FILTER_SET:
     case FILTER_CLEAR:
     case FILTER_SORT:
+    case FILTER_SET_FULL:
       state = u(state, {dirty: {$set: true}})
       break
     case SFILTER_DESTROY_SUCCESS:

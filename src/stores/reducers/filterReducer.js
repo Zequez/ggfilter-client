@@ -111,17 +111,6 @@ export function setFilterFromB64 (b64) {
   return dispatchAndGetGames({ type: FILTER_SET_FULL, filter: decode(b64) })
 }
 
-export function setFilterFromSid (sid) {
-  return function (dispatch, getState) {
-    dispatch({ type: FILTER_LOADING_FROM_SID, sid })
-    return getFilter(sid).then(({filter}) => {
-      return dispatchAndGetGames({ type: FILTER_SET_FULL, filter: JSON.parse(filter) })(dispatch, getState)
-    }, (error) => {
-      dispatch({ type: FILTER_LOADING_ERROR, error })
-    })
-  }
-}
-
 export function resetFilters () {
   return dispatchAndGetGames({ type: FILTER_RESET })
 }
