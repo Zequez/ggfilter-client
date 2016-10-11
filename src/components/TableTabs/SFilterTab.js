@@ -4,6 +4,7 @@ import { encode } from 'lib/b64FilterGenerator'
 import router from 'sources/stateRoutes'
 import config from 'sources/config'
 import { createFilter, updateFilter, changeAttr } from 'stores/reducers/sFilterReducer'
+import { setOption } from 'stores/reducers/optionsReducer'
 import generateAutoTitle from 'lib/AutoTitle'
 import SFilterForm from './SFilterForm'
 import SFilterFormSimple from './SFilterFormSimple'
@@ -13,11 +14,13 @@ import SFilterFormSimple from './SFilterFormSimple'
   tags: s.tags,
   dirty: s.sfilter.dirty,
   sfilter: s.sfilter.stageData,
-  currentUser: s.auth.currentUser
+  currentUser: s.auth.currentUser,
+  advancedMode: s.options.sFilterAdvancedMode
 }), {
   createFilter,
   updateFilter,
-  changeAttr
+  changeAttr,
+  setOption
 })
 export default class SFilterTab extends Component {
   static propTypes = {
@@ -26,6 +29,8 @@ export default class SFilterTab extends Component {
     createFilter: t.func.isRequired,
     updateFilter: t.func.isRequired,
     changeAttr: t.func.isRequired,
+    setOption: t.func.isRequired,
+    advancedMode: t.bool,
     dirty: t.bool,
     sfilter: t.shape({
       sid: t.string,
@@ -40,12 +45,11 @@ export default class SFilterTab extends Component {
   }
 
   state = {
-    advancedMode: true,
-    accountSave: true
+    saveToAccount: true
   }
 
   setAdvancedMode = (ev) => {
-    this.setState({advancedMode: ev.target.checked})
+    this.props.setOption('sFilterAdvancedMode', ev.target.checked)
   }
 
   generateAutoTitle () {
@@ -92,12 +96,12 @@ export default class SFilterTab extends Component {
   }
 
   onToggleAccountSave = (val) => {
-    this.setState({accountSave: val})
+    this.setState({saveToAccount: val})
   }
 
   render () {
-    let { dirty, sfilter, currentUser } = this.props
-    let { advancedMode } = this.state
+    let { dirty, sfilter, currentUser, advancedMode } = this.props
+    let { saveToAccount } = this.state
 
     let autotitle = this.generateAutoTitle()
 
@@ -118,7 +122,7 @@ export default class SFilterTab extends Component {
             dynamicUrl={this.b64Url()}
             fixedUrl={this.sidUrl()}
             officialUrl={this.officialUrl()}
-            saveToAccount={true}
+            saveToAccount={saveToAccount}
             onChange={this.props.changeAttr}
             onSubmit={this.onSubmit}
             onToggleAccountSave={this.onToggleAccountSave}/>

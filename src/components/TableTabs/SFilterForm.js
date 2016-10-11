@@ -45,7 +45,7 @@ export default class SFilterForm extends Component {
   }
 
   onToggleAccountSave = (ev) => {
-    this.props.onToggleAccountSave(ev.target.checked)
+    this.props.onToggleAccountSave(!ev.target.checked)
   }
 
   render () {
@@ -96,12 +96,12 @@ export default class SFilterForm extends Component {
               onChange={this.setAttr.bind(this, 'officialSlug')}/>
           </div>
         ) : null}
-        <div className='form-input form-input-checkbox'>
+        {/*<div className='form-input form-input-checkbox'>
           <label>
             {currentUser ? 'Save to your account' : 'Log-in or sign-up to save to your account'}
             <input type='checkbox' checked={saveToAccount} onChange={this.onToggleAccountSave}/>
           </label>
-        </div>
+        </div>*/}
         <div className='form-actions'>
           {existingRecord
             ? <button className='btn' onClick={this.update} disabled={!dirty}>Save</button>
