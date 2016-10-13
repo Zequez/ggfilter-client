@@ -147,11 +147,19 @@ export function parseQuery (search) {
 }
 
 export function camelizeKeys (obj) {
-  let camelizedObj = {}
-  for (let k in obj) {
-    camelizedObj[camelCase(k)] = obj[k]
+  if (obj instanceof Array) {
+    let camelizedArr = []
+    for (let i = 0; i < obj.length; ++i) {
+      camelizedArr.push(camelizeKeys(obj[i]))
+    }
+    return camelizedArr
+  } else {
+    let camelizedObj = {}
+    for (let k in obj) {
+      camelizedObj[camelCase(k)] = obj[k]
+    }
+    return camelizedObj
   }
-  return camelizedObj
 }
 
 export function camelCase (snakeCase) {
