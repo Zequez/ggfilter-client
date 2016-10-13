@@ -5,6 +5,7 @@ export default class FilterRow extends Component {
   static propTypes = {
     sfilter: t.object.isRequired,
     onLoad: t.func.isRequired,
+    onGo: t.func.isRequired,
     onEdit: t.func.isRequired,
     onDelete: t.func.isRequired,
     currentlyLoaded: t.bool.isRequired
@@ -12,7 +13,7 @@ export default class FilterRow extends Component {
 
   onClickLink = (ev) => {
     ev.preventDefault()
-    this.props.onLoad()
+    this.props.onGo()
   }
 
   render () {

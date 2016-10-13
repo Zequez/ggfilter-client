@@ -4,7 +4,6 @@ import { FILTER_MODES } from 'stores/reducers/uiReducer'
 
 import FiltersToggles from './FiltersToggles'
 import SFilterTab from './SFilterTab'
-import { SavedFiltersManagerGlued } from 'src/SavedFiltersManager'
 
 @connect((s) => ({mode: s.ui.filterMode}))
 export default class FilterTabsContent extends Component {

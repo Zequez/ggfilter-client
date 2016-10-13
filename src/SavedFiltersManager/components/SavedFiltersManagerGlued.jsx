@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect'
 // <EXTERNAL>
 import { loadFilter, selectCurrentFilter } from 'stores/reducers/sFilterReducer'
 import { selectCurrentUser } from 'stores/reducers/authReducer'
-import { setFilterMode, FILTER_MODES } from 'stores/reducers/uiReducer'
+import { setFilterMode, FILTER_MODES, setMode, MODES } from 'stores/reducers/uiReducer'
 // </EXTERNAL>
 
 import SavedFiltersManager from './SavedFiltersManager'
@@ -27,6 +27,11 @@ export class SavedFiltersManagerGlued extends Component {
     this.props.setFilterMode(FILTER_MODES.share)
   }
 
+  onGo = (sfilter) => {
+    this.props.loadFilter(sfilter)
+    this.props.setMode(MODES.filter)
+  }
+
   render () {
     let { currentUser, currentFilter, loadFilter } = this.props
     return (
@@ -34,6 +39,7 @@ export class SavedFiltersManagerGlued extends Component {
         currentUser={currentUser}
         currentFilter={currentFilter}
         loadFilter={loadFilter}
+        onGo={this.onGo}
         onLoad={this.onLoad}
         onEdit={this.onEdit}/>
     )
@@ -43,4 +49,4 @@ export class SavedFiltersManagerGlued extends Component {
 export default connect((s) => createStructuredSelector({
   currentFilter: selectCurrentFilter,
   currentUser: selectCurrentUser
-}), { loadFilter, setFilterMode })(SavedFiltersManagerGlued)
+}), { loadFilter, setFilterMode, setMode })(SavedFiltersManagerGlued)

@@ -16,6 +16,8 @@ export default new StateRouter({
     ['/contribute', {ui: {mode: MODES.contribute}}, setMode(MODES.contribute)],
   sources:
     ['/sources', {ui: {mode: MODES.sources}}, setMode(MODES.sources)],
+  myFilters:
+    ['/my-filters', {ui: {mode: MODES.myFilters}}, setMode(MODES.myFilters)],
 
   filterB64: [
     '/b/:filterB64', {

@@ -8,7 +8,8 @@ export const MODES = {
   feedback: 'feedback',
   contribute: 'contribute',
   login: 'login',
-  sources: 'sources'
+  sources: 'sources',
+  myFilters: 'myFilters'
 }
 
 export const FILTER_MODES = {

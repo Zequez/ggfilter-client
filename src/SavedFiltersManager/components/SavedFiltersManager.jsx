@@ -18,6 +18,7 @@ export class SavedFiltersManager extends Component {
     loadFilter: t.func.isRequired,
     onLoad: t.func.isRequired,
     onEdit: t.func.isRequired,
+    onGo: t.func.isRequired,
 
     sfilters: t.arrayOf(t.object).isRequired,
     fetch: t.func.isRequired,
@@ -37,7 +38,7 @@ export class SavedFiltersManager extends Component {
   }
 
   render () {
-    let { sfilters, onLoad, onEdit, currentFilter } = this.props
+    let { sfilters, onLoad, onGo, onEdit, currentFilter } = this.props
 
     return (
       <div className='saved-filters-manager'>
@@ -59,6 +60,7 @@ export class SavedFiltersManager extends Component {
                 sfilter={f}
                 currentlyLoaded={f.sid === currentFilter.sid}
                 onLoad={partial(onLoad, f)}
+                onGo={partial(onGo, f)}
                 onEdit={partial(onEdit, f)}
                 onDelete={partial(this.onDelete, f)}/>
             ))}
