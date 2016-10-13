@@ -30,8 +30,11 @@ export const initialState = {
   }
 }
 
+export const selectCurrentFilter = (s) => s.sfilter.data
+
 export const SFILTER_CHANGE = 'SFILTER_CHANGE'
 
+export const SFILTER_LOAD = 'SFILTER_LOAD'
 export const SFILTER_GET_REQUEST = 'SFILTER_GET_REQUEST'
 export const SFILTER_GET_SUCCESS = 'SFILTER_GET_SUCCESS'
 export const SFILTER_GET_FAILURE = 'SFILTER_GET_FAILURE'
@@ -70,7 +73,11 @@ export const updateFilter = (extraParams) => ({
 })
 export const destroyFilter = (sid) => ({
   types: [SFILTER_DESTROY_REQUEST, SFILTER_DESTROY_SUCCESS, SFILTER_DESTROY_FAILURE],
-  callAPI: (state) => api.destroyFilter(state.sfilter.data.sid)
+  callAPI: (state) => api.destroyFilter(sid || state.sfilter.data.sid)
+})
+export const loadFilter = (sfilter) => ({
+  type: SFILTER_LOAD,
+  response: sfilter
 })
 
 export function reducer (state = initialState, action) {
@@ -81,6 +88,7 @@ export function reducer (state = initialState, action) {
         stageData: {[action.attr]: {$set: action.value}}
       })
       break
+    case SFILTER_LOAD:
     case SFILTER_CREATE_SUCCESS:
     case SFILTER_UPDATE_SUCCESS:
     case SFILTER_GET_SUCCESS:

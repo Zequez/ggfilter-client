@@ -5,6 +5,8 @@ export const initialState = {
   currentUser: null
 }
 
+export const selectCurrentUser = (s) => s.auth.currentUser
+
 // export const AUTH_LOGIN_REQUEST = 'USER_LOGIN_REQUEST'
 // export const AUTH_LOGIN_SUCCESS = 'AUTH_LOGIN_SUCCESS'
 // export const AUTH_LOGIN_FAILURE = 'AUTH_LOGIN_FAILURE'

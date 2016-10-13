@@ -11,6 +11,7 @@ const mode = require('./modeReducer').reducer
 const sfilter = require('./sFilterReducer').reducer
 const auth = require('./authReducer').reducer
 const ui = require('./uiReducer').reducer
+import * as SavedFiltersManager from 'src/SavedFiltersManager'
 
 const reducer = combineReducers({
   mode,
@@ -23,7 +24,8 @@ const reducer = combineReducers({
   sfilter,
   options,
   auth,
-  ui
+  ui,
+  [SavedFiltersManager.constants.NAME]: SavedFiltersManager.reducer
 })
 
 export default reducer

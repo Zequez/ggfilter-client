@@ -54,6 +54,7 @@ export const FILTER_RESET = 'FILTER_RESET'
 
 // Quick hack so we don't have a circular dependency, fix later
 export const SFILTER_GET_SUCCESS = 'SFILTER_GET_SUCCESS'
+export const SFILTER_LOAD = 'SFILTER_LOAD'
 
 // =============================================================================
 // Helpers
@@ -164,6 +165,7 @@ export function reducer (state = initialState, action) {
       break
 
     case SFILTER_GET_SUCCESS:
+    case SFILTER_LOAD:
       state = JSON.parse(action.response.filter)
       break
   }
