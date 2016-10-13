@@ -1,5 +1,6 @@
 import React, { PropTypes as t, Component } from 'react'
 import cn from 'classnames'
+import ConfirmDeleteButton from './ConfirmDeleteButton'
 
 export default class SFilterForm extends Component {
   static propTypes = {
@@ -20,6 +21,7 @@ export default class SFilterForm extends Component {
     saveToAccount: t.bool.isRequired,
     onChange: t.func.isRequired,
     onSubmit: t.func.isRequired,
+    onDestroy: t.func.isRequired,
     onToggleAccountSave: t.func.isRequired
   }
 
@@ -42,6 +44,10 @@ export default class SFilterForm extends Component {
 
   create = () => {
     this.props.onSubmit(true)
+  }
+
+  destroy = () => {
+    this.props.onDestroy()
   }
 
   onToggleAccountSave = (ev) => {
@@ -103,6 +109,7 @@ export default class SFilterForm extends Component {
           </label>
         </div>*/}
         <div className='form-actions'>
+          {existingRecord ? <ConfirmDeleteButton onConfirm={this.destroy}/> : null}
           {existingRecord
             ? <button className='btn' onClick={this.update} disabled={!dirty}>Save</button>
             : null}

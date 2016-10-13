@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { encode } from 'lib/b64FilterGenerator'
 import router from 'sources/stateRoutes'
 import config from 'sources/config'
-import { createFilter, updateFilter, changeAttr } from 'stores/reducers/sFilterReducer'
+import { createFilter, updateFilter, destroyFilter, changeAttr } from 'stores/reducers/sFilterReducer'
 import { setOption } from 'stores/reducers/optionsReducer'
 import generateAutoTitle from 'lib/AutoTitle'
 import SFilterForm from './SFilterForm'
@@ -19,6 +19,7 @@ import SFilterFormSimple from './SFilterFormSimple'
 }), {
   createFilter,
   updateFilter,
+  destroyFilter,
   changeAttr,
   setOption
 })
@@ -28,6 +29,7 @@ export default class SFilterTab extends Component {
     tags: t.array.isRequired,
     createFilter: t.func.isRequired,
     updateFilter: t.func.isRequired,
+    destroyFilter: t.func.isRequired,
     changeAttr: t.func.isRequired,
     setOption: t.func.isRequired,
     advancedMode: t.bool,
@@ -125,6 +127,7 @@ export default class SFilterTab extends Component {
             saveToAccount={saveToAccount}
             onChange={this.props.changeAttr}
             onSubmit={this.onSubmit}
+            onDestroy={this.props.destroyFilter}
             onToggleAccountSave={this.onToggleAccountSave}/>
         ) : (
           <SFilterFormSimple
