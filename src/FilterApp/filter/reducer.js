@@ -1,9 +1,9 @@
 import { u } from 'lib/utils'
 import { decode } from 'lib/b64FilterGenerator'
 import { getGames } from 'stores/reducers/gamesReducer'
-import { getFilter } from 'sources/api'
+
 // import { dirty } from 'stores/reducers/filterUrlReducer'
-import filtersSectionsFlatSort from 'sources/filtersSectionsFlatSort'
+import filtersSectionsFlatSort from '../config/filtersSectionsFlatSort'
 
 export const initialState = {
   visible: [

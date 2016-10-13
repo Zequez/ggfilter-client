@@ -1,4 +1,4 @@
-import options from 'sources/filtersOptions'
+import options from './filtersOptions'
 
 import BaseToggle from 'components/toggles/BaseToggle'
 

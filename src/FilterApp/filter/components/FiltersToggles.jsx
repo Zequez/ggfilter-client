@@ -1,8 +1,8 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 
-import filtersDefinitions from 'sources/filtersDefinitions'
-import filtersSections from 'sources/filtersSectionsDefinitions'
+import filtersDefinitions from '../../config/filtersDefinitions'
+import filtersSections from '../../config/filtersSectionsDefinitions'
 
 import { toggle } from '../reducer'
 

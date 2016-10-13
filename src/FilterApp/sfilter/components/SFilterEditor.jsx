@@ -5,7 +5,7 @@ import router from 'sources/stateRoutes'
 import config from 'sources/config'
 import { createFilter, updateFilter, destroyFilter, changeAttr } from 'stores/reducers/sFilterReducer'
 import { setOption } from 'stores/reducers/optionsReducer'
-import generateAutoTitle from 'lib/AutoTitle'
+import generateAutoTitle from '../../lib/generateAutoTitle'
 import SFilterForm from './SFilterForm'
 import SFilterFormSimple from './SFilterFormSimple'
 

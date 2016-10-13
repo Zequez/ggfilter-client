@@ -1,7 +1,7 @@
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
 
-import filtersDefinitions from 'sources/filtersDefinitions'
+import filtersDefinitions from '../config/filtersDefinitions'
 
 import { getGames, getMoreGames } from 'stores/reducers/gamesReducer'
 

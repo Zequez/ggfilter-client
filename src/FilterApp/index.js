@@ -1,9 +1,11 @@
 import FilterApp from './components/FilterApp'
+import FilterTitle from './components/FilterTitle'
 import reducer from './reducer'
 import * as filter from './filter'
 
 module.exports = {
   FilterApp,
+  FilterTitle,
   reducer,
   toggleFilter: filter.toggle,
   setFilter: filter.setFilter,

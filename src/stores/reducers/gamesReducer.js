@@ -1,6 +1,7 @@
 import { u } from 'lib/utils'
 
 import { getGames as apiGetGames } from 'sources/api'
+import gamesQueryGenerator from 'src/FilterApp/lib/gamesQueryGenerator'
 
 export const initialState = {
   batches: [],
@@ -27,7 +28,8 @@ export function getGames (page = 0) {
 
     dispatch({type: GET_GAMES_START, page})
 
-    return apiGetGames(filter, page, options)
+    let queryFilter = gamesQueryGenerator(filter, page, options)
+    return apiGetGames(queryFilter)
       .then(games => {
         return dispatch({
           type: GET_GAMES_END,

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as t } from 'react'
 
-import FilterTitle from 'components/FilterTitle'
+import { FilterTitle } from 'src/FilterApp'
 
 export default class Layout extends Component {
   static propTypes = {

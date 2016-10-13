@@ -1,6 +1,6 @@
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
-import generateAutoTitle from 'lib/AutoTitle'
+import generateAutoTitle from '../lib/generateAutoTitle'
 
 @connect((s) => ({
   filter: s.filter,

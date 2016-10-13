@@ -1,7 +1,7 @@
 import autoTitleDefinitions from 'sources/autoTitleDefinitions'
 import { escapeHtml as h } from 'lib/utils'
-import { initialState } from 'src/FilterApp/filter/reducer'
-import filterDefinitions from 'sources/filtersDefinitions'
+import { initialState } from '../filter/reducer'
+import filterDefinitions from '../config/filtersDefinitions'
 
 function strongificate (text) {
   return text.replace(/(<)|(>)/g, (_, lt, gt) => lt ? '<strong>' : '</strong>')

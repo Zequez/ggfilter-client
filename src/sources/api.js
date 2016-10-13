@@ -1,5 +1,4 @@
 import pick from 'lodash/pick'
-import gamesQueryGenerator from 'lib/gamesQueryGenerator'
 import api from 'lib/apiRequester'
 
 export function officialFilters () {
@@ -46,9 +45,7 @@ export function getTags () {
   return api.get('tags.json').then((response) => response.data)
 }
 
-export function getGames (filter, page, options) {
-  let queryFilter = gamesQueryGenerator(filter, page, options)
-
+export function getGames (queryFilter) {
   let jsonQueryFilter = JSON.stringify(queryFilter)
 
   return api.get(`games.json`, {params: {filter: jsonQueryFilter}})

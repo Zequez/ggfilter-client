@@ -1,4 +1,4 @@
-import filtersDefinitions from 'sources/filtersDefinitions'
+import filtersDefinitions from '../config/filtersDefinitions'
 
 export default function gamesQueryGenerator (filter, page, options) {
   // Some filters require more than one column to work,
