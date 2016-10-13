@@ -1,5 +1,5 @@
-import reducer from './reducer'
+import * as reducer from './reducer'
 
 module.exports = {
-  reducer
+  ...reducer
 }

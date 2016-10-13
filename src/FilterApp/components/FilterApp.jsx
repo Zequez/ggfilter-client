@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import filtersDefinitions from '../config/filtersDefinitions'
 
-import { getGames, getMoreGames } from 'stores/reducers/gamesReducer'
+import { getGames, getMoreGames } from '../games'
 
 import DataTable from 'components/DataTable/DataTable'
 import TableTabs from './TableTabs'

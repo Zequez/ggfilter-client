@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
 import { setAllTags } from 'stores/reducers/tagsReducer'
-import { getGamesIfNoGames } from 'stores/reducers/gamesReducer'
+import { getGamesIfNoGames } from 'src/FilterApp'
 import { getCurrentUser } from 'stores/reducers/authReducer'
 import getStore from 'stores/AppStore'
 

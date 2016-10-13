@@ -1,6 +1,6 @@
 import { u } from 'lib/utils'
 import { decode } from 'lib/b64FilterGenerator'
-import { getGames } from 'stores/reducers/gamesReducer'
+import { getGames } from '../games'
 
 // import { dirty } from 'stores/reducers/filterUrlReducer'
 import filtersSectionsFlatSort from '../config/filtersSectionsFlatSort'

@@ -19,6 +19,7 @@ export default class SysreqCalc extends Component {
   filterGames = (value) => {
     if (!value) return []
 
+    // TODO: FIX, we need to call it like the API endpoint needs
     return getGames({
       visible: ['name', 'sysreq_index_centile'],
       params: {
