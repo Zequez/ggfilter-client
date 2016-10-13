@@ -2,6 +2,14 @@ import pick from 'lodash/pick'
 import gamesQueryGenerator from 'lib/gamesQueryGenerator'
 import api from 'lib/apiRequester'
 
+export function officialFilters () {
+  return api.get('filters.json').then((response) => response.data)
+}
+
+export function userFilters (userId) {
+  return api.get(`filters.json?user_id=${userId}`).then((response) => response.data)
+}
+
 export function createFilter (sfilter, filter) {
   return api.post('filters.json', { filter: {
     filter: JSON.stringify(filter),
