@@ -5,7 +5,6 @@ import lightbox from './lightboxReducer'
 import tags from './tagsReducer'
 const options = require('./optionsReducer').reducer
 const mode = require('./modeReducer').reducer
-const sfilter = require('./sFilterReducer').reducer
 const auth = require('./authReducer').reducer
 const ui = require('./uiReducer').reducer
 import * as SavedFiltersManager from 'src/SavedFiltersManager'
@@ -18,7 +17,6 @@ const reducer = combineReducers({
   columnsWidth,
   lightbox,
   tags,
-  sfilter,
   options,
   auth,
   ui,

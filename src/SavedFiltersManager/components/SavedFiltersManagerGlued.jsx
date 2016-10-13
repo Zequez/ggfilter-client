@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
 // <EXTERNAL>
-import { loadFilter, selectCurrentFilter } from 'stores/reducers/sFilterReducer'
+import { loadFilter, selectCurrentFilter } from 'src/FilterApp'
 import { selectCurrentUser } from 'stores/reducers/authReducer'
 import { setFilterMode, FILTER_MODES, setMode, MODES } from 'stores/reducers/uiReducer'
 // </EXTERNAL>

@@ -3,6 +3,7 @@ import FilterTitle from './components/FilterTitle'
 import reducer from './reducer'
 import * as filter from './filter'
 import * as games from './games'
+import * as sfilter from './sfilter'
 
 module.exports = {
   FilterApp,
@@ -15,5 +16,8 @@ module.exports = {
   resetFilter: filter.resetFilters,
   setFilterFromB64: filter.setFilterFromB64,
 
-  getGamesIfNoGames: games.getGamesIfNoGames
+  getGamesIfNoGames: games.getGamesIfNoGames,
+
+  loadFilter: sfilter.loadFilter,
+  selectCurrentFilter: sfilter.selectCurrentFilter
 }
