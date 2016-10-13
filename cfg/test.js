@@ -34,6 +34,7 @@ module.exports = {
       styles: srcPath + 'styles/',
       images: srcPath + '/images/',
       lib: srcPath + '/lib/',
+      src: srcPath + '/',
       compass: 'compass-mixins/lib/compass',
       sinon: 'sinon/pkg/sinon'
     }
