@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
-import { setFilter } from 'stores/reducers/filterReducer'
+import { setFilter } from 'src/FilterApp/filter'
 
 import classNames from 'classnames'
 

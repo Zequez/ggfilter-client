@@ -2,7 +2,7 @@ import React, { PropTypes as t, Component } from 'react'
 
 import { MODES } from 'stores/reducers/uiReducer'
 
-import FilterApp from 'components/FilterApp/FilterApp'
+import { FilterApp } from 'src/FilterApp'
 import SysreqCalc from './SysreqCalc'
 import SourcesTab from './SourcesTab'
 import { SavedFiltersManagerGlued } from 'src/SavedFiltersManager'

@@ -1,6 +1,6 @@
 import autoTitleDefinitions from 'sources/autoTitleDefinitions'
 import { escapeHtml as h } from 'lib/utils'
-import { initialState } from 'stores/reducers/filterReducer'
+import { initialState } from 'src/FilterApp/filter/reducer'
 import filterDefinitions from 'sources/filtersDefinitions'
 
 function strongificate (text) {

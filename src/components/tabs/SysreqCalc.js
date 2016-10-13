@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
-import { setFilter, setSort } from 'stores/reducers/filterReducer'
+import { setFilter, setSort } from 'src/FilterApp'
 import { lockFilterIntoView } from 'stores/reducers/uiReducer'
 import { snapTo } from 'lib/utils'
 import { getGames } from 'sources/api'

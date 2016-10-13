@@ -9,7 +9,7 @@ import {
   FILTER_SORT,
   FILTER_RESET,
   FILTER_SET_FULL
-} from 'stores/reducers/filterReducer'
+} from 'src/FilterApp/filter'
 
 export const initialState = {
   dirty: false,

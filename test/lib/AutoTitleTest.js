@@ -1,5 +1,5 @@
 import generateAutoTitle from 'lib/AutoTitle'
-import { initialState } from 'stores/reducers/filterReducer'
+import { initialState } from 'src/FilterApp/filter/reducer'
 import filtersDefinitions from 'sources/filtersDefinitions'
 
 describe('generateAutoTitle', () => {

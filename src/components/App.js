@@ -2,7 +2,7 @@ import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 
 import { showLightbox } from 'stores/reducers/lightboxReducer'
-import { resetFilters } from 'stores/reducers/filterReducer'
+import { resetFilter } from 'src/FilterApp'
 import { resetUi } from 'stores/reducers/uiReducer'
 
 import Lightbox from 'components/utils/Lightbox'
@@ -19,7 +19,7 @@ import Layout from 'components/Layout'
   }),
   {
     showLightbox,
-    resetFilters,
+    resetFilter,
     resetUi
   }
 )
@@ -33,7 +33,7 @@ export default class App extends Component {
   }
 
   clickOnLogo = () => {
-    this.props.resetFilters()
+    this.props.resetFilter()
     this.props.resetUi()
   }
 
