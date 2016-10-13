@@ -6,7 +6,8 @@ export default class FilterRow extends Component {
     sfilter: t.object.isRequired,
     onLoad: t.func.isRequired,
     onEdit: t.func.isRequired,
-    onDelete: t.func.isRequired
+    onDelete: t.func.isRequired,
+    currentlyLoaded: t.bool.isRequired
   }
 
   onClickLink = (ev) => {
@@ -15,11 +16,13 @@ export default class FilterRow extends Component {
   }
 
   render () {
-    let { sfilter: f, onLoad, onEdit, onDelete } = this.props
+    let { sfilter: f, onLoad, onEdit, onDelete, currentlyLoaded } = this.props
     let path = appropiateFilterPath(f)
 
+    let active = currentlyLoaded ? ' active' : ''
+
     return (
-      <tr>
+      <tr className={'saved-filter-row' + active}>
         <td><a href={path} onClick={this.onClickLink}>{path}</a></td>
         <td>{f.name}</td>
         <td>{f.createdAt}</td>
