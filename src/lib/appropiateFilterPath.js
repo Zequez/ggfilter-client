@@ -1,10 +1,31 @@
 import router from 'sources/stateRoutes'
-import { URLS_TYPES } from 'stores/reducers/filterUrlReducer'
+import config from 'sources/config'
+import { encode } from 'lib/b64FilterGenerator'
 
-export default function appropiateFilterPath (type, state) {
-  switch (type) {
-    case URLS_TYPES.b64: return router.url('filterB64')
-    case URLS_TYPES.sid: return router.url('filterSid')
-    case URLS_TYPES.official: return ''
+function officialPath (sfilter) {
+  if (sfilter.officialSlug) {
+    return router.url('filterOfficial', sfilter.officialSlug)
+  } else {
+    return ''
   }
+}
+
+function sidPath (sfilter) {
+  if (sfilter.sid) {
+    return router.url('filterSid', sfilter.sid)
+  } else {
+    return ''
+  }
+}
+
+function b64Path (sfilter) {
+  return config.origin + router.url('filterB64', encode(sfilter))
+}
+
+export function appropiateFilterPath (sfilter) {
+  return officialPath(sfilter) || sidPath(sfilter) || b64Path(sfilter)
+}
+
+export function appropiateFilterUrl (sfilter) {
+  return config.origin + appropiateFilterPath(sfilter)
 }

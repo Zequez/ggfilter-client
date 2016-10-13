@@ -1,5 +1,8 @@
 export function encode (filterState) {
-  return btoa(JSON.stringify(filterState)).replace(/=+$/, '')
+  if (typeof filterState !== 'string') {
+    filterState = JSON.stringify(filterState)
+  }
+  return btoa(filterState).replace(/=+$/, '')
 }
 
 export function decode (base64filter) {
