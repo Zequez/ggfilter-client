@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import filtersDefinitions from 'sources/filtersDefinitions'
 import filtersSections from 'sources/filtersSectionsDefinitions'
 
-import { toggle } from 'src/FilterApp/filter'
+import { toggle } from '../reducer'
 
 @connect((s) => ({toggledFilters: s.filter.visible}), {
   toggle

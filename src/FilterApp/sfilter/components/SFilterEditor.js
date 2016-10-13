@@ -23,7 +23,7 @@ import SFilterFormSimple from './SFilterFormSimple'
   changeAttr,
   setOption
 })
-export default class SFilterTab extends Component {
+export default class SFilterEditor extends Component {
   static propTypes = {
     filter: t.object.isRequired,
     tags: t.array.isRequired,

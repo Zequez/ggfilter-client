@@ -6,8 +6,8 @@ import filtersDefinitions from 'sources/filtersDefinitions'
 import { getGames, getMoreGames } from 'stores/reducers/gamesReducer'
 
 import DataTable from 'components/DataTable/DataTable'
-import TableTabs from 'components/TableTabs/TableTabs'
-import TableTabsContent from 'components/TableTabs/TableTabsContent'
+import TableTabs from './TableTabs'
+import TableTabsContent from './TableTabsContent'
 import GamesLoader from './GamesLoader'
 
 @connect((s) => ({

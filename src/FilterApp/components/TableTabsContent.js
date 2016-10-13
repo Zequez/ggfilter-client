@@ -2,8 +2,9 @@ import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
 import { FILTER_MODES } from 'stores/reducers/uiReducer'
 
-import FiltersToggles from './FiltersToggles'
-import SFilterTab from './SFilterTab'
+import { FiltersToggles } from '../filter'
+import { SFilterEditor } from '../sfilter'
+import { SavedFiltersManagerGlued } from 'src/SavedFiltersManager'
 
 @connect((s) => ({mode: s.ui.filterMode}))
 export default class FilterTabsContent extends Component {
@@ -14,7 +15,7 @@ export default class FilterTabsContent extends Component {
   modeComponent () {
     switch (this.props.mode) {
       case FILTER_MODES.columns: return <FiltersToggles/>
-      case FILTER_MODES.share: return <SFilterTab/>
+      case FILTER_MODES.share: return <SFilterEditor/>
       case FILTER_MODES.saved: return <SavedFiltersManagerGlued/>
       case FILTER_MODES.options: return 'Options!'
     }
