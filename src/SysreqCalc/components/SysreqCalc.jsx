@@ -4,7 +4,7 @@ import { setFilter, setSort } from 'src/FilterApp'
 import { lockFilterIntoView } from 'stores/reducers/uiReducer'
 import { snapTo } from 'lib/utils'
 import { getGames } from 'sources/api'
-import SuggestionsBox from 'components/utils/SuggestionsBox'
+import SuggestionsBox from './SuggestionsBox'
 
 @connect(() => ({}), {
   setFilter,
