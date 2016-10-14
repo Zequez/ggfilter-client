@@ -41,7 +41,7 @@ export class SavedFiltersManager extends Component {
     let { sfilters, onLoad, onGo, onEdit, currentFilter } = this.props
 
     return (
-      <div className='saved-filters-manager'>
+      <div className='saved-filters-manager content-box'>
         <table>
           <thead>
             <tr>
