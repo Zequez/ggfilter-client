@@ -25,7 +25,7 @@ export function clearColumnWidth (name) {
 // Reducer
 // =============================================================================
 
-export default function columnsWidthReducer (state = initialState, action) {
+export function reducer (state = initialState, action) {
   if (action.type === COLUMNS_WIDTH_ADJUST) {
     var current = state[action.name] || 0
 

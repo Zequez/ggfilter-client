@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 
-import columnsWidth from './columnsWidthReducer'
 import lightbox from './lightboxReducer'
 import tags from './tagsReducer'
 const options = require('./optionsReducer').reducer
@@ -14,7 +13,6 @@ console.log(FilterApp)
 
 const reducer = combineReducers({
   mode,
-  columnsWidth,
   lightbox,
   tags,
   options,
