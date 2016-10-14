@@ -1,6 +1,6 @@
 import autoTitleDefinitions from 'sources/autoTitleDefinitions'
 import { escapeHtml as h } from 'lib/utils'
-import { initialState } from '../filter/reducer'
+import defaultFilter from '../config/defaultFilter'
 import filterDefinitions from '../config/filtersDefinitions'
 
 function strongificate (text) {
@@ -30,7 +30,7 @@ export default function generateAutoTitle (filter, definitions = autoTitleDefini
     }
   }
 
-  if (filter.sort && filterDefinitions[filter.sort] && filter.sort !== initialState.sort) {
+  if (filter.sort && filterDefinitions[filter.sort] && filter.sort !== defaultFilter.sort) {
     let direction = filter.sortAsc ? 'ascending' : 'descending'
     let title = filterDefinitions[filter.sort].title
     titles.push(strongificate(`sorted by <${h(title)} in ${direction} order>`))

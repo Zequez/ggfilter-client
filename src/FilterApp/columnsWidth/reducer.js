@@ -6,19 +6,19 @@ export const initialState = {}
 // Actions
 // =============================================================================
 
-export const COLUMNS_WIDTH_ADJUST = 'COLUMNS_WIDTH_ADJUST'
-export const COLUMNS_WIDTH_CLEAR = 'COLUMNS_WIDTH_CLEAR'
+export const ADJUST = 'columnsWidth/ADJUST'
+export const CLEAR = 'columnsWidth/CLEAR'
 
 // =============================================================================
 // Actions Creators
 // =============================================================================
 
 export function adjustColumnWidth (name, amount) {
-  return { type: COLUMNS_WIDTH_ADJUST, name, amount }
+  return { type: ADJUST, name, amount }
 }
 
 export function clearColumnWidth (name) {
-  return { type: COLUMNS_WIDTH_ADJUST, name }
+  return { type: ADJUST, name }
 }
 
 // =============================================================================
@@ -26,11 +26,11 @@ export function clearColumnWidth (name) {
 // =============================================================================
 
 export function reducer (state = initialState, action) {
-  if (action.type === COLUMNS_WIDTH_ADJUST) {
+  if (action.type === ADJUST) {
     var current = state[action.name] || 0
 
     state = u(state, {[action.name]: {$set: current + action.amount}})
-  } else if (action.type === COLUMNS_WIDTH_CLEAR) {
+  } else if (action.type === CLEAR) {
     state = u(state, {[action.name]: {$set: 0}})
     delete state[action.name]
   }

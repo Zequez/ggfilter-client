@@ -2,59 +2,26 @@ import { u } from 'lib/utils'
 import { decode } from 'lib/b64FilterGenerator'
 import { getGames } from '../games'
 
-// import { dirty } from 'stores/reducers/filterUrlReducer'
-import filtersSectionsFlatSort from '../config/filtersSectionsFlatSort'
-
-export const initialState = {
-  visible: [
-    'steam_id',
-    'name',
-    // 'system_requirements',
-    'lowest_steam_price',
-    'steam_discount',
-    'playtime_median_ftb',
-    // 'metacritic',
-    'steam_reviews_count',
-    'steam_reviews_ratio',
-    'platforms',
-    'players',
-    'vr',
-    // 'steam_thumbnail',
-    'tags',
-    'playtime_median',
-    // 'controller_support',
-    // 'images'
-    // 'sysreq_index_centile',
-    'released_at'
-  ],
-  params: {
-    // steam_reviews_count: { gt: 65 },
-    // steam_reviews_ratio: { gt: 95 },
-    // platforms: { value: 3 },
-    // tags: { tags: [83] },
-    // lowest_steam_price: { gt: 500, lt: 6000 }
-  },
-  sort: 'name',
-  sortAsc: false
-}
-
-initialState.visible = filtersSectionsFlatSort(initialState.visible)
+import initialState from '../config/defaultFilter'
 
 // =============================================================================
 // Actions
 // =============================================================================
 
-export const FILTER_TOGGLE = 'FILTER_TOGGLE'
-export const FILTER_SET = 'FILTER_SET'
-export const FILTER_SORT = 'FILTER_SORT'
-export const FILTER_SET_FULL = 'FILTER_SET_FULL'
-export const FILTER_LOADING_FROM_SID = 'FILTER_LOADING_FROM_SID'
-export const FILTER_LOADING_ERROR = 'FILTER_LOADING_ERROR'
-export const FILTER_RESET = 'FILTER_RESET'
+export const TOGGLE = 'filter/TOGGLE'
+export const SET = 'filter/SET'
+export const SORT = 'filter/SORT'
+export const SET_FULL = 'filter/SET_FULL'
+export const LOADING_FROM_SID = 'filter/LOADING_FROM_SID'
+export const LOADING_ERROR = 'filter/LOADING_ERROR'
+export const RESET = 'filter/RESET'
 
-// Quick hack so we don't have a circular dependency, fix later
-export const SFILTER_GET_SUCCESS = 'SFILTER_GET_SUCCESS'
-export const SFILTER_LOAD = 'SFILTER_LOAD'
+export const DIRTY_ACTIONS = [
+  TOGGLE,
+  SET,
+  SORT,
+  SET_FULL
+]
 
 // =============================================================================
 // Helpers
@@ -72,7 +39,7 @@ function dispatchAndGetGames (action) {
 // =============================================================================
 
 export function toggle (name, force = null) {
-  return { type: FILTER_TOGGLE, name, force }
+  return { type: TOGGLE, name, force }
 }
 
 export function setFilter (name, data) {
@@ -80,16 +47,16 @@ export function setFilter (name, data) {
     if (getState().filter.visible.indexOf(name) === -1) {
       dispatch(toggle(name, true))
     }
-    dispatchAndGetGames({ type: FILTER_SET, name, data })(dispatch, getState)
+    dispatchAndGetGames({ type: SET, name, data })(dispatch, getState)
   }
 }
 
 export function setSort (name, asc) {
-  return dispatchAndGetGames({ type: FILTER_SORT, name, asc })
+  return dispatchAndGetGames({ type: SORT, name, asc })
 }
 
 export function setFullFilter (filter) {
-  return dispatchAndGetGames({ type: FILTER_SET_FULL, filter })
+  return dispatchAndGetGames({ type: SET_FULL, filter })
 }
 
 export function addTagFilter (tagId) {
@@ -109,11 +76,11 @@ export function addTagFilter (tagId) {
 }
 
 export function setFilterFromB64 (b64) {
-  return dispatchAndGetGames({ type: FILTER_SET_FULL, filter: decode(b64) })
+  return dispatchAndGetGames({ type: SET_FULL, filter: decode(b64) })
 }
 
 export function resetFilters () {
-  return dispatchAndGetGames({ type: FILTER_RESET })
+  return dispatchAndGetGames({ type: RESET })
 }
 
 // =============================================================================
@@ -122,7 +89,7 @@ export function resetFilters () {
 
 export function reducer (state = initialState, action) {
   switch (action.type) {
-    case FILTER_TOGGLE:
+    case TOGGLE:
       let filtersNames = state.visible
       let index = filtersNames.indexOf(action.name)
       let currentlyActive = index !== -1
@@ -138,7 +105,7 @@ export function reducer (state = initialState, action) {
       state = u(state, {visible: {$set: filtersNames}})
       break
 
-    case FILTER_SET:
+    case SET:
       let newParams = state.params[action.name] || {}
       newParams = {...newParams, ...action.data}
       state = u(state, {params: {[action.name]: {$set: newParams}}})
@@ -147,7 +114,7 @@ export function reducer (state = initialState, action) {
       }
       break
 
-    case FILTER_SORT:
+    case SORT:
       if (state.sort === action.name) {
         state = u(state, {sortAsc: {$set: !state.sortAsc}})
       } else {
@@ -156,17 +123,12 @@ export function reducer (state = initialState, action) {
       }
       break
 
-    case FILTER_SET_FULL:
+    case SET_FULL:
       state = action.filter
       break
 
-    case FILTER_RESET:
+    case RESET:
       state = initialState
-      break
-
-    case SFILTER_GET_SUCCESS:
-    case SFILTER_LOAD:
-      state = JSON.parse(action.response.filter)
       break
   }
 
