@@ -1,7 +1,12 @@
 import React, { Component, PropTypes as t } from 'react'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 import { loopNumber } from 'lib/utils'
 
-export default class Lightbox extends Component {
+import { getMedia, getThumbs } from '../selectors'
+import { showLightbox } from '../reducer'
+
+export class Lightbox extends Component {
   static propTypes = {
     media: t.arrayOf(t.string).isRequired,
     thumbnails: t.arrayOf(t.string).isRequired,
@@ -9,34 +14,34 @@ export default class Lightbox extends Component {
   }
 
   static defaultProps = {
-    onClose: ()=>{}
+    onClose: () => {}
   }
 
   state = { selected: 0 }
 
-  componentDidMount() {
+  componentDidMount () {
     window.addEventListener('keydown', this.onKeyDown)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps (nextProps) {
     if (nextProps !== this.props) {
       this.setState({selected: 0})
     }
   }
 
-  onClickThumbnail(i, ev) {
+  onClickThumbnail (i, ev) {
     this.setState({selected: i})
     ev.stopPropagation()
   }
 
-  preventClick = (ev)=>{
+  preventClick = (ev) => {
     ev.stopPropagation()
   }
 
-  onKeyDown = (ev)=>{
+  onKeyDown = (ev) => {
     let i = this.state.selected
     let key = ev.charCode || ev.keyCode
-    switch(key) {
+    switch (key) {
       case 97: // a
       case 37: // ArrowLeft
         i -= 2
@@ -44,18 +49,22 @@ export default class Lightbox extends Component {
       case 39:  // ArrowRight
         i = loopNumber(i, +1, this.props.media)
         this.setState({selected: i})
-      break
+        break
 
       case 27: // Escape
-        this.props.onClose()
-      break
+        this.close()
+        break
     }
   }
 
-  render() {
+  close = () => {
+    this.props.onClose()
+  }
+
+  render () {
     if (!this.props.media.length) return (<div></div>)
 
-    var thumbnails = this.props.thumbnails.map((t, i)=>{
+    var thumbnails = this.props.thumbnails.map((t, i) => {
       return (
         <li key={i} className={this.state.selected === i ? 'selected' : ''}>
           <img src={t} onClick={this.onClickThumbnail.bind(this, i)}/>
@@ -64,7 +73,7 @@ export default class Lightbox extends Component {
     })
 
     return (
-      <div className='lightbox' onClick={this.props.onClose}>
+      <div className='lightbox' onClick={this.close}>
         <div className='lightbox-media'>
           <img src={this.props.media[this.state.selected]} onClick={this.preventClick}/>
         </div>
@@ -75,3 +84,8 @@ export default class Lightbox extends Component {
     )
   }
 }
+
+export default connect((s) => createStructuredSelector({
+  media: getMedia,
+  thumbnails: getThumbs
+}), { onClose: showLightbox })(Lightbox)

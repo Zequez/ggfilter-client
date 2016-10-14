@@ -11,11 +11,11 @@ const initialState = {
 
 export const SHOW_LIGHTBOX = 'SHOW_LIGHTBOX'
 
-export function showLightbox (media, thumbnails) {
+export function showLightbox (media = [], thumbnails = []) {
   return { type: SHOW_LIGHTBOX, media, thumbnails }
 }
 
-export default function lightboxReducer (state = initialState, action) {
+export default function reducer (state = initialState, action) {
   if (action.type === SHOW_LIGHTBOX) {
     return {
       media: action.media,

@@ -1,6 +1,7 @@
 import { u } from 'lib/utils'
 import { decode } from 'lib/b64FilterGenerator'
 import { getGames } from '../games'
+import filtersSectionsFlatSort from '../config/filtersSectionsFlatSort'
 
 import initialState from '../config/defaultFilter'
 
