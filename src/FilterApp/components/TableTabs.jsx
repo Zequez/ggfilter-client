@@ -12,8 +12,8 @@ export default class TableTabs extends Component {
     console.logRender('TableTabs')
 
     return (
-      <nav className='nav'>
-        <ul className='nav-tabs'>
+      <nav className='table-tabs'>
+        <ul>
           <TableTabsLink text='Columns' mode={FILTER_MODES.columns}/>
           <TableTabsLink text='Save/Share' mode={FILTER_MODES.share}/>
           {false ? <TableTabsLink text='Options' mode={FILTER_MODES.options}/> : null}
