@@ -1,4 +1,4 @@
-require('styles/run')
+require('src/app/style')
 
 import React from 'react'
 import ReactDOM from 'react-dom'
