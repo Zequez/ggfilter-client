@@ -4,10 +4,10 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
-import { setAllTags } from 'stores/reducers/tagsReducer'
 import { getGamesIfNoGames } from 'src/FilterApp'
-import { getCurrentUser } from 'stores/reducers/authReducer'
-import getStore from 'stores/AppStore'
+import { setAllTags } from 'shared/reducers/tagsReducer'
+import { getCurrentUser } from 'shared/reducers/authReducer'
+import getStore from 'shared/AppStore'
 
 import history from 'lib/StateRouter/history'
 import router from 'sources/stateRoutes'

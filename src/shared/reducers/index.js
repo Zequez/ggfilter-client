@@ -2,7 +2,6 @@ import { combineReducers } from 'redux'
 
 import tags from './tagsReducer'
 const options = require('./optionsReducer').reducer
-const mode = require('./modeReducer').reducer
 const auth = require('./authReducer').reducer
 const ui = require('./uiReducer').reducer
 import * as SavedFiltersManager from 'src/SavedFiltersManager'
@@ -10,7 +9,6 @@ import * as FilterApp from 'src/FilterApp'
 import * as Lightbox from 'src/Lightbox'
 
 const reducer = combineReducers({
-  mode,
   tags,
   options,
   auth,

@@ -2,7 +2,7 @@ import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 
 import { resetFilter } from 'src/FilterApp'
-import { resetUi } from 'stores/reducers/uiReducer'
+import { resetUi } from 'shared/reducers/uiReducer'
 
 import { Lightbox } from 'src/Lightbox'
 import TabsContainer from 'components/Tabs/TabsContainer'

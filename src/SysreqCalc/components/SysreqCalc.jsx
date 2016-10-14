@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { setFilter, setSort } from 'src/FilterApp'
-import { lockFilterIntoView } from 'stores/reducers/uiReducer'
+import { lockFilterIntoView } from 'shared/reducers/uiReducer'
 import { snapTo } from 'lib/utils'
 import { getGames } from 'sources/api'
 import SuggestionsBox from './SuggestionsBox'

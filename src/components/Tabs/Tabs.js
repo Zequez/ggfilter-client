@@ -1,6 +1,6 @@
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
-import { MODES } from 'stores/reducers/uiReducer'
+import { MODES } from 'shared/reducers/uiReducer'
 import RouterLink from 'components/utils/RouterLink'
 import FilterTabLink from './FilterTabLink'
 

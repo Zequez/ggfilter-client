@@ -28,6 +28,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx', '.coffee', '.sass', '.scss'],
     alias: {
+      shared: srcPath + '/shared/',
       actions: srcPath + '/actions/',
       components: srcPath + '/components/',
       sources: srcPath + '/sources/',

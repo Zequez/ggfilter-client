@@ -1,7 +1,7 @@
 import StateRouter from 'lib/StateRouter/StateRouter'
 import { encode } from 'lib/b64FilterGenerator'
 
-import { MODES, setMode } from 'stores/reducers/uiReducer'
+import { MODES, setMode } from 'shared/reducers/uiReducer'
 
 // TODO: Somehow, don't do this, because we're looking inside FilterApp
 // But if we expose this on src/FilterApp, we get a circular reference

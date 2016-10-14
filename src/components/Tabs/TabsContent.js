@@ -1,6 +1,6 @@
 import React, { PropTypes as t, Component } from 'react'
 
-import { MODES } from 'stores/reducers/uiReducer'
+import { MODES } from 'shared/reducers/uiReducer'
 
 import { FilterApp } from 'src/FilterApp'
 import { SysreqCalc } from 'src/SysreqCalc'

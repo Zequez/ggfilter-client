@@ -1,7 +1,7 @@
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
 
-import { lockFilterIntoView, unlockFilterFromView } from 'stores/reducers/uiReducer'
+import { lockFilterIntoView, unlockFilterFromView } from 'shared/reducers/uiReducer'
 
 import Tabs from 'components/Tabs/Tabs'
 import TabsContent from 'components/Tabs/TabsContent'
