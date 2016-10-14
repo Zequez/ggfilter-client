@@ -7,3 +7,24 @@
 @import "src/FilterApp/style/index"
 @import "src/Lightbox/style"
 @import "src/SysreqCalc/style"
+
+#vr-helper
+  input
+    display: block
+    position: fixed
+    top: 0
+    right: 0
+    width: $r
+    height: $r
+    margin: 0
+    border: none
+    background: red
+    +appearance(none)
+  input:checked + div
+    position: absolute
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+    background: repeating-linear-gradient(transparent 0px, transparent ($r - 1), black $r)
+    pointer-events: none
