@@ -2,7 +2,7 @@
 const madge = require('madge')
 
 ;['FilterApp', 'LightBox', 'SavedFiltersManager', 'SysreqCalc'].forEach(function (mod) {
-  madge('src/' + mod, {webpackConfig: 'webpack.config.js'})
+  madge('src/' + mod, {webpackConfig: 'webpack.config.js', excludeRegExp: [/lib\/utils/]})
     // .then((res) => {
     //   console.log(res.depends())
     // })
