@@ -1,5 +1,5 @@
 import { u } from 'shared/lib/utils'
-const api = require('sources/api')
+const api = require('shared/lib/api')
 
 export const initialState = {
   currentUser: null

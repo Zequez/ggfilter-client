@@ -1,6 +1,6 @@
 import { u } from 'shared/lib/utils'
 
-const api = require('sources/api')
+const api = require('shared/lib/api')
 
 import {
   DIRTY_ACTIONS,

@@ -14,7 +14,7 @@ import { getCurrentUser } from 'shared/reducers/authReducer'
 import history from 'shared/lib/StateRouter/history'
 
 import App from 'components/App'
-import { getTags } from 'sources/api'
+import { getTags } from 'shared/lib/api'
 
 console.logRender = function (componentName) {
   // console.info(`<${componentName}/>`)

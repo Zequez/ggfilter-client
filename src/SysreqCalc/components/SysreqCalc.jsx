@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { setFilter, setSort } from 'src/FilterApp'
 import { lockFilterIntoView } from 'shared/reducers/uiReducer'
 import { snapTo } from 'shared/lib/utils'
-import { getGames } from 'sources/api'
+import { getGames } from 'shared/lib/api'
 import SuggestionsBox from './SuggestionsBox'
 
 @connect(() => ({}), {
