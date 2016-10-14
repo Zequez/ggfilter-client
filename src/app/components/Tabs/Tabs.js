@@ -1,7 +1,7 @@
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
 import { MODES } from 'shared/reducers/uiReducer'
-import RouterLink from 'components/utils/RouterLink'
+import RouterLink from 'shared/components/RouterLink'
 import FilterTabLink from './FilterTabLink'
 
 @connect((s) => ({
