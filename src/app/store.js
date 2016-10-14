@@ -4,7 +4,7 @@ import logger from './middlewares/logger'
 import crashReporter from './middlewares/crashReporter'
 import callAPI from './middlewares/callAPI'
 
-import reducer from './reducers/index'
+import reducer from './reducer'
 
 export default function getStore () {
   let store = createStore(reducer, {}, compose(
@@ -14,8 +14,8 @@ export default function getStore () {
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./reducers', () => {
-      const nextRootReducer = require('./reducers/index').default
+    module.hot.accept('./reducer', () => {
+      const nextRootReducer = require('./reducer').default
       store.replaceReducer(nextRootReducer)
     })
   }
