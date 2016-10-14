@@ -1,4 +1,4 @@
-import autoTitleDefinitions from 'sources/autoTitleDefinitions'
+import autoTitleDefinitions from '../config/autoTitleDefinitions'
 import { escapeHtml as h } from 'lib/utils'
 import defaultFilter from '../config/defaultFilter'
 import filterDefinitions from '../config/filtersDefinitions'

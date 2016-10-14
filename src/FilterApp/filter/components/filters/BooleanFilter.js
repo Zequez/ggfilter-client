@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as t } from 'react'
 
-import enumColumns from 'sources/enumColumns'
+import enumColumns from '../../../config/enumColumns'
 import classNames from 'classnames'
 
 export default class BooleanFilter extends Component {

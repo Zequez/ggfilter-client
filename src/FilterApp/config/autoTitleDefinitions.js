@@ -1,4 +1,4 @@
-import enumColumns from 'sources/enumColumns'
+import enumColumns from './enumColumns'
 import { timeInWords, escapeHtml as h } from 'lib/utils'
 
 let p = (cents) => {
