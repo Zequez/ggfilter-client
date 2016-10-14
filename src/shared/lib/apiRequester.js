@@ -1,5 +1,5 @@
 import axios from 'axios'
-import config from 'sources/config'
+import config from 'src/app/config'
 import { start, stop } from 'shared/lib/loadingSpinner'
 import { snakeizeKeys } from 'shared/lib/utils'
 

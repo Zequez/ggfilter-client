@@ -1,5 +1,5 @@
 import router from 'sources/stateRoutes'
-import config from 'sources/config'
+import config from 'src/app/config'
 import { encode } from 'shared/lib/b64FilterGenerator'
 
 function officialPath (sfilter) {
