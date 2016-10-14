@@ -6,7 +6,7 @@ import { resetUi } from 'shared/reducers/uiReducer'
 
 import { Lightbox } from 'src/Lightbox'
 import TabsContainer from 'components/Tabs/TabsContainer'
-import Layout from 'components/Layout'
+import Layout from './Layout'
 
 @connect(
   (s) => ({

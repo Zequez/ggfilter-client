@@ -13,7 +13,7 @@ import { getCurrentUser } from 'shared/reducers/authReducer'
 
 import history from 'shared/lib/StateRouter/history'
 
-import App from 'components/App'
+import App from 'src/app/components/App'
 import { getTags } from 'shared/lib/api'
 
 console.logRender = function (componentName) {
@@ -45,8 +45,8 @@ function renderWithHot (App) {
 }
 
 if (module.hot) {
-  module.hot.accept('components/App', () => {
-    const App = require('components/App').default
+  module.hot.accept('src/app/components/App', () => {
+    const App = require('src/app/components/App').default
     renderWithHot(App)
   })
 }
