@@ -79,7 +79,7 @@ export const destroyFilter = (sid) => ({
   callAPI: (state) => api.destroyFilter(sid || state.sfilter.data.sid)
 })
 export const loadFilter = (sfilter) => {
-  return (state, dispatch) => {
+  return (dispatch, getState) => {
     dispatch(setFullFilter(JSON.parse(sfilter.filter)))
     dispatch({
       type: LOAD,
