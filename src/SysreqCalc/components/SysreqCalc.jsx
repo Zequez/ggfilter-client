@@ -19,15 +19,15 @@ export default class SysreqCalc extends Component {
   filterGames = (value) => {
     if (!value) return []
 
-    // TODO: FIX, we need to call it like the API endpoint needs
     return getGames({
-      visible: ['name', 'sysreq_index_centile'],
-      params: {
+      filters: JSON.stringify({
         name: { value: value }
-      },
-      sort: 'name',
-      sortAsc: true
-    }, 0, { batchSize: 8 })
+      }),
+      sort: `name_asc`,
+      limit: 8,
+      columns: ['name', 'sysreq_index_centile'],
+      page: 0
+    })
     .then((games) => {
       var ids = this.state.games.map((g) => g.id)
       return games
