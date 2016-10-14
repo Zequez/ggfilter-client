@@ -1,4 +1,4 @@
-import router from 'sources/stateRoutes'
+import router from 'src/app/routes'
 import config from 'src/app/config'
 import { encode } from 'shared/lib/b64FilterGenerator'
 

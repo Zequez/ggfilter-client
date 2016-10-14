@@ -5,13 +5,13 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
 import getStore from 'src/app/store'
+import router from 'src/app/routes'
 
 import { getGamesIfNoGames } from 'src/FilterApp'
 import { setAllTags } from 'shared/reducers/tagsReducer'
 import { getCurrentUser } from 'shared/reducers/authReducer'
 
 import history from 'shared/lib/StateRouter/history'
-import router from 'sources/stateRoutes'
 
 import App from 'components/App'
 import { getTags } from 'sources/api'

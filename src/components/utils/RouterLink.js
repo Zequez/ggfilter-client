@@ -1,6 +1,6 @@
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
-import router from 'sources/stateRoutes'
+import router from 'src/app/routes'
 
 @connect((s) => ({
   currentRouteName: s.ui.routeName
