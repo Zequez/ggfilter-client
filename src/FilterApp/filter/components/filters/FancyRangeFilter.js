@@ -1,5 +1,5 @@
 import React, { Component, PropTypes as t } from 'react'
-import { chunkSize, paramsToRange, rangeToParams } from 'shared/lib/FancyRangeFilterHelpers'
+import { chunkSize, paramsToRange, rangeToParams } from '../../lib/FancyRangeFilterHelpers'
 import FancyRangeFilterMappedSensor from './FancyRangeFilterMappedSensor'
 import FancyRangeFilterBar from './FancyRangeFilterBar'
 import FancyRangeFilterLabel from './FancyRangeFilterLabel'
