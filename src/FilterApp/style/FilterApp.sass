@@ -1,3 +1,17 @@
-.filter-app.filter-tab-none
+.filter-app
+  &.filter-tab-none
+    .table-tabs-content
+      padding: 0
+
   .table-tabs-content
-    padding: 0
+    +clearfix
+    padding: $r
+    border-top: solid 1px lighten($ocean-blue, 3%)
+    background-color: $ocean-blue
+    background-image: linear-gradient(rgba(#000, 0.15) 0%, rgba(#000, 0) 65%)
+    color: lighten($white, 10%)
+    font-weight: 300
+    .tab-content
+      display: none
+    .tab-content.active
+      display: block
