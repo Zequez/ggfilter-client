@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
-import { encode } from 'lib/b64FilterGenerator'
+import { encode } from 'shared/lib/b64FilterGenerator'
 import router from 'sources/stateRoutes'
 import config from 'sources/config'
 import { createFilter, updateFilter, destroyFilter, changeAttr } from '../reducer'

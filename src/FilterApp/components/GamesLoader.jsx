@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 
 import classNames from 'classnames'
-const debounce = require('lib/utils').debounce
+const debounce = require('shared/lib/utils').debounce
 
 export default class GamesLoader extends Component {
   static propTypes = {

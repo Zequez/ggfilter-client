@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as t } from 'react'
 
-var debounce = require('lib/utils').debounce
+var debounce = require('shared/lib/utils').debounce
 import TableWidthCalculator from '../ui/lib/TableWidthCalculator'
 
 import DataTableControls from '../filter/components/DataTableControls'

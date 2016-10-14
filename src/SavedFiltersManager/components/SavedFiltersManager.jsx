@@ -1,7 +1,7 @@
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { partial } from 'lib/utils'
+import { partial } from 'shared/lib/utils'
 
 import { getAll } from '../selectors'
 import { fetch, destroy } from '../reducer'

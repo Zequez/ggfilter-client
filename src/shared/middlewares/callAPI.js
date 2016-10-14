@@ -1,4 +1,4 @@
-import { camelizeKeys } from 'lib/utils'
+import { camelizeKeys } from 'shared/lib/utils'
 
 export default function callAPIMiddleware ({ dispatch, getState }) {
   return next => action => {

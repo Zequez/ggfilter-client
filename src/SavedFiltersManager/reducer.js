@@ -1,4 +1,4 @@
-import { u } from 'lib/utils'
+import { u } from 'shared/lib/utils'
 import findIndex from 'lodash/findIndex'
 const api = require('sources/api')
 

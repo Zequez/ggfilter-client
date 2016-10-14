@@ -1,4 +1,4 @@
-import { u } from 'lib/utils'
+import { u } from 'shared/lib/utils'
 
 const api = require('sources/api')
 

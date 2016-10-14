@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { loopNumber } from 'lib/utils'
+import { loopNumber } from 'shared/lib/utils'
 
 import { getMedia, getThumbs } from '../selectors'
 import { showLightbox } from '../reducer'

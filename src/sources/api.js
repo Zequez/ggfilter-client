@@ -1,5 +1,5 @@
 import pick from 'lodash/pick'
-import api from 'lib/apiRequester'
+import api from 'shared/lib/apiRequester'
 
 export function officialFilters () {
   return api.get('filters.json').then((response) => response.data)

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as t } from 'react'
 
-import { partial } from 'lib/utils'
+import { partial } from 'shared/lib/utils'
 
 export default class TagsColumn extends Component {
   static propTypes = {

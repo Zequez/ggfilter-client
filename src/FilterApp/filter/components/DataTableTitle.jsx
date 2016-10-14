@@ -1,5 +1,5 @@
 import React, { Component, PropTypes as t } from 'react'
-import { debounce } from 'lib/utils'
+import { debounce } from 'shared/lib/utils'
 import classNames from 'classnames'
 
 import ColumnResizeHandle from './ColumnResizeHandle'

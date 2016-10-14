@@ -1,7 +1,7 @@
 import axios from 'axios'
 import config from 'sources/config'
-import { start, stop } from 'lib/loadingSpinner'
-import { snakeizeKeys } from 'lib/utils'
+import { start, stop } from 'shared/lib/loadingSpinner'
+import { snakeizeKeys } from 'shared/lib/utils'
 
 const api = axios.create({
   baseURL: config.apiHost + '/',

@@ -1,5 +1,5 @@
-import { u } from 'lib/utils'
-import { ROUTE_CHANGE } from 'lib/StateRouter/routeChangeAction'
+import { u } from 'shared/lib/utils'
+import { ROUTE_CHANGE } from 'shared/lib/StateRouter/routeChangeAction'
 
 export const MODES = {
   filter: 'filter',

@@ -1,5 +1,5 @@
 import enumColumns from './enumColumns'
-import { timeInWords, escapeHtml as h } from 'lib/utils'
+import { timeInWords, escapeHtml as h } from 'shared/lib/utils'
 
 let p = (cents) => {
   cents = parseInt(cents)

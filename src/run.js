@@ -9,7 +9,7 @@ import { setAllTags } from 'shared/reducers/tagsReducer'
 import { getCurrentUser } from 'shared/reducers/authReducer'
 import getStore from 'shared/AppStore'
 
-import history from 'lib/StateRouter/history'
+import history from 'shared/lib/StateRouter/history'
 import router from 'sources/stateRoutes'
 
 import App from 'components/App'

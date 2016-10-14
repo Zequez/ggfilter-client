@@ -1,6 +1,6 @@
 import router from 'sources/stateRoutes'
 import config from 'sources/config'
-import { encode } from 'lib/b64FilterGenerator'
+import { encode } from 'shared/lib/b64FilterGenerator'
 
 function officialPath (sfilter) {
   if (sfilter.officialSlug) {

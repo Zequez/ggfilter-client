@@ -1,5 +1,5 @@
-import StateRouter from 'lib/StateRouter/StateRouter'
-import { encode } from 'lib/b64FilterGenerator'
+import StateRouter from 'shared/lib/StateRouter/StateRouter'
+import { encode } from 'shared/lib/b64FilterGenerator'
 
 import { MODES, setMode } from 'shared/reducers/uiReducer'
 

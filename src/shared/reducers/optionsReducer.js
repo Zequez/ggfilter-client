@@ -1,4 +1,4 @@
-import { u } from 'lib/utils'
+import { u } from 'shared/lib/utils'
 
 function load (initialState) {
   if (typeof localStorage === 'undefined') return initialState

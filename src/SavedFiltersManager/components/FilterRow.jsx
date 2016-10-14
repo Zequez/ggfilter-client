@@ -1,5 +1,5 @@
 import React, { PropTypes as t, Component } from 'react'
-import { appropiateFilterPath } from 'lib/appropiateFilterPath'
+import { appropiateFilterPath } from 'shared/lib/appropiateFilterPath'
 
 export default class FilterRow extends Component {
   static propTypes = {

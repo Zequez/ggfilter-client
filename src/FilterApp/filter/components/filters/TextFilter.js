@@ -1,5 +1,5 @@
 import React, { Component, PropTypes as t } from 'react'
-var debounceCountdown = require('lib/utils').debounceCountdown
+var debounceCountdown = require('shared/lib/utils').debounceCountdown
 
 export default class TextFilter extends Component {
   static propTypes = {

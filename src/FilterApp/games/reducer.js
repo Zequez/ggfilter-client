@@ -1,4 +1,4 @@
-import { u } from 'lib/utils'
+import { u } from 'shared/lib/utils'
 
 import { getGames as apiGetGames } from 'sources/api'
 import gamesQueryGenerator from '../lib/gamesQueryGenerator'

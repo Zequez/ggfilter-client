@@ -1,5 +1,5 @@
-import { u } from 'lib/utils'
-import { decode } from 'lib/b64FilterGenerator'
+import { u } from 'shared/lib/utils'
+import { decode } from 'shared/lib/b64FilterGenerator'
 import { getGames } from '../games'
 import filtersSectionsFlatSort from '../config/filtersSectionsFlatSort'
 

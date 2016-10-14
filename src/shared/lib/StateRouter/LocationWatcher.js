@@ -1,4 +1,4 @@
-import { parseQuery } from 'lib/utils'
+import { parseQuery } from 'shared/lib/utils'
 
 export default class LocationWatcher {
   history = null

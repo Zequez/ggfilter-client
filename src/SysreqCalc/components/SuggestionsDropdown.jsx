@@ -1,5 +1,5 @@
 import React, { Component, PropTypes as t } from 'react'
-import { partial, loopNumber } from 'lib/utils'
+import { partial, loopNumber } from 'shared/lib/utils'
 
 export default class SuggestionsDropdown extends Component {
   static propTypes = {
