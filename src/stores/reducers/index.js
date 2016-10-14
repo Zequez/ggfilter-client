@@ -9,8 +9,6 @@ const ui = require('./uiReducer').reducer
 import * as SavedFiltersManager from 'src/SavedFiltersManager'
 import * as FilterApp from 'src/FilterApp'
 
-console.log(FilterApp)
-
 const reducer = combineReducers({
   mode,
   lightbox,
