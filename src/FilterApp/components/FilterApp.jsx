@@ -5,7 +5,7 @@ import filtersDefinitions from '../config/filtersDefinitions'
 
 import { getGames, getMoreGames } from '../games'
 
-import DataTable from 'components/DataTable/DataTable'
+import DataTable from './DataTable'
 import TableTabs from './TableTabs'
 import TableTabsContent from './TableTabsContent'
 import GamesLoader from './GamesLoader'

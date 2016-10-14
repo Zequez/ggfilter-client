@@ -3,9 +3,9 @@ import React, { Component, PropTypes as t } from 'react'
 var debounce = require('lib/utils').debounce
 import TableWidthCalculator from 'lib/TableWidthCalculator'
 
-import DataTableControls from './DataTableControls'
-import DataTableTitles from './DataTableTitles'
-import DataTableBatch from './DataTableBatch'
+import DataTableControls from '../filter/components/DataTableControls'
+import DataTableTitles from '../filter/components/DataTableTitles'
+import DataTableBatch from '../games/components/DataTableBatch'
 
 export default class DataTable extends Component {
   static propTypes = {
