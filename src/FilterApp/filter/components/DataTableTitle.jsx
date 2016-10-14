@@ -2,7 +2,7 @@ import React, { Component, PropTypes as t } from 'react'
 import { debounce } from 'lib/utils'
 import classNames from 'classnames'
 
-import ColumnResizeHandle from 'components/utils/ColumnResizeHandle'
+import ColumnResizeHandle from './ColumnResizeHandle'
 import DataTableTitleFilterButtons from './DataTableTitleFilterButtons'
 
 export default class DataTableTitle extends Component {
