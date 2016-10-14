@@ -108,7 +108,7 @@ export default class SFilterEditor extends Component {
     let autotitle = this.generateAutoTitle()
 
     return (
-      <div className='sharer form'>
+      <div className='sfilter-editor form'>
         <div className='form-input form-input-checkbox'>
           <label>
             Advanced mode
