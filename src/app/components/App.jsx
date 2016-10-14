@@ -5,7 +5,7 @@ import { resetFilter } from 'src/FilterApp'
 import { resetUi } from 'shared/reducers/uiReducer'
 
 import { Lightbox } from 'src/Lightbox'
-import TabsContainer from 'components/Tabs/TabsContainer'
+import TabsContainer from './Tabs/TabsContainer'
 import Layout from './Layout'
 
 @connect(

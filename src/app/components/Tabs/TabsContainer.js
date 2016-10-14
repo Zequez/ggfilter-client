@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 
 import { lockFilterIntoView, unlockFilterFromView } from 'shared/reducers/uiReducer'
 
-import Tabs from 'components/Tabs/Tabs'
-import TabsContent from 'components/Tabs/TabsContent'
+import Tabs from './Tabs'
+import TabsContent from './TabsContent'
 
 @connect((s) => ({
   filterLockedInView: s.ui.filterLockedInView,
