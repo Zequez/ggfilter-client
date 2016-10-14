@@ -1,11 +1,13 @@
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
-import { setFilterMode, FILTER_MODES } from 'stores/reducers/uiReducer'
+
+import { setTab, TABS } from '../ui/reducer'
+import { getTab } from '../ui/selectors'
 
 @connect((s) => ({
-  currentMode: s.ui.filterMode
+  currentMode: getTab(s)
 }), {
-  setFilterMode
+  setFilterMode: setTab
 })
 export default class TableTabsLink extends Component {
   static propTypes = {
@@ -24,7 +26,7 @@ export default class TableTabsLink extends Component {
     if (currentMode !== mode) {
       setFilterMode(mode)
     } else {
-      setFilterMode(FILTER_MODES.none)
+      setFilterMode(TABS.none)
     }
   }
 

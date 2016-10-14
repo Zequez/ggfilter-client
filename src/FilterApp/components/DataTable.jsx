@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 
 var debounce = require('lib/utils').debounce
-import TableWidthCalculator from '../columnsWidth/lib/TableWidthCalculator'
+import TableWidthCalculator from '../ui/lib/TableWidthCalculator'
 
 import DataTableControls from '../filter/components/DataTableControls'
 import DataTableTitles from '../filter/components/DataTableTitles'

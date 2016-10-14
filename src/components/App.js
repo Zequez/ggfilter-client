@@ -12,7 +12,6 @@ import Layout from 'components/Layout'
   (s) => ({
     routing: s.routing,
     mode: s.ui.mode,
-    filterMode: s.ui.filterMode,
     filterLockedInView: s.ui.filterLockedInView
   }),
   {
@@ -34,7 +33,7 @@ export default class App extends Component {
     console.logRender('App')
 
     let { mode, filterMode } = this.props
-    let containerClassName = `mode-${mode} filter-mode-${filterMode}`
+    let containerClassName = `mode-${mode}`
 
     return (
       <Layout className={containerClassName} clickOnLogo={this.clickOnLogo}>

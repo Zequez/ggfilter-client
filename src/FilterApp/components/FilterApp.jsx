@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import filtersDefinitions from '../config/filtersDefinitions'
 
 import { getGames, getMoreGames } from '../games'
+import { getColumnsWidth, getTab } from '../ui/selectors'
 
 import DataTable from './DataTable'
 import TableTabs from './TableTabs'
@@ -14,7 +15,8 @@ import GamesLoader from './GamesLoader'
   filter: s.filter,
   games: s.games,
   tags: s.tags,
-  columnsWidth: s.columnsWidth
+  columnsWidth: getColumnsWidth(s),
+  tab: getTab(s)
 }), {
   getGames,
   getMoreGames
@@ -53,10 +55,12 @@ export default class FilterApp extends Component {
   }
 
   render () {
-    let {games, filter, columnsWidth} = this.props
+    let {games, filter, columnsWidth, tab} = this.props
+
+    let filterMode = ' filter-tab-' + tab
 
     return (
-      <div className='filter-tab'>
+      <div className={'filter-app' + filterMode}>
         <TableTabs/>
         <TableTabsContent/>
         <DataTable

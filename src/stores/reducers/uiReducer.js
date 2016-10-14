@@ -12,14 +12,6 @@ export const MODES = {
   myFilters: 'myFilters'
 }
 
-export const FILTER_MODES = {
-  none: 'none',
-  columns: 'columns',
-  share: 'share',
-  saved: 'saved',
-  options: 'options'
-}
-
 // =============================================================================
 // Initial state
 // =============================================================================
@@ -27,7 +19,6 @@ export const FILTER_MODES = {
 export const initialState = {
   filterLockedInView: false,
   mode: MODES.filter,
-  filterMode: FILTER_MODES.none,
   routeName: null
 }
 
@@ -36,7 +27,6 @@ export const initialState = {
 // =============================================================================
 
 export const UI_SET_MODE = 'UI_SET_MODE'
-export const UI_SET_FILTER_MODE = 'UI_SET_FILTER_MODE'
 export const UI_LOCK_FILTER_INTO_VIEW = 'UI_LOCK_FILTER_INTO_VIEW'
 export const UI_UNLOCK_FILTER_FROM_VIEW = 'UI_UNLOCK_FILTER_FROM_VIEW'
 export const UI_RESET = 'UI_RESET'
@@ -48,7 +38,6 @@ export const UI_ROUTE_CHANGE = 'UI_ROUTE_CHANGE'
 // =============================================================================
 
 export const setMode = (mode) => ({ type: UI_SET_MODE, mode })
-export const setFilterMode = (mode) => ({ type: UI_SET_FILTER_MODE, mode })
 export const lockFilterIntoView = () => ({ type: UI_LOCK_FILTER_INTO_VIEW })
 export const unlockFilterFromView = () => ({ type: UI_UNLOCK_FILTER_FROM_VIEW })
 export const resetUi = () => ({ type: UI_RESET })
@@ -64,7 +53,6 @@ let reductions = {
       filterLockedInView: { $set: a.mode === MODES.filter || s.filterLockedInView }
     })
   ),
-  [UI_SET_FILTER_MODE]: (s, a) => u(s, { filterMode: { $set: a.mode } }),
   [UI_LOCK_FILTER_INTO_VIEW]: (s) => u(s, { filterLockedInView: { $set: true } }),
   [UI_UNLOCK_FILTER_FROM_VIEW]: (s) => u(s, { filterLockedInView: { $set: false } }),
   [UI_RESET]: (s) => initialState,
