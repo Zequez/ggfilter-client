@@ -1,0 +1,30 @@
+$footerHeight: $r*3
+
+// These are all the parents of .container
+// 100% height equals to the height of the visible portion of the screen
+html, body, #app
+  height: 100%
+
+.container
+  position: relative
+  min-height: 100%
+  overflow: hidden // So the children margins do not leak
+  padding-bottom: $footerHeight
+
+// And now the footer, which is inside the .container
+
+.footer
+  position: absolute
+  bottom: 0
+  left: 0
+  width: 100%
+  height: $footerHeight
+  background: $dark-blue
+  box-shadow: inset 0 3px 8px rgba(#000, 0.3), 0 1px 0 rgba(#fff, 0.05)
+  line-height: $r*3
+  text-align: center
+  &, a
+    color: rgba($white, 0.5)
+
+  & > span, & > a
+    margin-left: $r/2

@@ -18,6 +18,8 @@ export default class Layout extends Component {
     let className = 'container'
     if (this.props.className) className += ' ' + this.props.className
 
+    let currentYear = new Date().getFullYear()
+
     return (
       <div className={className}>
         <header className='header'>
@@ -31,6 +33,16 @@ export default class Layout extends Component {
         <main className='main'>
           {this.props.children}
         </main>
+        <footer className='footer'>
+          <span>
+            &copy; <a href='/'>GGFilters</a> {currentYear}
+          </span>
+          <a href='/sources'>Data Sources</a>
+          <a href='/tos'>Terms</a>
+          <a href='/help'>Help</a>
+          <a href='/about'>About</a>
+          <a href='/contact'>Contact</a>
+        </footer>
       </div>
     )
   }
