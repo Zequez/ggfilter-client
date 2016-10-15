@@ -9,19 +9,17 @@ import { MODES, setMode } from 'shared/reducers/uiReducer'
 import { setFilterFromB64 } from 'src/FilterApp/filter/reducer'
 import { getFromSid, getFromOfficialSlug } from 'src/FilterApp/sfilter/reducer'
 
+let basicModeRoute = (path, mode) => {
+  return [path, {ui: {mode: mode}}, setMode(mode)]
+}
+
 export default new StateRouter({
-  sysreq:
-    ['/system-requirements', {ui: {mode: MODES.sysreq}}, setMode(MODES.sysreq)],
-  officialFilters:
-    ['/interesting-filters', {ui: {mode: MODES.officialFilters}}, setMode(MODES.officialFilters)],
-  feedback:
-    ['/feedback', {ui: {mode: MODES.feedback}}, setMode(MODES.feedback)],
-  contribute:
-    ['/contribute', {ui: {mode: MODES.contribute}}, setMode(MODES.contribute)],
-  sources:
-    ['/sources', {ui: {mode: MODES.sources}}, setMode(MODES.sources)],
-  myFilters:
-    ['/my-filters', {ui: {mode: MODES.myFilters}}, setMode(MODES.myFilters)],
+  sysreq: basicModeRoute('/system-requirements', MODES.sysreq),
+  officialFilters: basicModeRoute('/interesting-filters', MODES.officialFilters),
+  feedback: basicModeRoute('/feedback', MODES.feedback),
+  contribute: basicModeRoute('/contribute', MODES.contribute),
+  sources: basicModeRoute('/sources', MODES.sources),
+  myFilters: basicModeRoute('/myFilters', MODES.myFilters),
 
   filterB64: [
     '/b/:filterB64', {
