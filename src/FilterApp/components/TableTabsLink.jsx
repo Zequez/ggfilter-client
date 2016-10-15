@@ -28,6 +28,8 @@ export default class TableTabsLink extends Component {
     } else {
       setFilterMode(TABS.none)
     }
+
+    ev.target.blur()
   }
 
   render () {
