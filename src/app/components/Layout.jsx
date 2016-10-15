@@ -1,6 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 
 import { FilterTitle } from 'src/FilterApp'
+import Link from 'shared/components/RouterLink'
 
 export default class Layout extends Component {
   static propTypes = {
@@ -35,13 +36,13 @@ export default class Layout extends Component {
         </main>
         <footer className='footer'>
           <span>
-            &copy; <a href='/'>GGFilters</a> {currentYear}
+            &copy; <Link to='root'>GGFilters</Link> {currentYear}
           </span>
-          <a href='/sources'>Data Sources</a>
-          <a href='/tos'>Terms</a>
-          <a href='/help'>Help</a>
-          <a href='/about'>About</a>
-          <a href='/contact'>Contact</a>
+          <Link to='sources'>Data Sources</Link>
+          <Link to='tos'>Terms</Link>
+          <Link to='help'>Help</Link>
+          <Link to='about'>About</Link>
+          <Link to='contact'>Contact</Link>
         </footer>
       </div>
     )

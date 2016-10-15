@@ -9,7 +9,7 @@ export default class RouterLink extends Component {
   static propTypes = {
     text: t.string,
     icon: t.string,
-    children: t.array,
+    children: t.any,
     to: t.string,
 
     currentRouteName: t.string
@@ -26,11 +26,11 @@ export default class RouterLink extends Component {
     let path = router.url(to)
     let activeClass = to === currentRouteName ? ' active' : ''
 
+    let content = icon ? <i className={`fa icon-${icon}`}></i> : text || children
+
     return (
       <a href={path} className={activeClass} onClick={this.onClick.bind(this, path)}>
-        {icon ? (
-            <i className={`fa icon-${icon}`}></i>
-        ) : text || children}
+        {content}
       </a>
     )
   }

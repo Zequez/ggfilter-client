@@ -9,7 +9,11 @@ export const MODES = {
   contribute: 'contribute',
   login: 'login',
   sources: 'sources',
-  myFilters: 'myFilters'
+  myFilters: 'myFilters',
+  tos: 'tos',
+  help: 'help',
+  about: 'about',
+  contact: 'contact'
 }
 
 // =============================================================================
