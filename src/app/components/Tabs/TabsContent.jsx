@@ -11,6 +11,7 @@ import { SavedFiltersManagerGlued } from 'src/SavedFiltersManager'
 import Sources from '../static/Sources'
 import Feedback from '../static/Feedback'
 import Contribute from '../static/Contribute'
+import AboutSysreq from '../static/AboutSysreq'
 
 export default class TabsContent extends Component {
   static propTypes = {
@@ -27,6 +28,7 @@ export default class TabsContent extends Component {
       case MODES.login: return 'Login'
       case MODES.sources: return <Sources/>
       case MODES.myFilters: return <SavedFiltersManagerGlued/>
+      case MODES.aboutSysreq: return <AboutSysreq/>
     }
 
     return null

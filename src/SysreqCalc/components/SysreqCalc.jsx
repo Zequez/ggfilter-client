@@ -5,6 +5,7 @@ import { lockFilterIntoView } from 'shared/reducers/uiReducer'
 import { snapTo } from 'shared/lib/utils'
 import { getGames } from 'shared/lib/api'
 import SuggestionsBox from './SuggestionsBox'
+import Link from 'shared/components/RouterLink'
 
 @connect(() => ({}), {
   setFilter,
@@ -85,9 +86,10 @@ export default class SysreqCalc extends Component {
     return (
       <div className='sysreq-calc'>
         <p>
-        The System Requirements Index is a very coarse number
-        that we are working on improving. To find more about
-        how is calculated, visit the <a href='/sources'>sources</a> tab.
+          The System Requirements Index is a very coarse number
+          that we are working on improving. <Link to='aboutSysreq'>
+            Here you can find information about how it is calculated.
+          </Link>
         </p>
         <SuggestionsBox
           ref='box'

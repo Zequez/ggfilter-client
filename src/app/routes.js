@@ -24,6 +24,7 @@ export default new StateRouter({
   help: basicModeRoute('/help', MODES.help),
   about: basicModeRoute('/about', MODES.about),
   contact: basicModeRoute('/contact', MODES.contact),
+  aboutSysreq: basicModeRoute('/about-sysreq', MODES.aboutSysreq),
 
   filterB64: [
     '/b/:filterB64', {

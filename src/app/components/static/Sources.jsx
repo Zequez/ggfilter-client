@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 export default class SourcesTabs extends Component {
   render () {
     return (
-      <div>
+      <div className='sources content-box'>
         <h2>Data sources</h2>
         <p>
           Most of the data is scraped hourly/daily/weekly/monthly from Steam.
