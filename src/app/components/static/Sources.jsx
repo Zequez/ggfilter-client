@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 export default class SourcesTabs extends Component {
-  render() {
+  render () {
     return (
       <div>
         <h2>Data sources</h2>

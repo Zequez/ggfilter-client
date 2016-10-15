@@ -4,11 +4,13 @@ import { MODES } from 'shared/reducers/uiReducer'
 
 import { FilterApp } from 'src/FilterApp'
 import { SysreqCalc } from 'src/SysreqCalc'
-import SourcesTab from './SourcesTab'
 import OfficialFilters from '../OfficialFilters'
-import Feedback from '../Feedback'
-import Contribute from '../Contribute'
 import { SavedFiltersManagerGlued } from 'src/SavedFiltersManager'
+
+// Tabs with static content
+import Sources from '../static/Sources'
+import Feedback from '../static/Feedback'
+import Contribute from '../static/Contribute'
 
 export default class TabsContent extends Component {
   static propTypes = {
@@ -23,7 +25,7 @@ export default class TabsContent extends Component {
       case MODES.feedback: return <Feedback/>
       case MODES.contribute: return <Contribute/>
       case MODES.login: return 'Login'
-      case MODES.sources: return <SourcesTab/>
+      case MODES.sources: return <Sources/>
       case MODES.myFilters: return <SavedFiltersManagerGlued/>
     }
 
