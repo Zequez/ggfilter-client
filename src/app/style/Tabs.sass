@@ -1,9 +1,9 @@
-.general-nav
+.tabs
   +pie-clearfix
   +carved-in-background
   height: $r
   margin-bottom: $r
-  // text-shadow: 0 1px 0 rgba(#000, 0.7)
+  text-shadow: 0 1px 0 rgba(#000, 0.7)
   li
     float: left
   a
@@ -14,14 +14,11 @@
       color: $white
       text-decoration: none
     &.active
+      +btn-style
       position: relative
       margin-top: -$r/4
       height: $r + $r/2
       line-height: $r + $r/2
-      +btn-background
-      box-shadow: inset 0 1px rgba(#fff, 0.1), 0 1px rgba(#000, 0.20)
-      border-radius: 2px
-      color: $white
 
   .filter-lock:hover
     color: $red

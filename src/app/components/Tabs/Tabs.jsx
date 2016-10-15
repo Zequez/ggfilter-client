@@ -35,7 +35,7 @@ export default class Tabs extends Component {
     let { currentUser } = this.props
 
     return (
-      <nav className='general-nav'>
+      <nav className='tabs'>
         <ul>
           <li>
             <FilterTabLink/>
