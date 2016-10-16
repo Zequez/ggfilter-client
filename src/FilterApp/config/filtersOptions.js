@@ -41,6 +41,34 @@ var generateDatesBack = function (years) {
   return hash
 }
 
+var generateAbsoluteDates = function (startYear, endYear = null) {
+  endYear = endYear || new Date().getFullYear() + 1
+
+  let range = []
+  let namedRanges = {}
+  for (let i = startYear; i <= endYear; ++i) {
+    let date = Date.parse(`${i}-1-1`) / 1000
+    range.push(date)
+    namedRanges[date] = i
+  }
+
+  let rangeInterpolation = (v1, v2, iv1, iv2) => {
+    return iv2 - iv1 < 2 ? iv1 : `[${iv1} to ${iv2 - 1}]`
+  }
+
+  let hash = {
+    range: range,
+    label: {
+      gtInterpolation: rangeInterpolation,
+      ltInterpolation: rangeInterpolation,
+      rangeInterpolation,
+      namedRanges
+    }
+  }
+
+  return hash
+}
+
 export default {
   filters: {
     range: {
@@ -77,7 +105,8 @@ export default {
         },
         autohook: 100
       },
-      dateBack: generateDatesBack(15)
+      dateBack: generateDatesBack(15),
+      datesAbsolute: generateAbsoluteDates(1990)
     }
   }
 }

@@ -20,7 +20,8 @@ export default {
     // 'controller_support',
     // 'images'
     // 'sysreq_index_centile',
-    'released_at'
+    'released_at',
+    // 'released_at_absolute',
   ]),
   params: {
     // steam_reviews_count: { gt: 65 },

@@ -4,13 +4,9 @@ var plural = function (num) {
   return num == 1 ? '' : 's'
 }
 
-export default class RawColumn extends Component {
+export default class TimeAgoColumn extends Component {
   static propTypes = {
-    value: t.any,
-    options: t.shape({
-      interpolation: t.string,
-      round: t.number
-    })
+    value: t.any
   }
 
   render () {

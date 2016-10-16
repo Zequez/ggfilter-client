@@ -11,6 +11,7 @@ import ImagesColumn from '../games/components/columns/ImagesColumn'
 import TagsColumn from '../games/components/columns/TagsColumn'
 import SystemReqColumn from '../games/components/columns/SystemReqColumn'
 import TimeAgoColumn from '../games/components/columns/TimeAgoColumn'
+import DateColumn from '../games/components/columns/DateColumn'
 
 import TextFilter from '../filter/components/filters/TextFilter'
 import NumberFilter from '../filter/components/filters/NumberFilter'
@@ -266,10 +267,19 @@ var filtersDefinitions = {
     width: 150
   },
   released_at: {
-    title: 'Release date',
+    title: 'Released at',
     filter: FancyRangeFilter,
     filterOptions: options.filters.range.dateBack,
     column: TimeAgoColumn,
+    width: 100
+  },
+  released_at_absolute: {
+    title: 'Release year',
+    filter: FancyRangeFilter,
+    filterOptions: options.filters.range.datesAbsolute,
+    column: DateColumn,
+    columnInputs: { value: 'released_at' },
+    sort: 'released_at',
     width: 100
   }
 }

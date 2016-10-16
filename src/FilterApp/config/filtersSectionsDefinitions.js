@@ -1,10 +1,9 @@
-import filtersDefinitions from './filtersDefinitions'
-
 var definitions = {
   'Game info': [
     'steam_thumbnail',
     'steam_id',
     'name',
+    'released_at_absolute',
     'released_at',
     'tags',
     'images',
@@ -12,7 +11,7 @@ var definitions = {
   ],
   'Price': [
     'lowest_steam_price',
-    'steam_discount',
+    'steam_discount'
   ],
   'Playtime': [
     'playtime_mean',
@@ -20,12 +19,12 @@ var definitions = {
     'playtime_sd',
     'playtime_rsd',
     'playtime_mean_ftb',
-    'playtime_median_ftb',
+    'playtime_median_ftb'
   ],
   'Ratings': [
     'metacritic',
     'steam_reviews_count',
-    'steam_reviews_ratio',
+    'steam_reviews_ratio'
   ],
   'Features': [
     'features',
