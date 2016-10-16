@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 
-import SelectedTags from './TagsFilter/SelectedTags'
-import TagsSelector from './TagsFilter/TagsSelector'
+import SelectedTags from './SelectedTags'
+import TagsSelector from './TagsSelector'
 
 export default class TagsFilter extends Component {
   static propTypes = {

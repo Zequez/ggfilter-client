@@ -18,8 +18,8 @@ import NumberFilter from '../filter/components/filters/NumberFilter'
 import RangeFilter from '../filter/components/filters/RangeFilter'
 import BooleanFilter from '../filter/components/filters/BooleanFilter'
 import NullFilter from '../filter/components/filters/NullFilter'
-import TagsFilter from '../filter/components/filters/TagsFilter'
-import FancyRangeFilter from '../filter/components/filters/FancyRangeFilter'
+import TagsFilter from '../filter/components/filters/TagsFilter/TagsFilter'
+import FancyRangeFilter from '../filter/components/filters/FancyRangeFilter/FancyRangeFilter'
 
 function componentName (component) {
   return component.toString().match(/function\s*(\w+)/)[1]

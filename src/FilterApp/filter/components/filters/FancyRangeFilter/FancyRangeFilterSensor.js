@@ -1,5 +1,5 @@
 import React, { PropTypes as t, Component } from 'react'
-import { mousePosTo1 } from '../../lib/FancyRangeFilterHelpers'
+import { mousePosTo1 } from '../../../lib/FancyRangeFilterHelpers'
 
 export default class FancyRangeFilterSensor extends Component {
   static propTypes = {
