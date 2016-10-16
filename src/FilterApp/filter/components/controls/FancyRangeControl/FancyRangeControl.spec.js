@@ -2,7 +2,7 @@ import React from 'react'
 import { mount } from 'enzyme'
 import sinon from 'sinon'
 
-import FancyRangeFilter from 'components/filters/FancyRangeFilter'
+import FancyRangeFilter from './FancyRangeControl'
 
 describe('FancyRangeFilter', () => {
 

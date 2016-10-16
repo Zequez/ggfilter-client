@@ -1,5 +1,5 @@
-`import objectBreadcrumbs from 'lib/StateRouter/objectBreadcrumbs'`
-`import StatePattern from 'lib/StateRouter/StatePattern'`
+`import objectBreadcrumbs from './objectBreadcrumbs'`
+`import StatePattern from './StatePattern'`
 
 describe 'objectBreadcrumbs', ->
   it 'should work with a basic object', ->

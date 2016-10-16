@@ -1,4 +1,4 @@
-utils = require 'lib/utils'
+utils = require './utils'
 
 describe 'utils', ->
   describe '.snapTo', ->

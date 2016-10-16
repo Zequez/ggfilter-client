@@ -1,4 +1,4 @@
-import { mapRange } from 'lib/FancyRangeFilterHelpers'
+import { mapRange } from './FancyRangeControlHelpers'
 
 describe('FancyRangeFilterHelpers', () => {
   describe('mapRange', () => {

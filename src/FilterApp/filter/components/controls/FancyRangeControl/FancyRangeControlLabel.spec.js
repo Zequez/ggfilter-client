@@ -2,7 +2,7 @@ import React from 'react'
 import { mount } from 'enzyme'
 import sinon from 'sinon'
 
-import FancyRangeFilterLabel from 'components/filters/FancyRangeFilterLabel'
+import FancyRangeFilterLabel from './FancyRangeControlLabel'
 
 describe('<FancyRangeFilterLabel/>', () => {
   let range = [null, 1, 3, 5, 10, 20, 30, 40, 60, Infinity]

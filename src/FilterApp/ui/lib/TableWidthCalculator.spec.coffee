@@ -1,4 +1,4 @@
-`import TableWidthCalculator from 'lib/TableWidthCalculator'`
+`import TableWidthCalculator from './TableWidthCalculator'`
 
 describe 'TableWidthCalculator', ->
   calc = null
