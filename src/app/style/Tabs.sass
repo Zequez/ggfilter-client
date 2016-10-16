@@ -6,6 +6,10 @@
   text-shadow: 0 1px 0 rgba(#000, 0.7)
   li
     float: left
+    &:first-child a
+      border-radius: 0 2px 2px 0
+    &:last-child a
+      border-radius: 2px 0 0 2px
   a
     display: inline-block
     padding: 0 $r/2
@@ -22,6 +26,13 @@
 
   .filter-lock:hover
     color: $red
+
+  .filter-view-locker
+    float: right
+    // button
+    //   border-radius: 0
+    //   box-shadow: none
+    //   line-height: $r
 
 .tabs-content
   &-normal

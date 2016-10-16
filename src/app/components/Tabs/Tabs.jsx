@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { MODES } from 'shared/reducers/uiReducer'
 import RouterLink from 'shared/components/RouterLink'
 import FilterTabLink from './FilterTabLink'
+import FilterViewLocker from './FilterViewLocker'
 
 @connect((s) => ({
   currentUser: s.auth.currentUser
@@ -11,27 +12,9 @@ export default class Tabs extends Component {
   static propTypes = {
     onLockFilter: t.func.isRequired,
     onUnlockFilter: t.func.isRequired
-    // filterLockedInView: t.bool.isRequired
   }
 
-  // handleLockClick (ev) {
-  //   ev.stopPropagation()
-  //   ev.preventDefault()
-  //   if (this.props.filterLockedInView) {
-  //     this.props.onUnlockFilter()
-  //   } else {
-  //     this.props.onLockFilter()
-  //   }
-  // }
-
   render () {
-    // let filterLockClass = this.props.filterLockedInView ? 'locked' : 'unlocked'
-
-    /*<i
-      className={`fa filter-lock icon-${filterLockClass}`}
-      onClick={::this.handleLockClick}
-      title='Lock filtering table into view'></i>*/
-
     let { currentUser } = this.props
 
     return (
@@ -58,6 +41,7 @@ export default class Tabs extends Component {
           {/*<li>
             <RouterLink to='login' text='Log In'/>
           </li>*/}
+          <FilterViewLocker/>
         </ul>
       </nav>
     )

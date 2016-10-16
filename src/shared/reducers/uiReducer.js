@@ -43,7 +43,10 @@ export const UI_ROUTE_CHANGE = 'UI_ROUTE_CHANGE'
 // =============================================================================
 
 export const setMode = (mode) => ({ type: UI_SET_MODE, mode })
-export const lockFilterIntoView = () => ({ type: UI_LOCK_FILTER_INTO_VIEW })
+export const lockFilterIntoView = (lock = true) => ({
+  type: UI_LOCK_FILTER_INTO_VIEW,
+  lock
+})
 export const unlockFilterFromView = () => ({ type: UI_UNLOCK_FILTER_FROM_VIEW })
 export const resetUi = () => ({ type: UI_RESET })
 
@@ -58,7 +61,7 @@ let reductions = {
       filterLockedInView: { $set: a.mode === MODES.filter || s.filterLockedInView }
     })
   ),
-  [UI_LOCK_FILTER_INTO_VIEW]: (s) => u(s, { filterLockedInView: { $set: true } }),
+  [UI_LOCK_FILTER_INTO_VIEW]: (s, a) => u(s, { filterLockedInView: { $set: a.lock } }),
   [UI_UNLOCK_FILTER_FROM_VIEW]: (s) => u(s, { filterLockedInView: { $set: false } }),
   [UI_RESET]: (s) => initialState,
 
