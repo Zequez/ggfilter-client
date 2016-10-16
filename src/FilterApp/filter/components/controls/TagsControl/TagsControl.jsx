@@ -3,7 +3,7 @@ import React, { Component, PropTypes as t } from 'react'
 import SelectedTags from './SelectedTags'
 import TagsSelector from './TagsSelector'
 
-export default class TagsFilter extends Component {
+export default class TagsControl extends Component {
   static propTypes = {
     query: t.shape({
       tags: t.arrayOf(t.number)
@@ -78,7 +78,7 @@ export default class TagsFilter extends Component {
   }
 
   render () {
-    console.logRender('TagsFilter')
+    console.logRender('TagsControl')
     let inputStyle = {
       paddingLeft: this.state.selectedWidth
     }

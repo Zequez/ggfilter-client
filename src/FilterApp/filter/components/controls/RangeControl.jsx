@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as t } from 'react'
 
-export default class RangeFilter extends Component {
+export default class RangeControl extends Component {
   static propTypes = {
     query: t.shape({
       gt: t.number,

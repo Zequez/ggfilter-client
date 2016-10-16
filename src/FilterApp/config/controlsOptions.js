@@ -70,7 +70,7 @@ var generateAbsoluteDates = function (startYear, endYear = null) {
 }
 
 export default {
-  filters: {
+  controls: {
     range: {
       price: {
         range: [0, 1, 100, 300, 500, 1000, 1500, 2000, 3000, 4000, 5000, 6000, Infinity],

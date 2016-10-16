@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
-import TextFilter from './TextFilter'
+import TextControl from './TextControl'
 
-export default class NumberFilter extends TextFilter {
+export default class NumberControl extends TextControl {
   render () {
     return super.render({type: 'number'})
   }

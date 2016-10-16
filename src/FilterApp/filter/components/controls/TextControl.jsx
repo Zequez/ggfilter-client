@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 var debounceCountdown = require('shared/lib/utils').debounceCountdown
 
-export default class TextFilter extends Component {
+export default class TextControl extends Component {
   static propTypes = {
     query: t.shape({
       value: t.string

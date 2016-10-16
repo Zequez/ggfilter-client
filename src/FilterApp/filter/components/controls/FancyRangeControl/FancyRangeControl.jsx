@@ -1,10 +1,10 @@
 import React, { Component, PropTypes as t } from 'react'
-import { chunkSize } from '../../../lib/FancyRangeFilterHelpers'
-import FancyRangeFilterMappedSensor from './FancyRangeFilterMappedSensor'
-import FancyRangeFilterBar from './FancyRangeFilterBar'
-import FancyRangeFilterLabel from './FancyRangeFilterLabel'
+import { chunkSize } from '../../../lib/FancyRangeControlHelpers'
+import FancyRangeControlMappedSensor from './FancyRangeControlMappedSensor'
+import FancyRangeControlBar from './FancyRangeControlBar'
+import FancyRangeControlLabel from './FancyRangeControlLabel'
 
-export default class FancyRangeFilter extends Component {
+export default class FancyRangeControl extends Component {
   static propTypes = {
     query: t.shape({
       gt: t.number,
@@ -119,7 +119,7 @@ export default class FancyRangeFilter extends Component {
 
     return (
       <div className='fancy-rf'>
-        <FancyRangeFilterMappedSensor
+        <FancyRangeControlMappedSensor
           range={this.options.range}
           mappedRanges={this.options.mappedRanges}
           autohook={this.options.autohook}
@@ -128,26 +128,26 @@ export default class FancyRangeFilter extends Component {
           onLeave={this.onSensorLeave}
           onDrag={this.onSensorDrag}
           onReset={this.onSensorReset}/>
-        <FancyRangeFilterBar
+        <FancyRangeControlBar
           className='fancy-rf-bar-main'
           chunkSize={this.chunkSize}
           start={start}
           end={end}/>
         {showCaret ? (
-          <FancyRangeFilterBar
+          <FancyRangeControlBar
             className='fancy-rf-bar-caret'
             chunkSize={this.chunkSize}
             start={hoverPos}
             end={hoverPos}/>
         ) : null}
         {showHighlight ? (
-          <FancyRangeFilterBar
+          <FancyRangeControlBar
             className='fancy-rf-bar-highlight'
             chunkSize={this.chunkSize}
             start={dragging ? draggingStart : hoverStart}
             end={dragging ? draggingEnd : hoverEnd}/>
         ) : null}
-        <FancyRangeFilterLabel
+        <FancyRangeControlLabel
           start={showHighlight ? (dragging ? draggingStart : hoverStart) : start}
           end={showHighlight ? (dragging ? draggingEnd : hoverEnd) : end}
           range={this.options.range}

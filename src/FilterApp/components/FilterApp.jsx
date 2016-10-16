@@ -34,7 +34,7 @@ export default class FilterApp extends Component {
 
   // This is hacky, but it's now the convention
   fillStaticFiltersDefinitionsOptions () {
-    filtersDefinitions.tags.filterOptions.tags = this.props.tags
+    filtersDefinitions.tags.controlOptions.tags = this.props.tags
     filtersDefinitions.tags.columnOptions.tags = this.props.tags
   }
 

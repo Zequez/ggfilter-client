@@ -1,6 +1,6 @@
 import React, { PropTypes as t, Component } from 'react'
 
-export default class FancyRangeFilterBar extends Component {
+export default class FancyRangeControlBar extends Component {
   static propTypes = {
     chunkSize: t.number.isRequired,
     start: t.number,

@@ -1,6 +1,6 @@
 import React, { PropTypes as t, Component } from 'react'
 
-export default class FancyRangeFilterLabel extends Component {
+export default class FancyRangeControlLabel extends Component {
   static propTypes = {
     className: t.string,
     start: t.any,
