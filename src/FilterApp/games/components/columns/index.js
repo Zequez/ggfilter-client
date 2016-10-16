@@ -1,12 +1,12 @@
 module.exports = {
-  Boolean: require('BooleanColumn'),
-  Date: require('DateColumn'),
-  Images: require('ImagesColumn'),
-  Link: require('LinkColumn'),
-  Price: require('PriceColumn'),
-  Ratio: require('RatioColumn'),
-  Raw: require('RawColumn'),
-  SystemReq: require('SystemReqColumn'),
-  Tags: require('TagsColumn'),
-  TimeAgo: require('TimeAgoColumn')
+  Boolean: require('./BooleanColumn').default,
+  Date: require('./DateColumn').default,
+  Images: require('./ImagesColumn').default,
+  Link: require('./LinkColumn').default,
+  Price: require('./PriceColumn').default,
+  Ratio: require('./RatioColumn').default,
+  Raw: require('./RawColumn').default,
+  SystemReq: require('./SystemReqColumn').default,
+  Tags: require('./TagsColumn').default,
+  TimeAgo: require('./TimeAgoColumn').default
 }

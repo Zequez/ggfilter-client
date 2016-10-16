@@ -2,20 +2,20 @@
   color: rgba($dark-blue, 0.6)
   font-size: $font-smaller
 
-.RawColumn
+.column-Raw
 
-.LinkColumn
+.column-Link
   text-align: left
 
 
-.PriceColumn
+.column-Price
   .price-was
     text-decoration: line-through
     &, .text-deco
       color: rgba($dark-blue, 0.3)
     margin-right: $r/4
 
-.RatioColumn
+.column-Ratio
   .ratio-column
     width: 100%
     height: 8px
@@ -30,7 +30,7 @@
       height: 100%
       background: red
 
-.BooleanColumn
+.column-Boolean
   padding-right: 10px
   .icons-list
     display: table
@@ -44,14 +44,14 @@
   &.vr
     padding-right: 0
 
-.ImagesColumn
+.column-Images
   img
     display: block
     margin: 0 auto
     height: 45px
     cursor: pointer
 
-.TagsColumn
+.column-Tags
   text-align: left
   ul
     color: $white
@@ -69,7 +69,7 @@
         background: $ocean-green
         cursor: default
 
-.SystemReqColumn
+.column-SystemReq
   text-align: left
   strong
     font-weight: bold
@@ -88,6 +88,6 @@
   ul
     padding-left: $r
 
-.DateColumn
+.column-Date
   .text-deco
     font-family: monospace

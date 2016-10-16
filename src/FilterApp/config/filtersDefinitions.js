@@ -2,17 +2,6 @@ import options from './filtersOptions'
 
 import BaseToggle from '../filter/components/toggles/BaseToggle'
 
-import RawColumn from '../games/components/columns/RawColumn'
-import PriceColumn from '../games/components/columns/PriceColumn'
-import RatioColumn from '../games/components/columns/RatioColumn'
-import LinkColumn from '../games/components/columns/LinkColumn'
-import BooleanColumn from '../games/components/columns/BooleanColumn'
-import ImagesColumn from '../games/components/columns/ImagesColumn'
-import TagsColumn from '../games/components/columns/TagsColumn'
-import SystemReqColumn from '../games/components/columns/SystemReqColumn'
-import TimeAgoColumn from '../games/components/columns/TimeAgoColumn'
-import DateColumn from '../games/components/columns/DateColumn'
-
 import TextFilter from '../filter/components/filters/TextFilter'
 import NumberFilter from '../filter/components/filters/NumberFilter'
 import RangeFilter from '../filter/components/filters/RangeFilter'
@@ -38,8 +27,7 @@ class FilterDefinition {
   filterType = null
   filterOptions = {}
 
-  column = RawColumn
-  columnType = null
+  column = 'Raw'
   columnActive = false
   columnInputs = null
   columnOptions = {}
@@ -55,14 +43,13 @@ class FilterDefinition {
 
     this.toggleType = componentName(this.toggle)
     this.filterType = componentName(this.filter)
-    this.columnType = componentName(this.column)
   }
 }
 
 var filtersDefinitions = {
   name: {
     title: 'Name',
-    column: LinkColumn,
+    column: 'Link',
     columnInputs: { text: 'name', urlValue: 'steam_id' },
     columnOptions: { urlTemplate: 'http://store.steampowered.com/app/%s/' },
     width: 200
@@ -75,7 +62,7 @@ var filtersDefinitions = {
   images: {
     title: 'Images',
     filter: NullFilter,
-    column: ImagesColumn,
+    column: 'Images',
     columnInputs: { 'images': 'images' },
     sort: false
   },
@@ -83,7 +70,7 @@ var filtersDefinitions = {
     title: 'Steam price (US)',
     filter: FancyRangeFilter,
     filterOptions: options.filters.range.price,
-    column: PriceColumn,
+    column: 'Price',
     columnInputs: { price: 'steam_price', was: 'steam_sale_price' },
     width: 100
   },
@@ -91,7 +78,6 @@ var filtersDefinitions = {
     title: 'Steam sale %',
     filter: FancyRangeFilter,
     filterOptions: options.filters.range.discount,
-    column: RawColumn,
     columnOptions: { interpolation: '%s%' },
     width: 50
   },
@@ -189,31 +175,31 @@ var filtersDefinitions = {
         interpolation: '{v}%'
       }
     },
-    column: RatioColumn,
+    column: 'Ratio',
     width: 100
   },
   features: {
     title: 'Steam features',
     filter: BooleanFilter,
-    column: BooleanColumn,
+    column: 'Boolean',
     width: 120 + 10
   },
   platforms: {
     title: 'Platforms',
     filter: BooleanFilter,
-    column: BooleanColumn,
+    column: 'Boolean',
     width: 72 + 10
   },
   players: {
     title: 'Players',
     filter: BooleanFilter,
-    column: BooleanColumn,
+    column: 'Boolean',
     width: 96 + 10
   },
   vr: {
     title: 'Virtual reality',
     filter: BooleanFilter,
-    column: BooleanColumn,
+    column: 'Boolean',
     width: 24 + 10
   },
   controller_support: {
@@ -234,7 +220,7 @@ var filtersDefinitions = {
   steam_thumbnail: {
     title: 'Thumbnail',
     filter: NullFilter,
-    column: ImagesColumn,
+    column: 'Images',
     columnInputs: { thumbnail: 'steam_thumbnail', 'images': 'images' },
     width: 120,
     sort: false
@@ -245,7 +231,7 @@ var filtersDefinitions = {
     filterOptions: {
       tags: [] // We fill this up later, sadly
     },
-    column: TagsColumn,
+    column: 'Tags',
     columnActive: true,
     columnOptions: {
       tags: [] // We fill this up later, sadly
@@ -270,14 +256,14 @@ var filtersDefinitions = {
     title: 'Released at',
     filter: FancyRangeFilter,
     filterOptions: options.filters.range.dateBack,
-    column: TimeAgoColumn,
+    column: 'TimeAgo',
     width: 100
   },
   released_at_absolute: {
     title: 'Release year',
     filter: FancyRangeFilter,
     filterOptions: options.filters.range.datesAbsolute,
-    column: DateColumn,
+    column: 'Date',
     columnInputs: { value: 'released_at' },
     sort: 'released_at',
     width: 100
