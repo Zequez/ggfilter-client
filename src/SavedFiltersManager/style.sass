@@ -1,8 +1,38 @@
 .saved-filters-manager
+  $borderColor: rgba(#000, 0.07)
+
+  table
+    width: 100%
   thead
-    background: rgba(#000, .25)
+    background: $blue
+    color: $white
+    text-align: center
+    td
+      line-height: $r*2
+  tr:nth-child(odd)
+    background: $borderColor
+  tr:last-child
+    box-shadow: inset 0 -1px 0 $borderColor
   td
-    border: solid 1px rgba(#000, .25)
+    padding: 0 $r/4
+    border-left: solid 1px $borderColor
+    &:last-child
+      border-right: solid 1px $borderColor
   .saved-filter-row
     &.active
-      background: rgba(red, .25)
+      background: rgba($blue, .25)
+
+    &-visits
+      text-align: center
+    &-actions
+      padding: 0
+      .btn
+        display: block
+        float: left
+        padding: 0 $r/4
+        width: 33.33%
+        height: $r
+        border-left: solid 1px $borderColor
+        border-radius: 0
+        &:first-child
+          border-left: 0

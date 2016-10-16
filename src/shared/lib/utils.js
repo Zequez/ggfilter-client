@@ -92,6 +92,10 @@ export function snapTo(val, snap) {
   return valr > snap/2 ? (val - valr + snap) : (val - valr)
 }
 
+export function timeAgo (date) {
+  return timeInWords((new Date().valueOf() - date.valueOf()) / 1000)
+}
+
 export function timeInWords (time) {
   let timespans = [
     [1, 'second'],

@@ -42,6 +42,7 @@ export class SavedFiltersManager extends Component {
 
     return (
       <div className='saved-filters-manager content-box'>
+        <h2>Your Saved Filters</h2>
         <table>
           <thead>
             <tr>
