@@ -109,7 +109,7 @@ export default class SFilterForm extends Component {
           </label>
         </div>*/}
         <div className='form-actions'>
-          {existingRecord ? <ConfirmDeleteButton onConfirm={this.destroy}/> : null}
+          {existingRecord && currentUser ? <ConfirmDeleteButton onConfirm={this.destroy}/> : null}
           {existingRecord
             ? <button className='btn' onClick={this.update} disabled={!dirty}>Save</button>
             : null}
