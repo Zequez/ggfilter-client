@@ -1,8 +1,9 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
+import { partial } from 'shared/lib/utils'
 import { setFilter } from 'src/FilterApp/filter'
 
-import classNames from 'classnames'
+import ControlComponent from './ControlComponent'
 
 @connect((s) => ({}), {
   setFilter
@@ -17,34 +18,17 @@ export default class DataTableControls extends Component {
 
   render () {
     console.logRender('DataTableControls')
-    let { filters, filtersParams } = this.props
-
-    let controls = filters.map((filter) => {
-      let params = filtersParams[filter.name]
-
-      let controlClass = classNames({
-        [filter.name]: true,
-        'filter-control': true,
-        [filter.filterType]: true
-      })
-
-      let filterProps = {
-        query: params,
-        name: filter.name,
-        options: filter.filterOptions,
-        onChange: this.props.setFilter.bind(this, filter.name)
-      }
-
-      return (
-        <th key={filter.name} className={controlClass}>
-          <filter.filter {...filterProps}/>
-        </th>
-      )
-    })
+    let { filters, filtersParams, setFilter } = this.props
 
     return (
       <tr className='data-table-controls'>
-        {controls}
+        {filters.map((filter) => (
+          <ControlComponent
+            key={filter.name}
+            filter={filter}
+            params={filtersParams[filter.name]}
+            onChange={partial(setFilter, filter.name)}/>
+        ))}
       </tr>
     )
   }

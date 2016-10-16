@@ -1,9 +1,9 @@
 module.exports = {
-  FancyRange: require('./FancyRangeFilter/FancyRangeFilter'),
-  Tags: require('./TagsFilter/TagsFilter'),
-  Boolean: require('./BooleanFilter'),
-  Null: require('./NullFilter'),
-  Number: require('./NumberFilter'),
-  Range: require('./RangeFilter'),
-  Text: require('./TextFilter')
+  FancyRange: require('./FancyRangeFilter/FancyRangeFilter').default,
+  Tags: require('./TagsFilter/TagsFilter').default,
+  Boolean: require('./BooleanFilter').default,
+  Null: require('./NullFilter').default,
+  Number: require('./NumberFilter').default,
+  Range: require('./RangeFilter').default,
+  Text: require('./TextFilter').default
 }

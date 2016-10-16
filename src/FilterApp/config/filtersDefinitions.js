@@ -2,14 +2,6 @@ import options from './filtersOptions'
 
 import BaseToggle from '../filter/components/toggles/BaseToggle'
 
-import TextFilter from '../filter/components/filters/TextFilter'
-import NumberFilter from '../filter/components/filters/NumberFilter'
-import RangeFilter from '../filter/components/filters/RangeFilter'
-import BooleanFilter from '../filter/components/filters/BooleanFilter'
-import NullFilter from '../filter/components/filters/NullFilter'
-import TagsFilter from '../filter/components/filters/TagsFilter/TagsFilter'
-import FancyRangeFilter from '../filter/components/filters/FancyRangeFilter/FancyRangeFilter'
-
 function componentName (component) {
   return component.toString().match(/function\s*(\w+)/)[1]
 }
@@ -23,7 +15,7 @@ class FilterDefinition {
   toggle = BaseToggle
   toggleType = null
 
-  filter = TextFilter
+  filter = 'Text'
   filterType = null
   filterOptions = {}
 
@@ -42,7 +34,6 @@ class FilterDefinition {
     }
 
     this.toggleType = componentName(this.toggle)
-    this.filterType = componentName(this.filter)
   }
 }
 
@@ -56,19 +47,19 @@ var filtersDefinitions = {
   },
   steam_id: {
     title: 'Steam ID',
-    filter: NumberFilter,
+    filter: 'Number',
     width: 65
   },
   images: {
     title: 'Images',
-    filter: NullFilter,
+    filter: 'Null',
     column: 'Images',
     columnInputs: { 'images': 'images' },
     sort: false
   },
   lowest_steam_price: {
     title: 'Steam price (US)',
-    filter: FancyRangeFilter,
+    filter: 'FancyRange',
     filterOptions: options.filters.range.price,
     column: 'Price',
     columnInputs: { price: 'steam_price', was: 'steam_sale_price' },
@@ -76,14 +67,14 @@ var filtersDefinitions = {
   },
   steam_discount: {
     title: 'Steam sale %',
-    filter: FancyRangeFilter,
+    filter: 'FancyRange',
     filterOptions: options.filters.range.discount,
     columnOptions: { interpolation: '%s%' },
     width: 50
   },
   playtime_mean: {
     title: 'Playtime avg',
-    filter: FancyRangeFilter,
+    filter: 'FancyRange',
     filterOptions: {
       range: [0, 1.5, 3, 4, 5, 7, 9, 13, 21, 39, Infinity],
       autohook: Infinity,
@@ -94,7 +85,7 @@ var filtersDefinitions = {
   },
   playtime_median: {
     title: 'Playtime median',
-    filter: FancyRangeFilter,
+    filter: 'FancyRange',
     filterOptions: {
       range: [0, 0.7, 1.3, 1.9, 2.7, 3.5, 4.7, 6.7, 9.7, 16.6, Infinity],
       autohook: Infinity,
@@ -105,7 +96,7 @@ var filtersDefinitions = {
   },
   playtime_sd: {
     title: 'Playtime σ',
-    filter: FancyRangeFilter,
+    filter: 'FancyRange',
     filterOptions: {
       range: [0, 1.7, 3.2, 4.9, 7.2, 10.4, 15.5, 24.2, 40.2, 76.5],
       autohook: 0,
@@ -116,7 +107,7 @@ var filtersDefinitions = {
   },
   playtime_rsd: {
     title: 'Playtime relative σ',
-    filter: FancyRangeFilter,
+    filter: 'FancyRange',
     filterOptions: {
       range: [0, 70.6, 89.7, 106.4, 122.3, 136.7, 154.9, 176.7, 209.8, 271.4],
       autohook: 0,
@@ -127,7 +118,7 @@ var filtersDefinitions = {
   },
   playtime_mean_ftb: {
     title: 'Playtime avg / $',
-    filter: FancyRangeFilter,
+    filter: 'FancyRange',
     filterOptions: {
       range: [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1.0, 1.4, 1.9, 3.1, Infinity],
       autohook: Infinity,
@@ -138,7 +129,7 @@ var filtersDefinitions = {
   },
   playtime_median_ftb: {
     title: 'Playtime median / $',
-    filter: FancyRangeFilter,
+    filter: 'FancyRange',
     filterOptions: {
       range: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.9, 1.5, Infinity],
       autohook: Infinity,
@@ -149,7 +140,7 @@ var filtersDefinitions = {
   },
   metacritic: {
     title: 'Metacritic',
-    filter: FancyRangeFilter,
+    filter: 'FancyRange',
     filterOptions: {
       range: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, Infinity],
       autohook: Infinity
@@ -158,7 +149,7 @@ var filtersDefinitions = {
   },
   steam_reviews_count: {
     title: '# Steam reviews',
-    filter: FancyRangeFilter,
+    filter: 'FancyRange',
     filterOptions: {
       range: [0, 8, 20, 35, 65, 115, 220, 420, 1020, 4250, Infinity],
       autohook: Infinity
@@ -167,7 +158,7 @@ var filtersDefinitions = {
   },
   steam_reviews_ratio: {
     title: 'Steam reviews ratio',
-    filter: FancyRangeFilter,
+    filter: 'FancyRange',
     filterOptions: {
       range: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 98, 99, Infinity],
       autohook: Infinity,
@@ -180,31 +171,31 @@ var filtersDefinitions = {
   },
   features: {
     title: 'Steam features',
-    filter: BooleanFilter,
+    filter: 'Boolean',
     column: 'Boolean',
     width: 120 + 10
   },
   platforms: {
     title: 'Platforms',
-    filter: BooleanFilter,
+    filter: 'Boolean',
     column: 'Boolean',
     width: 72 + 10
   },
   players: {
     title: 'Players',
-    filter: BooleanFilter,
+    filter: 'Boolean',
     column: 'Boolean',
     width: 96 + 10
   },
   vr: {
     title: 'Virtual reality',
-    filter: BooleanFilter,
+    filter: 'Boolean',
     column: 'Boolean',
     width: 24 + 10
   },
   controller_support: {
     title: 'Controller support',
-    filter: FancyRangeFilter,
+    filter: 'FancyRange',
     filterOptions: {
       range: [1, 2, 3],
       label: {
@@ -219,7 +210,7 @@ var filtersDefinitions = {
   },
   steam_thumbnail: {
     title: 'Thumbnail',
-    filter: NullFilter,
+    filter: 'Null',
     column: 'Images',
     columnInputs: { thumbnail: 'steam_thumbnail', 'images': 'images' },
     width: 120,
@@ -227,7 +218,7 @@ var filtersDefinitions = {
   },
   tags: {
     title: 'Tags',
-    filter: TagsFilter,
+    filter: 'Tags',
     filterOptions: {
       tags: [] // We fill this up later, sadly
     },
@@ -246,7 +237,7 @@ var filtersDefinitions = {
   // },
   sysreq_index_centile: {
     title: 'Sys.Req. Index',
-    filter: FancyRangeFilter,
+    filter: 'FancyRange',
     filterOptions: {
       range: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
     },
@@ -254,14 +245,14 @@ var filtersDefinitions = {
   },
   released_at: {
     title: 'Released at',
-    filter: FancyRangeFilter,
+    filter: 'FancyRange',
     filterOptions: options.filters.range.dateBack,
     column: 'TimeAgo',
     width: 100
   },
   released_at_absolute: {
     title: 'Release year',
-    filter: FancyRangeFilter,
+    filter: 'FancyRange',
     filterOptions: options.filters.range.datesAbsolute,
     column: 'Date',
     columnInputs: { value: 'released_at' },
