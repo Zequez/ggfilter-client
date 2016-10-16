@@ -59,7 +59,7 @@ export default class DataTableTitles extends Component {
     let { filters, filtersParams, sort, sortAsc, columnsWidth } = this.props
 
     let titles = filters.map((filter, i) => {
-      let sortStatus = (sort === filter.name) ? sortAsc : null
+      let sortStatus = (sort === filter.sort) ? sortAsc : null
       let width = columnsWidth[i]
       let hasParams = !!filtersParams[filter.name]
       let highlightMode = hasParams ? !!filtersParams[filter.name].highlight : false
