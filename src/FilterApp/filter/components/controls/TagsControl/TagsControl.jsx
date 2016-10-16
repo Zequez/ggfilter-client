@@ -29,27 +29,28 @@ export default class TagsControl extends Component {
     this.setState({tags: np.query.tags})
   }
   shouldComponentUpdate (np, ns) {
-    let p = this.props
     let s = this.state
-    return np.query.tags    !== s.tags
-        || ns.tags          !== s.tags
-        || ns.text          !== s.text
-        || ns.selectedWidth !== s.selectedWidth
+    return (
+      np.query.tags !== s.tags ||
+      ns.tags !== s.tags ||
+      ns.text !== s.text ||
+      ns.selectedWidth !== s.selectedWidth
+    )
   }
 
   onChange (data) {
     this.setState(data || {tags: []})
-    setTimeout(()=>{
+    setTimeout(() => {
       this.props.onChange(data)
     }, 50)
   }
 
-  selectTag = (tagId)=>{
+  selectTag = (tagId) => {
     this.setState({text: ''})
     this.onChange({tags: this.props.query.tags.concat([tagId])})
   }
 
-  onRemoveTag = (tagId)=>{
+  onRemoveTag = (tagId) => {
     let i = this.props.query.tags.indexOf(tagId)
     let newTags = this.props.query.tags.concat([])
     newTags.splice(i, 1)
@@ -60,19 +61,19 @@ export default class TagsControl extends Component {
     }
   }
 
-  onTextChange = (ev)=>{
+  onTextChange = (ev) => {
     this.setState({text: ev.target.value})
   }
 
-  onSelectedWidthChange = (width)=>{
+  onSelectedWidthChange = (width) => {
     this.setState({selectedWidth: width})
   }
 
-  onKeyDown = (ev)=>{
+  onKeyDown = (ev) => {
     if (ev.keyCode === 8) { // Backspace
       let tags = this.state.tags
       if (!this.state.text && tags.length) {
-        this.onRemoveTag(tags[tags.length-1])
+        this.onRemoveTag(tags[tags.length - 1])
       }
     }
   }

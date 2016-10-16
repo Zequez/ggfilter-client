@@ -14,7 +14,7 @@ export default class TagsSelector extends Component {
   state = { focusedTag: 0, visible: false }
   found = []
 
-  onKeyPress = (ev)=>{
+  onKeyPress = (ev) => {
     let i = this.state.focusedTag
     let key = ev.keyCode
     switch (key) {
@@ -24,35 +24,35 @@ export default class TagsSelector extends Component {
         i = loopNumber(i, -1, this.found)
         ev.preventDefault()
         this.setState({focusedTag: i})
-      break
+        break
       case 13: // Enter
         this.select(this.found[i])
-      break
+        break
     }
   }
 
-  onFocus = ()=>{
+  onFocus = () => {
     this.setState({visible: true})
   }
 
-  onBlur = ()=>{
+  onBlur = () => {
     this.setState({visible: false})
   }
 
-  onMouseOver = (i)=>{
+  onMouseOver = (i) => {
     this.setState({focusedTag: i})
   }
 
-  select = (tagId, ev)=>{
+  select = (tagId, ev) => {
     if (ev) ev.preventDefault()
     this.setState({focusedTag: 0})
     this.props.onSelect(tagId)
   }
 
-  render() {
+  render () {
     let tagsFinder = new TagsFinder(this.props.tags, this.props.selectedTags)
     this.found = tagsFinder.match(this.props.value)
-    let foundTags = this.found.map((tagId, j)=>{
+    let foundTags = this.found.map((tagId, j) => {
       let liClass = this.state.focusedTag === j ? 'focused' : ''
       return (
         <li

@@ -11,7 +11,7 @@ export default class TextControl extends Component {
 
   static defaultProps = { query: { value: '' } }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.debouncedSubmit = debounceCountdown(500, 20, this.handleCountdown, this.submit)
   }
@@ -26,20 +26,20 @@ export default class TextControl extends Component {
     this.setState({value: np.query.value})
   }
 
-  onKeyUp = (ev)=> {
+  onKeyUp = (ev) => {
     if (ev.key === 'Enter') {
       this.submit()
     }
   }
 
-  onChange = (ev)=> {
+  onChange = (ev) => {
     this.setState({value: ev.target.value})
     if (this.changed(ev.target.value)) {
       this.debouncedSubmitStop = this.debouncedSubmit()
     }
   }
 
-  submit = ()=> {
+  submit = () => {
     this.handleCountdown(0)
     if (this.changed()) {
       let val = this.state.value
@@ -48,17 +48,17 @@ export default class TextControl extends Component {
     }
   }
 
-  changed(val = this.state.value) {
-    return (val || '') != (this.props.query.value || '')
+  changed (val = this.state.value) {
+    return (val || '') !== (this.props.query.value || '')
   }
 
-  handleCountdown = (progress)=> {
+  handleCountdown = (progress) => {
     if (this.state.changeTimeoutProgress !== progress) {
       this.setState({changeTimeoutProgress: progress})
     }
   }
 
-  render(extraProps) {
+  render (extraProps) {
     let transform = {
       transform: `scaleY(${this.state.changeTimeoutProgress})`
     }

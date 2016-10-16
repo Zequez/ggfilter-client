@@ -20,7 +20,7 @@ export default class BooleanControl extends Component {
     }
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = {
@@ -33,11 +33,11 @@ export default class BooleanControl extends Component {
     this.state.keys = Object.keys(this.state.enumValues)
   }
 
-  checked(val) {
+  checked (val) {
     return (this.state.value & val) > 0
   }
 
-  onValueChange = (ev)=>{
+  onValueChange = (ev) => {
     let checked = ev.target.checked
     let val = ev.target.value
     let currentVal = this.props.query.value
@@ -45,31 +45,29 @@ export default class BooleanControl extends Component {
 
     if (checked) {
       newVal = currentVal | val
-    }
-    else {
+    } else {
       newVal = currentVal - (currentVal & val)
     }
 
     this.setState({value: newVal})
     if (newVal) {
       this.props.onChange({value: newVal, or: this.state.or})
-    }
-    else {
+    } else {
       this.props.onChange(null)
     }
   }
 
-  onOperatorChange = (ev)=>{
+  onOperatorChange = (ev) => {
     let or = ev.target.checked
     let val = this.state.value
     this.setState({or: or})
     if (val) this.props.onChange({value: val, or: or})
   }
 
-  render() {
+  render () {
     let enumType = this.props.name
     let inputs = []
-    this.state.keys.forEach((key)=>{
+    this.state.keys.forEach((key) => {
       let val = this.state.enumValues[key]
       let name = this.state.enumNames[key]
       let checked = this.checked(val)

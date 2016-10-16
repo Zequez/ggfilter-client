@@ -8,26 +8,26 @@ export default class SelectedTags extends Component {
     onWidthChange: t.func.isRequired
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.componentDidUpdate()
   }
 
-  componentDidUpdate() {
+  componentDidUpdate () {
     this.refs.ul.scrollLeft = 9999
-    setTimeout(()=>{
+    setTimeout(() => {
       this.props.onWidthChange(this.refs.ul.clientWidth)
     }, 0)
   }
 
-  shouldComponentUpdate(nextProps) {
+  shouldComponentUpdate (nextProps) {
     return (this.props.selectedTags !== nextProps.selectedTags) || (this.props.tags !== nextProps.tags)
   }
 
-  onRemove(tagId) {
+  onRemove (tagId) {
     this.props.onRemove(tagId)
   }
 
-  render() {
+  render () {
     let tags = this.props.selectedTags.map(tagId => {
       return (
         <li key={tagId}>
