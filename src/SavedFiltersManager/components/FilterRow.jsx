@@ -12,18 +12,40 @@ export default class FilterRow extends Component {
     currentlyLoaded: t.bool.isRequired
   }
 
+  state = {
+    confirmingDelete: false
+  }
+
   onClickLink = (ev) => {
     ev.preventDefault()
     this.props.onGo()
   }
 
+  onDelete = (ev) => {
+    if (this.state.confirmingDelete) {
+      this.props.onDelete()
+    } else {
+      this.setState({confirmingDelete: true})
+    }
+  }
+
+  cancelDelete = (ev) => {
+    ev.stopPropagation()
+    this.setState({confirmingDelete: false})
+  }
+
   render () {
-    let { sfilter: f, onLoad, onEdit, onDelete, currentlyLoaded } = this.props
+    let { sfilter: f, onLoad, onEdit, currentlyLoaded } = this.props
+    let { confirmingDelete } = this.state
     let path = appropiateFilterPath(f)
 
     let active = currentlyLoaded ? ' active' : ''
     let createdAt = new Date(f.createdAt)
     let updatedAt = new Date(f.updatedAt)
+
+    let deleteText = confirmingDelete
+      ? <span>Yes?<span className='cancel-delete' onClick={this.cancelDelete}>No</span></span>
+      : 'Delete'
 
     return (
       <tr className={'saved-filter-row' + active}>
@@ -35,7 +57,7 @@ export default class FilterRow extends Component {
         <td className='saved-filter-row-actions'>
           <button className='btn' onClick={onLoad}>Load</button>
           <button className='btn' onClick={onEdit}>Edit</button>
-          <button className='btn' onClick={onDelete}>Delete</button>
+          <button className='btn delete-button' onClick={this.onDelete}>{deleteText}</button>
         </td>
       </tr>
     )
