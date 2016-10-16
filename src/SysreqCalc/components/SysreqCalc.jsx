@@ -84,7 +84,8 @@ export default class SysreqCalc extends Component {
     let calcs = this.calculatedValues()
 
     return (
-      <div className='sysreq-calc'>
+      <div className='sysreq-calc content-box'>
+        <h2>System Requirements Calculator</h2>
         <p>
           The System Requirements Index is a very coarse number
           that we are working on improving. <Link to='aboutSysreq'>

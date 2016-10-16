@@ -1,17 +1,12 @@
 .sysreq-calc
-  position: relative
-  width: 700px
-  margin: 0 auto
   +pie-clearfix
+  position: relative
+  padding-bottom: $r
   z-index: 99
-  p
-    margin-bottom: $r
-  input
-    height: $r*2
-    padding-left: $r/2
-    font-size: $font-larger
-    line-height: $r*2
-    font-weight: 300
+
+  // override .content-box
+  ul
+    margin-bottom: 0
 
   .suggestions-box
     margin-bottom: $r
@@ -37,7 +32,6 @@
         font-size: $font-larger
         color: $ocean-green
 
-
   &-games-list
     float: left
     width: 400px
@@ -58,6 +52,10 @@
       cursor: pointer
 
 .suggestions-box
+  ul
+    list-style-type: none
+    li
+      margin-left: 0
   .suggestions-dropdown
     position: relative
     input, &-selector

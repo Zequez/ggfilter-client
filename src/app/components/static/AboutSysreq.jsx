@@ -2,7 +2,7 @@ import React from 'react'
 
 export default () => (
   <div className='about-sysreq content-box'>
-    <h2>System Requirements Index calculation</h2>
+    <h2>About the System Requirements Index</h2>
     <p>
       The System Requirements Index is a *very* coarse number.
     </p>

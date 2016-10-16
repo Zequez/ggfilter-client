@@ -4,29 +4,29 @@ import SuggestionsDropdown from './SuggestionsDropdown'
 export default class SuggestionsBox extends Component {
   static propTypes = {
     filter: t.func.isRequired,
-    onSelect: t.func.isRequired,
+    onSelect: t.func.isRequired
   }
 
   state = {
     value: '',
-    results: [],
+    results: []
   }
 
   clean () {
     this.setState({value: '', results: []})
   }
 
-  onChange = (ev)=>{
+  onChange = (ev) => {
     this.triggerFilter(ev.target.value)
   }
 
-  triggerFilter = (query)=>{
+  triggerFilter = (query) => {
     this.setState({value: query})
     var results = this.props.filter(query)
     if (results.length != null) {
       this.setState({results: results})
     } else {
-      results.then((r)=> this.setState({results: r}))
+      results.then((r) => this.setState({results: r}))
     }
   }
 
@@ -40,7 +40,7 @@ export default class SuggestionsBox extends Component {
     }
 
     return (
-      <div className='suggestions-box'>
+      <div className='suggestions-box form'>
         <SuggestionsDropdown
           list={list}
           listValues={listValues}
