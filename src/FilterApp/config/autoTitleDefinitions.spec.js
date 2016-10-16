@@ -1,5 +1,5 @@
-import autoTitleDefinitions from 'src/FilterApp/config/autoTitleDefinitions'
-import enumColumns from 'src/FilterApp/config/enumColumns'
+import autoTitleDefinitions from './autoTitleDefinitions'
+import enumColumns from './enumColumns'
 
 describe('autotitle definitions', () => {
   function testMulti (name, ranges) {

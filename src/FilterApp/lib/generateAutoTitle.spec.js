@@ -1,6 +1,6 @@
-import generateAutoTitle from 'lib/AutoTitle'
-import { initialState } from 'src/FilterApp/filter/reducer'
-import filtersDefinitions from 'sources/filtersDefinitions'
+import generateAutoTitle from './generateAutoTitle'
+import defaultFilter from '../config/defaultFilter'
+import filtersDefinitions from '../config/filtersDefinitions'
 
 describe('generateAutoTitle', () => {
   it('should generate a basic title based on a single filter', () => {
@@ -85,7 +85,7 @@ describe('generateAutoTitle', () => {
     })
 
     it("should not add the sorting order if it's the default", () => {
-      let title = generateAutoTitle({params: {supa: {}}, sort: initialState.sort, sortAsc: true}, {
+      let title = generateAutoTitle({params: {supa: {}}, sort: defaultFilter.sort, sortAsc: true}, {
         supa: () => 'yup'
       })
       expect(title).to.equal('Games yup')

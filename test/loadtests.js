@@ -1,2 +1,2 @@
-var testsContext = require.context('.', true, /(Test\..+$)|(Helper\..+$)/);
-testsContext.keys().forEach(testsContext);
+var testsContext = require.context('../src/', true, /(\.spec\.jsx?$)/)
+testsContext.keys().forEach(testsContext)
