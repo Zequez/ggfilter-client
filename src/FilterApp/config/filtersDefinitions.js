@@ -1,18 +1,12 @@
 import options from './filtersOptions'
 
-import BaseToggle from '../filter/components/toggles/BaseToggle'
-
-function componentName (component) {
-  return component.toString().match(/function\s*(\w+)/)[1]
-}
-
 class FilterDefinition {
   name = ''
   title = ''
 
   width = 100
 
-  toggle = BaseToggle
+  toggle = 'Base'
   toggleType = null
 
   filter = 'Text'
@@ -32,8 +26,6 @@ class FilterDefinition {
     for (let attr in args) {
       this[attr] = args[attr]
     }
-
-    this.toggleType = componentName(this.toggle)
   }
 }
 

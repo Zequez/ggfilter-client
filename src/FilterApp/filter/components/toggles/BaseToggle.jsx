@@ -4,25 +4,24 @@ export default class FilterToggle extends Component {
   static propTypes = {
     filter: t.object.isRequired,
     active: t.bool.isRequired,
-    toggle: t.func.isRequired
+    onToggle: t.func.isRequired
   }
 
-  toggle (status) {
-    this.props.toggle(this.props.filter.name, !this.props.active)
+  onToggle = () => {
+    this.props.onToggle(!this.props.active)
   }
 
   render () {
-    //console.info(`Render <BaseToggle/> ${this.props.filter.name}`)
+    let { active, filter } = this.props
+
     return (
-      <li className='filter-toggle'>
-        <label>
-          <input
-            type='checkbox'
-            checked={this.props.active}
-            onChange={::this.toggle}/>
-          {this.props.filter.title}
-        </label>
-      </li>
+      <label>
+        <input
+          type='checkbox'
+          checked={active}
+          onChange={this.onToggle}/>
+        {filter.title}
+      </label>
     )
   }
 }

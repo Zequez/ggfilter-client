@@ -1,3 +1,3 @@
 module.exports = {
-  Base: require('./BaseToggle')
+  Base: require('./BaseToggle').default
 }
