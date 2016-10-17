@@ -7,7 +7,7 @@ module.exports = {
     loaders: [
       {
         test: /\.(png|jpg|gif|woff|woff2|css|sass|scss|less|styl)$/,
-        loader: 'null-loader'
+        loader: 'null'
       },
       {
         test: /\.(js|jsx)$/,
@@ -17,22 +17,21 @@ module.exports = {
           path.join(__dirname, '/../test')
         ]
       },
-      { test: /\.coffee$/, loader: 'babel!coffee' }
-    ],
-    noParse: [
-      /node_modules\/sinon\//
-    ],
-    postLoaders: [
+      { test: /\.coffee$/, loader: 'babel!coffee' },
       {
         test: /\.js$/,
         exclude: /\.spec\.js$/,
         include: path.join(__dirname, '/../src'),
-        loader: 'istanbul-instrumenter'
+        loader: 'istanbul-instrumenter',
+        enforce: 'post'
       }
+    ],
+    noParse: [
+      /node_modules\/sinon\//
     ]
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.coffee'],
+    extensions: ['.js', '.jsx', '.coffee'],
     alias: {
       shared: srcPath + 'shared/',
       images: srcPath + 'images/',

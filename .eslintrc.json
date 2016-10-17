@@ -17,6 +17,7 @@
     "react/jsx-uses-vars": 2,
     "spaced-comment": 0,
     "no-return-assign": 0,
-    "no-fallthrough": 0
+    "no-fallthrough": 0,
+    "no-template-curly-in-string": 0
   }
 }
