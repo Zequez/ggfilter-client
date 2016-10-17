@@ -55,7 +55,7 @@ export default class SFilterForm extends Component {
   }
 
   render () {
-    let { dirty, sfilter: sf, currentUser, autotitle, dynamicUrl, fixedUrl, saveToAccount } = this.props
+    let { dirty, sfilter: sf, currentUser, autotitle, dynamicUrl, fixedUrl } = this.props
     let existingRecord = !!sf.sid
 
     return (

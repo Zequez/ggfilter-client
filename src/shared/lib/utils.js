@@ -2,8 +2,8 @@ import update from 'react-addons-update'
 
 export var u = update
 
-export function debounce(delay, fn) {
-  var timer = null;
+export function debounce (delay, fn) {
+  var timer = null
   return function (...args) {
     clearTimeout(timer)
     timer = setTimeout(function () {
@@ -12,26 +12,25 @@ export function debounce(delay, fn) {
   }
 }
 
-export function debounceCountdown(delay, interval, progressFn, fn) {
-  var miniDelay = delay/interval
+export function debounceCountdown (delay, interval, progressFn, fn) {
+  var miniDelay = delay / interval
   var timer = null
 
-  var stopFn = function() {
+  var stopFn = function () {
     clearTimeout(timer)
   }
 
   return function (...args) {
     clearTimeout(timer)
     var countdown = delay
-    var timeoutFn = function() {
+    var timeoutFn = function () {
       countdown -= miniDelay
       if (countdown <= 0) {
         countdown = 0
         progressFn(0)
         fn.apply(...args)
-      }
-      else {
-        progressFn(countdown/delay)
+      } else {
+        progressFn(countdown / delay)
         timer = setTimeout(timeoutFn, miniDelay)
       }
     }
@@ -40,25 +39,23 @@ export function debounceCountdown(delay, interval, progressFn, fn) {
   }
 }
 
-export function partial(fun, ...args) {
-  return (...args2)=>fun(...args, ...args2)
+export function partial (fun, ...args) {
+  return (...args2) => fun(...args, ...args2)
 }
 
-export function loopNumber(i, val, array) {
+export function loopNumber (i, val, array) {
   let len = array.length
   i += val
   if (i < 0) {
-    return len+i
-  }
-  else if (i >= len) {
-    return i-len
-  }
-  else {
+    return len + i
+  } else if (i >= len) {
+    return i - len
+  } else {
     return i
   }
 }
 
-export function elementOffsetTop(el) {
+export function elementOffsetTop (el) {
   let offset = 0
   while (el) {
     offset += el.offsetTop
@@ -67,7 +64,7 @@ export function elementOffsetTop(el) {
   return offset
 }
 
-export function elementOffsetLeft(el) {
+export function elementOffsetLeft (el) {
   let offset = 0
   while (el) {
     offset += el.offsetLeft
@@ -76,7 +73,7 @@ export function elementOffsetLeft(el) {
   return offset
 }
 
-export function merge(from, to) {
+export function merge (from, to) {
   let result = {}
   for (let n in from) {
     result[n] = from[n]
@@ -87,9 +84,9 @@ export function merge(from, to) {
   return result
 }
 
-export function snapTo(val, snap) {
+export function snapTo (val, snap) {
   let valr = val % snap
-  return valr > snap/2 ? (val - valr + snap) : (val - valr)
+  return valr > snap / 2 ? (val - valr + snap) : (val - valr)
 }
 
 export function timeAgo (date) {

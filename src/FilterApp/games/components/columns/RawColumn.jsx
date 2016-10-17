@@ -17,7 +17,7 @@ export default class RawColumn extends Component {
     let v = this.props.value
     let d2 = null
     if (v) {
-      if (round) v = Math.floor(v*round)/round
+      if (round) v = Math.floor(v * round) / round
       if (interp) [d1, d2] = interp.split('%s')
     } else {
       v = '-'
@@ -25,7 +25,7 @@ export default class RawColumn extends Component {
 
     return (
       <span>
-        {d1 ? <span className='text-deco'>{p1}</span> : null}
+        {d1 ? <span className='text-deco'>{d1}</span> : null}
         {v}
         {d2 ? <span className='text-deco'>{d2}</span> : null}
       </span>

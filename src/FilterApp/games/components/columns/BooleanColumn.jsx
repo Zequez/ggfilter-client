@@ -1,6 +1,5 @@
 import React, { Component, PropTypes as t } from 'react'
 import enumColumns from '../../../config/enumColumns'
-import classNames from 'classnames'
 
 export default class BooleanColumn extends Component {
   static propTypes = {
@@ -10,19 +9,19 @@ export default class BooleanColumn extends Component {
 
   static noOverflowContainer = true
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.values = enumColumns.values[props.name]
     this.names = enumColumns.names[props.name]
     this.keys = Object.keys(this.values)
   }
 
-  checked(val) {
+  checked (val) {
     return (this.props.value & val) > 0
   }
 
-  render() {
-    let icons = this.keys.map((k)=>{
+  render () {
+    let icons = this.keys.map((k) => {
       let className = this.checked(this.values[k]) ? ('icon-' + k) : ''
       return (
         <i key={k} title={this.names[k]} className={'fa ' + className}></i>

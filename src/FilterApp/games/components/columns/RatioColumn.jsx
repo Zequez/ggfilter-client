@@ -9,20 +9,20 @@ export default class RatioColumn extends Component {
 
   static noOverflowContainer = true
 
-  render() {
+  render () {
     var ratio = this.props.value
     if (!ratio) {
-      let up = this.props.up,
-          down = this.props.down,
-          total = up + down
-      ratio = Math.floor(up/total*100)
+      let up = this.props.up
+      let down = this.props.down
+      let total = up + down
+      ratio = Math.floor(up / total * 100)
     }
 
     var upStyle = {
       width: `${ratio}%`
     }
     var downStyle = {
-      width: `${100-ratio}%`
+      width: `${100 - ratio}%`
     }
 
     return (

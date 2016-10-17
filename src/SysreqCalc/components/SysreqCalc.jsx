@@ -1,4 +1,4 @@
-import React, { Component, PropTypes as t } from 'react'
+import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { setFilter, setSort } from 'src/FilterApp'
 import { lockFilterIntoView } from 'shared/reducers/uiReducer'

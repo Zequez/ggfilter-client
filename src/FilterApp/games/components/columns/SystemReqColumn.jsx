@@ -1,4 +1,4 @@
-import React, { Component, PropTypes as t } from 'react'
+import React, { Component } from 'react'
 
 export default class SystemReqColumn extends Component {
   requirementsList (req, label) {
@@ -19,7 +19,6 @@ export default class SystemReqColumn extends Component {
   }
 
   render () {
-
     let req = this.props.value
     let string = req.minimum && req.minimum.video_card
     let tokens = req.minimum && req.min_video_tokens && req.min_video_tokens.join(' ')

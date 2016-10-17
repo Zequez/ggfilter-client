@@ -21,7 +21,7 @@ export default class SuggestionsDropdown extends Component {
   state = { focused: 0, visible: false }
   found = []
 
-  onKeyPress = (ev)=>{
+  onKeyPress = (ev) => {
     let list = this.props.listValues || this.props.list
     let i = this.state.focused
     let key = ev.keyCode
@@ -32,26 +32,26 @@ export default class SuggestionsDropdown extends Component {
         i = loopNumber(i, -1, list)
         ev.preventDefault()
         this.setState({focused: i})
-      break
+        break
       case 13: // Enter
         this.select(list[i])
-      break
+        break
     }
   }
 
-  onFocus = ()=>{
+  onFocus = () => {
     this.setState({visible: true})
   }
 
-  onBlur = ()=>{
+  onBlur = () => {
     this.setState({visible: false})
   }
 
-  onMouseOver = (i)=>{
+  onMouseOver = (i) => {
     this.setState({focused: i})
   }
 
-  select = (value, ev)=>{
+  select = (value, ev) => {
     if (ev) ev.preventDefault()
     this.setState({focused: 0})
     this.props.onSelect(value)
@@ -64,11 +64,11 @@ export default class SuggestionsDropdown extends Component {
     }
   }
 
-  render() {
+  render () {
     let list = this.props.list
     let listValues = this.props.listValues || list
 
-    let liElements = list.map((option, i)=>{
+    let liElements = list.map((option, i) => {
       let liClass = this.state.focused === i ? 'focused' : ''
       return (
         <li

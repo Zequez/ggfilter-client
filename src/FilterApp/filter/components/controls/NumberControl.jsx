@@ -1,4 +1,4 @@
-import React, { Component, PropTypes as t } from 'react'
+// import React, { Component, PropTypes as t } from 'react'
 import TextControl from './TextControl'
 
 export default class NumberControl extends TextControl {

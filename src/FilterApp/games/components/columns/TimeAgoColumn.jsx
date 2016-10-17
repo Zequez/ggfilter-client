@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 
 var plural = function (num) {
-  return num == 1 ? '' : 's'
+  return num === 1 ? '' : 's'
 }
 
 export default class TimeAgoColumn extends Component {
@@ -17,12 +17,11 @@ export default class TimeAgoColumn extends Component {
     var timeAgo = (new Date() - new Date(this.props.value)) / 1000 / 60 / 60 / 24 / 365
 
     var label
-    if (timeAgo < 23/24) {
+    if (timeAgo < 23 / 24) {
       timeAgo = timeAgo * 12
       timeAgo = Math.round(timeAgo)
       label = `month${plural(timeAgo)} ago`
-    }
-    else {
+    } else {
       timeAgo = Math.round(timeAgo)
       label = `year${plural(timeAgo)} ago`
     }

@@ -9,7 +9,9 @@ import generateAutoTitle from '../lib/generateAutoTitle'
 }))
 export default class FilterTitle extends Component {
   static propTypes = {
-
+    filter: t.object,
+    filterName: t.string,
+    tags: t.array
   }
 
   generateAutoTitle () {

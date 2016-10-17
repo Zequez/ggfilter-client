@@ -21,6 +21,11 @@ import Layout from './Layout'
 )
 export default class App extends Component {
   static propTypes = {
+    routing: t.object.isRequired,
+    mode: t.string.isRequired,
+    filterLockedInView: t.bool.isRequired,
+    resetFilter: t.func.isRequired,
+    resetUi: t.func.isRequired
     // The store on initialState
   }
 
@@ -32,7 +37,7 @@ export default class App extends Component {
   render () {
     console.logRender('App')
 
-    let { mode, filterMode } = this.props
+    let { mode } = this.props
     let containerClassName = `mode-${mode}`
 
     return (

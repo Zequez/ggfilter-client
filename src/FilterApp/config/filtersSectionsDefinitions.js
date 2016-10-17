@@ -32,7 +32,7 @@ var definitions = {
     'players',
     'vr',
     'controller_support'
-  ],
+  ]
   // 'Other': [
   //   'system_requirements'
   // ]

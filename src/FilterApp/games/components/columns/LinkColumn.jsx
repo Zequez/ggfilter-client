@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 
 class LinkColumn extends Component {
-  render() {
+  render () {
     var url = this.props.options.urlTemplate.replace('%s', this.props.urlValue)
     return (
       <a
