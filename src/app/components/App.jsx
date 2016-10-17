@@ -10,7 +10,6 @@ import Layout from './Layout'
 
 @connect(
   (s) => ({
-    routing: s.routing,
     mode: s.ui.mode,
     filterLockedInView: s.ui.filterLockedInView
   }),
@@ -21,7 +20,6 @@ import Layout from './Layout'
 )
 export default class App extends Component {
   static propTypes = {
-    routing: t.object.isRequired,
     mode: t.string.isRequired,
     filterLockedInView: t.bool.isRequired,
     resetFilter: t.func.isRequired,
