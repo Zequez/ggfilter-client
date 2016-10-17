@@ -40,7 +40,7 @@ module.exports = {
     // ],
     loaders: [
       {
-        test: /\.(png|jpg|gif|woff|woff2)$/,
+        test: /\.(png|jpg|gif)$/,
         loader: 'url?limit=8192'
       },
       { test: /\.coffee$/, loader: 'babel!coffee' },
