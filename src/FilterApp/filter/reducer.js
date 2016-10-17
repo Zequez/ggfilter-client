@@ -4,6 +4,7 @@ import { getGames } from '../games'
 import filtersSectionsFlatSort from '../config/filtersSectionsFlatSort'
 
 import initialState from '../config/defaultFilter'
+import { filterSelector } from './selectors'
 
 // =============================================================================
 // Actions
@@ -45,8 +46,20 @@ export function toggle (name, force = null) {
   return { type: TOGGLE, name, force }
 }
 
-export function setParams(params) {
+export function setParams (params) {
   return dispatchAndGetGames({ type: SET_MULTI, params })
+}
+
+export function setShortcut (shortcut) {
+  return function (dispatch, getState) {
+    if (shortcut.params) {
+      dispatch({ type: SET_MULTI, params: shortcut.params })
+    }
+    if (shortcut.sort) {
+      dispatch({ type: SORT, name: shortcut.sort, asc: shortcut.sortAsc })
+    }
+    getGames()(dispatch, getState)
+  }
 }
 
 export function setParam (name, data) {
@@ -124,15 +137,16 @@ export function reducer (state = initialState, action) {
       break
 
     case SET_MULTI:
-      console.log('SET MULTI')
       state = u(state, {params: {$set: { ...state.params, ...action.params }}})
       break
 
     case SORT:
+      let asc = action.asc == null
+        ? (state.sort === action.name ? !state.sortAsc : true)
+        : action.asc
       if (state.sort === action.name) {
-        state = u(state, {sortAsc: {$set: !state.sortAsc}})
+        state = u(state, {sortAsc: {$set: asc}})
       } else {
-        let asc = action.asc == null ? true : action.asc
         state = u(state, {sort: {$set: action.name}, sortAsc: { $set: asc }})
       }
       break

@@ -4,7 +4,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 
-import getStore from 'src/app/store'
+import store from 'src/app/store'
 import router from 'src/app/routes'
 
 import { getGamesIfNoGames } from 'src/FilterApp'
@@ -20,9 +20,7 @@ console.logRender = function (componentName) {
   // console.info(`<${componentName}/>`)
 }
 
-let store
 getTags().then((tags) => {
-  store = getStore()
   store.dispatch(getCurrentUser()).then(() => {
     store.dispatch(setAllTags(tags))
     router.bind(store, history)
@@ -45,10 +43,11 @@ function renderWithHot (App) {
 }
 
 if (module.hot) {
-  module.hot.accept('src/app/components/App', () => {
-    const App = require('src/app/components/App').default
-    renderWithHot(App)
-  })
+  module.hot.accept()
+  // module.hot.accept('src/app/components/App', () => {
+  //   const App = require('src/app/components/App').default
+  //   renderWithHot(App)
+  // })
 }
 
 export default {}

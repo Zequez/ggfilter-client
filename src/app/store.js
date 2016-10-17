@@ -6,19 +6,17 @@ import callAPI from './middlewares/callAPI'
 
 import reducer from './reducer'
 
-export default function getStore () {
-  let store = createStore(reducer, {}, compose(
-    applyMiddleware(thunkMiddleware, callAPI, logger), //crashReporter
-    window.devToolsExtension ? window.devToolsExtension() : f => f
-  ))
+const store = createStore(reducer, {}, compose(
+  applyMiddleware(thunkMiddleware, callAPI, logger), //crashReporter
+  window.devToolsExtension ? window.devToolsExtension() : f => f
+))
 
-  if (module.hot) {
-    // Enable Webpack hot module replacement for reducers
-    module.hot.accept('./reducer', () => {
-      const nextRootReducer = require('./reducer').default
-      store.replaceReducer(nextRootReducer)
-    })
-  }
-
-  return store
+if (module.hot) {
+  // Enable Webpack hot module replacement for reducers
+  module.hot.accept('./reducer', () => {
+    const nextRootReducer = require('./reducer').default
+    store.replaceReducer(nextRootReducer)
+  })
 }
+
+export default store

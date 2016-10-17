@@ -5,6 +5,7 @@ import { NAME } from './constants'
 
 export const filterSelector = (s) => s[NAME]
 export const visibleFiltersSelector = (s) => s[NAME].visible
+export const paramsSelector = (s) => s[NAME].params
 
 export const plusFilterSelector = createSelector(
   filterSelector,

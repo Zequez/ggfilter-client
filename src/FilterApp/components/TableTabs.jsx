@@ -1,19 +1,14 @@
-import React, { Component, PropTypes as t } from 'react'
-import { connect } from 'react-redux'
+import React, { Component } from 'react'
 
 import { TABS } from '../ui/reducer'
-import { setParams } from '../filter/reducer'
 
 import plusFilterParams from '../config/plusFilterParams'
+import filtersShortcuts from '../config/filtersShortcuts'
 
 import TableTabsLink from './TableTabsLink'
+import FilterShortcut from './FilterShortcut'
 
-@connect(null, { setParams })
 export default class TableTabs extends Component {
-  static propTypes = {
-    setParams: t.func.isRequired
-  }
-
   onDecrapify = () => {
     this.props.setParams(plusFilterParams)
   }
@@ -27,11 +22,12 @@ export default class TableTabs extends Component {
           <TableTabsLink text='Columns' mode={TABS.columns}/>
           <TableTabsLink text='Save/Share' mode={TABS.share}/>
           {/*<TableTabsLink text='Options' mode={TABS.options}/>*/}
-          <li className='decrapify-tab'>
-            <a className='btn' onClick={this.onDecrapify}>
-              Decrapify
-            </a>
-          </li>
+          <FilterShortcut shortcut={filtersShortcuts.decrapify}>
+            Decrapify
+          </FilterShortcut>
+          <FilterShortcut shortcut={filtersShortcuts.playtimeForTheBuck}>
+            Playtime for your buck
+          </FilterShortcut>
         </ul>
       </nav>
     )

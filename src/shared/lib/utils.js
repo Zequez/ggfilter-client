@@ -185,3 +185,15 @@ export function snakeizeKeys (obj, recursive = true) {
 export function snakeCase (camelCase) {
   return camelCase.replace(/[A-Z]+/g, (m) => '_' + m.toLowerCase())
 }
+
+export function objectMatchesExtension (main, extension, deep = true) {
+  for (let key in extension) {
+    console.log(key)
+    if (deep && typeof main[key] === 'object') {
+      if (!objectMatchesExtension(main[key], extension[key])) return false
+    } else {
+      if (main[key] !== extension[key]) return false
+    }
+  }
+  return true
+}
