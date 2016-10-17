@@ -4,6 +4,7 @@ import reducer from './reducer'
 import * as filter from './filter'
 import * as games from './games'
 import * as sfilter from './sfilter'
+import * as ui from './ui'
 
 module.exports = {
   FilterApp,
@@ -15,6 +16,8 @@ module.exports = {
   setSort: filter.setSort,
   resetFilter: filter.resetFilters,
   setFilterFromB64: filter.setFilterFromB64,
+
+  editMode: ui.editMode,
 
   getGamesIfNoGames: games.getGamesIfNoGames,
 

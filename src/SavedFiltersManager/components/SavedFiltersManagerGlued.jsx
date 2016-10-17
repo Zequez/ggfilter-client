@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 
 // <EXTERNAL>
-import { loadFilter, selectCurrentFilter } from 'src/FilterApp'
+import { loadFilter, selectCurrentFilter, editMode } from 'src/FilterApp'
 import { selectCurrentUser } from 'shared/reducers/authReducer'
-import { setFilterMode, FILTER_MODES, setMode, MODES } from 'shared/reducers/uiReducer'
+import { setMode, MODES } from 'shared/reducers/uiReducer'
 // </EXTERNAL>
 
 import SavedFiltersManager from './SavedFiltersManager'
@@ -15,7 +15,7 @@ export class SavedFiltersManagerGlued extends Component {
     currentUser: t.object,
     currentFilter: t.object,
     loadFilter: t.func,
-    setFilterMode: t.func
+    setFilterEditMode: t.func
   }
 
   onLoad = (sfilter) => {
@@ -24,7 +24,7 @@ export class SavedFiltersManagerGlued extends Component {
 
   onEdit = (sfilter) => {
     this.props.loadFilter(sfilter)
-    this.props.setFilterMode(FILTER_MODES.share)
+    this.props.setFilterEditMode()
   }
 
   onGo = (sfilter) => {
@@ -49,4 +49,4 @@ export class SavedFiltersManagerGlued extends Component {
 export default connect((s) => createStructuredSelector({
   currentFilter: selectCurrentFilter,
   currentUser: selectCurrentUser
-}), { loadFilter, setFilterMode, setMode })(SavedFiltersManagerGlued)
+}), { loadFilter, setFilterEditMode: editMode, setMode })(SavedFiltersManagerGlued)

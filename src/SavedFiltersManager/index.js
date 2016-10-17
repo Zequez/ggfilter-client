@@ -4,8 +4,6 @@ import SavedFiltersManagerGlued from './components/SavedFiltersManagerGlued'
 import * as constants from './constants'
 import reducer from './reducer'
 
-export const potato = 'rsarsarsa'
-
 module.exports = { reducer, constants, SavedFiltersManager, SavedFiltersManagerGlued }
 
 // TODO: When you delete a filter that is the current filter it doesn't signal-up

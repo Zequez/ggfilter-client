@@ -6,7 +6,7 @@ import { MODES, resetUi, setMode } from 'shared/reducers/uiReducer'
 // TODO: Somehow, don't do this, because we're looking inside FilterApp
 // But if we expose this on src/FilterApp, we get a circular reference
 // Figure it out.
-import { setFilterFromB64, resetFilter } from 'src/FilterApp/filter/reducer'
+import { setFilterFromB64, resetFilters } from 'src/FilterApp/filter/reducer'
 import { getFromSid, getFromOfficialSlug } from 'src/FilterApp/sfilter/reducer'
 
 let basicModeRoute = (path, mode) => {
@@ -51,5 +51,5 @@ export default new StateRouter({
   filter:
     ['/', {ui: {mode: MODES.filter}}, setMode(MODES.filter)],
   root:
-    ['/', {no: 'match'}, [resetUi, resetFilter]]
+    ['/', {no: 'match'}, [resetUi, resetFilters]]
 })

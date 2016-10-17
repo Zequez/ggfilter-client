@@ -35,6 +35,10 @@ export function setTab (tab) {
   return { type: SET_TAB, tab }
 }
 
+export function editMode () {
+  return { type: SET_TAB, tab: TABS.share }
+}
+
 // =============================================================================
 // Reducer
 // =============================================================================
