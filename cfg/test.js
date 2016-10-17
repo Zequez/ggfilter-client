@@ -25,6 +25,7 @@ module.exports = {
     postLoaders: [
       {
         test: /\.js$/,
+        exclude: /\.spec\.js$/,
         include: path.join(__dirname, '/../src'),
         loader: 'istanbul-instrumenter'
       }
