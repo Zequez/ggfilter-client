@@ -33,13 +33,13 @@ module.exports = {
     }
   },
   module: {
-    preLoaders: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'eslint'
-      }
-    ],
+    // preLoaders: [
+    //   {
+    //     test: /\.jsx?$/,
+    //     exclude: /node_modules/,
+    //     loader: 'eslint'
+    //   }
+    // ],
     loaders: [
       {
         test: /\.(png|jpg|gif|woff|woff2)$/,
