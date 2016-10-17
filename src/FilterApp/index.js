@@ -12,7 +12,8 @@ module.exports = {
   reducer,
 
   toggleFilter: filter.toggle,
-  setFilter: filter.setFilter,
+  setFilter: filter.setParam,
+  setParam: filter.setParam,
   setSort: filter.setSort,
   resetFilter: filter.resetFilters,
   setFilterFromB64: filter.setFilterFromB64,

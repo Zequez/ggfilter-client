@@ -11,6 +11,7 @@ import initialState from '../config/defaultFilter'
 
 export const TOGGLE = 'filter/TOGGLE'
 export const SET = 'filter/SET'
+export const SET_MULTI = 'filter/SET_MULTI'
 export const SORT = 'filter/SORT'
 export const SET_FULL = 'filter/SET_FULL'
 export const LOADING_FROM_SID = 'filter/LOADING_FROM_SID'
@@ -20,6 +21,7 @@ export const RESET = 'filter/RESET'
 export const DIRTY_ACTIONS = [
   TOGGLE,
   SET,
+  SET_MULTI,
   SORT,
   SET_FULL
 ]
@@ -43,7 +45,11 @@ export function toggle (name, force = null) {
   return { type: TOGGLE, name, force }
 }
 
-export function setFilter (name, data) {
+export function setParams(params) {
+  return dispatchAndGetGames({ type: SET_MULTI, params })
+}
+
+export function setParam (name, data) {
   return function (dispatch, getState) {
     if (getState().filter.visible.indexOf(name) === -1) {
       dispatch(toggle(name, true))
@@ -51,6 +57,8 @@ export function setFilter (name, data) {
     dispatchAndGetGames({ type: SET, name, data })(dispatch, getState)
   }
 }
+
+export const setFilter = setParam
 
 export function setSort (name, asc) {
   return dispatchAndGetGames({ type: SORT, name, asc })
@@ -113,6 +121,11 @@ export function reducer (state = initialState, action) {
       if (action.data == null) {
         delete state.params[action.name]
       }
+      break
+
+    case SET_MULTI:
+      console.log('SET MULTI')
+      state = u(state, {params: {$set: { ...state.params, ...action.params }}})
       break
 
     case SORT:

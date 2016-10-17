@@ -2,6 +2,7 @@ import { u } from 'shared/lib/utils'
 
 import { getGames as apiGetGames } from 'shared/lib/api'
 import gamesQueryGenerator from '../lib/gamesQueryGenerator'
+import { filterSelector } from '../filter/selectors'
 
 export const initialState = {
   batches: [],
@@ -24,7 +25,9 @@ export const GET_GAMES_FAILED = 'GET_GAMES_FAILED'
 
 export function getGames (page = 0) {
   return function (dispatch, getState) {
-    let { filter, options } = getState()
+    let state = getState()
+    let filter = filterSelector(state)
+    let options = state.options
 
     dispatch({type: GET_GAMES_START, page})
 
