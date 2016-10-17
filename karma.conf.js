@@ -27,21 +27,22 @@ module.exports = function (config) {
         chunks: false
       }
     },
-    reporters: ['mocha', 'coverage'],
-    coverageReporter: {
-      reporters: [
-        { type: 'text' }
-        // { type: 'json', subdir: '.' },
-        // { type: 'html', subdir: 'report-html' },
-        // { type: 'lcovonly', subdir: '.' }
-        // // reporters supporting the `file` property, use `subdir` to directly
-        // // output them in the `dir` directory
-        // { type: 'cobertura', subdir: '.', file: 'cobertura.txt' },
-        // { type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' },
-        // { type: 'teamcity', subdir: '.', file: 'teamcity.txt' },
-        // { type: 'text', subdir: '.', file: 'text.txt' },
-        // { type: 'text-summary', subdir: '.', file: 'text-summary.txt' }
-      ]
-    }
+    reporters: ['mocha']
+    // reporters: ['mocha', 'coverage'],
+    // coverageReporter: {
+    //   reporters: [
+    //     { type: 'text' }
+    //     // { type: 'json', subdir: '.' },
+    //     // { type: 'html', subdir: 'report-html' },
+    //     // { type: 'lcovonly', subdir: '.' }
+    //     // // reporters supporting the `file` property, use `subdir` to directly
+    //     // // output them in the `dir` directory
+    //     // { type: 'cobertura', subdir: '.', file: 'cobertura.txt' },
+    //     // { type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' },
+    //     // { type: 'teamcity', subdir: '.', file: 'teamcity.txt' },
+    //     // { type: 'text', subdir: '.', file: 'text.txt' },
+    //     // { type: 'text-summary', subdir: '.', file: 'text-summary.txt' }
+    //   ]
+    // }
   })
 }

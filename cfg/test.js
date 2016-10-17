@@ -17,14 +17,14 @@ module.exports = {
           path.join(__dirname, '/../test')
         ]
       },
-      { test: /\.coffee$/, loader: 'babel!coffee' },
-      {
-        test: /\.js$/,
-        exclude: /\.spec\.js$/,
-        include: path.join(__dirname, '/../src'),
-        loader: 'istanbul-instrumenter',
-        enforce: 'post'
-      }
+      { test: /\.coffee$/, loader: 'babel!coffee' }
+      // {
+      //   test: /\.js$/,
+      //   exclude: /\.spec\.js$/,
+      //   include: path.join(__dirname, '/../src'),
+      //   loader: 'istanbul-instrumenter',
+      //   enforce: 'post'
+      // }
     ],
     noParse: [
       /node_modules\/sinon\//
