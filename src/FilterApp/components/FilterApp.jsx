@@ -5,6 +5,7 @@ import filtersDefinitions from '../config/filtersDefinitions'
 
 import { getGames, getMoreGames } from '../games'
 import { getColumnsWidth, getTab } from '../ui/selectors'
+import { filterSelector, visibleFiltersDefinitionsSelector } from '../filter/selectors'
 
 import DataTable from './DataTable'
 import TableTabs from './TableTabs'
@@ -12,7 +13,8 @@ import TableTabsContent from './TableTabsContent'
 import GamesLoader from './GamesLoader'
 
 @connect((s) => ({
-  filter: s.filter,
+  filter: filterSelector(s),
+  visibleFilters: visibleFiltersDefinitionsSelector(s),
   games: s.games,
   tags: s.tags,
   columnsWidth: getColumnsWidth(s),
@@ -29,7 +31,6 @@ export default class FilterApp extends Component {
 
   componentWillMount () {
     this.fillStaticFiltersDefinitionsOptions()
-    this.cacheFiltersDefinitions()
   }
 
   // This is hacky, but it's now the convention
@@ -38,24 +39,12 @@ export default class FilterApp extends Component {
     filtersDefinitions.tags.columnOptions.tags = this.props.tags
   }
 
-  componentWillReceiveProps (np) {
-    let tp = this.props
-    if (tp.filter.visible !== np.filter.visible) {
-      this.cacheFiltersDefinitions(np)
-    }
-  }
-
-  visibleFilters = []
-  cacheFiltersDefinitions (p = this.props) {
-    this.visibleFilters = p.filter.visible.map((f) => filtersDefinitions[f])
-  }
-
   handleRequestMoreGames () {
     this.props.getMoreGames()
   }
 
   render () {
-    let {games, filter, columnsWidth, tab} = this.props
+    let {games, filter, columnsWidth, tab, visibleFilters} = this.props
 
     let filterMode = ' filter-tab-' + tab
 
@@ -67,7 +56,7 @@ export default class FilterApp extends Component {
           games={games}
           filter={filter}
           columnsWidth={columnsWidth}
-          visibleFiltersDefinitions={this.visibleFilters}/>
+          visibleFiltersDefinitions={visibleFilters}/>
         <GamesLoader
           fetching={games.fetching}
           failed={games.failed}
