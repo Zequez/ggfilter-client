@@ -1,9 +1,8 @@
-var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var path = require('path')
 
-var port = 8001;
-var srcPath = path.join(__dirname, '/../src/');
-var publicPath = '/assets/';
+var port = 8001
+var srcPath = path.join(__dirname, '/../src/')
+var publicPath = '/assets/'
 
 module.exports = {
   port: port,
@@ -36,8 +35,8 @@ module.exports = {
   module: {
     preLoaders: [
       {
-        test: /\.(js|jsx)$/,
-        include: path.join(__dirname, 'src'),
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
         loader: 'eslint'
       }
     ],
@@ -49,5 +48,11 @@ module.exports = {
       { test: /\.coffee$/, loader: 'babel!coffee' },
       { test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url?limit=8192' }
     ]
+  },
+  eslint: {
+    // emitError: true,
+    // emitWarning: true,
+    // failOnWarning: false,
+    // failOnError: true
   }
-};
+}

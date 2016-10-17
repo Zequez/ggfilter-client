@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import logger from './middlewares/logger'
-import crashReporter from './middlewares/crashReporter'
+// import crashReporter from './middlewares/crashReporter'
 import callAPI from './middlewares/callAPI'
 
 import reducer from './reducer'
