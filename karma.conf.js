@@ -1,8 +1,8 @@
-var webpackCfg = require('./webpack.config');
+var webpackCfg = require('./webpack.config')
 
 // Install karma-cli globally
 
-module.exports = function(config) {
+module.exports = function (config) {
   config.set({
     basePath: '',
     browsers: ['PhantomJS'],
@@ -16,13 +16,32 @@ module.exports = function(config) {
       mocha: {}
     },
     singleRun: false,
-    reporters: ['mocha'],
     preprocessors: {
       'test/loadtests.js': ['webpack', 'sourcemap']
     },
     webpack: webpackCfg,
     webpackServer: {
-      noInfo: true
+      noInfo: false,
+      stats: {
+        colors: true,
+        chunks: false
+      }
+    },
+    reporters: ['mocha', 'coverage'],
+    coverageReporter: {
+      reporters: [
+        { type: 'text' }
+        // { type: 'json', subdir: '.' },
+        // { type: 'html', subdir: 'report-html' },
+        // { type: 'lcovonly', subdir: '.' }
+        // // reporters supporting the `file` property, use `subdir` to directly
+        // // output them in the `dir` directory
+        // { type: 'cobertura', subdir: '.', file: 'cobertura.txt' },
+        // { type: 'lcovonly', subdir: '.', file: 'report-lcovonly.txt' },
+        // { type: 'teamcity', subdir: '.', file: 'teamcity.txt' },
+        // { type: 'text', subdir: '.', file: 'text.txt' },
+        // { type: 'text-summary', subdir: '.', file: 'text-summary.txt' }
+      ]
     }
-  });
-};
+  })
+}

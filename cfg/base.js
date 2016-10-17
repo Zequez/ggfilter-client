@@ -2,7 +2,7 @@ var path = require('path');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var port = 8001;
-var srcPath = path.join(__dirname, '/../src');
+var srcPath = path.join(__dirname, '/../src/');
 var publicPath = '/assets/';
 
 module.exports = {
@@ -28,16 +28,9 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx', '.coffee', '.sass', '.scss'],
     alias: {
-      shared: srcPath + '/shared/',
-      actions: srcPath + '/actions/',
-      components: srcPath + '/components/',
-      sources: srcPath + '/sources/',
-      stores: srcPath + '/stores/',
-      styles: srcPath + '/styles/',
-      images: srcPath + '/images/',
-      lib: srcPath + '/lib/',
-      src: srcPath + '/',
-      compass: 'compass-mixins/lib/compass'
+      shared: srcPath + 'shared/',
+      images: srcPath + 'images/',
+      src: srcPath
     }
   },
   module: {

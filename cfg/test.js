@@ -2,7 +2,7 @@ var path = require('path')
 var srcPath = path.join(__dirname, '/../src/')
 
 module.exports = {
-  devtool: 'eval',
+  devtool: 'inline-source-map',
   module: {
     loaders: [
       {
@@ -21,22 +21,22 @@ module.exports = {
     ],
     noParse: [
       /node_modules\/sinon\//
+    ],
+    postLoaders: [
+      {
+        test: /\.js$/,
+        include: path.join(__dirname, '/../src'),
+        loader: 'istanbul-instrumenter'
+      }
     ]
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.coffee'],
     alias: {
       shared: srcPath + 'shared/',
-      actions: srcPath + 'actions/',
+      images: srcPath + 'images/',
+      src: srcPath,
       helpers: path.join(__dirname, '/../test/helpers'),
-      components: srcPath + 'components/',
-      sources: srcPath + 'sources/',
-      stores: srcPath + 'stores/',
-      styles: srcPath + 'styles/',
-      images: srcPath + '/images/',
-      lib: srcPath + '/lib/',
-      src: srcPath + '/',
-      compass: 'compass-mixins/lib/compass',
       sinon: 'sinon/pkg/sinon'
     }
   },
@@ -46,5 +46,8 @@ module.exports = {
     'react/lib/ExecutionEnvironment': true,
     'react/lib/ReactContext': true,
     'react/addons': true
+  },
+  node: {
+    fs: 'empty'
   }
 }
