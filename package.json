@@ -16,7 +16,8 @@
     "clean": "rimraf ./gem/app/assets/*",
     "release:major": "npm version major && npm publish && git push --follow-tags",
     "release:minor": "npm version minor && npm publish && git push --follow-tags",
-    "release:patch": "npm version patch && npm publish && git push --follow-tags"
+    "release:patch": "npm version patch && npm publish && git push --follow-tags",
+    "analyze": "webpack --json --env=dist | ./node_modules/.bin/webpack-bundle-size-analyzer"
   },
   "repository": "",
   "keywords": [],
@@ -72,6 +73,7 @@
     "susy": "^2.2.12",
     "url-loader": "^0.5.7",
     "webpack": "^1.13.2",
+    "webpack-bundle-size-analyzer": "^2.2.0",
     "webpack-dev-server": "^1.15.1"
   },
   "dependencies": {
