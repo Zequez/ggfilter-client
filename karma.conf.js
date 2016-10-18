@@ -27,7 +27,10 @@ module.exports = function (config) {
         chunks: false
       }
     },
-    reporters: ['mocha']
+    reporters: ['mocha'],
+    mochaReporter: {
+      showDiff: true
+    }
     // reporters: ['mocha', 'coverage'],
     // coverageReporter: {
     //   reporters: [
@@ -44,5 +47,6 @@ module.exports = function (config) {
     //     // { type: 'text-summary', subdir: '.', file: 'text-summary.txt' }
     //   ]
     // }
+
   })
 }
