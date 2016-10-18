@@ -188,7 +188,6 @@ export function snakeCase (camelCase) {
 
 export function objectMatchesExtension (main, extension, deep = true) {
   for (let key in extension) {
-    console.log(key)
     if (deep && typeof main[key] === 'object') {
       if (!objectMatchesExtension(main[key], extension[key])) return false
     } else {
