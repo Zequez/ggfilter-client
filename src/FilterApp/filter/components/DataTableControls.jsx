@@ -1,24 +1,24 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { partial } from 'shared/lib/utils'
-import { setFilter } from 'src/FilterApp/filter'
+import { setParam } from 'src/FilterApp/filter'
 
 import ControlComponent from './ControlComponent'
 
 @connect((s) => ({}), {
-  setFilter
+  setParam
 })
 export default class DataTableControls extends Component {
   static propTypes = {
     filters: t.arrayOf(t.object).isRequired,
     filtersParams: t.object.isRequired,
 
-    setFilter: t.func.isRequired
+    setParam: t.func.isRequired
   }
 
   render () {
     console.logRender('DataTableControls')
-    let { filters, filtersParams, setFilter } = this.props
+    let { filters, filtersParams, setParam } = this.props
 
     return (
       <tr className='data-table-controls'>
@@ -27,7 +27,7 @@ export default class DataTableControls extends Component {
             key={filter.name}
             filter={filter}
             params={filtersParams[filter.name]}
-            onChange={partial(setFilter, filter.name)}/>
+            onChange={partial(setParam, filter.name)}/>
         ))}
       </tr>
     )

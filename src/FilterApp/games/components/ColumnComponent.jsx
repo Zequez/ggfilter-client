@@ -31,7 +31,7 @@ export default ({game, filter, setFilter, filterParams}) => {
 
   if (filter.columnActive) {
     props.setFilter = partial(setFilter, filter.name)
-    props.filterParams = filterParams
+    props.filterParams = (filterParams !== true && filterParams !== false) ? filterParams : undefined
   }
 
   let comp = <Component {...props}/>

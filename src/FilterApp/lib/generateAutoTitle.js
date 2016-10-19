@@ -1,7 +1,7 @@
 import autoTitleDefinitions from '../config/autoTitleDefinitions'
 import { escapeHtml as h } from 'shared/lib/utils'
-import defaultFilter from '../config/defaultFilter'
-import filterDefinitions from '../config/filtersDefinitions'
+import defaultFilter from '../config/defaultFilterDelta'
+import filtersDefinitions from '../lib/definitions'
 
 function strongificate (text) {
   return text.replace(/(<)|(>)/g, (_, lt, gt) => lt ? '<strong>' : '</strong>')
@@ -13,7 +13,7 @@ export default function generateAutoTitle (filter, definitions = autoTitleDefini
   if (Object.keys(filter.params).length > 0) {
     for (let filterName in definitions) {
       let filterParams = filter.params[filterName]
-      if (filterParams) {
+      if (typeof filterParams === 'object') {
         let definition = definitions[filterName]
         let title = definition(filterParams, store)
         if (title instanceof Array) {
@@ -30,9 +30,15 @@ export default function generateAutoTitle (filter, definitions = autoTitleDefini
     }
   }
 
-  if (filter.sort && filterDefinitions[filter.sort] && filter.sort !== defaultFilter.sort) {
-    let direction = filter.sortAsc ? 'ascending' : 'descending'
-    let title = filterDefinitions[filter.sort].title
+  let shouldAddSortInfo = filter.sort && (
+    filter.sort.column !== defaultFilter.sort.column ||
+    filter.sort.asc !== defaultFilter.sort.asc
+  )
+
+  if (shouldAddSortInfo) {
+    let direction = filter.sort.asc ? 'ascending' : 'descending'
+    // FIXME: Doesn't work for filters with a name != sort column
+    let title = filtersDefinitions.filters[filter.sort.column].title
     titles.push(strongificate(`sorted by <${h(title)} in ${direction} order>`))
   }
 

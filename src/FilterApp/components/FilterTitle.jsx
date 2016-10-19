@@ -1,7 +1,7 @@
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
 import generateAutoTitle from '../lib/generateAutoTitle'
-import { filterSelector } from '../filter/selectors'
+import { filterSelector } from '../filter/newSelectors'
 
 @connect((s) => ({
   filter: filterSelector(s),

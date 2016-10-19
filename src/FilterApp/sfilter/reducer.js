@@ -2,11 +2,16 @@ import { u } from 'shared/lib/utils'
 
 const api = require('shared/lib/api')
 
-import {
-  DIRTY_ACTIONS,
-  RESET as FILTER_RESET,
-  setFullFilter
-} from 'src/FilterApp/filter'
+const {
+  actions: {
+    DIRTY_ACTIONS: FILTER_DIRTY_ACTIONS,
+    RESET: FILTER_RESET,
+    setFullFilter
+  },
+  selectors: {
+    deltaFilterSelector
+  }
+} = require('../filter')
 
 export const initialState = {
   dirty: false,
@@ -65,13 +70,13 @@ export const getFromOfficialSlug = (officialSlug) => ({
 export const createFilter = (extraParams) => ({
   condition: (s) => s.sfilter.dirty,
   types: [CREATE_REQUEST, CREATE_SUCCESS, CREATE_FAILURE],
-  callAPI: (state) => api.createFilter(state.sfilter.stageData, state.filter),
+  callAPI: (state) => api.createFilter(state.sfilter.stageData, deltaFilterSelector(state)),
   autoCamelize: true
 })
 export const updateFilter = (extraParams) => ({
   condition: (s) => s.sfilter.data.sid && s.sfilter.dirty,
   types: [UPDATE_REQUEST, UPDATE_SUCCESS, UPDATE_FAILURE],
-  callAPI: (state) => api.updateFilter(state.sfilter.stageData, state.filter),
+  callAPI: (state) => api.updateFilter(state.sfilter.stageData, deltaFilterSelector(state)),
   autoCamelize: true
 })
 export const destroyFilter = (sid) => ({
@@ -114,7 +119,7 @@ export function reducer (state = initialState, action) {
       break
   }
 
-  if (~DIRTY_ACTIONS.indexOf(action.type)) {
+  if (~FILTER_DIRTY_ACTIONS.indexOf(action.type)) {
     state = u(state, {dirty: {$set: true}})
   }
 

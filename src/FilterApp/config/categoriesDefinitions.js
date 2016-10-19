@@ -1,4 +1,4 @@
-var definitions = {
+export default {
   'Game info': [
     'steam_thumbnail',
     'steam_id',
@@ -36,6 +36,5 @@ var definitions = {
   // 'Other': [
   //   'system_requirements'
   // ]
-}
 
-export default definitions
+}

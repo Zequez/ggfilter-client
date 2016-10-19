@@ -1,11 +1,11 @@
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
 
-import filtersDefinitions from '../config/filtersDefinitions'
+import definitions from '../lib/definitions'
 
 import { getGames, getMoreGames } from '../games'
 import { getColumnsWidth, getTab } from '../ui/selectors'
-import { filterSelector, visibleFiltersDefinitionsSelector } from '../filter/selectors'
+import { filterSelector, visibleFiltersDefinitionsSelector } from '../filter/newSelectors'
 
 import DataTable from './DataTable'
 import TableTabs from './TableTabs'
@@ -35,8 +35,8 @@ export default class FilterApp extends Component {
 
   // This is hacky, but it's now the convention
   fillStaticFiltersDefinitionsOptions () {
-    filtersDefinitions.tags.controlOptions.tags = this.props.tags
-    filtersDefinitions.tags.columnOptions.tags = this.props.tags
+    definitions.filters.tags.controlOptions.tags = this.props.tags
+    definitions.filters.tags.columnOptions.tags = this.props.tags
   }
 
   handleRequestMoreGames () {

@@ -9,8 +9,10 @@ import generateAutoTitle from '../../lib/generateAutoTitle'
 import SFilterForm from './SFilterForm'
 import SFilterFormSimple from './SFilterFormSimple'
 
+const { filterSelector } = require('../../filter').selectors
+
 @connect((s) => ({
-  filter: s.filter,
+  filter: filterSelector(s),
   tags: s.tags,
   dirty: s.sfilter.dirty,
   sfilter: s.sfilter.stageData,

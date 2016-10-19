@@ -1,35 +1,6 @@
 import options from './controlsOptions'
 
-class FilterDefinition {
-  name = ''
-  title = ''
-
-  width = 100
-
-  toggle = 'Base'
-  toggleType = null
-
-  control = 'Text'
-  controlType = null
-  controlOptions = {}
-
-  column = 'Raw'
-  columnActive = false
-  columnInputs = null
-  columnOptions = {}
-
-  constructor (name, args) {
-    this.name = name
-    if (args.sort == null) this.sort = name
-    if (!args.columnInputs) this.columnInputs = {value: name}
-
-    for (let attr in args) {
-      this[attr] = args[attr]
-    }
-  }
-}
-
-var filtersDefinitions = {
+export default {
   name: {
     title: 'Name',
     column: 'Link',
@@ -252,9 +223,3 @@ var filtersDefinitions = {
     width: 100
   }
 }
-
-for (let name in filtersDefinitions) {
-  filtersDefinitions[name] = new FilterDefinition(name, filtersDefinitions[name])
-}
-
-export default filtersDefinitions

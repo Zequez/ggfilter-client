@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setFilter, setSort } from 'src/FilterApp'
 import { lockFilterIntoView } from 'shared/reducers/uiReducer'
 import { snapTo } from 'shared/lib/utils'
 import { getGames } from 'shared/lib/api'
 import SuggestionsBox from './SuggestionsBox'
 import Link from 'shared/components/RouterLink'
 
+const { setParam, setSort } = require('src/FilterApp').actions
+
 @connect(() => ({}), {
-  setFilter,
+  setParam,
   setSort,
   lockFilterIntoView
 })
@@ -57,7 +58,7 @@ export default class SysreqCalc extends Component {
     // let gt = Math.max(0, calcs.mean - calcs.deviation)
     let lt = Math.min(100, calcs.mean + calcs.deviation)
     this.props.lockFilterIntoView()
-    this.props.setFilter('sysreq_index_centile', {gt: 0, lt: snapTo(lt, 5)})
+    this.props.setParam('sysreq_index_centile', {gt: 0, lt: snapTo(lt, 5)})
     this.props.setSort('sysreq_index_centile', false)
   }
 

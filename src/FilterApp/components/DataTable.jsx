@@ -11,10 +11,11 @@ export default class DataTable extends Component {
   static propTypes = {
     visibleFiltersDefinitions: t.arrayOf(t.object).isRequired,
     filter: t.shape({
-      visible: t.arrayOf(t.string),
-      params: t.object,
-      sort: t.string,
-      sortAsc: t.bool
+      params: t.object.isRequired,
+      sort: t.shape({
+        column: t.string.isRequired,
+        asc: t.bool.isRequired
+      }).isRequired
     }).isRequired,
     columnsWidth: t.object.isRequired,
     games: t.shape({
@@ -59,8 +60,8 @@ export default class DataTable extends Component {
           <DataTableTitles
             filters={filters}
             filtersParams={filter.params}
-            sort={filter.sort}
-            sortAsc={filter.sortAsc}
+            sort={filter.sort.column}
+            sortAsc={filter.sort.asc}
             columnsWidth={trueColumnsWidth}/>
           <DataTableControls
             filters={filters}

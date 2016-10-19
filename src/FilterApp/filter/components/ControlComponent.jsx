@@ -10,10 +10,10 @@ export default ({filter, params, onChange}) => {
   )
 
   let props = {
-    query: params,
+    query: (params === true || params === false) ? undefined : params,
     name: filter.name,
     options: filter.controlOptions,
-    onChange
+    onChange: (value) => onChange(value === null ? true : value)
   }
 
   let Component = controlsDefinitions[filter.control]

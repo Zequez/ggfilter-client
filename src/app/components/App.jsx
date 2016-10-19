@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 
-import { resetFilter } from 'src/FilterApp'
+const { resetFilter } = require('src/FilterApp').actions
 import { resetUi } from 'shared/reducers/uiReducer'
 
 import { Lightbox } from 'src/Lightbox'

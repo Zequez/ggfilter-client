@@ -1,17 +1,20 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
-import { setFilter } from 'src/FilterApp/filter'
+
+const { setParam } = require('../../filter').actions
 
 import ColumnComponent from './ColumnComponent'
 
 @connect((s) => ({}), {
-  setFilter
+  setParam
 })
 export default class DataTableBatch extends Component {
   static propTypes = {
     games: t.array.isRequired,
     filters: t.arrayOf(t.object).isRequired,
-    filtersParams: t.object
+    filtersParams: t.object,
+
+    setParam: t.func.isRequired
   }
 
   shouldComponentUpdate (np, ns) {
@@ -26,7 +29,7 @@ export default class DataTableBatch extends Component {
   render () {
     console.logRender('DataTableBatch')
 
-    let { games, filters, filtersParams, setFilter } = this.props
+    let { games, filters, filtersParams, setParam } = this.props
 
     return (
       <tbody className='data-table-batch'>
@@ -37,7 +40,7 @@ export default class DataTableBatch extends Component {
                 key={filter.name}
                 game={game}
                 filter={filter}
-                setFilter={setFilter}
+                setFilter={setParam}
                 filterParams={filtersParams[filter.name]}/>
             ))}
           </tr>

@@ -1,13 +1,13 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { adjustColumnWidth, clearColumnWidth } from '../../ui/reducer'
-import { setSort, setFilter } from 'src/FilterApp/filter'
+import { setSort, setParam } from 'src/FilterApp/filter'
 
 import DataTableTitle from './DataTableTitle'
 
 @connect((s) => ({}), {
   setSort,
-  setFilter,
+  setParam,
   adjustColumnWidth,
   clearColumnWidth
 })
@@ -17,7 +17,12 @@ export default class DataTableTitles extends Component {
     filtersParams: t.object.isRequired,
     sort: t.string.isRequired,
     sortAsc: t.bool.isRequired,
-    columnsWidth: t.arrayOf(t.number).isRequired
+    columnsWidth: t.arrayOf(t.number).isRequired,
+
+    setSort: t.func.isRequired,
+    setParam: t.func.isRequired,
+    adjustColumnWidth: t.func.isRequired,
+    clearColumnWidth: t.func.isRequired
   }
 
   shouldComponentUpdate (np, ns) {
@@ -26,13 +31,14 @@ export default class DataTableTitles extends Component {
       np.filters !== p.filters ||
       np.filtersParams !== p.filtersParams ||
       np.columnsWidth.toString() !== p.columnsWidth.toString() ||
-      np.sort !== p.sort ||
-      np.sortAsc !== p.sortAsc
+      np.sort.column !== p.sort.column ||
+      np.sort.asc !== p.sort.asc
     )
   }
 
   onSort (filter, ev) {
-    this.props.setSort(filter.sort)
+    let asc = this.props.sort === filter.sort ? !this.props.sortAsc : true
+    this.props.setSort(filter.sort, asc)
   }
 
   onResize (filter, deltaX) {
@@ -47,11 +53,11 @@ export default class DataTableTitles extends Component {
 
   onSetHighlightMode (filter, mode) {
     let params = this.props.filtersParams[filter.name]
-    this.props.setFilter(filter.name, {...params, highlight: mode})
+    this.props.setParam(filter.name, {...params, highlight: mode})
   }
 
   onClearFilter (filter) {
-    this.props.setFilter(filter.name, null)
+    this.props.setParam(filter.name, true)
   }
 
   render () {
@@ -61,7 +67,7 @@ export default class DataTableTitles extends Component {
     let titles = filters.map((filter, i) => {
       let sortStatus = (sort === filter.sort) ? sortAsc : null
       let width = columnsWidth[i]
-      let hasParams = !!filtersParams[filter.name]
+      let hasParams = typeof filtersParams[filter.name] === 'object'
       let highlightMode = hasParams ? !!filtersParams[filter.name].highlight : false
 
       return (

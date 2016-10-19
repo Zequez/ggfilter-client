@@ -1,7 +1,9 @@
 import FilterApp from './components/FilterApp'
 import FilterTitle from './components/FilterTitle'
 import reducer from './reducer'
-import * as filter from './filter'
+
+const filter = require('./filter')
+
 import * as games from './games'
 import * as sfilter from './sfilter'
 import * as ui from './ui'
@@ -11,12 +13,12 @@ module.exports = {
   FilterTitle,
   reducer,
 
-  toggleFilter: filter.toggle,
-  setFilter: filter.setParam,
-  setParam: filter.setParam,
-  setSort: filter.setSort,
-  resetFilter: filter.resetFilters,
-  setFilterFromB64: filter.setFilterFromB64,
+  actions: {
+    setParam: filter.actions.setParam,
+    setSort: filter.actions.setSort,
+    setFilterFromB64: filter.actions.setFilterFromB64,
+    resetFilter: filter.actions.reset
+  },
 
   editMode: ui.editMode,
 

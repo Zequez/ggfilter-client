@@ -1,13 +1,26 @@
 import generateAutoTitle from './generateAutoTitle'
-import defaultFilter from '../config/defaultFilter'
-import filtersDefinitions from '../config/filtersDefinitions'
+import defaultFilter from '../config/defaultFilterDelta'
+import definitions from '../lib/definitions'
 
-describe('generateAutoTitle', () => {
+describe.only('generateAutoTitle', () => {
   it('should generate a basic title based on a single filter', () => {
     let title = generateAutoTitle({params: {superFilter: {value: 123}}}, {
       superFilter: (p) => 'SUPER TITLE! ' + p.value
     })
     expect(title).to.equal('Games SUPER TITLE! 123')
+  })
+
+  it('should ignore true/false titles that do not have params', () => {
+    let title = generateAutoTitle(
+      {params: {superFilter: {value: 123}, megaTitle: {value: 321}, other: true, anything: false}},
+      {
+        superFilter: (p) => 'SUPER TITLE! ' + p.value,
+        megaTitle: (p) => 'MEGA TITLE! ' + p.value,
+        other: (p) => 'other',
+        anything: (p) => 'anything'
+      }
+    )
+    expect(title).to.equal('Games SUPER TITLE! 123, MEGA TITLE! 321')
   })
 
   it('should generate a title based on multiple filters', () => {
@@ -70,7 +83,7 @@ describe('generateAutoTitle', () => {
   })
 
   it('should also return null if there are no filters and sorting is the default', () => {
-    let title = generateAutoTitle({params: {}, sort: 'name'}, {
+    let title = generateAutoTitle({params: {}, sort: defaultFilter.sort}, {
       superFilter: () => 'SUPER <TITLE>!'
     })
     expect(title).to.equal(null)
@@ -85,24 +98,24 @@ describe('generateAutoTitle', () => {
     })
 
     it("should not add the sorting order if it's the default", () => {
-      let title = generateAutoTitle({params: {supa: {}}, sort: defaultFilter.sort, sortAsc: true}, {
+      let title = generateAutoTitle({params: {supa: {}}, sort: defaultFilter.sort}, {
         supa: () => 'yup'
       })
       expect(title).to.equal('Games yup')
     })
 
     it('should add the sorting order ascending', () => {
-      let title = generateAutoTitle({params: {supa: {}}, sort: 'steam_id', sortAsc: true}, {
+      let title = generateAutoTitle({params: {supa: {}}, sort: {column: 'steam_id', asc: true}}, {
         supa: () => 'yup'
       })
-      expect(title).to.equal(`Games yup, sorted by <strong>${filtersDefinitions.steam_id.title} in ascending order</strong>`)
+      expect(title).to.equal(`Games yup, sorted by <strong>${definitions.filters.steam_id.title} in ascending order</strong>`)
     })
 
     it('should add the sorting order descending', () => {
-      let title = generateAutoTitle({params: {supa: {}}, sort: 'steam_id', sortAsc: false}, {
+      let title = generateAutoTitle({params: {supa: {}}, sort: {column: 'steam_id', asc: false}}, {
         supa: () => 'yup'
       })
-      expect(title).to.equal(`Games yup, sorted by <strong>${filtersDefinitions.steam_id.title} in descending order</strong>`)
+      expect(title).to.equal(`Games yup, sorted by <strong>${definitions.filters.steam_id.title} in descending order</strong>`)
     })
   })
 })

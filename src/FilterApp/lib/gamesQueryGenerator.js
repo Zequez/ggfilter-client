@@ -1,22 +1,17 @@
-import filtersDefinitions from '../config/filtersDefinitions'
+import { selectors } from '../filter'
 
-export default function gamesQueryGenerator (filter, page, options) {
-  // Some filters require more than one column to work,
-  // not neccesarily visible, we need to get all those columns
-  var columns = []
-  for (let i = 0; i < filter.visible.length; ++i) {
-    let columnInputs = filtersDefinitions[filter.visible[i]].columnInputs
-    for (let k in columnInputs) {
-      columns.push(columnInputs[k])
-    }
-  }
+const { filterSelector, queryColumnsSelector, activeParamsSelector } = selectors
 
-  let sortDir = filter.sortAsc ? 'asc' : 'desc'
+export default function gamesQueryGenerator (state, page, options) {
+  let filter = filterSelector(state)
+  let columns = queryColumnsSelector(state)
+  let params = activeParamsSelector(state)
+  let sortDir = filter.sort.asc ? 'asc' : 'desc'
 
   return {
-    filters: JSON.stringify(filter.params),
-    sort: `${filter.sort}_${sortDir}`,
-    limit: options.batchSize,
+    filters: JSON.stringify(params),
+    sort: `${filter.sort.column}_${sortDir}`,
+    limit: 20,
     columns: columns,
     page: page
   }

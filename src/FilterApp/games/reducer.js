@@ -26,12 +26,12 @@ export const GET_GAMES_FAILED = 'GET_GAMES_FAILED'
 export function getGames (page = 0) {
   return function (dispatch, getState) {
     let state = getState()
-    let filter = filterSelector(state)
+    // let filter = filterSelector(state)
     let options = state.options
 
     dispatch({type: GET_GAMES_START, page})
 
-    let queryFilter = gamesQueryGenerator(filter, page, options)
+    let queryFilter = gamesQueryGenerator(state, page, options)
     return apiGetGames(queryFilter)
       .then(games => {
         return dispatch({
