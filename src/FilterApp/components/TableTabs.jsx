@@ -2,17 +2,12 @@ import React, { Component } from 'react'
 
 import { TABS } from '../ui/reducer'
 
-import plusFilterParams from '../config/plusFilterParams'
 import filtersShortcuts from '../config/filtersShortcuts'
 
 import TableTabsLink from './TableTabsLink'
 import FilterShortcut from './FilterShortcut'
 
 export default class TableTabs extends Component {
-  onDecrapify = () => {
-    this.props.setParams(plusFilterParams)
-  }
-
   render () {
     console.logRender('TableTabs')
 
