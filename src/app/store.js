@@ -3,11 +3,12 @@ import thunkMiddleware from 'redux-thunk'
 import logger from './middlewares/logger'
 // import crashReporter from './middlewares/crashReporter'
 import callAPI from './middlewares/callAPI'
+import andDispatch from './middlewares/andDispatch'
 
 import reducer from './reducer'
 
 const store = createStore(reducer, {}, compose(
-  applyMiddleware(thunkMiddleware, callAPI, logger), //crashReporter
+  applyMiddleware(thunkMiddleware, callAPI, andDispatch, logger), //crashReporter
   window.devToolsExtension ? window.devToolsExtension() : f => f
 ))
 

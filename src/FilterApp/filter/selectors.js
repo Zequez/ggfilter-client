@@ -48,5 +48,5 @@ export const visibleFiltersDefinitionsSelector = createSelector(
 
 export const queryColumnsSelector = createSelector(
   visibleFiltersDefinitionsSelector,
-  (visible) => visible.reduce((cols, f) => cols.concat(f.columnInputs), [])
+  (visible) => visible.reduce((cols, f) => cols.concat(Object.values(f.columnInputs)), [])
 )
