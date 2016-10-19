@@ -44,10 +44,9 @@ function renderWithHot (App) {
 
 if (module.hot) {
   module.hot.accept()
-  // module.hot.accept('src/app/components/App', () => {
-  //   const App = require('src/app/components/App').default
-  //   renderWithHot(App)
-  // })
+  module.hot.dispose(() => {
+    router.unbind()
+  })
 }
 
 export default {}
