@@ -1,5 +1,6 @@
-import * as reducer from './reducer'
+const reducer = require('./reducer')
 
 module.exports = {
-  ...reducer
+  reducer: reducer.reducer,
+  actions: reducer
 }

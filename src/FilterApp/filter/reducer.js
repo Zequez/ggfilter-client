@@ -1,6 +1,8 @@
 // import { u } from 'shared/lib/utils'
 import { decode } from 'shared/lib/b64FilterGenerator'
 import defaultFilter from '../config/defaultFilter'
+// console.log(require('../games'))
+const { getGames } = require('../games').actions
 
 import { combiner, deleteDefaultsFromMask } from './lib/filterMutator'
 
@@ -24,13 +26,12 @@ export const DIRTY_ACTIONS = [
 // Helpers
 // =============================================================================
 
-
 // =============================================================================
 // Actions Creators
 // =============================================================================
 
-export const reset = () => ({ type: RESET })
-export const mutate = (mask) => ({ type: MUTATE, mask })
+export const reset = () => ({ type: RESET, dispatch: getGames() })
+export const mutate = (mask) => ({ type: MUTATE, mask, dispatch: getGames() })
 export const setParam = (name, value) => mutate({params: {[name]: value}})
 export const setSort = (name, asc) => mutate({sort: { column: name, asc }})
 

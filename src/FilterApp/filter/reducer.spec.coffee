@@ -1,5 +1,4 @@
 import sinon from 'sinon'
-import games from '../games'
 
 import {
   MUTATE,
@@ -7,9 +6,6 @@ import {
   setParam,
   reducer
 } from './reducer'
-
-getGamesResult = 'does not matter'
-sinon.stub(games, 'getGames').returns(getGamesResult)
 
 asyncAction = (actionResult, state, dispatch = ->) ->
   getState = -> state
@@ -76,19 +72,36 @@ describe 'FilterApp/filter reducer', ->
 
 
   describe 'action creators', ->
+    # sandbox = null
+    # getGamesResult = 'does not matter'
+    # beforeEach ->
+    #   sandbox = sinon.sandbox.create()
+    #   games = require('../games')
+    #   # console.log(games.actions.getGames)
+    #   sandbox.stub(require('../games/reducer'), 'getGames', -> getGamesResult)
+    #   console.log(require('../games').actions.getGames())
+    #   # console.log(getGamesResult)
+    #
+    # afterEach ->
+    #   sandbox.restore()
+
+    nd = (action)->
+      delete action.dispatch
+      action
+
     describe '.setParam', ->
       it 'should return a mutation action to show the param', ->
-        expect(setParam('potato', true)).to.deep.equal({
+        expect(nd(setParam('potato', true))).to.deep.equal({
           type: MUTATE
           mask: { params: { potato: true } }
         })
       it 'should return a mutation to hide the param', ->
-        expect(setParam('potato', false)).to.deep.equal({
+        expect(nd(setParam('potato', false))).to.deep.equal({
           type: MUTATE,
           mask: { params: { potato: false } }
         })
       it 'should return a mutation to set the param to any value', ->
-        expect(setParam('potato', {value: 'whoa'})).to.deep.equal({
+        expect(nd(setParam('potato', {value: 'whoa'}))).to.deep.equal({
           type: MUTATE,
           mask: { params: { potato: {value: 'whoa'} } }
         })

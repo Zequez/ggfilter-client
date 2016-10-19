@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import store from 'src/app/store'
 import router from 'src/app/routes'
 
-import { getGamesIfNoGames } from 'src/FilterApp'
+const { getGamesIfNoGames } = require('src/FilterApp').actions
 import { setAllTags } from 'shared/reducers/tagsReducer'
 import { getCurrentUser } from 'shared/reducers/authReducer'
 
