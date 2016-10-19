@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { partial } from 'shared/lib/utils'
-import { setParam } from 'src/FilterApp/filter'
+import { setParam } from '../reducer'
 
 import ControlComponent from './ControlComponent'
 

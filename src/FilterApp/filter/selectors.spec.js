@@ -1,22 +1,17 @@
-import {
-  filterSelector,
-  plusFilterSelector,
-  visibleFiltersDefinitionsSelector } from './selectors'
-import filtersDefinitions from '../config/filtersDefinitions'
+import { visibleFiltersSelector } from './selectors'
 
-describe('FilterApp/filter selectors', () => {
-  describe('filterSelector', () => {
-    it('should get the current filter from the state', () => {
-      expect(filterSelector({filter: {potatoSalad: true}}))
-        .to.deep.equal({potatoSalad: true})
-    })
-  })
-
-  describe('visibleFiltersDefinitionsSelector', () => {
-    it('should get the filters definitions of the visible filters in the state', () => {
-      expect(visibleFiltersDefinitionsSelector({filter: {
-        visible: ['name', 'steam_id']
-      }})).to.deep.equal([filtersDefinitions.name, filtersDefinitions.steam_id])
+describe('FilterApp/filter', () => {
+  describe('visibleFiltersSelector', () => {
+    it('should return all the filter names which param is not false', () => {
+      expect(visibleFiltersSelector({
+        filter: {
+          params: {
+            foo: 'aaa',
+            bar: false,
+            potato: { salad: 'yes' }
+          }
+        }
+      })).to.deep.equal(['foo', 'potato'])
     })
   })
 })

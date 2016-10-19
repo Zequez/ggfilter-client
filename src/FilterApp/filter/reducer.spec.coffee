@@ -6,8 +6,8 @@ import {
   autoToggle,
   setParam,
   reducer
-} from './newReducer'
-# injector = require('inject?../config/defaultFilterDelta!./newReducer')
+} from './reducer'
+# injector = require('inject?../config/defaultFilterDelta!./reducer')
 
 getGamesResult = 'does not matter'
 sinon.stub(games, 'getGames').returns(getGamesResult)
@@ -16,7 +16,7 @@ asyncAction = (actionResult, state, dispatch = ->) ->
   getState = -> state
   actionResult(dispatch, getState)
 
-describe 'FilterApp/filter newReducer', ->
+describe 'FilterApp/filter reducer', ->
   describe 'reducer', ->
     describe MUTATE, ->
       initialState =

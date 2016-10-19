@@ -6,7 +6,7 @@ import { MODES, resetUi, setMode } from 'shared/reducers/uiReducer'
 // TODO: Somehow, don't do this, because we're looking inside FilterApp
 // But if we expose this on src/FilterApp, we get a circular reference
 // Figure it out.
-import { setFilterFromB64, reset as resetFilters } from 'src/FilterApp/filter/newReducer'
+import { setFilterFromB64, reset as resetFilters } from 'src/FilterApp/filter/reducer'
 import { getFromSid, getFromOfficialSlug } from 'src/FilterApp/sfilter/reducer'
 
 let basicModeRoute = (path, mode) => {

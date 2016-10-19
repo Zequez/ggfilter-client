@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { partial } from 'shared/lib/utils'
 
 import definitions from '../../lib/definitions'
-import { visibleFiltersSelector } from '../newSelectors'
-import { setParam } from '../newReducer'
+import { visibleFiltersSelector } from '../selectors'
+import { setParam } from '../reducer'
 
 import ToggleComponent from './ToggleComponent'
 

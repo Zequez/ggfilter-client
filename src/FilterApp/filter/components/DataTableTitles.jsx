@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { adjustColumnWidth, clearColumnWidth } from '../../ui/reducer'
-import { setSort, setParam } from 'src/FilterApp/filter'
+import { setSort, setParam } from '../reducer'
 
 import DataTableTitle from './DataTableTitle'
 
