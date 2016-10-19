@@ -2,7 +2,7 @@ import generateAutoTitle from './generateAutoTitle'
 import defaultFilter from '../config/defaultFilter'
 import definitions from '../lib/definitions'
 
-describe.only('generateAutoTitle', () => {
+describe('generateAutoTitle', () => {
   it('should generate a basic title based on a single filter', () => {
     let title = generateAutoTitle({params: {superFilter: {value: 123}}}, {
       superFilter: (p) => 'SUPER TITLE! ' + p.value

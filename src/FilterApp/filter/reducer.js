@@ -1,11 +1,6 @@
 // import { u } from 'shared/lib/utils'
 import { decode } from 'shared/lib/b64FilterGenerator'
-// import { getGames } from '../games'
-// import filtersSectionsFlatSort from '../config/filtersSectionsFlatSort'
-
 import defaultFilter from '../config/defaultFilter'
-
-// import { filterSelector } from './selectors'
 
 import { combiner, deleteDefaultsFromMask } from './lib/filterMutator'
 
@@ -29,10 +24,6 @@ export const DIRTY_ACTIONS = [
 // Helpers
 // =============================================================================
 
-const deprecate = (fun, warn) => (...args) => {
-  console.warn(`Deprecated function ${warn}`)
-  return fun(...args)
-}
 
 // =============================================================================
 // Actions Creators
@@ -58,19 +49,6 @@ export const addTagFilter = (tagId) => (dispatch, getState) => {
 }
 
 export const setFilterFromB64 = (b64) => mutate(decode(b64))
-
-// Deprecated names
-export const setFilter = deprecate(setParam, 'setFilter, use setParam')
-export const toggle = deprecate(setParam, 'toggle, use setParam')
-export const setFullFilter = deprecate(mutate, 'setFullFilter, use mutate')
-export const resetFilters = deprecate(reset, 'resetFilters, use reset')
-export const autoToggle = (name) => (dispatch, getState) => {
-  let { params } = getState()
-  return dispatch(params[name]
-    ? toggle(name, false)
-    : toggle(name, true)
-  )
-}
 
 // =============================================================================
 // Reducer

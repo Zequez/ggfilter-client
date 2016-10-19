@@ -7,7 +7,6 @@ import {
   setParam,
   reducer
 } from './reducer'
-# injector = require('inject?../config/defaultFilter!./reducer')
 
 getGamesResult = 'does not matter'
 sinon.stub(games, 'getGames').returns(getGamesResult)
@@ -28,26 +27,27 @@ describe 'FilterApp/filter reducer', ->
           asc: true
 
       it 'should update the state normally', ->
-        expect(reducer(initialState, { type: MUTATE, mask: {
-          params:
-            foo: {pen: 'cuck'}
-            potato: {value: true}
-          sort:
-            column: 'name'
-        }}))
-        .to.deep.equal({
-          params:
-            foo: {pen: 'cuck'}
-            galaxy: {bar: 'rsa'}
-            potato: {value: true}
-          sort:
-            column: 'name'
-            asc: true
-        })
+        sinon.test ->
+          this.stub require('../config/defaultFilter'), 'default',
+            params: {}
+            sort: {}
 
-      inject = (files, cb) ->
-        for key of files
-          fil
+          expect(reducer(initialState, { type: MUTATE, mask: {
+            params:
+              foo: {pen: 'cuck'}
+              potato: {value: true}
+            sort:
+              column: 'name'
+          }}))
+          .to.deep.equal({
+            params:
+              foo: {pen: 'cuck'}
+              galaxy: {bar: 'rsa'}
+              potato: {value: true}
+            sort:
+              column: 'name'
+              asc: true
+          })
 
       it 'should remove things that are already present in the default filter', ->
         sinon.test ->
@@ -76,53 +76,21 @@ describe 'FilterApp/filter reducer', ->
 
 
   describe 'action creators', ->
-    describe '.autoToggle', ->
-      it 'should dispatch a mutation to show the param', ->
-        dispatch = sinon.stub()
-        asyncAction(
-          autoToggle('potato'),
-          {params: {potato: false}},
-          dispatch
-        )
-
-        expect(dispatch.getCall(0).args[0]).to.deep.equal({
-          type: MUTATE
-          mask: { params: { potato: true } }
-          dispatch: getGamesResult
-        })
-
-      it 'should dispatch a mutation to hide the param', ->
-        dispatch = sinon.stub()
-        asyncAction(
-          autoToggle('potato'),
-          {params: {potato: {value: 'woah'}}},
-          dispatch
-        )
-
-        expect(dispatch.getCall(0).args[0]).to.deep.equal({
-          type: MUTATE
-          mask: { params: { potato: false } }
-          dispatch: getGamesResult
-        })
-
     describe '.setParam', ->
       it 'should return a mutation action to show the param', ->
         expect(setParam('potato', true)).to.deep.equal({
           type: MUTATE
           mask: { params: { potato: true } }
-          dispatch: getGamesResult
         })
       it 'should return a mutation to hide the param', ->
         expect(setParam('potato', false)).to.deep.equal({
           type: MUTATE,
           mask: { params: { potato: false } }
-          dispatch: getGamesResult
         })
       it 'should return a mutation to set the param to any value', ->
         expect(setParam('potato', {value: 'whoa'})).to.deep.equal({
           type: MUTATE,
           mask: { params: { potato: {value: 'whoa'} } }
-          dispatch: getGamesResult
         })
 
     describe '.addTagFilter', ->
