@@ -1,6 +1,6 @@
 import autoTitleDefinitions from '../config/autoTitleDefinitions'
 import { escapeHtml as h } from 'shared/lib/utils'
-import defaultFilter from '../config/defaultFilterDelta'
+import defaultFilter from '../config/defaultFilter'
 import filtersDefinitions from '../lib/definitions'
 
 function strongificate (text) {

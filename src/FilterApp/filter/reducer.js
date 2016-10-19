@@ -3,7 +3,7 @@ import { decode } from 'shared/lib/b64FilterGenerator'
 // import { getGames } from '../games'
 // import filtersSectionsFlatSort from '../config/filtersSectionsFlatSort'
 
-import defaultFilter from '../config/defaultFilterDelta'
+import defaultFilter from '../config/defaultFilter'
 
 // import { filterSelector } from './selectors'
 

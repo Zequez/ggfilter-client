@@ -1,5 +1,5 @@
 import generateAutoTitle from './generateAutoTitle'
-import defaultFilter from '../config/defaultFilterDelta'
+import defaultFilter from '../config/defaultFilter'
 import definitions from '../lib/definitions'
 
 describe.only('generateAutoTitle', () => {

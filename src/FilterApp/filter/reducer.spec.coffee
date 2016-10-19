@@ -7,7 +7,7 @@ import {
   setParam,
   reducer
 } from './reducer'
-# injector = require('inject?../config/defaultFilterDelta!./reducer')
+# injector = require('inject?../config/defaultFilter!./reducer')
 
 getGamesResult = 'does not matter'
 sinon.stub(games, 'getGames').returns(getGamesResult)
@@ -51,7 +51,7 @@ describe 'FilterApp/filter reducer', ->
 
       it 'should remove things that are already present in the default filter', ->
         sinon.test ->
-          this.stub require('../config/defaultFilterDelta'), 'default',
+          this.stub require('../config/defaultFilter'), 'default',
             params:
               foo: { pen: 'cuck' }
               potato: { value: true }

@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 import definitions from '../lib/definitions'
-import defaultFilter from '../config/defaultFilterDelta'
+import defaultFilter from '../config/defaultFilter'
 import { NAME } from './constants'
 
 export const filterSelector = (s) => ({
