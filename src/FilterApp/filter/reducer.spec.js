@@ -1,15 +1,8 @@
-import sinon from 'sinon'
-
-import {
+const {
   MUTATE,
   setParam,
   reducer
-} from './reducer'
-
-// let asyncAction = function (actionResult, state, dispatch = function () {}) {
-//   let getState = () => state
-//   return actionResult(dispatch, getState)
-// }
+} = require('./reducer')
 
 describe('FilterApp/filter reducer', () => {
   describe('reducer', () =>
@@ -26,71 +19,70 @@ describe('FilterApp/filter reducer', () => {
       }
 
       it('should update the state normally', () => {
-        sinon.test(() => {
-          this.stub(require('../config/defaultFilter'), 'default', {
-            params: {},
-            sort: {}
-          })
+        jest.mock('../config/defaultFilter', () => ({
+          params: {},
+          sort: {}
+        }))
 
-          expect(reducer(initialState, {
-            type: MUTATE,
-            mask: {
-              params: {
-                foo: {pen: 'cuck'},
-                potato: {value: true}
-              },
-              sort: {
-                column: 'name'
-              }
-            }
-          }))
-          .toEqual({
+        expect(reducer(initialState, {
+          type: MUTATE,
+          mask: {
             params: {
               foo: {pen: 'cuck'},
-              galaxy: {bar: 'rsa'},
               potato: {value: true}
             },
             sort: {
-              column: 'name',
-              asc: true
+              column: 'name'
             }
-          })
+          }
+        }))
+        .toEqual({
+          params: {
+            foo: {pen: 'cuck'},
+            galaxy: {bar: 'rsa'},
+            potato: {value: true}
+          },
+          sort: {
+            column: 'name',
+            asc: true
+          }
         })
       })
 
       it('should remove things that are already present in the default filter', () => {
-        sinon.test(() => {
-          this.stub(require('../config/defaultFilter'), 'default', {
-            params: {
-              foo: { pen: 'cuck' },
-              potato: { value: true }
-            },
-            sort: {
-              column: 'name',
-              asc: false
-            }
-          })
+        jest.mock('../config/defaultFilter', () => ({
+          params: {
+            foo: { pen: 'cuck' },
+            potato: { value: true }
+          },
+          sort: {
+            column: 'name',
+            asc: false
+          }
+        }))
 
-          expect(reducer(initialState, {
-            type: MUTATE,
-            mask: {
-              params: {
-                foo: {pen: 'cuck'},
-                potato: {value: true}
-              },
-              sort: {
-                column: 'name'
-              }
-            }
-          }))
-          .toEqual({
+        jest.resetModules()
+        let reducer = require('./reducer').reducer
+
+        expect(reducer(initialState, {
+          type: MUTATE,
+          mask: {
             params: {
-              galaxy: {bar: 'rsa'}
+              foo: {pen: 'cuck'},
+              potato: {value: true}
             },
             sort: {
-              asc: true
+              column: 'name'
             }
-          })
+          }
+        }))
+        .toEqual({
+          params: {
+            galaxy: {bar: 'rsa'}
+          },
+          sort: {
+            asc: true
+          }
         })
       })
     })
