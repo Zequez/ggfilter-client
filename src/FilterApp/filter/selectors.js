@@ -5,18 +5,22 @@ import definitions from '../lib/definitions'
 import defaultFilter from '../config/defaultFilter'
 import { NAME } from './constants'
 
-export const filterSelector = (s) => ({
-  params: {
-    ...defaultFilter.params,
-    ...s[NAME].params
-  },
-  sort: {
-    ...defaultFilter.sort,
-    ...s[NAME].sort
-  }
-})
-
 export const deltaFilterSelector = (s) => s[NAME]
+
+export const filterSelector = createSelector(
+  deltaFilterSelector,
+  (filter) => ({
+    params: {
+      ...defaultFilter.params,
+      ...filter.params
+    },
+    sort: {
+      ...defaultFilter.sort,
+      ...filter.sort
+    }
+  })
+)
+
 export const isDirtySelector = (s) => !isEmpty(s[NAME].params) || !isEmpty(s[NAME].sort)
 
 export const paramsSelector = createSelector(
