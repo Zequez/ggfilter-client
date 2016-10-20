@@ -28,7 +28,8 @@ export default class StateWatcher {
     let state = this.store.getState()
 
     let path
-    let route = this.routes.find((r) => path = r.matchState(state))
+    // let route =
+    this.routes.find((r) => path = r.matchState(state))
 
     if (path) {
       // console.info('SelectorRouter: MATCHED STATE', route.name)

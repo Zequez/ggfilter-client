@@ -23,7 +23,7 @@ module.exports = {
     }
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.coffee', '.sass', '.scss'],
+    extensions: ['.js', '.jsx', '.sass', '.scss'],
     alias: {
       shared: srcPath + 'shared/',
       images: srcPath + 'images/',
@@ -43,7 +43,6 @@ module.exports = {
         test: /\.(png|jpg|gif)$/,
         loader: 'url?limit=8192'
       },
-      { test: /\.coffee$/, loader: 'babel!coffee' },
       { test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url?limit=8192' }
     ]
   }

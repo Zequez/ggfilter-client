@@ -31,7 +31,7 @@ describe('b54FilterGenerator', () => {
           foo: { gt: 111, lt: 222 },
           bar: { tags: [1, 2, 3] }
         }
-      }, definitions)).to.deep.equal({
+      }, definitions)).toEqual({
         '!': { v: 123 },
         '#': { g: 111, l: 222 },
         '&': { t: [1, 2, 3] }
@@ -44,7 +44,7 @@ describe('b54FilterGenerator', () => {
           man: true,
           wow: false
         }
-      }, definitions)).to.deep.equal({
+      }, definitions)).toEqual({
         '\'': 1,
         '(': 0
       })
@@ -56,7 +56,7 @@ describe('b54FilterGenerator', () => {
           column: 'salad',
           asc: true
         }
-      }, definitions)).to.deep.equal({
+      }, definitions)).toEqual({
         ' ': { c: '"', a: 1 }
       })
     })
@@ -69,7 +69,7 @@ describe('b54FilterGenerator', () => {
         '#': { g: 111, l: 222 },
         '&': { t: [1, 2, 3] },
         ' ': { c: '"', a: 1 }
-      }, definitions)).to.deep.equal({
+      }, definitions)).toEqual({
         params: {
           potato: { value: 123 },
           foo: { gt: 111, lt: 222 },
@@ -86,7 +86,7 @@ describe('b54FilterGenerator', () => {
       expect(maximize({
         '\'': 1,
         '(': 0
-      }, definitions)).to.deep.equal({
+      }, definitions)).toEqual({
         params: {
           man: true,
           wow: false

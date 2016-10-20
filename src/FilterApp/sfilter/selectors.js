@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect'
+// import { createSelector } from 'reselect'
 import { NAME } from './constants'
 
 export const sfilterSelector = (s) => s[NAME].data

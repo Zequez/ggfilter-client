@@ -11,7 +11,7 @@ describe('autotitle definitions', () => {
   function testBasic (name, params, expectation, store = {}) {
     let jp = JSON.stringify(params)
     it(`should have a "${name}" definition ${jp}`, () => {
-      expect(autoTitleDefinitions[name](params, store)).to.deep.equal(expectation)
+      expect(autoTitleDefinitions[name](params, store)).toEqual(expectation)
     })
   }
 

@@ -18,7 +18,7 @@ describe('FilterApp/filter', () => {
               potato: { salad: 'yes' }
             }
           }
-        })).to.deep.equal(['foo', 'potato'])
+        })).toEqual(['foo', 'potato'])
       })
     })
   })

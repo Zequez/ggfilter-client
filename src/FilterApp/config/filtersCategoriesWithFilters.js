@@ -1,5 +1,4 @@
 import filtersDefinitions from './filtersDefinitions'
-import filtersDefinitions from './filtersDefinitions'
 
 let categories = {}
 for (let filterName in filtersDefinitions) {

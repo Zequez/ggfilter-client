@@ -6,7 +6,7 @@ describe('SelectorRouter/Route', () => {
       let sr = new Route('name', '/:foo/:bar/potato/:salad', [], [])
 
       expect(sr.stringifyArray([true, true, 1, 123, 321, 'HEY', 'weon']))
-        .to.equal('/321/HEY/potato/weon')
+        .toBe('/321/HEY/potato/weon')
     })
   })
 
@@ -30,7 +30,7 @@ describe('SelectorRouter/Route', () => {
       let sr = new Route('name', '/f/:sid', selectors, [])
 
       expect(sr.matchState(state))
-        .to.equal('/f/12345')
+        .toBe('/f/12345')
     })
 
     it('should not match if any selector returns false', () => {
@@ -41,7 +41,7 @@ describe('SelectorRouter/Route', () => {
       ]
       let sr = new Route('name', '/f/:sid', selectors, [])
       expect(sr.matchState(state))
-        .to.equal(null)
+        .toBe(null)
     })
 
     it('should continue matching with false selectors with the force option', () => {
@@ -53,7 +53,7 @@ describe('SelectorRouter/Route', () => {
       ]
       let sr = new Route('name', '/f/:sid', selectors, [])
       expect(sr.matchState(state, true))
-        .to.equal('/f/12345')
+        .toBe('/f/12345')
     })
   })
 
@@ -65,7 +65,7 @@ describe('SelectorRouter/Route', () => {
       let sr = new Route('name', '/f/:sid', [], [objectAction, funAction])
 
       expect(sr.matchPath('/f/123456'))
-        .to.deep.equal([
+        .toEqual([
           {type: 'SET_MODE', mode: 'potato'},
           {type: 'SET_SID', sid: '123456'}
         ])
