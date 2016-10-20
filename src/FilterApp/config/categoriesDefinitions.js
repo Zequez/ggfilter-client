@@ -1,12 +1,12 @@
 export default {
   'Game info': [
     'steam_thumbnail',
+    'images',
     'steam_id',
     'name',
     'released_at_absolute',
     'released_at',
     'tags',
-    'images',
     'sysreq_index_centile'
   ],
   'Price': [
