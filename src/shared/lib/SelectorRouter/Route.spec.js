@@ -10,7 +10,7 @@ describe('SelectorRouter/Route', () => {
     })
   })
 
-  describe.only('matchState', () => {
+  describe('matchState', () => {
     let state = {
       mode: 'potato',
       sfilter: {
