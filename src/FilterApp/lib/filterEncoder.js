@@ -5,7 +5,9 @@ const keysMap = {
   value: 'v',
   gt: 'g',
   lt: 'l',
-  tags: 't'
+  tags: 't',
+  column: 'c',
+  asc: 'a'
 }
 
 const charStartFrom = 32
@@ -32,6 +34,8 @@ function fromNameKey (filterKey, defs) {
 }
 
 function toMappedKeys (obj) {
+  if (obj === true) return 1
+  if (obj === false) return 0
   let newObj = {}
   for (let key in obj) {
     newObj[keysMap[key]] = obj[key]
@@ -40,6 +44,8 @@ function toMappedKeys (obj) {
 }
 
 function fromMappedKeys (obj) {
+  if (obj === 1) return true
+  if (obj === 0) return false
   let newObj = {}
   for (let key in obj) {
     newObj[mapKeys[key]] = obj[key]
@@ -87,6 +93,7 @@ export function maximize (minFilt, defs = definitions) {
       maximized.params[fromNameKey(key, defs)] = fromMappedKeys(minFilt[key])
     }
   }
+
   if (minFilt[sortKey]) {
     maximized.sort = fromMinSort(minFilt[sortKey], defs)
   }
