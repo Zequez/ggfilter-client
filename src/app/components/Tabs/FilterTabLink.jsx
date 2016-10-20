@@ -3,16 +3,14 @@ import { connect } from 'react-redux'
 import router from 'src/app/routes'
 import { setMode, MODES } from 'shared/reducers/uiReducer'
 
-let routesNames = ['filter', 'filterB64', 'filterSid', 'filterOfficial']
-
 @connect((s) => ({
-  currentRouteName: s.ui.routeName
+  mode: s.ui.mode
 }), {
   setMode
 })
 export default class FilterTabLink extends Component {
   static propTypes = {
-    currentRouteName: t.string,
+    mode: t.string,
     setMode: t.func.isRequired
   }
 
@@ -22,8 +20,8 @@ export default class FilterTabLink extends Component {
   }
 
   render () {
-    let { currentRouteName } = this.props
-    let activeClass = ~routesNames.indexOf(currentRouteName) ? 'active' : ''
+    let { mode } = this.props
+    let activeClass = mode === MODES.filter ? 'active' : ''
     let path = router.url(MODES.filter)
 
     return (
