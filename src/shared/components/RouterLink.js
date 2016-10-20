@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import router from 'src/app/routes'
 
 @connect((s) => ({
-  currentRouteName: s.ui.routeName
+  currentRouteName: s.ui.mode
 }))
 export default class RouterLink extends Component {
   static propTypes = {
@@ -17,7 +17,6 @@ export default class RouterLink extends Component {
 
   onClick = (path, ev) => {
     ev.preventDefault()
-    console.info(path)
     router.history.push(path)
   }
 

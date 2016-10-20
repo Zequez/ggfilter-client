@@ -6,7 +6,7 @@ const {
   actions: {
     DIRTY_ACTIONS: FILTER_DIRTY_ACTIONS,
     RESET: FILTER_RESET,
-    setFullFilter
+    set: setFullFilter
   },
   selectors: {
     deltaFilterSelector
@@ -15,6 +15,7 @@ const {
 
 export const initialState = {
   dirty: false,
+  filterDirty: false,
   error: null,
   data: {
     sid: null,
@@ -55,7 +56,7 @@ export const getFromSid = (sid) => ({
   types: [GET_REQUEST, GET_SUCCESS, GET_FAILURE],
   callAPI: () => api.getFilter(sid),
   after: (response, state, dispatch) => {
-    dispatch(setFullFilter(JSON.parse(response.filter)))
+    return dispatch(setFullFilter(JSON.parse(response.filter)))
   },
   autoCamelize: true
 })
@@ -68,13 +69,13 @@ export const getFromOfficialSlug = (officialSlug) => ({
   autoCamelize: true
 })
 export const createFilter = (extraParams) => ({
-  condition: (s) => s.sfilter.dirty,
+  condition: (s) => s.sfilter.dirty || s.sfilter.filterDirty,
   types: [CREATE_REQUEST, CREATE_SUCCESS, CREATE_FAILURE],
   callAPI: (state) => api.createFilter(state.sfilter.stageData, deltaFilterSelector(state)),
   autoCamelize: true
 })
 export const updateFilter = (extraParams) => ({
-  condition: (s) => s.sfilter.data.sid && s.sfilter.dirty,
+  condition: (s) => s.sfilter.data.sid && (s.sfilter.dirty || s.sfilter.filterDirty),
   types: [UPDATE_REQUEST, UPDATE_SUCCESS, UPDATE_FAILURE],
   callAPI: (state) => api.updateFilter(state.sfilter.stageData, deltaFilterSelector(state)),
   autoCamelize: true
@@ -107,6 +108,7 @@ export function reducer (state = initialState, action) {
     case GET_SUCCESS:
       state = u(state, {
         dirty: {$set: false},
+        filterDirty: {$set: false},
         error: {$set: null},
         data: {$set: action.response},
         stageData: {$set: action.response}
@@ -120,7 +122,7 @@ export function reducer (state = initialState, action) {
   }
 
   if (~FILTER_DIRTY_ACTIONS.indexOf(action.type)) {
-    state = u(state, {dirty: {$set: true}})
+    state = u(state, {filterDirty: {$set: true}})
   }
 
   return state

@@ -2,6 +2,7 @@ import filtersDefinitions from '../config/filtersDefinitions'
 import categoriesDefinitions from '../config/categoriesDefinitions'
 
 class FilterDefinition {
+  id = null
   name = ''
   title = ''
 
@@ -36,6 +37,7 @@ export class Definitions {
   categoriesWithFilters = {}
   sortedFilters = []
   sortedFiltersNames = []
+  byId = {}
 
   constructor (filtersDefinitions, categoriesDefinitions) {
     this._extendFilters(filtersDefinitions)
@@ -62,7 +64,9 @@ export class Definitions {
 
   _extendFilters (filtersDefinitions) {
     for (let name in filtersDefinitions) {
-      filtersDefinitions[name] = new FilterDefinition(name, filtersDefinitions[name])
+      let def = new FilterDefinition(name, filtersDefinitions[name])
+      filtersDefinitions[name] = def
+      this.byId[def.id] = name
     }
   }
 

@@ -14,6 +14,7 @@ const initialState = {
 // Actions
 // =============================================================================
 
+export const SET = 'filter/SET'
 export const MUTATE = 'filter/MUTATE'
 export const RESET = 'filter/RESET'
 
@@ -49,6 +50,7 @@ export const addTagFilter = (tagId) => (dispatch, getState) => {
 }
 
 export const setFilterFromB64 = (b64) => mutate(decode(b64))
+export const set = (filter) => ({ type: SET, filter, dispatch: getGames() })
 
 // =============================================================================
 // Reducer
@@ -56,6 +58,9 @@ export const setFilterFromB64 = (b64) => mutate(decode(b64))
 
 export function reducer (state = initialState, action) {
   switch (action.type) {
+    case SET:
+      state = action.filter
+      break
     case MUTATE:
       state = combiner(state, action.mask)
       deleteDefaultsFromMask(state, defaultFilter)

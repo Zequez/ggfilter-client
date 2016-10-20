@@ -18,33 +18,22 @@ export default class LocationWatcher {
     this._bindHistory()
   }
 
-  start () {
-    this.watching++
-  }
-
-  stop () {
-    this.watching--
-  }
+  start () { this.watching++ }
+  stop () { this.watching-- }
+  unbind () { this.unlisten() }
 
   matchRoute () {
-    var { pathname, query } = this.location
-    var match
-    let route
+    let { pathname } = this.location
 
-    for (let i = 0; i < this.routes.length; ++i) {
-      route = this.routes[i]
-      if ((match = route.matchRoute(pathname, query))) break
-    }
+    let actions
+    let route = this.routes.find((r) => actions = r.matchPath(pathname))
 
-    if (match) {
-      return [route, match, this.location]
+    if (route) {
+      console.info('SelectorRouter: MATCHED ROUTE', route.path)
+      return actions
     } else {
       console.warn('Current location does not match any known route')
     }
-  }
-
-  unbind () {
-    this.unlisten()
   }
 
   _bindHistory () {
@@ -53,10 +42,8 @@ export default class LocationWatcher {
     this.unlisten = this.history.listen((location, action) => {
       this.location = this._parseDumbLocation(location)
       if (this.watching === 0) {
-        let matches = this.matchRoute()
-        if (matches) {
-          this.onMatch(...matches)
-        }
+        let actions = this.matchRoute()
+        if (actions) { this.onMatch(actions) }
       } else {
         this.onStateInducedLocationChange(location)
       }
@@ -67,6 +54,7 @@ export default class LocationWatcher {
     if (!dumbLocation.pathname) {
       console.error("You're pushing something wrong. Pushed location:", dumbLocation)
     }
+
     return {
       pathname: dumbLocation.pathname || '/',
       search: dumbLocation.search || '',

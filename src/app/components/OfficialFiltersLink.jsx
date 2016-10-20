@@ -1,7 +1,7 @@
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
 import { appropiateFilterPath } from 'shared/lib/appropiateFilterPath'
-import history from 'shared/lib/StateRouter/history'
+import history from 'shared/lib/SelectorRouter/history'
 import { partial } from 'shared/lib/utils'
 import { loadFilter } from 'src/FilterApp'
 import { lockFilterIntoView } from 'shared/reducers/uiReducer'

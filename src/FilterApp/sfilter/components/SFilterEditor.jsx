@@ -1,6 +1,5 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
-import { encode } from '../../lib/filterEncoder'
 import router from 'src/app/routes'
 import config from 'src/app/config'
 import { createFilter, updateFilter, destroyFilter, changeAttr } from '../reducer'
@@ -8,15 +7,19 @@ import { setOption } from 'shared/reducers/optionsReducer'
 import generateAutoTitle from '../../lib/generateAutoTitle'
 import SFilterForm from './SFilterForm'
 import SFilterFormSimple from './SFilterFormSimple'
+import { appropiateFilterPath } from 'shared/lib/appropiateFilterPath'
 
-const { filterSelector, deltaFilterSelector } = require('../../filter').selectors
+const urls = require('../lib/urls')
+
+const { filterSelector, encodedFilterSelector } = require('../../filter').selectors
+const { isDirty, sfilterSelectorStage } = require('../selectors')
 
 @connect((s) => ({
   filter: filterSelector(s),
-  deltaFilter: deltaFilterSelector(s),
+  encodedFilter: encodedFilterSelector(s),
   tags: s.tags,
-  dirty: s.sfilter.dirty,
-  sfilter: s.sfilter.stageData,
+  dirty: isDirty(s),
+  sfilter: sfilterSelectorStage(s),
   currentUser: s.auth.currentUser,
   advancedMode: s.options.sFilterAdvancedMode
 }), {
@@ -29,7 +32,7 @@ const { filterSelector, deltaFilterSelector } = require('../../filter').selector
 export default class SFilterEditor extends Component {
   static propTypes = {
     filter: t.object.isRequired,
-    deltaFilter: t.object.isRequired,
+    encodedFilter: t.string,
     tags: t.array.isRequired,
     createFilter: t.func.isRequired,
     updateFilter: t.func.isRequired,
@@ -69,28 +72,13 @@ export default class SFilterEditor extends Component {
     return autotitle ? 'Default: ' + autotitle : null
   }
 
-  officialUrl () {
-    if (this.props.sfilter.officialSlug) {
-      return config.origin + router.url('filterOfficial', this.props.sfilter.officialSlug)
-    } else {
-      return ''
-    }
-  }
-
-  sidUrl () {
-    if (this.props.sfilter.sid) {
-      return config.origin + router.url('filterSid', this.props.sfilter.sid)
-    } else {
-      return ''
-    }
-  }
-
-  b64Url () {
-    return config.origin + router.url('filterB64', encode(this.props.deltaFilter))
+  b64Path () {
+    console.log(this.props.encodedFilter)
+    return router.url('filterB64', this.props.encodedFilter)
   }
 
   appropiateFilterUrl () {
-    return this.officialUrl() || this.sidUrl() || this.b64Url()
+    return config.origin + (appropiateFilterPath(this.props.sfilter) || this.b64Path())
   }
 
   onSubmit = (createNew) => {
@@ -106,7 +94,7 @@ export default class SFilterEditor extends Component {
   }
 
   render () {
-    let { dirty, sfilter, currentUser, advancedMode } = this.props
+    let { dirty, sfilter, currentUser, advancedMode, encodedFilter } = this.props
     let { saveToAccount } = this.state
 
     let autotitle = this.generateAutoTitle()
@@ -125,9 +113,9 @@ export default class SFilterEditor extends Component {
             dirty={dirty}
             sfilter={sfilter}
             currentUser={currentUser}
-            dynamicUrl={this.b64Url()}
-            fixedUrl={this.sidUrl()}
-            officialUrl={this.officialUrl()}
+            dynamicUrl={urls.b64(encodedFilter)}
+            fixedUrl={urls.sid(sfilter)}
+            officialUrl={urls.official(sfilter)}
             saveToAccount={saveToAccount}
             onChange={this.props.changeAttr}
             onSubmit={this.onSubmit}
@@ -136,8 +124,8 @@ export default class SFilterEditor extends Component {
         ) : (
           <SFilterFormSimple
             dirty={dirty}
-            url={this.appropiateFilterUrl()}
-            onSubmit={this.onSubmit.bind(this, true)}/>
+            url={urls.appropiate(sfilter, encodedFilter)}
+            onSubmit={this.onSubmit}/>
         )}
 
       </div>

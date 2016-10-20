@@ -1,5 +1,4 @@
-import StateRouter from 'shared/lib/StateRouter/StateRouter'
-import { encode } from 'src/FilterApp/lib/filterEncoder'
+import SelectorRouter from 'shared/lib/SelectorRouter/SelectorRouter'
 
 import { MODES, resetUi, setMode } from 'shared/reducers/uiReducer'
 
@@ -8,48 +7,57 @@ import { MODES, resetUi, setMode } from 'shared/reducers/uiReducer'
 // Figure it out.
 import { setFilterFromB64, reset as resetFilters } from 'src/FilterApp/filter/reducer'
 import { getFromSid, getFromOfficialSlug } from 'src/FilterApp/sfilter/reducer'
+import { isDirtySelector, encodedFilterSelector } from 'src/FilterApp/filter/selectors'
+import { sfilterSelector, filterIsDirty as sfilterFilterIsDirty } from 'src/FilterApp/sfilter/selectors'
 
-let basicModeRoute = (path, mode) => {
-  return [path, {ui: {mode: mode}}, setMode(mode)]
-}
+let modeSelector = (s) => s.ui.mode
 
-export default new StateRouter({
-  sysreq: basicModeRoute('/system-requirements', MODES.sysreq),
-  officialFilters: basicModeRoute('/interesting-filters', MODES.officialFilters),
-  feedback: basicModeRoute('/feedback', MODES.feedback),
-  contribute: basicModeRoute('/contribute', MODES.contribute),
-  sources: basicModeRoute('/sources', MODES.sources),
-  myFilters: basicModeRoute('/myFilters', MODES.myFilters),
-  tos: basicModeRoute('/tos', MODES.tos),
-  help: basicModeRoute('/help', MODES.help),
-  about: basicModeRoute('/about', MODES.about),
-  contact: basicModeRoute('/contact', MODES.contact),
-  aboutSysreq: basicModeRoute('/about-sysreq', MODES.aboutSysreq),
+// Mode route
+let mr = (path, mode, extraSelect = [], extraActions = []) => ([
+  path,
+  [[modeSelector, mode], ...extraSelect],
+  [setMode(mode), ...extraActions]
+])
 
-  filterB64: [
-    '/b/:filterB64', {
-      ui: {mode: MODES.filter},
-      sfilter: {dirty: true}
-    },
-    [setMode(MODES.filter), setFilterFromB64],
-    (state) => ({filterB64: encode(state.filter)})
-  ],
-  filterOfficial: [
-    '/:officialSlug', {
-      ui: {mode: MODES.filter},
-      sfilter: {data: {officialSlug: ':officialSlug'}}
-    },
-    [setMode(MODES.filter), getFromOfficialSlug]
-  ],
-  filterSid: [
-    '/f/:filterSid', {
-      ui: {mode: MODES.filter},
-      sfilter: {data: {sid: ':filterSid'}}
-    },
-    [setMode(MODES.filter), getFromSid]
-  ],
-  filter:
-    ['/', {ui: {mode: MODES.filter}}, setMode(MODES.filter)],
-  root:
-    ['/', {no: 'match'}, [resetUi, resetFilters]]
+export default new SelectorRouter({
+  sysreq: mr('/system-requirements', MODES.sysreq),
+  officialFilters: mr('/interesting-filters', MODES.officialFilters),
+  feedback: mr('/feedback', MODES.feedback),
+  contribute: mr('/contribute', MODES.contribute),
+  sources: mr('/sources', MODES.sources),
+  myFilters: mr('/your-filters', MODES.myFilters),
+  tos: mr('/tos', MODES.tos),
+  help: mr('/help', MODES.help),
+  about: mr('/about', MODES.about),
+  contact: mr('/contact', MODES.contact),
+  aboutSysreq: mr('/about-sysreq', MODES.aboutSysreq),
+  filterOfficial: mr('/:officialSlug', MODES.filter,
+    [[sfilterFilterIsDirty, false], [sfilterSelector, (sf) => sf.officialSlug]],
+    [getFromOfficialSlug]
+  ),
+  filterSid: mr('/f/:filterSid', MODES.filter,
+    [[sfilterFilterIsDirty, false], [sfilterSelector, (sf) => sf.sid]],
+    [getFromSid]
+  ),
+  filterB64: mr('/b/:filterB54', MODES.filter,
+    [[isDirtySelector], [encodedFilterSelector]],
+    [setFilterFromB64]
+  ),
+  filter: mr('/', MODES.filter),
+  root: ['/', [], [[resetUi], [resetFilters]]]
+
+  // nested: [...mr('/', MODES.potato), {
+  //   official: [':/officialSlug',
+  //     [[sfilterSelector, (sf) => sf.officialSlug]],
+  //     [getFromOfficialSlug]
+  //   ],
+  //   b64: ['/b/:filterB54',
+  //     [[dirtySelector], [encodedFilterSelector]],
+  //     [setFilterFromB64]
+  //   ],
+  //   sid: ['/b/:filterSid',
+  //     [[sfilterSelector, (sf) => sf.sid]],
+  //     [getFromSid]
+  //   ]
+  // }]
 })

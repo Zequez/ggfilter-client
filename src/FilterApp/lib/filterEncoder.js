@@ -1,4 +1,5 @@
 import invert from 'lodash/invert'
+import { isEmpty } from 'shared/lib/utils'
 import definitions from './definitions'
 
 const keysMap = {
@@ -17,13 +18,6 @@ const mapKeys = invert(keysMap)
 const sortKey = String.fromCharCode(charStartFrom)
 const sortAsc = 'a'
 const sortCol = 'c'
-
-function isEmpty (obj) {
-  for (let key in obj) {
-    return false
-  }
-  return true
-}
 
 function toNameKey (filterName, defs) {
   return String.fromCharCode(charStartFrom + defs.filters[filterName].id)
@@ -111,6 +105,7 @@ export function decode (encodedMinFilter) {
     let minFilter = JSON.parse(atob(encodedMinFilter))
     return maximize(minFilter)
   } catch (e) {
+    console.warn('Error parsing encoded filter:', e)
     return null
   }
 }

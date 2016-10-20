@@ -12,17 +12,9 @@ export default class StateWatcher {
     this._bindStore()
   }
 
-  start () {
-    this.watching++
-  }
-
-  stop () {
-    this.watching--
-  }
-
-  unbind () {
-    this.unsubscribe()
-  }
+  start () { this.watching++ }
+  stop () { this.watching-- }
+  unbind () { this.unsubscribe() }
 
   _bindStore () {
     this.unsubscribe = this.store.subscribe(() => {
@@ -33,17 +25,14 @@ export default class StateWatcher {
   }
 
   _matchState () {
-    let match
-    let route
     let state = this.store.getState()
-    for (let i = 0; i < this.routes.length; ++i) {
-      route = this.routes[i]
-      if ((match = route.matchState(state))) break
-    }
 
-    if (match) {
-      // console.info('STATE-BASED-ROUTE-MATCH')
-      this.onMatch(route, match)
+    let path
+    let route = this.routes.find((r) => path = r.matchState(state))
+
+    if (path) {
+      // console.info('SelectorRouter: MATCHED STATE', route.name)
+      this.onMatch(path)
     } else {
       console.warn('Current state does not match any known route')
     }

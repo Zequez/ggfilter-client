@@ -1,4 +1,5 @@
 require('src/app/style')
+require('shared/lib/polyfills')
 
 import React from 'react'
 import ReactDOM from 'react-dom'
@@ -11,7 +12,7 @@ const { getGamesIfNoGames } = require('src/FilterApp').actions
 import { setAllTags } from 'shared/reducers/tagsReducer'
 import { getCurrentUser } from 'shared/reducers/authReducer'
 
-import history from 'shared/lib/StateRouter/history'
+import history from 'shared/lib/SelectorRouter/history'
 
 import App from 'src/app/components/App'
 import { getTags } from 'shared/lib/api'

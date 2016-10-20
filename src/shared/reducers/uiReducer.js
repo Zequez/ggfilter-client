@@ -1,5 +1,4 @@
 import { u } from 'shared/lib/utils'
-import { ROUTE_CHANGE } from 'shared/lib/StateRouter/routeChangeAction'
 
 export const MODES = {
   filter: 'filter',
@@ -65,7 +64,7 @@ let reductions = {
   [UI_UNLOCK_FILTER_FROM_VIEW]: (s) => u(s, { filterLockedInView: { $set: false } }),
   [UI_RESET]: (s) => initialState,
 
-  [ROUTE_CHANGE]: (s, {route, stateInduced, location}) => (
+  [UI_ROUTE_CHANGE]: (s, {route, stateInduced, location}) => (
     u(s, { routeName: {$set: route.name} })
   )
 }

@@ -41,8 +41,10 @@ export default function callAPIMiddleware ({ dispatch, getState }) {
     return callAPI(state).then(
       response => {
         if (autoCamelize) response = camelizeKeys(response)
-        if (after) after(response, state, dispatch)
-        return dispatch({...payload, response, type: successType})
+        let afterPromise
+        if (after) afterPromise = after(response, state, dispatch)
+        let result = dispatch({...payload, response, type: successType})
+        return afterPromise || result
       },
       error => dispatch({...payload, error, type: failureType}),
     )

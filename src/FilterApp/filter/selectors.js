@@ -1,4 +1,6 @@
 import { createSelector } from 'reselect'
+import { isEmpty } from 'shared/lib/utils'
+import { encode } from '../lib/filterEncoder'
 import definitions from '../lib/definitions'
 import defaultFilter from '../config/defaultFilter'
 import { NAME } from './constants'
@@ -15,6 +17,7 @@ export const filterSelector = (s) => ({
 })
 
 export const deltaFilterSelector = (s) => s[NAME]
+export const isDirtySelector = (s) => !isEmpty(s[NAME].params) || !isEmpty(s[NAME].sort)
 
 export const paramsSelector = createSelector(
   filterSelector,
@@ -49,4 +52,9 @@ export const visibleFiltersDefinitionsSelector = createSelector(
 export const queryColumnsSelector = createSelector(
   visibleFiltersDefinitionsSelector,
   (visible) => visible.reduce((cols, f) => cols.concat(Object.values(f.columnInputs)), [])
+)
+
+export const encodedFilterSelector = createSelector(
+  deltaFilterSelector,
+  (filter) => encode(filter)
 )
