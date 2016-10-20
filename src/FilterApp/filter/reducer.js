@@ -1,7 +1,6 @@
 // import { u } from 'shared/lib/utils'
-import { decode } from 'shared/lib/b64FilterGenerator'
+import { decode } from '../lib/filterEncoder'
 import defaultFilter from '../config/defaultFilter'
-// console.log(require('../games'))
 const { getGames } = require('../games').actions
 
 import { combiner, deleteDefaultsFromMask } from './lib/filterMutator'

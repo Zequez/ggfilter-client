@@ -2,6 +2,7 @@ import options from './controlsOptions'
 
 export default {
   name: {
+    id: 1,
     title: 'Name',
     column: 'Link',
     columnInputs: { text: 'name', urlValue: 'steam_id' },
@@ -9,11 +10,13 @@ export default {
     width: 200
   },
   steam_id: {
+    id: 2,
     title: 'Steam ID',
     control: 'Number',
     width: 65
   },
   images: {
+    id: 3,
     title: 'Images',
     control: 'Null',
     column: 'Images',
@@ -21,6 +24,7 @@ export default {
     sort: false
   },
   lowest_steam_price: {
+    id: 4,
     title: 'Steam price (US)',
     control: 'FancyRange',
     controlOptions: options.controls.range.price,
@@ -29,6 +33,7 @@ export default {
     width: 100
   },
   steam_discount: {
+    id: 5,
     title: 'Steam sale %',
     control: 'FancyRange',
     controlOptions: options.controls.range.discount,
@@ -36,6 +41,7 @@ export default {
     width: 50
   },
   playtime_mean: {
+    id: 6,
     title: 'Playtime avg',
     control: 'FancyRange',
     controlOptions: {
@@ -47,6 +53,7 @@ export default {
     width: 60
   },
   playtime_median: {
+    id: 7,
     title: 'Playtime median',
     control: 'FancyRange',
     controlOptions: {
@@ -58,6 +65,7 @@ export default {
     width: 60
   },
   playtime_sd: {
+    id: 8,
     title: 'Playtime σ',
     control: 'FancyRange',
     controlOptions: {
@@ -69,6 +77,7 @@ export default {
     width: 60
   },
   playtime_rsd: {
+    id: 9,
     title: 'Playtime relative σ',
     control: 'FancyRange',
     controlOptions: {
@@ -80,6 +89,7 @@ export default {
     width: 60
   },
   playtime_mean_ftb: {
+    id: 10,
     title: 'Playtime avg / $',
     control: 'FancyRange',
     controlOptions: {
@@ -91,6 +101,7 @@ export default {
     width: 60
   },
   playtime_median_ftb: {
+    id: 11,
     title: 'Playtime median / $',
     control: 'FancyRange',
     controlOptions: {
@@ -102,6 +113,7 @@ export default {
     width: 60
   },
   metacritic: {
+    id: 12,
     title: 'Metacritic',
     control: 'FancyRange',
     controlOptions: {
@@ -111,6 +123,7 @@ export default {
     width: 60
   },
   steam_reviews_count: {
+    id: 13,
     title: '# Steam reviews',
     control: 'FancyRange',
     controlOptions: {
@@ -120,6 +133,7 @@ export default {
     width: 60
   },
   steam_reviews_ratio: {
+    id: 14,
     title: 'Steam reviews ratio',
     control: 'FancyRange',
     controlOptions: {
@@ -133,30 +147,35 @@ export default {
     width: 100
   },
   features: {
+    id: 15,
     title: 'Steam features',
     control: 'Boolean',
     column: 'Boolean',
     width: 120 + 10
   },
   platforms: {
+    id: 16,
     title: 'Platforms',
     control: 'Boolean',
     column: 'Boolean',
     width: 72 + 10
   },
   players: {
+    id: 17,
     title: 'Players',
     control: 'Boolean',
     column: 'Boolean',
     width: 96 + 10
   },
   vr: {
+    id: 18,
     title: 'Virtual reality',
     control: 'Boolean',
     column: 'Boolean',
     width: 24 + 10
   },
   controller_support: {
+    id: 19,
     title: 'Controller support',
     control: 'FancyRange',
     controlOptions: {
@@ -172,6 +191,7 @@ export default {
     }
   },
   steam_thumbnail: {
+    id: 20,
     title: 'Thumbnail',
     control: 'Null',
     column: 'Images',
@@ -180,6 +200,7 @@ export default {
     sort: false
   },
   tags: {
+    id: 21,
     title: 'Tags',
     control: 'Tags',
     controlOptions: {
@@ -194,11 +215,13 @@ export default {
     sort: false
   },
   // system_requirements: {
+  //   id: 22,
   //   title: 'System Requirements',
   //   column: SystemReqColumn,
   //   width: 600
   // },
   sysreq_index_centile: {
+    id: 23,
     title: 'Sys.Req. Index',
     control: 'FancyRange',
     controlOptions: {
@@ -207,6 +230,7 @@ export default {
     width: 150
   },
   released_at: {
+    id: 24,
     title: 'Released at',
     control: 'FancyRange',
     controlOptions: options.controls.range.dateBack,
@@ -214,6 +238,7 @@ export default {
     width: 100
   },
   released_at_absolute: {
+    id: 25,
     title: 'Release year',
     control: 'FancyRange',
     controlOptions: options.controls.range.datesAbsolute,

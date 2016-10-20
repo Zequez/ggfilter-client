@@ -1,6 +1,5 @@
 import router from 'src/app/routes'
 import config from 'src/app/config'
-import { encode } from 'shared/lib/b64FilterGenerator'
 
 function officialPath (sfilter) {
   if (sfilter.officialSlug) {
@@ -18,12 +17,8 @@ function sidPath (sfilter) {
   }
 }
 
-function b64Path (sfilter) {
-  return config.origin + router.url('filterB64', encode(sfilter))
-}
-
 export function appropiateFilterPath (sfilter) {
-  return officialPath(sfilter) || sidPath(sfilter) || b64Path(sfilter)
+  return officialPath(sfilter) || sidPath(sfilter)
 }
 
 export function appropiateFilterUrl (sfilter) {

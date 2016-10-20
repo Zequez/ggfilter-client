@@ -1,5 +1,5 @@
 import StateRouter from 'shared/lib/StateRouter/StateRouter'
-import { encode } from 'shared/lib/b64FilterGenerator'
+import { encode } from 'src/FilterApp/lib/filterEncoder'
 
 import { MODES, resetUi, setMode } from 'shared/reducers/uiReducer'
 

@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
-import { encode } from 'shared/lib/b64FilterGenerator'
+import { encode } from '../../lib/filterEncoder'
 import router from 'src/app/routes'
 import config from 'src/app/config'
 import { createFilter, updateFilter, destroyFilter, changeAttr } from '../reducer'
@@ -9,10 +9,11 @@ import generateAutoTitle from '../../lib/generateAutoTitle'
 import SFilterForm from './SFilterForm'
 import SFilterFormSimple from './SFilterFormSimple'
 
-const { filterSelector } = require('../../filter').selectors
+const { filterSelector, deltaFilterSelector } = require('../../filter').selectors
 
 @connect((s) => ({
   filter: filterSelector(s),
+  deltaFilter: deltaFilterSelector(s),
   tags: s.tags,
   dirty: s.sfilter.dirty,
   sfilter: s.sfilter.stageData,
@@ -28,6 +29,7 @@ const { filterSelector } = require('../../filter').selectors
 export default class SFilterEditor extends Component {
   static propTypes = {
     filter: t.object.isRequired,
+    deltaFilter: t.object.isRequired,
     tags: t.array.isRequired,
     createFilter: t.func.isRequired,
     updateFilter: t.func.isRequired,
@@ -84,7 +86,7 @@ export default class SFilterEditor extends Component {
   }
 
   b64Url () {
-    return config.origin + router.url('filterB64', encode(this.props.filter))
+    return config.origin + router.url('filterB64', encode(this.props.deltaFilter))
   }
 
   appropiateFilterUrl () {

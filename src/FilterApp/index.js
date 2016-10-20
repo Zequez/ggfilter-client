@@ -8,6 +8,8 @@ const games = require('./games')
 import * as sfilter from './sfilter'
 import * as ui from './ui'
 
+import { encode, decode } from './lib/filterEncoder'
+
 module.exports = {
   FilterApp,
   FilterTitle,
@@ -19,6 +21,11 @@ module.exports = {
     setFilterFromB64: filter.actions.setFilterFromB64,
     resetFilter: filter.actions.reset,
     getGamesIfNoGames: games.actions.getGamesIfNoGames
+  },
+
+  lib: {
+    encode,
+    decode
   },
 
   editMode: ui.editMode,
