@@ -19,12 +19,12 @@ const sortKey = String.fromCharCode(charStartFrom)
 const sortAsc = 'a'
 const sortCol = 'c'
 
-function toNameKey (filterName, defs) {
-  return String.fromCharCode(charStartFrom + defs.filters[filterName].id)
+function toNameKey (filterName) {
+  return String.fromCharCode(charStartFrom + definitions.filters[filterName].id)
 }
 
-function fromNameKey (filterKey, defs) {
-  return defs.byId[filterKey.charCodeAt(0) - charStartFrom]
+function fromNameKey (filterKey) {
+  return definitions.byId[filterKey.charCodeAt(0) - charStartFrom]
 }
 
 function toMappedKeys (obj) {
@@ -47,36 +47,36 @@ function fromMappedKeys (obj) {
   return newObj
 }
 
-function toMinSort (sort, defs) {
+function toMinSort (sort) {
   let newSort = {}
-  if (sort.column) newSort[sortCol] = toNameKey(sort.column, defs)
+  if (sort.column) newSort[sortCol] = toNameKey(sort.column)
   if (sort.asc) newSort[sortAsc] = sort.asc ? 1 : 0
   return newSort
 }
 
-function fromMinSort (sort, defs) {
+function fromMinSort (sort) {
   let newSort = {}
-  if (sort[sortCol]) newSort.column = fromNameKey(sort[sortCol], defs)
+  if (sort[sortCol]) newSort.column = fromNameKey(sort[sortCol])
   if (sort[sortAsc]) newSort.asc = !!sort[sortAsc]
   return newSort
 }
 
 // Remove defs = definitions  after you figure out a way to do dependency injection
-export function minimize (filter, defs = definitions) {
+export function minimize (filter) {
   let minimized = {}
   if (filter.params) {
     for (let name in filter.params) {
-      minimized[toNameKey(name, defs)] = toMappedKeys(filter.params[name])
+      minimized[toNameKey(name, definitions)] = toMappedKeys(filter.params[name])
     }
   }
   if (filter.sort && !isEmpty(filter.sort)) {
-    minimized[sortKey] = toMinSort(filter.sort, defs)
+    minimized[sortKey] = toMinSort(filter.sort, definitions)
   }
 
   return minimized
 }
 
-export function maximize (minFilt, defs = definitions) {
+export function maximize (minFilt) {
   let maximized = {
     params: {},
     sort: {}
@@ -84,12 +84,12 @@ export function maximize (minFilt, defs = definitions) {
 
   for (let key in minFilt) {
     if (key !== sortKey) {
-      maximized.params[fromNameKey(key, defs)] = fromMappedKeys(minFilt[key])
+      maximized.params[fromNameKey(key)] = fromMappedKeys(minFilt[key])
     }
   }
 
   if (minFilt[sortKey]) {
-    maximized.sort = fromMinSort(minFilt[sortKey], defs)
+    maximized.sort = fromMinSort(minFilt[sortKey])
   }
 
   return maximized

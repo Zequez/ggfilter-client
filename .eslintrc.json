@@ -10,7 +10,8 @@
     "afterEach": true,
     "localStorage": true,
     "btoa": true,
-    "atob": true
+    "atob": true,
+    "jest": true
   },
   "rules": {
     "react/jsx-uses-react": 2,
