@@ -101,7 +101,7 @@ describe('FilterApp/filter reducer', () => {
       })
     })
 
-    describe.only(ADD_MASK, () => {
+    describe(ADD_MASK, () => {
       it('should add a mask to the state.masks', () => {
         withDefaultFilter({
           params: {},
