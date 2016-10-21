@@ -6,7 +6,6 @@ import { addMask, removeMask } from '../filter/reducer'
 import { filterMasksNames } from '../filter/selectors'
 
 import masks from '../config/masks'
-import FilterMask from './FilterMask'
 
 @connect((s) => ({
   activeMasks: filterMasksNames(s)

@@ -58,14 +58,13 @@ export const set = (filter) => ({ type: SET, filter, dispatch: getGames() })
 // Reducer
 // =============================================================================
 
-function deleteRedundant (state) {
-  return deleteRedundantAttrs(state, maskedFilterSelector(state, true))
+function deleteRedundant (state, maskedFilter) {
+  return deleteRedundantAttrs(state, maskedFilter)
 }
 
 function removeOverridenMasks (state) {
   let masksNames = state.masks
   masksNames.forEach((name) => {
-    console.log(masks)
     if (isMaskFullyOverriden(masks[name], state)) {
       masksNames = removeMaskName(masksNames, name)
     }
@@ -86,8 +85,10 @@ export function reducer (state = initialState, action) {
       state = action.filter
       break
     case MUTATE:
+      // We call it with the original state so it doesn't recompute al pedo
+      let maskedFilter = maskedFilterSelector(state, true)
       state = combiner(state, action.mask)
-      state = deleteRedundant(state)
+      state = deleteRedundant(state, maskedFilter)
       state = removeOverridenMasks(state)
       break
     case RESET:
@@ -95,12 +96,12 @@ export function reducer (state = initialState, action) {
       break
     case ADD_MASK:
       state = {...state, masks: state.masks.concat(action.mask)}
-      state = deleteRedundant(state, true)
+      state = deleteRedundant(state, maskedFilterSelector(state, true))
       break
     case REMOVE_MASK:
       let masksNames = removeMaskName(state.masks, action.mask)
       state = {...state, masks: masksNames}
-      state = deleteRedundant(state)
+      state = deleteRedundant(state, maskedFilterSelector(state, true))
       break
   }
 
