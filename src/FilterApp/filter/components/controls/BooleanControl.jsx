@@ -33,6 +33,11 @@ export default class BooleanControl extends Component {
     this.state.keys = Object.keys(this.state.enumValues)
   }
 
+  componentWillUpdate (np) {
+    this.state.or = np.query.or
+    this.state.value = np.query.value
+  }
+
   checked (val) {
     return (this.state.value & val) > 0
   }

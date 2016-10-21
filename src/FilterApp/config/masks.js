@@ -21,5 +21,11 @@ export default {
     params: {
       steam_discount: { gt: 1 }
     }
+  },
+  'vr': {
+    title: 'VR Games',
+    params: {
+      vr: { value: 0b11, or: true }
+    }
   }
 }
