@@ -151,28 +151,28 @@ export default {
     title: 'Steam features',
     control: 'Boolean',
     column: 'Boolean',
-    width: 120 + 10
+    width: 24 * 5 + 10
   },
   platforms: {
     id: 16,
     title: 'Platforms',
     control: 'Boolean',
     column: 'Boolean',
-    width: 72 + 10
+    width: 24 * 3 + 10
   },
   players: {
     id: 17,
     title: 'Players',
     control: 'Boolean',
     column: 'Boolean',
-    width: 96 + 10
+    width: 24 * 4 + 10
   },
   vr: {
     id: 18,
     title: 'Virtual reality',
     control: 'Boolean',
     column: 'Boolean',
-    width: 24 + 10
+    width: 24 * 2 + 10
   },
   controller_support: {
     id: 19,

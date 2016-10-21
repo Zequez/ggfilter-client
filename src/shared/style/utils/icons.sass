@@ -58,7 +58,11 @@ $fa-font-path: '~font-awesome/fonts/'
 .icon-local_co_op:before
   content: $fa-var-home
 
-.icon-vive:before
+.icon-vive
+  transform: rotate(-90deg) translateX(-1px)
+  &:before
+    content: $fa-var-play-circle
+.icon-oculus:before
   content: $fa-var-eye
 
 // Base filters icons
