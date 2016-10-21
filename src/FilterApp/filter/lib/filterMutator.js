@@ -2,11 +2,12 @@ import isEqual from 'lodash/isEqual'
 
 export function combiner (...filters) {
   let initial = filters.shift()
-  initial = { params: initial.params, sort: initial.sort }
+  initial = { ...initial }
 
   return filters.reduce((curr, mask) => {
     curr.params = { ...curr.params, ...mask.params }
     curr.sort = { ...curr.sort, ...mask.sort }
+    if (mask.masks) curr.masks = mask.masks
     return curr
   }, initial)
 }
@@ -40,9 +41,27 @@ function negateObjects (target, source) {
   }
 }
 
-export function deleteDefaultsFromMask (mask, defaultFilter) {
+export function deleteRedundantAttrs (mask, defaultFilter) {
   negateObjects(mask.params, defaultFilter.params, true)
   negateObjects(mask.sort, defaultFilter.sort, false)
 
   return mask
+}
+
+export function isMaskActive (filter, mask, deep = true) {
+  for (let key in mask) {
+    if (deep && typeof filter[key] === 'object') {
+      if (!isMaskActive(filter[key], mask[key])) return false
+    } else {
+      if (filter[key] !== mask[key]) return false
+    }
+  }
+  return true
+}
+
+export function reverseFilter (mask) {
+  let reversed = {}
+  for (let key in mask.params) {
+
+  }
 }

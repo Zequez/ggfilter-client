@@ -13,13 +13,13 @@
 // For now we can just imagine that FilterApp/games
 // it's actually a submodule of FilterApp/filter
 const {
-  filterSelector,
+  finalFilterSelector,
   queryColumnsSelector,
   activeParamsSelector
 } = require('../../filter/selectors')
 
 export default function filterQuery (state, page, options) {
-  let filter = filterSelector(state)
+  let filter = finalFilterSelector(state)
   let columns = queryColumnsSelector(state)
   let params = activeParamsSelector(state)
   let sortDir = filter.sort.asc ? 'asc' : 'desc'

@@ -23,6 +23,7 @@ export const GET_GAMES_FAILED = 'FilterApp/games/FAILED'
 // =============================================================================
 
 export function getGames (page = 0) {
+  // return () => Promise.resolve()
   return function (dispatch, getState) {
     let state = getState()
     // let filter = filterSelector(state)

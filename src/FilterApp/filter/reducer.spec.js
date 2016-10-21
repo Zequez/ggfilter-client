@@ -1,11 +1,13 @@
 const {
   MUTATE,
+  ADD_MASK,
+  REMOVE_MASK,
   setParam,
   reducer
 } = require('./reducer')
 
 describe('FilterApp/filter reducer', () => {
-  describe('reducer', () =>
+  describe('reducer', () => {
     describe(MUTATE, () => {
       let initialState = {
         params: {
@@ -15,7 +17,8 @@ describe('FilterApp/filter reducer', () => {
         sort: {
           column: 'steam_id',
           asc: true
-        }
+        },
+        masks: []
       }
 
       it('should update the state normally', () => {
@@ -23,6 +26,8 @@ describe('FilterApp/filter reducer', () => {
           params: {},
           sort: {}
         }))
+        jest.resetModules()
+        let reducer = require('./reducer').reducer
 
         expect(reducer(initialState, {
           type: MUTATE,
@@ -45,7 +50,8 @@ describe('FilterApp/filter reducer', () => {
           sort: {
             column: 'name',
             asc: true
-          }
+          },
+          masks: []
         })
       })
 
@@ -82,11 +88,28 @@ describe('FilterApp/filter reducer', () => {
           },
           sort: {
             asc: true
-          }
+          },
+          masks: []
         })
       })
     })
-  )
+
+    describe(ADD_MASK, () => {
+      it('should add a mask to the state.masks', () => {
+        let state = {params: {}, sort: {}, masks: ['hey']}
+        expect(reducer(state, {type: ADD_MASK, mask: 'potato'}))
+          .toEqual({params: {}, sort: {}, masks: ['hey', 'potato']})
+      })
+    })
+
+    describe(REMOVE_MASK, () => {
+      it('should remove a mask from the state.mask', () => {
+        let state = {params: {}, sort: {}, masks: ['hey', 'potato', 'salad']}
+        expect(reducer(state, {type: REMOVE_MASK, mask: 'potato'}))
+          .toEqual({params: {}, sort: {}, masks: ['hey', 'salad']})
+      })
+    })
+  })
 
   describe('action creators', () => {
     let nd = (action) => {

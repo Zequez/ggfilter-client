@@ -2,13 +2,11 @@
 import { decode } from '../lib/filterEncoder'
 import defaultFilter from '../config/defaultFilter'
 const { getGames } = require('../games').actions
+const masks = require('../config/masks')
 
-import { combiner, deleteDefaultsFromMask } from './lib/filterMutator'
-
-const initialState = {
-  params: {},
-  sort: {}
-}
+import { maskedFilterSelector } from './selectors'
+import { combiner, deleteRedundantAttrs } from './lib/filterMutator'
+import initialState from './initialState'
 
 // =============================================================================
 // Actions
@@ -17,6 +15,8 @@ const initialState = {
 export const SET = 'filter/SET'
 export const MUTATE = 'filter/MUTATE'
 export const RESET = 'filter/RESET'
+export const ADD_MASK = 'filter/ADD_MASK'
+export const REMOVE_MASK = 'filter/REMOVE_MASK'
 
 export const DIRTY_ACTIONS = [
   MUTATE
@@ -30,6 +30,8 @@ export const DIRTY_ACTIONS = [
 // Actions Creators
 // =============================================================================
 
+export const addMask = (mask) => ({ type: ADD_MASK, mask })
+export const removeMask = (mask) => ({ type: REMOVE_MASK, mask })
 export const reset = () => ({ type: RESET, dispatch: getGames() })
 export const mutate = (mask) => ({ type: MUTATE, mask, dispatch: getGames() })
 export const setParam = (name, value) => mutate({params: {[name]: value}})
@@ -49,7 +51,7 @@ export const addTagFilter = (tagId) => (dispatch, getState) => {
   dispatch(setParam('tags', newTagsFilter))
 }
 
-export const setFilterFromB64 = (b64) => mutate(decode(b64))
+export const setFilterFromB64 = (b64) => set(decode(b64))
 export const set = (filter) => ({ type: SET, filter, dispatch: getGames() })
 
 // =============================================================================
@@ -62,11 +64,21 @@ export function reducer (state = initialState, action) {
       state = action.filter
       break
     case MUTATE:
+
       state = combiner(state, action.mask)
-      deleteDefaultsFromMask(state, defaultFilter)
+      let maskedFilter = maskedFilterSelector(state, true)
+      deleteRedundantAttrs(state, maskedFilter)
       break
     case RESET:
       state = initialState
+      break
+    case ADD_MASK:
+      state = {...state, masks: state.masks.concat(action.mask)}
+      break
+    case REMOVE_MASK:
+      let masks = state.masks.concat([])
+      masks.splice(state.masks.indexOf(action.mask), 1)
+      state = {...state, masks: masks}
       break
   }
 

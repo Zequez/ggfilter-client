@@ -1,29 +1,39 @@
 import React, { PropTypes as t, Component } from 'react'
-// import { connect } from 'react-redux'
-import { objectMatchesExtension as ome } from 'shared/lib/utils'
-// import { setShortcut } from '../filter/reducer'
-// import { filterSelector } from '../filter/selectors'
+import { connect } from 'react-redux'
+import { addMask, removeMask } from '../filter/reducer'
+import { filterMasksNames } from '../filter/selectors'
 
-// @connect((s) => ({ currentFilter: filterSelector(s) }), { setShortcut })
+@connect((s) => ({
+  activeMasks: filterMasksNames(s)
+}), {
+  addMask,
+  removeMask
+})
 export default class FilterShortcut extends Component {
   static propTypes = {
     children: t.string,
     shortcut: t.object.isRequired,
-    // setShortcut: t.func.isRequired,
-    // currentFilter: t.object.isRequired
+
+    addMask: t.func.isRequired,
+    removeMask: t.func.isRequired,
+    activeMasks: t.arrayOf(t.string).isRequired
   }
 
   applyShortcut = () => {
-    // this.props.setShortcut(this.props.shortcut)
+    let shortcut = this.props.shortcut
+    if (this.isActive) {
+
+    }
+
+    this.props.setShortcut(shortcut)
   }
 
+  isActive = false
   render () {
     let { shortcut, currentFilter, children } = this.props
 
-    // let active =
-    //   ome(currentFilter, shortcut)
-    //   ? 'active' : ''
-    let active = ''
+    this.isActive = isMaskActive(currentFilter, shortcut)
+    let active = this.isActive ? 'active' : ''
 
     return (
       <li className='filter-shortcut'>

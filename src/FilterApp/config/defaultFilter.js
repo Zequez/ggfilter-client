@@ -9,8 +9,8 @@ export default {
     steam_discount: true,
     playtime_median_ftb: true,
     metacritic: false,
-    steam_reviews_count: { gt: 65 },
-    steam_reviews_ratio: { gt: 80 },
+    steam_reviews_count: true,
+    steam_reviews_ratio: true,
     platforms: true,
     players: true,
     vr: true,
@@ -25,7 +25,7 @@ export default {
     released_at: true
   }),
   sort: {
-    column: 'playtime_median_ftb',
-    asc: false
+    column: 'name',
+    asc: true
   }
 }

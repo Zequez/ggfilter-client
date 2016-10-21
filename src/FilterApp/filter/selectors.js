@@ -1,30 +1,41 @@
 import { createSelector } from 'reselect'
-import { isEmpty } from 'shared/lib/utils'
 import { encode } from '../lib/filterEncoder'
+import { combiner } from './lib/filterMutator'
 import definitions from '../lib/definitions'
 import defaultFilter from '../config/defaultFilter'
+import masks from '../config/masks'
 import { NAME } from './constants'
+import initialState from './initialState'
 
-export const deltaFilterSelector = (s) => s[NAME]
+export const deltaFilterSelector =
+  (s, fragment = false) => {
+    return fragment ? s : s[NAME]
+  }
 
-export const filterSelector = createSelector(
+export const filterMasksNames = createSelector(
   deltaFilterSelector,
-  (filter) => ({
-    params: {
-      ...defaultFilter.params,
-      ...filter.params
-    },
-    sort: {
-      ...defaultFilter.sort,
-      ...filter.sort
-    }
-  })
+  (s) => s.masks
 )
 
-export const isDirtySelector = (s) => !isEmpty(s[NAME].params) || !isEmpty(s[NAME].sort)
+export const filterMasks = createSelector(
+  filterMasksNames,
+  (names) => names.map((name) => masks[name])
+)
+export const maskedFilterSelector = createSelector(
+  filterMasks,
+  (masksList) => combiner(defaultFilter, ...masksList)
+)
+
+export const finalFilterSelector = createSelector(
+  maskedFilterSelector,
+  deltaFilterSelector,
+  (maskedFilter, filter) => combiner(maskedFilter, filter)
+)
+
+export const isDirtySelector = (s) => s[NAME] !== initialState
 
 export const paramsSelector = createSelector(
-  filterSelector,
+  finalFilterSelector,
   (filter) => filter.params
 )
 

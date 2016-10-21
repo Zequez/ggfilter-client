@@ -19,7 +19,7 @@ jest.mock('./definitions', () => ({
   }
 }))
 
-const { minimize, maximize } = require('./filterEncoder')
+const { minimize, maximize, encode, decode, toB64, fromB64 } = require('./filterEncoder')
 
 sinon.config = { useFakeTimers: false } // sino fails without this for some reason
 
@@ -79,7 +79,8 @@ describe('FilterApp filterEncoder', () => {
         sort: {
           column: 'salad',
           asc: true
-        }
+        },
+        masks: []
       })
     })
 
@@ -92,8 +93,55 @@ describe('FilterApp filterEncoder', () => {
           man: true,
           wow: false
         },
-        sort: {}
+        sort: {},
+        masks: []
       })
     })
   })
+
+  describe('encode/decode', () => {
+    let filter = {params: {}, sort: {asc: true}, masks: ['potato', 'salad']}
+    let encodedThing = 'eyIgIjp7ImEiOjF9fQ'
+    let result = `potato+salad+${encodedThing}`
+
+    it('should encode', () => {
+      expect(encode(filter)).toBe(result)
+    })
+
+    it('should decode', () => {
+      expect(decode(result)).toEqual(filter)
+    })
+  })
+
+  describe('toB64/fromB64', () => {
+    let subject = {name: 'äöüÄÖÜçéèñ'}
+    it('should work work with strange UTF characters', () => {
+      let result = toB64(subject)
+      expect(result).not.toEqual(subject)
+      expect(fromB64(result)).toEqual(subject)
+    })
+
+    it('should replace + signs with underscores', () => {
+      expect(toB64(subject)).toEqual('eyJuYW1lIjoi5Pb8xNbc5_no8SJ9')
+      expect(fromB64('eyJuYW1lIjoi5Pb8xNbc5_no8SJ9')).toEqual(subject)
+    })
+  })
+
+  // describe('encode', () => {
+  //   it('should minimize and encode with B64, and should add the masks with a +', () => {
+  //     let filter = {params: {}, sort: {asc: true}, masks: ['potato', 'salad']}
+  //     let encodedThing = btoa(JSON.stringify(minimize(filter))).replace(/=/g, '')
+  //     expect(encode(filter))
+  //       .toBe(`potato+salad+${encodedThing}`)
+  //   })
+  // })
+  //
+  // describe('decode', () => {
+  //   it('should decode from B64, and it should read the masks from the encoded thing', () => {
+  //     let filter = {params: {}, sort: {asc: true}, masks: ['potato', 'salad']}
+  //     let encodedThing = btoa(JSON.stringify(minimize(filter))).replace(/=/g, '')
+  //     expect(decode(filter))
+  //       .toBe()
+  //   })
+  // })
 })

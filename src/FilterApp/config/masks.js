@@ -1,11 +1,13 @@
 export default {
-  decrapify: {
+  decrap: {
+    title: 'Decrapify',
     params: {
       steam_reviews_count: { gt: 65 },
       steam_reviews_ratio: { gt: 95 }
     }
   },
-  playtimeForTheBuck: {
+  ptftb: {
+    title: 'Playtime For The Buck',
     params: {
       playtime_median_ftb: { gt: 1.5 }
     },

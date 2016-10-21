@@ -31,14 +31,14 @@ export default new SelectorRouter({
   about: mr('/about', MODES.about),
   contact: mr('/contact', MODES.contact),
   aboutSysreq: mr('/about-sysreq', MODES.aboutSysreq),
-  filterOfficial: mr('/:officialSlug', MODES.filter,
-    [[sfilterFilterIsDirty, false], [sfilterSelector, (sf) => sf.officialSlug]],
-    [getFromOfficialSlug]
-  ),
-  filterSid: mr('/f/:filterSid', MODES.filter,
-    [[sfilterFilterIsDirty, false], [sfilterSelector, (sf) => sf.sid]],
-    [getFromSid]
-  ),
+  // filterOfficial: mr('/:officialSlug', MODES.filter,
+  //   [[sfilterFilterIsDirty, false], [sfilterSelector, (sf) => sf.officialSlug]],
+  //   [getFromOfficialSlug]
+  // ),
+  // filterSid: mr('/f/:filterSid', MODES.filter,
+  //   [[sfilterFilterIsDirty, false], [sfilterSelector, (sf) => sf.sid]],
+  //   [getFromSid]
+  // ),
   filterB64: mr('/b/:filterB54', MODES.filter,
     [[isDirtySelector], [encodedFilterSelector]],
     [setFilterFromB64]

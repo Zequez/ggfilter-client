@@ -79,7 +79,8 @@ export function minimize (filter) {
 export function maximize (minFilt) {
   let maximized = {
     params: {},
-    sort: {}
+    sort: {},
+    masks: []
   }
 
   for (let key in minFilt) {
@@ -95,15 +96,29 @@ export function maximize (minFilt) {
   return maximized
 }
 
+export function toB64 (obj) {
+  return btoa(JSON.stringify(obj)).replace(/=+$/, '').replace(/\+/g, '_')
+}
+
+export function fromB64 (str) {
+  return JSON.parse(atob(str.replace(/_/g, '+')))
+}
+
 export function encode (filter) {
+  let parts = filter.masks || []
   let minFilter = minimize(filter)
-  return btoa(JSON.stringify(minFilter)).replace(/=+$/, '')
+  let slug = toB64(minFilter)
+  return parts.concat(slug).join('+')
 }
 
 export function decode (encodedMinFilter) {
   try {
-    let minFilter = JSON.parse(atob(encodedMinFilter))
-    return maximize(minFilter)
+    let parts = encodedMinFilter.split('+')
+    let slug = parts.pop()
+    let minFilter = fromB64(slug)
+    let filter = maximize(minFilter)
+    filter.masks = parts
+    return filter
   } catch (e) {
     console.warn('Error parsing encoded filter:', e)
     return null

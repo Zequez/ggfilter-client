@@ -8,7 +8,7 @@ const games = require('./games')
 import * as sfilter from './sfilter'
 import * as ui from './ui'
 
-import { encode, decode } from './lib/filterEncoder'
+// import { encode, decode } from './lib/filterEncoder'
 
 module.exports = {
   FilterApp,
@@ -24,8 +24,7 @@ module.exports = {
   },
 
   lib: {
-    encode,
-    decode
+
   },
 
   editMode: ui.editMode,

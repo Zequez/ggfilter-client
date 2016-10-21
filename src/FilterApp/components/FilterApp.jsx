@@ -5,7 +5,7 @@ import definitions from '../lib/definitions'
 
 import { getGames, getMoreGames } from '../games'
 import { getColumnsWidth, getTab } from '../ui/selectors'
-import { filterSelector, visibleFiltersDefinitionsSelector } from '../filter/selectors'
+import { finalFilterSelector, visibleFiltersDefinitionsSelector } from '../filter/selectors'
 
 import DataTable from './DataTable'
 import TableTabs from './TableTabs'
@@ -13,7 +13,7 @@ import TableTabsContent from './TableTabsContent'
 import GamesLoader from './GamesLoader'
 
 @connect((s) => ({
-  filter: filterSelector(s),
+  filter: finalFilterSelector(s),
   visibleFilters: visibleFiltersDefinitionsSelector(s),
   games: s.games,
   tags: s.tags,

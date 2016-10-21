@@ -1,4 +1,10 @@
-import { combiner, createLegacyFilter, deleteDefaultsFromMask } from './filterMutator'
+import {
+  combiner,
+  createLegacyFilter,
+  deleteRedundantAttrs,
+  isMaskActive,
+  reverseFilter
+} from './filterMutator'
 
 let defaultFilter = {
   params: {
@@ -151,7 +157,7 @@ describe('createLegacyFilter', () =>
   )
 )
 
-describe('deleteDefaultsFromMask', () =>
+describe('deleteRedundantAttrs', () =>
   it("should remove stuff that it's part of the default from the mask", () => {
     let mask = {
       params: {
@@ -166,7 +172,7 @@ describe('deleteDefaultsFromMask', () =>
         asc: true
       }
     }
-    expect(deleteDefaultsFromMask(mask, {
+    expect(deleteRedundantAttrs(mask, {
       params: {
         steam_id: false,
         name: { value: 'Potato' },
@@ -195,3 +201,45 @@ describe('deleteDefaultsFromMask', () =>
     })
   })
 )
+
+describe('isMaskActive', () => {
+  let fun = isMaskActive
+
+  describe('with one key to match', () => {
+    it('should return true for equal objects', () =>
+      expect(fun({potato: 1}, {potato: 1})).toBe(true))
+    it('should return true for matched keys', () =>
+      expect(fun({potato: 1, other: 2}, {potato: 1})).toBe(true))
+    it('should return false for different key values', () =>
+      expect(fun({potato: 1}, {potato: 2})).toBe(false))
+    it('should return false for different keys', () =>
+      expect(fun({other: 1}, {potato: 1})).toBe(false))
+  })
+
+  describe('with multiple keys to match', () => {
+    it('should return true for matched keys', () =>
+      expect(fun({potato: 1, salad: 2, other: 2}, {potato: 1, salad: 2})).toBe(true))
+    it('should return false if one of the key values do not match', () =>
+      expect(fun({potato: 1, salad: 0, other: 2}, {potato: 1, salad: 2})).toBe(false))
+    it('should return false if one of the key is not there', () =>
+      expect(fun({potato: 1, other: 2}, {potato: 1, salad: 2})).toBe(false))
+  })
+
+  describe('with objects with values', () => {
+    it('should return true for matched values', () =>
+      expect(fun({potato: {hey: 123}, other: 2}, {potato: {hey: 123}})).toBe(true))
+    it('should return false for non matched values', () =>
+      expect(fun({potato: {hey: 666}, other: 2}, {potato: {hey: 123}})).toBe(false))
+    it('should NOT match this real life object', () => {
+      let store = {'visible': ['steam_id', 'name', 'released_at', 'tags', 'lowest_steam_price', 'steam_discount', 'playtime_median', 'playtime_median_ftb', 'steam_reviews_count', 'steam_reviews_ratio', 'platforms', 'players', 'vr'], 'params': {'steam_reviews_count': {'gt': 65}, 'steam_reviews_ratio': {'gt': 95}, 'playtime_median_ftb': {'gt': 1.5}}, 'sort': 'lowest_steam_price', 'sortAsc': true}
+      let shortcut = {'params': {'playtime_median_ftb': {'gt': 1.5}}, 'sort': 'playtime_median_ftb', 'sortAsc': false}
+      return expect(fun(store, shortcut)).toBe(false)
+    })
+  })
+})
+
+describe('reverseFilter', () => {
+  it('should false any truthy values', () => {
+
+  })
+})

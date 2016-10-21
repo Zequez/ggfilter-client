@@ -1,21 +1,24 @@
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
 import generateAutoTitle from '../lib/generateAutoTitle'
-import { filterSelector } from '../filter/selectors'
+import { finalFilterSelector, isDirtySelector } from '../filter/selectors'
 
 @connect((s) => ({
-  filter: filterSelector(s),
+  isDirty: isDirtySelector(s),
+  filter: finalFilterSelector(s),
   filterName: s.sfilter.data.name,
   tags: s.tags
 }))
 export default class FilterTitle extends Component {
   static propTypes = {
+    isDirty: t.bool,
     filter: t.object,
     filterName: t.string,
     tags: t.array
   }
 
   generateAutoTitle () {
+    if (!this.props.isDirty) return null
     return generateAutoTitle(
       this.props.filter,
       undefined,
