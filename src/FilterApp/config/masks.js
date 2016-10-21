@@ -22,10 +22,16 @@ export default {
       steam_discount: { gt: 1 }
     }
   },
-  'vr': {
+  vr: {
     title: 'VR Games',
     params: {
       vr: { value: 0b11, or: true }
+    }
+  },
+  potato: {
+    title: 'For Potatoes',
+    params: {
+      sysreq_index_centile: { lt: 50 }
     }
   }
 }
