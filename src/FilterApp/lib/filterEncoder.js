@@ -1,6 +1,7 @@
 import invert from 'lodash/invert'
 import { isEmpty } from 'shared/lib/utils'
 import definitions from './definitions'
+import masks from '../config/masks'
 
 const keysMap = {
   value: 'v',
@@ -83,6 +84,8 @@ export function maximize (minFilt) {
     masks: []
   }
 
+  if (!minFilt) return maximized
+
   for (let key in minFilt) {
     if (key !== sortKey) {
       maximized.params[fromNameKey(key)] = fromMappedKeys(minFilt[key])
@@ -104,6 +107,29 @@ export function fromB64 (str) {
   return JSON.parse(atob(str.replace(/_/g, '+')))
 }
 
+const warn = (msg, value) => {
+  console.warn(`Error parsing filter: ${msg}`, value)
+}
+
+function extractKnownMasks (encodedMinFilter) {
+  let parts = encodedMinFilter.split('+')
+  let knownMasks = []
+  let other = []
+
+  parts.forEach((part) => {
+    masks[part]
+      ? knownMasks.push(part)
+      : other.push(part)
+  })
+
+  let probablyTheSlug = other.pop()
+  if (other.length) {
+    other.forEach((part) => warn('Unrecognized mask', part))
+  }
+
+  return [knownMasks, probablyTheSlug]
+}
+
 export function encode (filter) {
   let parts = filter.masks || []
   let minFilter = minimize(filter)
@@ -112,15 +138,20 @@ export function encode (filter) {
 }
 
 export function decode (encodedMinFilter) {
-  try {
-    let parts = encodedMinFilter.split('+')
-    let slug = parts.pop()
-    let minFilter = fromB64(slug)
-    let filter = maximize(minFilter)
-    filter.masks = parts
-    return filter
-  } catch (e) {
-    console.warn('Error parsing encoded filter:', e)
-    return null
+  let [masks, slug] = extractKnownMasks(encodedMinFilter)
+
+  let filter
+  if (slug) {
+    try {
+      filter = maximize(fromB64(slug))
+    } catch (e) {
+      warn('Malformed encoded filter slug', slug)
+      filter = maximize(null)
+    }
+  } else {
+    filter = maximize(null)
   }
+
+  filter.masks = masks
+  return filter
 }

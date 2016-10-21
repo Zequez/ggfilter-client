@@ -19,6 +19,17 @@ jest.mock('./definitions', () => ({
   }
 }))
 
+jest.mock('../config/masks', () => ({
+  potato: {
+    params: {},
+    sort: {}
+  },
+  salad: {
+    params: {},
+    sort: {}
+  }
+}))
+
 const { minimize, maximize, encode, decode, toB64, fromB64 } = require('./filterEncoder')
 
 sinon.config = { useFakeTimers: false } // sino fails without this for some reason
@@ -111,6 +122,30 @@ describe('FilterApp filterEncoder', () => {
     it('should decode', () => {
       expect(decode(result)).toEqual(filter)
     })
+
+    it('should warn and ignore non registered masks', () => {
+      console.warn = jest.fn()
+      expect(decode(`NOPE+${encodedThing}`)).toEqual({params: {}, sort: {asc: true}, masks: []})
+      expect(console.warn).toHaveBeenCalled()
+    })
+
+    it('should allow to decode masks without extra filters', () => {
+      expect(decode(`potato+salad`)).toEqual({
+        params: {},
+        sort: {},
+        masks: ['potato', 'salad']
+      })
+    })
+
+    it('should give a warning and return an empty filter when decoding an erroneous filter', () => {
+      console.warn = jest.fn()
+      expect(decode('potato+neonreaistneisra')).toEqual({
+        params: {},
+        sort: {},
+        masks: ['potato']
+      })
+      expect(console.warn).toHaveBeenCalled()
+    })
   })
 
   describe('toB64/fromB64', () => {
@@ -126,22 +161,4 @@ describe('FilterApp filterEncoder', () => {
       expect(fromB64('eyJuYW1lIjoi5Pb8xNbc5_no8SJ9')).toEqual(subject)
     })
   })
-
-  // describe('encode', () => {
-  //   it('should minimize and encode with B64, and should add the masks with a +', () => {
-  //     let filter = {params: {}, sort: {asc: true}, masks: ['potato', 'salad']}
-  //     let encodedThing = btoa(JSON.stringify(minimize(filter))).replace(/=/g, '')
-  //     expect(encode(filter))
-  //       .toBe(`potato+salad+${encodedThing}`)
-  //   })
-  // })
-  //
-  // describe('decode', () => {
-  //   it('should decode from B64, and it should read the masks from the encoded thing', () => {
-  //     let filter = {params: {}, sort: {asc: true}, masks: ['potato', 'salad']}
-  //     let encodedThing = btoa(JSON.stringify(minimize(filter))).replace(/=/g, '')
-  //     expect(decode(filter))
-  //       .toBe()
-  //   })
-  // })
 })
