@@ -5,7 +5,7 @@ const { getGames } = require('../games').actions
 import masks from '../config/masks'
 
 import { maskedFilterSelector } from './selectors'
-import { combiner, deleteRedundantAttrs, isMaskFullyOverriden } from './lib/filterMutator'
+import { combiner, deleteRedundantAttrs, isMaskFullyOverriden, removeAttrsInMask } from './lib/filterMutator'
 import initialState from './initialState'
 
 // =============================================================================
@@ -96,7 +96,7 @@ export function reducer (state = initialState, action) {
       break
     case ADD_MASK:
       state = {...state, masks: state.masks.concat(action.mask)}
-      state = deleteRedundant(state, maskedFilterSelector(state, true))
+      state = removeAttrsInMask(state, maskedFilterSelector(state, true))
       break
     case REMOVE_MASK:
       let masksNames = removeMaskName(state.masks, action.mask)
