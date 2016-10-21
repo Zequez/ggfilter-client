@@ -2,10 +2,10 @@
 import { decode } from '../lib/filterEncoder'
 import defaultFilter from '../config/defaultFilter'
 const { getGames } = require('../games').actions
-const masks = require('../config/masks')
+import masks from '../config/masks'
 
 import { maskedFilterSelector } from './selectors'
-import { combiner, deleteRedundantAttrs } from './lib/filterMutator'
+import { combiner, deleteRedundantAttrs, isMaskFullyOverriden } from './lib/filterMutator'
 import initialState from './initialState'
 
 // =============================================================================
@@ -58,27 +58,49 @@ export const set = (filter) => ({ type: SET, filter, dispatch: getGames() })
 // Reducer
 // =============================================================================
 
+function deleteRedundant (state) {
+  return deleteRedundantAttrs(state, maskedFilterSelector(state, true))
+}
+
+function removeOverridenMasks (state) {
+  let masksNames = state.masks
+  masksNames.forEach((name) => {
+    console.log(masks)
+    if (isMaskFullyOverriden(masks[name], state)) {
+      masksNames = removeMaskName(masksNames, name)
+    }
+  })
+  state.masks = masksNames
+  return state
+}
+
+function removeMaskName (masks, mask) {
+  masks = masks.concat([])
+  masks.splice(masks.indexOf(mask), 1)
+  return masks
+}
+
 export function reducer (state = initialState, action) {
   switch (action.type) {
     case SET:
       state = action.filter
       break
     case MUTATE:
-
       state = combiner(state, action.mask)
-      let maskedFilter = maskedFilterSelector(state, true)
-      deleteRedundantAttrs(state, maskedFilter)
+      state = deleteRedundant(state)
+      state = removeOverridenMasks(state)
       break
     case RESET:
       state = initialState
       break
     case ADD_MASK:
       state = {...state, masks: state.masks.concat(action.mask)}
+      state = deleteRedundant(state, true)
       break
     case REMOVE_MASK:
-      let masks = state.masks.concat([])
-      masks.splice(state.masks.indexOf(action.mask), 1)
-      state = {...state, masks: masks}
+      let masksNames = removeMaskName(state.masks, action.mask)
+      state = {...state, masks: masksNames}
+      state = deleteRedundant(state)
       break
   }
 

@@ -27,24 +27,32 @@ export function createLegacyFilter (newFilter) {
   }
 }
 
-function negateObjects (target, source) {
+// It creates new object only if it changes
+function negateObjects (initialTarget, source) {
+  let target = initialTarget
+
   for (let key in target) {
     let v1 = target[key]
     let v2 = source[key]
     if (typeof v1 === 'object') {
       if (isEqual(v1, v2)) {
+        if (target !== initialTarget) target = {...target}
         delete target[key]
       }
     } else if (v1 === v2) {
+      if (target !== initialTarget) target = {...target}
       delete target[key]
     }
   }
+
+  return target
 }
 
+// This creates a new state.params and/or state.sort
+// but it doesn't create a new state object
 export function deleteRedundantAttrs (mask, defaultFilter) {
-  negateObjects(mask.params, defaultFilter.params, true)
-  negateObjects(mask.sort, defaultFilter.sort, false)
-
+  mask.params = negateObjects(mask.params, defaultFilter.params, true)
+  mask.sort = negateObjects(mask.sort, defaultFilter.sort, false)
   return mask
 }
 
@@ -59,9 +67,18 @@ export function isMaskActive (filter, mask, deep = true) {
   return true
 }
 
-export function reverseFilter (mask) {
-  let reversed = {}
-  for (let key in mask.params) {
+function isObjectFullyOverriden (obj1, obj2) {
+  if (!obj1) return true
 
+  for (let key in obj1) {
+    if (obj2[key] === undefined) return false
   }
+  return true
+}
+
+export function isMaskFullyOverriden (mask, filter) {
+  return (
+    isObjectFullyOverriden(mask.params, filter.params) &&
+    isObjectFullyOverriden(mask.sort, filter.sort)
+  )
 }

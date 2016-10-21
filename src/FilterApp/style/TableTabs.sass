@@ -3,6 +3,7 @@
   ul
     list-style-type: none
     li
+      float: left
       a
         display: block
         float: left
@@ -10,11 +11,20 @@
         padding: 0 $r/2
         line-height: $r
         border-radius: 0
-      &:last-child a
-        border-top-right-radius: 2px
+
 
       &.decrapify-tab
         .btn
           background: $yellow
           color: $dark-blue
           text-shadow: none
+
+  &-buttons
+    float: right
+    li:first-child a
+      border-top-left-radius: 2px
+
+  .filter-masks
+    float: left
+    li:last-child a
+      border-top-right-radius: 2px

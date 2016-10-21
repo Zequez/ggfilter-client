@@ -12,7 +12,7 @@ export default class Route {
     this.path = path
     this.selectors = selectors
     this.actions = actions
-    this.pathPattern = new UrlPattern(this.path)
+    this.pathPattern = new UrlPattern(this.path, {segmentValueCharset: 'a-zA-Z0-9_+-'})
     this.children = children // Doesn't do anything yet
   }
 

@@ -11,11 +11,11 @@ export default class TableTabs extends Component {
 
     return (
       <nav className='table-tabs'>
-        <ul>
+        <FilterMasks/>
+        <ul className='table-tabs-buttons'>
           <TableTabsLink text='Columns' mode={TABS.columns}/>
-          <TableTabsLink text='Save/Share' mode={TABS.share}/>
+          {/*<TableTabsLink text='Save/Share' mode={TABS.share}/>*/}
           {/*<TableTabsLink text='Options' mode={TABS.options}/>*/}
-          <FilterMasks/>
         </ul>
       </nav>
     )

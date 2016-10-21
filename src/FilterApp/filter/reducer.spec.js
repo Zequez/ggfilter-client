@@ -2,9 +2,21 @@ const {
   MUTATE,
   ADD_MASK,
   REMOVE_MASK,
-  setParam,
-  reducer
+  setParam
 } = require('./reducer')
+
+let reducer = require('./reducer').reducer
+function withDefaultFilter (defaultFilter) {
+  jest.mock('../config/defaultFilter', () => defaultFilter)
+  jest.resetModules()
+  reducer = require('./reducer').reducer
+}
+
+jest.mock('../config/masks', () => ({
+  hey: {params: {}, sort: {}},
+  potato: {params: {}, sort: {}},
+  salad: {params: {}, sort: {}}
+}))
 
 describe('FilterApp/filter reducer', () => {
   describe('reducer', () => {
@@ -22,12 +34,10 @@ describe('FilterApp/filter reducer', () => {
       }
 
       it('should update the state normally', () => {
-        jest.mock('../config/defaultFilter', () => ({
+        withDefaultFilter({
           params: {},
           sort: {}
-        }))
-        jest.resetModules()
-        let reducer = require('./reducer').reducer
+        })
 
         expect(reducer(initialState, {
           type: MUTATE,
@@ -56,7 +66,7 @@ describe('FilterApp/filter reducer', () => {
       })
 
       it('should remove things that are already present in the default filter', () => {
-        jest.mock('../config/defaultFilter', () => ({
+        withDefaultFilter({
           params: {
             foo: { pen: 'cuck' },
             potato: { value: true }
@@ -65,10 +75,7 @@ describe('FilterApp/filter reducer', () => {
             column: 'name',
             asc: false
           }
-        }))
-
-        jest.resetModules()
-        let reducer = require('./reducer').reducer
+        })
 
         expect(reducer(initialState, {
           type: MUTATE,
@@ -94,8 +101,13 @@ describe('FilterApp/filter reducer', () => {
       })
     })
 
-    describe(ADD_MASK, () => {
+    describe.only(ADD_MASK, () => {
       it('should add a mask to the state.masks', () => {
+        withDefaultFilter({
+          params: {},
+          sort: {}
+        })
+
         let state = {params: {}, sort: {}, masks: ['hey']}
         expect(reducer(state, {type: ADD_MASK, mask: 'potato'}))
           .toEqual({params: {}, sort: {}, masks: ['hey', 'potato']})
@@ -104,6 +116,11 @@ describe('FilterApp/filter reducer', () => {
 
     describe(REMOVE_MASK, () => {
       it('should remove a mask from the state.mask', () => {
+        withDefaultFilter({
+          params: {},
+          sort: {}
+        })
+
         let state = {params: {}, sort: {}, masks: ['hey', 'potato', 'salad']}
         expect(reducer(state, {type: REMOVE_MASK, mask: 'potato'}))
           .toEqual({params: {}, sort: {}, masks: ['hey', 'salad']})

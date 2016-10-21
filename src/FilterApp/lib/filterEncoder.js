@@ -100,11 +100,14 @@ export function maximize (minFilt) {
 }
 
 export function toB64 (obj) {
-  return btoa(JSON.stringify(obj)).replace(/=+$/, '').replace(/\+/g, '_')
+  return btoa(JSON.stringify(obj))
+    .replace(/=+$/, '')
+    .replace(/\+/g, '_')
+    .replace(/-/g, '/')
 }
 
 export function fromB64 (str) {
-  return JSON.parse(atob(str.replace(/_/g, '+')))
+  return JSON.parse(atob(str.replace(/_/g, '+').replace(/\//g, '-')))
 }
 
 const warn = (msg, value) => {
@@ -132,9 +135,12 @@ function extractKnownMasks (encodedMinFilter) {
 
 export function encode (filter) {
   let parts = filter.masks || []
-  let minFilter = minimize(filter)
-  let slug = toB64(minFilter)
-  return parts.concat(slug).join('+')
+  if (!(isEmpty(filter.params) && isEmpty(filter.sort))) {
+    let minFilter = minimize(filter)
+    let slug = toB64(minFilter)
+    parts = parts.concat(slug)
+  }
+  return parts.join('+')
 }
 
 export function decode (encodedMinFilter) {

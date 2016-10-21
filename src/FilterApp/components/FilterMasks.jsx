@@ -51,11 +51,9 @@ export default class FilterMasks extends Component {
     }
 
     return (
-      <li className='filter-masks'>
-        <ul>
-          {items}
-        </ul>
-      </li>
+      <ul className='filter-masks'>
+        {items}
+      </ul>
     )
   }
 }

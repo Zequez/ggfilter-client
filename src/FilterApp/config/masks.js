@@ -15,5 +15,11 @@ export default {
       column: 'playtime_median_ftb',
       asc: false
     }
+  },
+  'on-sale': {
+    title: 'On sale',
+    params: {
+      steam_discount: { gt: 1 }
+    }
   }
 }

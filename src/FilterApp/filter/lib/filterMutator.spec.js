@@ -3,7 +3,7 @@ import {
   createLegacyFilter,
   deleteRedundantAttrs,
   isMaskActive,
-  reverseFilter
+  isMaskFullyOverriden
 } from './filterMutator'
 
 let defaultFilter = {
@@ -241,5 +241,73 @@ describe('isMaskActive', () => {
 describe('reverseFilter', () => {
   it('should false any truthy values', () => {
 
+  })
+})
+
+describe('isMaskFullyOverriden', () => {
+  it('should return true if the mask is fully overriden', () => {
+    expect(isMaskFullyOverriden({
+      params: {
+        up: { value: 1 },
+        middle: { value: 2 },
+        down: { value: 3 },
+      },
+      sort: {
+        column: 'potato',
+        asc: true
+      }
+    }, {
+      params: {
+        up: { value: 2 },
+        middle: true,
+        down: false
+      },
+      sort: {
+        column: 'apple',
+        asc: false
+      }
+    })).toBe(true)
+  })
+
+  it('should return false if the mask is partially overriden', () => {
+    expect(isMaskFullyOverriden({
+      params: {
+        up: { value: 1 },
+        middle: { value: 2 },
+        down: { value: 3 }
+      },
+      sort: {
+        column: 'potato',
+        asc: true
+      }
+    }, {
+      params: {
+        middle: true,
+        down: false
+      },
+      sort: {
+        column: 'apple',
+        asc: false
+      }
+    })).toBe(false)
+  })
+
+  it('should return false if the mask is not at all overriden', () => {
+    expect(isMaskFullyOverriden({
+      params: {
+        up: { value: 1 },
+        middle: { value: 2 },
+        down: { value: 3 }
+      },
+      sort: {
+        column: 'potato',
+        asc: true
+      }
+    }, {
+      params: {
+        hey: { value: 3 }
+      },
+      sort: {}
+    })).toBe(false)
   })
 })

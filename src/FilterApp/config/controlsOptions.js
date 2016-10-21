@@ -93,7 +93,8 @@ export default {
       discount: {
         range: [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
         mappedRanges: {
-          '0': [0, 0] // Override the autohook,
+          '0': [0, 0], // Override the autohook,
+          '100': [100, 100]
         },
         label: {
           interpolation: '{v}%',
