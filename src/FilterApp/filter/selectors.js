@@ -8,9 +8,7 @@ import { NAME } from './constants'
 import initialState from './initialState'
 
 export const deltaFilterSelector =
-  (s, fragment = false) => {
-    return fragment ? s : s[NAME]
-  }
+  (s, fragment = false) => fragment ? s : s[NAME]
 
 export const filterMasksNames = createSelector(
   deltaFilterSelector,
@@ -59,9 +57,7 @@ export const visibleFiltersSelector = createSelector(
 
 export const visibleFiltersDefinitionsSelector = createSelector(
   visibleFiltersSelector,
-  (visible) => {
-    return visible.map((f) => definitions.filters[f])
-  }
+  (visible) => visible.map((f) => definitions.filters[f])
 )
 
 export const queryColumnsSelector = createSelector(

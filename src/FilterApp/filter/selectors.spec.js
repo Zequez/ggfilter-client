@@ -34,7 +34,8 @@ describe('FilterApp/filter', () => {
             foo: 'aaa',
             bar: false,
             potato: { salad: 'yes' }
-          }
+          },
+          masks: []
         }
       })).toEqual(['hey', 'foo', 'potato'])
     })
