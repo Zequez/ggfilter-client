@@ -3,6 +3,7 @@ import React, { Component, PropTypes as t } from 'react'
 var debounce = require('shared/lib/utils').debounce
 import TableWidthCalculator from '../ui/lib/TableWidthCalculator'
 
+import CategoriesColumns from './CategoriesColumns'
 import DataTableControls from '../filter/components/DataTableControls'
 import DataTableTitles from '../filter/components/DataTableTitles'
 import DataTableBatch from '../games/components/DataTableBatch'
@@ -57,6 +58,7 @@ export default class DataTable extends Component {
     return (
       <table className='data-table' style={{width: tableWidth}}>
         <thead>
+          <CategoriesColumns/>
           <DataTableTitles
             filters={filters}
             filtersParams={filter.params}
