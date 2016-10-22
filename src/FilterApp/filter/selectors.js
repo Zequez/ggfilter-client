@@ -10,6 +10,11 @@ import initialState from './initialState'
 export const deltaFilterSelector =
   (s, fragment = false) => fragment ? s : s[NAME]
 
+export const staticSlugSelector = createSelector(
+  deltaFilterSelector,
+  (s) => s.staticSlug
+)
+
 export const filterMasksNames = createSelector(
   deltaFilterSelector,
   (s) => s.masks

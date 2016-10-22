@@ -5,10 +5,10 @@ import { MODES, resetUi, setMode } from 'shared/reducers/uiReducer'
 // TODO: Somehow, don't do this, because we're looking inside FilterApp
 // But if we expose this on src/FilterApp, we get a circular reference
 // Figure it out.
-import { setFilterFromB64, reset as resetFilters } from 'src/FilterApp/filter/reducer'
-import { getFromSid, getFromOfficialSlug } from 'src/FilterApp/sfilter/reducer'
-import { isDirtySelector, encodedFilterSelector } from 'src/FilterApp/filter/selectors'
-import { sfilterSelector, filterIsDirty as sfilterFilterIsDirty } from 'src/FilterApp/sfilter/selectors'
+import { setFilterFromB64, setFilterFromStatic, reset as resetFilters } from 'src/FilterApp/filter/reducer'
+// import { getFromSid, getFromOfficialSlug } from 'src/FilterApp/sfilter/reducer'
+import { isDirtySelector, encodedFilterSelector, staticSlugSelector } from 'src/FilterApp/filter/selectors'
+// import { sfilterSelector, filterIsDirty as sfilterFilterIsDirty } from 'src/FilterApp/sfilter/selectors'
 
 let modeSelector = (s) => s.ui.mode
 
@@ -39,6 +39,10 @@ export default new SelectorRouter({
   //   [[sfilterFilterIsDirty, false], [sfilterSelector, (sf) => sf.sid]],
   //   [getFromSid]
   // ),
+  filterStatic: mr('/:staticSlug', MODES.filter,
+    [[staticSlugSelector]],
+    [setFilterFromStatic]
+  ),
   filterB64: mr('/f/:filterB54', MODES.filter,
     [[isDirtySelector], [encodedFilterSelector]],
     [setFilterFromB64]

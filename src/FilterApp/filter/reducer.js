@@ -1,8 +1,9 @@
-// import { u } from 'shared/lib/utils'
+import { u } from 'shared/lib/utils'
 import { decode } from '../lib/filterEncoder'
-import defaultFilter from '../config/defaultFilter'
+// import defaultFilter from '../config/defaultFilter'
 const { getGames } = require('../games').actions
 import masks from '../config/masks'
+import staticFilters from '../config/staticFilters'
 
 import { maskedFilterSelector } from './selectors'
 import { combiner, deleteRedundantAttrs, isMaskFullyOverriden, removeAttrsInMask } from './lib/filterMutator'
@@ -17,6 +18,7 @@ export const MUTATE = 'filter/MUTATE'
 export const RESET = 'filter/RESET'
 export const ADD_MASK = 'filter/ADD_MASK'
 export const REMOVE_MASK = 'filter/REMOVE_MASK'
+export const SET_STATIC = 'filter/SET_STATIC'
 
 export const DIRTY_ACTIONS = [
   MUTATE
@@ -53,6 +55,11 @@ export const addTagFilter = (tagId) => (dispatch, getState) => {
 
 export const setFilterFromB64 = (b64) => set(decode(b64))
 export const set = (filter) => ({ type: SET, filter, dispatch: getGames() })
+export const setFilterFromStatic = (slug) => {
+  if (staticFilters[slug]) {
+    return { type: SET_STATIC, slug, dispatch: getGames() }
+  }
+}
 
 // =============================================================================
 // Reducer
@@ -88,6 +95,7 @@ export function reducer (state = initialState, action) {
       // We call it with the original state so it doesn't recompute al pedo
       let maskedFilter = maskedFilterSelector(state, true)
       state = combiner(state, action.mask)
+      if (state.staticSlug) state.staticSlug = null
       state = deleteRedundant(state, maskedFilter)
       state = removeOverridenMasks(state)
       break
@@ -95,13 +103,20 @@ export function reducer (state = initialState, action) {
       state = initialState
       break
     case ADD_MASK:
-      state = {...state, masks: state.masks.concat(action.mask)}
+      state = {...state, masks: state.masks.concat(action.mask), staticSlug: null}
       state = removeAttrsInMask(state, maskedFilterSelector(state, true))
       break
     case REMOVE_MASK:
       let masksNames = removeMaskName(state.masks, action.mask)
-      state = {...state, masks: masksNames}
+      state = {...state, masks: masksNames, staticSlug: null}
       state = deleteRedundant(state, maskedFilterSelector(state, true))
+      break
+    case SET_STATIC:
+      state = u(staticFilters[action.slug].filter, {
+        masks: {$set: []},
+        staticSlug: {$set: action.slug}
+      })
+
       break
   }
 

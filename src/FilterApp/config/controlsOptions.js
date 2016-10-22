@@ -46,10 +46,12 @@ var generateAbsoluteDates = function (startYear, endYear = null) {
 
   let range = []
   let namedRanges = {}
+  let invertedNamedRanges = {}
   for (let i = startYear; i <= endYear; ++i) {
     let date = Date.parse(`${i}-1-1`) / 1000
     range.push(date)
     namedRanges[date] = i
+    invertedNamedRanges[i] = date
   }
 
   let rangeInterpolation = (v1, v2, iv1, iv2) => {
@@ -63,7 +65,8 @@ var generateAbsoluteDates = function (startYear, endYear = null) {
       ltInterpolation: rangeInterpolation,
       rangeInterpolation,
       namedRanges
-    }
+    },
+    byName: invertedNamedRanges
   }
 
   return hash
