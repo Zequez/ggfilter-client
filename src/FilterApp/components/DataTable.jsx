@@ -1,8 +1,5 @@
 import React, { Component, PropTypes as t } from 'react'
 
-var debounce = require('shared/lib/utils').debounce
-import TableWidthCalculator from '../ui/lib/TableWidthCalculator'
-
 import ColumnsWidthFixer from './ColumnsWidthFixer'
 import CategoriesColumns from './CategoriesColumns'
 import DataTableControls from '../filter/components/DataTableControls'
@@ -19,7 +16,8 @@ export default class DataTable extends Component {
         asc: t.bool.isRequired
       }).isRequired
     }).isRequired,
-    columnsWidth: t.object.isRequired,
+    columnsWidth: t.arrayOf(t.number).isRequired,
+    tableWidth: t.number.isRequired,
     games: t.shape({
       list: t.array,
       fetching: t.bool,
@@ -27,17 +25,9 @@ export default class DataTable extends Component {
     }).isRequired
   }
 
-  componentDidMount () {
-    window.addEventListener('resize', debounce(250, this.handleWindowResize.bind(this)))
-  }
-
-  handleWindowResize (ev) {
-    this.forceUpdate()
-  }
-
   render () {
     console.logRender('DataTable')
-    let { filter, columnsWidth, games } = this.props
+    let { filter, columnsWidth, tableWidth, games } = this.props
     let filters = this.props.visibleFiltersDefinitions
 
     let batches = []
@@ -51,22 +41,16 @@ export default class DataTable extends Component {
       )
     }
 
-    let docSize = document.documentElement.clientWidth
-    let calc = new TableWidthCalculator(filters, columnsWidth, docSize)
-    let trueColumnsWidth = calc.columnsWidth()
-    let tableWidth = calc.tableWidth()
-
     return (
       <table className='data-table' style={{width: tableWidth}}>
         <thead>
-          <ColumnsWidthFixer columnsWidth={trueColumnsWidth}/>
+          <ColumnsWidthFixer columnsWidth={columnsWidth}/>
           <CategoriesColumns/>
           <DataTableTitles
             filters={filters}
             filtersParams={filter.params}
             sort={filter.sort.column}
-            sortAsc={filter.sort.asc}
-            columnsWidth={trueColumnsWidth}/>
+            sortAsc={filter.sort.asc}/>
           <DataTableControls
             filters={filters}
             filtersParams={this.props.filter.params}/>

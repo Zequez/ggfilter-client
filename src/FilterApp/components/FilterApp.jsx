@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import definitions from '../lib/definitions'
 
 import { getGames, getMoreGames } from '../games'
-import { getColumnsWidth, getTab } from '../ui/selectors'
+import { getTrueColumnsWidth, getTrueTableWidth, getTab } from '../ui/selectors'
 import { finalFilterSelector, visibleFiltersDefinitionsSelector } from '../filter/selectors'
 
 import DataTable from './DataTable'
@@ -17,7 +17,8 @@ import GamesLoader from './GamesLoader'
   visibleFilters: visibleFiltersDefinitionsSelector(s),
   games: s.games,
   tags: s.tags,
-  columnsWidth: getColumnsWidth(s),
+  columnsWidth: getTrueColumnsWidth(s),
+  tableWidth: getTrueTableWidth(s),
   tab: getTab(s)
 }), {
   getGames,
@@ -44,7 +45,7 @@ export default class FilterApp extends Component {
   }
 
   render () {
-    let {games, filter, columnsWidth, tab, visibleFilters} = this.props
+    let {games, filter, columnsWidth, tableWidth, tab, visibleFilters} = this.props
 
     let filterMode = ' filter-tab-' + tab
 
@@ -56,6 +57,7 @@ export default class FilterApp extends Component {
           games={games}
           filter={filter}
           columnsWidth={columnsWidth}
+          tableWidth={tableWidth}
           visibleFiltersDefinitions={visibleFilters}/>
         <GamesLoader
           fetching={games.fetching}
