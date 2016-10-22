@@ -61,7 +61,12 @@ export default class SelectorRouter {
     let promises = []
     actions.forEach((action) => {
       let result = this.store.dispatch(action)
-      if (result instanceof Promise) promises.push(result)
+      if (result === false) {
+        // store-induced-404
+        this.history.push('/')
+      } else if (result instanceof Promise) {
+        promises.push(result)
+      }
     })
     promises = Promise.all(promises)
 

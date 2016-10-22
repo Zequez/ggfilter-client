@@ -58,6 +58,8 @@ export const set = (filter) => ({ type: SET, filter, dispatch: getGames() })
 export const setFilterFromStatic = (slug) => {
   if (staticFilters[slug]) {
     return { type: SET_STATIC, slug, dispatch: getGames() }
+  } else {
+    return false
   }
 }
 

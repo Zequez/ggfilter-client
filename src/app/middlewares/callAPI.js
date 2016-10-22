@@ -2,6 +2,8 @@ import { camelizeKeys } from 'shared/lib/utils'
 
 export default function callAPIMiddleware ({ dispatch, getState }) {
   return next => action => {
+    if (!action) return action
+
     if (!action.types) {
       // Normal action: pass it on
       return next(action)
