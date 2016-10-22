@@ -46,7 +46,7 @@ export default class CategoriesColumnsList extends Component {
       }
     })
 
-    return (
+    return countVisibleFilters ? (
       <th colSpan={countVisibleFilters} className={`categories-columns-${slug}`} ref='th'>
         <div className='category-title' onClick={this.onClickTitle}>{title}</div>
         {open ? (
@@ -55,6 +55,6 @@ export default class CategoriesColumnsList extends Component {
           </ul>
         ) : null}
       </th>
-    )
+    ) : null
   }
 }
