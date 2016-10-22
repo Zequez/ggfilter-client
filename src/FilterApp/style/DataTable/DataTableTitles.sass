@@ -74,20 +74,23 @@
         &:last-child
           border-top-right-radius: 2px
 
+    &:last-child
+      .title-tooltip
+        transform: none
+        left: auto
+        right: 0
+
     .title-tooltip
       +z(dt-titles-tooltip)
       position: absolute
       bottom: 0%
       left: 50%
-      width: 300px
-      margin-left: -150px
+      padding: 0 $r/4
+      background: rgba(#000, 0.5)
+      border-top-left-radius: 2px
+      border-top-right-radius: 2px
       transition: bottom 0.25s
-      span
-        display: inline-block
-        padding: 0 2px
-        background: rgba(#000, 0.5)
-        border-top-left-radius: 2px
-        border-top-right-radius: 2px
+      transform: translateX(-50%)
 
     .title-icon
       +z(dt-titles-icon)

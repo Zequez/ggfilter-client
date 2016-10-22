@@ -58,7 +58,7 @@ export default class DataTableTitle extends Component {
           <i className={'fa icon-' + filter.name}></i>
         </div>
         <div className='title-tooltip'>
-          <span>{filter.title}</span>
+          {filter.title}
         </div>
         { this.props.active ? (
           <DataTableTitleFilterButtons
