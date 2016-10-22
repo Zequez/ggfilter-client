@@ -34,6 +34,7 @@ class FilterDefinition {
 export class Definitions {
   filters = {}
   categories = {}
+  categoriesList = []
   categoriesWithFilters = {}
   sortedFilters = []
   sortedFiltersNames = []
@@ -41,6 +42,7 @@ export class Definitions {
 
   constructor (filtersDefinitions, categoriesDefinitions) {
     this._extendFilters(filtersDefinitions)
+    this._extendCategories(categoriesDefinitions)
     this.filters = filtersDefinitions
     this.categories = categoriesDefinitions
     this._setCategoriesWithFilters()
@@ -48,13 +50,14 @@ export class Definitions {
     this._setSortedFiltersNames()
   }
 
-  sortParams (params) {
+  normalizeParamsOrder (params, addMissing = true) {
     let newParams = {}
-    let names = Object.keys(params)
-    this.sortNames(names)
-      .forEach((name) => {
-        newParams[name] = params[name]
-      })
+    let sortedNames = addMissing
+      ? this.sortedFiltersNames
+      : this.sortNames(Object.keys(params))
+    sortedNames.forEach((name) => {
+      newParams[name] = params[name] || false
+    })
     return newParams
   }
 
@@ -70,17 +73,17 @@ export class Definitions {
     }
   }
 
-  _sortedFilters () {
-    let flatDefinitions = []
-    for (let section in this.categories) {
-      flatDefinitions = flatDefinitions.concat(this.filters[section])
+  _extendCategories (categoriesDefinitions) {
+    for (let name in categoriesDefinitions) {
+      categoriesDefinitions[name].name = name
+      this.categoriesList.push(categoriesDefinitions[name])
     }
   }
 
   _setCategoriesWithFilters () {
     for (let cat in this.categories) {
       this.categoriesWithFilters[cat] =
-        this.categories[cat].map((filterName) => this.filters[filterName])
+        this.categories[cat].filters.map((filterName) => this.filters[filterName])
     }
   }
 

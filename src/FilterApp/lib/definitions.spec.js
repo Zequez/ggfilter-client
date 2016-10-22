@@ -8,7 +8,16 @@ describe('FilterApp/lib/definitions', () => {
       foo: {title: 'Foo filter'},
       potato: {title: 'Potato filter'}
     }
-    categories = {'Hello': ['potato', 'bar'], 'Bye': ['foo']}
+    categories = {
+      hello: {
+        title: 'Hello',
+        filters: ['potato', 'bar']
+      },
+      bye: {
+        title: 'Bye',
+        filters: ['foo']
+      }
+    }
     def = new Definitions(filters, categories)
   })
 
@@ -22,7 +31,7 @@ describe('FilterApp/lib/definitions', () => {
   })
 
   it('should expose the categories with filters in .categoriesWithFilters', () => {
-    expect(def.categoriesWithFilters['Hello'][0]).toBe(def.filters.potato)
+    expect(def.categoriesWithFilters.hello[0]).toBe(def.filters.potato)
   })
 
   it('should expose the filters in the order given by the categories in .sortedFilters', () => {
@@ -38,10 +47,20 @@ describe('FilterApp/lib/definitions', () => {
   })
 
   it('should allow you to sort params by the filters order', () => {
-    expect(Object.keys(def.sortParams({
+    let sortedParams = def.normalizeParamsOrder({
       bar: { value: true },
-      foo: { value: true },
       potato: { value: true }
-    }))).toEqual(['potato', 'bar', 'foo'])
+    }, false)
+    expect(Object.keys(sortedParams)).toEqual(['potato', 'bar'])
+    expect(sortedParams.foo).toBeUndefined()
+  })
+
+  it('should allow you to sort params by the filters order, and add the ones missing', () => {
+    let sortedParams = def.normalizeParamsOrder({
+      bar: { value: true },
+      potato: { value: true }
+    })
+    expect(Object.keys(sortedParams)).toEqual(['potato', 'bar', 'foo'])
+    expect(sortedParams.foo).toBe(false)
   })
 })

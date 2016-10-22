@@ -17,36 +17,20 @@ export default class CategoriesColumns extends Component {
     setParam: t.func.isRequired
   }
 
-  categoriesWithFilters = {}
-  componentWillMount () {
-    for (let title in categoriesDefinitions) {
-      this.categoriesWithFilters[title] = this.categoriesWithFilters[title] || []
-      this.categoriesWithFilters[title] =
-        categoriesDefinitions[title].map((name) => definitions.filters[name])
-    }
-  }
-
   render () {
     let { visibleFilters, setParam } = this.props
 
-    let lists = []
-    for (let title in this.categoriesWithFilters) {
-      let slug = title.toLowerCase().replace(/ /g, '-')
-      let filters = this.categoriesWithFilters[title]
-      lists.push(
-        <CategoriesColumnsList
-          key={slug}
-          title={title}
-          slug={slug}
-          filters={filters}
-          visibleFilters={visibleFilters}
-          onToggle={setParam}/>
-      )
-    }
-
     return (
       <tr className='categories-columns'>
-        {lists}
+        {definitions.categoriesList.map((cat) => (
+          <CategoriesColumnsList
+            key={cat.name}
+            title={cat.title}
+            slug={cat.name}
+            filters={definitions.categoriesWithFilters[cat.name]}
+            visibleFilters={visibleFilters}
+            onToggle={setParam}/>
+        ))}
       </tr>
     )
   }
