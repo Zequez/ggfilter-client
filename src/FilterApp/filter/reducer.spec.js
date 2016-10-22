@@ -110,7 +110,7 @@ describe('FilterApp/filter reducer', () => {
 
         let state = {params: {}, sort: {}, masks: ['hey']}
         expect(reducer(state, {type: ADD_MASK, mask: 'potato'}))
-          .toEqual({params: {}, sort: {}, masks: ['hey', 'potato']})
+          .toEqual({params: {}, sort: {}, masks: ['hey', 'potato'], staticSlug: null})
       })
     })
 
@@ -123,7 +123,7 @@ describe('FilterApp/filter reducer', () => {
 
         let state = {params: {}, sort: {}, masks: ['hey', 'potato', 'salad']}
         expect(reducer(state, {type: REMOVE_MASK, mask: 'potato'}))
-          .toEqual({params: {}, sort: {}, masks: ['hey', 'salad']})
+          .toEqual({params: {}, sort: {}, masks: ['hey', 'salad'], staticSlug: null})
       })
     })
   })
