@@ -1,12 +1,12 @@
 @mixin category-color($color)
-  background-color: mix($color, $blue, 75%)
+  background-color: mix($color, $blue, 50%)
   .category-items
     background: rgba(mix($color, $dark-blue, 75%), 0.8)
 
 .categories-columns
   .category-title
     background-image: linear-gradient(rgba(#fff, 0.05) 0%, rgba(#fff, 0) 65%)
-    box-shadow: inset 0 0 10px rgba($blue, 0.8)
+    box-shadow: inset 0 5px 10px rgba($blue, 0.2)
     color: $white
     text-shadow: 0 1px 0 #000
     line-height: $r
