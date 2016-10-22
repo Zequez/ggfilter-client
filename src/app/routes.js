@@ -21,11 +21,11 @@ let mr = (path, mode, extraSelect = [], extraActions = []) => ([
 
 export default new SelectorRouter({
   sysreq: mr('/system-requirements', MODES.sysreq),
-  officialFilters: mr('/interesting-filters', MODES.officialFilters),
+  // officialFilters: mr('/interesting-filters', MODES.officialFilters),
   feedback: mr('/feedback', MODES.feedback),
   contribute: mr('/contribute', MODES.contribute),
   sources: mr('/sources', MODES.sources),
-  myFilters: mr('/your-filters', MODES.myFilters),
+  // myFilters: mr('/your-filters', MODES.myFilters),
   tos: mr('/tos', MODES.tos),
   help: mr('/help', MODES.help),
   about: mr('/about', MODES.about),
@@ -39,7 +39,7 @@ export default new SelectorRouter({
   //   [[sfilterFilterIsDirty, false], [sfilterSelector, (sf) => sf.sid]],
   //   [getFromSid]
   // ),
-  filterB64: mr('/b/:filterB54', MODES.filter,
+  filterB64: mr('/f/:filterB54', MODES.filter,
     [[isDirtySelector], [encodedFilterSelector]],
     [setFilterFromB64]
   ),

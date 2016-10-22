@@ -26,12 +26,12 @@ export default class Tabs extends Component {
           <li>
             <RouterLink to={MODES.sysreq} text='System Requirements Calculator'/>
           </li>
-          <li>
+          {/*<li>
             <RouterLink to={MODES.officialFilters} text='Interesting Filters'/>
-          </li>
-          {currentUser ? <li>
+          </li>*/}
+          {/*{currentUser ? <li>
             <RouterLink to={MODES.myFilters} text='Your saved filters'/>
-          </li> : null}
+          </li> : null}*/}
           <li>
             <RouterLink to={MODES.feedback} text='Feedback'/>
           </li>

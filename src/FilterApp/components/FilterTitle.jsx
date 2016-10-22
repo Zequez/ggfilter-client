@@ -6,14 +6,14 @@ import { finalFilterSelector, isDirtySelector } from '../filter/selectors'
 @connect((s) => ({
   isDirty: isDirtySelector(s),
   filter: finalFilterSelector(s),
-  filterName: s.sfilter.data.name,
+  // filterName: s.sfilter.data.name,
   tags: s.tags
 }))
 export default class FilterTitle extends Component {
   static propTypes = {
     isDirty: t.bool,
     filter: t.object,
-    filterName: t.string,
+    // filterName: t.string,
     tags: t.array
   }
 
@@ -31,7 +31,8 @@ export default class FilterTitle extends Component {
   }
 
   render () {
-    let autotitle = this.props.filterName || this.generateAutoTitle()
+    // let autotitle = this.props.filterName || this.generateAutoTitle()
+    let autotitle = this.generateAutoTitle()
 
     return (
       <div className='filter-title'>

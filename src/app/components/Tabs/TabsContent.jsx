@@ -4,8 +4,8 @@ import { MODES } from 'shared/reducers/uiReducer'
 
 import { FilterApp } from 'src/FilterApp'
 import { SysreqCalc } from 'src/SysreqCalc'
-import OfficialFilters from '../OfficialFilters'
-import { SavedFiltersManagerGlued } from 'src/SavedFiltersManager'
+// import OfficialFilters from '../OfficialFilters'
+// import { SavedFiltersManagerGlued } from 'src/SavedFiltersManager'
 
 // Tabs with static content
 import Sources from '../static/Sources'
@@ -22,12 +22,12 @@ export default class TabsContent extends Component {
   tabsContent () {
     switch (this.props.mode) {
       case MODES.sysreq: return <SysreqCalc/>
-      case MODES.officialFilters: return <OfficialFilters/>
+      // case MODES.officialFilters: return <OfficialFilters/>
       case MODES.feedback: return <Feedback/>
       case MODES.contribute: return <Contribute/>
-      case MODES.login: return 'Login'
+      // case MODES.login: return 'Login'
       case MODES.sources: return <Sources/>
-      case MODES.myFilters: return <SavedFiltersManagerGlued/>
+      // case MODES.myFilters: return <SavedFiltersManagerGlued/>
       case MODES.aboutSysreq: return <AboutSysreq/>
     }
 

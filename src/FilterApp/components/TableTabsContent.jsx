@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { getTab } from '../ui/selectors'
 import { TABS } from '../ui/reducer'
 import { FiltersToggles } from '../filter'
-import { SFilterEditor } from '../sfilter'
+// import { SFilterEditor } from '../sfilter'
 
 @connect((s) => ({mode: getTab(s)}))
 export default class FilterTabsContent extends Component {
@@ -15,7 +15,7 @@ export default class FilterTabsContent extends Component {
   modeComponent () {
     switch (this.props.mode) {
       case TABS.columns: return <FiltersToggles/>
-      case TABS.share: return <SFilterEditor/>
+      // case TABS.share: return <SFilterEditor/>
       case TABS.options: return 'Options!'
     }
     return null
