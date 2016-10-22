@@ -3,6 +3,7 @@ import React, { Component, PropTypes as t } from 'react'
 var debounce = require('shared/lib/utils').debounce
 import TableWidthCalculator from '../ui/lib/TableWidthCalculator'
 
+import ColumnsWidthFixer from './ColumnsWidthFixer'
 import CategoriesColumns from './CategoriesColumns'
 import DataTableControls from '../filter/components/DataTableControls'
 import DataTableTitles from '../filter/components/DataTableTitles'
@@ -58,6 +59,7 @@ export default class DataTable extends Component {
     return (
       <table className='data-table' style={{width: tableWidth}}>
         <thead>
+          <ColumnsWidthFixer columnsWidth={trueColumnsWidth}/>
           <CategoriesColumns/>
           <DataTableTitles
             filters={filters}

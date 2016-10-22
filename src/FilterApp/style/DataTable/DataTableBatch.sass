@@ -1,0 +1,15 @@
+.data-table
+  &-batch
+    tr:nth-child(even)
+      background: $dt-alt-background
+      .overflow-cell
+        background: $dt-alt-background
+      td.hl, td.hl .overflow-cell
+        background: mix($green, $dt-alt-background, 25%)
+    td.hl, td.hl .overflow-cell
+      background: mix($green, $dt-background, 25%)
+
+  // Columns
+  .filter-column
+    .overflow-cell
+      background: $dt-background

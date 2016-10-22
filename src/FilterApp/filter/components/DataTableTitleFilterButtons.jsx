@@ -13,12 +13,16 @@ export default class DataTableTitleFilterButtons extends Component {
     }
   }
 
+  stopPropagation = (ev) => {
+    ev.stopPropagation()
+  }
+
   render () {
     let filterActive = this.props.mode ? '' : ' active'
     let highlightActive = this.props.mode ? ' active' : ''
 
     return (
-      <div className='filter-title-buttons'>
+      <div className='filter-title-buttons' onClick={this.stopPropagation}>
         <button
           className={'filter-title-button-filter' + filterActive}
           onClick={this.setHighlightMode.bind(this, false)}>

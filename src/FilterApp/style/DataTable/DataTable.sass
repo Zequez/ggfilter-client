@@ -1,0 +1,51 @@
+$dt-background: $white
+$dt-alt-background: darken($white, 5%)
+$dt-color: $dark-blue
+$dt-title-background: $blue
+$dt-title-alt-background: darken($blue, 5%)
+$dt-title-color: $white
+
+.data-table
+  +z(dt)
+
+  $background: $white
+  $alternate-background: darken($white, 5%)
+  $color: $dark-blue
+  $title-background: $blue
+  $title-alternate-background: darken($blue, 5%)
+  $title-color: $white
+
+  table-layout: fixed
+  border-collapse: separate
+  width: 100%
+  background: $dt-background
+  color: $dt-color
+  // overflow: hidden
+
+  td, th
+    height: $r
+    white-space: nowrap
+    text-align: center
+    font-weight: 300
+    border-right: solid 1px $dt-alt-background
+    &:last-child
+      border-right: none
+
+  .columns-width-fixer th
+    height: 0
+
+  .overflow-cell
+    display: block
+    overflow: hidden
+    text-overflow: ellipsis
+    &:hover
+      // Inline: block doesn't expand to the rest of the thing
+      //         inline-block changes the height
+      display: inline
+      position: relative
+      overflow: inherit
+      +z(dt-overflowCell)
+
+  th .overflow-cell:hover
+    // Because fuck it, we need this on the titles
+    display: inline-block

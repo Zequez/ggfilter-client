@@ -67,6 +67,10 @@ $fa-font-path: '~font-awesome/fonts/'
 
 // Base filters icons
 
+.icon-steam_thumbnail:before
+  content: $fa-var-picture-o
+.icon-images:before
+  content: $fa-var-file-picture-o
 .icon-steam_id:before
   content: $fa-var-steam
 .icon-name:before
@@ -75,6 +79,12 @@ $fa-font-path: '~font-awesome/fonts/'
   content: $fa-var-image
 .icon-sysreq_index_centile:before
   content: $fa-var-tv + $fa-var-fire
+.icon-released_at:before
+  content: $fa-var-calendar-minus-o
+.icon-released_at_absolute:before
+  content: $fa-var-calendar
+.icon-tags:before
+  content: $fa-var-tags
 
 .icon-lowest_steam_price:before
   content: $fa-var-steam + $fa-var-dollar
@@ -82,22 +92,22 @@ $fa-font-path: '~font-awesome/fonts/'
   content: $fa-var-steam + $fa-var-dollar + '%'
 
 .icon-playtime_mean:before
-  content: $fa-var-clock-o + 'X'
+  content: $fa-var-clock-o + 'A'
 .icon-playtime_median:before
-  content: $fa-var-clock-o + 'M'
+  content: $fa-var-clock-o
 .icon-playtime_sd:before
   content: $fa-var-clock-o + 'σ'
 .icon-playtime_rsd:before
-  content: $fa-var-clock-o + 'σ/X'
+  content: $fa-var-clock-o + 'σ/A'
 .icon-playtime_mean_ftb:before
-  content: $fa-var-clock-o + 'X/' + $fa-var-dollar
+  content: $fa-var-clock-o + 'A/' + $fa-var-dollar
 .icon-playtime_median_ftb:before
-  content: $fa-var-clock-o + 'M/' + $fa-var-dollar
+  content: $fa-var-clock-o + '/' + $fa-var-dollar
 
 .icon-metacritic:before
   content: $fa-var-star
 .icon-steam_reviews_count:before
-  content: $fa-var-steam + $fa-var-comments + "#"
+  content: $fa-var-steam + $fa-var-comments
 .icon-steam_reviews_ratio:before
   content: $fa-var-steam + $fa-var-comments + $fa-var-star
 

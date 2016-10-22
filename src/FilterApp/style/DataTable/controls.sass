@@ -1,0 +1,238 @@
+.data-table
+  .control-Text, .control-Number
+    position: relative
+    .timerbar
+      content: ' '
+      position: absolute
+      top: 0
+      right: 0
+      width: 5px
+      height: $r
+      background: $red
+      transform-origin: bottom
+      transform: scaleY(0)
+      z-index: 10
+
+    input
+      width: 100%
+
+  .control-Range
+    select
+      width: 50%
+      border-left: none
+      &:last-child
+        border-right: none
+
+  .control-Boolean
+    $_background: $blue
+    $_color: rgba(#fff, 0.75)
+
+    & > div
+      display: table
+      table-layout: fixed
+      width: 100%
+
+    label
+      display: table-cell
+      cursor: pointer
+
+    span, input
+      display: none
+
+    .boolean-input:checked + label
+      background-color: $_background
+      background-image: linear-gradient(rgba($dark-blue, 0.5) 0%, rgba(#000,0) 50%)
+      box-shadow: inset 0px 1px 0px $dark-blue, inset 0px 0px 10px $dark-blue
+      color: $_color
+
+    i
+      display: inline-block
+      width: 100%
+
+    .boolean-operator
+      position: relative
+      width: 10px
+      font-size: $font-smaller
+      line-height: $r/2
+      text-align: center
+      &:before, &:after
+        position: absolute
+        right: -1px
+        height: 50%
+        width: 11px
+      &:before
+        content: '&'
+        top: 0
+        background: $_background
+        color: $_color
+      &:after
+        content: '|'
+        bottom: 0
+
+    .boolean-operator-input:checked + .boolean-operator
+      &:before
+        background: none
+        color: inherit
+      &:after
+        background: $_background
+        color: $_color
+
+
+  .control-Tags
+    .tags-filter
+      position: relative
+      height: $r
+      background: $input-white
+
+      white-space: nowrap
+      text-align: left
+
+      input
+        width: 100%
+        z-index: 10
+
+      &-selected-tags
+        overflow: hidden
+        position: absolute
+        left: 0px
+        top: 0px
+        bottom: 0px
+        padding-right: 2px
+        max-width: 75%
+        font-size: $font-smaller
+        line-height: $r*3/4
+        z-index: 15
+        li
+          position: relative
+          display: inline-block
+          margin-left: 2px
+          margin-top: 3px
+          padding: 0 2px
+          background: $ocean-blue
+          border-radius: 2px
+          color: $white
+
+          .selected-tag-remove
+            position: absolute
+            top: -2px
+            right: -2px
+            padding: 1px
+            background: $white
+            border-radius: 5px
+            color: $red
+            line-height: $r/3
+            font-weight: bold
+            cursor: pointer
+
+            &:after
+              content: '×'
+
+
+      &-selector
+        position: absolute
+        top: 100%
+        box-shadow: 0 0 10px rgba(#000, 0.5)
+        li
+          padding: 0 $r/4
+          background: $white
+          cursor: pointer
+          &.focused
+            background: $ocean-blue
+            color: $white
+
+  .control-FancyRange
+    position: relative
+
+    // Quick hack
+    &.lowest_steam_price
+      .fancy-rf-sensor:after
+        content: 'Free'
+        position: absolute
+        top: 0
+        right: 100%
+        width: $r
+        line-height: 10px
+        font-size: 10px
+        font-weight: bold
+        transform-origin: top right
+        transform: rotate(-90deg)
+        z-index: 10
+
+    .fancy-rf
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      background-color: mix($green, $input-white, 30%)
+      box-shadow: inset rgba(#000, 0.3) 0 0 10px
+      font-size: $font-smaller
+      cursor: col-resize
+
+      -webkit-touch-callout: none
+      -webkit-user-select: none
+      -khtml-user-select: none
+      -moz-user-select: none
+      -ms-user-select: none
+      user-select: none
+
+      &-sensor
+        position: absolute
+        top: 0
+        right: 0
+        bottom: 0
+        left: 0
+        z-index: 6
+
+      &-label
+        position: absolute
+        top: 0
+        right: 0
+        bottom: 0
+        left: 0
+        text-align: center
+        z-index: 5
+
+        & > span
+          position: relative
+          top: -1px
+          padding: 2px
+          border: dashed 1px transparent
+          border-radius: 2px
+          background: rgba(#000, 0.5)
+          line-height: $r/3
+          color: $white
+
+        &.mouse-label > span
+          border-color: $blue
+          background-color: rgba(#fff, 0.5)
+          color: $dark-blue
+          font-weight: bold
+
+
+      &-bar
+        position: absolute
+        top: 0
+        right: 0
+        bottom: 0
+        left: 0
+
+      &-bar-main
+        background: $green
+        box-shadow: inset rgba(#000, 0.5) 0 0 10px, $blue 1px 0, $blue -1px 0
+        z-index: 3
+
+      &-bar-highlight
+        right: 100%
+        background-image: url(~images/dashes.png)
+        background-position: 100% 100%
+        opacity: 0.5
+        z-index: 4
+
+      &-bar-caret
+        right: 100%
+        background-image: url(~images/dashes.png)
+        background-position: 100% 100%
+        box-shadow: rgba(#000, 0.3) 1px 0, rgba(#000, 0.3) -1px 0
+        text-align: left
+        z-index: 5

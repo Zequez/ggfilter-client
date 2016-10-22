@@ -17,7 +17,6 @@ export default class DataTableTitles extends Component {
     filtersParams: t.object.isRequired,
     sort: t.string.isRequired,
     sortAsc: t.bool.isRequired,
-    columnsWidth: t.arrayOf(t.number).isRequired,
 
     setSort: t.func.isRequired,
     setParam: t.func.isRequired,
@@ -62,11 +61,10 @@ export default class DataTableTitles extends Component {
 
   render () {
     console.logRender('DataTableTitles')
-    let { filters, filtersParams, sort, sortAsc, columnsWidth } = this.props
+    let { filters, filtersParams, sort, sortAsc } = this.props
 
     let titles = filters.map((filter, i) => {
       let sortStatus = (sort === filter.sort) ? sortAsc : null
-      let width = columnsWidth[i]
       let hasParams = typeof filtersParams[filter.name] === 'object'
       let highlightMode = hasParams ? !!filtersParams[filter.name].highlight : false
 
@@ -74,7 +72,6 @@ export default class DataTableTitles extends Component {
         <DataTableTitle
           key={filter.name}
           filter={filter}
-          width={width}
           sort={sortStatus}
           active={hasParams}
           highlightMode={highlightMode}

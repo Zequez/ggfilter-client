@@ -1,0 +1,47 @@
+@mixin category-color($color)
+  background-color: mix($color, $blue, 50%)
+  .category-items
+    background: rgba(mix($color, $dark-blue, 75%), 0.8)
+
+.data-table
+  .categories-columns
+    .category-title
+      background-image: linear-gradient(rgba(#fff, 0.05) 0%, rgba(#fff, 0) 65%)
+      box-shadow: inset 0 5px 10px rgba($blue, 0.2)
+      color: $white
+      text-shadow: 0 1px 0 #000
+      line-height: $r
+      cursor: pointer
+
+    th
+      position: relative
+      border: none
+
+    .category-items
+      position: absolute
+      top: 100%
+      padding: $r/2 0
+      margin-top: -1px
+      border-radius: 0 0 2px 2px
+      box-shadow: 0 3px 5px rgba(#000, 0.5)
+      color: $white
+      text-shadow: 0 1px 0 #000
+      text-align: left
+      +z(catColumnsItems)
+      label
+        display: block
+        padding: 0 $r/2
+        cursor: pointer
+        &:hover
+          background: rgba(#fff, 0.1)
+
+    &-gameInfo
+      +category-color(cadetblue)
+    &-price
+      +category-color(mediumseagreen)
+    &-playtime
+      +category-color(sandybrown)
+    &-ratings
+      +category-color(firebrick)
+    &-features
+      +category-color(darkorchid)
