@@ -25,11 +25,11 @@ export default class FiltersToggles extends Component {
 
     return (
       <ul className='filters-toggles'>
-        {Object.keys(definitions.categoriesWithFilters).map((categoryName) =>
-          <li key={categoryName} className='filters-toggles-section'>
-            <h3>{categoryName}</h3>
+        {definitions.categoriesList.map((cat) =>
+          <li key={cat.name} className='filters-toggles-section'>
+            <h3>{cat.title}</h3>
             <ul>
-              {definitions.categoriesWithFilters[categoryName].map((filter) =>
+              {definitions.categoriesWithFilters[cat.name].map((filter) =>
                 <ToggleComponent
                   key={filter.name}
                   filter={filter}
