@@ -29,7 +29,26 @@ $font-smaller: 12px;
 $font-x-smaller: 8px;
 
 $z: (
-  catColumnsItems: 9999
+  catColumnsItems: 100,
+  loadingSpinner: 101,
+  lightbox: 102,
+  sysreqCalc: 99,
+
+  dt: 70,
+  dt-controls: 50,
+  dt-titles: 60,
+  dt-titles-tooltip: 1,
+  dt-titles-highlightBorder: 2,
+  dt-titles-resizeHandle: 5,
+  dt-overflowCell: 10
 );
 
-@mixin z($name) { z-index: map-get($z, $name); }
+@mixin z($name, $sub: false) {
+  @if map-has-key($z, $name) {
+    z-index: map-get($z, $name);
+  }
+  @else {
+    @error "z-index map doesn't have key #{$name}";
+  }
+
+}

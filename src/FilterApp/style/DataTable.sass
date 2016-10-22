@@ -1,4 +1,6 @@
 .data-table
+  +z(dt)
+
   $background: $white
   $alternate-background: darken($white, 5%)
   $color: $dark-blue
@@ -42,7 +44,7 @@
       display: inline
       position: relative
       overflow: inherit
-      z-index: 10
+      +z(dt-overflowCell)
 
   th .overflow-cell:hover
     // Because fuck it, we need this on the titles
@@ -50,6 +52,7 @@
 
   // Filters titles
   &-titles
+    +z(dt-titles)
     color: $title-color
     background: $title-background
     text-shadow: 0px 1px $dark-blue
@@ -85,13 +88,16 @@
       left: 0
       right: 0
       height: 1px
-      z-index: 2
+      +z(dt-titles-highlightBorder)
 
     &-buttons
       position: absolute
       right: 0
       top: -$r * 3/4
       height: $r * 3/4
+      opacity: 0.5
+      &:hover
+        opacity: 1
       button
         display: inline-block
         height: $r * 3/4
@@ -123,7 +129,7 @@
       left: 50%
       width: 300px
       margin-left: -150px
-      z-index: 1
+      +z(dt-titles-tooltip)
       span
         display: inline-block
         padding: 2px
@@ -159,10 +165,11 @@
       height: 100%
       background: lighten($blue, 5%)
       cursor: ew-resize
-      z-index: 5
+      +z(dt-titles-resizeHandle)
 
   // Filters controls
   &-controls
+    +z(dt-controls)
     th:last-child // horrible hack
       overflow: hidden
 
