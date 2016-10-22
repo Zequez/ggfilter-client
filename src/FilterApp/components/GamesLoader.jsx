@@ -49,11 +49,12 @@ export default class GamesLoader extends Component {
 
   render () {
     console.logRender('GamesLoader')
+    let { fetching, failed, lastPage } = this.props
 
     let divClass = classNames('games-loader', {
-      'games-loader-fetching': this.props.fetching,
-      'games-loader-failed': this.props.failed,
-      'games-loader-lastpage': this.props.lastPage
+      'games-loader-fetching': fetching,
+      'games-loader-failed': failed,
+      'games-loader-lastpage': lastPage
     })
 
     return (
@@ -61,6 +62,9 @@ export default class GamesLoader extends Component {
         ref='el'
         className={divClass}
         onClick={this.handleClick.bind(this)}>
+        <i className='fa icon-load-more-left'></i>
+        <span className='games-loader-label'>Load more games</span>
+        <i className='fa icon-load-more-right'></i>
       </div>
     )
   }

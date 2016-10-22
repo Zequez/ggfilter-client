@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import definitions from '../lib/definitions'
 
-import { getGames, getMoreGames } from '../games'
+const { getGames, getMoreGames } = require('../games').actions
 import { getTrueColumnsWidth, getTrueTableWidth, getTab } from '../ui/selectors'
 import { finalFilterSelector, visibleFiltersDefinitionsSelector } from '../filter/selectors'
 
