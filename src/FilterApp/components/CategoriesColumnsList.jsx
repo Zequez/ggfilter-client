@@ -1,4 +1,5 @@
 import React, { PropTypes as t, Component } from 'react'
+import { onClickOutsideOnce } from 'shared/lib/utils'
 import CategoriesColumnsListToggle from './CategoriesColumnsListToggle'
 
 export default class CategoriesColumnsList extends Component {
@@ -14,8 +15,14 @@ export default class CategoriesColumnsList extends Component {
     open: false
   }
 
-  toggle = () => {
-    this.setState({open: !this.state.open})
+  onClickTitle = () => {
+    let newState = !this.state.open
+    this.setState({open: newState})
+    if (newState) {
+      onClickOutsideOnce(this.refs.th, (ev) => {
+        this.setState({open: false})
+      })
+    }
   }
 
   render () {
@@ -40,8 +47,8 @@ export default class CategoriesColumnsList extends Component {
     })
 
     return (
-      <th colSpan={countVisibleFilters} className={`categories-columns-${slug}`}>
-        <div className='category-title' onClick={this.toggle}>{title}</div>
+      <th colSpan={countVisibleFilters} className={`categories-columns-${slug}`} ref='th'>
+        <div className='category-title' onClick={this.onClickTitle}>{title}</div>
         {open ? (
           <ul className='category-items'>
             {toggles}

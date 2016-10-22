@@ -186,20 +186,35 @@ export function snakeCase (camelCase) {
   return camelCase.replace(/[A-Z]+/g, (m) => '_' + m.toLowerCase())
 }
 
-export function objectMatchesExtension (main, extension, deep = true) {
-  for (let key in extension) {
-    if (deep && typeof main[key] === 'object') {
-      if (!objectMatchesExtension(main[key], extension[key])) return false
-    } else {
-      if (main[key] !== extension[key]) return false
-    }
-  }
-  return true
-}
-
 export function isEmpty (obj) {
   for (let key in obj) {
     return false
   }
   return true
+}
+
+export function isParentOf (element, possibleChild) {
+  let el = possibleChild
+  while (el.parentElement !== null) {
+    if (el.parentElement === element) {
+      return true
+    }
+    el = el.parentElement
+  }
+  return false
+}
+
+export function onClickOutsideOnce (target, cb) {
+  if (document) {
+    let doc = document.documentElement
+    const binding = (ev) => {
+      if (!isParentOf(target, ev.target)) {
+        if (cb(ev) !== false) {
+          doc.removeEventListener('click', binding)
+        }
+      }
+    }
+
+    doc.addEventListener('click', binding)
+  }
 }

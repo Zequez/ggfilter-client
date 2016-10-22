@@ -24,7 +24,6 @@ export default class CategoriesColumns extends Component {
       this.categoriesWithFilters[title] =
         categoriesDefinitions[title].map((name) => definitions.filters[name])
     }
-    console.log(this.categoriesWithFilters)
   }
 
   render () {
