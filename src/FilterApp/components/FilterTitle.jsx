@@ -24,7 +24,7 @@ export default class FilterTitle extends Component {
   }
 
   generateAutoTitle () {
-    if (!this.props.isDirty) return null
+    // if (!this.props.isDirty) return null
     return generateAutoTitle(
       this.props.filter,
       undefined,
@@ -39,12 +39,13 @@ export default class FilterTitle extends Component {
   render () {
     let { staticSlug, gamesFoundCount } = this.props
     let autotitle = staticSlug ? staticFilters[staticSlug].title : this.generateAutoTitle()
+    let count = gamesFoundCount == null ? '???' : gamesFoundCount
 
     return (
       <div className='filter-title'>
         {autotitle ? (
           <span>
-            “<strong>{gamesFoundCount}</strong> <span dangerouslySetInnerHTML={this.dangerousMarkup(autotitle)}></span>”
+            “<strong>{count}</strong> <span dangerouslySetInnerHTML={this.dangerousMarkup(autotitle)}></span>”
           </span>
         ) : (
           <h1 title="We have no proof whatsoever of this claim, but we really aspire to!">

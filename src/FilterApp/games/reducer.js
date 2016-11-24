@@ -8,7 +8,7 @@ export const initialState = {
   fetching: false,
   failed: false,
   lastPage: false,
-  totalCount: 0
+  totalCount: null
 }
 
 // =============================================================================
@@ -77,7 +77,8 @@ export function reducer (state = initialState, action) {
   if (action.type === GET_GAMES_START) {
     state = u(state, {
       fetching: {$set: true},
-      lastPage: {$set: false}
+      lastPage: {$set: false},
+      totalCount: {$set: action.page === 0 ? null : state.totalCount}
     })
   } else if (action.type === GET_GAMES_END) {
     let stateChange = {
