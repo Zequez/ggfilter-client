@@ -31,20 +31,20 @@ export default function generateAutoTitle (filter, definitions = autoTitleDefini
   }
 
   let shouldAddSortInfo = filter.sort && (
-    filter.sort.column !== defaultFilter.sort.column ||
+    filter.sort.filter !== defaultFilter.sort.filter ||
     filter.sort.asc !== defaultFilter.sort.asc
   )
 
   if (shouldAddSortInfo) {
     let direction = filter.sort.asc ? 'ascending' : 'descending'
     // FIXME: Doesn't work for filters with a name != sort column
-    let title = filtersDefinitions.filters[filter.sort.column].title
+    let title = filtersDefinitions.filters[filter.sort.filter].title
     titles.push(strongificate(`sorted by <${h(title)} in ${direction} order>`))
   }
 
   if (titles.length) {
     let title = titles.join(', ')
-    return 'Games ' + title
+    return 'games ' + title
   } else {
     return null
   }

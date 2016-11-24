@@ -1,9 +1,11 @@
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
+import debounce from 'lodash/debounce'
 
 import definitions from '../lib/definitions'
 
 const { getGames, getMoreGames } = require('../games').actions
+import { setDocWidth } from '../ui/reducer'
 import { getTrueColumnsWidth, getTrueTableWidth, getTab } from '../ui/selectors'
 import { finalFilterSelector, visibleFiltersDefinitionsSelector } from '../filter/selectors'
 
@@ -22,7 +24,8 @@ import GamesLoader from './GamesLoader'
   tab: getTab(s)
 }), {
   getGames,
-  getMoreGames
+  getMoreGames,
+  setDocWidth
 })
 export default class FilterApp extends Component {
   static propTypes = {
@@ -32,6 +35,12 @@ export default class FilterApp extends Component {
 
   componentWillMount () {
     this.fillStaticFiltersDefinitionsOptions()
+    this.debouncedResize = debounce(this.props.setDocWidth, 100)
+    window.addEventListener('resize', this.debouncedResize)
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.debouncedResize)
   }
 
   // This is hacky, but it's now the convention
@@ -46,7 +55,6 @@ export default class FilterApp extends Component {
 
   render () {
     let {games, filter, columnsWidth, tableWidth, tab, visibleFilters} = this.props
-
     let filterMode = ' filter-tab-' + tab
 
     return (

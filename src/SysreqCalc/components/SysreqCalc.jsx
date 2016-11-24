@@ -22,15 +22,21 @@ export default class SysreqCalc extends Component {
     if (!value) return []
 
     return getGames({
-      filters: JSON.stringify({
-        name: { value: value }
+      filter: JSON.stringify({
+        params: {
+          name: { value: value },
+          sysreq_index_centile: true
+        },
+        sort: {
+          filter: 'name',
+          asc: true
+        }
       }),
-      sort: `name_asc`,
       limit: 8,
-      columns: ['name', 'sysreq_index_centile'],
       page: 0
     })
-    .then((games) => {
+    .then((response) => {
+      let games = response.data
       var ids = this.state.games.map((g) => g.id)
       return games
         .filter((game) => ids.indexOf(game.id) === -1)

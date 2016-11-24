@@ -7,7 +7,8 @@ export const initialState = {
   batches: [],
   fetching: false,
   failed: false,
-  lastPage: false
+  lastPage: false,
+  totalCount: 0
 }
 
 // =============================================================================
@@ -33,12 +34,13 @@ export function getGames (page = 0) {
 
     let queryFilter = filterQuery(state, page, options)
     return apiGetGames(queryFilter)
-      .then(games => {
+      .then(response => {
         return dispatch({
           type: GET_GAMES_END,
-          games: games,
+          games: response.data,
+          totalCount: response.totalCount,
           page: page,
-          lastPage: games.length < options.batchSize})
+          lastPage: response.data.length < options.batchSize})
       }, (error) => {
         return dispatch({type: GET_GAMES_FAILED, page, error})
       })
@@ -81,7 +83,8 @@ export function reducer (state = initialState, action) {
     let stateChange = {
       fetching: {$set: false},
       failed: {$set: false},
-      lastPage: {$set: action.lastPage}
+      lastPage: {$set: action.lastPage},
+      totalCount: {$set: action.totalCount}
     }
 
     if (action.page === 0) {
@@ -95,7 +98,8 @@ export function reducer (state = initialState, action) {
     state = u(state, {
       fetching: {$set: false},
       failed: {$set: true},
-      lastPage: {$set: true}
+      lastPage: {$set: true},
+      totalCount: {$set: 0}
     })
   }
 

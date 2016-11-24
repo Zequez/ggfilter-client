@@ -21,7 +21,9 @@ export const REMOVE_MASK = 'filter/REMOVE_MASK'
 export const SET_STATIC = 'filter/SET_STATIC'
 
 export const DIRTY_ACTIONS = [
-  MUTATE
+  MUTATE,
+  ADD_MASK,
+  REMOVE_MASK
 ]
 
 // =============================================================================
@@ -32,12 +34,12 @@ export const DIRTY_ACTIONS = [
 // Actions Creators
 // =============================================================================
 
-export const addMask = (mask) => ({ type: ADD_MASK, mask })
-export const removeMask = (mask) => ({ type: REMOVE_MASK, mask })
+export const addMask = (mask) => ({ type: ADD_MASK, mask, dispatch: getGames() })
+export const removeMask = (mask) => ({ type: REMOVE_MASK, mask, dispatch: getGames() })
 export const reset = () => ({ type: RESET, dispatch: getGames() })
 export const mutate = (mask) => ({ type: MUTATE, mask, dispatch: getGames() })
 export const setParam = (name, value) => mutate({params: {[name]: value}})
-export const setSort = (name, asc) => mutate({sort: { column: name, asc }})
+export const setSort = (name, asc) => mutate({sort: { filter: name, asc }})
 
 export const addTagFilter = (tagId) => (dispatch, getState) => {
   let tagsFilter = getState().filter.params.tags

@@ -1,8 +1,5 @@
 import React, { Component, PropTypes as t } from 'react'
-
-var plural = function (num) {
-  return num === 1 ? '' : 's'
-}
+import { timeAgo } from 'shared/lib/utils'
 
 export default class TimeAgoColumn extends Component {
   static propTypes = {
@@ -14,21 +11,13 @@ export default class TimeAgoColumn extends Component {
       return (<span>-</span>)
     }
 
-    var timeAgo = (new Date() - new Date(this.props.value)) / 1000 / 60 / 60 / 24 / 365
-
-    var label
-    if (timeAgo < 23 / 24) {
-      timeAgo = timeAgo * 12
-      timeAgo = Math.round(timeAgo)
-      label = `month${plural(timeAgo)} ago`
-    } else {
-      timeAgo = Math.round(timeAgo)
-      label = `year${plural(timeAgo)} ago`
-    }
+    let date = new Date(this.props.value)
+    let fullTimeAgo = timeAgo(date) + ' ago'
+    let [, ago, label] = fullTimeAgo.match(/(\d+) (.*)/)
 
     return (
       <span title={this.props.value}>
-        {timeAgo} <span className='text-deco'>{label}</span>
+        {ago} <span className='text-deco'>{label}</span>
       </span>
     )
   }

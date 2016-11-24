@@ -47,7 +47,9 @@ let booleanFilter = (nameKey, wholeInterpol = '%s', valInterpol = '%s') => {
 
 export default {
   platforms: booleanFilter('platforms', 'for %s'),
-  vr: booleanFilter('vr', 'with support for %s', 'the %s'),
+  vr_platforms: booleanFilter('vr_platforms', 'for %s', 'the %s'),
+  vr_mode: booleanFilter('vr_mode', 'for %s VR'),
+  vr_controllers: booleanFilter('vr_controllers', 'with %s VR controllers support'),
   players: booleanFilter('players', 'with %s support'),
   features: booleanFilter('features', 'with support for %s'),
   controller_support: ({gt, lt}) => {

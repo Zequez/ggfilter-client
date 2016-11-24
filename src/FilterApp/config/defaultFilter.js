@@ -13,10 +13,10 @@ export default {
     steam_reviews_ratio: true,
     platforms: true,
     players: true,
-    vr: true
+    vr_platforms: true
   }),
   sort: {
-    column: 'name',
+    filter: 'name',
     asc: true
   }
 }

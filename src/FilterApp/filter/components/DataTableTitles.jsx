@@ -52,7 +52,7 @@ export default class DataTableTitles extends Component {
 
   onSetHighlightMode (filter, mode) {
     let params = this.props.filtersParams[filter.name]
-    this.props.setParam(filter.name, {...params, highlight: mode})
+    this.props.setParam(filter.name, {...params, hl: mode})
   }
 
   onClearFilter (filter) {
@@ -64,9 +64,9 @@ export default class DataTableTitles extends Component {
     let { filters, filtersParams, sort, sortAsc } = this.props
 
     let titles = filters.map((filter, i) => {
-      let sortStatus = (sort === filter.sort) ? sortAsc : null
+      let sortStatus = (sort === filter.name) ? sortAsc : null
       let hasParams = typeof filtersParams[filter.name] === 'object'
-      let highlightMode = hasParams ? !!filtersParams[filter.name].highlight : false
+      let highlightMode = hasParams ? !!filtersParams[filter.name].hl : false
 
       return (
         <DataTableTitle

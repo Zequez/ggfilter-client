@@ -29,7 +29,7 @@ export default {
     control: 'FancyRange',
     controlOptions: options.controls.range.price,
     column: 'Price',
-    columnInputs: { price: 'steam_price', was: 'steam_sale_price' },
+    columnInputs: { price: 'lowest_steam_price', was: 'steam_price' },
     width: 100
   },
   steam_discount: {
@@ -167,9 +167,9 @@ export default {
     column: 'Boolean',
     width: 24 * 4 + 10
   },
-  vr: {
+  vr_platforms: {
     id: 18,
-    title: 'Virtual reality',
+    title: 'VR Platforms',
     control: 'Boolean',
     column: 'Boolean',
     width: 24 * 2 + 10
@@ -246,5 +246,19 @@ export default {
     columnInputs: { value: 'released_at' },
     sort: 'released_at',
     width: 100
+  },
+  vr_mode: {
+    id: 26,
+    title: 'VR Mode',
+    control: 'Boolean',
+    column: 'Boolean',
+    width: 24 * 2 + 10
+  },
+  vr_controllers: {
+    id: 27,
+    title: 'VR Controllers',
+    control: 'Boolean',
+    column: 'Boolean',
+    width: 24 * 2 + 10
   }
 }

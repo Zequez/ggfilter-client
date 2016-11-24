@@ -22,10 +22,21 @@ export default {
       local_co_op: 8
     },
 
-    vr: {
+    vr_platforms: {
       vive: 1,
       oculus: 2
-      // open: 4
+    },
+
+    vr_mode: {
+      seated: 1,
+      standing: 2,
+      room_scale: 4
+    },
+
+    vr_controllers: {
+      tracked: 1,
+      gamepad: 2,
+      keyboard_mouse: 4
     },
 
     controller_support: {
@@ -58,10 +69,22 @@ export default {
       local_co_op: 'Local co-op'
     },
 
-    vr: {
+    vr_platforms: {
       vive: 'HTC Vive',
       oculus: 'Oculus Rift'
       // open: 'Open VR'
+    },
+
+    vr_mode: {
+      seated: 'Seated',
+      standing: 'Standing',
+      room_scale: 'Room Scale'
+    },
+
+    vr_controllers: {
+      tracked: 'Tracked',
+      gamepad: 'Gamepad',
+      keyboard_mouse: 'Keyboard & Mouse'
     },
 
     controller_support: {

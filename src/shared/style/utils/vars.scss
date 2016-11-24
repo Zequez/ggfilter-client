@@ -28,29 +28,26 @@ $font-xx-larger: 48px;
 $font-smaller: 12px;
 $font-x-smaller: 8px;
 
-$z: (
-  catColumnsItems: 100,
-  loadingSpinner: 101,
-  lightbox: 102,
-  sysreqCalc: 99,
+$z:
+  "lightbox",
+  "loadingSpinner",
+  "catColumnsItems",
+  "sysreqCalc",
+  "dt",
+  "dt-titles-highlightBorder",
+  "dt-titles",
+  "dt-controls",
+  "dt-overflowCell",
+  "dt-titles-resizeHandle",
+  "dt-titles-sort-arrow",
+  "dt-titles-icon",
+  "dt-titles-tooltip";
 
-  dt: 70,
-  dt-controls: 50,
-  dt-titles: 60,
-  dt-titles-tooltip: 1,
-  dt-titles-highlightBorder: 2,
-  dt-titles-resizeHandle: 5,
-  dt-titles-icon: 3,
-  dt-titles-tooltip-activation: 10,
-  dt-overflowCell: 10
-);
-
-@mixin z($name, $sub: false) {
-  @if map-has-key($z, $name) {
-    z-index: map-get($z, $name);
+@mixin z($name) {
+  @if index($z, $name) {
+    z-index: length($z) - index($z, $name) + 100;
   }
   @else {
-    @error "z-index map doesn't have key #{$name}";
+    @error "z-index list doesn't have #{$name}";
   }
-
 }

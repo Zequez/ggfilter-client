@@ -5,14 +5,16 @@ const { visibleFiltersDefinitionsSelector } = require('../filter').selectors
 
 export const getColumnsWidth = (s) => s[NAME].columnsWidth
 export const getTab = (s) => s[NAME].tab
+export const getDocumentWidth = (s) => s[NAME].documentWidth
 
 export const tableWidthCalculator = createSelector(
   getColumnsWidth,
   visibleFiltersDefinitionsSelector,
-  (columnsWidth, filters) => {
-    if (!document) return null
-    let docSize = document.documentElement.clientWidth
-    return new TableWidthCalculator(filters, columnsWidth, docSize)
+  getDocumentWidth,
+  (columnsWidth, filters, documentWidth) => {
+    // if (!document) return null
+    // let docSize = document.documentElement.clientWidth
+    return new TableWidthCalculator(filters, columnsWidth, documentWidth)
   }
 )
 

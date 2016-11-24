@@ -12,7 +12,7 @@ export default {
       playtime_median_ftb: { gt: 1.5 }
     },
     sort: {
-      column: 'playtime_median_ftb',
+      filter: 'playtime_median_ftb',
       asc: false
     }
   },
@@ -25,7 +25,9 @@ export default {
   vr: {
     title: 'VR Games',
     params: {
-      vr: { value: 0b11, or: true }
+      vr_platforms: { value: 0b11, or: true },
+      vr_mode: true,
+      vr_controllers: true
     }
   },
   potato: {

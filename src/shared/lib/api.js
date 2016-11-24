@@ -46,11 +46,10 @@ export function getTags () {
 }
 
 export function getGames (queryFilter) {
-  let jsonQueryFilter = JSON.stringify(queryFilter)
-
-  return api.get(`games.json`, {params: {filter: jsonQueryFilter}})
+  return api.get(`games.json`, {params: queryFilter})
     .then((response) => {
-      return response.data
+      let count = Number(response.headers['x-pagination-count'])
+      return {totalCount: count, data: response.data}
     }, (error) => {
       console.error(error)
     })

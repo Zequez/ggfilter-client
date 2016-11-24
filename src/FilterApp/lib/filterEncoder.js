@@ -8,8 +8,9 @@ const keysMap = {
   gt: 'g',
   lt: 'l',
   tags: 't',
-  column: 'c',
-  asc: 'a'
+  filter: 'c',
+  asc: 'a',
+  or: 'o'
 }
 
 const charStartFrom = 32
@@ -50,14 +51,14 @@ function fromMappedKeys (obj) {
 
 function toMinSort (sort) {
   let newSort = {}
-  if (sort.column) newSort[sortCol] = toNameKey(sort.column)
+  if (sort.filter) newSort[sortCol] = toNameKey(sort.filter)
   if (sort.asc) newSort[sortAsc] = sort.asc ? 1 : 0
   return newSort
 }
 
 function fromMinSort (sort) {
   let newSort = {}
-  if (sort[sortCol]) newSort.column = fromNameKey(sort[sortCol])
+  if (sort[sortCol]) newSort.filter = fromNameKey(sort[sortCol])
   if (sort[sortAsc]) newSort.asc = !!sort[sortAsc]
   return newSort
 }
@@ -136,7 +137,9 @@ function extractKnownMasks (encodedMinFilter) {
 export function encode (filter) {
   let parts = filter.masks || []
   if (!(isEmpty(filter.params) && isEmpty(filter.sort))) {
+    // console.log(filter)
     let minFilter = minimize(filter)
+    // console.log(minFilter)
     let slug = toB64(minFilter)
     parts = parts.concat(slug)
   }

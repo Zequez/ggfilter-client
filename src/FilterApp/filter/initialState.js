@@ -5,7 +5,7 @@ export default {
   sort: {},
 
   // base: defaultFilter,
-  masks: ['decrap', 'ptftb']
+  masks: ['on-sale']
   // extra: {
   //   params: {},
   //   sort: {}

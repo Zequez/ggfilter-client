@@ -12,7 +12,7 @@ export default class DataTable extends Component {
     filter: t.shape({
       params: t.object.isRequired,
       sort: t.shape({
-        column: t.string.isRequired,
+        filter: t.string.isRequired,
         asc: t.bool.isRequired
       }).isRequired
     }).isRequired,
@@ -49,7 +49,7 @@ export default class DataTable extends Component {
           <DataTableTitles
             filters={filters}
             filtersParams={filter.params}
-            sort={filter.sort.column}
+            sort={filter.sort.filter}
             sortAsc={filter.sort.asc}/>
           <DataTableControls
             filters={filters}

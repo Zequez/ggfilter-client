@@ -44,8 +44,15 @@ export default {
       'features',
       'platforms',
       'players',
-      'vr',
       'controller_support'
+    ]
+  },
+  vr: {
+    title: 'VR',
+    filters: [
+      'vr_platforms',
+      'vr_mode',
+      'vr_controllers'
     ]
   }
   // 'Other': [
