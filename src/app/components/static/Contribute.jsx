@@ -9,9 +9,9 @@ export default () => (
     <img className='bitcoins-wallet-qr' src={WALLET_QR}/>
     <h3>Bitcoins</h3>
     <p>
-      You can always donate bitcoins to the cause: <a href='bitcoin:{WALLET}'>{WALLET}</a>
+      You can always donate bitcoins to the cause: <a href={'bitcoin:' + WALLET}>{WALLET}</a>
       <br/>
-      I promise to spend it on server fees, or my coffee addiction.
+      I promise to spend it on server fees, my coffee addiction, and helping me get through college.
     </p>
     <h3>Offer me a job!</h3>
     <p>
