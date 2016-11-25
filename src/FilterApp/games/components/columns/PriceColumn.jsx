@@ -15,10 +15,13 @@ export default class PriceColumn extends Component {
   }
 
   render () {
+    let { was, price } = this.props
+
     return (
       <span>
-        {this.elem(this.props.was, 'price-was')}
-        {this.elem(this.props.price, 'price-is')}
+        {this.elem(was !== price ? was : null, 'price-was')}
+        {this.elem(price, 'price-is')}
+        {price == null && was == null ? '-' : ''}
       </span>
     )
   }
