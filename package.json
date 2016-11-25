@@ -14,7 +14,7 @@
     "dist": "npm run copy && ruby ./copy_version_to_gem.rb && NODE_ENV=production webpack --env=dist && npm run dist:commit",
     "dist:commit": "cd gem && rake commit",
     "lint": "eslint ./src",
-    "copy": "copyfiles -f ./src/index.html ./src/favicon.ico ./gem/app/assets/javascripts/app",
+    "copy": "copyfiles -f ./src/index.html ./src/images/favicon1.png ./src/images/favicon2.png ./gem/app/assets/javascripts/app",
     "clean": "rimraf ./gem/app/assets/*",
     "release:major": "npm version major && npm publish && git push --follow-tags",
     "release:minor": "npm version minor && npm publish && git push --follow-tags",

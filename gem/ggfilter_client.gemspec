@@ -3,7 +3,7 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 # Automatically changed by client build script
-version = '0.1.0'
+version = '0.1.1'
 
 Gem::Specification.new do |spec|
   spec.name          = "ggfilter_client"
