@@ -26,7 +26,7 @@ export default function filterQuery (state, page, options) {
 
   return {
     filter: JSON.stringify(filter),
-    limit: 20,
+    limit: 50,
     page: page
   }
 }
