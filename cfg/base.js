@@ -2,11 +2,11 @@ var path = require('path')
 
 var port = 8001
 var srcPath = path.join(__dirname, '/../src/')
-var publicPath = '/assets/'
+var publicPath = '/assets/app/'
 
 module.exports = {
   output: {
-    path: path.join(__dirname, '/../gem/app/assets/javascripts'),
+    path: path.join(__dirname, '/../gem/app/assets/javascripts/app'),
     filename: 'app.js',
     publicPath: publicPath
   },

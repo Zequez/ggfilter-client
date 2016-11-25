@@ -1,2 +1,8 @@
 require "bundler/gem_tasks"
 
+desc "Commit with version"
+task "commit" do
+  gemspec = Bundler.load_gemspec('./ggfilter_client.gemspec')
+  `git add -A`
+  `git commit -m "Version #{gemspec.version}"`
+end

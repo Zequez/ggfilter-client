@@ -15,7 +15,7 @@ var config = _.merge({
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.NoErrorsPlugin(),
-    new ExtractTextPlugin('../stylesheets/app.css'),
+    new ExtractTextPlugin('../../stylesheets/app/app.css'),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     })
