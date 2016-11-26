@@ -4,6 +4,7 @@ var yearsAgo = function (years) {
 
 var generateDatesBack = function (years) {
   let range = [
+    Infinity,
     0,
     60 * 60 * 24,
     60 * 60 * 24 * 7,
@@ -16,24 +17,26 @@ var generateDatesBack = function (years) {
     range: range,
     autohook: 0,
     label: {
-      gtInterpolation: 'Last {si}',
-      ltInterpolation: 'Older than {ei}',
-      namedRanges: {
-        [range[0]]: 'Now',
-        [range[1]]: '24 hours',
-        [range[2]]: '1 week',
-        [range[3]]: '1 month',
-        [range[4]]: '3 months',
-        [range[5]]: '6 months',
-        [range[6]]: '1 year'
-      }
+      [range[1]]: 'now',
+      [range[2]]: '24 hours',
+      [range[3]]: '1 week',
+      [range[4]]: '1 month',
+      [range[5]]: '3 months',
+      [range[6]]: '6 months',
+      [range[7]]: '1 year',
+
+      '0->': 'Unreleased',
+      '<-0': 'Released',
+
+      '*-0': 'Last {si}',
+      '<-*': 'Older than {ei}'
     }
   }
 
   for (var i = 2; i <= years; i++) {
     let ago = yearsAgo(i)
     hash.range.push(ago)
-    hash.label.namedRanges[ago] = `${i} years`
+    hash.label[ago] = `${i} years`
   }
   hash.range.push(null)
 
@@ -61,10 +64,10 @@ var generateAbsoluteDates = function (startYear, endYear = null) {
   let hash = {
     range: range,
     label: {
-      gtInterpolation: rangeInterpolation,
-      ltInterpolation: rangeInterpolation,
-      rangeInterpolation,
-      namedRanges
+      '<-*': null,
+      '*->': null,
+      '*-*': rangeInterpolation,
+      ...namedRanges
     },
     byName: invertedNamedRanges
   }
@@ -78,13 +81,15 @@ export default {
       price: {
         range: [0, 1, 100, 300, 500, 1000, 1500, 2000, 3000, 4000, 5000, 6000, Infinity],
         label: {
-          fullRangeLabel: 'Any price',
-          interpolation: (v) => '$' + Math.floor(v / 100),
-          namedRanges: {
-            '0': 'Free',
-            '1-Infinity': 'Non-free',
-            '1': '$0.01'
-          }
+          '': (v) => '$' + Math.floor(v / 100),
+          '1': '$0.01',
+
+          '<->': 'Any price',
+          '0': 'Free',
+          '1-Infinity': 'Non-free',
+
+          '1-*': '≤{ei}',
+          '0-*': '≤{ei} & Free'
         },
         mappedRanges: {
           '0-1': [0, 0], // Override strictlyRangeMode
@@ -100,12 +105,10 @@ export default {
           '100': [100, 100]
         },
         label: {
-          interpolation: '{v}%',
-          namedRanges: {
-            '0': 'NotOnSale',
-            '1-100': 'On sale',
-            '100': 'FREE!?'
-          }
+          '': '{v}%',
+          '0': 'NotOnSale',
+          '1-100': 'On sale',
+          '100': 'FREE!?'
         },
         autohook: 100
       },

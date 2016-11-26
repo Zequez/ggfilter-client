@@ -23,14 +23,14 @@ describe('<FancyRangeFilterLabel/>', () => {
 
     it('should render with interpolation', () => {
       const f = render(2, 2, range, {
-        interpolation: '${v}'
+        '': '${v}'
       })
       expect(f.text()).toBe('$3')
     })
 
     it('should render from the named labels data', () => {
       const f = render(2, 2, range, {
-        namedRanges: {'3': 'Potato!'}
+        '3': 'Potato!'
       })
       expect(f.text()).toBe('Potato!')
     })
@@ -39,7 +39,7 @@ describe('<FancyRangeFilterLabel/>', () => {
       let interpolation = sinon.stub()
       interpolation.onFirstCall().returns('Yay!')
       const f = render(2, 2, range, {
-        interpolation
+        '': interpolation
       })
       expect(interpolation.getCall(0).args[0]).toBe(3)
       expect(f.text()).toBe('Yay!')
@@ -54,30 +54,31 @@ describe('<FancyRangeFilterLabel/>', () => {
 
     it('should render with interpolation', () => {
       const f = render(2, 7, range, {
-        rangeInterpolation: '{s} potato {e}',
-        interpolation: '${v}'
+        '*-*': '{s} potato {e}',
+        '': '${v}'
       })
       expect(f.text()).toBe('3 potato 40')
     })
 
     it('should render with individual and range interpolation both', () => {
       const f = render(2, 7, range, {
-        rangeInterpolation: '{si} tooo {ei}',
-        interpolation: '${v}'
+        '*-*': '{si} tooo {ei}',
+        '': '${v}'
       })
       expect(f.text()).toBe('$3 tooo $40')
     })
 
     it('should render with the individual labels named labels data', () => {
       const f = render(2, 7, range, {
-        namedRanges: {'3': 'FREE!', '40': 'Non-free'}
+        '3': 'FREE!',
+        '40': 'Non-free'
       })
       expect(f.text()).toBe('FREE! to Non-free')
     })
 
     it('should render from named labels data', () => {
       const f = render(2, 7, range, {
-        namedRanges: {'3-40': 'Potato!'}
+        '3-40': 'Potato!'
       })
       expect(f.text()).toBe('Potato!')
     })
@@ -86,8 +87,8 @@ describe('<FancyRangeFilterLabel/>', () => {
       let rangeInterpolation = sinon.stub()
       rangeInterpolation.onFirstCall().returns('Yay!')
       const f = render(2, 7, range, {
-        interpolation: '!{v}!',
-        rangeInterpolation
+        '': '!{v}!',
+        '*-*': rangeInterpolation
       })
       expect(rangeInterpolation.getCall(0).args[0]).toBe(3)
       expect(rangeInterpolation.getCall(0).args[1]).toBe(40)
@@ -105,15 +106,15 @@ describe('<FancyRangeFilterLabel/>', () => {
 
     it('should render with individual and gt interpolation both', () => {
       const f = render(2, 9, range, {
-        gtInterpolation: 'more than {si}',
-        interpolation: '!{v}!'
+        '*->': 'more than {si}',
+        '': '!{v}!'
       })
       expect(f.text()).toBe('more than !3!')
     })
 
     it('should render from a named label data', () => {
       const f = render(2, 9, range, {
-        namedRanges: {'3-Infinity': 'Ohhhh'}
+        '3-Infinity': 'Ohhhh'
       })
       expect(f.text()).toBe('Ohhhh')
     })
@@ -127,15 +128,15 @@ describe('<FancyRangeFilterLabel/>', () => {
 
     it('should render with individual and lt interpolation both', () => {
       const f = render(0, 2, range, {
-        ltInterpolation: 'less than {ei}',
-        interpolation: '!{v}!'
+        '<-*': 'less than {ei}',
+        '': '!{v}!'
       })
       expect(f.text()).toBe('less than !3!')
     })
 
     it('should render from a named label data', () => {
       const f = render(0, 2, range, {
-        namedRanges: {'null-3': 'Yeah!'}
+        'null-3': 'Yeah!'
       })
       expect(f.text()).toBe('Yeah!')
     })

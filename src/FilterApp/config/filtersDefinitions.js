@@ -47,7 +47,7 @@ export default {
     controlOptions: {
       range: [0, 1.5, 3, 4, 5, 7, 9, 13, 21, 39, Infinity],
       autohook: Infinity,
-      label: { interpolation: '{v}hs', rangeInterpolation: '{s} to {e} hs' }
+      label: { '': '{v}hs', '*-*': '{s} to {e} hs' }
     },
     columnOptions: { round: 100 },
     width: 60
@@ -59,7 +59,7 @@ export default {
     controlOptions: {
       range: [0, 0.7, 1.3, 1.9, 2.7, 3.5, 4.7, 6.7, 9.7, 16.6, Infinity],
       autohook: Infinity,
-      label: { interpolation: '{v}hs' }
+      label: { '': '{v}hs', '*-*': '{s} to {e} hs' }
     },
     columnOptions: { round: 100, interpolation: '%shs' },
     width: 60
@@ -71,7 +71,7 @@ export default {
     controlOptions: {
       range: [0, 1.7, 3.2, 4.9, 7.2, 10.4, 15.5, 24.2, 40.2, 76.5],
       autohook: 0,
-      label: { interpolation: '{v}hs', rangeInterpolation: '{s} to {e} hs' }
+      label: { '': '{v}hs', '*-*': '{s} to {e} hs' }
     },
     columnOptions: { round: 100 },
     width: 60
@@ -83,7 +83,7 @@ export default {
     controlOptions: {
       range: [0, 70.6, 89.7, 106.4, 122.3, 136.7, 154.9, 176.7, 209.8, 271.4],
       autohook: 0,
-      label: { interpolation: '{v}hs', rangeInterpolation: '{s} to {e} hs' }
+      label: { '': '{v}hs', '*-*': '{s} to {e} hs' }
     },
     columnOptions: { round: 100 },
     width: 60
@@ -95,7 +95,7 @@ export default {
     controlOptions: {
       range: [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1.0, 1.4, 1.9, 3.1, Infinity],
       autohook: Infinity,
-      label: { interpolation: '{v}hs/$', rangeInterpolation: '{s} to {e} hs/$' }
+      label: { '': '{v}hs/$', '*-*': '{s} to {e} hs/$' }
     },
     columnOptions: { round: 100, interpolation: '%shs/$' },
     width: 60
@@ -107,7 +107,7 @@ export default {
     controlOptions: {
       range: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.9, 1.5, Infinity],
       autohook: Infinity,
-      label: { interpolation: '{v}hs/$', rangeInterpolation: '{s} to {e} hs/$' }
+      label: { '': '{v}hs/$', '*-*': '{s} to {e} hs/$' }
     },
     columnOptions: { round: 100, interpolation: '%shs/$' },
     width: 60
@@ -139,9 +139,7 @@ export default {
     controlOptions: {
       range: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 98, 99, Infinity],
       autohook: Infinity,
-      label: {
-        interpolation: '{v}%'
-      }
+      label: { '': '{v}%' }
     },
     column: 'Ratio',
     width: 100
@@ -181,11 +179,9 @@ export default {
     controlOptions: {
       range: [1, 2, 3],
       label: {
-        namedRanges: {
-          '1': 'No',
-          '2': 'Partial',
-          '3': 'Full'
-        }
+        '1': 'No',
+        '2': 'Partial',
+        '3': 'Full'
       },
       strictlyRangeMode: false
     }

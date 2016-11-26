@@ -18,66 +18,52 @@ export default class FancyRangeControlLabel extends Component {
     super(props)
 
     this.options = {
-      namedRanges: {},
-      interpolation: '{v}',
-      rangeInterpolation: '{si} to {ei}',
-      gtInterpolation: '≥{si}',
-      ltInterpolation: '≤{ei}',
-      fullRangeLabel: 'Any',
+      '': '{v}',
+      '*-*': '{si} to {ei}',
+      '*->': '≥{si}',
+      '<-*': '≤{ei}',
+      '<->': 'Any',
       ...props.options
     }
   }
 
   label () {
     let { start, end, range } = this.props
-    let { interpolation, gtInterpolation, ltInterpolation, rangeInterpolation, fullRangeLabel } = this.options
-    let startVal = range[start]
-    let endVal = range[end]
+    let interpolations = this.options
 
-    if (start === end) {
-      return this.interpolateSingle(interpolation, startVal)
-    } else if (start === 0 && end === range.length - 1) {
-      return fullRangeLabel != null
-        ? fullRangeLabel
-        : this.interpolate(rangeInterpolation, startVal, endVal)
-    } else if (start === 0) {
-      return this.interpolate(ltInterpolation, startVal, endVal)
-    } else if (end === range.length - 1) {
-      return this.interpolate(gtInterpolation, startVal, endVal)
+    let sv = range[start]
+    let ev = range[end]
+    let START = start === 0
+    let END = end === range.length - 1
+
+    let inte =
+      (START && END && interpolations['<->']) ||
+      (start === end && (interpolations[sv] || interpolations[''])) ||
+      interpolations[`${sv}-${ev}`] ||
+      (ev != null && interpolations[`${sv}-*`]) ||
+      (sv != null && interpolations[`*-${ev}`]) ||
+      (START && end != null && (interpolations[`<-${ev}`] || interpolations['<-*'])) ||
+      (start != null && END && (interpolations[`${sv}->`] || interpolations['*->'])) ||
+      (start != null && end != null && interpolations['*-*']) ||
+      '{s}-{e}'
+
+    let preInt = interpolations['']
+    let preInterpolate = (index, v) =>
+      start != null
+        ? interpolations[v] || (preInt.call ? preInt(v) : preInt.replace('{v}', v))
+        : null
+
+    if (inte.call) {
+      return inte === preInt
+        ? inte(sv, ev)
+        : inte(sv, ev, preInterpolate(start, sv), preInterpolate(end, ev))
     } else {
-      return this.interpolate(rangeInterpolation, startVal, endVal)
-    }
-  }
-
-  interpolateSingle (inter, val) {
-    let { namedRanges } = this.options
-    return namedRanges[val]
-      ? namedRanges[val]
-      : inter.call
-        ? inter(val)
-        : inter.replace('{v}', val)
-  }
-
-  interpolate (inter, val1, val2) {
-    let { namedRanges, interpolation } = this.options
-    let namedKey = `${val1}-${val2}`
-    if (namedRanges[namedKey]) {
-      return namedRanges[namedKey]
-    } else {
-      if (inter.call) {
-        return inter(
-          val1,
-          val2,
-          this.interpolateSingle(interpolation, val1),
-          this.interpolateSingle(interpolation, val2)
-        )
-      } else {
-        return inter
-          .replace('{s}', val1)
-          .replace('{e}', val2)
-          .replace('{si}', () => this.interpolateSingle(interpolation, val1))
-          .replace('{ei}', () => this.interpolateSingle(interpolation, val2))
-      }
+      return inte
+        .replace('{v}', sv)
+        .replace('{s}', sv)
+        .replace('{e}', ev)
+        .replace('{si}', () => preInterpolate(start, sv))
+        .replace('{ei}', () => preInterpolate(end, ev))
     }
   }
 

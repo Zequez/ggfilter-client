@@ -155,12 +155,16 @@ export default {
     'with a system requirements index <≤{lt}>'
   ),
   released_at: ({gt, lt}) => {
-    if (lt === 0 && gt != null) {
+    if (gt === 0 && lt == null) {
+      return '<unreleased>'
+    } else if (lt === 0 && gt != null) {
       return `released in the <last ${h(timeInWords(gt))}>`
     } else if (lt != null && gt == null) {
       return `<older than ${h(timeInWords(lt))}>`
     } else if (lt != null && gt != null) {
       return `released between <${h(timeInWords(gt))} and ${h(timeInWords(lt))} ago>`
+    } else {
+      return ''
     }
   }
 }
