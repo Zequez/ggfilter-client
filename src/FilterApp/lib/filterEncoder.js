@@ -52,14 +52,14 @@ function fromMappedKeys (obj) {
 function toMinSort (sort) {
   let newSort = {}
   if (sort.filter) newSort[sortCol] = toNameKey(sort.filter)
-  if (sort.asc) newSort[sortAsc] = sort.asc ? 1 : 0
+  if (sort.asc != null) newSort[sortAsc] = sort.asc ? 1 : 0
   return newSort
 }
 
 function fromMinSort (sort) {
   let newSort = {}
   if (sort[sortCol]) newSort.filter = fromNameKey(sort[sortCol])
-  if (sort[sortAsc]) newSort.asc = !!sort[sortAsc]
+  if (sort[sortAsc] != null) newSort.asc = !!sort[sortAsc]
   return newSort
 }
 
