@@ -1,6 +1,10 @@
 require('src/app/style')
 require('shared/lib/polyfills')
 
+require('autotrack/lib/plugins/clean-url-tracker')
+require('autotrack/lib/plugins/outbound-link-tracker')
+require('autotrack/lib/plugins/url-change-tracker')
+
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'

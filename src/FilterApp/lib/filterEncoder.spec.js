@@ -65,7 +65,7 @@ describe('FilterApp filterEncoder', () => {
     it('should put the sort data under the space " " key', () => {
       expect(minimize({
         sort: {
-          column: 'salad',
+          filter: 'salad',
           asc: true
         }
       })).toEqual({
@@ -88,7 +88,7 @@ describe('FilterApp filterEncoder', () => {
           bar: { tags: [1, 2, 3] }
         },
         sort: {
-          column: 'salad',
+          filter: 'salad',
           asc: true
         },
         masks: []

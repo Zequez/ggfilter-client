@@ -23,11 +23,6 @@ export default () => (
       </li>
       <li>
         Use a complex set of rules to turn the text into a set of standarized tokens
-        <ul>
-          <li>Hallo there</li>
-          <li>Hallo there</li>
-          <li>Hallo there</li>
-        </ul>
       </li>
       <li>
         Additionally assign the year of the release of the game as

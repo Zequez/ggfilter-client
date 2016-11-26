@@ -179,13 +179,13 @@ describe('autotitle definitions', () => {
     ])
   })
 
-  describe('vr', () => {
-    let e = enumColumns.values.vr
-    testMulti('vr', [
-      [{value: e.vive, or: false}, 'with support for the <HTC Vive>'],
-      [{value: e.vive + e.oculus, or: false}, 'with support for the <HTC Vive> and the <Oculus Rift>'],
-      [{value: e.vive, or: true}, 'with support for the <HTC Vive>'],
-      [{value: e.vive + e.oculus, or: true}, 'with support for the <HTC Vive> or the <Oculus Rift>']
+  describe('vr_platforms', () => {
+    let e = enumColumns.values.vr_platforms
+    testMulti('vr_platforms', [
+      [{value: e.vive, or: false}, 'for the <HTC Vive>'],
+      [{value: e.vive + e.oculus, or: false}, 'for the <HTC Vive> and the <Oculus Rift>'],
+      [{value: e.vive, or: true}, 'for the <HTC Vive>'],
+      [{value: e.vive + e.oculus, or: true}, 'for the <HTC Vive> or the <Oculus Rift>']
     ])
   })
 
