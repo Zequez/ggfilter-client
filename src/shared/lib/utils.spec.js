@@ -31,4 +31,13 @@ describe('utils', () => {
     it('should work with years', () =>
       expect(utils.timeInWords(60 * 60 * 24 * 365 * 10)).toBe('10 years'))
   })
+
+  let d = (v) => v == null ? new Date() : new Date(v)
+
+  describe('.relativeTimeInWords', () => {
+    it('should work in the past', () =>
+      expect(utils.relativeTimeInWords(d(d().valueOf() - 1000 * 60 * 60 * 3))).toBe('3 hours ago'))
+    it('should work in the future', () =>
+      expect(utils.relativeTimeInWords(d(d().valueOf() + 1000 * 60 * 60 * 3))).toBe('3 hours in the future'))
+  })
 })

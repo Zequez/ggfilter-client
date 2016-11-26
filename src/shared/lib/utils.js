@@ -89,6 +89,18 @@ export function snapTo (val, snap) {
   return valr > snap / 2 ? (val - valr + snap) : (val - valr)
 }
 
+export function relativeTimeInWords (date, past = '%s ago', futu = '%s in the future') {
+  let distance = ((new Date().valueOf()) - date.valueOf()) / 1000
+  let pastFun = past.call ? past : (text) => past.replace(/%s/, text)
+  let futuFun = futu.call ? futu : (text) => futu.replace(/%s/, text)
+
+  if (distance >= 0) { // Past
+    return pastFun(timeInWords(distance))
+  } else { // Future
+    return futuFun(timeInWords(-distance))
+  }
+}
+
 export function timeAgo (date) {
   return timeInWords((new Date().valueOf() - date.valueOf()) / 1000)
 }
