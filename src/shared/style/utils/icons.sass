@@ -63,7 +63,12 @@ $fa-font-path: '~font-awesome/fonts/'
   &:before
     content: $fa-var-play-circle
 .icon-oculus:before
-  content: $fa-var-eye
+  content: ' '
+  display: inline-block
+  width: 8px
+  height: 3px
+  border: solid 4px $dark-blue
+  border-radius: $r/2
 
 .icon-tracked:before
   content: $fa-var-video-camera
@@ -72,8 +77,21 @@ $fa-font-path: '~font-awesome/fonts/'
 .icon-keyboard_mouse:before
   content: $fa-var-keyboard-o
 
-.icon-seated:before
-  content: $fa-var-wheelchair
+.icon-seated
+  &:before
+    content: $fa-var-wheelchair
+  //   content: ' '
+  //   display: inline-block
+  //   width: 3px
+  //   height: 12px
+  //   background: $dark-blue
+  // &:after
+  //   content: ' '
+  //   display: inline-block
+  //   height: 5px
+  //   width: 3px
+  //   border-top: solid 2px $dark-blue
+  //   border-right: solid 3px $dark-blue
 .icon-standing:before
   content: $fa-var-male
 .icon-room_scale:before
@@ -93,6 +111,8 @@ $fa-font-path: '~font-awesome/fonts/'
   content: $fa-var-image
 .icon-sysreq_index_centile:before
   content: $fa-var-tv + $fa-var-fire
+.icon-sysreq_video_tokens_values:before
+  content: $fa-var-tv + $fa-var-fire + $fa-var-tags
 .icon-released_at:before
   content: $fa-var-calendar-minus-o
 .icon-released_at_absolute:before
