@@ -48,8 +48,8 @@ export default class FilterTitle extends Component {
             “<strong>{count}</strong> <span dangerouslySetInnerHTML={this.dangerousMarkup(autotitle)}></span>”
           </span>
         ) : (
-          <h1 title="We have no proof whatsoever of this claim, but we really aspire to!">
-            {"The Internet's Nº1 source to find good games, *allegedly*"}
+          <h1 title="I have no proof whatsoever of this claim, but I really aspire to!">
+            “<strong>{count}</strong> games” {"The Internet's Nº1 source to find good games, *allegedly*"}
           </h1>
         )}
       </div>

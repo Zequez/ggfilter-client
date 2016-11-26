@@ -8,5 +8,6 @@ module.exports = {
   Raw: require('./RawColumn').default,
   SystemReq: require('./SystemReqColumn').default,
   Tags: require('./TagsColumn').default,
-  TimeAgo: require('./TimeAgoColumn').default
+  TimeAgo: require('./TimeAgoColumn').default,
+  SysreqTokensDetails: require('./SysreqTokensDetailsColumn').default
 }

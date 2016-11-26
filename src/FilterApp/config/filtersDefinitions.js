@@ -223,7 +223,7 @@ export default {
     controlOptions: {
       range: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
     },
-    width: 150
+    width: 50
   },
   released_at: {
     id: 24,
@@ -256,5 +256,13 @@ export default {
     control: 'Boolean',
     column: 'Boolean',
     width: 24 * 2 + 10
+  },
+  sysreq_video_tokens_values: {
+    id: 28,
+    title: 'Sys.Req. Index Detail',
+    control: 'Null',
+    column: 'SysreqTokensDetails',
+    sort: false,
+    width: 200
   }
 }

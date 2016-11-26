@@ -9,7 +9,8 @@ export default {
       'released_at_absolute',
       'released_at',
       'tags',
-      'sysreq_index_centile'
+      'sysreq_index_centile',
+      'sysreq_video_tokens_values'
     ]
   },
   price: {
