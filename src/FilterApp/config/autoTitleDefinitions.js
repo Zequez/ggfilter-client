@@ -166,5 +166,6 @@ export default {
     } else {
       return ''
     }
-  }
+  },
+  steam_early_access: ({value}) => value ? '<early access>' : '<non early access>'
 }
