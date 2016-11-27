@@ -4,5 +4,6 @@ module.exports = {
   Boolean: require('./BooleanControl').default,
   Null: require('./NullControl').default,
   Number: require('./NumberControl').default,
-  Text: require('./TextControl').default
+  Text: require('./TextControl').default,
+  Toggle: require('./ToggleControl').default
 }

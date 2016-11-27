@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as t } from 'react'
 
-export default class RawColumn extends Component {
+export default class SysreqTokensDetailsColumn extends Component {
   static propTypes = {
     value: t.any
   }

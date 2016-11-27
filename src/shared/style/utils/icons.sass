@@ -62,6 +62,7 @@ $fa-font-path: '~font-awesome/fonts/'
   transform: rotate(-90deg) translateX(-1px)
   &:before
     content: $fa-var-play-circle
+
 .icon-oculus:before
   content: ' '
   display: inline-block
@@ -69,6 +70,9 @@ $fa-font-path: '~font-awesome/fonts/'
   height: 3px
   border: solid 4px $dark-blue
   border-radius: $r/2
+.boolean-checked
+  .icon-oculus:before
+    border-color: $white
 
 .icon-tracked:before
   content: $fa-var-video-camera
@@ -159,6 +163,11 @@ $fa-font-path: '~font-awesome/fonts/'
   content: $fa-var-eye + $fa-var-gamepad
 .icon-controller_support:before
   content: $fa-var-gamepad
+
+.icon-steam_early_access:before
+  content: $fa-var-exclamation-circle
+.icon-circle:before
+  content: $fa-var-circle
 
 // Games loader
 

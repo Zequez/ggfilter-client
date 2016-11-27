@@ -8,6 +8,7 @@ export default {
       'name',
       'released_at_absolute',
       'released_at',
+      'steam_early_access',
       'tags',
       'sysreq_index_centile',
       'sysreq_video_tokens_values'

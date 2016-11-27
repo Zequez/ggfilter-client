@@ -9,5 +9,6 @@ module.exports = {
   SystemReq: require('./SystemReqColumn').default,
   Tags: require('./TagsColumn').default,
   TimeAgo: require('./TimeAgoColumn').default,
-  SysreqTokensDetails: require('./SysreqTokensDetailsColumn').default
+  SysreqTokensDetails: require('./SysreqTokensDetailsColumn').default,
+  Toggle: require('./ToggleColumn').default
 }

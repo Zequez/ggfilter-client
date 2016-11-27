@@ -264,5 +264,12 @@ export default {
     column: 'SysreqTokensDetails',
     sort: false,
     width: 200
+  },
+  steam_early_access: {
+    id: 29,
+    title: 'Early Access',
+    control: 'Toggle',
+    column: 'Toggle',
+    width: 24 * 2
   }
 }
