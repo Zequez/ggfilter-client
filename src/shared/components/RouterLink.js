@@ -25,11 +25,11 @@ export default class RouterLink extends Component {
     let path = router.url(to)
     let activeClass = to === currentRouteName ? ' active' : ''
 
-    let content = icon ? <i className={`fa icon-${icon}`}></i> : text || children
-
     return (
       <a href={path} className={activeClass} onClick={this.onClick.bind(this, path)}>
-        {content}
+        {icon ? <i className={`fa icon-${icon}`}></i> : null}
+        {text || null}
+        {children || null}
       </a>
     )
   }

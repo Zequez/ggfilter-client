@@ -1,39 +1,42 @@
 .tabs
-  +pie-clearfix
-  +carved-in-background
-  height: $r
-  margin-bottom: $r
-  text-shadow: 0 1px 0 rgba(#000, 0.7)
-  li
-    float: left
-    &:first-child a
-      border-radius: 0 2px 2px 0
-    &:last-child a
-      border-radius: 2px 0 0 2px
-  a
-    display: inline-block
-    padding: 0 $r/2
-    color: $faded-white
+  +z(tabs)
+  position: fixed
+  top: 0
+  left: - $gg * 4
+  height: 100%
+  width: $gg * 4
+  background: $color-mono-4
+  // border-right: solid 1px mix($white, $color-divider, 100%)
+  overflow: hidden
+  transition: transform 0.5s
+
+  +media('>tablet')
+    left: 0
+    width: $gg
+    transition: width 0.5s, box-shadow 0.5s
     &:hover
-      color: $white
-      text-decoration: none
+      +shadow(drawer)
+      width: $gg * 4
+
+  &.active
+    transform: translateX(100%)
+    +shadow(drawer)
+
+  a
+    +font-body-2
+    display: inline-block
+    padding: 0 $g*2
+    color: $color-text-pri
+    line-height: $g * 6
+    white-space: nowrap
+    .fa
+      margin-right: $g * 4
+      color: $color-text-sec
+      line-height: $g * 6
     &.active
-      +btn-style
-      position: relative
-      margin-top: -$r/4
-      height: $r + $r/2
-      line-height: $r + $r/2
-
-  .filter-lock:hover
-    color: $red
-
-  .filter-view-locker
-    float: right
-    // button
-    //   border-radius: 0
-    //   box-shadow: none
-    //   line-height: $r
+      &, .fa
+        color: $color-sec-dark
 
 .tabs-content
-  &-normal
-    margin-bottom: $r
+  +media('>tablet')
+    padding-left: $gg

@@ -15,7 +15,7 @@ export default class Tabs extends Component {
   }
 
   render () {
-    let { currentUser } = this.props
+    // let { currentUser } = this.props
 
     return (
       <nav className='tabs'>
@@ -24,7 +24,7 @@ export default class Tabs extends Component {
             <FilterTabLink/>
           </li>
           <li>
-            <RouterLink to={MODES.sysreq} text='System Requirements Calculator'/>
+            <RouterLink to={MODES.sysreq} text='Sys. Req. Calculator' icon='sysreq'/>
           </li>
           {/*<li>
             <RouterLink to={MODES.officialFilters} text='Interesting Filters'/>
@@ -33,15 +33,15 @@ export default class Tabs extends Component {
             <RouterLink to={MODES.myFilters} text='Your saved filters'/>
           </li> : null}*/}
           <li>
-            <RouterLink to={MODES.feedback} text='Feedback'/>
+            <RouterLink to={MODES.feedback} text='Feedback' icon='feedback'/>
           </li>
           <li>
-            <RouterLink to={MODES.contribute} text='Contribute'/>
+            <RouterLink to={MODES.contribute} text='Contribute' icon='contribute'/>
           </li>
           {/*<li>
             <RouterLink to='login' text='Log In'/>
           </li>*/}
-          <FilterViewLocker/>
+          {/*<FilterViewLocker/>*/}
         </ul>
       </nav>
     )

@@ -1,3 +1,211 @@
+// Colors
+$color-cyan-500: #00BCD4;
+$color-cyan-50: #E0F7FA;
+$color-cyan-100: #B2EBF2;
+$color-cyan-200: #80DEEA;
+$color-cyan-300: #4DD0E1;
+$color-cyan-400: #26C6DA;
+$color-cyan-500: #00BCD4;
+$color-cyan-600: #00ACC1;
+$color-cyan-700: #0097A7;
+$color-cyan-800: #00838F;
+$color-cyan-900: #006064;
+$color-cyan-A100: #84FFFF;
+$color-cyan-A200: #18FFFF;
+$color-cyan-A400: #00E5FF;
+$color-cyan-A700: #00B8D4;
+
+// $color-amber-500: #FFC107;
+// $color-amber-50: #FFF8E1;
+// $color-amber-100: #FFECB3;
+// $color-amber-200: #FFE082;
+// $color-amber-300: #FFD54F;
+// $color-amber-400: #FFCA28;
+// $color-amber-500: #FFC107;
+// $color-amber-600: #FFB300;
+// $color-amber-700: #FFA000;
+// $color-amber-800: #FF8F00;
+// $color-amber-900: #FF6F00;
+// $color-amber-A100: #FFE57F;
+// $color-amber-A200: #FFD740;
+// $color-amber-A400: #FFC400;
+// $color-amber-A700: #FFAB00;
+
+$color-deep-orange-500: #FF5722;
+$color-deep-orange-50: #FBE9E7;
+$color-deep-orange-100: #FFCCBC;
+$color-deep-orange-200: #FFAB91;
+$color-deep-orange-300: #FF8A65;
+$color-deep-orange-400: #FF7043;
+$color-deep-orange-500: #FF5722;
+$color-deep-orange-600: #F4511E;
+$color-deep-orange-700: #E64A19;
+$color-deep-orange-800: #D84315;
+$color-deep-orange-900: #BF360C;
+$color-deep-orange-A100: #FF9E80;
+$color-deep-orange-A200: #FF6E40;
+$color-deep-orange-A400: #FF3D00;
+$color-deep-orange-A700: #DD2C00;
+
+$color-grey-300: #E0E0E0;
+$color-grey-100: #F5F5F5;
+$color-grey-50: #FAFAFA;
+$color-white: #FFFFFF;
+
+// Primary & secondary colors
+$color-pri: $color-cyan-500;
+$color-pri-light: $color-cyan-100;
+$color-pri-dark: $color-cyan-700;
+$color-sec: $color-deep-orange-A400;
+$color-sec-light: $color-deep-orange-A100;
+$color-sec-dark: $color-deep-orange-A700;
+
+// Theme colors
+$color-mono-1: $color-grey-300;
+$color-mono-2: $color-grey-100;
+$color-mono-3: $color-grey-50;
+$color-mono-4: $color-white;
+
+// Text colors
+$color-text-pri: rgba(#000, .87);
+$color-text-sec: rgba(#000, .54);
+$color-text-dis: rgba(#000, .38);
+// $color-text-pri-alt: rgba(#FFF, 1);
+// $color-text-sec-alt: rgba(#FFF, .70);
+// $color-text-dis-alt: rgba(#FFF, .50);
+
+// Other colors
+$color-icon-active: $color-text-sec;
+$color-icon-inactive: $color-text-dis;
+$color-divider: rgba(#000, .12);
+// $color-divider-alt: rgba(#FFF, 12%);
+
+
+// Grid
+$g: 8px;
+$gg: $g*7;
+
+
+// Font style
+@mixin font-base() {
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  // font-size: 14px;
+  font-size: 13px; // Desktop
+  line-height: 100%;
+  color: $color-text-pri;
+}
+@mixin font-display-4() {
+  font-size: 112px;
+  letter-spacing: -10px;
+  color: $color-text-sec; }
+@mixin font-display-3() {
+  font-size: 56px;
+  letter-spacing: -5px;
+ color: $color-text-sec; }
+@mixin font-display-2() {
+  font-size: 45px;
+  line-height: 48px;
+  letter-spacing: 0;
+  color: $color-text-sec; }
+@mixin font-display-1() {
+  font-size: 34px;
+  line-height: 40px;
+  letter-spacing: 0;
+  color: $color-text-sec; }
+@mixin font-headline() {
+  font-size: 24px;
+  line-height: 32px;
+  letter-spacing: 0; }
+@mixin font-title() {
+  font-size: 20px;
+  font-weight: medium;
+  letter-spacing: 5px; }
+@mixin font-subheading-1() {
+  // font-size: 16px;
+  font-size: 15px; // Desktop
+  line-height: 24px;
+  letter-spacing: 10px; }
+@mixin font-subheading-2() {
+  // font-size: 16px;
+  font-size: 15px; // Desktop
+  line-height: 28px;
+  letter-spacing: 10px;
+  font-weight: 500; }
+@mixin font-body-1() {
+  // font-size: 14px;
+  font-size: 13px; // Desktop
+  line-height: 20px;
+  letter-spacing: 10px; }
+@mixin font-body-2() {
+  // font-size: 14px;
+  font-size: 13px; // Desktop
+  line-height: 24px;
+  font-weight: 500; }
+@mixin font-caption() {
+  font-size: 12px;
+  color: $color-text-sec;
+  letter-spacing: 20px; }
+@mixin font-button() {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 10px; }
+
+// Z-Index
+
+$z:
+  "lightbox",
+  "loadingSpinner",
+  "tabs",
+  "catColumnsItems",
+  "sysreqCalc",
+  "dt",
+  "dt-titles-highlightBorder",
+  "dt-titles",
+  "dt-controls",
+  "dt-overflowCell",
+  "dt-titles-resizeHandle",
+  "dt-titles-sort-arrow",
+  "dt-titles-icon",
+  "dt-titles-tooltip";
+
+@mixin z($name) {
+  @if index($z, $name) {
+    z-index: length($z) - index($z, $name) + 100;
+  }
+  @else {
+    @error "z-index list doesn't have #{$name}";
+  }
+}
+
+// Shadows
+
+$shadow: (
+  dialog: 24px,
+  drawer: 16px,
+  fab-raised: 12px,
+  submenu: 9px,
+  button-raised: 8px,
+  fab: 6px,
+  app-bar: 4px,
+  button: 2px,
+  card: 2px,
+  switch: 1px
+);
+
+@mixin shadow($size) {
+  $s: map-get($shadow, $size);
+  box-shadow: 0 $s/2 $s rgba(#000, 0.3);
+};
+
+// Media queries breakpoints
+
+$breakpoints: (phone: 320px, tablet: 768px, desktop: 1024px, big-desktop: 1600px);
+
+////////////////////////////////////////
+// Old stuff
+
 $dark-blue:   #1A1932;
 $blue:        #2A354C;
 $ocean-blue:  #3F5864;
@@ -27,27 +235,3 @@ $font-x-larger: 24px;
 $font-xx-larger: 48px;
 $font-smaller: 12px;
 $font-x-smaller: 8px;
-
-$z:
-  "lightbox",
-  "loadingSpinner",
-  "catColumnsItems",
-  "sysreqCalc",
-  "dt",
-  "dt-titles-highlightBorder",
-  "dt-titles",
-  "dt-controls",
-  "dt-overflowCell",
-  "dt-titles-resizeHandle",
-  "dt-titles-sort-arrow",
-  "dt-titles-icon",
-  "dt-titles-tooltip";
-
-@mixin z($name) {
-  @if index($z, $name) {
-    z-index: length($z) - index($z, $name) + 100;
-  }
-  @else {
-    @error "z-index list doesn't have #{$name}";
-  }
-}

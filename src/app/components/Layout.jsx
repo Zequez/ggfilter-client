@@ -23,18 +23,18 @@ export default class Layout extends Component {
 
     return (
       <div className={className}>
-        <header className='header'>
+        {/*<header className='header'>
           <a className='logo' title="The Good Game Filter" href='/' onClick={::this.clickOnLogo}>
             <strong>GG</strong>Filter
             <i className='fa icon-filter'></i>
             <span className='logo-semicolons'>:</span>
           </a>
           <FilterTitle/>
-        </header>
+        </header>*/}
         <main className='main'>
           {this.props.children}
         </main>
-        <footer className='footer'>
+        {/*<footer className='footer'>
           <span>
             &copy; <Link to='root'>GGFilters</Link> {currentYear}
           </span>
@@ -43,7 +43,7 @@ export default class Layout extends Component {
           <Link to='help'>Help</Link>
           <Link to='about'>About</Link>
           <Link to='contact'>Contact</Link>
-        </footer>
+        </footer>*/}
       </div>
     )
   }

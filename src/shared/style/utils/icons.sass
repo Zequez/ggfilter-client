@@ -4,6 +4,13 @@ $fa-font-path: '~font-awesome/fonts/'
 @import "~font-awesome/scss/_path"
 @import "~font-awesome/scss/_core"
 
+.fa
+  display: inline-block
+  width: $g*3
+  height: $g*3
+  font-size: $g*3
+  text-align: center
+
 // Sharer tab
 
 .icon-warning:before
@@ -11,12 +18,21 @@ $fa-font-path: '~font-awesome/fonts/'
 
 // Title icons
 
-.icon-filter:before
-  content: $fa-var-filter
+
 .icon-highlight:before
   content: $fa-var-lightbulb-o
 .icon-close:before
   content: $fa-var-times
+
+// Drawer
+.icon-filter:before
+  content: $fa-var-filter
+.icon-sysreq:before
+  content: $fa-var-thermometer-three-quarters
+.icon-feedback:before
+  content: $fa-var-commenting-o
+.icon-contribute:before
+  content: $fa-var-btc
 
 // Tabs
 

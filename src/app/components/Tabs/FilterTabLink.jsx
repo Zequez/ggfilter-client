@@ -26,6 +26,7 @@ export default class FilterTabLink extends Component {
 
     return (
       <a href={path} className={activeClass} onClick={this.onClick}>
+        <i className='fa icon-filter'></i>
         Filter
       </a>
     )

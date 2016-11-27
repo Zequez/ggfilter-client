@@ -1,25 +1,17 @@
 *
   box-sizing: border-box
 
-html, body
-  line-height: $r
-
 html
   overflow-y: scroll
 
 body
-  color: $white
-  font-family: Roboto, sans-serif
-  font-weight: 300
-  background-color: $dark-blue
-  background-image: url(~images/maze-black.png)
+  +font-base
+  background-color: $color-mono-1
 
 a
-  color: $link-blue
+  color: $color-sec
   text-decoration: none
   cursor: pointer
-  &:hover
-    text-decoration: underline
 
 em
   font-style: italic
