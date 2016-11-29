@@ -11,8 +11,13 @@ export default class RouterLink extends Component {
     icon: t.string,
     children: t.any,
     to: t.string,
+    activeClass: t.string,
 
     currentRouteName: t.string
+  }
+
+  static defaultProps = {
+    activeClass: 'active'
   }
 
   onClick = (path, ev) => {
@@ -21,12 +26,12 @@ export default class RouterLink extends Component {
   }
 
   render () {
-    let { currentRouteName, text, icon, children, to } = this.props
+    let { currentRouteName, text, icon, children, to, activeClass } = this.props
     let path = router.url(to)
-    let activeClass = to === currentRouteName ? ' active' : ''
+    let activeClassResolve = to === currentRouteName ? activeClass : ''
 
     return (
-      <a href={path} className={activeClass} onClick={this.onClick.bind(this, path)}>
+      <a href={path} className={activeClassResolve} onClick={this.onClick.bind(this, path)}>
         {icon ? <i className={`fa icon-${icon}`}></i> : null}
         {text || null}
         {children || null}

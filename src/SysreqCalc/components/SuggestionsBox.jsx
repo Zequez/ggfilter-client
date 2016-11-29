@@ -1,4 +1,9 @@
+import th from '../theme'
+import inputTheme from '../inputTheme'
+
 import React, { Component, PropTypes as t } from 'react'
+import Input from 'react-toolbox/lib/input'
+
 import SuggestionsDropdown from './SuggestionsDropdown'
 
 export default class SuggestionsBox extends Component {
@@ -16,8 +21,8 @@ export default class SuggestionsBox extends Component {
     this.setState({value: '', results: []})
   }
 
-  onChange = (ev) => {
-    this.triggerFilter(ev.target.value)
+  onChange = (value) => {
+    this.triggerFilter(value)
   }
 
   triggerFilter = (query) => {
@@ -40,16 +45,17 @@ export default class SuggestionsBox extends Component {
     }
 
     return (
-      <div className='suggestions-box form'>
+      <div className={th.suggestionsBox}>
         <SuggestionsDropdown
           list={list}
           listValues={listValues}
           onSelect={this.props.onSelect}>
-          <input
+          <Input
             type='text'
             value={this.state.value}
             onChange={this.onChange}
-            placeholder={this.props.placeholder}/>
+            theme={inputTheme}
+            hint={this.props.placeholder}/>
         </SuggestionsDropdown>
       </div>
     )

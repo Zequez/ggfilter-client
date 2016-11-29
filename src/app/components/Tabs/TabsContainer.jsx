@@ -1,36 +1,45 @@
+import th from './theme'
+
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
-
-import { lockFilterIntoView, unlockFilterFromView } from 'shared/reducers/uiReducer'
+import cn from 'classnames'
 
 import Tabs from './Tabs'
 import TabsContent from './TabsContent'
 
 @connect((s) => ({
-  filterLockedInView: s.ui.filterLockedInView,
   mode: s.ui.mode
-}), {
-  lockFilterIntoView,
-  unlockFilterFromView
-})
+}))
 export default class TabsContainer extends Component {
   static propTypes = {
-    lockFilterIntoView: t.func.isRequired,
-    unlockFilterFromView: t.func.isRequired,
-    filterLockedInView: t.bool.isRequired,
     mode: t.string.isRequired
   }
 
+  state = {
+    drawerOpen: false
+  }
+
+  toggleDrawer = () => {
+    this.setState({drawerOpen: !this.state.drawerOpen})
+  }
+
+  closeDrawer = () => {
+    if (this.state.drawerOpen) this.toggleDrawer()
+  }
+
   render () {
-    let { mode, filterLockedInView, lockFilterIntoView, unlockFilterFromView } = this.props
+    let { mode } = this.props
+    let { drawerOpen } = this.state
+
+    let className = cn(th.container, {
+      [th.open]: drawerOpen
+    })
 
     return (
-      <div className='tabs-container'>
-        <Tabs
-          filterLockedInView={filterLockedInView}
-          onLockFilter={lockFilterIntoView}
-          onUnlockFilter={unlockFilterFromView}/>
-        <TabsContent mode={mode} filterLockedInView={filterLockedInView}/>
+      <div className={className}>
+        <Tabs onClick={this.closeDrawer}/>
+        <TabsContent mode={mode} onClickMenu={this.toggleDrawer}/>
+        <div className={th.veil} onClick={this.toggleDrawer}></div>
       </div>
     )
   }

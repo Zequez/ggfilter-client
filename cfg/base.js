@@ -1,5 +1,5 @@
 var path = require('path')
-
+var webpack = require('webpack')
 var port = 8001
 var srcPath = path.join(__dirname, '/../src/')
 var publicPath = '/assets/app/'
@@ -23,11 +23,12 @@ module.exports = {
     }
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.sass', '.scss'],
+    extensions: ['.js', '.jsx', '.sass', '.scss', '.css'],
     alias: {
       shared: srcPath + 'shared/',
       images: srcPath + 'images/',
-      src: srcPath
+      src: srcPath,
+      np: path.join(__dirname, '/node_modules')
     }
   },
   module: {
@@ -45,5 +46,15 @@ module.exports = {
       },
       { test: /\.(ttf|eot|svg|woff|woff2)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: 'url?limit=8192' }
     ]
-  }
+  },
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        context: __dirname,
+        sassLoader: {
+          data: "@import 'src/shared/style/common/index';"
+        }
+      }
+    })
+  ]
 }

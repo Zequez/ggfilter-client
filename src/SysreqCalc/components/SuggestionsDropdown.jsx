@@ -1,3 +1,4 @@
+import th from '../theme'
 import React, { Component, PropTypes as t } from 'react'
 import { partial, loopNumber } from 'shared/lib/utils'
 
@@ -68,8 +69,10 @@ export default class SuggestionsDropdown extends Component {
     let list = this.props.list
     let listValues = this.props.listValues || list
 
+    // let source = list.map((option, i) => ({label: option, value: listValues[i]}))
+
     let liElements = list.map((option, i) => {
-      let liClass = this.state.focused === i ? 'focused' : ''
+      let liClass = this.state.focused === i ? th.focused : ''
       return (
         <li
           key={i}
@@ -86,12 +89,12 @@ export default class SuggestionsDropdown extends Component {
 
     return (
       <div
-        className='suggestions-dropdown'
+        className={th.suggestionsDropdown}
         onBlur={this.onBlur}
         onFocus={this.onFocus}
         onKeyDown={this.onKeyPress}>
         {this.props.children}
-        <ul className='suggestions-dropdown-selector' style={ulStyle}>
+        <ul className={th.suggestionsDropdownSelector} style={ulStyle}>
           {liElements}
         </ul>
       </div>

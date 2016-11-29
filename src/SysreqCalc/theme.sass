@@ -1,0 +1,74 @@
+.sysreqCalc
+  +pie-clearfix
+  position: relative
+  +z(sysreqCalc)
+
+.appBody
+  padding-top: 0
+
+.suggestionsBox
+  ul
+    list-style-type: none
+    li
+      margin-left: 0
+  .suggestionsDropdown
+    +z(sysreqSelectorDropdown)
+    position: relative
+    input, &-selector
+      width: 100%
+  .suggestionsDropdownSelector
+    +shadow(submenu)
+    position: absolute
+    top: $gg
+    background: $color-mono-4
+    border-radius: 2px
+    li
+      padding: 0 $g * 3
+      line-height: $g * 6
+      cursor: pointer
+      font-size: $font-size-menu-item
+      color: $color-text-sec
+      &.focused
+        background: $color-mono-2
+
+.chips
+  margin-bottom: $g * 2
+.result
+
+.resultTitle
+  display: flex
+  justify-content: center
+  align-items: center
+  width: 50%
+  height: $gg * 2
+  float: left
+  font-size: $font-size-display-1
+  line-height: $g * 5
+  color: $color-text-sec
+.resultValue
+  display: inline-block
+  font-size: $font-size-display-4
+  line-height: $gg * 2
+
+.resultValueMean
+.resultValueDeviation
+  color: $color-text-sec
+  font-size: $font-size-display-1
+
+.info
+  line-height: $g * 3
+  margin-bottom: $g * 3
+
+.actionBar
+  display: flex
+  justify-content: flex-end
+
++media('<desktop')
+  .resultTitle
+    width: auto
+    height: auto
+    float: none
+    margin-bottom: $g * 2
+  .resultValue
+    display: block
+    text-align: center

@@ -1,15 +1,32 @@
-$fa-font-path: '~font-awesome/fonts/'
-@import "~font-awesome/scss/_variables"
-@import "~font-awesome/scss/_mixins"
-@import "~font-awesome/scss/_path"
-@import "~font-awesome/scss/_core"
+$fa-font-path: 'font-awesome/fonts/'
+@import "../../../../node_modules/font-awesome/scss/_variables"
+@import "../../../../node_modules/font-awesome/scss/_mixins"
+@import "../../../../node_modules/font-awesome/scss/_path"
+@import "../../../../node_modules/font-awesome/scss/_core"
 
-.fa
+:global(.fa)
   display: inline-block
   width: $g*3
   height: $g*3
-  font-size: $g*3
+
   text-align: center
+
+  font: normal normal normal #{$fa-font-size-base}/#{$fa-line-height-base} FontAwesome
+  font-size: $g*3
+
+  text-rendering: auto
+  -webkit-font-smoothing: antialiased
+  -moz-osx-font-smoothing: grayscale
+
+@mixin gicon($name, $var)
+  :global(.icon-#{$name}:before)
+    content: $var
+
++gicon(menu, $fa-var-bars)
++gicon(filter, $fa-var-filter)
++gicon(sysreq, $fa-var-thermometer-three-quarters)
++gicon(feedback, $fa-var-commenting-o)
++gicon(contribute, $fa-var-btc)
 
 // Sharer tab
 

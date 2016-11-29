@@ -1,9 +1,14 @@
-require('src/app/style')
 require('shared/lib/polyfills')
 
 require('autotrack/lib/plugins/clean-url-tracker')
 require('autotrack/lib/plugins/outbound-link-tracker')
 require('autotrack/lib/plugins/url-change-tracker')
+
+// import 'react-toolbox/lib/commons'
+// We import the react-toolbox things here so they are added FIRST to the CSS and
+// we can override the classes easily
+import 'react-toolbox/lib/input/theme'
+import 'src/shared/style/global/index'
 
 import React from 'react'
 import ReactDOM from 'react-dom'

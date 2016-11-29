@@ -1,30 +1,32 @@
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500)
+html, body
+  height: 100%
+
+// @import url(https://fonts.googleapis.com/css?family=Roboto:400,500)
 
 @import "src/shared/style/index"
-@import "src/app/style/index"
 
-@import "src/SavedFiltersManager/style"
-@import "src/FilterApp/style/index"
-@import "src/Lightbox/style"
-@import "src/SysreqCalc/style"
+// @import "src/SavedFiltersManager/style"
+// @import "src/FilterApp/style/index"
+// @import "src/Lightbox/style"
+// @import "src/SysreqCalc/style"
 
-#vr-helper
-  input
-    display: block
-    position: fixed
-    top: 0
-    right: 0
-    width: $r
-    height: $r
-    margin: 0
-    border: none
-    background: red
-    +appearance(none)
-  input:checked + div
-    position: absolute
-    top: 0
-    left: 0
-    bottom: 0
-    right: 0
-    background: repeating-linear-gradient(transparent 0px, transparent ($r - 1), black $r)
-    pointer-events: none
+// #vr-helper
+//   input
+//     display: block
+//     position: fixed
+//     top: 0
+//     right: 0
+//     width: $r
+//     height: $r
+//     margin: 0
+//     border: none
+//     background: red
+//     +appearance(none)
+//   input:checked + div
+//     position: absolute
+//     top: 0
+//     left: 0
+//     bottom: 0
+//     right: 0
+//     background: repeating-linear-gradient(transparent 0px, transparent ($r - 1), black $r)
+//     pointer-events: none

@@ -2,27 +2,36 @@ import React, { Component, PropTypes as t } from 'react'
 
 import { FilterTitle } from 'src/FilterApp'
 import Link from 'shared/components/RouterLink'
+import Tabs from './Tabs/Tabs'
+import TabsContent from './Tabs/TabsContent'
 
 export default class Layout extends Component {
   static propTypes = {
     clickOnLogo: t.func.isRequired
   }
 
-  clickOnLogo (ev) {
-    ev.preventDefault()
-    this.props.clickOnLogo()
+  state = {
+    drawerOpen: false
   }
 
+  // clickOnLogo (ev) {
+  //   ev.preventDefault()
+  //   this.props.clickOnLogo()
+  // }
+
   render () {
-    console.logRender('Layout')
+    // console.logRender('Layout')
 
-    let className = 'container'
-    if (this.props.className) className += ' ' + this.props.className
+    // let className = 'container'
+    // if (this.props.className) className += ' ' + this.props.className
 
-    let currentYear = new Date().getFullYear()
+    // let currentYear = new Date().getFullYear()
 
     return (
-      <div className={className}>
+      <main>
+        <Tabs open={this.state.drawerOpen}/>
+        <TabsContent on/>
+
         {/*<header className='header'>
           <a className='logo' title="The Good Game Filter" href='/' onClick={::this.clickOnLogo}>
             <strong>GG</strong>Filter
@@ -31,9 +40,7 @@ export default class Layout extends Component {
           </a>
           <FilterTitle/>
         </header>*/}
-        <main className='main'>
-          {this.props.children}
-        </main>
+
         {/*<footer className='footer'>
           <span>
             &copy; <Link to='root'>GGFilters</Link> {currentYear}
@@ -44,7 +51,7 @@ export default class Layout extends Component {
           <Link to='about'>About</Link>
           <Link to='contact'>Contact</Link>
         </footer>*/}
-      </div>
+      </main>
     )
   }
 }

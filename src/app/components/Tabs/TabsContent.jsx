@@ -1,3 +1,4 @@
+import th from './theme'
 import React, { PropTypes as t, Component } from 'react'
 
 import { MODES } from 'shared/reducers/uiReducer'
@@ -15,36 +16,31 @@ import AboutSysreq from '../static/AboutSysreq'
 
 export default class TabsContent extends Component {
   static propTypes = {
-    mode: t.string.isRequired,
-    filterLockedInView: t.bool.isRequired
+    mode: t.string.isRequired
   }
 
   tabsContent () {
-    switch (this.props.mode) {
-      case MODES.sysreq: return <SysreqCalc/>
+    let { mode, ...other } = this.props
+
+    switch (mode) {
+      case MODES.sysreq: return <SysreqCalc {...other}/>
       // case MODES.officialFilters: return <OfficialFilters/>
-      case MODES.feedback: return <Feedback/>
-      case MODES.contribute: return <Contribute/>
+      case MODES.feedback: return <Feedback {...other}/>
+      case MODES.contribute: return <Contribute {...other}/>
       // case MODES.login: return 'Login'
-      case MODES.sources: return <Sources/>
+      case MODES.sources: return <Sources {...other}/>
       // case MODES.myFilters: return <SavedFiltersManagerGlued/>
-      case MODES.aboutSysreq: return <AboutSysreq/>
+      case MODES.aboutSysreq: return <AboutSysreq {...other}/>
+      case MODES.filter: return <FilterApp {...other}/>
     }
 
     return null
   }
 
   render () {
-    let { mode, filterLockedInView } = this.props
-
     return (
-      <div className='tabs-content'>
-        <div className='tabs-content-normal'>
-          {this.tabsContent()}
-        </div>
-        {mode === MODES.filter || filterLockedInView ? (
-          <FilterApp/>
-        ) : null}
+      <div className={th.content}>
+        {this.tabsContent()}
       </div>
     )
   }

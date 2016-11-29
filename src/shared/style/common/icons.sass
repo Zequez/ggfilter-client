@@ -1,0 +1,14 @@
+@import "../../../../node_modules/font-awesome/scss/_variables"
+
+%fa
+  display: inline-block
+  width: $g*3
+  height: $g*3
+  font-size: $g*3
+  text-align: center
+
+@mixin icon($var)
+  // @extend %fa
+  @if $var
+    &:before
+      content: $var

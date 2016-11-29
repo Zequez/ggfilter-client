@@ -8,6 +8,10 @@ import { Lightbox } from 'src/Lightbox'
 import TabsContainer from './Tabs/TabsContainer'
 import Layout from './Layout'
 
+// import { Layout, NavDrawer, Panel } from 'react-toolbox/lib/layout'
+// import { Button } from 'react-toolbox/lib/button'
+import Tabs from './Tabs/Tabs'
+
 @connect(
   (s) => ({
     mode: s.ui.mode,
@@ -27,22 +31,38 @@ export default class App extends Component {
     // The store on initialState
   }
 
-  clickOnLogo = () => {
-    this.props.resetFilter()
-    this.props.resetUi()
-  }
+  // state = {
+  //   drawerActive: false
+  // }
+
+  // clickOnLogo = () => {
+  //   this.props.resetFilter()
+  //   this.props.resetUi()
+  // }
+
+  // toggleDrawerActive = () => {
+  //   this.setState({drawerActive: !this.state.drawerActive})
+  // }
 
   render () {
-    console.logRender('App')
-
-    let { mode } = this.props
-    let containerClassName = `mode-${mode}`
+    // let { drawerActive } = this.state
 
     return (
-      <Layout className={containerClassName} clickOnLogo={this.clickOnLogo}>
-        <TabsContainer/>
-        <Lightbox/>
-      </Layout>
+      <TabsContainer>
+
+        {/*<NavDrawer
+          active={drawerActive}
+          onOverlayClick={this.toggleDrawerActive}>
+          <p>
+              Hello fella!
+          </p>
+        </NavDrawer>
+        <Panel>
+          <Button label='Panel' onClick={this.toggleDrawerActive}/>
+        </Panel>*/}
+        {/*<TabsContainer/>
+        <Lightbox/>*/}
+      </TabsContainer>
     )
   }
 }

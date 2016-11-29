@@ -1,9 +1,9 @@
-var path = require('path');
-var webpack = require('webpack');
-var _ = require('lodash');
+var path = require('path')
+var webpack = require('webpack')
+var _ = require('lodash')
 var CircularDependencyPlugin = require('circular-dependency-plugin')
 
-var baseConfig = require('./base');
+var baseConfig = require('./base')
 
 var config = _.merge({
   entry: [
@@ -12,35 +12,38 @@ var config = _.merge({
     './src/run'
   ],
   cache: true,
-  devtool: 'eval',
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new CircularDependencyPlugin({
-      // exclude detection of files based on a RegExp
-      exclude: /node_modules/,
-      // add errors to webpack instead of warnings
-      // failOnError: true
-    }),
-    new webpack.NamedModulesPlugin()
-  ]
-}, baseConfig);
+  devtool: '#eval'
+}, baseConfig)
+
+config.plugins = config.plugins.concat([
+  new webpack.HotModuleReplacementPlugin(),
+  new webpack.NoErrorsPlugin(),
+  new CircularDependencyPlugin({
+    // exclude detection of files based on a RegExp
+    exclude: /node_modules/
+    // add errors to webpack instead of warnings
+    // failOnError: true
+  }),
+  new webpack.NamedModulesPlugin()
+])
 
 // Add needed loaders
 config.module.loaders.push({
   test: /\.(js|jsx)$/,
   loader: 'babel',
   include: path.join(__dirname, '/../src')
-});
+})
+
+// let cssLoader = 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass?outputStyle=expanded'
+let cssLoader = 'style!css?modules&importLoaders=1&localIdentName=[folder]_[local]_[hash:base64:3]!sass?outputStyle=expanded'
+config.module.loaders.push({
+  test: /\.s?css/,
+  loader: cssLoader
+})
 
 config.module.loaders.push({
-  test: /\.css$/,
-  loader: 'style!css'
-});
+  test: /\.sass/,
+  loader: cssLoader + '&indentedSyntax'
+})
 
-config.module.loaders.push({
-  test: /\.s[ac]ss/,
-  loader: 'style!css!sass?outputStyle=expanded&indentedSyntax'
-});
-
-module.exports = config;
+module.exports = config
