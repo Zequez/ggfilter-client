@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { snapTo } from 'shared/lib/utils'
 import { getGames } from 'shared/lib/api'
+import { MODES, setMode } from 'shared/reducers/uiReducer'
 
 import Link from 'shared/components/RouterLink'
 import Page from 'src/app/components/Tabs/Page'
@@ -18,7 +19,8 @@ const { setParam, setSort } = require('src/FilterApp').actions
 
 @connect(() => ({}), {
   setParam,
-  setSort
+  setSort,
+  setMode
 })
 export default class SysreqCalc extends Component {
   state = {
@@ -69,6 +71,7 @@ export default class SysreqCalc extends Component {
     let lt = Math.min(100, calcs.mean + calcs.deviation)
     this.props.setParam('sysreq_index_centile', {gt: 0, lt: snapTo(lt, 5)})
     this.props.setSort('sysreq_index_centile', false)
+    this.props.setMode(MODES.filter)
   }
 
   calculatedValues () {
@@ -115,7 +118,7 @@ export default class SysreqCalc extends Component {
           </div>
         ) : null}
         {calcs.mean ? (
-          <CalcResult mean={calc.mean} deviation={calc.deviation}/>
+          <CalcResult mean={calcs.mean} deviation={calcs.deviation}/>
         ) : null}
         <p className={th.info}>
           The System Requirements Index is a very coarse number
