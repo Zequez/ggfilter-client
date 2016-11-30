@@ -10,9 +10,8 @@ import { getTrueColumnsWidth, getTrueTableWidth, getTab } from '../ui/selectors'
 import { finalFilterSelector, visibleFiltersDefinitionsSelector } from '../filter/selectors'
 
 import DataTable from './DataTable'
-import TableTabs from './TableTabs'
-import TableTabsContent from './TableTabsContent'
 import GamesLoader from './GamesLoader'
+import FilterMasks from './FilterMasks'
 
 @connect((s) => ({
   filter: finalFilterSelector(s),
@@ -59,8 +58,7 @@ export default class FilterApp extends Component {
 
     return (
       <div className={'filter-app' + filterMode}>
-        <TableTabs/>
-        <TableTabsContent/>
+        <FilterMasks/>
         <DataTable
           games={games}
           filter={filter}

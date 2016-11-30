@@ -1,6 +1,10 @@
-import React, { PropTypes as t, Component } from 'react'
+import th from '../theme'
 
+import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
+import cn from 'classnames'
+import Chip from 'react-toolbox/lib/chip'
+
 import { partial as p } from 'shared/lib/utils'
 import { addMask, removeMask } from '../filter/reducer'
 import { filterMasksNames } from '../filter/selectors'
@@ -37,22 +41,23 @@ export default class FilterMasks extends Component {
 
     for (let name in masks) {
       let mask = masks[name]
-      let activeClass = this.isActive(name) ? 'active' : ''
+      let klass = cn(th.maskChip, {
+        [th.activeMaskChip]: this.isActive(name)
+      })
       items.push(
-        <li key={name}>
-          <a
-            className={`btn ${activeClass}`}
-            onClick={p(this.onClick, name)}>
-            {mask.title}
-          </a>
-        </li>
+        <Chip key={name} onClick={p(this.onClick, name)} className={klass}>
+          {mask.title}
+        </Chip>
       )
     }
 
     return (
-      <ul className='filter-masks'>
+      <div className={th.filterMasks}>
+        <div className={th.filterMasksLabel}>
+          Shortcuts
+        </div>
         {items}
-      </ul>
+      </div>
     )
   }
 }

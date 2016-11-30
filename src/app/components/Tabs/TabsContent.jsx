@@ -3,7 +3,7 @@ import React, { PropTypes as t, Component } from 'react'
 
 import { MODES } from 'shared/reducers/uiReducer'
 
-import { FilterApp } from 'src/FilterApp'
+import { FilterAppPage } from 'src/FilterApp'
 import { SysreqCalc } from 'src/SysreqCalc'
 // import OfficialFilters from '../OfficialFilters'
 // import { SavedFiltersManagerGlued } from 'src/SavedFiltersManager'
@@ -31,7 +31,7 @@ export default class TabsContent extends Component {
       case MODES.sources: return <Sources {...other}/>
       // case MODES.myFilters: return <SavedFiltersManagerGlued/>
       case MODES.aboutSysreq: return <AboutSysreq {...other}/>
-      case MODES.filter: return <FilterApp {...other}/>
+      case MODES.filter: return <FilterAppPage {...other}/>
     }
 
     return null

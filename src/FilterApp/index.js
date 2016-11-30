@@ -1,4 +1,5 @@
 import FilterApp from './components/FilterApp'
+import FilterAppPage from './components/FilterAppPage'
 import FilterTitle from './components/FilterTitle'
 import reducer from './reducer'
 
@@ -13,6 +14,7 @@ import * as ui from './ui'
 module.exports = {
   FilterApp,
   FilterTitle,
+  FilterAppPage,
   reducer,
 
   actions: {
