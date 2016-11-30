@@ -1,3 +1,4 @@
+import th from '../theme'
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
 import debounce from 'lodash/debounce'
@@ -10,8 +11,9 @@ import { getTrueColumnsWidth, getTrueTableWidth, getTab } from '../ui/selectors'
 import { finalFilterSelector, visibleFiltersDefinitionsSelector } from '../filter/selectors'
 
 import DataTable from './DataTable'
-import GamesLoader from './GamesLoader'
+// import GamesLoader from './GamesLoader'
 import FilterMasks from './FilterMasks'
+import CategoriesList from './CategoriesList'
 
 @connect((s) => ({
   filter: finalFilterSelector(s),
@@ -53,23 +55,23 @@ export default class FilterApp extends Component {
   }
 
   render () {
-    let {games, filter, columnsWidth, tableWidth, tab, visibleFilters} = this.props
-    let filterMode = ' filter-tab-' + tab
+    let {games, filter, columnsWidth, tableWidth, visibleFilters} = this.props
 
     return (
-      <div className={'filter-app' + filterMode}>
+      <div className={th.filterApp}>
         <FilterMasks/>
+        <CategoriesList/>
         <DataTable
           games={games}
           filter={filter}
           columnsWidth={columnsWidth}
           tableWidth={tableWidth}
           visibleFiltersDefinitions={visibleFilters}/>
-        <GamesLoader
+        {/*<GamesLoader
           fetching={games.fetching}
           failed={games.failed}
           lastPage={games.lastPage}
-          onRequestMore={::this.handleRequestMoreGames} />
+          onRequestMore={::this.handleRequestMoreGames} />*/}
       </div>
     )
   }

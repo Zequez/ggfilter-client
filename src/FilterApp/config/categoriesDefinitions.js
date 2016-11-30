@@ -9,7 +9,12 @@ export default {
       'released_at_absolute',
       'released_at',
       'steam_early_access',
-      'tags',
+      'tags'
+    ]
+  },
+  performance: {
+    title: 'Performance',
+    filters: [
       'sysreq_index_centile',
       'sysreq_video_tokens_values'
     ]

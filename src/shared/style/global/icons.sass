@@ -28,28 +28,57 @@ $fa-font-path: 'font-awesome/fonts/'
 +gicon(feedback, $fa-var-commenting-o)
 +gicon(contribute, $fa-var-btc)
 
-// Sharer tab
 
+// Base filters icons
+
++gicon(filter-steam_thumbnail, $fa-var-picture-o)
++gicon(filter-images, $fa-var-file-picture-o)
++gicon(filter-steam_id, $fa-var-steam)
++gicon(filter-name, $fa-var-font)
++gicon(filter-images, $fa-var-image)
++gicon(filter-sysreq_index_centile, $fa-var-fire)
++gicon(filter-sysreq_video_tokens_values, $fa-var-tags)
++gicon(filter-released_at, $fa-var-calendar-minus-o)
++gicon(filter-released_at_absolute, $fa-var-calendar)
++gicon(filter-tags, $fa-var-tags)
+
++gicon(filter-lowest_steam_price, $fa-var-dollar)
++gicon(filter-steam_discount, $fa-var-dollar + '%')
+
++gicon(filter-playtime_mean, $fa-var-clock-o + 'A')
++gicon(filter-playtime_median, $fa-var-clock-o)
++gicon(filter-playtime_sd, $fa-var-clock-o + 'σ')
++gicon(filter-playtime_rsd, $fa-var-clock-o + 'σ/A')
++gicon(filter-playtime_mean_ftb, $fa-var-dollar)
++gicon(filter-playtime_median_ftb, $fa-var-dollar)
+
++gicon(filter-metacritic, $fa-var-star)
++gicon(filter-steam_reviews_count, $fa-var-comments)
++gicon(filter-steam_reviews_ratio, $fa-var-star)
+
++gicon(filter-features, $fa-var-cubes)
++gicon(filter-platforms, $fa-var-linux)
++gicon(filter-players, $fa-var-group)
++gicon(filter-vr_platforms, $fa-var-desktop)
++gicon(filter-vr_mode, $fa-var-male)
++gicon(filter-vr_controllers, $fa-var-gamepad)
++gicon(filter-controller_support, $fa-var-gamepad)
+
++gicon(filter-steam_early_access, $fa-var-exclamation-circle)
+
+
++gicon(column-circle, $fa-var-circle)
+
+
+// Sharer tab
 .icon-warning:before
   content: $fa-var-exclamation-triangle
 
 // Title icons
-
-
 .icon-highlight:before
   content: $fa-var-lightbulb-o
 .icon-close:before
   content: $fa-var-times
-
-// Drawer
-.icon-filter:before
-  content: $fa-var-filter
-.icon-sysreq:before
-  content: $fa-var-thermometer-three-quarters
-.icon-feedback:before
-  content: $fa-var-commenting-o
-.icon-contribute:before
-  content: $fa-var-btc
 
 // Tabs
 
@@ -57,10 +86,6 @@ $fa-font-path: 'font-awesome/fonts/'
   content: $fa-var-share-alt
 .icon-link:before
   content: $fa-var-link
-.icon-unlocked:before
-  content: $fa-var-unlock-alt
-.icon-locked:before
-  content: $fa-var-lock
 
 // Boolean filters icons
 
@@ -114,96 +139,14 @@ $fa-font-path: 'font-awesome/fonts/'
 .icon-keyboard_mouse:before
   content: $fa-var-keyboard-o
 
-.icon-seated
-  &:before
-    content: $fa-var-wheelchair
-  //   content: ' '
-  //   display: inline-block
-  //   width: 3px
-  //   height: 12px
-  //   background: $dark-blue
-  // &:after
-  //   content: ' '
-  //   display: inline-block
-  //   height: 5px
-  //   width: 3px
-  //   border-top: solid 2px $dark-blue
-  //   border-right: solid 3px $dark-blue
+.icon-seated:before
+  content: $fa-var-wheelchair
 .icon-standing:before
   content: $fa-var-male
 .icon-room_scale:before
   content: $fa-var-street-view
 
-// Base filters icons
-
-.icon-steam_thumbnail:before
-  content: $fa-var-picture-o
-.icon-images:before
-  content: $fa-var-file-picture-o
-.icon-steam_id:before
-  content: $fa-var-steam
-.icon-name:before
-  content: $fa-var-font
-.icon-images:before
-  content: $fa-var-image
-.icon-sysreq_index_centile:before
-  content: $fa-var-tv + $fa-var-fire
-.icon-sysreq_video_tokens_values:before
-  content: $fa-var-tv + $fa-var-fire + $fa-var-tags
-.icon-released_at:before
-  content: $fa-var-calendar-minus-o
-.icon-released_at_absolute:before
-  content: $fa-var-calendar
-.icon-tags:before
-  content: $fa-var-tags
-
-.icon-lowest_steam_price:before
-  content: $fa-var-steam + $fa-var-dollar
-.icon-steam_discount:before
-  content: $fa-var-steam + $fa-var-dollar + '%'
-
-.icon-playtime_mean:before
-  content: $fa-var-clock-o + 'A'
-.icon-playtime_median:before
-  content: $fa-var-clock-o
-.icon-playtime_sd:before
-  content: $fa-var-clock-o + 'σ'
-.icon-playtime_rsd:before
-  content: $fa-var-clock-o + 'σ/A'
-.icon-playtime_mean_ftb:before
-  content: $fa-var-clock-o + 'A/' + $fa-var-dollar
-.icon-playtime_median_ftb:before
-  content: $fa-var-clock-o + '/' + $fa-var-dollar
-
-.icon-metacritic:before
-  content: $fa-var-star
-.icon-steam_reviews_count:before
-  content: $fa-var-steam + $fa-var-comments
-.icon-steam_reviews_ratio:before
-  content: $fa-var-steam + $fa-var-comments + $fa-var-star
-
-.icon-features:before
-  content: $fa-var-steam + $fa-var-cubes
-.icon-platforms:before
-  content: $fa-var-windows + $fa-var-apple + $fa-var-linux
-.icon-players:before
-  content: $fa-var-group
-.icon-vr_platforms:before
-  content: $fa-var-eye + $fa-var-desktop
-.icon-vr_mode:before
-  content: $fa-var-eye + $fa-var-male
-.icon-vr_controllers:before
-  content: $fa-var-eye + $fa-var-gamepad
-.icon-controller_support:before
-  content: $fa-var-gamepad
-
-.icon-steam_early_access:before
-  content: $fa-var-exclamation-circle
-.icon-circle:before
-  content: $fa-var-circle
-
 // Games loader
-
 .icon-load-more-left:before
   content: $fa-var-angle-double-left
 .icon-load-more-right:before

@@ -1,7 +1,7 @@
+import th from '../theme'
 import React, { Component, PropTypes as t } from 'react'
 
 import ColumnsWidthFixer from './ColumnsWidthFixer'
-import CategoriesColumns from './CategoriesColumns'
 import DataTableControls from '../filter/components/DataTableControls'
 import DataTableTitles from '../filter/components/DataTableTitles'
 import DataTableBatch from '../games/components/DataTableBatch'
@@ -42,10 +42,9 @@ export default class DataTable extends Component {
     }
 
     return (
-      <table className='data-table' style={{width: tableWidth}}>
+      <table className={th.dataTable} style={{width: tableWidth}}>
         <thead>
           <ColumnsWidthFixer columnsWidth={columnsWidth}/>
-          <CategoriesColumns/>
           <DataTableTitles
             filters={filters}
             filtersParams={filter.params}

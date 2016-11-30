@@ -1,17 +1,17 @@
+import th from './theme'
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
-import definitions from '../lib/definitions'
-import categoriesDefinitions from '../config/categoriesDefinitions'
+import definitions from '../../lib/definitions'
 
 const {
   selectors: { visibleFiltersSelector },
   actions: { setParam }
-} = require('../filter')
+} = require('../../filter')
 
-import CategoriesColumnsList from './CategoriesColumnsList'
+import Category from './Category'
 
 @connect((s) => ({visibleFilters: visibleFiltersSelector(s)}), { setParam })
-export default class CategoriesColumns extends Component {
+export default class CategoriesList extends Component {
   static propTypes = {
     visibleFilters: t.arrayOf(t.string).isRequired,
     setParam: t.func.isRequired
@@ -21,9 +21,9 @@ export default class CategoriesColumns extends Component {
     let { visibleFilters, setParam } = this.props
 
     return (
-      <tr className='categories-columns'>
+      <ul className={th.categoriesList}>
         {definitions.categoriesList.map((cat) => (
-          <CategoriesColumnsList
+          <Category
             key={cat.name}
             title={cat.title}
             slug={cat.name}
@@ -31,7 +31,7 @@ export default class CategoriesColumns extends Component {
             visibleFilters={visibleFilters}
             onToggle={setParam}/>
         ))}
-      </tr>
+      </ul>
     )
   }
 }

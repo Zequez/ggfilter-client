@@ -6,13 +6,11 @@ export default class SysreqTokensDetailsColumn extends Component {
   }
 
   render () {
-    console.log(this.props.value)
-
     let tags = []
     let tokens = this.props.value
     for (let name in tokens) {
       tags.push(
-        <span className='detail'>
+        <span className='detail' key={name}>
           <i>{tokens[name]}</i> {name}
         </span>
       )

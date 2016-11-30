@@ -1,0 +1,77 @@
+.categoriesList
+  +shadow(card)
+  display: flex
+  border-radius: 2px
+  overflow: hidden
+
+.category
+  flex-grow: 1
+
+.category
+  background: $color-mono-4
+
+
+  // &-gameInfo
+  //   background: $palette-indigo-100
+  // &-performance
+  //   background: $palette-deep-orange-100
+  // &-price
+  //   background: $palette-green-100
+  // &-playtime
+  //   background: $palette-cyan-100
+  // &-ratings
+  //   background: $palette-yellow-100
+  // &-features
+  //   background: $palette-brown-100
+  // &-vr
+  //   background: $palette-blue-grey-100
+
+.title
+  padding: $g * 2
+  line-height: $g * 3
+  font-size: $font-size-subheading
+  color: $color-text-sec
+  overflow: hidden
+  text-overflow: ellipsis
+
+.togglesList
+  display: flex
+  margin-top: -1px
+  background: $color-mono-4
+  color: $color-text-sec
+
+.toggle
+  display: flex
+  flex-grow: 1
+  border: solid 1px transparent
+    bottom: none
+  margin-left: -1px
+  color: $color-text-dis
+  color: mix-opacify($color-text-dis, $color-mono-4)
+  white-space: nowrap
+  text-align: center
+  overflow: hidden
+  input
+    display: none
+  label
+    display: block
+    padding: $g 0
+    width: 100%
+    cursor: pointer
+  &.active
+    color: mix-opacify($color-text-sec, $color-mono-2)
+    background: $color-mono-2
+    border-color: mix-opacify($color-divider, $color-mono-4)
+
+.category:first-child .toggle:first-child
+  margin-left: 0
+  border-left: none
+.category:last-child .toggle:last-child
+  border-right: none
+
+.toggleTitle
+  display: none
+
+.toggleIcon
+  letter-spacing: -5px
+  margin-left: -5px
