@@ -1,4 +1,4 @@
-import th from '../theme'
+import th from './theme'
 
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'

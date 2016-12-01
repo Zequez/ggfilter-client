@@ -1,4 +1,4 @@
-import th from '../theme'
+import th from './theme'
 import React, { Component, PropTypes as t } from 'react'
 
 import ColumnsWidthFixer from './ColumnsWidthFixer'
