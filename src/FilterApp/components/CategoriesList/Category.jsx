@@ -3,7 +3,7 @@ import { flex } from 'src/style'
 
 import React, { PropTypes as t, Component } from 'react'
 import cn from 'classnames'
-import Toggle from './Toggle'
+import TooltipRippledToggle from './TooltipRippledToggle'
 
 export default class Category extends Component {
   static propTypes = {
@@ -21,7 +21,7 @@ export default class Category extends Component {
     filters.map((filter) => {
       let active = ~visibleFilters.indexOf(filter.name)
       toggles.push(
-        <Toggle
+        <TooltipRippledToggle
           key={filter.name}
           active={!!active}
           name={filter.name}
