@@ -1,5 +1,5 @@
 import th from './theme'
-import flex from '../../equalflex.sass'
+import { flex } from 'src/style'
 
 import React, { PropTypes as t, Component } from 'react'
 import cn from 'classnames'
