@@ -1,7 +1,7 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 
-const { setParam } = require('../../filter').actions
+const { setParam } = require('../../../filter').actions
 
 import ColumnComponent from './ColumnComponent'
 

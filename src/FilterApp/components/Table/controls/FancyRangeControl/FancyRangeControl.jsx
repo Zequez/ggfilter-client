@@ -1,5 +1,5 @@
 import React, { Component, PropTypes as t } from 'react'
-import { chunkSize } from '../../../lib/FancyRangeControlHelpers'
+import { chunkSize } from '../../../../lib/FancyRangeControlHelpers'
 import FancyRangeControlMappedSensor from './FancyRangeControlMappedSensor'
 import FancyRangeControlBar from './FancyRangeControlBar'
 import FancyRangeControlLabel from './FancyRangeControlLabel'

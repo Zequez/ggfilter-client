@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
-import columnsDefinitions from './columns'
+import columnsDefinitions from '../columns'
 import { partial } from 'shared/lib/utils'
 
 function columnInputValues (game, filter) {

@@ -1,6 +1,6 @@
 import React from 'react'
 import cn from 'classnames'
-import controlsDefinitions from './controls'
+import controlsDefinitions from '../controls'
 
 export default ({filter, params, onChange}) => {
   let controlClass = cn(

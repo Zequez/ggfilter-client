@@ -13,7 +13,7 @@ import staticFilters from '../config/staticFilters'
   tags: s.tags,
   gamesFoundCount: totalCountSelector(s)
 }))
-export default class FilterTitle extends Component {
+export default class TitleGenerator extends Component {
   static propTypes = {
     isDirty: t.bool,
     filter: t.object,

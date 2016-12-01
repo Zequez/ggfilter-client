@@ -1,9 +1,9 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
-import { adjustColumnWidth, clearColumnWidth } from '../../ui/reducer'
-import { setSort, setParam } from '../reducer'
+import { adjustColumnWidth, clearColumnWidth } from '../../../ui/reducer'
+import { setSort, setParam } from '../../../filter/reducer'
 
-import DataTableTitle from './DataTableTitle'
+import Title from './Title'
 
 @connect((s) => ({}), {
   setSort,
@@ -11,7 +11,7 @@ import DataTableTitle from './DataTableTitle'
   adjustColumnWidth,
   clearColumnWidth
 })
-export default class DataTableTitles extends Component {
+export default class TitlesList extends Component {
   static propTypes = {
     filters: t.arrayOf(t.object).isRequired,
     filtersParams: t.object.isRequired,
@@ -69,7 +69,7 @@ export default class DataTableTitles extends Component {
       let highlightMode = hasParams ? !!filtersParams[filter.name].hl : false
 
       return (
-        <DataTableTitle
+        <Title
           key={filter.name}
           filter={filter}
           sort={sortStatus}

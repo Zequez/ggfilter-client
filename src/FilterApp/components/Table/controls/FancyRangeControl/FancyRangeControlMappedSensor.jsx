@@ -1,6 +1,6 @@
 import React, { PropTypes as t, Component } from 'react'
 import FancyRangeControlSensor from './FancyRangeControlSensor'
-import { chunkSize, mapRange } from '../../../lib/FancyRangeControlHelpers'
+import { chunkSize, mapRange } from '../../../../lib/FancyRangeControlHelpers'
 
 export default class FancyRangeControlMappedSensor extends Component {
   static propTypes = {

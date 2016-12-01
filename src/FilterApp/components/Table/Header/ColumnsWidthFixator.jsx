@@ -1,6 +1,6 @@
 import React, { PropTypes as t, Component } from 'react'
 
-export default class ColumnsWidthFixer extends Component {
+export default class ColumnsWidthFixator extends Component {
   static propTypes = {
     columnsWidth: t.arrayOf(t.number).isRequired
   }

@@ -1,7 +1,7 @@
 import React, { PropTypes as t } from 'react'
 import { DraggableCore } from 'react-draggable'
 
-export default class ColumnResizeHandle extends DraggableCore {
+export default class ResizeHandle extends DraggableCore {
   static propTypes = {
     onStop: t.func.isRequired,
     onDoubleClick: t.func.isRequired

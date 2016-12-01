@@ -10,7 +10,7 @@ import { setDocWidth } from '../ui/reducer'
 import { getTrueColumnsWidth, getTrueTableWidth, getTab } from '../ui/selectors'
 import { finalFilterSelector, visibleFiltersDefinitionsSelector } from '../filter/selectors'
 
-import DataTable from './DataTable'
+import Table from './Table/Table'
 // import GamesLoader from './GamesLoader'
 import FilterMasks from './FilterMasks'
 import CategoriesList from './CategoriesList'
@@ -61,7 +61,7 @@ export default class FilterApp extends Component {
       <div className={th.filterApp}>
         <FilterMasks/>
         <CategoriesList/>
-        <DataTable
+        <Table
           games={games}
           filter={filter}
           columnsWidth={columnsWidth}

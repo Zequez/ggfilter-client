@@ -1,8 +1,8 @@
 import React, { Component, PropTypes as t } from 'react'
 import classNames from 'classnames'
 
-import ColumnResizeHandle from './ColumnResizeHandle'
-import DataTableTitleFilterButtons from './DataTableTitleFilterButtons'
+import ResizeHandle from './ResizeHandle'
+import TitleButtons from './TitleButtons'
 
 export default class DataTableTitle extends Component {
   static propTypes = {
@@ -61,13 +61,13 @@ export default class DataTableTitle extends Component {
           {filter.title}
         </div>
         { this.props.active ? (
-          <DataTableTitleFilterButtons
+          <TitleButtons
             mode={this.props.highlightMode}
             onSetHighlightMode={this.props.onSetHighlightMode}
             onClearFilter={this.props.onClearFilter}/>
         ) : null}
         <div className='title-highlight-border'></div>
-        <ColumnResizeHandle
+        <ResizeHandle
           onStop={::this.onResize}
           onDoubleClick={::this.onResetResize}/>
       </th>

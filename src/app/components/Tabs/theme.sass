@@ -56,6 +56,7 @@
   +shadow(card)
   position: relative
   background: $color-mono-3
+  overflow: hidden
 
 .tabs
   +z(drawer)
@@ -157,8 +158,9 @@
     left: - $gg * 4
     transition: transform 0.2s, box-shadow 0.2s
 
-  .appBody
-    padding: $g * 2
+  .page.cardPage
+    .appBody
+      padding: $g * 2
 
 +media('>tablet')
   .menuButton
@@ -167,8 +169,9 @@
   .appBar
     padding-left: $g * 3
 
-  .appBody
-    padding: $g * 3
+  .page.cardPage
+    .appBody
+      padding: $g * 3
 
   .container
     &.open .tabs, .tabs:hover
