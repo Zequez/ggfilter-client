@@ -24,7 +24,7 @@ class Toggle extends Component {
   }
 
   render () {
-    let {name, title, active, children, theme, ...other} = this.props
+    let {name, title, active, children, theme, onToggle, ...other} = this.props
     let iconClass = cn(th.toggleIcon, 'fa', 'icon-filter-' + name)
 
     return (

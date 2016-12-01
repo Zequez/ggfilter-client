@@ -1,8 +1,11 @@
 .container
   padding-left: $gg
 
+  .tabs
+    box-shadow: $shadow-appBar
+
   &.open .tabs, .tabs:hover
-    +shadow(drawer)
+    box-shadow: $shadow-drawer
     .logo
       padding-left: $g
       .logoLast
