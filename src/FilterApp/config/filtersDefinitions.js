@@ -34,7 +34,7 @@ export default {
   },
   steam_discount: {
     id: 5,
-    title: 'Steam sale %',
+    title: 'Steam sale',
     control: 'FancyRange',
     controlOptions: options.controls.range.discount,
     columnOptions: { interpolation: '%s%' },

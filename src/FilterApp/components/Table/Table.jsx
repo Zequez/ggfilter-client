@@ -31,7 +31,7 @@ export default class DataTable extends Component {
     return (
       <table className={th.table} style={{width: tableWidth}}>
         <Header filters={filters} filter={filter} columnsWidth={columnsWidth}/>
-        {Body({games, filters, filter})}
+        {/*{Body({games, filters, filter})}*/}
       </table>
     )
   }

@@ -1,2 +1,59 @@
 .table
+  // background: $color-mono-4
+
+.header
+  margin: 0 $g*3
   background: $color-mono-4
+  box-shadow: $shadow-card
+  margin-bottom: $g*3
+
+.titlesList
+
+
+.title
+  position: relative
+  padding: $g
+  // border-left: solid 1px $color-divider-light
+  // border-bottom: solid 1px $color-divider-light
+  color: $color-text-sec
+  line-height: $g*3
+  white-space: nowrap
+  text-align: left
+  overflow: hidden
+  text-overflow: ellipsis
+  text-transform: uppercase
+  font-weight: 500
+
+  :global(.fa)
+    font-size: $g*2
+
+
+  &.titleSortable
+    cursor: pointer
+    &:hover
+      background: $color-mono-3
+
+  &.sort
+    color: $color-text
+
+.titleIcon
+  margin-right: $g/2
+
+.titleText
+  font-size: $font-size-caption
+
+.titleIcon i, .titleText
+  display: inline-block
+  line-height: $g*3
+  vertical-align: baseline
+
+// .titleText
+//   display: inline-block
+//   vertical-align: top
+  // display: flex
+  // align-items: center
+  // justify-content: center
+  // height: $g*2
+  // // white-space: nowrap
+  // font-size: $font-size-caption
+  // line-height: $g*3 / 2

@@ -12,4 +12,6 @@ export default function Body ({games, filters, filter}) {
         filtersParams={filter.params}/>
     )
   }
+
+  return batches
 }

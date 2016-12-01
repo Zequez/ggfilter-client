@@ -1,9 +1,10 @@
+import th from '../theme'
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { adjustColumnWidth, clearColumnWidth } from '../../../ui/reducer'
 import { setSort, setParam } from '../../../filter/reducer'
 
-import Title from './Title'
+import Title, { SortableTitle } from './Title'
 
 @connect((s) => ({}), {
   setSort,
@@ -68,8 +69,10 @@ export default class TitlesList extends Component {
       let hasParams = typeof filtersParams[filter.name] === 'object'
       let highlightMode = hasParams ? !!filtersParams[filter.name].hl : false
 
+      let Component = filter.sort ? SortableTitle : Title
+
       return (
-        <Title
+        <Component
           key={filter.name}
           filter={filter}
           sort={sortStatus}
@@ -84,7 +87,7 @@ export default class TitlesList extends Component {
     })
 
     return (
-      <tr className='data-table-titles'>
+      <tr className={th.titlesList}>
         {titles}
       </tr>
     )
