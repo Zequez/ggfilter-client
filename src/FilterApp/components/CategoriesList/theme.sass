@@ -5,10 +5,11 @@
   overflow: hidden
 
 .category
-  flex-grow: 1
-
-.category
+  border-left: solid 1px rgba(#000, 0.06)
   background: $color-mono-4
+  overflow: hidden
+  &:first-child .title
+    border-left: none
 
   &-gameInfo
   &-performance
@@ -18,13 +19,17 @@
   &-features
   &-vr
 
+
 .title
-  padding: $g * 2
+  padding: $g*2
+    right: $g
   line-height: $g * 3
   font-size: $font-size-subheading
   color: $color-text-sec
+  font-weight: 500
   overflow: hidden
   text-overflow: ellipsis
+
 
 .togglesList
   display: flex
@@ -34,6 +39,7 @@
 .toggle
   display: flex
   flex-grow: 1
+  max-width: $gg*2
   border: solid 1px transparent
     bottom: none
   margin-left: -1px
@@ -55,8 +61,13 @@
     box-shadow: inset 0 1px 3px rgba(#000, 0.06)
     border-color: mix-opacify($color-divider, $color-mono-4)
 
-.category:first-child .toggle:first-child
+.toggle:first-child
   margin-left: 0
+  border-left: none
+.toggle:last-child
+  border-right: none
+.category:first-child .toggle:first-child
+  // margin-left: 0
   border-left: none
 .category:last-child .toggle:last-child
   border-right: none
@@ -67,3 +78,15 @@
 .toggleIcon
   letter-spacing: -5px
   margin-left: -5px
+
++media('<desktop')
+  .categoriesList
+    display: none
+  // .categoriesList
+  //   flex-direction: column
+  // .width
+  // .category
+  //   width: 100%
+  // .toggleTitle
+  //   display: block
+  //   font-size: $font-size-caption

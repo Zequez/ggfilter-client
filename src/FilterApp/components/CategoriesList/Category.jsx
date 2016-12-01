@@ -1,4 +1,6 @@
 import th from './theme'
+import flex from '../../equalflex.sass'
+
 import React, { PropTypes as t, Component } from 'react'
 import cn from 'classnames'
 import Toggle from './Toggle'
@@ -29,14 +31,14 @@ export default class Category extends Component {
     })
 
     // Ensure that the length is proportional to the icons count
-    let flexStyle = {
-      flexGrow: toggles.length,
-      width: toggles.length * 24
-    }
+    // let flexStyle = {
+    //   flexGrow: toggles.length,
+    //   width: toggles.length * 240
+    // }
 
-    let className = cn(th.category, th['category-' + slug])
+    let className = cn(th.category, th['category-' + slug], flex['flex-' + toggles.length])
     return (
-      <li className={className} ref='th' style={flexStyle}>
+      <li className={className} ref='th'>
         <div className={th.title} onClick={this.onClickTitle}>{title}</div>
         <ul className={th.togglesList}>
           {toggles}

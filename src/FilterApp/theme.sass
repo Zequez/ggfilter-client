@@ -2,8 +2,6 @@
 
 .dataTable
 
-
-
 .filterMasks
   margin-bottom: $g * 3
 
@@ -16,9 +14,12 @@
   text-transform: uppercase
   font-weight: 500
 
-
 .maskChip
   cursor: pointer
 
 .activeMaskChip
   background: $color-primary-light
+
++media('<tablet')
+  .filterMasks
+    display: none

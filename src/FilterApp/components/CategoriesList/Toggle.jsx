@@ -1,8 +1,13 @@
 import th from './theme'
 import React, { PropTypes as t, Component } from 'react'
 import cn from 'classnames'
+import { tooltipFactory } from 'react-toolbox/lib/tooltip'
 
-export default class Toggle extends Component {
+const TooltippedLabel = tooltipFactory({position: 'bottom'})(({children, theme, ...other}) =>
+  <label {...other}>{children}</label>
+)
+
+class Toggle extends Component {
   static propTypes = {
     active: t.bool.isRequired,
     onToggle: t.func.isRequired,
@@ -20,16 +25,18 @@ export default class Toggle extends Component {
 
   render () {
     let {name, title, active} = this.props
-    let toggleClass = cn(th.toggleIcon, 'fa', 'icon-filter-' + name)
+    let iconClass = cn(th.toggleIcon, 'fa', 'icon-filter-' + name)
 
     return (
-      <li className={cn(th.toggle, th['toggle-' + name], {[th.active]: active})} title={title}>
-        <label>
+      <li className={cn(th.toggle, th['toggle-' + name], {[th.active]: active})}>
+        <TooltippedLabel title={title} tooltip={title}>
           <input type='checkbox' checked={active} onChange={this.onToggle}/>
+          <i className={iconClass}></i>
           <span className={th.toggleTitle}>{title}</span>
-          <i className={toggleClass}></i>
-        </label>
+        </TooltippedLabel>
       </li>
     )
   }
 }
+
+export default tooltipFactory({position: 'bottom'})(Toggle)

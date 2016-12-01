@@ -18,9 +18,13 @@ $fa-font-path: 'font-awesome/fonts/'
   -webkit-font-smoothing: antialiased
   -moz-osx-font-smoothing: grayscale
 
-@mixin gicon($name, $var)
+@mixin gicon($name, $var, $combined: false)
   :global(.icon-#{$name}:before)
     content: $var
+  @if $combined
+    :global(.icon-#{$name}:after)
+      content: $combined
+      font-size: $g*2
 
 +gicon(menu, $fa-var-bars)
 +gicon(filter, $fa-var-filter)
@@ -45,18 +49,12 @@ $fa-font-path: 'font-awesome/fonts/'
 +gicon(filter-lowest_steam_price, $fa-var-dollar)
 +gicon(filter-steam_discount, $fa-var-percent)
 
-+gicon(filter-playtime_mean, $fa-var-clock-o)
-:global(.icon-filter-playtime_mean:after)
-  content: $fa-var-font
-  font-size: $g*2
++gicon(filter-playtime_mean, $fa-var-clock-o, $fa-var-font)
 +gicon(filter-playtime_median, $fa-var-clock-o)
 +gicon(filter-playtime_sd, $fa-var-clock-o + 'σ')
-+gicon(filter-playtime_rsd, $fa-var-clock-o)
-:global(.icon-filter-playtime_rsd:after)
-  content: 'σ' + $fa-var-font
-  font-size: $g*2
-+gicon(filter-playtime_mean_ftb, $fa-var-dollar)
-+gicon(filter-playtime_median_ftb, $fa-var-dollar)
++gicon(filter-playtime_rsd, $fa-var-clock-o, 'σ' + $fa-var-font)
++gicon(filter-playtime_mean_ftb, $fa-var-clock-o, $fa-var-dollar)
++gicon(filter-playtime_median_ftb, $fa-var-clock-o, $fa-var-dollar)
 
 +gicon(filter-metacritic, $fa-var-star)
 +gicon(filter-steam_reviews_count, $fa-var-comments)

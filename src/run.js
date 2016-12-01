@@ -7,6 +7,7 @@ require('autotrack/lib/plugins/url-change-tracker')
 // import 'react-toolbox/lib/commons'
 // We import the react-toolbox things here so they are added FIRST to the CSS and
 // we can override the classes easily
+import 'src/FilterApp/equalflex'
 import 'react-toolbox/lib/chip/theme'
 import 'react-toolbox/lib/input/theme'
 import 'src/shared/style/global/index'
