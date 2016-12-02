@@ -12,13 +12,13 @@ describe('TableWidthCalculator', () => {
     )
 
     describe('#tableWidth', () =>
-      it('should be 1000', () => expect(calc.tableWidth()).toBe(1000)
+      it('should be 1000', () => expect(calc.tableWidth).toBe(1000)
       )
 
     )
 
     return describe('#columnsWidth', () =>
-      it('should be both proportional to the window size', () => expect(calc.columnsWidth()).toEqual([600, 400])
+      it('should be both proportional to the window size', () => expect(calc.columnsWidth).toEqual([600, 400])
       )
 
     )
@@ -35,12 +35,12 @@ describe('TableWidthCalculator', () => {
     )
 
     describe('#tableWidth', () =>
-      it('should be 1000', () => expect(calc.tableWidth()).toBe(1000))
+      it('should be 1000', () => expect(calc.tableWidth).toBe(1000))
     )
 
     return describe('#columnsWidth', () => {
       it('should transfer the adjustement to the columns on the right equally', () =>
-        expect(calc.columnsWidth()).toEqual([600, 300, 100]))
+        expect(calc.columnsWidth).toEqual([600, 300, 100]))
     })
   })
 
@@ -54,12 +54,12 @@ describe('TableWidthCalculator', () => {
     )
 
     describe('#tableWidth', () => {
-      it('should be 1000', () => expect(calc.tableWidth()).toBe(1000))
+      it('should be 1000', () => expect(calc.tableWidth).toBe(1000))
     })
 
     describe('#columnsWidth', () => {
       it('should transfer the adjustement to the other columns equally', () =>
-        expect(calc.columnsWidth()).toEqual([500, 350, 150]))
+        expect(calc.columnsWidth).toEqual([500, 350, 150]))
     })
   })
 
@@ -73,12 +73,12 @@ describe('TableWidthCalculator', () => {
 
     describe('#tableWidth', () => {
       it('should return the minimal width, greater than window', () =>
-        expect(calc.tableWidth()).toBe(600 + 400))
+        expect(calc.tableWidth).toBe(600 + 400))
     })
 
     describe('#columnsWidth', () => {
       it('should return the minimal width, greater than window', () =>
-        expect(calc.columnsWidth()).toEqual([600, 400]))
+        expect(calc.columnsWidth).toEqual([600, 400]))
     })
   })
 
@@ -92,12 +92,12 @@ describe('TableWidthCalculator', () => {
 
     describe('#tableWidth', () => {
       it('should return the minimal width, greater than window plus the adjusts', () =>
-        expect(calc.tableWidth()).toBe(600 + 400 + 100))
+        expect(calc.tableWidth).toBe(600 + 400 + 100))
     })
 
     describe('#columnsWidth', () => {
       it('should return the minimal width, greater than window plus the adjusts', () =>
-        expect(calc.columnsWidth()).toEqual([600, 500]))
+        expect(calc.columnsWidth).toEqual([600, 500]))
     })
   })
 
@@ -111,12 +111,12 @@ describe('TableWidthCalculator', () => {
 
     describe('#tableWidth', () => {
       it('should return minimal widths plus the adjustements', () =>
-        expect(calc.tableWidth()).toBe(400 + 400 + 300))
+        expect(calc.tableWidth).toBe(400 + 400 + 300))
     })
 
     describe('#columnsWidth', () => {
       it('should return the minimal width for the non adjusted, and the adjusted width for the others', () =>
-        expect(calc.columnsWidth()).toEqual([400, 700]))
+        expect(calc.columnsWidth).toEqual([400, 700]))
     })
   })
 })

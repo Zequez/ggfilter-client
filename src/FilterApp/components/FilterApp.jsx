@@ -20,8 +20,8 @@ import CategoriesList from './CategoriesList'
   visibleFilters: visibleFiltersDefinitionsSelector(s),
   games: s.games,
   tags: s.tags,
-  columnsWidth: getTrueColumnsWidth(s),
-  tableWidth: getTrueTableWidth(s),
+  // columnsWidth: getTrueColumnsWidth(s),
+  // tableWidth: getTrueTableWidth(s),
   tab: getTab(s)
 }), {
   getGames,
@@ -36,8 +36,6 @@ export default class FilterApp extends Component {
 
   componentWillMount () {
     this.fillStaticFiltersDefinitionsOptions()
-    this.debouncedResize = debounce(this.props.setDocWidth, 100)
-    window.addEventListener('resize', this.debouncedResize)
   }
 
   componentWillUnmount () {

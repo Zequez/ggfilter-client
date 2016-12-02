@@ -15,7 +15,7 @@ export default class Header extends Component {
         asc: t.bool.isRequired
       }).isRequired
     }).isRequired,
-    columnsWidth: t.arrayOf(t.number).isRequired
+    // columnsWidth: t.arrayOf(t.number).isRequired
   }
 
   render () {
@@ -23,7 +23,7 @@ export default class Header extends Component {
 
     return (
       <thead className={th.header}>
-        <ColumnsWidthFixator columnsWidth={columnsWidth}/>
+        <ColumnsWidthFixator visibleFiltersDefinitions={filters}/>
         <TitlesList
           filters={filters}
           filtersParams={filter.params}

@@ -4,7 +4,7 @@ import React, { Component, PropTypes as t } from 'react'
 import Header from './Header/Header'
 import Body from './Body/Body'
 
-export default class DataTable extends Component {
+export default class Table extends Component {
   static propTypes = {
     visibleFiltersDefinitions: t.arrayOf(t.object).isRequired,
     filter: t.shape({
@@ -14,8 +14,8 @@ export default class DataTable extends Component {
         asc: t.bool.isRequired
       }).isRequired
     }).isRequired,
-    columnsWidth: t.arrayOf(t.number).isRequired,
-    tableWidth: t.number.isRequired,
+    // columnsWidth: t.arrayOf(t.number).isRequired,
+    // tableWidth: t.number.isRequired,
     games: t.shape({
       list: t.array,
       fetching: t.bool,
@@ -30,8 +30,8 @@ export default class DataTable extends Component {
 
     return (
       <div className={th.table}>
-        <table style={{width: tableWidth}}>
-          <Header filters={filters} filter={filter} columnsWidth={columnsWidth}/>
+        <table>
+          <Header filters={filters} filter={filter}/>
           {/*{Body({games, filters, filter})}*/}
         </table>
       </div>

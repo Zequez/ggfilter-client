@@ -1,7 +1,9 @@
-import React, { PropTypes as t } from 'react'
+import th from '../theme'
+import React, { PropTypes as t, Component } from 'react'
+import cn from 'classnames'
 import { DraggableCore } from 'react-draggable'
 
-export default class ResizeHandle extends DraggableCore {
+export default class ResizeHandle extends Component {
   static propTypes = {
     onStop: t.func.isRequired,
     onDoubleClick: t.func.isRequired
@@ -31,6 +33,9 @@ export default class ResizeHandle extends DraggableCore {
 
   render () {
     let style = {transform: `translateX(${this.state.clientX}px)`}
+    let className = cn(th.resizeHandle, {
+      [th.resizeHandleDragging]: !!this.state.clientX
+    })
 
     return (
       <DraggableCore
@@ -38,7 +43,7 @@ export default class ResizeHandle extends DraggableCore {
         onStart={::this.onDragStart}
         onStop={::this.onDragStop}>
         <div
-          className='resize-handle'
+          className={className}
           style={style}
           onClick={::this.handleClick}
           onDoubleClick={this.props.onDoubleClick}></div>

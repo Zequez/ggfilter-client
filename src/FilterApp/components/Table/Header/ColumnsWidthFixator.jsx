@@ -1,20 +1,77 @@
+// Warning, this class is hacky:
+// - reads parentNode.parentNode.parentNode.clientWidth
+// - modifies parentNode.parentNode.style.width
+// Use with caution
+
+import th from '../theme'
 import React, { PropTypes as t, Component } from 'react'
+import debounce from 'lodash/debounce'
+import { u } from 'shared/lib/utils'
+import TableWidthCalculator from '../../../lib/TableWidthCalculator'
+import ResizeHandle from './ResizeHandle'
 
 export default class ColumnsWidthFixator extends Component {
   static propTypes = {
-    columnsWidth: t.arrayOf(t.number).isRequired
+    visibleFiltersDefinitions: t.arrayOf(t.object)
   }
 
-  shouldComponentUpdate (np) {
-    let tp = this.props
-    return np.columnsWidth.toString() !== tp.columnsWidth.toString()
+  state = {
+    deltaWidth: {},
+    containerWidth: 1280
+  }
+
+  // Don't look at this, this part is very hacky
+  // But it's the most efficient...
+  componentDidMount () {
+    this.setContainerWidth()
+
+    this.debouncedResize = debounce(this.setContainerWidth, 100)
+    window.addEventListener('resize', this.debouncedResize)
+  }
+
+  componentDidUpdate () {
+    let table = this.getHackyTable()
+    table.style.width = this.calc.tableWidth + 'px'
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('resize', this.debouncedResize)
+  }
+
+  setContainerWidth = () => {
+    this.setState({containerWidth: this.getHackyContainer().clientWidth})
+  }
+
+  getHackyContainer () { return this.refs.tr.parentNode.parentNode.parentNode }
+  getHackyTable () { return this.refs.tr.parentNode.parentNode }
+
+  // End of hacky stuff
+
+  onResize = (filter, deltaX) => {
+    this.setDelta(filter, (this.state.deltaWidth[filter.name] || 0) + deltaX)
+  }
+
+  onResetResize = (filter) => {
+    this.setDelta(filter, 0)
+  }
+
+  setDelta (filter, amount) {
+    this.setState({deltaWidth: u(this.state.deltaWidth, {[filter.name]: {$set: amount}})})
   }
 
   render () {
+    this.calc = new TableWidthCalculator(
+      this.props.visibleFiltersDefinitions, this.state.deltaWidth, this.state.containerWidth
+    )
+
     return (
-      <tr className='columns-width-fixer'>
-        {this.props.columnsWidth.map((width, i) => (
-          <th key={i} style={{width: `${width}px`}}></th>
+      <tr className={th.columnsWidthFixator} ref='tr'>
+        {this.calc.map((filter, width) => (
+          <td key={filter.name} style={{width: `${width}px`}}>
+            <ResizeHandle
+              onStop={this.onResize.bind(this, filter)}
+              onDoubleClick={this.onResetResize.bind(this, filter)}/>
+          </td>
         ))}
       </tr>
     )
