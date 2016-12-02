@@ -42,19 +42,23 @@ class Title extends Component {
 
   render () {
     console.logRender('DataTableTitle')
-    let { filter, sort, active, children, onMouseDown, onTouchStart } = this.props
+    let { filter, sort, active, children, onMouseDown,
+      onTouchStart, highlightMode } = this.props
 
     let titleClass = cn(th.title, filter.name, {
       [th.sort]: sort != null,
       [th.sortAsc]: sort === true,
       [th.sortDesc]: sort === false,
       [th.titleActive]: active,
+      [th.titleHighlighted]: highlightMode,
       [th.titleSortable]: !!filter.sort
     })
 
-    // let icon = <i className={'fa icon-filter-' + filter.name}></i>
-
     // Show tooltip ONLY if the object is overflowed
+    let statusTooltip = active ? (highlightMode
+      ? 'Results are being highlighted'
+      : 'Results are being filtered')
+      : ''
 
     return (
       <th
@@ -70,18 +74,9 @@ class Title extends Component {
           <span className={th.titleText}>
             {filter.title}
           </span>
-          {/*{ this.props.active ? (
-            <TitleButtons
-              mode={this.props.highlightMode}
-              onSetHighlightMode={this.props.onSetHighlightMode}
-              onClearFilter={this.props.onClearFilter}/>
-          ) : null}*/}
-          {/*<div className='title-highlight-border'></div>*/}
-          {/*<ResizeHandle
-            onStop={::this.onResize}
-            onDoubleClick={::this.onResetResize}/>*/}
           {children}
         </div>
+        <div className={th.titleStatus} title={statusTooltip}>*</div>
       </th>
     )
   }

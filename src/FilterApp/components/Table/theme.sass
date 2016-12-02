@@ -43,7 +43,7 @@
 
 
 .title
-
+  position: relative
   // border-left: solid 1px $color-divider-light
   // border-bottom: solid 1px $color-divider-light
   color: $color-text-sec
@@ -77,14 +77,19 @@
     line-height: $g*4 - $g/2
     vertical-align: baseline
 
+.titleStatus
+  display: none
+  position: absolute
+  top: $g/2
+  left: $g/2
+  color: $color-sec
 
-// .titleOverflow
-//   position: relative
-//   padding: $g
-//   width: 100%
-//   height: 100%
-//   overflow: hidden
-//   text-overflow: ellipsis
+.titleActive .titleStatus
+  display: block
+
+.titleHighlighted .titleStatus
+  color: $color-pri
+
 
 .titleSortIcon
 
@@ -93,19 +98,3 @@
 
 .titleText
   font-size: $font-size-caption
-
-// .titleIcon i, .titleText
-//   display: inline-block
-//   line-height: $g*3
-//   vertical-align: baseline
-
-// .titleText
-//   display: inline-block
-//   vertical-align: top
-  // display: flex
-  // align-items: center
-  // justify-content: center
-  // height: $g*2
-  // // white-space: nowrap
-  // font-size: $font-size-caption
-  // line-height: $g*3 / 2
