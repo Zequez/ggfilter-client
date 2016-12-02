@@ -2,17 +2,11 @@ import th from '../theme'
 import React, { Component, PropTypes as t } from 'react'
 import cn from 'classnames'
 
-import Ripple from 'react-toolbox/lib/ripple'
-import ResizeHandle from './ResizeHandle'
-import TitleButtons from './TitleButtons'
-
 class Title extends Component {
   static propTypes = {
     filter: t.object.isRequired,
     sort: t.oneOf([true, false, null]),
     onSort: t.func.isRequired,
-    onResize: t.func.isRequired,
-    onResetResize: t.func.isRequired,
     active: t.bool.isRequired,
     highlightMode: t.bool.isRequired
   }
@@ -28,22 +22,36 @@ class Title extends Component {
     )
   }
 
-  onSort () {
+  onSort = (ev) => {
     if (this.props.filter.sort) this.props.onSort(this.props.filter)
+    if (this.props.onClick) this.props.onClick(ev)
   }
 
-  onResize (deltaX) {
-    this.props.onResize(this.props.filter, deltaX)
-  }
-
-  onResetResize () {
-    this.props.onResetResize(this.props.filter)
+  blockTooltipOnMouseEnter = (ev) => {
+    // Prevent the tooltip from firing if the title is not overflowed
+    if (this.props.onMouseEnter) {
+      let overflow = this.refs.overflow
+      if (overflow.clientWidth < overflow.scrollWidth) {
+        this.props.onMouseEnter(ev)
+      }
+    }
   }
 
   render () {
     console.logRender('DataTableTitle')
-    let { filter, sort, active, children, onMouseDown,
-      onTouchStart, highlightMode } = this.props
+
+    let {
+      filter,
+      sort,
+      active,
+      children,
+      highlightMode,
+      // Wrapper
+      onSort, //eslint-disable-line no-unused-vars
+      theme, //eslint-disable-line no-unused-vars
+      className, //eslint-disable-line no-unused-vars
+      ...other
+    } = this.props
 
     let titleClass = cn(th.title, filter.name, {
       [th.sort]: sort != null,
@@ -64,9 +72,10 @@ class Title extends Component {
       <th
         ref='th'
         className={titleClass}
-        onClick={::this.onSort}
-        onMouseDown={onMouseDown} onTouchStart={onTouchStart}>
-        <div className={th.titleOverflow}>
+        {...other}
+        onClick={this.onSort}
+        onMouseEnter={this.blockTooltipOnMouseEnter}>
+        <div className={th.titleOverflow} ref='overflow'>
           {sort != null ? (
             <span className={cn(th.titleSortIcon, 'fa', 'icon-sort-' + (sort ? 'asc' : 'desc'))}></span>
           ) : null}
@@ -82,5 +91,4 @@ class Title extends Component {
   }
 }
 
-export const SortableTitle = Ripple()(Title)
 export default Title

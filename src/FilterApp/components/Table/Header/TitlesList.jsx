@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { adjustColumnWidth, clearColumnWidth } from '../../../ui/reducer'
 import { setSort, setParam } from '../../../filter/reducer'
 
-import Title, { SortableTitle } from './Title'
+import WrappedTitle from './WrappedTitle'
 
 @connect((s) => ({}), {
   setSort,
@@ -69,20 +69,14 @@ export default class TitlesList extends Component {
       let hasParams = typeof filtersParams[filter.name] === 'object'
       let highlightMode = hasParams ? !!filtersParams[filter.name].hl : false
 
-      let Component = filter.sort ? SortableTitle : Title
-
       return (
-        <Component
+        <WrappedTitle
           key={filter.name}
           filter={filter}
           sort={sortStatus}
           active={hasParams}
           highlightMode={highlightMode}
-          onSort={::this.onSort}
-          onResize={::this.onResize}
-          onResetResize={::this.onResetResize}
-          onClearFilter={this.onClearFilter.bind(this, filter)}
-          onSetHighlightMode={this.onSetHighlightMode.bind(this, filter)}/>
+          onSort={::this.onSort}/>
       )
     })
 
