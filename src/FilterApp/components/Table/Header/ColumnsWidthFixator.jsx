@@ -47,8 +47,11 @@ export default class ColumnsWidthFixator extends Component {
 
   // End of hacky stuff
 
-  onResize = (filter, deltaX) => {
-    this.setDelta(filter, (this.state.deltaWidth[filter.name] || 0) + deltaX)
+  onResize = (filter, deltaAdded) => {
+    let minDelta = -filter.width + 8
+    let delta = (this.state.deltaWidth[filter.name] || 0) + deltaAdded
+
+    this.setDelta(filter, Math.max(minDelta, delta))
   }
 
   onResetResize = (filter) => {
