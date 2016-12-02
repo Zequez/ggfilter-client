@@ -1,5 +1,10 @@
 .table
   // background: $color-mono-4
+  overflow-x: auto
+  overflow-y: hidden
+
+  table
+    table-layout: fixed
 
 .header
   margin: 0 $g*3
@@ -7,26 +12,25 @@
   box-shadow: $shadow-card
   margin-bottom: $g*3
 
+.columnsWidthFixator th
+  height: 0
+
 .titlesList
 
 
 .title
-  position: relative
-  padding: $g
+
   // border-left: solid 1px $color-divider-light
   // border-bottom: solid 1px $color-divider-light
   color: $color-text-sec
-  line-height: $g*3
   white-space: nowrap
   text-align: left
-  overflow: hidden
   text-overflow: ellipsis
   text-transform: uppercase
   font-weight: 500
 
   :global(.fa)
     font-size: $g*2
-
 
   &.titleSortable
     cursor: pointer
@@ -36,16 +40,40 @@
   &.sort
     color: $color-text
 
+.titleOverflow
+  // display: flex
+  position: relative
+  padding: $g
+  height: $g * 6
+  text-overflow: ellipsis
+  overflow: hidden
+  // align-items: center
+  & > span
+    display: inline
+    line-height: $g*4 - $g/2
+    vertical-align: baseline
+
+
+// .titleOverflow
+//   position: relative
+//   padding: $g
+//   width: 100%
+//   height: 100%
+//   overflow: hidden
+//   text-overflow: ellipsis
+
+.titleSortIcon
+
 .titleIcon
   margin-right: $g/2
 
 .titleText
   font-size: $font-size-caption
 
-.titleIcon i, .titleText
-  display: inline-block
-  line-height: $g*3
-  vertical-align: baseline
+// .titleIcon i, .titleText
+//   display: inline-block
+//   line-height: $g*3
+//   vertical-align: baseline
 
 // .titleText
 //   display: inline-block

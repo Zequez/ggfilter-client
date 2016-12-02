@@ -29,10 +29,12 @@ export default class DataTable extends Component {
       games, visibleFiltersDefinitions: filters } = this.props
 
     return (
-      <table className={th.table} style={{width: tableWidth}}>
-        <Header filters={filters} filter={filter} columnsWidth={columnsWidth}/>
-        {/*{Body({games, filters, filter})}*/}
-      </table>
+      <div className={th.table}>
+        <table style={{width: tableWidth}}>
+          <Header filters={filters} filter={filter} columnsWidth={columnsWidth}/>
+          {/*{Body({games, filters, filter})}*/}
+        </table>
+      </div>
     )
   }
 }

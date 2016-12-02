@@ -1,6 +1,6 @@
 import th from '../theme'
 import React, { Component, PropTypes as t } from 'react'
-import classNames from 'classnames'
+import cn from 'classnames'
 
 import Ripple from 'react-toolbox/lib/ripple'
 import ResizeHandle from './ResizeHandle'
@@ -44,7 +44,7 @@ class Title extends Component {
     console.logRender('DataTableTitle')
     let { filter, sort, active, children, onMouseDown, onTouchStart } = this.props
 
-    let titleClass = classNames(th.title, filter.name, {
+    let titleClass = cn(th.title, filter.name, {
       [th.sort]: sort != null,
       [th.sortAsc]: sort === true,
       [th.sortDesc]: sort === false,
@@ -54,34 +54,34 @@ class Title extends Component {
 
     // let icon = <i className={'fa icon-filter-' + filter.name}></i>
 
+    // Show tooltip ONLY if the object is overflowed
+
     return (
       <th
         ref='th'
         className={titleClass}
         onClick={::this.onSort}
         onMouseDown={onMouseDown} onTouchStart={onTouchStart}>
-        {sort != null ? (
-          <span className={th.titleSortIcon}>
-            <i className={'fa icon-sort-' + (sort ? 'asc' : 'desc') }></i>
+        <div className={th.titleOverflow}>
+          {sort != null ? (
+            <span className={cn(th.titleSortIcon, 'fa', 'icon-sort-' + (sort ? 'asc' : 'desc'))}></span>
+          ) : null}
+          <span className={cn(th.titleIcon, 'fa', 'icon-filter-' + filter.name)}></span>
+          <span className={th.titleText}>
+            {filter.title}
           </span>
-        ) : null}
-        <span className={th.titleIcon}>
-          <i className={'fa icon-filter-' + filter.name}></i>
-        </span>
-        <span className={th.titleText}>
-          {filter.title}
-        </span>
-        {/*{ this.props.active ? (
-          <TitleButtons
-            mode={this.props.highlightMode}
-            onSetHighlightMode={this.props.onSetHighlightMode}
-            onClearFilter={this.props.onClearFilter}/>
-        ) : null}*/}
-        {/*<div className='title-highlight-border'></div>*/}
-        {/*<ResizeHandle
-          onStop={::this.onResize}
-          onDoubleClick={::this.onResetResize}/>*/}
-        {children}
+          {/*{ this.props.active ? (
+            <TitleButtons
+              mode={this.props.highlightMode}
+              onSetHighlightMode={this.props.onSetHighlightMode}
+              onClearFilter={this.props.onClearFilter}/>
+          ) : null}*/}
+          {/*<div className='title-highlight-border'></div>*/}
+          {/*<ResizeHandle
+            onStop={::this.onResize}
+            onDoubleClick={::this.onResetResize}/>*/}
+          {children}
+        </div>
       </th>
     )
   }
