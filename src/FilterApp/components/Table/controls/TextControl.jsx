@@ -1,5 +1,7 @@
+import th from '../theme'
 import React, { Component, PropTypes as t } from 'react'
-var debounceCountdown = require('shared/lib/utils').debounceCountdown
+import { debounceCountdown } from 'shared/lib/utils'
+import Input from 'shared/components/Input'
 
 export default class TextControl extends Component {
   static propTypes = {
@@ -32,9 +34,9 @@ export default class TextControl extends Component {
     }
   }
 
-  onChange = (ev) => {
-    this.setState({value: ev.target.value})
-    if (this.changed(ev.target.value)) {
+  onChange = (value) => {
+    this.setState({value: value})
+    if (this.changed(value)) {
       this.debouncedSubmitStop = this.debouncedSubmit()
     }
   }
@@ -58,21 +60,20 @@ export default class TextControl extends Component {
     }
   }
 
-  render (extraProps) {
+  render () {
     let transform = {
       transform: `scaleY(${this.state.changeTimeoutProgress})`
     }
 
     return (
-      <div>
-        <input
-          type='text'
+      <div className={th.TextControl}>
+        <Input
           value={this.state.value}
           onKeyUp={this.onKeyUp}
           onBlur={this.submit}
-          onChange={this.onChange}
-          {...extraProps} />
-        <div className='timerbar' style={transform}></div>
+          hint='Search games by name'
+          onChange={this.onChange}/>
+        <div className={th.TextControl__timebar} style={transform}></div>
       </div>
     )
   }

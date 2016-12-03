@@ -1,11 +1,45 @@
 .table
-  // background: $color-mono-4
   overflow-x: auto
   overflow-y: hidden
 
   table
     table-layout: fixed
     width: auto
+
+// .table
+// .table__header
+// .table__body
+// .columnsWidthFixator
+// .columnsWidthFixator__resizeHandle
+// .columnsWidthFixator__resizeHandle_dragging
+// .titlesList
+// .titlesList__title
+// .titlesList__title_active
+// .titlesList__title_highlighted
+// .titlesList__title_sortable
+// .titlesList__title_sorted
+// .titlesList__title_sortedAsc
+// .titlesList__title_sortedDesc
+// .titlesList__title
+// .titlesList__overflow
+// .titlesList__status
+// .titlesList__icon
+// .titlesList__sortIcon
+// .controlsList
+// .controlsList__control
+// .controlsList__overflow
+// .control
+// .control_steamId
+// .control_name
+// //.control_<filterDefinitions>
+// .TextControl
+// .NullControl
+// .BooleanControl
+// .FancyRangeControl
+// .TagsControl
+// .NumberControl
+// .ToggleControl
+
 
 .header
   margin: 0 $g*3
@@ -44,7 +78,7 @@
 
 .title
   position: relative
-  // border-left: solid 1px $color-divider-light
+  border-left: solid 1px $color-divider-light
   // border-bottom: solid 1px $color-divider-light
   color: $color-text-sec
   white-space: nowrap
@@ -90,7 +124,6 @@
 .titleHighlighted .titleStatus
   color: $color-pri
 
-
 .titleSortIcon
 
 .titleIcon
@@ -98,3 +131,27 @@
 
 .titleText
   font-size: $font-size-caption
+
+.controlsList
+
+.filterControl
+  border-left: solid 1px $color-divider-light
+
+.filterControlOverflow
+  padding: $g
+  height: $g * 6
+
+.TextControl
+  position: relative
+  height: 100%
+  &__timebar
+    content: ' '
+    position: absolute
+    top: 0
+    right: 0
+    width: 3px
+    height: 100%
+    background: $color-primary
+    transform-origin: bottom
+    transform: scaleY(0)
+    z-index: 10

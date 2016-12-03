@@ -1,3 +1,4 @@
+import th from '../theme'
 import React from 'react'
 import cn from 'classnames'
 import controlsDefinitions from '../controls'
@@ -5,8 +6,8 @@ import controlsDefinitions from '../controls'
 export default ({filter, params, onChange}) => {
   let controlClass = cn(
     filter.name,
-    'filter-control',
-    'control-' + filter.control
+    th.filterControl,
+    th['control-' + filter.control]
   )
 
   let props = {
@@ -20,7 +21,9 @@ export default ({filter, params, onChange}) => {
 
   return (
     <th className={controlClass}>
-      <Component {...props}/>
+      <div className={th.filterControlOverflow}>
+        <Component {...props}/>
+      </div>
     </th>
   )
 }

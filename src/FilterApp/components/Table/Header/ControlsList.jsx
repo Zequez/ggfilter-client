@@ -1,3 +1,4 @@
+import th from '../theme'
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { partial } from 'shared/lib/utils'
@@ -21,7 +22,7 @@ export default class ControlsList extends Component {
     let { filters, filtersParams, setParam } = this.props
 
     return (
-      <tr className='data-table-controls'>
+      <tr className={th.controlsList}>
         {filters.map((filter) => (
           <ControlComponent
             key={filter.name}
