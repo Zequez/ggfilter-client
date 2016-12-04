@@ -1,8 +1,8 @@
-import th from './FilterApp.sass'
+import th from './Shortcuts.sass'
 
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
-import cn from 'classnames'
+import cx from 'classnames'
 import Chip from 'react-toolbox/lib/chip'
 
 import { partial as p } from 'shared/lib/utils'
@@ -41,19 +41,19 @@ export default class FilterMasks extends Component {
 
     for (let name in masks) {
       let mask = masks[name]
-      let klass = cn(th.maskChip, {
-        [th.activeMaskChip]: this.isActive(name)
+      let className = cx(th.Shortcuts__Chip, {
+        [th.Shortcuts__Chip_active]: this.isActive(name)
       })
       items.push(
-        <Chip key={name} onClick={p(this.onClick, name)} className={klass}>
+        <Chip key={name} onClick={p(this.onClick, name)} className={className}>
           {mask.title}
         </Chip>
       )
     }
 
     return (
-      <div className={th.filterMasks}>
-        <div className={th.filterMasksLabel}>
+      <div className={th.Shortcuts}>
+        <div className={th.Shortcuts__Label}>
           Shortcuts
         </div>
         {items}

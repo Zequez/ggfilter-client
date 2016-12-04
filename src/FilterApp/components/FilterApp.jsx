@@ -12,7 +12,7 @@ import { finalFilterSelector, visibleFiltersDefinitionsSelector } from '../filte
 
 import Table from './Table/Table'
 // import GamesLoader from './GamesLoader'
-import FilterMasks from './FilterMasks'
+import Shortcuts from './Shortcuts'
 import CategoriesList from './CategoriesList'
 
 @connect((s) => ({
@@ -57,7 +57,7 @@ export default class FilterApp extends Component {
 
     return (
       <div className={th.filterApp}>
-        <FilterMasks/>
+        <Shortcuts/>
         <CategoriesList/>
         <Table
           games={games}
