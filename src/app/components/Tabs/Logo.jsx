@@ -1,6 +1,6 @@
 import th from './theme'
 import React from 'react'
-import Ripple from 'react-toolbox/lib/ripple'
+import Ripple from 'shared/components/Ripple'
 
 const Logo = ({theme, children, ...props}) => (
   <li className={th.logo}>

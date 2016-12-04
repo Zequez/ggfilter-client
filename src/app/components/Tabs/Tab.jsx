@@ -1,6 +1,6 @@
 import { active, label as labelClass } from './theme'
 import React from 'react'
-import Ripple from 'react-toolbox/lib/ripple'
+import Ripple from 'shared/components/Ripple'
 import RouterLink from 'shared/components/RouterLink'
 
 function Tab ({className, to, children, icon, label, theme, ...other}) {

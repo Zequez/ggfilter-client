@@ -1,4 +1,4 @@
-import update from 'react-addons-update'
+import update from 'immutability-helper'
 
 export var u = update
 
@@ -259,4 +259,12 @@ export function bindGlobal (event, binding) {
     doc.addEventListener(event, binding)
     return () => doc.removeEventListener(event, binding)
   }
+}
+
+export function removeObjectKey (key, object) {
+  const newObject = {}
+  Object.keys(object)
+    .filter(k => k !== key)
+    .forEach(k => { newObject[k] = object[k] })
+  return newObject
 }
