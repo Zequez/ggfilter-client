@@ -1,9 +1,14 @@
 .BooleanControl
   display: flex
-  height: $g*4
+  align-items: stretch
+  height: $g * 6
   &__Label, &__OperatorLabel
+    position: relative
     flex-grow: 1
     cursor: pointer
+    overflow: hidden
+    &:hover
+      background: $color-mono-3
   &__Input
     display: none
   &__Label
@@ -16,6 +21,8 @@
     background: $color-mono-2
     box-shadow: inset 0 1px 3px rgba(#000, 0.06)
     color: $color-text-pri
+    &:hover
+      background: $color-mono-2
   &__Title
     display: none
   &__Icon
@@ -27,12 +34,12 @@
     font-size: $font-size-caption
     color: $color-text-sec
     text-align: center
-    line-height: $g*4
+    line-height: $g*6
   &__OperatorSlider
     transition: transform 0.25s
   &__OperatorOr, &__OperatorAnd
     display: block
   &__OperatorLabel_or
     .BooleanControl__OperatorSlider
-      transform: translateY(-$g*4)
+      transform: translateY(-$g*6)
   &__OperatorLabel_and

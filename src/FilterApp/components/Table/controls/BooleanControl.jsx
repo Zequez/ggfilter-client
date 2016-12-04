@@ -3,6 +3,9 @@ import React, { Component, PropTypes as t } from 'react'
 
 import enumColumns from '../../../config/enumColumns'
 import cx from 'classnames'
+import rippleFactory from 'shared/components/Ripple'
+
+const RippledLabel = rippleFactory()('label')
 
 export default class BooleanControl extends Component {
   static propTypes = {
@@ -96,10 +99,10 @@ export default class BooleanControl extends Component {
       )
 
       inputs.push(
-        <label key={key + 'l'} className={labelClass} title={name} htmlFor={id}>
+        <RippledLabel key={key + 'l'} className={labelClass} title={name} htmlFor={id}>
           <i className={iconClass}></i>
           <span className={th.BooleanControl__Title}>{name}</span>
-        </label>
+        </RippledLabel>
       )
     })
 
@@ -119,12 +122,12 @@ export default class BooleanControl extends Component {
           checked={this.state.or}
           id={opId}
           onChange={this.onOperatorChange}/>
-        <label className={operatorLabelClass} htmlFor={opId} title='AND/OR'>
+        <RippledLabel className={operatorLabelClass} htmlFor={opId} title='AND/OR'>
           <div className={th.BooleanControl__OperatorSlider}>
             <span className={th.BooleanControl__OperatorAnd}>AND</span>
             <span className={th.BooleanControl__OperatorOr}>OR</span>
           </div>
-        </label>
+        </RippledLabel>
       </div>
     )
   }
