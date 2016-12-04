@@ -1,15 +1,13 @@
 import th from './RangeControl.sass'
 import React, { PropTypes as t, Component } from 'react'
-import { pairs } from 'shared/lib/utils'
 import EditableDropdown from 'shared/components/EditableDropdown'
 
 class OptionsManager {
   constructor (options, toInput) {
     this.toInput = toInput
     this.options = options
-    this.pairs = pairs(options)
-    this.min = this.pairs.concat([])
-    this.max = this.pairs.concat([])
+    this.min = this.options.concat([])
+    this.max = this.options.concat([])
 
     this.min.pop()
     this.max.shift()
@@ -59,27 +57,12 @@ class OptionsManager {
 }
 
 const defaultOptions = {
-  options: {
-    'Free': 0,
-    'Non-free': 1,
-    '$1': 100,
-    '$2': 200,
-    '$5': 500,
-    '$10': 1000,
-    '$20': 2000
-  },
+  options: [],
   minHint: 'Min',
   maxHint: 'Max',
-  toInput: (value) => value / 100,
-  fromInput: (value) => value * 100,
-  prefix: '$',
-  shortcuts: [
-    [null, 0],
-    [1, null],
-    [1, 300],
-    [1, 500],
-    [1, 1000]
-  ]
+  toInput: (value) => value,
+  fromInput: (value) => value,
+  prefix: null
 }
 
 export default class RangeControl extends Component {
@@ -89,7 +72,7 @@ export default class RangeControl extends Component {
       lt: t.number
     }),
     options: t.shape({
-      options: t.arrayOf(t.number),
+      options: t.arrayOf(t.array),
       minHint: t.string,
       maxHint: t.string,
       toInput: t.func,

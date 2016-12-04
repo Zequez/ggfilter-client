@@ -30,14 +30,40 @@ export default {
     controlOptions: options.controls.range.price,
     column: 'Price',
     columnInputs: { price: 'lowest_steam_price', was: 'steam_price' },
+    chip: 'Range',
+    chipOptions: {
+      '': (v) => '$' + Math.floor(v / 100),
+      '1': '$0.01',
+
+      '<->': 'Any price',
+      '0': 'Free',
+      '1-Infinity': 'Non-free',
+
+      '1-*': '≤{ei}',
+      '0-*': '≤{ei} & Free'
+    },
+    shortcuts: [
+      {gt: null, lt: 0},
+      {gt: 1, lt: null},
+      {gt: 1, lt: 300},
+      {gt: 1, lt: 500},
+      {gt: 1, lt: 1000}
+    ],
     width: 100
   },
   steam_discount: {
     id: 5,
     title: 'Steam sale',
-    control: 'FancyRange',
+    control: 'Range',
     controlOptions: options.controls.range.discount,
     columnOptions: { interpolation: '%s%' },
+    chip: 'Range',
+    chipOptions: {
+      '': '{v}%',
+      '0': 'NotOnSale',
+      '1-100': 'On sale',
+      '100': 'FREE!?'
+    },
     width: 50
   },
   playtime_mean: {

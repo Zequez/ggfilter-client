@@ -79,38 +79,34 @@ export default {
   controls: {
     range: {
       price: {
-        range: [0, 1, 100, 300, 500, 1000, 1500, 2000, 3000, 4000, 5000, 6000, Infinity],
-        label: {
-          '': (v) => '$' + Math.floor(v / 100),
-          '1': '$0.01',
-
-          '<->': 'Any price',
-          '0': 'Free',
-          '1-Infinity': 'Non-free',
-
-          '1-*': '≤{ei}',
-          '0-*': '≤{ei} & Free'
-        },
-        mappedRanges: {
-          '0-1': [0, 0], // Override strictlyRangeMode
-          '0': [0, 0], // Override autohook
-          '1': [1, Infinity]
-        },
-        autohook: 1
+        options: [
+          ['Free', 0],
+          ['Non-free', 1],
+          ['$1', 100],
+          ['$2', 200],
+          ['$5', 500],
+          ['$10', 1000],
+          ['$20', 2000]
+        ],
+        toInput: (value) => value / 100,
+        fromInput: (value) => value * 100,
+        prefix: '$'
       },
       discount: {
-        range: [0, 1, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-        mappedRanges: {
-          '0': [0, 0], // Override the autohook,
-          '100': [100, 100]
-        },
-        label: {
-          '': '{v}%',
-          '0': 'NotOnSale',
-          '1-100': 'On sale',
-          '100': 'FREE!?'
-        },
-        autohook: 100
+        options: [
+          ['Any discount', 1],
+          ['100%?', 100],
+          ['90%', 90],
+          ['80%', 80],
+          ['70%', 70],
+          ['60%', 60],
+          ['50%', 50],
+          ['40%', 40],
+          ['30%', 30],
+          ['20%', 20],
+          ['10%', 10]
+        ],
+        prefix: '%'
       },
       dateBack: generateDatesBack(15),
       datesAbsolute: generateAbsoluteDates(1990)
