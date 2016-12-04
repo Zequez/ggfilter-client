@@ -55,7 +55,9 @@ export default {
     id: 5,
     title: 'Steam sale',
     control: 'Range',
-    controlOptions: options.controls.range.discount,
+    controlOptions: {
+      prefix: '%'
+    },
     columnOptions: { interpolation: '%s%' },
     chip: 'Range',
     chipOptions: {

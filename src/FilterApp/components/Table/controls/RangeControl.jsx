@@ -7,7 +7,9 @@ const defaultOptions = {
   maxHint: 'Max',
   toInput: (value) => value,
   fromInput: (value) => value,
-  prefix: null
+  prefix: null,
+  min: 0,
+  max: 100
 }
 
 export default class RangeControl extends Component {
@@ -20,7 +22,10 @@ export default class RangeControl extends Component {
       minHint: t.string,
       maxHint: t.string,
       toInput: t.func,
-      fromInput: t.func
+      fromInput: t.func,
+      prefix: t.string,
+      min: t.number,
+      max: t.number
     }).isRequired,
     onChange: t.func.isRequired
   }
@@ -77,12 +82,16 @@ export default class RangeControl extends Component {
           value={this.toInput(gt)}
           onChange={this.onMinChange}
           fixedLabel={this.options.prefix}
+          min={this.options.min}
+          max={this.options.max}
           label={this.options.minHint}/>
         <NumericInput
           className={th.RangeControl__NumericInput_end}
           value={this.toInput(lt)}
           onChange={this.onMaxChange}
           fixedLabel={this.options.prefix}
+          min={this.options.min}
+          max={this.options.max}
           label={this.options.maxHint}/>
       </div>
     )

@@ -27,7 +27,7 @@ export default class Input extends Component {
     return (
       <div className={classes}>
         { fixedLabel
-          ? <div className={th.Input__fixedLabel}>$</div>
+          ? <div className={th.Input__fixedLabel}>{fixedLabel}</div>
           : null }
         <input
           type='text'

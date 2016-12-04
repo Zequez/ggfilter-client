@@ -7,6 +7,11 @@ export default class NumericInput extends Component {
     onChange: t.func.isRequired
   }
 
+  defaultProps = {
+    min: Number.MIN_SAFE_INTEGER,
+    max: Number.MAX_SAFE_INTEGER
+  }
+
   state = {}
 
   componentWillMount () {
@@ -21,27 +26,23 @@ export default class NumericInput extends Component {
   select () { this.refs.input.select() }
 
   onChange = (value) => {
-    value = value.replace(/,/g, '.')
-    if ((value.match(/\./g) || []).length > 1) return
-
-    let valid = false
-    let newValue
-
-    if (/^[0-9.]+$/.test(value)) {
-      if (value !== '.') newValue = Number(value)
-      valid = true
-    }
-
-    if (value === '') {
-      newValue = null
-      valid = true
-    }
-
-    if (valid) {
-      if (newValue !== undefined && newValue !== this.props.value) {
-        this.props.onChange(newValue)
+    if (value !== '') {
+      value = parseFloat(value)
+      if (value < this.props.min) {
+        value = this.props.min
+      } else if (value > this.props.max) {
+        value = this.props.max
       }
-      this.setState({value: value})
+    } else {
+      value = null
+    }
+
+    if (value !== this.state.value) {
+      this.setState({value})
+    }
+
+    if (value !== this.props.value) {
+      this.props.onChange(value)
     }
   }
 
@@ -53,7 +54,7 @@ export default class NumericInput extends Component {
         {...this.props}
         ref='input'
         value={value == null ? null : value.toString()}
-        type='numeric'
+        type='number'
         onChange={this.onChange}>
       </Input>
     )
