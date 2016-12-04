@@ -1,4 +1,4 @@
-import th from './theme'
+import th from './CategoriesList.sass'
 import { flex } from 'src/style'
 
 import React, { PropTypes as t, Component } from 'react'
@@ -30,17 +30,18 @@ export default class Category extends Component {
       )
     })
 
-    // Ensure that the length is proportional to the icons count
-    // let flexStyle = {
-    //   flexGrow: toggles.length,
-    //   width: toggles.length * 240
-    // }
+    let className = cn(
+      th.CategoriesList__Category,
+      th['CategoriesList__Category_' + slug],
+      flex['flex-' + toggles.length]
+    )
 
-    let className = cn(th.category, th['category-' + slug], flex['flex-' + toggles.length])
     return (
-      <li className={className} ref='th'>
-        <div className={th.title} onClick={this.onClickTitle}>{title}</div>
-        <ul className={th.togglesList}>
+      <li className={className}>
+        <div className={th.CategoriesList__Title} onClick={this.onClickTitle}>
+          {title}
+        </div>
+        <ul className={th.CategoriesList__TogglesList}>
           {toggles}
         </ul>
       </li>

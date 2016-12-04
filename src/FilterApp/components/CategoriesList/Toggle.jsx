@@ -1,10 +1,6 @@
-import th from './theme'
+import th from './CategoriesList.sass'
 import React, { PropTypes as t, Component } from 'react'
-import cn from 'classnames'
-
-// const TooltippedLabel = tooltipFactory({position: 'bottom'})(({children, theme, ...other}) =>
-//   <label {...other}>{children}</label>
-// )
+import cx from 'classnames'
 
 class Toggle extends Component {
   static propTypes = {
@@ -24,15 +20,29 @@ class Toggle extends Component {
   }
 
   render () {
-    let {name, title, active, children, theme, onToggle, ...other} = this.props
-    let iconClass = cn(th.toggleIcon, 'fa', 'icon-filter-' + name)
+    let {
+      name,
+      title,
+      active,
+      children,
+      theme, //eslint-disable-line no-unused-vars
+      onToggle, //eslint-disable-line no-unused-vars
+      ...other
+    } = this.props
+
+    let iconClass = cx(th.CategoriesList__Icon, 'fa', 'icon-filter-' + name)
+    let className = cx(
+      th.CategoriesList__Toggle,
+      th['CategoriesList__Toggle_' + name],
+      {[th.CategoriesList__Toggle_active]: active}
+    )
 
     return (
-      <li className={cn(th.toggle, th['toggle-' + name], {[th.active]: active})}>
+      <li className={className}>
         <label title={title} {...other}>
           <input type='checkbox' checked={active} onChange={this.onToggle}/>
           <i className={iconClass}></i>
-          <span className={th.toggleTitle}>{title}</span>
+          <span className={th.CategoriesList__ToggleTitle}>{title}</span>
           {children}
         </label>
       </li>

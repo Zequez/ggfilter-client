@@ -1,4 +1,4 @@
-import th from './theme'
+import th from './CategoriesList.sass'
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
 import definitions from '../../lib/definitions'
@@ -21,7 +21,7 @@ export default class CategoriesList extends Component {
     let { visibleFilters, setParam } = this.props
 
     return (
-      <ul className={th.categoriesList}>
+      <ul className={th.CategoriesList}>
         {definitions.categoriesList.map((cat) => (
           <Category
             key={cat.name}
