@@ -56,7 +56,7 @@ export default class FilterApp extends Component {
     let {games, filter, columnsWidth, tableWidth, visibleFilters} = this.props
 
     return (
-      <div className={th.filterApp}>
+      <div className={th.FilterApp}>
         <Shortcuts/>
         <CategoriesList/>
         <Table
