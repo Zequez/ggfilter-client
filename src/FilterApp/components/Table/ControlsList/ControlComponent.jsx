@@ -1,4 +1,4 @@
-import th from '../Table.sass'
+import th from './ControlsList.sass'
 import React from 'react'
 import cn from 'classnames'
 import controlsDefinitions from '../controls'
@@ -6,8 +6,8 @@ import controlsDefinitions from '../controls'
 export default ({filter, params, onChange}) => {
   let controlClass = cn(
     filter.name,
-    th.filterControl,
-    th['control-' + filter.control]
+    th.ControlsList__Control
+    // th['control-' + filter.control]
   )
 
   let props = {
