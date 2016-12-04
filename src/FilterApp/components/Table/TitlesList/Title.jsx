@@ -1,6 +1,6 @@
-import th from '../Table.sass'
+import th from './TitlesList.sass'
 import React, { Component, PropTypes as t } from 'react'
-import cn from 'classnames'
+import cx from 'classnames'
 
 class Title extends Component {
   static propTypes = {
@@ -53,14 +53,17 @@ class Title extends Component {
       ...other
     } = this.props
 
-    let titleClass = cn(th.title, filter.name, {
-      [th.sort]: sort != null,
-      [th.sortAsc]: sort === true,
-      [th.sortDesc]: sort === false,
-      [th.titleActive]: active,
-      [th.titleHighlighted]: highlightMode,
-      [th.titleSortable]: !!filter.sort
+    const titleClass = cx(th.TitlesList__Title, filter.name, {
+      [th.TitlesList__Title_sorted]: sort != null,
+      // [th.sortAsc]: sort === true,
+      // [th.sortDesc]: sort === false,
+      [th.TitlesList__Title_active]: active,
+      [th.TitlesList__Title_highlighted]: highlightMode,
+      [th.TitlesList__Title_sortable]: !!filter.sort
     })
+
+    const iconClass = cx(th.TitlesList__Icon, 'fa', 'icon-filter-' + filter.name)
+    const sortIconClass = cx(th.TitlesList__SortIcon, 'fa', 'icon-sort-' + (sort ? 'asc' : 'desc'))
 
     // Show tooltip ONLY if the object is overflowed
     let statusTooltip = active ? (highlightMode
@@ -75,17 +78,17 @@ class Title extends Component {
         {...other}
         onClick={this.onSort}
         onMouseEnter={this.blockTooltipOnMouseEnter}>
-        <div className={th.titleOverflow} ref='overflow'>
+        <div className={th.TitlesList__Overflow} ref='overflow'>
           {sort != null ? (
-            <span className={cn(th.titleSortIcon, 'fa', 'icon-sort-' + (sort ? 'asc' : 'desc'))}></span>
+            <span className={sortIconClass}></span>
           ) : null}
-          <span className={cn(th.titleIcon, 'fa', 'icon-filter-' + filter.name)}></span>
+          <span className={iconClass}></span>
           <span className={th.titleText}>
             {filter.title}
           </span>
           {children}
         </div>
-        <div className={th.titleStatus} title={statusTooltip}>*</div>
+        <div className={th.TitlesList__Status} title={statusTooltip}>*</div>
       </th>
     )
   }

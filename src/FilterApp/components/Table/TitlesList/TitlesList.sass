@@ -1,0 +1,57 @@
+.TitlesList
+
+.TitlesList__Status
+  display: none
+  position: absolute
+  top: $g/2
+  left: $g/2
+  color: $color-sec
+
+.TitlesList__Title
+  position: relative
+  border-left: solid 1px $color-divider-light
+  color: $color-text-sec
+  white-space: nowrap
+  text-align: left
+  text-overflow: ellipsis
+  text-transform: uppercase
+  font-weight: 500
+
+  :global(.fa)
+    font-size: $g*2
+
+.TitlesList__Title_sortable
+  cursor: pointer
+  &:hover
+    background: $color-mono-3
+
+.TitlesList__Title_sorted
+  color: $color-text
+
+.TitlesList__Title_active
+  .TitlesList__Status
+    display: block
+
+.TitlesList__Title_highlighted
+  .TitlesList__Status
+    color: $color-pri
+
+.TitlesList__Overflow
+  position: relative
+  padding: $g
+  height: $g * 6
+  text-overflow: ellipsis
+  overflow: hidden
+  & > span
+    display: inline
+    line-height: $g*4 - $g/2
+    vertical-align: baseline
+
+.TitlesList__SortIcon
+
+
+.TitlesList__Icon
+  margin-right: $g/2
+
+.TitlesList__Text
+  font-size: $font-size-caption

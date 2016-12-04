@@ -1,4 +1,4 @@
-import th from '../Table.sass'
+import th from './TitlesList.sass'
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { adjustColumnWidth, clearColumnWidth } from '../../../ui/reducer'
@@ -81,7 +81,7 @@ export default class TitlesList extends Component {
     })
 
     return (
-      <tr className={th.titlesList}>
+      <tr className={th.TitlesList}>
         {titles}
       </tr>
     )
