@@ -1,63 +1,8 @@
 import th from './RangeControl.sass'
 import React, { PropTypes as t, Component } from 'react'
-import EditableDropdown from 'shared/components/EditableDropdown'
-
-class OptionsManager {
-  constructor (options, toInput) {
-    this.toInput = toInput
-    this.options = options
-    this.min = this.options.concat([])
-    this.max = this.options.concat([])
-
-    this.min.pop()
-    this.max.shift()
-  }
-
-  minRestricted (gt, lt) {
-    let min = this.min
-    if (lt != null) {
-      let result = []
-      min.some((arr, i) => arr[1] < lt ? !result.push(arr) : true)
-      min = result
-    }
-
-    let result = this._arrToInput(min)
-    if (gt != null) result.unshift(['', null])
-    return result
-  }
-
-  maxRestricted (gt, lt) {
-    let max = lt == null ? this._removeNull(this.max) : this.max
-    if (gt != null) {
-      let result = []
-      max.concat([]).reverse().some((arr, i) => arr[1] > gt ? !result.unshift(arr) : true)
-      max = result
-    }
-
-    let result = this._arrToInput(max)
-    if (lt != null) result.unshift(['', null])
-    return result
-  }
-
-  _arrToInput (arr) {
-    return arr.map((pair) => [pair[0], this.toInput(pair[1])])
-  }
-
-  _removeNull (arr) {
-    let result = arr
-    result.some((p, i) => {
-      if (p[1] == null) {
-        result = arr.concat([])
-        result.splice(i, 1)
-        return true
-      }
-    })
-    return result
-  }
-}
+import NumericInput from 'shared/components/NumericInput'
 
 const defaultOptions = {
-  options: [],
   minHint: 'Min',
   maxHint: 'Max',
   toInput: (value) => value,
@@ -72,12 +17,10 @@ export default class RangeControl extends Component {
       lt: t.number
     }),
     options: t.shape({
-      options: t.arrayOf(t.array),
       minHint: t.string,
       maxHint: t.string,
       toInput: t.func,
-      fromInput: t.func,
-      shortcuts: t.arrayOf(t.array)
+      fromInput: t.func
     }).isRequired,
     onChange: t.func.isRequired
   }
@@ -91,7 +34,6 @@ export default class RangeControl extends Component {
 
   componentWillMount () {
     this.options = {...defaultOptions, ...this.props.options}
-    this.selectOptions = new OptionsManager(this.options.options, this.options.toInput)
   }
 
   fromInput (value) {
@@ -128,27 +70,20 @@ export default class RangeControl extends Component {
   render () {
     let { query: { gt, lt } } = this.props
 
-    let min = this.selectOptions.minRestricted(gt, lt)
-    let max = this.selectOptions.maxRestricted(gt, lt)
-
     return (
       <div className={th.RangeControl}>
-        <EditableDropdown
-          className={th.RangeControl__EditableDropdown_start}
+        <NumericInput
+          className={th.RangeControl__NumericInput_start}
           value={this.toInput(gt)}
           onChange={this.onMinChange}
           fixedLabel={this.options.prefix}
-          label={this.options.minHint}
-          numeric
-          options={min}/>
-        <EditableDropdown
-          className={th.RangeControl__EditableDropdown_end}
+          label={this.options.minHint}/>
+        <NumericInput
+          className={th.RangeControl__NumericInput_end}
           value={this.toInput(lt)}
           onChange={this.onMaxChange}
           fixedLabel={this.options.prefix}
-          label={this.options.maxHint}
-          numeric
-          options={max}/>
+          label={this.options.maxHint}/>
       </div>
     )
   }

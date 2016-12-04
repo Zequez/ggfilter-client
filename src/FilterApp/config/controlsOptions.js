@@ -79,33 +79,11 @@ export default {
   controls: {
     range: {
       price: {
-        options: [
-          ['Free', 0],
-          ['Non-free', 1],
-          ['$1', 100],
-          ['$2', 200],
-          ['$5', 500],
-          ['$10', 1000],
-          ['$20', 2000]
-        ],
         toInput: (value) => value / 100,
         fromInput: (value) => value * 100,
         prefix: '$'
       },
       discount: {
-        options: [
-          ['Any discount', 1],
-          ['100%?', 100],
-          ['90%', 90],
-          ['80%', 80],
-          ['70%', 70],
-          ['60%', 60],
-          ['50%', 50],
-          ['40%', 40],
-          ['30%', 30],
-          ['20%', 20],
-          ['10%', 10]
-        ],
         prefix: '%'
       },
       dateBack: generateDatesBack(15),
