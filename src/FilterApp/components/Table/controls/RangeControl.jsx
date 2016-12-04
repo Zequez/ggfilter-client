@@ -84,6 +84,7 @@ export default class RangeControl extends Component {
           fixedLabel={this.options.prefix}
           min={this.options.min}
           max={this.options.max}
+          selectOnFocus
           label={this.options.minHint}/>
         <NumericInput
           className={th.RangeControl__NumericInput_end}
@@ -92,6 +93,7 @@ export default class RangeControl extends Component {
           fixedLabel={this.options.prefix}
           min={this.options.min}
           max={this.options.max}
+          selectOnFocus
           label={this.options.maxHint}/>
       </div>
     )

@@ -4,12 +4,14 @@ import Input from './Input'
 export default class NumericInput extends Component {
   static propTypes = {
     value: t.number,
-    onChange: t.func.isRequired
+    onChange: t.func.isRequired,
+    selectOnFocus: t.bool
   }
 
   defaultProps = {
     min: Number.MIN_SAFE_INTEGER,
-    max: Number.MAX_SAFE_INTEGER
+    max: Number.MAX_SAFE_INTEGER,
+    selectOnFocus: false
   }
 
   state = {}
@@ -26,35 +28,49 @@ export default class NumericInput extends Component {
   select () { this.refs.input.select() }
 
   onChange = (value) => {
-    if (value !== '') {
-      value = parseFloat(value)
-      if (value < this.props.min) {
-        value = this.props.min
-      } else if (value > this.props.max) {
-        value = this.props.max
+    let newValue = value
+
+    if (newValue !== '') {
+      newValue = parseFloat(value)
+
+      if (newValue < this.props.min) {
+        newValue = this.props.min
+      } else if (newValue > this.props.max) {
+        newValue = this.props.max
       }
     } else {
-      value = null
+      newValue = null
     }
 
-    if (value !== this.state.value) {
-      this.setState({value})
+    if (newValue !== this.state.value) {
+      this.setState({newValue})
     }
 
-    if (value !== this.props.value) {
-      this.props.onChange(value)
+    if (newValue !== this.props.value) {
+      this.props.onChange(newValue)
+    }
+  }
+
+  onFocus = (value) => {
+    if (this.props.selectOnFocus) {
+      this.select()
     }
   }
 
   render () {
     const { value } = this.state
+    const {
+      selectOnFocus, //eslint-disable-line no-unused-vars
+      ...other
+    } = this.props
 
     return (
       <Input
-        {...this.props}
+        {...other}
         ref='input'
         value={value == null ? null : value.toString()}
         type='number'
+        onFocus={this.onFocus}
         onChange={this.onChange}>
       </Input>
     )
