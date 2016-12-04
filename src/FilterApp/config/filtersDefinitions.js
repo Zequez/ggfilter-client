@@ -26,7 +26,7 @@ export default {
   lowest_steam_price: {
     id: 4,
     title: 'Steam price (US)',
-    control: 'FancyRange',
+    control: 'Range',
     controlOptions: options.controls.range.price,
     column: 'Price',
     columnInputs: { price: 'lowest_steam_price', was: 'steam_price' },

@@ -63,8 +63,13 @@ $font-size-menu-item: 15px;
 $font-size-subheading: 15px;
 $font-size-caption: 12px;
 $font-size-input: 16px;
+$font-size-body: 14px;
+$font-size-body-desktop: 13px;
 
+$font-family: Roboto, sans-serif;
 
+$font-weight-normal: 400;
+$font-weight-medium: 500;
 
 // Font style
 @mixin font-base() {

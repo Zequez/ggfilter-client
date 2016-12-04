@@ -6,7 +6,8 @@ export default class Input extends Component {
   static propTypes = {
     onChange: t.func,
     className: t.string,
-    hint: t.string
+    hint: t.string,
+    fixedLabel: t.string
   }
 
   onChange = (ev) => {
@@ -14,7 +15,7 @@ export default class Input extends Component {
   }
 
   render () {
-    let { className, value, hint, ...other } = this.props
+    let { className, value, hint, fixedLabel, label, ...other } = this.props
     let classes = cx(th.Input, {
       [className]: !!className,
       [th.Input_withText]: !!value
@@ -22,16 +23,22 @@ export default class Input extends Component {
 
     return (
       <div className={classes}>
+        { fixedLabel
+          ? <div className={th.Input__fixedLabel}>$</div>
+          : null }
         <input
           type='text'
           className={th.Input__input}
           {...other}
-          value={value}
+          value={value || ''}
           onChange={this.onChange}/>
-        <div className={th.Input__focusLine}></div>
+        { label
+          ? <div className={th.Input__label}>{label}</div>
+          : null }
         { hint
           ? <div className={th.Input__hint}>{hint}</div>
           : null }
+        <div className={th.Input__focusLine}></div>
       </div>
     )
   }

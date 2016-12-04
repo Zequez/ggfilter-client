@@ -1,14 +1,19 @@
 *
   box-sizing: border-box
+  -webkit-tap-highlight-color: rgba(#FFF, 0)
+
+html, body, :global(#app)
+  height: 100%
 
 html
   overflow-y: scroll
 
 body
-  +font-base
+  font-family: $font-family
+  font-weight: $font-weight-normal
+  font-size: $font-size-body
+  color: $color-text-pri
   background-color: $color-mono-1
-  *
-    -webkit-tap-highlight-color: rgba(#FFF, 0)
 
 a
   color: $color-sec
@@ -20,3 +25,13 @@ em
 
 th, td
   vertical-align: middle
+
+input
+  font-family: $font-family
+  font-size: $font-size-input
+  line-height: 100%
+  color: $color-text-pri
+
+@include media(">tablet")
+  body
+    font-size: $font-size-body-desktop

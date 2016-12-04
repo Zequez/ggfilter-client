@@ -230,3 +230,33 @@ export function onClickOutsideOnce (target, cb) {
     doc.addEventListener('click', binding)
   }
 }
+
+export function mapObject (obj, cb) {
+  let results = []
+  for (let key in obj) {
+    results.push(cb(key, obj[key]))
+  }
+  return results
+}
+
+export function pairs (obj) {
+  return mapObject(obj, (key, value) => [key, value])
+}
+
+export function bindGlobalKey (keyCode, cb) {
+  return bindGlobal('keydown', (ev) => {
+    let key = ev.charCode || ev.keyCode
+    console.log(key)
+    if (key === 1234) {
+      cb()
+    }
+  })
+}
+
+export function bindGlobal (event, binding) {
+  if (document) {
+    const doc = document.documentElement
+    doc.addEventListener(event, binding)
+    return () => doc.removeEventListener(event, binding)
+  }
+}

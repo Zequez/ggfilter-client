@@ -1,0 +1,33 @@
+.EditableDropdown
+  position: relative
+
+  // Use .Input__input after we go back global
+  input
+    padding-right: $g*2.5
+
+.EditableDropdown__input
+
+.EditableDropdown__arrow
+  position: absolute
+  right: 0
+  top: 0
+  padding: $g 0
+  height: $font-size-input
+  font-size: $font-size-input
+  color: $color-text-secondary
+  cursor: pointer
+
+.EditableDropdown__FloatingMenu
+  display: block
+  overflow: hidden
+  position: absolute
+  top: 100%
+  left: 0
+  min-width: 100%
+  transform: scale(0)
+  transform-origin: top left
+  transition: transform 0.25s
+
+.EditableDropdown_dropdownVisible
+  .EditableDropdown__FloatingMenu
+    transform: scale(1)

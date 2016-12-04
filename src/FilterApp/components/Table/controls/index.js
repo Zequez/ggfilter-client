@@ -5,5 +5,6 @@ module.exports = {
   Null: require('./NullControl').default,
   Number: require('./NumberControl').default,
   Text: require('./TextControl').default,
-  Toggle: require('./ToggleControl').default
+  Toggle: require('./ToggleControl').default,
+  Range: require('./RangeControl').default
 }
