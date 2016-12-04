@@ -35,15 +35,20 @@ config.module.loaders.push({
 })
 
 // let cssLoader = 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass?outputStyle=expanded'
-let cssLoader = 'style!css?modules&importLoaders=1&localIdentName=[folder]_[local]_[hash:base64:3]!sass?outputStyle=expanded'
+let cssLoader = 'style!css?modules&importLoaders=1&localIdentName=[folder]_[local]_[hash:base64:3]'
 config.module.loaders.push({
-  test: /\.s?css/,
+  test: /\.css/,
   loader: cssLoader
 })
 
 config.module.loaders.push({
+  test: /\.scss/,
+  loader: cssLoader + '!sass?outputStyle=expanded'
+})
+
+config.module.loaders.push({
   test: /\.sass/,
-  loader: cssLoader + '&indentedSyntax'
+  loader: cssLoader + '!sass?outputStyle=expanded&indentedSyntax'
 })
 
 module.exports = config
