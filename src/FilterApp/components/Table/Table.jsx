@@ -2,7 +2,7 @@ import th from './Table.sass'
 import React, { Component, PropTypes as t } from 'react'
 
 import Header from './Header'
-import Body from './Body/Body'
+import Body from './Body'
 
 export default class Table extends Component {
   static propTypes = {

@@ -1,9 +1,9 @@
 import th from './Table.sass'
 import React, { PropTypes as t, Component } from 'react'
 
-import ColumnsWidthFixator from './ColumnsWidthFixator/ColumnsWidthFixator'
-import ControlsList from './ControlsList/ControlsList'
-import TitlesList from './TitlesList/TitlesList'
+import ColumnsWidthFixator from './ColumnsWidthFixator'
+import ControlsList from './ControlsList'
+import TitlesList from './TitlesList'
 
 export default class Header extends Component {
   static propTypes = {
