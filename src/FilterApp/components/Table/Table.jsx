@@ -1,7 +1,7 @@
-import th from './theme'
+import th from './Table.sass'
 import React, { Component, PropTypes as t } from 'react'
 
-import Header from './Header/Header'
+import Header from './Header'
 import Body from './Body/Body'
 
 export default class Table extends Component {

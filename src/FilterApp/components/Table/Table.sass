@@ -48,31 +48,7 @@
   box-shadow: $shadow-card
   margin-bottom: $g*3
 
-.columnsWidthFixator td
-  position: relative
-  height: 0
 
-.resizeHandle
-  position: absolute
-  right: 0
-  top: 0
-  width: $g/2
-  height: $g*6
-  border-bottom-left-radius: $g
-
-  cursor: ew-resize
-  +z(dt-titles-resizeHandle)
-  &:hover, &.resizeHandleDragging
-    background: $color-pri-light
-
-.resizeHandleDragging:after
-  content: ' '
-  position: absolute
-  right: 0
-  top: 0
-  height: 1000px
-  width: 1px
-  background: $color-pri-light
 
 .titlesList
 

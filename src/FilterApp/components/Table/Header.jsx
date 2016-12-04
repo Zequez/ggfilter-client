@@ -1,9 +1,9 @@
-import th from '../theme'
+import th from './Table.sass'
 import React, { PropTypes as t, Component } from 'react'
 
-import ColumnsWidthFixator from './ColumnsWidthFixator'
-import ControlsList from './ControlsList'
-import TitlesList from './TitlesList'
+import ColumnsWidthFixator from './ColumnsWidthFixator/ColumnsWidthFixator'
+import ControlsList from './ControlsList/ControlsList'
+import TitlesList from './TitlesList/TitlesList'
 
 export default class Header extends Component {
   static propTypes = {
@@ -14,12 +14,11 @@ export default class Header extends Component {
         filter: t.string.isRequired,
         asc: t.bool.isRequired
       }).isRequired
-    }).isRequired,
-    // columnsWidth: t.arrayOf(t.number).isRequired
+    }).isRequired
   }
 
   render () {
-    let { filter, columnsWidth, filters } = this.props
+    let { filter, filters } = this.props
 
     return (
       <thead className={th.header}>

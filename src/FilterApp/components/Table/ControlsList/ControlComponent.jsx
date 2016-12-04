@@ -1,4 +1,4 @@
-import th from '../theme'
+import th from '../Table.sass'
 import React from 'react'
 import cn from 'classnames'
 import controlsDefinitions from '../controls'

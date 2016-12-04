@@ -1,4 +1,4 @@
-import th from '../theme'
+import th from '../Table.sass'
 import React, { PropTypes as t, Component } from 'react'
 import cn from 'classnames'
 import { DraggableCore } from 'react-draggable'

@@ -3,7 +3,7 @@
 // - modifies parentNode.parentNode.style.width
 // Use with caution
 
-import th from '../theme'
+import th from '../Table.sass'
 import React, { PropTypes as t, Component } from 'react'
 import debounce from 'lodash/debounce'
 import { u } from 'shared/lib/utils'

@@ -1,4 +1,4 @@
-import th from '../theme'
+import th from '../Table.sass'
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { partial } from 'shared/lib/utils'
