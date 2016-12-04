@@ -7,7 +7,7 @@ export default {
     column: 'Link',
     columnInputs: { text: 'name', urlValue: 'steam_id' },
     columnOptions: { urlTemplate: 'http://store.steampowered.com/app/%s/' },
-    width: 200
+    width: 150
   },
   steam_id: {
     id: 2,
@@ -207,7 +207,7 @@ export default {
     columnOptions: {
       tags: [] // We fill this up later, sadly
     },
-    width: 200,
+    width: 150,
     sort: false
   },
   // system_requirements: {
@@ -231,7 +231,7 @@ export default {
     control: 'FancyRange',
     controlOptions: options.controls.range.dateBack,
     column: 'TimeAgo',
-    width: 100
+    width: 80
   },
   released_at_absolute: {
     id: 25,

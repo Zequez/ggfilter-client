@@ -9,7 +9,6 @@ export default class FloatingMenu extends Component {
   }
 
   onMouseDown (value) {
-    console.log(value)
     this.props.onSelect(value)
   }
 

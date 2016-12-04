@@ -17,6 +17,9 @@ export default class NumericInput extends Component {
     this.state.value = np.value
   }
 
+  focus () { this.refs.input.focus() }
+  select () { this.refs.input.select() }
+
   onChange = (value) => {
     value = value.replace(/,/g, '.')
     if ((value.match(/\./g) || []).length > 1) return
@@ -48,6 +51,7 @@ export default class NumericInput extends Component {
     return (
       <Input
         {...this.props}
+        ref='input'
         value={value == null ? null : value.toString()}
         type='numeric'
         onChange={this.onChange}>

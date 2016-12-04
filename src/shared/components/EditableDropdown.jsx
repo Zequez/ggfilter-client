@@ -25,7 +25,6 @@ export default class EditableDropdown extends Component {
   }
 
   onSelect = (value) => {
-    console.log('SELECT!')
     this.props.onChange(value)
     this.closeDropdown()
   }
@@ -34,17 +33,23 @@ export default class EditableDropdown extends Component {
     this.props.onChange(value)
   }
 
-  openDropdownFromArrow = () => {
-    onClickOutsideOnce(this.refs.div, () => this.closeDropdown())
-    this.openDropdown()
-  }
-
   openDropdown = () => {
     this.setState({dropdownVisible: true})
   }
 
   closeDropdown = () => {
     this.setState({dropdownVisible: false})
+  }
+
+  onBlurInput = () => { this.closeDropdown() }
+
+  onFocusInput = () => {
+    this.refs.input.select()
+    this.openDropdown()
+  }
+
+  onClickArrow = () => {
+    this.refs.input.focus()
   }
 
   render () {
@@ -71,10 +76,11 @@ export default class EditableDropdown extends Component {
           className={th.EditableDropdown__input}
           value={value}
           onChange={this.onChange}
-          onFocus={this.openDropdown}
-          onBlur={this.closeDropdown}
+          onFocus={this.onFocusInput}
+          onBlur={this.onBlurInput}
+          ref='input'
         />
-        <span className={arrowClass} onClick={this.openDropdownFromArrow}></span>
+        <span className={arrowClass} onClick={this.onClickArrow}></span>
         <FloatingMenu
           className={th.EditableDropdown__FloatingMenu}
           options={options}

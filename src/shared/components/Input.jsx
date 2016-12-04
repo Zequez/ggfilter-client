@@ -14,6 +14,9 @@ export default class Input extends Component {
     if (this.props.onChange) this.props.onChange(ev.target.value)
   }
 
+  focus () { this.refs.input.focus() }
+  select () { this.refs.input.select() }
+
   render () {
     let { className, value, hint, fixedLabel, label, ...other } = this.props
     let classes = cx(th.Input, {
@@ -29,6 +32,7 @@ export default class Input extends Component {
         <input
           type='text'
           className={th.Input__input}
+          ref='input'
           {...other}
           value={value || ''}
           onChange={this.onChange}/>

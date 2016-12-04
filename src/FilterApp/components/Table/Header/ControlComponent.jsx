@@ -21,9 +21,7 @@ export default ({filter, params, onChange}) => {
 
   return (
     <th className={controlClass}>
-      <div className={th.filterControlOverflow}>
-        <Component {...props}/>
-      </div>
+      <Component {...props}/>
     </th>
   )
 }

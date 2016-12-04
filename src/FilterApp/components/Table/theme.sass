@@ -80,7 +80,6 @@
 .title
   position: relative
   border-left: solid 1px $color-divider-light
-  // border-bottom: solid 1px $color-divider-light
   color: $color-text-sec
   white-space: nowrap
   text-align: left
@@ -100,13 +99,11 @@
     color: $color-text
 
 .titleOverflow
-  // display: flex
   position: relative
   padding: $g
   height: $g * 6
   text-overflow: ellipsis
   overflow: hidden
-  // align-items: center
   & > span
     display: inline
     line-height: $g*4 - $g/2
@@ -137,10 +134,9 @@
 
 .filterControl
   border-left: solid 1px $color-divider-light
-
-.filterControlOverflow
   padding: $g
   height: $g * 6
+  vertical-align: top
 
 .TextControl
   position: relative
@@ -156,3 +152,8 @@
     transform-origin: bottom
     transform: scaleY(0)
     z-index: 10
+
+
++media('<desktop')
+  .controlsList
+    display: none
