@@ -1,33 +1,78 @@
 import th from './RangeControl.sass'
 import React, { PropTypes as t, Component } from 'react'
-import cx from 'classnames'
-import { pairs, onClickOutsideOnce } from 'shared/lib/utils'
+import { pairs } from 'shared/lib/utils'
 import EditableDropdown from 'shared/components/EditableDropdown'
 
-const defaultLabels = {
-  '': '{v}',
-  '*-*': '{si} to {ei}',
-  '*->': '≥{si}',
-  '<-*': '≤{ei}',
-  '<->': 'Any'
+class OptionsManager {
+  constructor (options, toInput) {
+    this.toInput = toInput
+    this.options = options
+    this.pairs = pairs(options)
+    this.min = this.pairs.concat([])
+    this.max = this.pairs.concat([])
+
+    this.min.pop()
+    this.max.shift()
+  }
+
+  minRestricted (gt, lt) {
+    let min = this.min
+    if (lt != null) {
+      let result = []
+      min.some((arr, i) => arr[1] < lt ? !result.push(arr) : true)
+      min = result
+    }
+
+    let result = this._arrToInput(min)
+    if (gt != null) result.unshift(['', null])
+    return result
+  }
+
+  maxRestricted (gt, lt) {
+    let max = lt == null ? this._removeNull(this.max) : this.max
+    if (gt != null) {
+      let result = []
+      max.concat([]).reverse().some((arr, i) => arr[1] > gt ? !result.unshift(arr) : true)
+      max = result
+    }
+
+    let result = this._arrToInput(max)
+    if (lt != null) result.unshift(['', null])
+    return result
+  }
+
+  _arrToInput (arr) {
+    return arr.map((pair) => [pair[0], this.toInput(pair[1])])
+  }
+
+  _removeNull (arr) {
+    let result = arr
+    result.some((p, i) => {
+      if (p[1] == null) {
+        result = arr.concat([])
+        result.splice(i, 1)
+        return true
+      }
+    })
+    return result
+  }
 }
 
 const defaultOptions = {
   options: {
     'Free': 0,
-    'Non-free': 0.01,
-    '$1': 1,
-    '$2': 2,
-    '$5': 5,
-    '$10': 10,
-    '$20': 20
+    'Non-free': 1,
+    '$1': 100,
+    '$2': 200,
+    '$5': 500,
+    '$10': 1000,
+    '$20': 2000
   },
   minHint: 'Min',
   maxHint: 'Max',
   toInput: (value) => value / 100,
   fromInput: (value) => value * 100,
   prefix: '$',
-  labels: {},
   shortcuts: [
     [null, 0],
     [1, null],
@@ -61,13 +106,9 @@ export default class RangeControl extends Component {
     }
   }
 
-  state = {
-    floater: false
-  }
-
   componentWillMount () {
     this.options = {...defaultOptions, ...this.props.options}
-    this.options.labels = {...defaultLabels, ...this.options.labels}
+    this.selectOptions = new OptionsManager(this.options.options, this.options.toInput)
   }
 
   fromInput (value) {
@@ -101,56 +142,30 @@ export default class RangeControl extends Component {
     }
   }
 
-  activateFloater = () => {
-    if (!this.state.floater) {
-      this.setState({floater: true})
-      onClickOutsideOnce(this.refs.floater, this.deactivateFloater)
-    }
-  }
-
-  deactivateFloater = () => {
-    this.setState({floater: false})
-  }
-
   render () {
     let { query: { gt, lt } } = this.props
-    let { floater } = this.state
 
-    let min = pairs(this.options.options)
-    let max = min.concat([])
-    min.pop()
-    min.unshift(['', null])
-    max.shift()
-    max.unshift(['', null])
-
-    const classNames = cx(th.RangeControl, {
-      [th.RangeControl_floaterActive]: floater
-    })
+    let min = this.selectOptions.minRestricted(gt, lt)
+    let max = this.selectOptions.maxRestricted(gt, lt)
 
     return (
-      <div className={classNames}>
-        <div
-          className={th.RangeControl__floater}
-          onMouseUp={this.activateFloater}
-          ref='floater'
-        >
-          <EditableDropdown
-            className={th.RangeControl__EditableDropdown_start}
-            value={this.toInput(gt)}
-            onChange={this.onMinChange}
-            fixedLabel={this.options.prefix}
-            label={this.options.minHint}
-            numeric
-            options={min}/>
-          <EditableDropdown
-            className={th.RangeControl__EditableDropdown_end}
-            value={this.toInput(lt)}
-            onChange={this.onMaxChange}
-            fixedLabel={this.options.prefix}
-            label={this.options.maxHint}
-            numeric
-            options={max}/>
-        </div>
+      <div className={th.RangeControl}>
+        <EditableDropdown
+          className={th.RangeControl__EditableDropdown_start}
+          value={this.toInput(gt)}
+          onChange={this.onMinChange}
+          fixedLabel={this.options.prefix}
+          label={this.options.minHint}
+          numeric
+          options={min}/>
+        <EditableDropdown
+          className={th.RangeControl__EditableDropdown_end}
+          value={this.toInput(lt)}
+          onChange={this.onMaxChange}
+          fixedLabel={this.options.prefix}
+          label={this.options.maxHint}
+          numeric
+          options={max}/>
       </div>
     )
   }
