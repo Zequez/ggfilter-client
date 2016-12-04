@@ -1,4 +1,4 @@
-import th from '../theme'
+import th from './TextControl.sass'
 import React, { Component, PropTypes as t } from 'react'
 import { debounceCountdown } from 'shared/lib/utils'
 import Input from 'shared/components/Input'

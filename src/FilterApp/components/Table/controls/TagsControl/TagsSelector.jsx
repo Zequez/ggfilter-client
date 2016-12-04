@@ -1,7 +1,10 @@
+import th from './TagsControl.sass'
 import React, { Component, PropTypes as t } from 'react'
+import cx from 'classnames'
 
 import { partial, loopNumber } from 'shared/lib/utils'
 import TagsFinder from 'shared/lib/TagsFinder'
+import FloatingMenu from 'shared/components/FloatingMenu'
 
 export default class TagsSelector extends Component {
   static propTypes = {
@@ -49,37 +52,45 @@ export default class TagsSelector extends Component {
     this.props.onSelect(tagId)
   }
 
+  onSelect = (value) => {
+    this.select(value)
+    // console.log('Selected!', value)
+  }
+
   render () {
     let tagsFinder = new TagsFinder(this.props.tags, this.props.selectedTags)
     this.found = tagsFinder.match(this.props.value)
-    let foundTags = this.found.map((tagId, j) => {
-      let liClass = this.state.focusedTag === j ? 'focused' : ''
-      return (
-        <li
-          key={tagId}
-          className={liClass}
-          onMouseOver={partial(this.onMouseOver, j)}
-          onMouseDown={partial(this.select, tagId)}>
-          {this.props.tags[tagId]}
-        </li>
-      )
-    })
 
-    let input = this.props.children
-    let ulStyle = {
-      left: input.props.style.paddingLeft
-    }
-    if (!this.state.visible) ulStyle.display = 'none'
+    let { focusedTag } = this.state
+    let focusedTagId = null
+    let selectOptions = this.found.map((tagId, j) => {
+      if (focusedTag === j) {
+        focusedTagId = tagId
+      }
+      return [this.props.tags[tagId], tagId]
+    })
 
     return (
       <div
         onBlur={this.onBlur}
         onFocus={this.onFocus}
-        onKeyDown={this.onKeyPress}>
-        {input}
-        <ul className='tags-filter-selector' style={ulStyle}>
+        onKeyDown={this.onKeyPress}
+      >
+        {this.props.children}
+        {selectOptions.length
+          ? (
+            <FloatingMenu
+              className={th.TagsControl__FloatingMenu}
+              options={selectOptions}
+              selected={focusedTagId}
+              onSelect={this.onSelect}
+            />
+          )
+          : null }
+
+        {/*<ul className={th.TagsControl__TagsSelector} style={ulStyle}>
           {foundTags}
-        </ul>
+        </ul>*/}
       </div>
     )
   }

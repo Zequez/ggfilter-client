@@ -1,3 +1,4 @@
+import th from './TagsControl.sass'
 import React, { Component, PropTypes as t } from 'react'
 
 export default class SelectedTags extends Component {
@@ -30,15 +31,18 @@ export default class SelectedTags extends Component {
   render () {
     let tags = this.props.selectedTags.map(tagId => {
       return (
-        <li key={tagId}>
+        <li key={tagId} className={th.TagsControl__SelectedTag}>
           {this.props.tags[tagId]}
-          <span className='selected-tag-remove' onClick={this.onRemove.bind(this, tagId)}></span>
+          <span
+            className={th.TagsControl__RemoveTag + ' fa icon-remove-tag'}
+            onClick={this.onRemove.bind(this, tagId)}>
+          </span>
         </li>
       )
     })
 
     return (
-      <ul className='tags-filter-selected-tags' ref='ul'>
+      <ul className={th.TagsControl__SelectedTags} ref='ul'>
         {tags}
       </ul>
     )

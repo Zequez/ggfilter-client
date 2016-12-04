@@ -1,12 +1,15 @@
+import th from './TagsControl.sass'
 import React, { Component, PropTypes as t } from 'react'
 
 import SelectedTags from './SelectedTags'
 import TagsSelector from './TagsSelector'
+import Input from 'shared/components/Input'
 
 export default class TagsControl extends Component {
   static propTypes = {
     query: t.shape({
-      tags: t.arrayOf(t.number)
+      tags: t.arrayOf(t.number),
+      reject: t.arrayOf(t.number)
     }),
     options: t.shape({
       tags: t.arrayOf(t.string)
@@ -61,8 +64,8 @@ export default class TagsControl extends Component {
     }
   }
 
-  onTextChange = (ev) => {
-    this.setState({text: ev.target.value})
+  onTextChange = (value) => {
+    this.setState({text: value})
   }
 
   onSelectedWidthChange = (width) => {
@@ -87,7 +90,7 @@ export default class TagsControl extends Component {
     let tags = this.props.options.tags || [] // FIIIIIXX!
 
     return (
-      <div className='tags-filter'>
+      <div className={th.TagsControl}>
         <SelectedTags
           tags={tags}
           selectedTags={this.state.tags}
@@ -99,10 +102,10 @@ export default class TagsControl extends Component {
           selectedTags={this.state.tags}
           value={this.state.text}
           onSelect={this.selectTag}>
-          <input
-            type='text'
+          <Input
             value={this.state.text}
             style={inputStyle}
+            hint={this.state.tags.length ? null : 'Filter games by tag'}
             onKeyDown={this.onKeyDown}
             onChange={this.onTextChange}/>
         </TagsSelector>

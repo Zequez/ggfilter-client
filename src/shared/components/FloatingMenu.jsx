@@ -5,6 +5,7 @@ import cx from 'classnames'
 export default class FloatingMenu extends Component {
   static propTypes = {
     options: t.arrayOf(t.array).isRequired,
+    selected: t.any,
     onSelect: t.func.isRequired
   }
 
@@ -16,7 +17,15 @@ export default class FloatingMenu extends Component {
     return (
       <ul className={cx(th.FloatingMenu, {[this.props.className]: this.props.className})}>
         {this.props.options.map(([label, value]) => (
-          <li key={value} onMouseDown={this.onMouseDown.bind(this, value)}>{label}</li>
+          <li
+            key={value}
+            onMouseDown={this.onMouseDown.bind(this, value)}
+            className={cx(th.FloatingMenu__Item, {
+              [th.FloatingMenu__Item_selected]: value === this.props.selected
+            })}
+          >
+            {label}
+          </li>
         ))}
       </ul>
     )
