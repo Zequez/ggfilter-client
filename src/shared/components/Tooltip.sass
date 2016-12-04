@@ -1,0 +1,65 @@
+// Specifications: https://material.google.com/components/tooltips.html#tooltips-interaction
+
+
+
+.Tooltip
+  +z(tooltip)
+  position: fixed
+  padding: 0 $g
+  background: rgba($palette-grey-700, 0.9)
+  color: $color-text-pri-alt
+  font-size: 10px
+  line-height: 22px
+  border-radius: 2px
+  // opacity: 1
+  transition: opacity 0.25s, transform 0.25s
+
+.Tooltip
+  &_top
+    transform: translate(-50%, -14px)
+  &_right
+    transform: translate(14px, -50%)
+  &_bottom
+    transform: translate(-50%, 14px)
+  &_left
+    transform: translate(-14px, -50%)
+
+  // &_leaveActive
+  //   width: auto
+    // opacity: 0.01
+    // &.Tooltip_bottom
+    //   transform: translate(-50%, 0)
+
+  // &_appearActive
+  //   opacity: 1
+  //   &.Tooltip_bottom
+  //     transform: translate(-50%, 14px)
+
+  // &:global(.Tooltip-appear), &:global(.Tooltip-enter)
+  //   opacity: 0.01
+  //   &.Tooltip_bottom
+  //     transform: translate(-50%, 0)
+  // &, &:global(.Tooltip-appear-active), &:global(.Tooltip-leave), &:global(.Tooltip-enter-active)
+  //   opacity: 1
+  //   &.Tooltip_bottom
+  //     transform: translate(-50%, 14px)
+  // &:global(.Tooltip-leave-active)
+  //   opacity: 0.01
+  //   &.Tooltip_bottom
+  //     transform: translate(-50%, 0)
+
++media('<desktop')
+  .Tooltip
+    padding: 0 $g*2
+    margin-bottom: -24px
+    line-height: 32px
+    font-size: 14px
+
+    &_top
+      transform: translate(-50%, -24px)
+    &_right
+      transform: translate(24px, -50%)
+    &_bottom
+      transform: translate(-50%, 24px)
+    &_left
+      transform: translate(-24px, -50%)

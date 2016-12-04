@@ -1,9 +1,10 @@
 import React, { PropTypes as t, Component } from 'react'
-import { tooltipFactory } from 'react-toolbox/lib/tooltip'
+// import { tooltipFactory } from 'react-toolbox/lib/tooltip'
 import Ripple from 'shared/components/Ripple'
+import myTooltipFactory from 'shared/components/Tooltip'
 import Toggle from './Toggle'
 
-const TooltippedToggle = tooltipFactory({position: 'bottom'})(Toggle)
+const TooltippedToggle = myTooltipFactory(Toggle)
 
 class TooltipRippledToggle extends Component {
   static propTypes = {
