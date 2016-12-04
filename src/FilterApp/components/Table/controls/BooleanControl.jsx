@@ -1,7 +1,8 @@
+import th from './BooleanControl.sass'
 import React, { Component, PropTypes as t } from 'react'
 
 import enumColumns from '../../../config/enumColumns'
-import classNames from 'classnames'
+import cx from 'classnames'
 
 export default class BooleanControl extends Component {
   static propTypes = {
@@ -76,16 +77,18 @@ export default class BooleanControl extends Component {
       let val = this.state.enumValues[key]
       let name = this.state.enumNames[key]
       let checked = this.checked(val)
-      let labelClass = classNames(`boolean-${enumType}-${key}`, {
-        'boolean-checked': checked
+
+      let labelClass = cx(th.BooleanControl__Label, {
+        [th.BooleanControl__Label_checked]: checked
       })
-      let iconClass = 'fa icon-' + key
+      let iconClass = cx(th.BooleanControl__Icon, 'fa', 'icon-boolean-' + key)
       let id = `boolean-${enumType}-${key}`
 
       inputs.push(
         <input
           id={id}
-          className='boolean-input'
+          key={key}
+          className={th.BooleanControl__Input}
           type='checkbox'
           value={val}
           checked={checked}
@@ -93,26 +96,36 @@ export default class BooleanControl extends Component {
       )
 
       inputs.push(
-        <label className={labelClass} title={name} htmlFor={id}>
+        <label key={key + 'l'} className={labelClass} title={name} htmlFor={id}>
           <i className={iconClass}></i>
-          <span>{name}</span>
+          <span className={th.BooleanControl__Title}>{name}</span>
         </label>
       )
     })
 
     let opId = `boolean-${enumType}-operator`
-    var opInput =
-      <input
-        type='checkbox'
-        className='boolean-operator-input'
-        checked={this.state.or}
-        id={opId}
-        onChange={this.onOperatorChange}/>
-    var opLabel =
-      <label className='boolean-operator' htmlFor={opId} title='AND/OR'>
-        <span>AND/OR</span>
-      </label>
 
-    return React.createElement('div', null, ...inputs, opInput, opLabel)
+    let operatorLabelClass = cx(th.BooleanControl__OperatorLabel, {
+      [th.BooleanControl__OperatorLabel_or]: this.state.or,
+      [th.BooleanControl__OperatorLabel_and]: !this.state.or
+    })
+
+    return (
+      <div className={th.BooleanControl}>
+        {inputs}
+        <input
+          type='checkbox'
+          className={th.BooleanControl__OperatorInput}
+          checked={this.state.or}
+          id={opId}
+          onChange={this.onOperatorChange}/>
+        <label className={operatorLabelClass} htmlFor={opId} title='AND/OR'>
+          <div className={th.BooleanControl__OperatorSlider}>
+            <span className={th.BooleanControl__OperatorAnd}>AND</span>
+            <span className={th.BooleanControl__OperatorOr}>OR</span>
+          </div>
+        </label>
+      </div>
+    )
   }
 }

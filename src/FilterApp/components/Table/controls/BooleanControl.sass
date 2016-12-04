@@ -1,0 +1,38 @@
+.BooleanControl
+  display: flex
+  height: $g*4
+  &__Label, &__OperatorLabel
+    flex-grow: 1
+    cursor: pointer
+  &__Input
+    display: none
+  &__Label
+    display: flex
+    flex-basis: 50px
+    align-items: center
+    justify-content: center
+    color: $color-text-sec
+  &__Label_checked
+    background: $color-mono-2
+    box-shadow: inset 0 1px 3px rgba(#000, 0.06)
+    color: $color-text-pri
+  &__Title
+    display: none
+  &__Icon
+  &__OperatorInput
+    display: none
+  &__OperatorLabel
+    overflow: hidden
+    width: 50px
+    font-size: $font-size-caption
+    color: $color-text-sec
+    text-align: center
+    line-height: $g*4
+  &__OperatorSlider
+    transition: transform 0.25s
+  &__OperatorOr, &__OperatorAnd
+    display: block
+  &__OperatorLabel_or
+    .BooleanControl__OperatorSlider
+      transform: translateY(-$g*4)
+  &__OperatorLabel_and

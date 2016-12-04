@@ -112,12 +112,9 @@ $fa-font-path: 'font-awesome/fonts/'
 .icon-valve_anti_cheat:before
   content: $fa-var-shield
 
-.icon-win:before
-  content: $fa-var-windows
-.icon-mac:before
-  content: $fa-var-apple
-.icon-linux:before
-  content: $fa-var-linux
++gicon(boolean-win, $fa-var-windows)
++gicon(boolean-mac, $fa-var-apple)
++gicon(boolean-linux, $fa-var-linux)
 
 .icon-single_player:before
   content: $fa-var-user
