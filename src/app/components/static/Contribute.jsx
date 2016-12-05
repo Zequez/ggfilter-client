@@ -1,13 +1,14 @@
 import th from './theme'
 import React from 'react'
-import Page from 'src/app/components/Tabs/Page'
 
 import config from 'src/app/config'
 const WALLET_QR = require('images/bitcoins_address.png')
 const WALLET = config.bitcoinDonationWallet
 
-export default (other) => (
-  <Page Title='Contribute' bigHeader card textContent {...other} className={th.contribute}>
+import { AutoPage } from 'src/Layout'
+
+export default () => (
+  <AutoPage title='Contribute' bigHeader card textContent className={th.contribute}>
     <img className={th.qr} src={WALLET_QR}/>
     <h3>Bitcoins</h3>
     <p>
@@ -29,7 +30,7 @@ export default (other) => (
     <p>
       Should I create a Patreon for the project?
     </p>
-  </Page>
+  </AutoPage>
 )
 
 // export default Page({card: true}, () => (

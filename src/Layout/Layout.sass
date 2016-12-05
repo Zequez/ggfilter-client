@@ -1,0 +1,114 @@
+.Layout
+  height: 100%
+
+.Layout__Page
+  height: 100%
+  padding-left: $gg
+
+.Layout__AppBar
+  +z(appBar)
+  position: relative
+  background: $color-pri
+  padding-left: $g*3
+  h1
+    +font-title
+    color: $color-text-pri-alt
+    line-height: $gg
+
+.Layout__MenuButton
+  display: none
+  float: left
+  height: $gg
+  width: $gg
+  line-height: $gg
+  color: $color-text-sec-alt
+  cursor: pointer
+
+.Layout__PageBody
+  +z(appBody)
+  position: relative
+  background: $color-mono-3
+  box-shadow: $shadow-card
+
+.Layout__Page_card
+  .Layout__AppBar
+  .Layout__PageBody
+
++media('>=desktop')
+  .Layout__Page_card
+    .Layout__AppBar
+      height: $gg*3
+      padding-left: 0
+      h1
+        width: $gg*15
+        margin: 0 auto
+        font-size: $font-size-display-2
+        line-height: $gg*2
+
+    .Layout__PageBody
+      width: $gg*15
+      margin: -$gg auto 0 auto
+      border-radius: 2px
+
++media('<desktop')
+  .Layout__Page_card
+    .Layout__AppBar
+      height: $gg
+    .Layout__PageBody
+      width: auto
+      margin: 0
+      border-radius: none
+
++media('>tablet')
+  .Layout__Page_card
+    .Layout__AppBar
+    .Layout__PageBody
+      padding: $g*3
+
++media('<=tablet')
+  .Layout__Page
+    padding-left: 0
+  .Layout__MenuButton
+    display: block
+  .Layout__AppBar
+    padding-left: 0
+
+  .Layout__Page_card
+    .Layout__AppBar
+    .Layout__PageBody
+      padding: $g*2
+
+
+// +media('>=desktop')
+//   // .Layout__Page_card
+//   //   .Layout__AppBar
+//   //     padding-bottom: $gg
+//
+//   .Layout__Page_card
+//     .Layout__AppBar
+//       // padding-left: 0
+//       // h1
+//       //   width: $gg*15
+//       //   padding: $gg/2 0
+//       //   margin: 0 auto
+//       //   font-size: $font-size-display-1
+//       //   line-height: $gg
+//       //   color: $color-text-pri-alt
+//
+//
+// +media('<desktop')
+//   .Layout__Page_card
+//     .Layout__PageBody
+//       margin: 0
+//       width: auto
+//
+// +media('<=tablet')
+//   .Layout__Page
+//     padding-left: 0
+//
+// +media('>tablet')
+//   .Layout__MenuButton
+//     display: none
+//
+//   .Layout__AppBar
+//     padding-left: $g * 3

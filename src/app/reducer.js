@@ -1,5 +1,8 @@
 import { combineReducers } from 'redux'
 
+import { reducer as layout } from 'src/Layout/reducer'
+import { ID as layoutId } from 'src/Layout/selectors'
+
 import tags from 'shared/reducers/tagsReducer'
 const options = require('shared/reducers/optionsReducer').reducer
 const auth = require('shared/reducers/authReducer').reducer
@@ -15,6 +18,7 @@ const reducer = combineReducers({
   ui,
   [Lightbox.constants.NAME]: Lightbox.reducer,
   [SavedFiltersManager.constants.NAME]: SavedFiltersManager.reducer,
+  [layoutId]: layout,
   ...FilterApp.reducer
 })
 

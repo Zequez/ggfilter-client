@@ -1,24 +1,18 @@
 .Drawer
-  +z(drawer)
-  position: fixed
-  top: 0
-  height: 100%
-  background: $color-mono-4
-  box-shadow: $shadow-appBar
-  overflow: hidden
-
-
-  &_expanded, &:hover
-    .Drawer__Logo
-      padding-left: $g
-    .Drawer__LogoLast
-      opacity: 1
+  &__Items
+    +z(drawer)
+    position: fixed
+    top: 0
+    height: 100%
+    background: $color-mono-4
+    overflow: hidden
 
   &__Item
     position: relative
     overflow: hidden
 
   &__Logo
+    overflow: hidden
     position: relative
     transition: padding 0.2s
     background: $color-pri-light
@@ -80,33 +74,36 @@
     transition: opacity 0.2s
     pointer-events: none
 
-  // &.open .tabs, .tabs:hover
-  //   box-shadow: $shadow-drawer
-  //   .logo
-  //     padding-left: $g
-  //     .logoLast
-  //       opacity: 1
-  //
-  // &.open .veil
-  //   opacity: 1
-  //   pointer-events: all
-  //
-  // .content
-  //   height: 100%
+.Drawer_expanded
+  .Drawer__Veil
+    opacity: 1
+    pointer-events: all
+
+.Drawer_expanded .Drawer__Items, .Drawer__Items:hover
+  box-shadow: $shadow-drawer
+  .Drawer__Logo
+    padding-left: $g
+  .Drawer__LogoLast
+    opacity: 1
 
 +media('<=tablet')
-  .Drawer
+  .Drawer__Items
     width: $gg * 4
     left: - $gg * 4
+    box-shadow: none
     transition: transform 0.2s, box-shadow 0.2s
 
+  .Drawer_expanded .Drawer__Items
+    transform: translateX(100%)
+
 +media('>tablet')
-  .Drawer
+  .Drawer__Items
     left: 0
     width: $gg
+    box-shadow: $shadow-appBar
     transition: width 0.2s, box-shadow 0.2s
 
-  .Drawer_expanded, .Drawer:hover
+  .Drawer_expanded .Drawer__Items, .Drawer__Items:hover
     width: $gg * 4
     .Drawer__Label
       transform: translateX(0)

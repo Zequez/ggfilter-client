@@ -12,12 +12,14 @@ import Logo from './Logo'
 }))
 export default class Tabs extends Component {
   static propTypes = {
-    onClick: t.func,
+    onRequestClose: t.func,
     expanded: t.bool
   }
 
   onClick = () => {
-    console.log('Click drawer!')
+    if (this.props.expanded) {
+      this.props.onRequestClose()
+    }
   }
 
   render () {
@@ -26,14 +28,15 @@ export default class Tabs extends Component {
     })
 
     return (
-      <nav className={className} onClick={this.props.onClick}>
-        <ul>
+      <nav className={className} onClick={this.onClick}>
+        <ul className={th.Drawer__Items}>
           <Logo/>
           <Item to={MODES.filter} label='Filter' icon='filter'/>
           <Item to={MODES.sysreq} label="Sys. Req. Calculator" icon='sysreq'/>
           <Item to={MODES.feedback} label="Feedback" icon='feedback'/>
           <Item to={MODES.contribute} label="Contribute" icon='contribute'/>
         </ul>
+        <div className={th.Drawer__Veil}></div>
       </nav>
     )
   }

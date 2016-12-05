@@ -1,4 +1,4 @@
-import th from './theme'
+import th from './Layout.sass'
 import React, { PropTypes as t, Component } from 'react'
 import cn from 'classnames'
 
@@ -15,7 +15,7 @@ export default class AppBar extends Component {
     let {children, onClickMenu, className} = this.props
 
     return (
-      <header className={cn(th.appBar, className)}>
+      <header className={cn(th.Layout__AppBar, className)}>
         <MenuButton onClick={onClickMenu}/>
         {children}
       </header>

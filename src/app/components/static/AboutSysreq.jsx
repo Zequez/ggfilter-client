@@ -1,7 +1,8 @@
 import React from 'react'
+import { AutoPage } from 'src/Layout'
 
 export default () => (
-  <div className='about-sysreq content-box'>
+  <AutoPage className='about-sysreq content-box'>
     <h2>About the System Requirements Index</h2>
     <p>
       The System Requirements Index is a *very* coarse number.
@@ -59,5 +60,5 @@ export default () => (
         appear, the other games will slowly reduce its Sysreq Index number.
       </li>
     </ol>
-  </div>
+  </AutoPage>
 )

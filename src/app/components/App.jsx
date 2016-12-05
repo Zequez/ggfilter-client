@@ -1,63 +1,25 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 
-const { resetFilter } = require('src/FilterApp').actions
-import { resetUi } from 'shared/reducers/uiReducer'
-
+import * as pages from '../pages'
 // import { Lightbox } from 'src/Lightbox'
-// import TabsContainer from './Tabs/TabsContainer'
-import Layout from './Layout/index'
-
-// import { Layout, NavDrawer, Panel } from 'react-toolbox/lib/layout'
-// import { Button } from 'react-toolbox/lib/button'
-// import Tabs from './Tabs/Tabs'
+import Layout from 'src/Layout'
 
 @connect(
-  (s) => ({
-    mode: s.ui.mode
-  }),
-  { resetFilter, resetUi }
+  (s) => ({ mode: s.ui.mode })
 )
 export default class App extends Component {
   static propTypes = {
-    mode: t.string.isRequired,
-    resetFilter: t.func.isRequired,
-    resetUi: t.func.isRequired
-    // The store on initialState
+    mode: t.string.isRequired
   }
 
-  // state = {
-  //   drawerActive: false
-  // }
-
-  // clickOnLogo = () => {
-  //   this.props.resetFilter()
-  //   this.props.resetUi()
-  // }
-
-  // toggleDrawerActive = () => {
-  //   this.setState({drawerActive: !this.state.drawerActive})
-  // }
-
   render () {
-    // let { drawerActive } = this.state
-    let { mode } = this.props
+    const { mode } = this.props
+    const CurrentPage = pages[mode]
 
     return (
-      <Layout mode={mode}>
-
-        {/*<NavDrawer
-          active={drawerActive}
-          onOverlayClick={this.toggleDrawerActive}>
-          <p>
-              Hello fella!
-          </p>
-        </NavDrawer>
-        <Panel>
-          <Button label='Panel' onClick={this.toggleDrawerActive}/>
-        </Panel>*/}
-        {/*<TabsContainer/>
-        <Lightbox/>*/}
+      <Layout>
+        <CurrentPage/>
       </Layout>
     )
   }

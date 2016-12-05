@@ -1,9 +1,9 @@
 .content
-  +font-body-1
+  font-size: $font-size-body
   line-height: 20px
 
   +media(">tablet")
-    +font-body-1-desktop
+    font-size: $font-size-body-desktop
 
     p, ol, ul, table
       margin: $g*2 0
@@ -12,9 +12,11 @@
       margin-left: $g*2
 
   h2
-    +font-display-2
+    font-size: $font-size-display-2
+    line-height: 48px
   h3
-    +font-display-1
+    font-size: $font-size-display-1
+    line-height: 48px
 
   ol ol, ul ul
     margin: 0
@@ -31,28 +33,3 @@
     cursor: pointer
     &:hover
       text-decoration: underline
-
-  // -- Material design font sizes
-  h1 small, h2 small, h3 small, h4 small, h5 small, h6 small
-    +typo-display-3($color-contrast: true)
-
-  h1
-    +typo-display-3
-
-  h2
-    +typo-display-2
-
-  h3
-    +typo-display-1
-
-  h4
-    +typo-headline
-
-  h5
-    +typo-title
-
-  h6
-    +typo-subhead
-
-  p
-    +typo-body-1

@@ -6,7 +6,7 @@ import { getGames } from 'shared/lib/api'
 import { MODES, setMode } from 'shared/reducers/uiReducer'
 
 import Link from 'shared/components/RouterLink'
-import Page from 'src/app/components/Tabs/Page'
+import { AutoPage } from 'src/Layout'
 
 import Chip from 'react-toolbox/lib/chip'
 import { Button } from 'react-toolbox/lib/button'
@@ -102,7 +102,7 @@ export default class SysreqCalc extends Component {
     let { games } = this.state
 
     return (
-      <Page className={th.sysreqCalc} bodyClass={th.appBody} card bigHeader Title='System Requirements Calculator' {...this.props}>
+      <AutoPage className={th.sysreqCalc} card bigHeader title='System Requirements Calculator'>
         <SuggestionsBox
           ref='box'
           filter={this.filterGames}
@@ -130,7 +130,7 @@ export default class SysreqCalc extends Component {
             disabled={!calcs.mean}
             onClick={this.submitFilter}/>
         </div>
-      </Page>
+      </AutoPage>
     )
   }
 }

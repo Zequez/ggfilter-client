@@ -1,13 +1,13 @@
 import React, { PropTypes as t, Component } from 'react'
-import Page from 'src/app/components/Tabs/Page'
+import { AutoPage } from 'src/Layout'
 import FilterApp from './FilterApp'
 
 export default class FilterAppPage extends Component {
   render () {
     return (
-      <Page Title='Filter' {...this.props}>
+      <AutoPage title='Filter'>
         <FilterApp/>
-      </Page>
+      </AutoPage>
     )
   }
 }
