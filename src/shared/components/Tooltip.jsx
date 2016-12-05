@@ -19,8 +19,8 @@ const tooltipFactory = (ComposedComponent, defaultOptions = {}) => (
 
     state = {
       visible: false,
-      top: 0,
-      left: 0
+      firstTick: true,
+      style: {}
     }
 
     onMouseEnter = (ev) => {
@@ -28,17 +28,35 @@ const tooltipFactory = (ComposedComponent, defaultOptions = {}) => (
         let coords = ev.currentTarget.getBoundingClientRect()
         this.setState({
           visible: true,
-          ...this.getTopLeft(coords)
+          firstTick: true,
+          style: this.getTopLeft(coords)
         })
       }
     }
 
     getTopLeft (c) {
+      const docWidth = document.documentElement.clientWidth
+      const docHeight = document.documentElement.clientHeight
+      const midPointLeft = Math.floor(c.left + c.width / 2)
+      const midPointTop = Math.floor(c.top + c.height / 2)
+
       switch (this.props.position) {
-        case 'top': return { top: c.top, left: Math.floor(c.left + c.width / 2) }
-        case 'right': return { top: Math.floor(c.top + c.height / 2), left: c.left + c.width }
-        case 'bottom': return { top: c.top + c.height, left: Math.floor(c.left + c.width / 2) }
-        case 'left': return { top: Math.floor(c.top + c.height / 2), left: c.left }
+        case 'top': return {
+          top: c.top,
+          left: midPointLeft
+        }
+        case 'right': return {
+          top: midPointTop,
+          right: docWidth - c.right
+        }
+        case 'bottom': return {
+          bottom: docHeight - c.bottom,
+          left: midPointLeft
+        }
+        case 'left': return {
+          top: midPointTop,
+          left: c.left
+        }
         default: throw new Error('Error no such position')
       }
     }
@@ -65,6 +83,12 @@ const tooltipFactory = (ComposedComponent, defaultOptions = {}) => (
       }
     }
 
+    componentDidUpdate () {
+      if (this.state.visible && this.state.firstTick === true) {
+        setTimeout(() => this.setState({firstTick: false}), 5)
+      }
+    }
+
     render () {
       let {
         position, //eslint-disable-line no-unused-vars
@@ -73,9 +97,7 @@ const tooltipFactory = (ComposedComponent, defaultOptions = {}) => (
         children,
         ...other
       } = this.props
-      let { visible, top, left } = this.state
-
-      let style = { top, left }
+      let { visible, firstTick, style } = this.state
       // <ReactCSSTransitionGroup
       //   transitionName='Tooltip'
       //   transitionAppear={true}
@@ -85,7 +107,7 @@ const tooltipFactory = (ComposedComponent, defaultOptions = {}) => (
       // </ReactCSSTransitionGroup>
 
       const className = cx(th.Tooltip, this.positionClass(), {
-        // [th.Tooltip_visible]: visible
+        [th.Tooltip_firstTick]: firstTick
       })
 
       return (

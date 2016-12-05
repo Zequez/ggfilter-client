@@ -54,6 +54,41 @@
 
 .ToggleColumn
 
+.SysreqIndexColumn
+  position: relative
+  height: 100%
+  display: flex
+  align-items: center
+.SysreqIndexColumn_unknown
+  .SysreqIndexColumn__col
+    opacity: 0.25
+  &:after
+    content: '?'
+    position: absolute
+    top: 50%
+    left: 50%
+    height: $g*2
+    width: $g*2
+    margin-top: -$g
+    margin-left: -$g
+    background: $color-text-dis
+    color: $color-text-pri-alt
+    line-height: $g*2
+    text-align: center
+    border-radius: 2px
+.SysreqIndexColumn__col
+  flex-grow: 1
+  display: block
+  margin-left: 1px
+  height: 75%
+  background: $color-pri-light
+  &:first-child
+    border-radius: 2px 0 0 2px
+  &:last-child
+    border-radius: 0 2px 2px 0
+.SysreqIndexColumn__col_active
+  background: $color-acc
+
 //   &.steam_early_access
 //     color: rgba(red, 0.4)
 

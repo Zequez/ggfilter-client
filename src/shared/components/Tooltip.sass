@@ -1,26 +1,43 @@
 // Specifications: https://material.google.com/components/tooltips.html#tooltips-interaction
 
+// @keyframes slidein
+//   from {
+//     margin: 0
+//   }
+//
+//   to {
+//     margin-left: 0%
+//     width: 100%
+//   }
+
 .Tooltip
   +z(tooltip)
   position: fixed
   padding: 0 $g
+  margin: 0
   background: rgba($palette-grey-700, 0.9)
   color: $color-text-pri-alt
   font-size: 10px
   line-height: 22px
   border-radius: 2px
-  // opacity: 1
-  transition: opacity 0.25s, transform 0.25s
+  opacity: 1
+  transition: opacity 0.25s, margin 0.25s
 
-.Tooltip
   &_top
-    transform: translate(-50%, -14px)
+    transform: translate(-50%, -100%)
+    margin-top: -14px
   &_right
-    transform: translate(14px, -50%)
+    transform: translate(0, -50%)
+    margin-right: -14px
   &_bottom
-    transform: translate(-50%, 14px)
+    transform: translate(-50%, 100%)
+    margin-bottom: -14px
   &_left
-    transform: translate(-14px, -50%)
+    transform: translate(-100%, -50%)
+    margin-left: -14px
+  &_firstTick
+    margin: 0
+    opacity: 0.01
 
   // &_leaveActive
   //   width: auto
@@ -54,10 +71,12 @@
     font-size: 14px
 
     &_top
-      transform: translate(-50%, -24px)
+      margin-top: -24px
     &_right
-      transform: translate(24px, -50%)
+      margin-right: -24px
     &_bottom
-      transform: translate(-50%, 24px)
+      margin-bottom: -24px
     &_left
-      transform: translate(-24px, -50%)
+      margin-left: -24px
+    &_firstTick
+      margin: 0
