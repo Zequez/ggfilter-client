@@ -1,4 +1,4 @@
-import th from '../Table.sass'
+import th from './Body.sass'
 import React from 'react'
 import cx from 'classnames'
 import columnsDefinitions from '../columns'
@@ -16,9 +16,9 @@ function columnInputValues (game, filter) {
 export default ({game, filter, setFilter, filterParams}) => {
   let tdClass = cx(
     filter.name,
-    th.Table__ColumnComponent, {
-      [th.Table__ColumnComponent_hl]: !!game['hl_' + filter.name],
-      [th.Table__ColumnComponent_numeric]: !!filter.numeric
+    th.Body__ColumnComponent, {
+      [th.Body__ColumnComponent_hl]: !!game['hl_' + filter.name],
+      [th.Body__ColumnComponent_numeric]: !!filter.numeric
     }
   )
 
@@ -39,10 +39,9 @@ export default ({game, filter, setFilter, filterParams}) => {
 
   return (
     <td className={tdClass}>
-      <div className={th.Table__OverflowCell}>{comp}</div>
-      {/*{Component.noOverflowContainer
+      {Component.noOverflowContainer
         ? comp
-        : <div className={th.Table__OverflowCell}>{comp}</div>}*/}
+        : <div className={th.Body__OverflowCell}>{comp}</div>}
     </td>
   )
 }

@@ -1,0 +1,31 @@
+.Body__Batch
+
+.Body__Row
+  &:nth-child(odd)
+    background: $color-mono-3
+
+// Cell
+.Body__ColumnComponent
+  padding: 0
+  white-space: nowrap
+  a
+    color: $color-text-sec
+    text-decoration: underline
+  a:hover
+    color: $color-accent
+
+.Body__ColumnComponent_hl
+  background: red
+
+.Body__ColumnComponent_numeric
+  text-align: right
+
+.Body__OverflowCell
+  display: block
+  float: left
+  height: $g*6
+  width: 100%
+  padding: $g
+  line-height: $g*4
+  overflow: hidden
+  text-overflow: ellipsis
