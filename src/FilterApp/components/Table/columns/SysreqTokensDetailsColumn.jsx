@@ -1,4 +1,6 @@
+import th from './columns'
 import React, { Component, PropTypes as t } from 'react'
+import MicroTag from 'shared/components/MicroTag'
 
 export default class SysreqTokensDetailsColumn extends Component {
   static propTypes = {
@@ -9,15 +11,11 @@ export default class SysreqTokensDetailsColumn extends Component {
     let tags = []
     let tokens = this.props.value
     for (let name in tokens) {
-      tags.push(
-        <span className='detail' key={name}>
-          <i>{tokens[name]}</i> {name}
-        </span>
-      )
+      tags.push(<MicroTag key={name} tag={name} deco={tokens[name]}/>)
     }
 
     return (
-      <span>
+      <span className={th.SysreqTokensDetailsColumn}>
         {tags}
       </span>
     )
