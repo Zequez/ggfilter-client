@@ -8,6 +8,7 @@
 .Body__ColumnComponent
   padding: 0
   white-space: nowrap
+  height: $g*6
   a
     color: $color-text-sec
     text-decoration: underline
@@ -29,3 +30,10 @@
   line-height: $g*4
   overflow: hidden
   text-overflow: ellipsis
+
++media(">tablet")
+  .Body__ColumnComponent
+    height: $g*5
+  .Body__OverflowCell
+    height: $g*5
+    padding: $g/2
