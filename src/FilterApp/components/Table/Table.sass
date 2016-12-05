@@ -18,18 +18,7 @@
   &:nth-child(odd)
     background: $color-mono-3
 
-.Table__Cell
-.Table__OverflowCell
-  display: block
-  float: left
-  height: $g*6
-  width: 100%
-  padding: $g
-  line-height: $g*4
-  overflow: hidden
-  text-overflow: ellipsis
-
-
+// Cell
 .Table__ColumnComponent
   padding: 0
   white-space: nowrap
@@ -39,9 +28,18 @@
   a:hover
     color: $color-accent
 
-
 .Table__ColumnComponent_hl
   background: red
 
 .Table__ColumnComponent_numeric
   text-align: right
+
+.Table__OverflowCell
+  display: block
+  float: left
+  height: $g*6
+  width: 100%
+  padding: $g
+  line-height: $g*4
+  overflow: hidden
+  text-overflow: ellipsis

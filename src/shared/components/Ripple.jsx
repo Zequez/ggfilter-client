@@ -218,7 +218,7 @@ const rippleFactory = (options = {}) => {
           [th.rippleRestarting]: restarting
         }, className)
         return (
-          <span key={key} data-react-toolbox='ripple' className={th.rippleWrapper} {...props}>
+          <span key={key} className={th.rippleWrapper} {...props}>
             <span
               role='ripple'
               ref={key}

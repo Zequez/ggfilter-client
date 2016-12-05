@@ -3,7 +3,7 @@ import React, { PropTypes as t, Component } from 'react'
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import cx from 'classnames'
 
-const tooltipFactory = (ComposedComponent) => (
+const tooltipFactory = (ComposedComponent, defaultOptions = {}) => (
   class Tooltip extends Component {
     static propTypes = {
       position: t.oneOf(['top', 'left', 'right', 'bottom']),
@@ -13,7 +13,8 @@ const tooltipFactory = (ComposedComponent) => (
 
     static defaultProps = {
       hideOnClick: true,
-      position: 'bottom'
+      position: 'bottom',
+      ...defaultOptions
     }
 
     state = {

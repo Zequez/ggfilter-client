@@ -1,9 +1,9 @@
 import React, { PropTypes as t, Component } from 'react'
-import { tooltipFactory } from 'react-toolbox/lib/tooltip'
+import tooltipFactory from 'shared/components/Tooltip'
 import Ripple from 'shared/components/Ripple'
 import Title from './Title'
 
-const TooltippedTitle = tooltipFactory({position: 'top'})(Title)
+const TooltippedTitle = tooltipFactory(Title, {position: 'top'})
 const SortableTooltippedTitle = Ripple()(TooltippedTitle)
 
 export default class WrappedTitle extends Component {

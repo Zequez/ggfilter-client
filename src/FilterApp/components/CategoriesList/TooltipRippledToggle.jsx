@@ -1,5 +1,4 @@
 import React, { PropTypes as t, Component } from 'react'
-// import { tooltipFactory } from 'react-toolbox/lib/tooltip'
 import Ripple from 'shared/components/Ripple'
 import myTooltipFactory from 'shared/components/Tooltip'
 import Toggle from './Toggle'

@@ -84,7 +84,7 @@ class Title extends Component {
             <span className={sortIconClass}></span>
           ) : null}
           <span className={iconClass}></span>
-          <span className={th.titleText}>
+          <span className={th.TitlesList__Text}>
             {filter.title}
           </span>
           {children}
