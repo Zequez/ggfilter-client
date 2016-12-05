@@ -1,5 +1,6 @@
 import th from './TagsControl.sass'
 import React, { Component, PropTypes as t } from 'react'
+import MicroTag from 'shared/components/MicroTag'
 
 export default class SelectedTags extends Component {
   static propTypes = {
@@ -29,22 +30,17 @@ export default class SelectedTags extends Component {
   }
 
   render () {
-    let tags = this.props.selectedTags.map(tagId => {
-      return (
-        <li key={tagId} className={th.TagsControl__SelectedTag}>
-          {this.props.tags[tagId]}
-          <span
-            className={th.TagsControl__RemoveTag + ' fa icon-remove-tag'}
-            onClick={this.onRemove.bind(this, tagId)}>
-          </span>
-        </li>
-      )
-    })
+    const { tags, selectedTags } = this.props
 
     return (
-      <ul className={th.TagsControl__SelectedTags} ref='ul'>
-        {tags}
-      </ul>
+      <div className={th.TagsControl__SelectedTags} ref='ul'>
+        {selectedTags.map(tagId =>
+          <MicroTag
+            key={tagId}
+            tag={tags[tagId]}
+            onDelete={this.onRemove.bind(this, tagId)}/>
+        )}
+      </div>
     )
   }
 }

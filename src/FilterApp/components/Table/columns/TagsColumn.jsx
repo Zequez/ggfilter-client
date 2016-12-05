@@ -1,8 +1,9 @@
 import th from './columns.sass'
 import React, { Component, PropTypes as t } from 'react'
-import cx from 'classnames'
 
 import { partial } from 'shared/lib/utils'
+
+import MicroTag from 'shared/components/MicroTag'
 
 export default class TagsColumn extends Component {
   static propTypes = {
@@ -27,24 +28,20 @@ export default class TagsColumn extends Component {
   }
 
   render () {
-    let tags = this.props.options.tags
-    let paramsTags = this.paramsTags()
-
-    let tagsElements = this.props.value.map((tagId) => {
-      let liClass = cx(th.TagsColumn__Tag, {
-        [th.TagsColumn__Tag_selected]: paramsTags.indexOf(tagId) !== -1
-      })
-      return (
-        <li key={tagId} onClick={partial(this.selectTag, tagId)} className={liClass}>
-          {tags[tagId]}
-        </li>
-      )
-    })
+    const tags = this.props.options.tags
+    const paramsTags = this.paramsTags()
 
     return (
-      <ul className={th.TagsColumn}>
-        {tagsElements}
-      </ul>
+      <span className={th.TagsColumn}>
+        {this.props.value.map((tagId) =>
+          <MicroTag
+            key={tagId}
+            tag={tags[tagId]}
+            onClick={partial(this.selectTag, tagId)}
+            highlighted={paramsTags.indexOf(tagId) !== -1}
+            className={th.TagsColumn__MicroTag}/>
+        )}
+      </span>
     )
   }
 }
