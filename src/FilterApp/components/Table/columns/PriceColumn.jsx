@@ -10,7 +10,7 @@ export default class PriceColumn extends Component {
   elem (val, className) {
     return val != null ? (
       <span className={className}>
-        {val > 0 ? <span><span className={th.__deco}>$</span>{val / 100}</span> : 'Free'}
+        {val > 0 ? <span><span className={th.__deco}>$</span>{(val / 100).toFixed(2)}</span> : 'Free'}
       </span>
     ) : null
   }
