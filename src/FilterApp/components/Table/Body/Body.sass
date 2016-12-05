@@ -9,6 +9,8 @@
   padding: 0
   white-space: nowrap
   height: $g*6
+  color: $color-text-sec
+
   a
     color: $color-text-sec
     text-decoration: underline
@@ -18,7 +20,11 @@
 .Body__ColumnComponent_hl
   background: red
 
-.Body__ColumnComponent_numeric
+.Body__ColumnComponent_left
+  text-align: left
+.Body__ColumnComponent_center
+  text-align: center
+.Body__ColumnComponent_right
   text-align: right
 
 .Body__OverflowCell
@@ -33,6 +39,7 @@
 
 +media(">tablet")
   .Body__ColumnComponent
+    // font-weight: 300
     height: $g*5
   .Body__OverflowCell
     height: $g*5

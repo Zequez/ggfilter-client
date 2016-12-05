@@ -18,7 +18,9 @@ export default ({game, filter, setFilter, filterParams}) => {
     filter.name,
     th.Body__ColumnComponent, {
       [th.Body__ColumnComponent_hl]: !!game['hl_' + filter.name],
-      [th.Body__ColumnComponent_numeric]: !!filter.numeric
+      [th.Body__ColumnComponent_left]: filter.alignment === -1,
+      [th.Body__ColumnComponent_center]: filter.alignment === 0,
+      [th.Body__ColumnComponent_right]: filter.alignment === 1
     }
   )
 

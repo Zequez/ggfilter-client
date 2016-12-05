@@ -1,3 +1,4 @@
+import th from './columns.sass'
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { showLightbox } from 'src/Lightbox'
@@ -30,7 +31,7 @@ class ImagesColumn extends Component {
 
   render () {
     return (
-      <div>
+      <div className={th.ImagesColumn}>
         <img src={this.thumbnail()} onClick={this.showLightbox}/>
       </div>
     )

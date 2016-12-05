@@ -7,7 +7,7 @@ class FilterDefinition {
   title = ''
 
   width = 100
-  numeric = false
+  alignment = -1
 
   toggle = 'Base'
   toggleType = null

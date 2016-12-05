@@ -57,7 +57,9 @@ class Title extends Component {
       [th.TitlesList__Title_sorted]: sort != null,
       // [th.sortAsc]: sort === true,
       // [th.sortDesc]: sort === false,
-      [th.TitlesList__Title_numeric]: !!filter.numeric,
+      [th.TitlesList__Title_left]: filter.alignment === -1,
+      [th.TitlesList__Title_center]: filter.alignment === 0,
+      [th.TitlesList__Title_right]: filter.alignment === 1,
       [th.TitlesList__Title_active]: active,
       [th.TitlesList__Title_highlighted]: highlightMode,
       [th.TitlesList__Title_sortable]: !!filter.sort

@@ -1,3 +1,7 @@
+.__deco
+  color: $color-text-dis
+  font-size: $font-size-caption
+
 .TagsColumn
 
 .TagsColumn__Tag
@@ -6,6 +10,7 @@
 .TagsColumn__Tag_selected
 
 .LinkColumn
+  // font-size: $font-size-input
 
 .PriceColumn
   text-align: right
@@ -13,25 +18,45 @@
   color: $color-text-dis
   margin-right: $r/4
   text-decoration: line-through
-.PriceColumn__TextDeco
-  color: $color-text-dis
 .PriceColumn__PriceIs
 
 
 .RatioColumn
+  display: flex
+  align-items: center
   width: 100%
-  height: $g*2
-  padding-top: $g
+  height: 100%
 .RatioColumn__up
   float: left
-  height: 100%
+  height: $g
   background: $color-primary
 .RatioColumn__down
   float: left
-  height: 100%
+  height: $g
   background: $color-primary-light
 
-//
+.ImagesColumn
+  height: 100%
+  img
+    display: block
+    float: left
+    margin: 0 auto
+    height: 100%
+    cursor: pointer
+
+.DateColumn
+  .__deco
+    font-family: $font-family-mono
+
+.TimeAgoColumn
+.TimeAgoColumn__future
+  opacity: 0.5
+
+.ToggleColumn
+
+//   &.steam_early_access
+//     color: rgba(red, 0.4)
+
 // .column-Boolean
 //   padding-right: 10px
 //   .icons-list
@@ -90,9 +115,7 @@
 //   .text-deco
 //     font-family: monospace
 //
-// .column-TimeAgo
-//   .in-the-future
-//     opacity: 0.5
+
 //
 // .column-SysreqTokensDetails
 //   text-align: left

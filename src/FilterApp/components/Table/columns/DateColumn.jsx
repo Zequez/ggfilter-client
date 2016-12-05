@@ -1,3 +1,4 @@
+import th from './columns.sass'
 import React, { PropTypes as t, Component } from 'react'
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -27,8 +28,8 @@ export default class DateColumn extends Component {
     let secondaryTextDate = `${month} ${day}`
 
     return (
-      <span title={this.props.value}>
-        {textDate}<span className='text-deco'>{secondaryTextDate}</span>
+      <span title={this.props.value} className={th.DateColumn}>
+        {textDate}<span className={th.__deco}>{secondaryTextDate}</span>
       </span>
     )
   }

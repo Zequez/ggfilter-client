@@ -14,7 +14,7 @@ export default {
     title: 'Steam ID',
     control: 'Number',
     width: 65,
-    numeric: true
+    alignment: 1
   },
   images: {
     id: 3,
@@ -51,7 +51,7 @@ export default {
       {gt: 1, lt: 1000}
     ],
     width: 100,
-    numeric: true
+    alignment: 1
   },
   steam_discount: {
     id: 5,
@@ -69,7 +69,7 @@ export default {
       '100': 'FREE!?'
     },
     width: 50,
-    numeric: true
+    alignment: 1
   },
   playtime_mean: {
     id: 6,
@@ -82,7 +82,7 @@ export default {
     },
     columnOptions: { round: 100 },
     width: 60,
-    numeric: true
+    alignment: 1
   },
   playtime_median: {
     id: 7,
@@ -95,7 +95,7 @@ export default {
     },
     columnOptions: { round: 100, interpolation: '%shs' },
     width: 60,
-    numeric: true
+    alignment: 1
   },
   playtime_sd: {
     id: 8,
@@ -108,7 +108,7 @@ export default {
     },
     columnOptions: { round: 100 },
     width: 60,
-    numeric: true
+    alignment: 1
   },
   playtime_rsd: {
     id: 9,
@@ -121,7 +121,7 @@ export default {
     },
     columnOptions: { round: 100 },
     width: 60,
-    numeric: true
+    alignment: 1
   },
   playtime_mean_ftb: {
     id: 10,
@@ -134,7 +134,7 @@ export default {
     },
     columnOptions: { round: 100, interpolation: '%shs/$' },
     width: 60,
-    numeric: true
+    alignment: 1
   },
   playtime_median_ftb: {
     id: 11,
@@ -147,7 +147,7 @@ export default {
     },
     columnOptions: { round: 100, interpolation: '%shs/$' },
     width: 60,
-    numeric: true
+    alignment: 1
   },
   metacritic: {
     id: 12,
@@ -158,7 +158,7 @@ export default {
       autohook: Infinity
     },
     width: 60,
-    numeric: true
+    alignment: 1
   },
   steam_reviews_count: {
     id: 13,
@@ -169,7 +169,7 @@ export default {
       autohook: Infinity
     },
     width: 60,
-    numeric: true
+    alignment: 1
   },
   steam_reviews_ratio: {
     id: 14,
@@ -263,7 +263,7 @@ export default {
       range: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
     },
     width: 50,
-    numeric: true
+    alignment: 1
   },
   released_at: {
     id: 24,
@@ -281,7 +281,8 @@ export default {
     column: 'Date',
     columnInputs: { value: 'released_at' },
     sort: 'released_at',
-    width: 100
+    width: 100,
+    alignment: 1
   },
   vr_mode: {
     id: 26,
@@ -310,6 +311,7 @@ export default {
     title: 'Early Access',
     control: 'Toggle',
     column: 'Toggle',
-    width: 24 * 2
+    width: 24 * 2,
+    alignment: 0
   }
 }
