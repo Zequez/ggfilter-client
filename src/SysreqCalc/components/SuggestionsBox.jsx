@@ -1,8 +1,7 @@
 import th from '../theme'
-import inputTheme from '../inputTheme'
 
 import React, { Component, PropTypes as t } from 'react'
-import Input from 'react-toolbox/lib/input'
+import Input from 'shared/components/Input'
 
 import SuggestionsDropdown from './SuggestionsDropdown'
 
@@ -50,12 +49,13 @@ export default class SuggestionsBox extends Component {
           list={list}
           listValues={listValues}
           onSelect={this.props.onSelect}>
-          <Input
-            type='text'
-            value={this.state.value}
-            onChange={this.onChange}
-            theme={inputTheme}
-            hint={this.props.placeholder}/>
+          <div className={th.SysreqCalc__InputContainer}>
+            <Input
+              className={th.SysreqCalc__Input}
+              value={this.state.value}
+              onChange={this.onChange}
+              hint={this.props.placeholder}/>
+          </div>
         </SuggestionsDropdown>
       </div>
     )

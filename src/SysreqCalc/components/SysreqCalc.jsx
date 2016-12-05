@@ -102,7 +102,7 @@ export default class SysreqCalc extends Component {
     let { games } = this.state
 
     return (
-      <AutoPage className={th.sysreqCalc} card bigHeader title='System Requirements Calculator'>
+      <AutoPage className={th.sysreqCalc} card title='System Requirements Calculator'>
         <SuggestionsBox
           ref='box'
           filter={this.filterGames}

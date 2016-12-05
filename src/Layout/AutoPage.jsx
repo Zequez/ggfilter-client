@@ -20,11 +20,11 @@ export default class AutoPage extends Component {
   }
 
   render () {
-    const { title, card, bigHeader, textContent, children, className } = this.props
+    const { title, card, naked, textContent, children, className } = this.props
 
     const finalClassName = cx(className, {
       [th.Layout__Page_card]: card,
-      [th.Layout__Page_bigHeader]: bigHeader,
+      [th.Layout__Page_naked]: naked,
       [thContent.content]: textContent
     })
 
