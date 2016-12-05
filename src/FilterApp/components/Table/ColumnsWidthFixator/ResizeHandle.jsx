@@ -1,4 +1,4 @@
-import th from '../Table.sass'
+import th from './ColumnsWidthFixator.sass'
 import React, { PropTypes as t, Component } from 'react'
 import cn from 'classnames'
 import { DraggableCore } from 'react-draggable'
@@ -33,8 +33,8 @@ export default class ResizeHandle extends Component {
 
   render () {
     let style = {transform: `translateX(${this.state.clientX}px)`}
-    let className = cn(th.resizeHandle, {
-      [th.resizeHandleDragging]: !!this.state.clientX
+    let className = cn(th.ColumnsWidthFixator__ResizeHandler, {
+      [th.ColumnsWidthFixator__ResizeHandler_dragging]: !!this.state.clientX
     })
 
     return (

@@ -3,7 +3,7 @@
 // - modifies parentNode.parentNode.style.width
 // Use with caution
 
-import th from '../Table.sass'
+import th from './ColumnsWidthFixator.sass'
 import React, { PropTypes as t, Component } from 'react'
 import debounce from 'lodash/debounce'
 import { u } from 'shared/lib/utils'
@@ -68,7 +68,7 @@ export default class ColumnsWidthFixator extends Component {
     )
 
     return (
-      <tr className={th.columnsWidthFixator} ref='tr'>
+      <tr className={th.ColumnsWidthFixator} ref='tr'>
         {this.calc.map((filter, width) => (
           <td key={filter.name} style={{width: `${width}px`}}>
             <ResizeHandle
