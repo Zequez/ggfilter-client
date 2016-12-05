@@ -1,3 +1,4 @@
+import th from './columns'
 import React, { Component, PropTypes as t } from 'react'
 
 export default class RawColumn extends Component {
@@ -25,9 +26,9 @@ export default class RawColumn extends Component {
 
     return (
       <span>
-        {d1 ? <span className='text-deco'>{d1}</span> : null}
+        {d1 ? <span className={th.__deco}>{d1}</span> : null}
         {v}
-        {d2 ? <span className='text-deco'>{d2}</span> : null}
+        {d2 ? <span className={th.__deco}>{d2}</span> : null}
       </span>
     )
   }

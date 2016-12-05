@@ -11,5 +11,6 @@ module.exports = {
   TimeAgo: require('./TimeAgoColumn').default,
   SysreqTokensDetails: require('./SysreqTokensDetailsColumn').default,
   Toggle: require('./ToggleColumn').default,
-  SysreqIndex: require('./SysreqIndexColumn').default
+  SysreqIndex: require('./SysreqIndexColumn').default,
+  Discount: require('./DiscountColumn').default
 }

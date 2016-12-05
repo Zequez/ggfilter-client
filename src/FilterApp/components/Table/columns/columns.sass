@@ -91,6 +91,26 @@
 
 .SysreqTokensDetailsColumn
 
+.DiscountColumn
+  display: flex
+  align-items: center
+  justify-content: center
+  height: 100%
+.DiscountColumn__thingy
+  height: $g*3
+  padding: 0 $g/2
+  line-height: $g*3
+  border-radius: 2px
+  color: $color-text-pri-alt
+  .__deco
+    color: $color-text-sec-alt
+  &_low
+    background: $color-pri-light
+  &_medium
+    background: $color-pri
+  &_high
+    background: $color-pri-dark
+
 //   &.steam_early_access
 //     color: rgba(red, 0.4)
 

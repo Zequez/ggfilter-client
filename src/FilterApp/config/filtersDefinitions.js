@@ -60,7 +60,8 @@ export default {
     controlOptions: {
       prefix: '%'
     },
-    columnOptions: { interpolation: '%s%' },
+    column: 'Discount',
+    columnOptions: { interpolation: '-%s%' },
     chip: 'Range',
     chipOptions: {
       '': '{v}%',
@@ -69,7 +70,7 @@ export default {
       '100': 'FREE!?'
     },
     width: 50,
-    alignment: 1
+    alignment: 0
   },
   playtime_mean: {
     id: 6,
