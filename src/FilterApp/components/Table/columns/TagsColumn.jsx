@@ -1,4 +1,6 @@
+import th from './columns.sass'
 import React, { Component, PropTypes as t } from 'react'
+import cx from 'classnames'
 
 import { partial } from 'shared/lib/utils'
 
@@ -29,7 +31,9 @@ export default class TagsColumn extends Component {
     let paramsTags = this.paramsTags()
 
     let tagsElements = this.props.value.map((tagId) => {
-      let liClass = paramsTags.indexOf(tagId) === -1 ? '' : 'selected'
+      let liClass = cx(th.TagsColumn__Tag, {
+        [th.TagsColumn__Tag_selected]: paramsTags.indexOf(tagId) !== -1
+      })
       return (
         <li key={tagId} onClick={partial(this.selectTag, tagId)} className={liClass}>
           {tags[tagId]}
@@ -38,7 +42,7 @@ export default class TagsColumn extends Component {
     })
 
     return (
-      <ul>
+      <ul className={th.TagsColumn}>
         {tagsElements}
       </ul>
     )

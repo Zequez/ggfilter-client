@@ -13,7 +13,8 @@ export default {
     id: 2,
     title: 'Steam ID',
     control: 'Number',
-    width: 65
+    width: 65,
+    numeric: true
   },
   images: {
     id: 3,
@@ -49,7 +50,8 @@ export default {
       {gt: 1, lt: 500},
       {gt: 1, lt: 1000}
     ],
-    width: 100
+    width: 100,
+    numeric: true
   },
   steam_discount: {
     id: 5,
@@ -66,7 +68,8 @@ export default {
       '1-100': 'On sale',
       '100': 'FREE!?'
     },
-    width: 50
+    width: 50,
+    numeric: true
   },
   playtime_mean: {
     id: 6,
@@ -78,7 +81,8 @@ export default {
       label: { '': '{v}hs', '*-*': '{s} to {e} hs' }
     },
     columnOptions: { round: 100 },
-    width: 60
+    width: 60,
+    numeric: true
   },
   playtime_median: {
     id: 7,
@@ -90,7 +94,8 @@ export default {
       label: { '': '{v}hs', '*-*': '{s} to {e} hs' }
     },
     columnOptions: { round: 100, interpolation: '%shs' },
-    width: 60
+    width: 60,
+    numeric: true
   },
   playtime_sd: {
     id: 8,
@@ -102,7 +107,8 @@ export default {
       label: { '': '{v}hs', '*-*': '{s} to {e} hs' }
     },
     columnOptions: { round: 100 },
-    width: 60
+    width: 60,
+    numeric: true
   },
   playtime_rsd: {
     id: 9,
@@ -114,7 +120,8 @@ export default {
       label: { '': '{v}hs', '*-*': '{s} to {e} hs' }
     },
     columnOptions: { round: 100 },
-    width: 60
+    width: 60,
+    numeric: true
   },
   playtime_mean_ftb: {
     id: 10,
@@ -126,7 +133,8 @@ export default {
       label: { '': '{v}hs/$', '*-*': '{s} to {e} hs/$' }
     },
     columnOptions: { round: 100, interpolation: '%shs/$' },
-    width: 60
+    width: 60,
+    numeric: true
   },
   playtime_median_ftb: {
     id: 11,
@@ -138,7 +146,8 @@ export default {
       label: { '': '{v}hs/$', '*-*': '{s} to {e} hs/$' }
     },
     columnOptions: { round: 100, interpolation: '%shs/$' },
-    width: 60
+    width: 60,
+    numeric: true
   },
   metacritic: {
     id: 12,
@@ -148,7 +157,8 @@ export default {
       range: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, Infinity],
       autohook: Infinity
     },
-    width: 60
+    width: 60,
+    numeric: true
   },
   steam_reviews_count: {
     id: 13,
@@ -158,7 +168,8 @@ export default {
       range: [0, 8, 20, 35, 65, 115, 220, 420, 1020, 4250, Infinity],
       autohook: Infinity
     },
-    width: 60
+    width: 60,
+    numeric: true
   },
   steam_reviews_ratio: {
     id: 14,
@@ -251,7 +262,8 @@ export default {
     controlOptions: {
       range: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
     },
-    width: 50
+    width: 50,
+    numeric: true
   },
   released_at: {
     id: 24,

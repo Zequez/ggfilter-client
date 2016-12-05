@@ -1,3 +1,4 @@
+import th from './columns'
 import React, { Component, PropTypes as t } from 'react'
 
 export default class RatioColumn extends Component {
@@ -26,9 +27,9 @@ export default class RatioColumn extends Component {
     }
 
     return (
-      <div className='ratio-column'>
-        <div className='ratio-column-up' style={upStyle}></div>
-        <div className='ratio-column-down' style={downStyle}></div>
+      <div className={th.RatioColumn}>
+        <div className={th.RatioColumn__up} style={upStyle}></div>
+        <div className={th.RatioColumn__down} style={downStyle}></div>
       </div>
     )
   }

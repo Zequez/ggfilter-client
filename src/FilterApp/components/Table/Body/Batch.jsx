@@ -1,3 +1,4 @@
+import th from '../Table.sass'
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 
@@ -32,9 +33,9 @@ export default class DataTableBatch extends Component {
     let { games, filters, filtersParams, setParam } = this.props
 
     return (
-      <tbody className='data-table-batch'>
+      <tbody className={th.Table__Batch}>
         {games.map((game) => (
-          <tr key={game.id} className='game-row'>
+          <tr key={game.id} className={th.Table__Row}>
             {filters.map((filter) => (
               <ColumnComponent
                 key={filter.name}

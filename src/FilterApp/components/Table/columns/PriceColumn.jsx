@@ -1,3 +1,4 @@
+import th from './columns.sass'
 import React, { Component, PropTypes as t } from 'react'
 
 export default class PriceColumn extends Component {
@@ -9,7 +10,7 @@ export default class PriceColumn extends Component {
   elem (val, className) {
     return val != null ? (
       <span className={className}>
-        {val > 0 ? <span><span className='text-deco'>$</span>{val / 100}</span> : 'Free'}
+        {val > 0 ? <span><span className={th.PriceColumn__TextDeco}>$</span>{val / 100}</span> : 'Free'}
       </span>
     ) : null
   }
@@ -18,11 +19,11 @@ export default class PriceColumn extends Component {
     let { was, price } = this.props
 
     return (
-      <span>
-        {this.elem(was !== price ? was : null, 'price-was')}
-        {this.elem(price, 'price-is')}
+      <div className={th.PriceColumn}>
+        {this.elem(was !== price ? was : null, th.PriceColumn__PriceWas)}
+        {this.elem(price, th.PriceColumn__PriceIs)}
         {price == null && was == null ? '-' : ''}
-      </span>
+      </div>
     )
   }
 }

@@ -25,14 +25,13 @@ export default class Table extends Component {
 
   render () {
     console.logRender('DataTable')
-    let { filter, columnsWidth, tableWidth,
-      games, visibleFiltersDefinitions: filters } = this.props
+    let { filter, games, visibleFiltersDefinitions: filters } = this.props
 
     return (
-      <div className={th.table}>
+      <div className={th.Table}>
         <table>
           <Header filters={filters} filter={filter}/>
-          {/*{Body({games, filters, filter})}*/}
+          {Body({games, filters, filter})}
         </table>
       </div>
     )

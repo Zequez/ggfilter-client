@@ -21,16 +21,16 @@ export default class Header extends Component {
     let { filter, filters } = this.props
 
     return (
-      <thead className={th.header}>
+      <thead className={th.Table__Header}>
         <ColumnsWidthFixator visibleFiltersDefinitions={filters}/>
+        <ControlsList
+          filters={filters}
+          filtersParams={filter.params}/>
         <TitlesList
           filters={filters}
           filtersParams={filter.params}
           sort={filter.sort.filter}
           sortAsc={filter.sort.asc}/>
-        <ControlsList
-          filters={filters}
-          filtersParams={filter.params}/>
       </thead>
     )
   }
