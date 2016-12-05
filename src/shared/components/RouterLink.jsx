@@ -1,5 +1,6 @@
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
+import cx from 'classnames'
 import router from 'src/app/routes'
 
 @connect((s) => ({
@@ -7,8 +8,6 @@ import router from 'src/app/routes'
 }))
 export default class RouterLink extends Component {
   static propTypes = {
-    text: t.string,
-    icon: t.string,
     children: t.any,
     to: t.string,
     activeClass: t.string,
@@ -26,15 +25,15 @@ export default class RouterLink extends Component {
   }
 
   render () {
-    let { currentRouteName, text, icon, children, to, activeClass } = this.props
+    let { currentRouteName, children, to, activeClass, className } = this.props
     let path = router.url(to)
-    let activeClassResolve = to === currentRouteName ? activeClass : ''
+    let finalClassName = cx(className, {
+      [activeClass]: to === currentRouteName
+    })
 
     return (
-      <a href={path} className={activeClassResolve} onClick={this.onClick.bind(this, path)}>
-        {icon ? <i className={`fa icon-${icon}`}></i> : null}
-        {text || null}
-        {children || null}
+      <a href={path} className={finalClassName} onClick={this.onClick.bind(this, path)}>
+        {children}
       </a>
     )
   }

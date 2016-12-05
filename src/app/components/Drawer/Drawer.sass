@@ -1,0 +1,116 @@
+.Drawer
+  +z(drawer)
+  position: fixed
+  top: 0
+  height: 100%
+  background: $color-mono-4
+  box-shadow: $shadow-appBar
+  overflow: hidden
+
+
+  &_expanded, &:hover
+    .Drawer__Logo
+      padding-left: $g
+    .Drawer__LogoLast
+      opacity: 1
+
+  &__Item
+    position: relative
+    overflow: hidden
+
+  &__Logo
+    position: relative
+    transition: padding 0.2s
+    background: $color-pri-light
+    font-family: Courier, monospace
+    .Drawer__Link
+      +font-title
+      color: $color-text-sec
+  &__LogoFirst, &__LogoLast
+    display: inline-block
+    height: $gg
+    line-height: $gg
+    letter-spacing: 0
+  &__LogoFirst
+    width: $gg
+    text-align: center
+    font-weight: bold
+  &__LogoLast
+    margin-left: -11px
+    opacity: 0
+    transition: opacity 0.2s
+
+  &__Link
+    position: relative
+    +font-body-2
+    display: block
+    height: $gg
+    color: $color-text-pri
+    line-height: $gg
+    white-space: nowrap
+    z-index: 1
+  &__Link_active
+    &, .Drawer__Icon
+      color: $color-sec-dark
+  &__Icon, &__Label
+    vertical-align: top
+  &__Icon
+    position: relative
+    height: $gg
+    width: $gg
+    margin-top: -2px
+    background: $color-mono-4
+    color: $color-text-sec
+    line-height: $gg
+    z-index: 2
+  &__Label
+    display: inline-block
+    padding-left: $g
+    z-index: 1
+
+  &__Veil
+    +z(drawer-veil)
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    background: $color-dimming
+    opacity: 0
+    transition: opacity 0.2s
+    pointer-events: none
+
+  // &.open .tabs, .tabs:hover
+  //   box-shadow: $shadow-drawer
+  //   .logo
+  //     padding-left: $g
+  //     .logoLast
+  //       opacity: 1
+  //
+  // &.open .veil
+  //   opacity: 1
+  //   pointer-events: all
+  //
+  // .content
+  //   height: 100%
+
++media('<=tablet')
+  .Drawer
+    width: $gg * 4
+    left: - $gg * 4
+    transition: transform 0.2s, box-shadow 0.2s
+
++media('>tablet')
+  .Drawer
+    left: 0
+    width: $gg
+    transition: width 0.2s, box-shadow 0.2s
+
+  .Drawer_expanded, .Drawer:hover
+    width: $gg * 4
+    .Drawer__Label
+      transform: translateX(0)
+
+  .Drawer__Label
+    transition: transform 0.2s
+    transform: translateX(-110%)

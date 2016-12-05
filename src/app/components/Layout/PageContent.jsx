@@ -1,4 +1,4 @@
-import th from './theme'
+import th from './Layout.sass'
 import React, { PropTypes as t, Component } from 'react'
 
 import { MODES } from 'shared/reducers/uiReducer'
@@ -39,7 +39,7 @@ export default class TabsContent extends Component {
 
   render () {
     return (
-      <div className={th.content}>
+      <div className={th.Layout__PageContent}>
         {this.tabsContent()}
       </div>
     )

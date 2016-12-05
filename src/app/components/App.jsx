@@ -4,28 +4,23 @@ import { connect } from 'react-redux'
 const { resetFilter } = require('src/FilterApp').actions
 import { resetUi } from 'shared/reducers/uiReducer'
 
-import { Lightbox } from 'src/Lightbox'
-import TabsContainer from './Tabs/TabsContainer'
-import Layout from './Layout'
+// import { Lightbox } from 'src/Lightbox'
+// import TabsContainer from './Tabs/TabsContainer'
+import Layout from './Layout/index'
 
 // import { Layout, NavDrawer, Panel } from 'react-toolbox/lib/layout'
 // import { Button } from 'react-toolbox/lib/button'
-import Tabs from './Tabs/Tabs'
+// import Tabs from './Tabs/Tabs'
 
 @connect(
   (s) => ({
-    mode: s.ui.mode,
-    filterLockedInView: s.ui.filterLockedInView
+    mode: s.ui.mode
   }),
-  {
-    resetFilter,
-    resetUi
-  }
+  { resetFilter, resetUi }
 )
 export default class App extends Component {
   static propTypes = {
     mode: t.string.isRequired,
-    filterLockedInView: t.bool.isRequired,
     resetFilter: t.func.isRequired,
     resetUi: t.func.isRequired
     // The store on initialState
@@ -46,9 +41,10 @@ export default class App extends Component {
 
   render () {
     // let { drawerActive } = this.state
+    let { mode } = this.props
 
     return (
-      <TabsContainer>
+      <Layout mode={mode}>
 
         {/*<NavDrawer
           active={drawerActive}
@@ -62,7 +58,7 @@ export default class App extends Component {
         </Panel>*/}
         {/*<TabsContainer/>
         <Lightbox/>*/}
-      </TabsContainer>
+      </Layout>
     )
   }
 }
