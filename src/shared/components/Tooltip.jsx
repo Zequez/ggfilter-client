@@ -1,5 +1,6 @@
 import th from './Tooltip.sass'
 import React, { PropTypes as t, Component } from 'react'
+import Portal from './Portal'
 // import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import cx from 'classnames'
 
@@ -118,9 +119,11 @@ const tooltipFactory = (ComposedComponent, defaultOptions = {}) => (
           {...other}>
           {children}
           { tooltip && visible ? (
-            <div className={className} style={style}>
-              {tooltip}
-            </div>
+            <Portal>
+              <div className={className} style={style}>
+                {tooltip}
+              </div>
+            </Portal>
           ) : null }
         </ComposedComponent>
       )
