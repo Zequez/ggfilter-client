@@ -5,6 +5,7 @@ import MicroTag from 'shared/components/MicroTag'
 import tooltipFactory from 'shared/components/Tooltip'
 
 const TooltipMicrotag = tooltipFactory(MicroTag, {position: 'left'})
+const TooltipDiv = tooltipFactory('div', {position: 'left'})
 
 export default class RatioColumn extends Component {
   static propTypes = {
@@ -16,6 +17,7 @@ export default class RatioColumn extends Component {
 
   render () {
     let { ratio, total } = this.props
+    let tooltip = `${total} reviews, ${ratio}% positive`
 
     return (total && ratio) ? (
       <div className={cx(th.RatioColumn, {
@@ -23,14 +25,16 @@ export default class RatioColumn extends Component {
         [th.RatioColumn_sampleHigh]: total && total > 1000,
         [th.RatioColumn_noSamples]: total === 0
       })}>
-        <div className={th.RatioColumn__up} style={{ width: `${ratio}%` }}></div>
-        <div className={th.RatioColumn__down} style={{ width: `${100 - ratio}%` }}></div>
+        <TooltipDiv tooltip={tooltip} className={th.RatioColumn__votesContainer}>
+          <div className={th.RatioColumn__up} style={{ width: `${ratio}%` }}></div>
+          <div className={th.RatioColumn__down} style={{ width: `${100 - ratio}%` }}></div>
+        </TooltipDiv>
         <div className={th.RatioColumn__microTagContainer}>
           <TooltipMicrotag
             className={th.RatioColumn__MicroTag}
             tag={total}
             deco={ratio + '%'}
-            tooltip={`${total} reviews, ${ratio}% positive`}/>
+            tooltip={tooltip}/>
         </div>
       </div>
     ) : (

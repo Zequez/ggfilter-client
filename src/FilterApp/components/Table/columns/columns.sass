@@ -24,6 +24,8 @@
 
 
 .RatioColumn
+  height: 100%
+.RatioColumn__votesContainer
   position: relative
   display: flex
   align-items: center
@@ -31,10 +33,10 @@
   width: 100%
   height: 100%
 .RatioColumn_sampleLow
-  .RatioColumn__up, .RatioColumn__down
-    height: $g/4
+  .RatioColumn__up
+    background: $color-primary-light
 .RatioColumn_sampleHigh
-  .RatioColumn__up, .RatioColumn__down
+  .RatioColumn__up
     background: $color-primary-dark
   .RatioColumn__MicroTag
     background: $color-primary-dark
@@ -42,10 +44,11 @@
   float: left
   height: $g
   background: $color-primary
+  box-shadow: $shadow-switch
 .RatioColumn__down
   float: left
   height: $g
-  background: $color-primary-light
+  background: $color-mono-2
 .RatioColumn__microTagContainer
   position: absolute
   top: 0
@@ -55,6 +58,8 @@
   display: flex
   align-items: center
   justify-content: left
+  display: none
+
 
 .ImagesColumn
   height: 100%
