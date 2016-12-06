@@ -5,6 +5,7 @@ class FilterDefinition {
   id = null
   name = ''
   title = ''
+  longtitle = null
 
   width = 100
   alignment = -1

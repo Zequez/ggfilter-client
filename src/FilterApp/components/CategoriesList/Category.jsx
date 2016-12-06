@@ -25,7 +25,7 @@ export default class Category extends Component {
           key={filter.name}
           active={!!active}
           name={filter.name}
-          title={filter.title}
+          title={filter.longTitle || filter.title}
           onToggle={this.props.onToggle}/>
       )
     })

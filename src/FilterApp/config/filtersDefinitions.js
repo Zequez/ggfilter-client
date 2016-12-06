@@ -75,13 +75,14 @@ export default {
   playtime_mean: {
     id: 6,
     title: 'Playtime avg',
+    longTitle: 'Playtime average',
     control: 'FancyRange',
     controlOptions: {
       range: [0, 1.5, 3, 4, 5, 7, 9, 13, 21, 39, Infinity],
       autohook: Infinity,
       label: { '': '{v}hs', '*-*': '{s} to {e} hs' }
     },
-    columnOptions: { round: 100 },
+    columnOptions: { round: 100, interpolation: '%shs' },
     width: 60,
     alignment: 1
   },
@@ -101,32 +102,35 @@ export default {
   playtime_sd: {
     id: 8,
     title: 'Playtime σ',
+    longTitle: 'Playtime standard deviation',
     control: 'FancyRange',
     controlOptions: {
       range: [0, 1.7, 3.2, 4.9, 7.2, 10.4, 15.5, 24.2, 40.2, 76.5],
       autohook: 0,
       label: { '': '{v}hs', '*-*': '{s} to {e} hs' }
     },
-    columnOptions: { round: 100 },
+    columnOptions: { round: 1, interpolation: '%shs' },
     width: 60,
     alignment: 1
   },
   playtime_rsd: {
     id: 9,
     title: 'Playtime relative σ',
+    longTitle: 'Playtime relative standard deviation',
     control: 'FancyRange',
     controlOptions: {
       range: [0, 70.6, 89.7, 106.4, 122.3, 136.7, 154.9, 176.7, 209.8, 271.4],
       autohook: 0,
       label: { '': '{v}hs', '*-*': '{s} to {e} hs' }
     },
-    columnOptions: { round: 100 },
+    columnOptions: { round: 1, interpolation: '%shs' },
     width: 60,
     alignment: 1
   },
   playtime_mean_ftb: {
     id: 10,
     title: 'Playtime avg / $',
+    longTitle: 'Average playtime divided by lowest price',
     control: 'FancyRange',
     controlOptions: {
       range: [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1.0, 1.4, 1.9, 3.1, Infinity],
@@ -140,6 +144,7 @@ export default {
   playtime_median_ftb: {
     id: 11,
     title: 'Playtime median / $',
+    longTitle: 'Median playtime divided by lowest price',
     control: 'FancyRange',
     controlOptions: {
       range: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.9, 1.5, Infinity],
@@ -164,6 +169,7 @@ export default {
   steam_reviews_count: {
     id: 13,
     title: '# Steam reviews',
+    longTitle: 'Number of Steam reviews',
     control: 'FancyRange',
     controlOptions: {
       range: [0, 8, 20, 35, 65, 115, 220, 420, 1020, 4250, Infinity],
@@ -207,7 +213,7 @@ export default {
   },
   vr_platforms: {
     id: 18,
-    title: 'VR Platforms',
+    title: 'VR platforms',
     control: 'Boolean',
     column: 'Boolean',
     width: 24 * 2 + 10
@@ -259,6 +265,7 @@ export default {
   sysreq_index_centile: {
     id: 23,
     title: 'Sys.Req. Index',
+    longTitle: 'System Requirements Index (percentile)',
     control: 'FancyRange',
     controlOptions: {
       range: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
@@ -270,6 +277,7 @@ export default {
   released_at: {
     id: 24,
     title: 'Released at',
+    longTitle: 'Released time ago',
     control: 'FancyRange',
     controlOptions: options.controls.range.dateBack,
     column: 'TimeAgo',
@@ -278,6 +286,7 @@ export default {
   released_at_absolute: {
     id: 25,
     title: 'Release year',
+    longTitle: 'Precise date of release',
     control: 'FancyRange',
     controlOptions: options.controls.range.datesAbsolute,
     column: 'Date',
@@ -289,6 +298,7 @@ export default {
   vr_mode: {
     id: 26,
     title: 'VR Mode',
+    longTitle: 'Sitting / Standing / Room Scale',
     control: 'Boolean',
     column: 'Boolean',
     width: 24 * 2 + 10
@@ -303,6 +313,7 @@ export default {
   sysreq_video_tokens_values: {
     id: 28,
     title: 'Sys.Req. Index Detail',
+    longTitle: 'System Requirements Index detailed tokens',
     control: 'Null',
     column: 'SysreqTokensDetails',
     sort: false,
