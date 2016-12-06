@@ -1,15 +1,33 @@
 .ControlsList
 
+.ControlsList__cell
+  height: $g*6
+  padding: $g*2 0
+  vertical-align: top
+
 .ControlsList__ControlComponent
   // border-left: solid 1px $color-divider-light
   // padding: $g
-  height: $g * 6
-  padding: $g*2 0
+  // height: $g * 6
+  // padding: $g*2 0
   // padding-bottom: $g*2
-  vertical-align: top
+
 
 .ControlsList__controlOverflow
   position: relative
+
+.ControlsList__ControlPop
+  +z(ControlPop)
+  position: fixed
+  width: 400px
+  height: 300px
+  // top: 300px
+  // left: 300px
+  border-radius: 2px
+  background: $color-mono-4
+  box-shadow: $shadow-dialog
+
+.ControlsList__ControlButton
 
 +media('<desktop')
   .ControlsList

@@ -60,6 +60,10 @@ export default class TextControl extends Component {
     }
   }
 
+  focus () {
+    this.refs.input.focus()
+  }
+
   render () {
     let transform = {
       transform: `scaleY(${this.state.changeTimeoutProgress})`
@@ -72,7 +76,8 @@ export default class TextControl extends Component {
           onKeyUp={this.onKeyUp}
           onBlur={this.submit}
           hint='Search games by name'
-          onChange={this.onChange}/>
+          onChange={this.onChange}
+          ref='input'/>
         <div className={th.TextControl__timebar} style={transform}></div>
       </div>
     )

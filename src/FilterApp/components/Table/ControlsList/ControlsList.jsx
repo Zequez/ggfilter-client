@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { partial } from 'shared/lib/utils'
 import { setParam } from '../../../filter/reducer'
 
-import ControlComponent from './ControlComponent'
+import ControlButton from './ControlButton'
 
 @connect((s) => ({}), {
   setParam
@@ -23,11 +23,12 @@ export default class ControlsList extends Component {
     return (
       <tr className={th.ControlsList}>
         {filters.map((filter) => (
-          <ControlComponent
-            key={filter.name}
-            filter={filter}
-            params={filtersParams[filter.name]}
-            onChange={partial(setParam, filter.name)}/>
+          <th className={th.ControlsList__cell} key={filter.name}>
+            <ControlButton
+              filter={filter}
+              params={filtersParams[filter.name]}
+              onChange={partial(setParam, filter.name)}/>
+          </th>
         ))}
       </tr>
     )
