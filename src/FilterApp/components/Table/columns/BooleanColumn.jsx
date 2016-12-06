@@ -1,13 +1,17 @@
+import th from './columns.sass'
 import React, { Component, PropTypes as t } from 'react'
 import enumColumns from '../../../config/enumColumns'
+import cx from 'classnames'
+import Icon from 'shared/components/Icon'
+import tooltipFactory from 'shared/components/Tooltip'
+
+const TooltipIcon = tooltipFactory(Icon, { position: 'top' })
 
 export default class BooleanColumn extends Component {
   static propTypes = {
     value: t.number.isRequired,
     name: t.string.isRequired
   }
-
-  static noOverflowContainer = true
 
   constructor (props) {
     super(props)
@@ -21,16 +25,20 @@ export default class BooleanColumn extends Component {
   }
 
   render () {
-    let icons = this.keys.map((k) => {
-      let className = this.checked(this.values[k]) ? ('icon-' + k) : ''
-      return (
-        <i key={k} title={this.names[k]} className={'fa ' + className}></i>
-      )
-    })
-
     return (
-      <div className='icons-list'>
-        {icons}
+      <div className={th.BooleanColumn}>
+        {this.keys.map((k) => (
+          <TooltipIcon
+            tooltip={this.names[k]}
+            key={k}
+            icon={'boolean-' + k}
+            className={cx(
+              th.BooleanColumn__Icon, {
+                [th.BooleanColumn__Icon_disabled]: !this.checked(this.values[k])
+              })
+            }
+          />
+        ))}
       </div>
     )
   }

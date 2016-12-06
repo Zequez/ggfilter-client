@@ -203,21 +203,24 @@ export default {
     title: 'Platforms',
     control: 'Boolean',
     column: 'Boolean',
-    width: 24 * 3 + 10
+    width: 24 * 3 + 10,
+    alignment: 0
   },
   players: {
     id: 17,
     title: 'Players',
     control: 'Boolean',
     column: 'Boolean',
-    width: 24 * 4 + 10
+    width: 24 * 4 + 10,
+    alignment: 0
   },
   vr_platforms: {
     id: 18,
     title: 'VR platforms',
     control: 'Boolean',
     column: 'Boolean',
-    width: 24 * 2 + 10
+    width: 24 * 2 + 10,
+    alignment: 0
   },
   controller_support: {
     id: 19,
@@ -231,7 +234,8 @@ export default {
         '3': 'Full'
       },
       strictlyRangeMode: false
-    }
+    },
+    alignment: 0
   },
   steam_thumbnail: {
     id: 20,
@@ -302,14 +306,16 @@ export default {
     longTitle: 'Sitting / Standing / Room Scale',
     control: 'Boolean',
     column: 'Boolean',
-    width: 24 * 2 + 10
+    width: 24 * 2 + 10,
+    alignment: 0
   },
   vr_controllers: {
     id: 27,
     title: 'VR Controllers',
     control: 'Boolean',
     column: 'Boolean',
-    width: 24 * 2 + 10
+    width: 24 * 2 + 10,
+    alignment: 0
   },
   sysreq_video_tokens_values: {
     id: 28,

@@ -102,59 +102,48 @@ $fa-font-path: 'font-awesome/fonts/'
 
 // Boolean filters icons
 
-.icon-steam_achievements:before
-  content: $fa-var-certificate
-.icon-steam_trading_cards:before
-  content: $fa-var-file
-.icon-steam_workshop:before
-  content: $fa-var-wrench
-.icon-steam_cloud:before
-  content: $fa-var-cloud
-.icon-valve_anti_cheat:before
-  content: $fa-var-shield
+
++gicon(boolean-steam_achievements, $fa-var-certificate)
++gicon(boolean-steam_trading_cards, $fa-var-file)
++gicon(boolean-steam_workshop, $fa-var-wrench)
++gicon(boolean-steam_cloud, $fa-var-cloud)
++gicon(boolean-valve_anti_cheat, $fa-var-shield)
 
 +gicon(boolean-win, $fa-var-windows)
 +gicon(boolean-mac, $fa-var-apple)
 +gicon(boolean-linux, $fa-var-linux)
 
-.icon-single_player:before
-  content: $fa-var-user
-.icon-multi_player:before
-  content: $fa-var-users
-.icon-co_op:before
-  content: $fa-var-user-plus
-.icon-local_co_op:before
-  content: $fa-var-home
++gicon(boolean-single_player, $fa-var-user)
++gicon(boolean-multi_player, $fa-var-users)
++gicon(boolean-co_op, $fa-var-user-plus)
++gicon(boolean-local_co_op, $fa-var-home)
 
-.icon-vive
++gicon(boolean-vive, $fa-var-play-circle)
+:global(.icon-boolean-vive)
   transform: rotate(-90deg) translateX(-1px)
-  &:before
-    content: $fa-var-play-circle
++gicon(boolean-oculus, '⬭')
+:global(.icon-boolean-oculus:before)
+  display: block
+  transform: translateY(-2px)
 
-.icon-oculus:before
-  content: ' '
-  display: inline-block
-  width: 8px
-  height: 3px
-  border: solid 4px $dark-blue
-  border-radius: $r/2
-.boolean-checked
-  .icon-oculus:before
-    border-color: $white
+// .icon-boolean-oculus:before
+//   content: ' '
+//   display: inline-block
+//   width: 8px
+//   height: 3px
+//   border: solid 4px $color-text-sec
+//   border-radius: $r/2
+// .boolean-checked
+//   .icon-boolean-oculus:before
+//     border-color: $white
 
-.icon-tracked:before
-  content: $fa-var-video-camera
-.icon-gamepad:before
-  content: $fa-var-gamepad
-.icon-keyboard_mouse:before
-  content: $fa-var-keyboard-o
++gicon(boolean-tracked, $fa-var-video-camera)
++gicon(boolean-gamepad, $fa-var-gamepad)
++gicon(boolean-keyboard_mouse, $fa-var-keyboard-o)
 
-.icon-seated:before
-  content: $fa-var-wheelchair
-.icon-standing:before
-  content: $fa-var-male
-.icon-room_scale:before
-  content: $fa-var-street-view
++gicon(boolean-seated, $fa-var-wheelchair)
++gicon(boolean-standing, $fa-var-male)
++gicon(boolean-room_scale, $fa-var-street-view)
 
 // Games loader
 .icon-load-more-left:before

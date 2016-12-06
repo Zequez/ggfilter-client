@@ -4,8 +4,10 @@ import React, { Component, PropTypes as t } from 'react'
 import enumColumns from '../../../config/enumColumns'
 import cx from 'classnames'
 import rippleFactory from 'shared/components/Ripple'
+import Icon from 'shared/components/Icon'
+import tooltipFactory from 'shared/components/Tooltip'
 
-const RippledLabel = rippleFactory()('label')
+const LabelPlus = tooltipFactory(rippleFactory()('label'), {position: 'top'})
 
 export default class BooleanControl extends Component {
   static propTypes = {
@@ -84,7 +86,7 @@ export default class BooleanControl extends Component {
       let labelClass = cx(th.BooleanControl__Label, {
         [th.BooleanControl__Label_checked]: checked
       })
-      let iconClass = cx(th.BooleanControl__Icon, 'fa', 'icon-boolean-' + key)
+
       let id = `boolean-${enumType}-${key}`
 
       inputs.push(
@@ -99,10 +101,10 @@ export default class BooleanControl extends Component {
       )
 
       inputs.push(
-        <RippledLabel key={key + 'l'} className={labelClass} title={name} htmlFor={id}>
-          <i className={iconClass}></i>
+        <LabelPlus key={key + 'l'} className={labelClass} tooltip={name} htmlFor={id}>
+          <Icon icon={'boolean-' + key} className={th.BooleanControl__Icon}/>
           <span className={th.BooleanControl__Title}>{name}</span>
-        </RippledLabel>
+        </LabelPlus>
       )
     })
 
@@ -122,12 +124,12 @@ export default class BooleanControl extends Component {
           checked={this.state.or}
           id={opId}
           onChange={this.onOperatorChange}/>
-        <RippledLabel className={operatorLabelClass} htmlFor={opId} title='AND/OR'>
+        <LabelPlus className={operatorLabelClass} htmlFor={opId} tooltip='AND/OR'>
           <div className={th.BooleanControl__OperatorSlider}>
             <span className={th.BooleanControl__OperatorAnd}>AND</span>
             <span className={th.BooleanControl__OperatorOr}>OR</span>
           </div>
-        </RippledLabel>
+        </LabelPlus>
       </div>
     )
   }
