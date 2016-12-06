@@ -1,7 +1,7 @@
 import th from './ControlsList.sass'
 import React, { PropTypes as t, Component } from 'react'
 import Button from 'shared/components/Button'
-import ControlPop from './ControlPop'
+import ControlPop from '../../ControlPop'
 
 export default class ControlButton extends Component {
   static propTypes = {

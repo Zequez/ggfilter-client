@@ -220,7 +220,7 @@ export function onClickOutsideOnce (target, cb) {
   if (document) {
     let doc = document.documentElement
     const binding = (ev) => {
-      if (!isParentOf(target, ev.target)) {
+      if (target !== ev.target && !isParentOf(target, ev.target)) {
         if (cb(ev) !== false) {
           doc.removeEventListener('click', binding)
         }
