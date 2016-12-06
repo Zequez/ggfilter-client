@@ -18,7 +18,6 @@ export default class ControlsList extends Component {
   }
 
   render () {
-    console.logRender('DataTableControls')
     let { filters, filtersParams, setParam } = this.props
 
     return (
