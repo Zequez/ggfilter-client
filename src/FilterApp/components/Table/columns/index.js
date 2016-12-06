@@ -1,17 +1,15 @@
-module.exports = {
-  Boolean: require('./BooleanColumn').default,
-  Date: require('./DateColumn').default,
-  Images: require('./ImagesColumn').default,
-  Link: require('./LinkColumn').default,
-  Price: require('./PriceColumn').default,
-  Ratio: require('./RatioColumn').default,
-  Raw: require('./RawColumn').default,
-  SystemReq: require('./SystemReqColumn').default,
-  Tags: require('./TagsColumn').default,
-  TimeAgo: require('./TimeAgoColumn').default,
-  SysreqTokensDetails: require('./SysreqTokensDetailsColumn').default,
-  Toggle: require('./ToggleColumn').default,
-  SysreqIndex: require('./SysreqIndexColumn').default,
-  Discount: require('./DiscountColumn').default,
-  Controller: require('./ControllerColumn').default
-}
+export Boolean from './BooleanColumn'
+export Date from './DateColumn'
+export Images from './ImagesColumn'
+export Link from './LinkColumn'
+export Price from './PriceColumn'
+export Ratio from './RatioColumn'
+export Raw from './RawColumn'
+export SystemReq from './SystemReqColumn'
+export Tags from './TagsColumn'
+export TimeAgo from './TimeAgoColumn'
+export SysreqTokensDetails from './SysreqTokensDetailsColumn'
+export Toggle from './ToggleColumn'
+export SysreqIndex from './SysreqIndexColumn'
+export Discount from './DiscountColumn'
+export Controller from './ControllerColumn'

@@ -1,7 +1,7 @@
 import th from './ControlsList.sass'
 import React from 'react'
 import cn from 'classnames'
-import controlsDefinitions from '../controls'
+import * as controlsDefinitions from '../controls'
 
 export default ({filter, params, onChange}) => {
   let controlClass = cn(

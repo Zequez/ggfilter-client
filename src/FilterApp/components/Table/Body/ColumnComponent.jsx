@@ -1,7 +1,7 @@
 import th from './Body.sass'
 import React from 'react'
 import cx from 'classnames'
-import columnsDefinitions from '../columns'
+import * as columnsDefinitions from '../columns'
 import { partial } from 'shared/lib/utils'
 
 function columnInputValues (game, filter) {

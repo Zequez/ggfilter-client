@@ -1,10 +1,8 @@
-module.exports = {
-  FancyRange: require('./FancyRangeControl/FancyRangeControl').default,
-  Tags: require('./TagsControl/TagsControl').default,
-  Boolean: require('./BooleanControl').default,
-  Null: require('./NullControl').default,
-  Number: require('./NumberControl').default,
-  Text: require('./TextControl').default,
-  Toggle: require('./ToggleControl').default,
-  Range: require('./RangeControl').default
-}
+export FancyRange from './FancyRangeControl/FancyRangeControl'
+export Tags from './TagsControl/TagsControl'
+export Boolean from './BooleanControl'
+export Null from './NullControl'
+export Number from './NumberControl'
+export Text from './TextControl'
+export Toggle from './ToggleControl'
+export Range from './RangeControl'
