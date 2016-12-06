@@ -6,7 +6,7 @@ import * as controlsDefinitions from '../controls'
 export default ({filter, params, onChange}) => {
   let controlClass = cn(
     filter.name,
-    th.ControlsList__Control
+    th.ControlsList__ControlComponent
     // th['control-' + filter.control]
   )
 
@@ -21,7 +21,9 @@ export default ({filter, params, onChange}) => {
 
   return (
     <th className={controlClass}>
-      <Component {...props}/>
+      <div className={th.ControlsList__controlOverflow}>
+        <Component {...props}/>
+      </div>
     </th>
   )
 }
