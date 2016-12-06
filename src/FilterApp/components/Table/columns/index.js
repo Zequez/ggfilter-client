@@ -12,5 +12,6 @@ module.exports = {
   SysreqTokensDetails: require('./SysreqTokensDetailsColumn').default,
   Toggle: require('./ToggleColumn').default,
   SysreqIndex: require('./SysreqIndexColumn').default,
-  Discount: require('./DiscountColumn').default
+  Discount: require('./DiscountColumn').default,
+  Controller: require('./ControllerColumn').default
 }

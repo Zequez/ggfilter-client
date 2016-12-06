@@ -235,6 +235,7 @@ export default {
       },
       strictlyRangeMode: false
     },
+    column: 'Controller',
     alignment: 0
   },
   steam_thumbnail: {
