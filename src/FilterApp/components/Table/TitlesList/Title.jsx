@@ -31,7 +31,7 @@ class Title extends Component {
     // Prevent the tooltip from firing if the title is not overflowed
     if (this.props.onMouseEnter) {
       let overflow = this.refs.overflow
-      if (overflow.clientWidth < overflow.scrollWidth) {
+      if (overflow.clientWidth < overflow.scrollWidth || this.props.filter.longTitle) {
         this.props.onMouseEnter(ev)
       }
     }

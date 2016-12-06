@@ -15,8 +15,9 @@ export default class WrappedTitle extends Component {
   }
 
   render () {
-    let sortable = !!this.props.filter.sort
+    let { title, longTitle, sort } = this.props.filter
+    let sortable = !!sort
     let Comp = sortable ? SortableTooltippedTitle : TooltippedTitle
-    return <Comp tooltip={this.props.filter.title} {...this.props}/>
+    return <Comp tooltip={longTitle || title} {...this.props}/>
   }
 }
