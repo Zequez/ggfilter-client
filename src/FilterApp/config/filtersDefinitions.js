@@ -188,6 +188,7 @@ export default {
       label: { '': '{v}%' }
     },
     column: 'Ratio',
+    columnInputs: { ratio: 'steam_reviews_ratio', total: 'steam_reviews_count' },
     width: 100
   },
   features: {

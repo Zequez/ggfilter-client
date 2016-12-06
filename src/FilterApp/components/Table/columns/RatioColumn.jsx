@@ -1,35 +1,41 @@
 import th from './columns'
 import React, { Component, PropTypes as t } from 'react'
+import cx from 'classnames'
+import MicroTag from 'shared/components/MicroTag'
+import tooltipFactory from 'shared/components/Tooltip'
+
+const TooltipMicrotag = tooltipFactory(MicroTag, {position: 'left'})
 
 export default class RatioColumn extends Component {
   static propTypes = {
-    up: t.number,
-    down: t.number,
-    value: t.number
+    ratio: t.number,
+    total: t.number
   }
 
-  static noOverflowContainer = true
+  // static noOverflowContainer = true
 
   render () {
-    var ratio = this.props.value
-    if (!ratio) {
-      let up = this.props.up
-      let down = this.props.down
-      let total = up + down
-      ratio = Math.floor(up / total * 100)
-    }
+    let { ratio, total } = this.props
 
-    var upStyle = {
-      width: `${ratio}%`
-    }
-    var downStyle = {
-      width: `${100 - ratio}%`
-    }
-
-    return (
+    return (total && ratio) ? (
+      <div className={cx(th.RatioColumn, {
+        [th.RatioColumn_sampleLow]: total && total < 100,
+        [th.RatioColumn_sampleHigh]: total && total > 1000,
+        [th.RatioColumn_noSamples]: total === 0
+      })}>
+        <div className={th.RatioColumn__up} style={{ width: `${ratio}%` }}></div>
+        <div className={th.RatioColumn__down} style={{ width: `${100 - ratio}%` }}></div>
+        <div className={th.RatioColumn__microTagContainer}>
+          <TooltipMicrotag
+            className={th.RatioColumn__MicroTag}
+            tag={total}
+            deco={ratio + '%'}
+            tooltip={`${total} reviews, ${ratio}% positive`}/>
+        </div>
+      </div>
+    ) : (
       <div className={th.RatioColumn}>
-        <div className={th.RatioColumn__up} style={upStyle}></div>
-        <div className={th.RatioColumn__down} style={downStyle}></div>
+        <div className={th.RatioColumn__noData}>No reviews</div>
       </div>
     )
   }
