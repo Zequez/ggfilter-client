@@ -189,14 +189,16 @@ export default {
     },
     column: 'Ratio',
     columnInputs: { ratio: 'steam_reviews_ratio', total: 'steam_reviews_count' },
-    width: 100
+    width: 100,
+    alignment: 0
   },
   features: {
     id: 15,
     title: 'Steam features',
     control: 'Boolean',
     column: 'Boolean',
-    width: 24 * 5 + 10
+    width: 24 * 5 + 10,
+    alignment: 0
   },
   platforms: {
     id: 16,
