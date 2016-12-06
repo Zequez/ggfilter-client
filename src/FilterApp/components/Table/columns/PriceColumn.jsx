@@ -20,9 +20,11 @@ export default class PriceColumn extends Component {
 
     return (
       <div className={th.PriceColumn}>
-        {this.elem(was !== price ? was : null, th.PriceColumn__PriceWas)}
-        {this.elem(price, th.PriceColumn__PriceIs)}
-        {price == null && was == null ? '-' : ''}
+        <div className={th.PriceColum__prices}>
+          {this.elem(was !== price ? was : null, th.PriceColumn__PriceWas)}
+          {this.elem(price, th.PriceColumn__PriceIs)}
+          {price == null && was == null ? '-' : ''}
+        </div>
       </div>
     )
   }
