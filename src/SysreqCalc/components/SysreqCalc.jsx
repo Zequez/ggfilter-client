@@ -9,7 +9,7 @@ import Link from 'shared/components/RouterLink'
 import { AutoPage } from 'src/Layout'
 
 import Chip from 'react-toolbox/lib/chip'
-import { Button } from 'react-toolbox/lib/button'
+import Button from 'shared/components/Button'
 
 import SuggestionsBox from './SuggestionsBox'
 import CalcResult from './CalcResult'
@@ -126,7 +126,8 @@ export default class SysreqCalc extends Component {
           It's <Link to='aboutSysreq'>calculated by an automated algorithm</Link>.
         </p>
         <div className={th.actionBar}>
-          <Button label='Apply filter' raised primary accent
+          <Button
+            label='Apply filter'
             disabled={!calcs.mean}
             onClick={this.submitFilter}/>
         </div>

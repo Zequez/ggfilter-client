@@ -1,0 +1,56 @@
+// Specifications: https://material.google.com/components/buttons.html#buttons-style
+
+// @keyframes raiseButton
+//   from
+//     transform: none
+//   to
+//     transform: translateY(-2px)
+
+.Button
+  position: relative
+  display: inline-block
+  min-width: 64px
+  height: 36px
+  padding: 0 16px
+  border: none
+  border-radius: 2px
+  background: transparent
+  line-height: 36px
+  text-align: center
+  font-size: 13px
+  font-weight: $font-weight-medium
+  color: $color-text-pri
+  text-transform: uppercase
+  cursor: pointer
+  overflow: hidden
+  &:focus, &:hover
+    outline: none
+
+.Button_flat
+  &:hover, &:focus
+    background: $color-mono-2
+.Button_raised
+  color: $color-text-pri-alt
+  background: $color-pri
+  transition: transform 0.2s, box-shadow 0.2s
+  &:not(:active), &:active
+    animation: raiseButton 0.2s
+  &:hover
+    box-shadow: $shadow-button
+  // &:focus
+  //   background: mix(#000, $color-pri, 12%)
+  //   color: mix(#000, $color-text-pri-alt, 12%)
+  &:active
+    box-shadow: $shadow-buttonRaised
+    transform: translateY(-2px)
+  &.Button_disabled
+    color: $color-text-dis!important
+    background: rgba(#000, .12)!important
+    box-shadow: none!important
+
+
+.Button_primary
+.Button_accent
+.Button_disabled
+  background: transparent
+  box-shadow: none
