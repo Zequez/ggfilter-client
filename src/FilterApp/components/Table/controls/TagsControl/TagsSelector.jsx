@@ -72,6 +72,7 @@ export default class TagsSelector extends Component {
 
     return (
       <div
+        className={th.TagsControl__TagsSelector}
         onBlur={this.onBlur}
         onFocus={this.onFocus}
         onKeyDown={this.onKeyPress}

@@ -11,44 +11,16 @@
   &__SelectedTags
     overflow: hidden
     position: absolute
-    left: 0px
-    top: $g
+    left: $g
+    top: $g*2
     bottom: 0px
     padding-right: 2px
     max-width: 75%
-    // font-size: $font-size-caption
-    // line-height: $font-size-input
     z-index: 15
-
-  // &__SelectedTag
-  //   position: relative
-  //   display: inline-block
-  //   margin-right: $g/2
-  //   padding: 0 2px
-  //   height: $g*2
-  //   background: $color-primary
-  //   border-radius: 2px 10px 10px 2px
-  //   color: $color-text-pri-alt
-  //   line-height: $g*2
-
-  // &__RemoveTag
-  //   height: $g*2
-  //   width: $g*2
-  //   vertical-align: top
-  //   margin-left: $g/2
-  //   margin-right: -2px
-  //
-  //   background: $color-primary-light
-  //   border-radius: 10px
-  //   color: $color-text-pri
-  //   font-size: $font-size-caption
-  //   cursor: pointer
 
 
   &__TagsSelector
-    position: absolute
-    top: 100%
-    box-shadow: 0 0 10px rgba(#000, 0.5)
+    position: relative
 
   &__Tag
     padding: 0 $r/4
@@ -59,6 +31,7 @@
     color: $white
 
   &__FloatingMenu
+    +z(dropdown)
     position: absolute
     top: 100%
     left: 0
