@@ -101,7 +101,12 @@ export default class BooleanControl extends Component {
       )
 
       inputs.push(
-        <LabelPlus key={key + 'l'} className={labelClass} tooltip={name} htmlFor={id}>
+        <LabelPlus
+          key={key + 'l'}
+          className={labelClass}
+          tooltip={name}
+          htmlFor={id}
+          rippleDisabled={checked}>
           <Icon icon={'boolean-' + key} className={th.BooleanControl__Icon}/>
           <span className={th.BooleanControl__Title}>{name}</span>
         </LabelPlus>

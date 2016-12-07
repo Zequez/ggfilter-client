@@ -27,6 +27,7 @@ const rippleFactory = (options = {}) => {
       static propTypes = {
         children: PropTypes.any,
         disabled: PropTypes.bool,
+        rippleDisabled: PropTypes.bool,
         onRippleEnded: PropTypes.func,
         ripple: PropTypes.bool,
         rippleCentered: PropTypes.bool,
@@ -37,6 +38,7 @@ const rippleFactory = (options = {}) => {
 
       static defaultProps = {
         disabled: false,
+        rippleDisabled: false,
         ripple: true,
         rippleCentered: defaultCentered,
         rippleClassName: defaultClassName,
@@ -196,7 +198,7 @@ const rippleFactory = (options = {}) => {
 
       handleMouseDown = (event) => {
         if (this.props.onMouseDown) this.props.onMouseDown(event)
-        if (!this.props.disabled) {
+        if (!this.props.disabled && !this.props.rippleDisabled) {
           const { x, y } = events.getMousePosition(event)
           this.animateRipple(x, y, false)
         }
@@ -204,7 +206,7 @@ const rippleFactory = (options = {}) => {
 
       handleTouchStart = (event) => {
         if (this.props.onTouchStart) this.props.onTouchStart(event)
-        if (!this.props.disabled) {
+        if (!this.props.disabled && !this.props.rippleDisabled) {
           const { x, y } = events.getTouchPosition(event)
           this.animateRipple(x, y, true)
         }
@@ -231,7 +233,7 @@ const rippleFactory = (options = {}) => {
 
       render () {
         const { ripples } = this.state
-        const { onRippleEnded, rippleCentered, rippleMultiple, rippleSpread, // eslint-disable-line
+        const { onRippleEnded, rippleCentered, rippleMultiple, rippleSpread, rippleDisabled, // eslint-disable-line
           children, ripple, rippleClassName, ...other } = this.props
 
         if (!ripple) return <ComposedComponent children={children} {...other} />

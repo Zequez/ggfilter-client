@@ -3,9 +3,9 @@ import Ripple from 'shared/components/Ripple'
 import myTooltipFactory from 'shared/components/Tooltip'
 import Toggle from './Toggle'
 
-const TooltippedToggle = myTooltipFactory(Toggle)
+const TooltippedToggle = Ripple()(myTooltipFactory(Toggle))
 
-class TooltipRippledToggle extends Component {
+export default class TooltipRippledToggle extends Component {
   static propTypes = {
     active: t.bool.isRequired,
     onToggle: t.func.isRequired,
@@ -15,9 +15,9 @@ class TooltipRippledToggle extends Component {
 
   render () {
     return (
-      <TooltippedToggle tooltip={this.props.title} {...this.props}/>
+      <TooltippedToggle
+        rippleDisabled={this.props.active}
+        tooltip={this.props.title} {...this.props}/>
     )
   }
 }
-
-export default Ripple()(TooltipRippledToggle)

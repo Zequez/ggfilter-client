@@ -100,11 +100,13 @@ export default class ControlPop extends Component {
         <div className={classNames} style={style} ref='pop'>
           <div className={th.ControlPop__centerer}>
             <ControlComponent {...other} ref='control'/>
-            <Button
-              flat
-              label='Done'
-              onClick={this.initiateClosing}
-              className={th.ControlList__ControlPop__closeButton}/>
+            <div className={th.ControlPop__actions}>
+              <Button
+                flat
+                label='Done'
+                onClick={this.initiateClosing}
+                className={th.ControlList__ControlPop__closeButton}/>
+            </div>
           </div>
         </div>
       </Portal>
