@@ -243,14 +243,22 @@ export function pairs (obj) {
   return mapObject(obj, (key, value) => [key, value])
 }
 
-export function bindGlobalKey (keyCode, cb) {
+export function bindGlobalKey (keyCodes, cb) {
+  if (!Array.isArray(keyCodes)) keyCodes = [keyCodes]
   return bindGlobal('keydown', (ev) => {
     let key = ev.charCode || ev.keyCode
-    console.log(key)
-    if (key === 1234) {
-      cb()
+    if (keyCodes.indexOf(key) !== -1) {
+      cb(key)
     }
   })
+}
+
+export function bindGlobalKeyOnce (keyCode, cb) {
+  let unbind = bindGlobalKey(keyCode, (key) => {
+    unbind()
+    cb(key)
+  })
+  return unbind
 }
 
 export function bindGlobal (event, binding) {

@@ -1,7 +1,7 @@
 import th from './ControlPop.sass'
 import React, { Component, PropTypes as t } from 'react'
 import cx from 'classnames'
-import { elementOffsetTop, elementOffsetLeft, onClickOutsideOnce } from 'shared/lib/utils'
+import { elementOffsetTop, elementOffsetLeft, onClickOutsideOnce, bindGlobalKeyOnce } from 'shared/lib/utils'
 import Portal from 'shared/components/Portal'
 import Button from 'shared/components/Button'
 
@@ -26,6 +26,10 @@ export default class ControlPop extends Component {
     onClickOutsideOnce(this.refs.pop, () => {
       this.initiateClosing()
     })
+    bindGlobalKeyOnce(27, () => { // ESC
+      this.initiateClosing()
+    })
+
 
     this.setState({firstFrame: false, ...this.getViewportAdjust()})
   }
