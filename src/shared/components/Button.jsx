@@ -39,7 +39,7 @@ class Button extends Component {
         [th.Button_primary]: primary,
         [th.Button_accent]: accent,
         [th.Button_disabled]: disabled
-      })} disabled={disabled} onClick={this.onClick} {...other}>
+      })} disabled={disabled} {...other} onClick={this.onClick} >
         { icon ? <Icon icon={icon}/> : null }
         {label}
         {children}
