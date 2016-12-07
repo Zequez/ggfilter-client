@@ -15,7 +15,7 @@ import Table from './Table/Table'
 // import GamesLoader from './GamesLoader'
 import Shortcuts from './Shortcuts'
 import CategoriesList from './CategoriesList'
-import FilterChips from './FilterChips'
+import QueryChipsList from './QueryChipsList'
 
 import { AppBar } from 'src/Layout'
 
@@ -70,7 +70,7 @@ export default class FilterApp extends Component {
       <div className={th.FilterApp}>
         <AppBar className={th.FilterApp__AppBar}>
           <h1>Filterrr!</h1>
-          <FilterChips filter={filter} onRemove={this.onRemoveFilter}/>
+          <QueryChipsList filter={filter} onRemove={this.onRemoveFilter}/>
         </AppBar>
         {/*<Shortcuts/>*/}
         <CategoriesList/>

@@ -1,7 +1,7 @@
-import th from './FilterChips.sass'
+import th from './QueryChipsList.sass'
 import React, { PropTypes as t, Component } from 'react'
 import definitions from '../../lib/definitions'
-import FilterChip from './FilterChip'
+import QueryChip from '../QueryChip'
 
 export default class FilterChips extends Component {
   static propTypes = {
@@ -26,7 +26,7 @@ export default class FilterChips extends Component {
       let query = params[name]
       if (query !== false && query !== true) {
         chips.push(
-          <FilterChip
+          <QueryChip
             key={name}
             query={query}
             filter={definitions.filters[name]}
@@ -36,8 +36,8 @@ export default class FilterChips extends Component {
     }
 
     return (
-      <div className={th.FilterChips}>
-        <div className={th.FilterChips__titleLabel}>
+      <div className={th.QueryChipsList}>
+        <div className={th.QueryChipsList__titleLabel}>
           Filters
         </div>
         {chips}

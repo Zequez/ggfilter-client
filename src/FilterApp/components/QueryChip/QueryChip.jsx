@@ -1,4 +1,4 @@
-import th from './FilterChips.sass'
+import th from './QueryChip.sass'
 import React, { PropTypes as t, Component } from 'react'
 import cx from 'classnames'
 import { capitalizeFirstLetter } from 'shared/lib/utils'
@@ -10,7 +10,7 @@ import * as chips from './chips'
 
 const TooltipDiv = tooltipFactory('div', { position: 'top' })
 
-export default class FilterChip extends Component {
+export default class QueryChip extends Component {
   static propTypes = {
     query: t.oneOfType([t.object, t.bool]),
     filter: t.object, // Definition
@@ -30,8 +30,8 @@ export default class FilterChip extends Component {
     const { query, filter, iconVisible, onRemove } = this.props
 
     const ChipComponent = chips[filter.chip]
-    const className = cx(th.FilterChips__FilterChip, {
-      [th.FilterChips__FilterChip_hl]: !!query.hl
+    const className = cx(th.QueryChip, {
+      [th.QueryChip_hl]: !!query.hl
     })
 
     const tooltipPre = query.hl ? 'Highlighting: ' : 'Filtering by: '
@@ -40,12 +40,12 @@ export default class FilterChip extends Component {
     return (
       <TooltipDiv className={className} onClick={this.openControl} tooltip={tooltip}>
         { iconVisible ? (
-          <Icon icon={'filter-' + filter.name} className={th.FilterChips__Icon}/>
+          <Icon icon={'filter-' + filter.name} className={th.QueryChip__Icon}/>
         ) : null }
-        <span className={th.FilterChips__text}>
+        <span className={th.QueryChip__text}>
           <ChipComponent query={query} options={filter.chipOptions}/>
         </span>
-        <Icon icon='remove-chip' className={th.FilterChips__remove} onClick={onRemove}/>
+        <Icon icon='remove-chip' className={th.QueryChip__remove} onClick={onRemove}/>
       </TooltipDiv>
     )
   }
