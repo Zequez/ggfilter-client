@@ -15,6 +15,8 @@ import Table from './Table/Table'
 import Shortcuts from './Shortcuts'
 import CategoriesList from './CategoriesList'
 
+import { AppBar } from 'src/Layout'
+
 @connect((s) => ({
   filter: finalFilterSelector(s),
   visibleFilters: visibleFiltersDefinitionsSelector(s),
@@ -57,6 +59,9 @@ export default class FilterApp extends Component {
 
     return (
       <div className={th.FilterApp}>
+        <AppBar className={th.FilterApp__AppBar}>
+          <h1>Filterrr!</h1>
+        </AppBar>
         <Shortcuts/>
         <CategoriesList/>
         <Table
