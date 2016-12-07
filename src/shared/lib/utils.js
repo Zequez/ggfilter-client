@@ -276,3 +276,7 @@ export function removeObjectKey (key, object) {
     .forEach(k => { newObject[k] = object[k] })
   return newObject
 }
+
+export function capitalizeFirstLetter (text) {
+  return text.charAt(0).toUpperCase() + text.slice(1)
+}

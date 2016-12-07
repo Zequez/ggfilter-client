@@ -138,8 +138,8 @@ export default {
     'with a Steam reviews ratio <≥{gt}%>',
     'with a Steam reviews ratio <≤{lt}%>'
   ),
-  tags: ({tags}, store) => {
-    tags = tags.map((id) => '<' + h(store.tags[id]) + '>')
+  tags: ({tags}, filter) => {
+    tags = tags.map((id) => '<' + h(filter.columnOptions.tags[id]) + '>')
     if (tags.length > 1) {
       let lastTag = tags.pop()
       return 'tagged as ' + tags.join(', ') + ' and ' + lastTag
