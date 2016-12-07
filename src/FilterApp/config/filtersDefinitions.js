@@ -197,6 +197,7 @@ export default {
     title: 'Steam features',
     control: 'Boolean',
     column: 'Boolean',
+    chip: 'Boolean',
     width: 24 * 5 + 10,
     alignment: 0
   },
@@ -205,6 +206,7 @@ export default {
     title: 'Platforms',
     control: 'Boolean',
     column: 'Boolean',
+    chip: 'Boolean',
     width: 24 * 3 + 10,
     alignment: 0
   },
@@ -213,6 +215,7 @@ export default {
     title: 'Players',
     control: 'Boolean',
     column: 'Boolean',
+    chip: 'Boolean',
     width: 24 * 4 + 10,
     alignment: 0
   },
@@ -221,6 +224,7 @@ export default {
     title: 'VR platforms',
     control: 'Boolean',
     column: 'Boolean',
+    chip: 'Boolean',
     width: 24 * 2 + 10,
     alignment: 0
   },
@@ -310,6 +314,7 @@ export default {
     longTitle: 'Sitting / Standing / Room Scale',
     control: 'Boolean',
     column: 'Boolean',
+    chip: 'Boolean',
     width: 24 * 2 + 10,
     alignment: 0
   },
@@ -318,6 +323,7 @@ export default {
     title: 'VR Controllers',
     control: 'Boolean',
     column: 'Boolean',
+    chip: 'Boolean',
     width: 24 * 2 + 10,
     alignment: 0
   },

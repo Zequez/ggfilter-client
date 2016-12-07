@@ -43,7 +43,7 @@ export default class QueryChip extends Component {
           <Icon icon={'filter-' + filter.name} className={th.QueryChip__Icon}/>
         ) : null }
         <span className={th.QueryChip__text}>
-          <ChipComponent query={query} options={filter.chipOptions}/>
+          <ChipComponent query={query} options={filter.chipOptions} name={filter.name}/>
         </span>
         <Icon icon='remove-chip' className={th.QueryChip__remove} onClick={onRemove}/>
       </TooltipDiv>
