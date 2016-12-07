@@ -6,7 +6,7 @@ import Portal from 'shared/components/Portal'
 import Button from 'shared/components/Button'
 
 // Should move this outside if I'm gonna use it here
-import ControlComponent from './Table/ControlsList/ControlComponent'
+import Control from './Control'
 
 export default class ControlPop extends Component {
   static propTypes = {
@@ -53,8 +53,6 @@ export default class ControlPop extends Component {
       top = -coords.top
     }
 
-    console.log(left, top)
-
     return { viewportAdjustLeft: left, viewportAdjustTop: top }
   }
 
@@ -99,7 +97,7 @@ export default class ControlPop extends Component {
       <Portal>
         <div className={classNames} style={style} ref='pop'>
           <div className={th.ControlPop__centerer}>
-            <ControlComponent {...other} ref='control'/>
+            <Control {...other} ref='control'/>
             <div className={th.ControlPop__actions}>
               <Button
                 flat

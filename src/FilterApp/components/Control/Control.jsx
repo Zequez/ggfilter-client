@@ -1,7 +1,7 @@
-import th from './ControlsList.sass'
+import th from './Control.sass'
 import React, { PropTypes as t, Component } from 'react'
-import cn from 'classnames'
-import * as controlsDefinitions from '../controls'
+import cx from 'classnames'
+import * as controlsDefinitions from './controls'
 
 export default class ControlComponent extends Component {
   static propTypes = {
@@ -17,12 +17,6 @@ export default class ControlComponent extends Component {
   render () {
     const {filter, params, onChange} = this.props
 
-    const controlClass = cn(
-      filter.name,
-      th.ControlsList__ControlComponent
-      // th['control-' + filter.control]
-    )
-
     const props = {
       query: (params === true || params === false) ? undefined : params,
       name: filter.name,
@@ -33,8 +27,8 @@ export default class ControlComponent extends Component {
     let Component = controlsDefinitions[filter.control]
 
     return (
-      <div className={controlClass}>
-        <div className={th.ControlsList__controlOverflow}>
+      <div className={cx(th.Control, filter.name)}>
+        <div className={th.Control__overflow}>
           <Component {...props} ref='control'/>
         </div>
       </div>
