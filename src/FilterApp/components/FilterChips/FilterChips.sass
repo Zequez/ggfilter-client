@@ -31,8 +31,14 @@
   box-shadow: $shadow-switch
 .FilterChips__remove
   background: $color-mono-2
+  &:hover
+    background: $color-mono-3
 .FilterChips__text
   display: inline-block
   padding: 0 $g
   font-weight: $font-weight-medium
   vertical-align: top
+.FilterChips__FilterChip_hl
+  .FilterChips__Icon
+    background: $color-sec-light
+    color: $color-text-sec

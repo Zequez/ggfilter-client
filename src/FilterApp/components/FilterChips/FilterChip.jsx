@@ -1,5 +1,6 @@
 import th from './FilterChips.sass'
 import React, { PropTypes as t, Component } from 'react'
+import cx from 'classnames'
 import Icon from 'shared/components/Icon'
 import * as chips from './chips'
 
@@ -23,9 +24,12 @@ export default class FilterChip extends Component {
     const { query, filter, iconVisible, onRemove } = this.props
 
     const ChipComponent = chips[filter.chip]
+    const className = cx(th.FilterChips__FilterChip, {
+      [th.FilterChips__FilterChip_hl]: !!query.hl
+    })
 
     return (
-      <div className={th.FilterChips__FilterChip} onClick={this.openControl}>
+      <div className={className} onClick={this.openControl}>
         { iconVisible ? (
           <Icon icon={'filter-' + filter.name} className={th.FilterChips__Icon}/>
         ) : null }
