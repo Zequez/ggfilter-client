@@ -66,7 +66,7 @@ export default {
     chipOptions: {
       '': '{v}%',
       '0': 'NotOnSale',
-      '1-100': 'On sale',
+      '1->': 'On sale',
       '100': 'FREE!?'
     },
     width: 50,
