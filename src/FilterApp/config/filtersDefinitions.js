@@ -261,6 +261,7 @@ export default {
     columnOptions: {
       tags: [] // We fill this up later, sadly
     },
+    chip: 'Tags',
     width: 150,
     sort: false
   },

@@ -7,6 +7,7 @@ import definitions from '../lib/definitions'
 
 const { getGames, getMoreGames } = require('../games').actions
 import { setDocWidth } from '../ui/reducer'
+import { setParam } from '../filter/reducer'
 import { getTrueColumnsWidth, getTrueTableWidth, getTab } from '../ui/selectors'
 import { finalFilterSelector, visibleFiltersDefinitionsSelector } from '../filter/selectors'
 
@@ -14,6 +15,7 @@ import Table from './Table/Table'
 // import GamesLoader from './GamesLoader'
 import Shortcuts from './Shortcuts'
 import CategoriesList from './CategoriesList'
+import FilterChips from './FilterChips'
 
 import { AppBar } from 'src/Layout'
 
@@ -28,12 +30,14 @@ import { AppBar } from 'src/Layout'
 }), {
   getGames,
   getMoreGames,
-  setDocWidth
+  setDocWidth,
+  setParam
 })
 export default class FilterApp extends Component {
   static propTypes = {
     getGames: t.func,
-    getMoreGames: t.func
+    getMoreGames: t.func,
+    setParam: t.func
   }
 
   componentWillMount () {
@@ -48,10 +52,15 @@ export default class FilterApp extends Component {
   fillStaticFiltersDefinitionsOptions () {
     definitions.filters.tags.controlOptions.tags = this.props.tags
     definitions.filters.tags.columnOptions.tags = this.props.tags
+    definitions.filters.tags.chipOptions.tags = this.props.tags
   }
 
   handleRequestMoreGames () {
     this.props.getMoreGames()
+  }
+
+  onRemoveFilter = (name) => {
+    this.props.setParam(name, true)
   }
 
   render () {
@@ -61,8 +70,9 @@ export default class FilterApp extends Component {
       <div className={th.FilterApp}>
         <AppBar className={th.FilterApp__AppBar}>
           <h1>Filterrr!</h1>
+          <FilterChips filter={filter} onRemove={this.onRemoveFilter}/>
         </AppBar>
-        <Shortcuts/>
+        {/*<Shortcuts/>*/}
         <CategoriesList/>
         <Table
           games={games}

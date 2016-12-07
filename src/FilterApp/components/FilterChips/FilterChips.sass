@@ -1,0 +1,38 @@
+.FilterChips
+  display: flex
+  align-items: center
+  height: $g*7
+
+.FilterChips__titleLabel
+  margin-right: $g*2
+  text-transform: uppercase
+  color: $color-text-sec-alt
+  font-weight: $font-weight-medium
+  font-size: $font-size-subheading
+
+.FilterChips__FilterChip
+  height: $g*4
+  margin-right: $g
+  border-radius: $g*2
+  background: $color-mono-4
+  box-shadow: $shadow-card
+  line-height: $g*4
+  cursor: pointer
+.FilterChips__Icon, .FilterChips__remove
+  line-height: $g*4
+  height: $g*4
+  width: $g*4
+  border-radius: $g*2
+  text-align: center
+  font-size: $font-size-input
+.FilterChips__Icon
+  background: $color-sec-dark
+  color: $color-text-pri-alt
+  box-shadow: $shadow-switch
+.FilterChips__remove
+  background: $color-mono-2
+.FilterChips__text
+  display: inline-block
+  padding: 0 $g
+  font-weight: $font-weight-medium
+  vertical-align: top

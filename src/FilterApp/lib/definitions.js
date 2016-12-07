@@ -22,6 +22,9 @@ class FilterDefinition {
   columnInputs = null
   columnOptions = {}
 
+  chip = 'Raw'
+  chipOptions = {}
+
   constructor (name, args) {
     this.name = name
     if (args.sort == null) this.sort = name

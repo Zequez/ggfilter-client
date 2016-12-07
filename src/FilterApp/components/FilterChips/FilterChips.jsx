@@ -1,0 +1,47 @@
+import th from './FilterChips.sass'
+import React, { PropTypes as t, Component } from 'react'
+import definitions from '../../lib/definitions'
+import FilterChip from './FilterChip'
+
+export default class FilterChips extends Component {
+  static propTypes = {
+    filter: t.shape({
+      params: t.object.isRequired,
+      sort: t.shape({
+        filter: t.string.isRequired,
+        asc: t.bool.isRequired
+      }).isRequired
+    }).isRequired,
+    onRemove: t.func.isRequired
+  }
+
+  onRemove = (filterName) => {
+    this.props.onRemove(filterName)
+  }
+
+  render () {
+    let { params } = this.props.filter
+    let chips = []
+    for (let name in params) {
+      let query = params[name]
+      if (query !== false && query !== true) {
+        chips.push(
+          <FilterChip
+            key={name}
+            query={query}
+            filter={definitions.filters[name]}
+            onRemove={this.onRemove.bind(this, name)}/>
+        )
+      }
+    }
+
+    return (
+      <div className={th.FilterChips}>
+        <div className={th.FilterChips__titleLabel}>
+          Filters
+        </div>
+        {chips}
+      </div>
+    )
+  }
+}
