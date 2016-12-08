@@ -30,7 +30,6 @@ export default class ControlPop extends Component {
       this.initiateClosing()
     })
 
-
     this.setState({firstFrame: false, ...this.getViewportAdjust()})
   }
 
@@ -67,7 +66,8 @@ export default class ControlPop extends Component {
     }
   }
 
-  getOriginCenter = (target) => {
+  getOriginCenter = () => {
+    const target = this.props.target
     const coords = target.getBoundingClientRect()
 
     return {
@@ -82,11 +82,17 @@ export default class ControlPop extends Component {
     }
   }
 
+  getPermanentOriginCenter = () => {
+    return this._permOriginCenter = this._permOriginCenter || this.getOriginCenter()
+  }
+
   render () {
-    const { target, ...other } = this.props
+    const { target, ...other } = this.props //eslint-disable-line no-unused-vars
     const { firstFrame, lastFrame } = this.state
 
-    const style = this.getOriginCenter(target)
+    const style = firstFrame
+      ? this.getOriginCenter()
+      : this.getPermanentOriginCenter()
 
     const classNames = cx(th.ControlPop, {
       [th.ControlPop_firstFrame]: firstFrame,

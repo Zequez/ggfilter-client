@@ -7,6 +7,7 @@ import generateQueryTitle from '../../lib/generateQueryTitle'
 import Icon from 'shared/components/Icon'
 import tooltipFactory from 'shared/components/Tooltip'
 import * as chips from './chips'
+import ConnectedControlPop from '../ConnectedControlPop'
 
 const TooltipDiv = tooltipFactory('div', { position: 'top' })
 
@@ -22,8 +23,17 @@ export default class QueryChip extends Component {
     iconVisible: true
   }
 
-  openControl = () => {
+  state = {
+    controlOpen: false,
+    popTarget: null
+  }
 
+  openControl = (ev) => {
+    this.setState({controlOpen: true, popTarget: ev.currentTarget})
+  }
+
+  closeControl = () => {
+    this.setState({controlOpen: false, popTarget: null})
   }
 
   render () {
@@ -38,14 +48,29 @@ export default class QueryChip extends Component {
     const tooltip = tooltipPre + capitalizeFirstLetter(generateQueryTitle(filter, query))
 
     return (
-      <TooltipDiv className={className} onClick={this.openControl} tooltip={tooltip}>
+      <TooltipDiv className={className} tooltip={tooltip}>
         { iconVisible ? (
-          <Icon icon={'filter-' + filter.name} className={th.QueryChip__Icon}/>
+          <Icon
+            icon={'filter-' + filter.name}
+            className={th.QueryChip__Icon}
+            onClick={this.openControl}/>
         ) : null }
-        <span className={th.QueryChip__text}>
-          <ChipComponent query={query} options={filter.chipOptions} name={filter.name}/>
+        <span
+          className={th.QueryChip__text}
+          onClick={this.openControl}>
+          <ChipComponent
+            query={query}
+            options={filter.chipOptions}
+            name={filter.name}/>
         </span>
         <Icon icon='remove-chip' className={th.QueryChip__remove} onClick={onRemove}/>
+        { this.state.controlOpen ? (
+          <ConnectedControlPop
+            query={query}
+            filter={filter}
+            target={this.state.popTarget}
+            onClose={this.closeControl}/>
+        ) : null }
       </TooltipDiv>
     )
   }

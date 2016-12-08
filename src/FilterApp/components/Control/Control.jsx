@@ -6,7 +6,7 @@ import * as controlsDefinitions from './controls'
 export default class ControlComponent extends Component {
   static propTypes = {
     filter: t.object,
-    params: t.oneOfType([t.object, t.bool]),
+    query: t.oneOfType([t.object, t.bool]),
     onChange: t.func
   }
 
@@ -15,10 +15,10 @@ export default class ControlComponent extends Component {
   }
 
   render () {
-    const {filter, params, onChange} = this.props
+    const {filter, query, onChange} = this.props
 
     const props = {
-      query: (params === true || params === false) ? undefined : params,
+      query: (query === true || query === false) ? undefined : query,
       name: filter.name,
       options: filter.controlOptions,
       onChange: (value) => onChange(value === null ? true : value)

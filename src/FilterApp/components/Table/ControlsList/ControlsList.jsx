@@ -26,7 +26,7 @@ export default class ControlsList extends Component {
           <th className={th.ControlsList__cell} key={filter.name}>
             <ControlButton
               filter={filter}
-              params={filtersParams[filter.name]}
+              query={filtersParams[filter.name]}
               onChange={partial(setParam, filter.name)}/>
           </th>
         ))}
