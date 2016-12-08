@@ -68,12 +68,6 @@ class Title extends Component {
     const iconClass = cx(th.TitlesList__Icon, 'fa', 'icon-filter-' + filter.name)
     const sortIconClass = cx(th.TitlesList__SortIcon, 'fa', 'icon-sort-' + (sort ? 'asc' : 'desc'))
 
-    // Show tooltip ONLY if the object is overflowed
-    let statusTooltip = active ? (highlightMode
-      ? 'Results are being highlighted'
-      : 'Results are being filtered')
-      : ''
-
     return (
       <th
         ref='th'
@@ -91,7 +85,6 @@ class Title extends Component {
           </span>
           {children}
         </div>
-        <div className={th.TitlesList__Status} title={statusTooltip}>*</div>
       </th>
     )
   }
