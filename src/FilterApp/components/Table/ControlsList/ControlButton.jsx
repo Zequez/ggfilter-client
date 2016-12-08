@@ -26,7 +26,6 @@ export default class ControlButton extends Component {
 
   render () {
     const { query, filter, onRemove } = this.props
-    console.log(query)
     return (
       <div className={th.ControlsList__ControlButton}>
         { typeof query === 'object' ? (

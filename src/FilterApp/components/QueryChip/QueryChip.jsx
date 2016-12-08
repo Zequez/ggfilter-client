@@ -14,17 +14,17 @@ export default class QueryChip extends Component {
   static propTypes = {
     query: t.oneOfType([t.object, t.bool]),
     filter: t.object, // Definition
-    iconVisible: t.bool,
+    icon: t.bool,
     onRemove: t.func.isRequired,
     onClick: t.func
   }
 
   static defaultProps = {
-    iconVisible: true
+    icon: true
   }
 
   render () {
-    const { query, filter, iconVisible, onRemove, children, onClick } = this.props
+    const { query, filter, icon, onRemove, children, onClick } = this.props
 
     const ChipComponent = chips[filter.chip]
     const className = cx(th.QueryChip, {
@@ -36,7 +36,7 @@ export default class QueryChip extends Component {
 
     return (
       <TooltipDiv className={className} tooltip={tooltip}>
-        { iconVisible ? (
+        { icon ? (
           <Icon
             icon={'filter-' + filter.name}
             className={th.QueryChip__Icon}
