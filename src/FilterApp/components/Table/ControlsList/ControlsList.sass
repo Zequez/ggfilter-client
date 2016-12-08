@@ -12,6 +12,11 @@
   align-items: center
   justify-content: center
   height: $gg
+  overflow: hidden
+
+// so it doesn't overflow the table if the chip is too long
+.ControlsList__cell:last-child .ControlsList__ControlButton
+  overflow: hidden
 
 // This is a little hacky because we're using a global class to match, but whatever
 // CSS modules should let us do this anyway
