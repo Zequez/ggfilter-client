@@ -1,11 +1,19 @@
 .QueryChipsList
   display: flex
+  flex-wrap: wrap
   align-items: center
-  height: $g*7
+  justify-content: flex-start
 
 .QueryChipsList__titleLabel
   margin-right: $g*2
+  line-height: $g*7
   text-transform: uppercase
   color: $color-text-sec-alt
   font-weight: $font-weight-medium
   font-size: $font-size-subheading
+
+.QueryChipsList__chipContainer
+  margin-right: $g
+  height: $g*7
+  display: flex
+  align-items: center

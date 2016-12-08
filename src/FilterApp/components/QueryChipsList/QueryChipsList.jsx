@@ -26,22 +26,23 @@ export default class FilterChips extends Component {
       let query = params[name]
       if (query !== false && query !== true) {
         chips.push(
-          <ControlOpeningChip
-            key={name}
-            query={query}
-            filter={definitions.filters[name]}
-            onRemove={this.onRemove.bind(this, name)}/>
+          <div key={name} className={th.QueryChipsList__chipContainer}>
+            <ControlOpeningChip
+              query={query}
+              filter={definitions.filters[name]}
+              onRemove={this.onRemove.bind(this, name)}/>
+          </div>
         )
       }
     }
 
-    return (
+    return chips.length ? (
       <div className={th.QueryChipsList}>
         <div className={th.QueryChipsList__titleLabel}>
           Filters
         </div>
         {chips}
       </div>
-    )
+    ) : null
   }
 }
