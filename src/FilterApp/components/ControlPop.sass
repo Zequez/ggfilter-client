@@ -1,24 +1,32 @@
-.ControlPop
+.ControlPop // <- this is actually the centerer
   +z(ControlPop)
   position: absolute
-  transform: translate(-50%, -50%)
-.ControlPop__centerer
-  width: $gg*7
+  // transform: translate(-50%, -50%)
+  width: 100%
+.ControlPop__centered
+  width: 100%
+  max-width: $gg*6
   padding: $g*2
   border-radius: 2px
   background: $color-mono-4
   box-shadow: $shadow-dialog
   opacity: 1
-  transition-property: transform opacity
+  transform-origin: 0% 0%
+  transform: translate(-50%, -50%)
+  transition-property: transform, opacity
   transition-duration: 0.25s
-.ControlPop_firstFrame
-  .ControlPop__centerer
-    transform: scale(0.75)
+.ControlPop_probeFrame
+  .ControlPop__centered
+    visibility: hidden
+    transition: none
+.ControlPop_enterFrame
+  .ControlPop__centered
+    transition: none
+    transform: scale(0.75) translate(-50%, -50%)
     opacity: 0.01
-    transition-duration: 0.5s
-.ControlPop_lastFrame
-  .ControlPop__centerer
-    transform: scale(0.01)
+.ControlPop_leaveFrame
+  .ControlPop__centered
+    transform: scale(0.01) translate(-50%, -50%)
     opacity: 0.01
 .ControlPop__closeButton
 

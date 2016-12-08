@@ -15,22 +15,44 @@ export default class ControlPop extends Component {
   }
 
   state = {
-    firstFrame: true,
-    lastFrame: false,
     viewportAdjustLeft: 0,
-    viewportAdjustTop: 0
+    viewportAdjustTop: 0,
+
+    frameClass: th.ControlPop_probeFrame
   }
 
-  componentDidMount () {
+  portalDidMount = () => {
     this.refs.control.focus()
     onClickOutsideOnce(this.refs.pop, () => {
-      this.initiateClosing()
+      this.leaveFrame()
     })
     bindGlobalKeyOnce(27, () => { // ESC
-      this.initiateClosing()
+      this.leaveFrame()
     })
 
-    this.setState({firstFrame: false, ...this.getViewportAdjust()})
+    this.setState({
+      frameClass: th.ControlPop_enterFrame,
+      ...this.getViewportAdjust()
+    })
+  }
+
+  portalDidUpdate = () => {
+    if (this.state.frameClass === th.ControlPop_enterFrame) {
+      // Force repaint otherwise the transition won't run
+      this.refs.pop.getBoundingClientRect()
+      this.setState({frameClass: null})
+    }
+  }
+
+  leaveFrame = () => {
+    if (this.refs.pop) {
+      this.setState({frameClass: th.ControlPop_leaveFrame})
+      this.refs.pop.addEventListener('transitionend', () => {
+        this.props.onClose()
+      })
+    } else {
+      this.props.onClose()
+    }
   }
 
   getViewportAdjust () {
@@ -42,8 +64,8 @@ export default class ControlPop extends Component {
     let top = 0
     if (coords.right > docWidth) {
       left = docWidth - coords.right
-    } else if (coords.left < 56) { // 56 == Drawer size // HACK
-      left = -coords.left + 56
+    } else if (coords.left < 0) {
+      left = -coords.left
     }
 
     if (coords.bottom > docHeight) {
@@ -55,60 +77,48 @@ export default class ControlPop extends Component {
     return { viewportAdjustLeft: left, viewportAdjustTop: top }
   }
 
-  initiateClosing = () => {
-    if (this.refs.pop) {
-      this.setState({lastFrame: true})
-      this.refs.pop.addEventListener('transitionend', () => {
-        this.props.onClose()
-      })
-    } else {
-      this.props.onClose()
-    }
-  }
+  targetInitialCenter = null
+  getTargetInitialCenter () {
+    if (this.targetInitialCenter) return this.targetInitialCenter
 
-  getOriginCenter = () => {
     const target = this.props.target
     const coords = target.getBoundingClientRect()
-
-    return {
+    return this.targetInitialCenter = {
       top: Math.floor(
         elementOffsetTop(target) +
-        coords.height / 2 +
-        this.state.viewportAdjustTop),
+        coords.height / 2),
       left: Math.floor(
         elementOffsetLeft(target) +
-        coords.width / 2 +
-        this.state.viewportAdjustLeft)
+        coords.width / 2)
     }
   }
 
-  getPermanentOriginCenter = () => {
-    return this._permOriginCenter = this._permOriginCenter || this.getOriginCenter()
+  getAdjustedCenter = () => {
+    const targetCenter = this.getTargetInitialCenter()
+
+    return {
+      top: Math.floor(targetCenter.top + this.state.viewportAdjustTop),
+      left: Math.floor(targetCenter.left + this.state.viewportAdjustLeft)
+    }
   }
 
   render () {
     const { target, ...other } = this.props //eslint-disable-line no-unused-vars
-    const { firstFrame, lastFrame } = this.state
+    const { frameClass } = this.state
 
-    const style = firstFrame
-      ? this.getOriginCenter()
-      : this.getPermanentOriginCenter()
-
-    const classNames = cx(th.ControlPop, {
-      [th.ControlPop_firstFrame]: firstFrame,
-      [th.ControlPop_lastFrame]: lastFrame
-    })
+    const style = this.getAdjustedCenter()
+    const classNames = cx(th.ControlPop, frameClass)
 
     return (
-      <Portal>
-        <div className={classNames} style={style} ref='pop'>
-          <div className={th.ControlPop__centerer}>
+      <Portal onMount={this.portalDidMount} onUpdate={this.portalDidUpdate}>
+        <div className={classNames} style={style} ref='rsa'>
+          <div className={th.ControlPop__centered} ref='pop'>
             <Control {...other} ref='control'/>
             <div className={th.ControlPop__actions}>
               <Button
                 flat
                 label='Done'
-                onClick={this.initiateClosing}
+                onClick={this.leaveFrame}
                 className={th.ControlList__ControlPop__closeButton}/>
             </div>
           </div>
