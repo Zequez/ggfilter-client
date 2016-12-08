@@ -27,6 +27,7 @@ export default class ControlsList extends Component {
             <ControlButton
               filter={filter}
               query={filtersParams[filter.name]}
+              onRemove={partial(setParam, filter.name, null)}
               onChange={partial(setParam, filter.name)}/>
           </th>
         ))}
