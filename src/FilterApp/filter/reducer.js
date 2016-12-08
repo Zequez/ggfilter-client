@@ -40,6 +40,7 @@ export const reset = () => ({ type: RESET, dispatch: getGames() })
 export const mutate = (mask) => ({ type: MUTATE, mask, dispatch: getGames() })
 export const setParam = (name, value) => mutate({params: {[name]: value}})
 export const setSort = (name, asc) => mutate({sort: { filter: name, asc }})
+export const clearParam = (name) => setParam(name, true)
 
 export const addTagFilter = (tagId) => (dispatch, getState) => {
   let tagsFilter = getState().filter.params.tags

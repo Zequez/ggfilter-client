@@ -2,14 +2,21 @@
   flex-grow: 1
   overflow-x: auto
   overflow-y: hidden
-  background: $color-mono-4
-  box-shadow: $shadow-card
 
-  table
-    table-layout: fixed
-    width: auto
+
+  // A little hack to make space for the ControlList until we
+  // re-do the ColumnsWidthFixator and are able to separate everything
+  padding-top: $gg
+  // this is a quick fix so the shadow of the table is visible
+  padding-bottom: $g
+
   th, td
     border-left: solid 1px $color-divider-light
+.Table__table
+  table-layout: fixed
+  width: auto
+  background: $color-mono-4
+  box-shadow: $shadow-card
 
 .Table__Header
   // border-bottom: solid 1px $color-divider-light

@@ -1,12 +1,13 @@
 .ControlsList
-
 .ControlsList__cell
-  height: $g*6
-  padding: $g*2 0
+  // height: $g*6
+
   vertical-align: top
 
+.ControlList__cellWrap
+  height: 0
+  margin-top: -$g*6
 .ControlsList__ControlButton
-
-+media('<desktop')
-  .ControlsList
-    display: none
+  display: flex
+  align-items: center
+  justify-content: center

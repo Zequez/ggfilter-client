@@ -29,7 +29,7 @@ export default class Table extends Component {
 
     return (
       <div className={th.Table}>
-        <table>
+        <table className={th.Table__table}>
           <Header filters={filters} filter={filter}/>
           {Body({games, filters, filter})}
         </table>
