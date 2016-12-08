@@ -7,7 +7,6 @@ import generateQueryTitle from '../../lib/generateQueryTitle'
 import Icon from 'shared/components/Icon'
 import tooltipFactory from 'shared/components/Tooltip'
 import * as chips from './chips'
-import ConnectedControlPop from '../ConnectedControlPop'
 
 const TooltipDiv = tooltipFactory('div', { position: 'top' })
 
@@ -16,28 +15,16 @@ export default class QueryChip extends Component {
     query: t.oneOfType([t.object, t.bool]),
     filter: t.object, // Definition
     iconVisible: t.bool,
-    onRemove: t.func.isRequired
+    onRemove: t.func.isRequired,
+    onClick: t.func
   }
 
   static defaultProps = {
     iconVisible: true
   }
 
-  state = {
-    controlOpen: false,
-    popTarget: null
-  }
-
-  openControl = (ev) => {
-    this.setState({controlOpen: true, popTarget: ev.currentTarget})
-  }
-
-  closeControl = () => {
-    this.setState({controlOpen: false, popTarget: null})
-  }
-
   render () {
-    const { query, filter, iconVisible, onRemove } = this.props
+    const { query, filter, iconVisible, onRemove, children, onClick } = this.props
 
     const ChipComponent = chips[filter.chip]
     const className = cx(th.QueryChip, {
@@ -53,24 +40,18 @@ export default class QueryChip extends Component {
           <Icon
             icon={'filter-' + filter.name}
             className={th.QueryChip__Icon}
-            onClick={this.openControl}/>
+            onClick={onClick}/>
         ) : null }
         <span
           className={th.QueryChip__text}
-          onClick={this.openControl}>
+          onClick={onClick}>
           <ChipComponent
             query={query}
             options={filter.chipOptions}
             name={filter.name}/>
         </span>
         <Icon icon='remove-chip' className={th.QueryChip__remove} onClick={onRemove}/>
-        { this.state.controlOpen ? (
-          <ConnectedControlPop
-            query={query}
-            filter={filter}
-            target={this.state.popTarget}
-            onClose={this.closeControl}/>
-        ) : null }
+        {children}
       </TooltipDiv>
     )
   }
