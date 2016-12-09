@@ -6,7 +6,6 @@
 .ControlPop__centered
   width: 100%
   max-width: $gg*6
-  padding: $g*2
   border-radius: 2px
   background: $color-mono-4
   box-shadow: $shadow-dialog
@@ -15,6 +14,23 @@
   transform: translate(-50%, -50%)
   transition-property: transform, opacity
   transition-duration: 0.25s
+
+.ControlPop__header
+  padding: $g*2
+  text-transform: uppercase
+
+  :global(.fa)
+    margin-right: $g*2
+.ControlPop__title
+  line-height: $g*3
+  vertical-align: top
+.ControlPop__body
+  padding: $g*2
+.ControlPop__actions
+  display: flex
+  justify-content: flex-end
+  padding: $g
+
 .ControlPop_probeFrame
   .ControlPop__centered
     visibility: hidden
@@ -29,8 +45,3 @@
     transform: scale(0.01) translate(-50%, -50%)
     opacity: 0.01
 .ControlPop__closeButton
-
-.ControlPop__actions
-  display: flex
-  justify-content: flex-end
-  padding-top: $g*2

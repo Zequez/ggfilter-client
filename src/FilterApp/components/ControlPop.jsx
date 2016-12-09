@@ -4,12 +4,14 @@ import cx from 'classnames'
 import { elementOffsetTop, elementOffsetLeft, onClickOutsideOnce, bindGlobalKeyOnce } from 'shared/lib/utils'
 import Portal from 'shared/components/Portal'
 import Button from 'shared/components/Button'
+import Icon from 'shared/components/Icon'
 
 // Should move this outside if I'm gonna use it here
 import Control from './Control'
 
 export default class ControlPop extends Component {
   static propTypes = {
+    filter: t.object.isRequired,
     onClose: t.func.isRequired,
     target: t.object.isRequired // Dom node
   }
@@ -103,7 +105,7 @@ export default class ControlPop extends Component {
   }
 
   render () {
-    const { target, ...other } = this.props //eslint-disable-line no-unused-vars
+    const { target, filter, ...other } = this.props //eslint-disable-line no-unused-vars
     const { frameClass } = this.state
 
     const style = this.getAdjustedCenter()
@@ -113,7 +115,13 @@ export default class ControlPop extends Component {
       <Portal onMount={this.portalDidMount} onUpdate={this.portalDidUpdate}>
         <div className={classNames} style={style} ref='rsa'>
           <div className={th.ControlPop__centered} ref='pop'>
-            <Control {...other} ref='control'/>
+            <div className={th.ControlPop__header}>
+              <Icon icon={'filter-' + filter.name}/>
+              <span className={th.ControlPop__title}>{filter.title}</span>
+            </div>
+            <div className={th.ControlPop__body}>
+              <Control {...other} filter={filter} ref='control'/>
+            </div>
             <div className={th.ControlPop__actions}>
               <Button
                 flat
