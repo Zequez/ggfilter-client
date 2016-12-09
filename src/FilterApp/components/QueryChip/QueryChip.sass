@@ -17,10 +17,12 @@
   text-align: center
   font-size: $font-size-input
 .QueryChip__Icon
+  composes: __export_QueryChip__icons from global
   background: $color-sec-dark
   color: $color-text-pri-alt
   box-shadow: $shadow-switch
 .QueryChip__remove
+  composes: __export_QueryChip__icons from global
   background: $color-mono-2
   &:hover
     background: $color-mono-3

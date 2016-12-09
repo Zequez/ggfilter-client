@@ -20,9 +20,8 @@
 
 // This is a little hacky because we're using a global class to match, but whatever
 // CSS modules should let us do this anyway
-
 // We need to hide both the remove-query button and the filter icon
 +media('<desktop')
   .ControlsList__ControlButton
-    :global(.fa)
-      display: none!important
+    :global(.__export_QueryChip__icons)
+      display: none
