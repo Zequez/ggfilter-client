@@ -1,0 +1,24 @@
+.ToggleIcon
+  display: flex
+  justify-content: center
+  align-items: center
+  position: relative
+  width: $g*4
+  height: $g*4
+  padding: 0
+  background: transparent
+  border: none
+  border-radius: $g*2
+  text-align: center
+  overflow: hidden
+  transform: scale(1) // Fix so the overflow clips the Ripple
+  cursor: pointer
+  &:focus
+    outline: none
+  &:hover, &_checked
+    color: $color-sec
+  &, &_justUnchecked:hover
+    color: $color-text-sec
+
+.ToggleIcon__Icon
+  color: inherit

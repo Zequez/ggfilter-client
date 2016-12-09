@@ -5,6 +5,7 @@ import { elementOffsetTop, elementOffsetLeft, onClickOutsideOnce, bindGlobalKeyO
 import Portal from 'shared/components/Portal'
 import Button from 'shared/components/Button'
 import Icon from 'shared/components/Icon'
+import ToggleIcon from 'shared/components/ToggleIcon'
 
 // Should move this outside if I'm gonna use it here
 import Control from './Control'
@@ -111,20 +112,28 @@ export default class ControlPop extends Component {
     this.props.onClose()
   }
 
+  onClickHighlight = () => {
+    let { query } = this.props
+    let currentHl = query && query.hl
+    this.props.onChange({...query, hl: !currentHl})
+  }
+
   render () {
     const { target, filter, query, ...other } = this.props //eslint-disable-line no-unused-vars
     const { frameClass } = this.state
 
     const style = this.getAdjustedCenter()
     const classNames = cx(th.ControlPop, frameClass)
+    const highlighting = typeof query === 'object' && query.hl
 
     return (
       <Portal onMount={this.portalDidMount} onUpdate={this.portalDidUpdate}>
         <div className={classNames} style={style} ref='rsa'>
           <div className={th.ControlPop__centered} ref='pop'>
             <div className={th.ControlPop__header}>
-              <Icon icon={'filter-' + filter.name}/>
+              <Icon className={th.ControlPop__Icon} icon={'filter-' + filter.name}/>
               <span className={th.ControlPop__title}>{filter.title}</span>
+              <ToggleIcon icon={'highlight'} checked={highlighting} onClick={this.onClickHighlight}/>
             </div>
             <div className={th.ControlPop__body}>
               <Control {...other} filter={filter} query={query} ref='control'/>
