@@ -12,6 +12,8 @@ import Control from './Control'
 export default class ControlPop extends Component {
   static propTypes = {
     filter: t.object.isRequired,
+    query: t.oneOfType([t.object, t.bool]).isRequired,
+    onChange: t.func,
     onClose: t.func.isRequired,
     target: t.object.isRequired // Dom node
   }
@@ -104,8 +106,13 @@ export default class ControlPop extends Component {
     }
   }
 
+  onClear = () => {
+    this.props.onChange(true)
+    this.props.onClose()
+  }
+
   render () {
-    const { target, filter, ...other } = this.props //eslint-disable-line no-unused-vars
+    const { target, filter, query, ...other } = this.props //eslint-disable-line no-unused-vars
     const { frameClass } = this.state
 
     const style = this.getAdjustedCenter()
@@ -120,9 +127,10 @@ export default class ControlPop extends Component {
               <span className={th.ControlPop__title}>{filter.title}</span>
             </div>
             <div className={th.ControlPop__body}>
-              <Control {...other} filter={filter} ref='control'/>
+              <Control {...other} filter={filter} query={query} ref='control'/>
             </div>
             <div className={th.ControlPop__actions}>
+              <Button flat disabled={query === true} label='Clear' onClick={this.onClear}/>
               <Button
                 flat
                 label='Done'
