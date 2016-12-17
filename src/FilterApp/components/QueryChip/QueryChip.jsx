@@ -3,6 +3,7 @@ import React, { PropTypes as t, Component } from 'react'
 import cx from 'classnames'
 import { capitalizeFirstLetter } from 'shared/lib/utils'
 import generateQueryTitle from '../../lib/generateQueryTitle'
+import { isQueryEmpty } from '../../lib/utils'
 
 import Icon from 'shared/components/Icon'
 import tooltipFactory from 'shared/components/Tooltip'
@@ -17,6 +18,7 @@ export default class QueryChip extends Component {
     icon: t.bool,
     onRemove: t.func.isRequired,
     onClick: t.func,
+    hl: t.bool,
     className: t.string
   }
 
@@ -24,23 +26,16 @@ export default class QueryChip extends Component {
     icon: true
   }
 
-  isQueryEmpty (query) {
-    const queryKeys = Object.keys(query)
-    return (
-      typeof query !== 'object' ||
-      (queryKeys.length === 1 && queryKeys[0] === 'hl')
-    )
-  }
-
   render () {
-    const { query, filter, icon, onRemove, children, onClick, className } = this.props
-    const queryIsEmpty = this.isQueryEmpty(query)
+    const { query, filter, icon, onRemove, children, onClick, className, hl } = this.props
+    const queryIsEmpty = isQueryEmpty(query)
 
     const ChipComponent = chips[filter.chip]
     const divClassName = cx(th.QueryChip, className, {
-      [th.QueryChip_hl]: !!query.hl
+      [th.QueryChip_hl]: queryIsEmpty ? !!hl : !!query.hl
     })
 
+    console.log(queryIsEmpty, query)
     let tooltip
     if (!queryIsEmpty) {
       let tooltipPre = query.hl ? 'Highlighting: ' : 'Filtering by: '

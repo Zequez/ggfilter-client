@@ -6,6 +6,7 @@ import Portal from 'shared/components/Portal'
 import Button from 'shared/components/Button'
 import Icon from 'shared/components/Icon'
 import ToggleIcon from 'shared/components/ToggleIcon'
+import { isQueryEmpty } from '../lib/utils'
 
 import Control from './Control'
 import QueryChip from './QueryChip'
@@ -23,7 +24,15 @@ export default class ControlPop extends Component {
     viewportAdjustLeft: 0,
     viewportAdjustTop: 0,
 
-    frameClass: th.ControlPop_probeFrame
+    frameClass: th.ControlPop_probeFrame,
+
+    hl: false
+  }
+
+  componentWillReceiveProps (props) {
+    if (!isQueryEmpty(props.query) && this.state.hl !== !!props.query.hl) {
+      this.setState({hl: !!props.query.hl})
+    }
   }
 
   portalDidMount = () => {
@@ -36,6 +45,7 @@ export default class ControlPop extends Component {
     })
 
     this.setState({
+      hl: !isQueryEmpty(this.props.query) && !!this.props.query.hl,
       frameClass: th.ControlPop_enterFrame,
       ...this.getViewportAdjust()
     })
@@ -118,17 +128,23 @@ export default class ControlPop extends Component {
 
   onClickHighlight = () => {
     let { query } = this.props
-    let currentHl = query && query.hl
-    this.props.onChange({...query, hl: !currentHl})
+    let newHl = !this.state.hl
+    this.setState({hl: newHl})
+    if (!isQueryEmpty(query)) {
+      this.props.onChange({...query, hl: newHl})
+    }
+  }
+
+  onControlChange = (val) => {
+    this.props.onChange(isQueryEmpty(val) ? val : {...val, hl: this.state.hl})
   }
 
   render () {
     const { target, filter, query, ...other } = this.props //eslint-disable-line no-unused-vars
-    const { frameClass } = this.state
+    const { frameClass, hl } = this.state
 
     const style = this.getAdjustedCenter()
     const classNames = cx(th.ControlPop, frameClass)
-    const highlighting = typeof query === 'object' && query.hl
 
     return (
       <Portal onMount={this.portalDidMount} onUpdate={this.portalDidUpdate}>
@@ -139,18 +155,19 @@ export default class ControlPop extends Component {
               <ToggleIcon
                 className={th.ControlPop__ToggleIcon}
                 icon={'highlight'}
-                checked={highlighting}
+                checked={hl}
                 onClick={this.onClickHighlight}/>
               <div className={th.ControlPop__queryChipWrapper}>
                 <QueryChip
                   className={th.ControlPop__QueryChip}
                   filter={filter}
                   query={query}
+                  hl={hl}
                   onRemove={this.onChipClear}/>
               </div>
             </div>
             <div className={th.ControlPop__body}>
-              <Control {...other} filter={filter} query={query} ref='control'/>
+              <Control {...other} filter={filter} query={query} onChange={this.onControlChange} ref='control'/>
             </div>
             <div className={th.ControlPop__actions}>
               <Button flat disabled={query === true} label='Clear' onClick={this.onClear}/>

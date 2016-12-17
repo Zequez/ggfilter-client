@@ -1,6 +1,7 @@
 import th from './ControlsList.sass'
 import React, { PropTypes as t, Component } from 'react'
 import Button from 'shared/components/Button'
+import { isQueryEmpty } from '../../../lib/utils'
 import ControlPop from '../../ControlPop'
 import QueryChip from '../../QueryChip'
 
@@ -28,7 +29,7 @@ export default class ControlButton extends Component {
     const { query, filter, onRemove } = this.props
     return (
       <div className={th.ControlsList__ControlButton}>
-        { typeof query === 'object' ? (
+        { !isQueryEmpty(query) ? (
           <QueryChip
             query={query}
             filter={filter}

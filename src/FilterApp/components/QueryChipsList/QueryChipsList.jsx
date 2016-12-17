@@ -1,9 +1,10 @@
 import th from './QueryChipsList.sass'
 import React, { PropTypes as t, Component } from 'react'
 import definitions from '../../lib/definitions'
+import { isQueryEmpty } from '../../lib/utils'
 import ControlOpeningChip from './ControlOpeningChip'
 
-export default class FilterChips extends Component {
+export default class QueryChipsList extends Component {
   static propTypes = {
     filter: t.shape({
       params: t.object.isRequired,
@@ -24,7 +25,7 @@ export default class FilterChips extends Component {
     let chips = []
     for (let name in params) {
       let query = params[name]
-      if (query !== false && query !== true) {
+      if (!isQueryEmpty(query)) {
         chips.push(
           <div key={name} className={th.QueryChipsList__chipContainer}>
             <ControlOpeningChip

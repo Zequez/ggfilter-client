@@ -2,6 +2,7 @@ import { createSelector } from 'reselect'
 import { encode } from '../lib/filterEncoder'
 import { combiner } from './lib/filterMutator'
 import definitions from '../lib/definitions'
+import { isQueryEmpty } from '../lib/utils'
 import defaultFilter from '../config/defaultFilter'
 import masks from '../config/masks'
 import { NAME } from './constants'
@@ -47,7 +48,7 @@ export const activeParamsSelector = createSelector(
   (params) => {
     let newParams = {}
     for (let k in params) {
-      if (params[k] !== false && params[k] !== true) {
+      if (!isQueryEmpty(params[k])) {
         newParams[k] = params[k]
       }
     }

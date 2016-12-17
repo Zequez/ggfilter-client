@@ -2,6 +2,7 @@ import th from './Control.sass'
 import React, { PropTypes as t, Component } from 'react'
 import cx from 'classnames'
 import * as controlsDefinitions from './controls'
+import { isQueryEmpty } from '../../lib/utils'
 
 export default class ControlComponent extends Component {
   static propTypes = {
@@ -18,7 +19,7 @@ export default class ControlComponent extends Component {
     const {filter, query, onChange} = this.props
 
     const props = {
-      query: (query === true || query === false) ? undefined : query,
+      query: isQueryEmpty(query) ? undefined : query,
       name: filter.name,
       options: filter.controlOptions,
       onChange: (value) => onChange(value === null ? true : value)

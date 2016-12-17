@@ -70,7 +70,10 @@ export default class FilterApp extends Component {
       <div className={th.FilterApp}>
         <AppBar className={th.FilterApp__AppBar}>
           <h1>Filterrr!</h1>
-          <QueryChipsList filter={filter} onRemove={this.onRemoveFilter}/>
+          <QueryChipsList
+            filter={filter}
+            visibleFilters={visibleFilters}
+            onRemove={this.onRemoveFilter}/>
         </AppBar>
         {/*<Shortcuts/>*/}
         <CategoriesList/>
