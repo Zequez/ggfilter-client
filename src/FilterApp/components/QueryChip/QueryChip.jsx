@@ -35,7 +35,6 @@ export default class QueryChip extends Component {
       [th.QueryChip_hl]: queryIsEmpty ? !!hl : !!query.hl
     })
 
-    console.log(queryIsEmpty, query)
     let tooltip
     if (!queryIsEmpty) {
       let tooltipPre = query.hl ? 'Highlighting: ' : 'Filtering by: '
