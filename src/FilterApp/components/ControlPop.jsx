@@ -141,11 +141,13 @@ export default class ControlPop extends Component {
                 icon={'highlight'}
                 checked={highlighting}
                 onClick={this.onClickHighlight}/>
-              <QueryChip
-                className={th.ControlPop__QueryChip}
-                filter={filter}
-                query={query}
-                onRemove={this.onChipClear}/>
+              <div className={th.ControlPop__queryChipWrapper}>
+                <QueryChip
+                  className={th.ControlPop__QueryChip}
+                  filter={filter}
+                  query={query}
+                  onRemove={this.onChipClear}/>
+              </div>
             </div>
             <div className={th.ControlPop__body}>
               <Control {...other} filter={filter} query={query} ref='control'/>
