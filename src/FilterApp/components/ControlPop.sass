@@ -17,13 +17,20 @@
 
 .ControlPop__header
   padding: $g*2
-  text-transform: uppercase
-
-.ControlPop__Icon
-  margin-right: $g*2
+  +clearfix
 .ControlPop__title
+  float: left
   line-height: $g*3
   vertical-align: top
+  text-transform: uppercase
+.ControlPop__ToggleIcon
+  float: right
+.ControlPop__QueryChip
+  float: left
+  clear: both
+  position: relative
+  left: 50%
+  transform: translateX(-50%)
 .ControlPop__body
   padding: $g*2
 .ControlPop__actions

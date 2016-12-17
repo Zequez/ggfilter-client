@@ -16,41 +16,58 @@ export default class QueryChip extends Component {
     filter: t.object, // Definition
     icon: t.bool,
     onRemove: t.func.isRequired,
-    onClick: t.func
+    onClick: t.func,
+    className: t.string
   }
 
   static defaultProps = {
     icon: true
   }
 
+  isQueryEmpty (query) {
+    const queryKeys = Object.keys(query)
+    return (
+      typeof query !== 'object' ||
+      (queryKeys.length === 1 && queryKeys[0] === 'hl')
+    )
+  }
+
   render () {
-    const { query, filter, icon, onRemove, children, onClick } = this.props
+    const { query, filter, icon, onRemove, children, onClick, className } = this.props
+    const queryIsEmpty = this.isQueryEmpty(query)
 
     const ChipComponent = chips[filter.chip]
-    const className = cx(th.QueryChip, {
+    const divClassName = cx(th.QueryChip, className, {
       [th.QueryChip_hl]: !!query.hl
     })
 
-    const tooltipPre = query.hl ? 'Highlighting: ' : 'Filtering by: '
-    const tooltip = tooltipPre + capitalizeFirstLetter(generateQueryTitle(filter, query))
+    let tooltip
+    if (!queryIsEmpty) {
+      let tooltipPre = query.hl ? 'Highlighting: ' : 'Filtering by: '
+      tooltip = tooltipPre + capitalizeFirstLetter(generateQueryTitle(filter, query))
+    }
 
     return (
-      <TooltipDiv className={className} tooltip={tooltip}>
+      <TooltipDiv className={divClassName} tooltip={tooltip}>
         { icon ? (
           <Icon
             icon={'filter-' + filter.name}
             className={th.QueryChip__Icon}
             onClick={onClick}/>
         ) : null }
-        <span
-          className={th.QueryChip__text}
-          onClick={onClick}>
-          <ChipComponent
-            query={query}
-            options={filter.chipOptions}
-            name={filter.name}/>
-        </span>
-        <Icon icon='remove-chip' className={th.QueryChip__remove} onClick={onRemove}/>
+        { !queryIsEmpty ? (
+          <span
+            className={th.QueryChip__text}
+            onClick={onClick}>
+            <ChipComponent
+              query={query}
+              options={filter.chipOptions}
+              name={filter.name}/>
+          </span>
+        ) : null}
+        { !queryIsEmpty ? (
+          <Icon icon='remove-chip' className={th.QueryChip__remove} onClick={onRemove}/>
+        ) : null }
         {children}
       </TooltipDiv>
     )

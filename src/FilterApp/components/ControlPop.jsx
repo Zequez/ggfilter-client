@@ -7,8 +7,8 @@ import Button from 'shared/components/Button'
 import Icon from 'shared/components/Icon'
 import ToggleIcon from 'shared/components/ToggleIcon'
 
-// Should move this outside if I'm gonna use it here
 import Control from './Control'
+import QueryChip from './QueryChip'
 
 export default class ControlPop extends Component {
   static propTypes = {
@@ -107,6 +107,10 @@ export default class ControlPop extends Component {
     }
   }
 
+  onChipClear = () => {
+    this.props.onChange(true)
+  }
+
   onClear = () => {
     this.props.onChange(true)
     this.props.onClose()
@@ -131,9 +135,17 @@ export default class ControlPop extends Component {
         <div className={classNames} style={style} ref='rsa'>
           <div className={th.ControlPop__centered} ref='pop'>
             <div className={th.ControlPop__header}>
-              <Icon className={th.ControlPop__Icon} icon={'filter-' + filter.name}/>
               <span className={th.ControlPop__title}>{filter.title}</span>
-              <ToggleIcon icon={'highlight'} checked={highlighting} onClick={this.onClickHighlight}/>
+              <ToggleIcon
+                className={th.ControlPop__ToggleIcon}
+                icon={'highlight'}
+                checked={highlighting}
+                onClick={this.onClickHighlight}/>
+              <QueryChip
+                className={th.ControlPop__QueryChip}
+                filter={filter}
+                query={query}
+                onRemove={this.onChipClear}/>
             </div>
             <div className={th.ControlPop__body}>
               <Control {...other} filter={filter} query={query} ref='control'/>
