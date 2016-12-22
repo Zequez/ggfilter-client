@@ -15,7 +15,10 @@ export default class Input extends Component {
     if (this.props.onChange) this.props.onChange(ev.target.value)
   }
 
-  focus () { this.refs.input.focus() }
+  focus () {
+    // We should not need this, it's called after being mounted :S
+    setTimeout(() => { this.refs.input.focus() }, 10)
+  }
   select () { this.refs.input.select() }
 
   render () {

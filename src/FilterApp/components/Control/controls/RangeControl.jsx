@@ -10,7 +10,8 @@ const defaultOptions = {
   prefix: null,
   suffix: null,
   min: 0,
-  max: 99999
+  max: 99999,
+  focus: 'min'
 }
 
 export default class RangeControl extends Component {
@@ -73,6 +74,14 @@ export default class RangeControl extends Component {
     }
   }
 
+  focus () {
+    if (this.options.focus === 'min') {
+      this.refs.min.focus()
+    } else if (this.options.focus === 'max') {
+      this.refs.max.focus()
+    }
+  }
+
   render () {
     let { query: { gt, lt } } = this.props
 
@@ -87,7 +96,8 @@ export default class RangeControl extends Component {
           min={this.options.min}
           max={this.options.max}
           selectOnFocus
-          label={this.options.minHint}/>
+          label={this.options.minHint}
+          ref='min'/>
         <NumericInput
           className={th.RangeControl__NumericInput_end}
           value={this.toInput(lt)}
@@ -97,7 +107,8 @@ export default class RangeControl extends Component {
           min={this.options.min}
           max={this.options.max}
           selectOnFocus
-          label={this.options.maxHint}/>
+          label={this.options.maxHint}
+          ref='max'/>
       </div>
     )
   }

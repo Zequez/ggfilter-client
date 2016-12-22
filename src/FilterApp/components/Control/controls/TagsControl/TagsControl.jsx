@@ -81,6 +81,10 @@ export default class TagsControl extends Component {
     }
   }
 
+  focus () {
+    this.refs.input.focus()
+  }
+
   render () {
     console.logRender('TagsControl')
     let inputStyle = {
@@ -107,7 +111,8 @@ export default class TagsControl extends Component {
             style={inputStyle}
             hint={this.state.tags.length ? null : 'Filter games by tag'}
             onKeyDown={this.onKeyDown}
-            onChange={this.onTextChange}/>
+            onChange={this.onTextChange}
+            ref='input'/>
         </TagsSelector>
       </div>
     )
