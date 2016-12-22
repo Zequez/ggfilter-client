@@ -8,8 +8,9 @@ const defaultOptions = {
   toInput: (value) => value,
   fromInput: (value) => value,
   prefix: null,
+  suffix: null,
   min: 0,
-  max: 100
+  max: 99999
 }
 
 export default class RangeControl extends Component {
@@ -81,7 +82,8 @@ export default class RangeControl extends Component {
           className={th.RangeControl__NumericInput_start}
           value={this.toInput(gt)}
           onChange={this.onMinChange}
-          fixedLabel={this.options.prefix}
+          prefix={this.options.prefix}
+          suffix={this.options.suffix}
           min={this.options.min}
           max={this.options.max}
           selectOnFocus
@@ -90,7 +92,8 @@ export default class RangeControl extends Component {
           className={th.RangeControl__NumericInput_end}
           value={this.toInput(lt)}
           onChange={this.onMaxChange}
-          fixedLabel={this.options.prefix}
+          prefix={this.options.prefix}
+          suffix={this.options.suffix}
           min={this.options.min}
           max={this.options.max}
           selectOnFocus

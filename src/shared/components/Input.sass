@@ -1,57 +1,74 @@
+.labelLike
+  height: $g*4
+  line-height: $g*4
+  color: $color-text-secondary
+  font-size: $font-size-input
+
 .Input
   position: relative
 
+  &__alignContainer
+    display: flex
+    position: relative
+    border-bottom: solid 1px $color-divider
+
   &__input
+    order: 2
+    flex-grow: 1
     display: block
     height: $g * 4
     width: 100%
     padding: $g 0
     border: none
-    border-bottom: solid 1px $color-divider
     background: transparent
     &:focus
       outline: none
       & ~ .Input__focusLine
         transform: scaleX(1)
 
+  &__prefixContainer
+    order: 1
+    flex-shrink: 1
+    position: relative
+  &__suffix
+    composes: labelLike
+    order: 3
+    flex-shrink: 1
+
+  &__prefix
+    composes: labelLike
+    white-space: pre
+  &__hint
+    composes: labelLike
+    position: absolute
+    left: 100%
+    top: 0
+    white-space: nowrap
+    opacity: 1
+    transition: opacity 0.25s
+    pointer-events: none
+  &__label
+    composes: labelLike
+    position: absolute
+    left: 100%
+    top: 0
+    transition: top 0.25s, left 0.25s, font-size 0.25s
+    pointer-events: none
+
   &__focusLine
     position: absolute
     bottom: 0
+    left: 0
     height: 2px
     width: 100%
     background: $color-primary
     transform: scaleX(0)
     transition: transform 0.25s
 
-  %labelLike
-    position: absolute
-    top: $g
-    left: 0
-    color: $color-text-secondary
-    font-size: $font-size-input
-
-  &__fixedLabel
-    @extend %labelLike
-    & ~ .Input__hint, & ~ .Input__label
-      left: $g * 1.5
-    & ~ .Input__input
-      padding-left: $g * 1.5
-
-  &__label
-    @extend %labelLike
-    transition: top 0.25s, left 0.25s, font-size 0.25s
-    pointer-events: none
-
-  &__hint
-    @extend %labelLike
-    transition: opacity 0.25s
-    pointer-events: none
-
   &_withText
     .Input__hint
       opacity: 0
-
-  &_withText .Input__label, &__input:focus + .Input__label
-    top: -$g
+  &_withText .Input__label, .Input__input:focus + .Input__prefixContainer .Input__label
     left: 0
+    top: -$g*2
     font-size: $font-size-caption

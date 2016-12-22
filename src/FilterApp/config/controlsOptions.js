@@ -81,10 +81,7 @@ export default {
       price: {
         toInput: (value) => value / 100,
         fromInput: (value) => value * 100,
-        prefix: '$'
-      },
-      discount: {
-        prefix: '%'
+        prefix: '$ '
       },
       dateBack: generateDatesBack(15),
       datesAbsolute: generateAbsoluteDates(1990)

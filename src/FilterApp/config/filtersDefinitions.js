@@ -58,7 +58,8 @@ export default {
     title: 'Steam sale',
     control: 'Range',
     controlOptions: {
-      prefix: '%'
+      suffix: '%',
+      max: 100
     },
     column: 'Discount',
     columnOptions: { interpolation: '-%s%' },
@@ -76,12 +77,12 @@ export default {
     id: 6,
     title: 'Playtime avg',
     longTitle: 'Playtime average',
-    control: 'FancyRange',
+    control: 'Range',
     controlOptions: {
-      range: [0, 1.5, 3, 4, 5, 7, 9, 13, 21, 39, Infinity],
-      autohook: Infinity,
-      label: { '': '{v}hs', '*-*': '{s} to {e} hs' }
+      suffix: 'hs'
     },
+    chip: 'Range',
+    chipOptions: { '': '{v}hs', '*-*': '{s} to {e} hs' },
     columnOptions: { round: 100, interpolation: '%shs' },
     width: 60,
     alignment: 1
@@ -89,12 +90,12 @@ export default {
   playtime_median: {
     id: 7,
     title: 'Playtime median',
-    control: 'FancyRange',
+    control: 'Range',
     controlOptions: {
-      range: [0, 0.7, 1.3, 1.9, 2.7, 3.5, 4.7, 6.7, 9.7, 16.6, Infinity],
-      autohook: Infinity,
-      label: { '': '{v}hs', '*-*': '{s} to {e} hs' }
+      suffix: 'hs'
     },
+    chip: 'Range',
+    chipOptions: { '': '{v}hs', '*-*': '{s} to {e} hs' },
     columnOptions: { round: 100, interpolation: '%shs' },
     width: 60,
     alignment: 1
@@ -103,12 +104,12 @@ export default {
     id: 8,
     title: 'Playtime σ',
     longTitle: 'Playtime standard deviation',
-    control: 'FancyRange',
+    control: 'Range',
     controlOptions: {
-      range: [0, 1.7, 3.2, 4.9, 7.2, 10.4, 15.5, 24.2, 40.2, 76.5],
-      autohook: 0,
-      label: { '': '{v}hs', '*-*': '{s} to {e} hs' }
+      suffix: 'hs'
     },
+    chip: 'Range',
+    chipOptions: { '': '{v}hs', '*-*': '{s} to {e} hs' },
     columnOptions: { round: 1, interpolation: '%shs' },
     width: 60,
     alignment: 1
@@ -117,12 +118,12 @@ export default {
     id: 9,
     title: 'Playtime relative σ',
     longTitle: 'Playtime relative standard deviation',
-    control: 'FancyRange',
+    control: 'Range',
     controlOptions: {
-      range: [0, 70.6, 89.7, 106.4, 122.3, 136.7, 154.9, 176.7, 209.8, 271.4],
-      autohook: 0,
-      label: { '': '{v}hs', '*-*': '{s} to {e} hs' }
+      suffix: 'hs'
     },
+    chip: 'Range',
+    chipOptions: { '': '{v}hs', '*-*': '{s} to {e} hs' },
     columnOptions: { round: 1, interpolation: '%shs' },
     width: 60,
     alignment: 1
@@ -131,12 +132,12 @@ export default {
     id: 10,
     title: 'Playtime avg / $',
     longTitle: 'Average playtime divided by lowest price',
-    control: 'FancyRange',
+    control: 'Range',
     controlOptions: {
-      range: [0, 0.2, 0.4, 0.5, 0.6, 0.8, 1.0, 1.4, 1.9, 3.1, Infinity],
-      autohook: Infinity,
-      label: { '': '{v}hs/$', '*-*': '{s} to {e} hs/$' }
+      suffix: 'hs/$'
     },
+    chip: 'Range',
+    chipOptions: { '': '{v}hs/$', '*-*': '{s} to {e} hs/$' },
     columnOptions: { round: 100, interpolation: '%shs/$' },
     width: 60,
     alignment: 1
@@ -145,12 +146,12 @@ export default {
     id: 11,
     title: 'Playtime median / $',
     longTitle: 'Median playtime divided by lowest price',
-    control: 'FancyRange',
+    control: 'Range',
     controlOptions: {
-      range: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.7, 0.9, 1.5, Infinity],
-      autohook: Infinity,
-      label: { '': '{v}hs/$', '*-*': '{s} to {e} hs/$' }
+      suffix: 'hs/$'
     },
+    chip: 'Range',
+    chipOptions: { '': '{v}hs/$', '*-*': '{s} to {e} hs/$' },
     columnOptions: { round: 100, interpolation: '%shs/$' },
     width: 60,
     alignment: 1
@@ -158,11 +159,11 @@ export default {
   metacritic: {
     id: 12,
     title: 'Metacritic',
-    control: 'FancyRange',
+    control: 'Range',
     controlOptions: {
-      range: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, Infinity],
-      autohook: Infinity
+      max: 100
     },
+    chip: 'Range',
     width: 60,
     alignment: 1
   },
@@ -170,23 +171,21 @@ export default {
     id: 13,
     title: '# Steam reviews',
     longTitle: 'Number of Steam reviews',
-    control: 'FancyRange',
-    controlOptions: {
-      range: [0, 8, 20, 35, 65, 115, 220, 420, 1020, 4250, Infinity],
-      autohook: Infinity
-    },
+    control: 'Range',
+    chip: 'Range',
     width: 60,
     alignment: 1
   },
   steam_reviews_ratio: {
     id: 14,
     title: 'Steam reviews ratio',
-    control: 'FancyRange',
+    control: 'Range',
     controlOptions: {
-      range: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 98, 99, Infinity],
-      autohook: Infinity,
-      label: { '': '{v}%' }
+      max: 100,
+      suffix: '%'
     },
+    chip: 'Range',
+    chipOptions: { '': '{v}%' },
     column: 'Ratio',
     columnInputs: { ratio: 'steam_reviews_ratio', total: 'steam_reviews_count' },
     width: 100,
@@ -279,10 +278,12 @@ export default {
     id: 23,
     title: 'Sys.Req. Index',
     longTitle: 'System Requirements Index (percentile)',
-    control: 'FancyRange',
+    control: 'Range',
     controlOptions: {
-      range: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
+      min: 0,
+      max: 100
     },
+    chip: 'Range',
     column: 'SysreqIndex',
     width: 50,
     alignment: 1
