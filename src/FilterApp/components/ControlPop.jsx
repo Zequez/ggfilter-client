@@ -135,6 +135,13 @@ export default class ControlPop extends Component {
     }
   }
 
+  onClickShortcut = (query) => {
+    this.leaveFrame()
+    setTimeout(() => {
+      this.onControlChange(query)
+    }, 250)
+  }
+
   onControlChange = (val) => {
     this.props.onChange(isQueryEmpty(val) ? val : {...val, hl: this.state.hl})
   }
@@ -145,6 +152,16 @@ export default class ControlPop extends Component {
 
     const style = this.getAdjustedCenter()
     const classNames = cx(th.ControlPop, frameClass)
+
+    const shortcuts = filter.shortcuts.map((shortcutQuery) => (
+      <QueryChip
+        tooltipPre={false}
+        icon={false}
+        filter={filter}
+        query={shortcutQuery}
+        className={th.ControlPop__Shortcut}
+        onClick={this.onClickShortcut.bind(this, shortcutQuery)}/>
+    ))
 
     return (
       <Portal onMount={this.portalDidMount} onUpdate={this.portalDidUpdate}>
@@ -168,6 +185,9 @@ export default class ControlPop extends Component {
             </div>
             <div className={th.ControlPop__body}>
               <Control {...other} filter={filter} query={query} onChange={this.onControlChange} ref='control'/>
+            </div>
+            <div className={th.ControlPop__shortcuts}>
+              {shortcuts}
             </div>
             <div className={th.ControlPop__actions}>
               <Button flat disabled={query === true} label='Clear' onClick={this.onClear}/>

@@ -25,6 +25,8 @@ class FilterDefinition {
   chip = 'Raw'
   chipOptions = {}
 
+  shortcuts = []
+
   constructor (name, args) {
     this.name = name
     if (args.sort == null) this.sort = name

@@ -38,13 +38,13 @@ export default {
 
       '<->': 'Any price',
       '0': 'Free',
-      '1-Infinity': 'Non-free',
+      '1-null': 'Non-free',
 
       '1-*': '≤{ei}',
       '0-*': '≤{ei} & Free'
     },
     shortcuts: [
-      {gt: null, lt: 0},
+      {gt: 0, lt: 0},
       {gt: 1, lt: null},
       {gt: 1, lt: 300},
       {gt: 1, lt: 500},
