@@ -27,7 +27,7 @@ export default class ControlButton extends Component {
 
   render () {
     const { query, filter, onRemove } = this.props
-    return (
+    return filter.control ? (
       <div className={th.ControlsList__ControlButton}>
         { !isQueryEmpty(query) ? (
           <QueryChip
@@ -45,6 +45,6 @@ export default class ControlButton extends Component {
             {...this.props} />
         ) : null }
       </div>
-    )
+    ) : null
   }
 }

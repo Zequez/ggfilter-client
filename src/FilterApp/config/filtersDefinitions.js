@@ -19,7 +19,7 @@ export default {
   images: {
     id: 3,
     title: 'Images',
-    control: 'Null',
+    control: null,
     column: 'Images',
     columnInputs: { 'images': 'images' },
     sort: false
@@ -246,7 +246,7 @@ export default {
   steam_thumbnail: {
     id: 20,
     title: 'Thumbnail',
-    control: 'Null',
+    control: null,
     column: 'Images',
     columnInputs: { thumbnail: 'steam_thumbnail', 'images': 'images' },
     width: 120,
@@ -332,7 +332,7 @@ export default {
     id: 28,
     title: 'Sys.Req. Index Detail',
     longTitle: 'System Requirements Index detailed tokens',
-    control: 'Null',
+    control: null,
     column: 'SysreqTokensDetails',
     sort: false,
     width: 200
