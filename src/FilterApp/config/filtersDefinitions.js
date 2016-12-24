@@ -68,10 +68,24 @@ export default {
     chip: 'Range',
     chipOptions: {
       '': '{v}%',
-      '0': 'NotOnSale',
+      '0': 'Not on sale',
       '1->': 'On sale',
       '100': 'FREE!?'
     },
+    shortcuts: [
+      {gt: 0, lt: 0},
+      {gt: 1, lt: null},
+      {gt: 100, lt: 100},
+      {gt: 10, lt: null},
+      {gt: 20, lt: null},
+      {gt: 30, lt: null},
+      {gt: 40, lt: null},
+      {gt: 50, lt: null},
+      {gt: 60, lt: null},
+      {gt: 70, lt: null},
+      {gt: 80, lt: null},
+      {gt: 90, lt: null}
+    ],
     width: 50,
     alignment: 0
   },
@@ -86,6 +100,17 @@ export default {
     chip: 'Range',
     chipOptions: { '': '{v}hs', '*-*': '{s} to {e} hs' },
     columnOptions: { round: 100, interpolation: '%shs' },
+    shortcuts: [
+      {gt: 1.5, lt: null},
+      {gt: 2.5, lt: null},
+      {gt: 3.5, lt: null},
+      {gt: 4.5, lt: null},
+      {gt: 6, lt: null},
+      {gt: 8, lt: null},
+      {gt: 11, lt: null},
+      {gt: 17.5, lt: null},
+      {gt: 34, lt: null}
+    ],
     width: 60,
     alignment: 1
   },
@@ -99,6 +124,17 @@ export default {
     chip: 'Range',
     chipOptions: { '': '{v}hs', '*-*': '{s} to {e} hs' },
     columnOptions: { round: 100, interpolation: '%shs' },
+    shortcuts: [
+      {gt: 0.5, lt: null},
+      {gt: 1, lt: null},
+      {gt: 2, lt: null},
+      {gt: 2.5, lt: null},
+      {gt: 3, lt: null},
+      {gt: 4, lt: null},
+      {gt: 5.5, lt: null},
+      {gt: 8, lt: null},
+      {gt: 15, lt: null}
+    ],
     width: 60,
     alignment: 1
   },
@@ -113,6 +149,17 @@ export default {
     chip: 'Range',
     chipOptions: { '': '{v}hs', '*-*': '{s} to {e} hs' },
     columnOptions: { round: 1, interpolation: '%shs' },
+    shortcuts: [
+      {gt: null, lt: 1.5},
+      {gt: null, lt: 3},
+      {gt: null, lt: 4},
+      {gt: null, lt: 6},
+      {gt: null, lt: 9},
+      {gt: null, lt: 12},
+      {gt: null, lt: 20},
+      {gt: null, lt: 35},
+      {gt: null, lt: 70}
+    ],
     width: 60,
     alignment: 1
   },
@@ -127,6 +174,17 @@ export default {
     chip: 'Range',
     chipOptions: { '': '{v}hs', '*-*': '{s} to {e} hs' },
     columnOptions: { round: 1, interpolation: '%shs' },
+    shortcuts: [
+      {gt: null, lt: 70},
+      {gt: null, lt: 90},
+      {gt: null, lt: 100},
+      {gt: null, lt: 120},
+      {gt: null, lt: 135},
+      {gt: null, lt: 150},
+      {gt: null, lt: 180},
+      {gt: null, lt: 210},
+      {gt: null, lt: 280}
+    ],
     width: 60,
     alignment: 1
   },
@@ -141,6 +199,17 @@ export default {
     chip: 'Range',
     chipOptions: { '': '{v}hs/$', '*-*': '{s} to {e} hs/$' },
     columnOptions: { round: 100, interpolation: '%shs/$' },
+    shortcuts: [
+      {gt: 0.3, lt: null},
+      {gt: 0.6, lt: null},
+      {gt: 0.9, lt: null},
+      {gt: 1.3, lt: null},
+      {gt: 1.7, lt: null},
+      {gt: 2.5, lt: null},
+      {gt: 3.5, lt: null},
+      {gt: 5, lt: null},
+      {gt: 8.5, lt: null}
+    ],
     width: 60,
     alignment: 1
   },
@@ -155,6 +224,17 @@ export default {
     chip: 'Range',
     chipOptions: { '': '{v}hs/$', '*-*': '{s} to {e} hs/$' },
     columnOptions: { round: 100, interpolation: '%shs/$' },
+    shortcuts: [
+      {gt: 0.2, lt: null},
+      {gt: 0.3, lt: null},
+      {gt: 0.5, lt: null},
+      {gt: 0.7, lt: null},
+      {gt: 0.9, lt: null},
+      {gt: 1.3, lt: null},
+      {gt: 1.8, lt: null},
+      {gt: 2.7, lt: null},
+      {gt: 4.4, lt: null}
+    ],
     width: 60,
     alignment: 1
   },
@@ -166,6 +246,17 @@ export default {
       max: 100
     },
     chip: 'Range',
+    shortcuts: [
+      {gt: 10, lt: null},
+      {gt: 20, lt: null},
+      {gt: 30, lt: null},
+      {gt: 40, lt: null},
+      {gt: 50, lt: null},
+      {gt: 60, lt: null},
+      {gt: 70, lt: null},
+      {gt: 80, lt: null},
+      {gt: 90, lt: null}
+    ],
     width: 60,
     alignment: 1
   },
@@ -175,6 +266,17 @@ export default {
     longTitle: 'Number of Steam reviews',
     control: 'Range',
     chip: 'Range',
+    shortcuts: [
+      {gt: 0, lt: 0},
+      {gt: 1, lt: null},
+      {gt: 10, lt: null},
+      {gt: 30, lt: null},
+      {gt: 50, lt: null},
+      {gt: 100, lt: null},
+      {gt: 200, lt: null},
+      {gt: 500, lt: null},
+      {gt: 1500, lt: null}
+    ],
     width: 60,
     alignment: 1
   },
@@ -190,6 +292,17 @@ export default {
     chipOptions: { '': '{v}%' },
     column: 'Ratio',
     columnInputs: { ratio: 'steam_reviews_ratio', total: 'steam_reviews_count' },
+    shortcuts: [
+      {gt: 50, lt: null},
+      {gt: 60, lt: null},
+      {gt: 70, lt: null},
+      {gt: 80, lt: null},
+      {gt: 90, lt: null},
+      {gt: 95, lt: null},
+      {gt: 97, lt: null},
+      {gt: 98, lt: null},
+      {gt: 99, lt: null}
+    ],
     width: 100,
     alignment: 0
   },
@@ -287,6 +400,17 @@ export default {
     },
     chip: 'Range',
     column: 'SysreqIndex',
+    shortcuts: [
+      {gt: null, lt: 10},
+      {gt: null, lt: 20},
+      {gt: null, lt: 30},
+      {gt: null, lt: 40},
+      {gt: null, lt: 50},
+      {gt: null, lt: 60},
+      {gt: null, lt: 70},
+      {gt: null, lt: 80},
+      {gt: null, lt: 90}
+    ],
     width: 50,
     alignment: 1
   },
@@ -296,6 +420,7 @@ export default {
     longTitle: 'Released time ago',
     control: 'FancyRange',
     controlOptions: options.controls.range.dateBack,
+    shortcuts: options.shortcuts.timeAgo,
     column: 'TimeAgo',
     width: 80
   },
@@ -307,6 +432,7 @@ export default {
     controlOptions: options.controls.range.datesAbsolute,
     column: 'Date',
     columnInputs: { value: 'released_at' },
+    shortcuts: options.shortcuts.timeAbsolute,
     sort: 'released_at',
     width: 100,
     alignment: 1
@@ -344,6 +470,10 @@ export default {
     title: 'Early Access',
     control: 'Toggle',
     column: 'Toggle',
+    shortcuts: [
+      {value: true},
+      {value: false}
+    ],
     width: 24 * 2,
     alignment: 0
   }

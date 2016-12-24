@@ -87,5 +87,9 @@ export default {
       dateBack: generateDatesBack(15),
       datesAbsolute: generateAbsoluteDates(1990)
     }
+  },
+  shortcuts: {
+    timeAgo: [],
+    timeAbsolute: []
   }
 }

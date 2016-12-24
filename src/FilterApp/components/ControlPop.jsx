@@ -153,8 +153,9 @@ export default class ControlPop extends Component {
     const style = this.getAdjustedCenter()
     const classNames = cx(th.ControlPop, frameClass)
 
-    const shortcuts = filter.shortcuts.map((shortcutQuery) => (
+    const shortcuts = filter.shortcuts.map((shortcutQuery, i) => (
       <QueryChip
+        key={i}
         tooltipPre={false}
         icon={false}
         filter={filter}
@@ -186,9 +187,11 @@ export default class ControlPop extends Component {
             <div className={th.ControlPop__body}>
               <Control {...other} filter={filter} query={query} onChange={this.onControlChange} ref='control'/>
             </div>
-            <div className={th.ControlPop__shortcuts}>
-              {shortcuts}
-            </div>
+            { shortcuts.length ? (
+              <div className={th.ControlPop__shortcuts}>
+                {shortcuts}
+              </div>
+            ) : null}
             <div className={th.ControlPop__actions}>
               <Button flat disabled={query === true} label='Clear' onClick={this.onClear}/>
               <Button

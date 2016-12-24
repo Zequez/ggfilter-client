@@ -16,7 +16,7 @@ export default class QueryChip extends Component {
     query: t.oneOfType([t.object, t.bool]),
     filter: t.object, // Definition
     icon: t.bool,
-    onRemove: t.func.isRequired,
+    onRemove: t.func,
     onClick: t.func,
     hl: t.bool,
     className: t.string,
