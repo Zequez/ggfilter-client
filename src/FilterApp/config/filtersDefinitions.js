@@ -48,7 +48,9 @@ export default {
       {gt: 1, lt: null},
       {gt: 1, lt: 300},
       {gt: 1, lt: 500},
-      {gt: 1, lt: 1000}
+      {gt: 1, lt: 1000},
+      {gt: 1, lt: 1500},
+      {gt: 1, lt: 2000}
     ],
     width: 100,
     alignment: 1
