@@ -468,8 +468,9 @@ export default {
   steam_early_access: {
     id: 29,
     title: 'Early Access',
-    control: 'Toggle',
+    control: false,
     column: 'Toggle',
+    chip: 'Toggle',
     shortcuts: [
       {value: true},
       {value: false}

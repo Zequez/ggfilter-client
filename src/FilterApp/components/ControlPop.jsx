@@ -36,7 +36,7 @@ export default class ControlPop extends Component {
   }
 
   portalDidMount = () => {
-    this.refs.control.focus()
+    this.refs.control && this.refs.control.focus()
     onClickOutsideOnce(this.refs.pop, () => {
       this.leaveFrame()
     })
@@ -184,9 +184,11 @@ export default class ControlPop extends Component {
                   onRemove={this.onChipClear}/>
               </div>*/}
             </div>
-            <div className={th.ControlPop__body}>
-              <Control {...other} filter={filter} query={query} onChange={this.onControlChange} ref='control'/>
-            </div>
+            {filter.control !== false ? (
+              <div className={th.ControlPop__body}>
+                <Control {...other} filter={filter} query={query} onChange={this.onControlChange} ref='control'/>
+              </div>
+            ) : null }
             { shortcuts.length ? (
               <div className={th.ControlPop__shortcuts}>
                 {shortcuts}

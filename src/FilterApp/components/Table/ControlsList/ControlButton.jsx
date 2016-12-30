@@ -27,7 +27,7 @@ export default class ControlButton extends Component {
 
   render () {
     const { query, filter, onRemove } = this.props
-    return filter.control ? (
+    return filter.control || filter.shortcuts.length ? (
       <div className={th.ControlsList__ControlButton}>
         { !isQueryEmpty(query) ? (
           <QueryChip
