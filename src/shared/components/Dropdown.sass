@@ -1,0 +1,49 @@
+.Dropdown
+  position: relative
+  height: $g*4
+  border-bottom: solid 1px $color-divider
+  cursor: pointer
+  &:after
+    content: ''
+    position: absolute
+    bottom: -1px
+    left: 0
+    height: 2px
+    width: 100%
+    background: $color-primary
+    transform: scaleX(0)
+    transition: transform 0.25s
+  &:focus
+    outline: none
+    &:after
+      transform: scaleX(1)
+
+.Dropdown__selected
+
+.Dropdown__arrow
+  position: absolute
+  right: 0
+  top: 0
+  height: $g*4
+  line-height: $g*4
+  font-size: 16px
+  color: $color-text-dis
+  cursor: pointer
+
+.Dropdown .Dropdown__FloatingMenu
+  display: block
+  overflow: hidden
+  position: absolute
+  top: 100%
+  left: -$g*2
+  margin-top: -$g*6
+  min-width: 100%
+  font-size: 100%
+  opacity: 0
+  pointer-events: none
+  transition: opacity 0.25s
+
+.Dropdown_dropdownVisible
+  .Dropdown__FloatingMenu
+    opacity: 1
+    pointer-events: all

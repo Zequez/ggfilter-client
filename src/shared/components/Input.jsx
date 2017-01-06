@@ -8,7 +8,8 @@ export default class Input extends Component {
     className: t.string,
     hint: t.string,
     prefix: t.string,
-    suffix: t.string
+    suffix: t.string,
+    label: t.string
   }
 
   onChange = (ev) => {

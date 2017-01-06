@@ -5,12 +5,14 @@ export default class NumericInput extends Component {
   static propTypes = {
     value: t.number,
     onChange: t.func.isRequired,
-    selectOnFocus: t.bool
+    selectOnFocus: t.bool,
+    decimal: t.bool
   }
 
   defaultProps = {
     min: Number.MIN_SAFE_INTEGER,
     max: Number.MAX_SAFE_INTEGER,
+    decimal: true,
     selectOnFocus: false
   }
 
@@ -31,7 +33,7 @@ export default class NumericInput extends Component {
     let newValue = value
 
     if (newValue !== '') {
-      newValue = parseFloat(value)
+      newValue = this.props.decimal ? parseFloat(value) : parseInt(value)
 
       if (newValue < this.props.min) {
         newValue = this.props.min
@@ -43,7 +45,7 @@ export default class NumericInput extends Component {
     }
 
     if (newValue !== this.state.value) {
-      this.setState({newValue})
+      this.setState({value: newValue})
     }
 
     if (newValue !== this.props.value) {
@@ -60,7 +62,7 @@ export default class NumericInput extends Component {
   render () {
     const { value } = this.state
     const {
-      selectOnFocus, //eslint-disable-line no-unused-vars
+      selectOnFocus, decimal, //eslint-disable-line no-unused-vars
       ...other
     } = this.props
 

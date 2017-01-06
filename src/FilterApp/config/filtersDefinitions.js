@@ -418,8 +418,8 @@ export default {
     id: 24,
     title: 'Released at',
     longTitle: 'Released time ago',
-    control: 'FancyRange',
-    controlOptions: options.controls.range.dateBack,
+    control: 'RelativeDate',
+    // controlOptions: options.controls.range.dateBack,
     shortcuts: options.shortcuts.timeAgo,
     column: 'TimeAgo',
     width: 80
