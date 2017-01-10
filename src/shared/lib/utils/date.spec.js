@@ -1,14 +1,6 @@
-const utils = require('./utils')
+const utils = require('./date')
 
 describe('utils', () => {
-  describe('.snapTo', () => {
-    it('should round to a higher number', () =>
-      expect(utils.snapTo(9, 5)).toBe(10))
-
-    it('should round to a lower number', () =>
-      expect(utils.snapTo(17, 5)).toBe(15))
-  })
-
   describe('.timeInWords', () => {
     it('should work with second', () =>
       expect(utils.timeInWords(1)).toBe('1 second'))
