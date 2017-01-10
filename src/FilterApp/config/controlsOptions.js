@@ -75,6 +75,25 @@ var generateAbsoluteDates = function (startYear, endYear = null) {
   return hash
 }
 
+const dd = (strDate) => {
+  return new Date(strDate).valueOf() / 1000
+}
+
+const lastYearsDates = (yearsCount) => {
+  let endYear = new Date().getFullYear()
+  let startYear = endYear - yearsCount
+  let shortcuts = []
+  for (let i = startYear; i <= endYear; ++i) {
+    let startDate = Date.parse(`${i}-1-1`) / 1000
+    let endDate = Date.parse(`${i+1}-1-1`) / 1000
+    shortcuts.push({
+      gt: startDate,
+      lt: endDate
+    })
+  }
+  return shortcuts
+}
+
 export default {
   controls: {
     range: {
@@ -102,6 +121,6 @@ export default {
       {gt: null, lt: 365 * 24 * 60 * 60},
       {gt: 0, lt: null}
     ],
-    timeAbsolute: []
+    timeAbsolute: lastYearsDates(10)
   }
 }

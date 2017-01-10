@@ -432,6 +432,7 @@ export default {
     control: 'DateRange',
     controlOptions: options.controls.range.datesAbsolute,
     column: 'Date',
+    chip: 'DateRange',
     columnInputs: { value: 'released_at' },
     shortcuts: options.shortcuts.timeAbsolute,
     sort: 'released_at',

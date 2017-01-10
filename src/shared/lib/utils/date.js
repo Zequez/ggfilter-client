@@ -45,3 +45,22 @@ export function timeInWordsFromTimespans (time, timespans, useOne = false) {
 
   return timeInWordsFromTimespans(time, timespans, useOne)
 }
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+export function formatShortDate (date) {
+  let [year, month, day] = formatShortDateArray(date)
+  return `${day} ${month} ${year}`
+}
+
+export function formatShortDateArray (date) {
+  if (date.constructor !== Date) date = new Date(date)
+  let day = date.getUTCDate().toString()
+  let month = MONTHS[date.getUTCMonth()]
+  let year = date.getUTCFullYear()
+  day = '00'.substring(0, 2 - day.length) + day
+  return [year, month, day]
+}
+
+export function isFirstDayOfTheYear (date) {
+  return date.getUTCDate() === 1 && date.getUTCMonth() === 0
+}
