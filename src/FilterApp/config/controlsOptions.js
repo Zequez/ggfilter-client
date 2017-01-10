@@ -26,6 +26,7 @@ export default {
   },
   shortcuts: {
     timeAgo: [
+      {gt: null, lt: 0},
       {gt: 24 * 60 * 60, lt: 0},
       {gt: 7 * 24 * 60 * 60, lt: 0},
       {gt: 30 * 24 * 60 * 60, lt: 0},

@@ -7,6 +7,8 @@ export default function RelativeDateChip ({query}) {
 
   if (gt === 0 && lt == null) {
     label = 'Unreleased'
+  } else if (gt == null && lt === 0) {
+    label = 'Released'
   } else if (lt === 0 && gt != null) {
     label = `Last ${timeInWords(gt, false)}`
   } else if (lt != null && gt == null) {

@@ -1,5 +1,5 @@
 import enumColumns from './enumColumns'
-import { timeInWords, escapeHtml as h } from 'shared/lib/utils'
+import { timeInWords, formatShortDate, escapeHtml as h } from 'shared/lib/utils'
 
 let p = (cents) => {
   cents = parseInt(cents)
@@ -168,7 +168,7 @@ export default {
     }
   },
   released_at_absolute: ({gt, lt}) => {
-    return ''
+    return `release date`
   },
   steam_early_access: ({value}) => value ? '<early access>' : '<non early access>'
 }
