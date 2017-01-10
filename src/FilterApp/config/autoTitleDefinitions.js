@@ -158,7 +158,7 @@ export default {
     if (gt === 0 && lt == null) {
       return '<unreleased>'
     } else if (lt === 0 && gt != null) {
-      return `released in the <last ${h(timeInWords(gt))}>`
+      return `released in the <last ${h(timeInWords(gt, false))}>`
     } else if (lt != null && gt == null) {
       return `<older than ${h(timeInWords(lt))}>`
     } else if (lt != null && gt != null) {

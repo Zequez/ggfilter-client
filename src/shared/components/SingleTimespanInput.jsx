@@ -70,7 +70,7 @@ export default class SingleTimespanInput extends Component {
         <NumericInput
           className={th.SingleTimespanInput__Input}
           value={shownValue}
-          min={0}
+          min={-100}
           max={100}
           decimal={false}
           hint={hint}

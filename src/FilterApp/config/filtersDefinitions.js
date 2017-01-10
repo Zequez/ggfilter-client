@@ -420,6 +420,7 @@ export default {
     longTitle: 'Released time ago',
     control: 'RelativeDate',
     // controlOptions: options.controls.range.dateBack,
+    chip: 'RelativeDate',
     shortcuts: options.shortcuts.timeAgo,
     column: 'TimeAgo',
     width: 80

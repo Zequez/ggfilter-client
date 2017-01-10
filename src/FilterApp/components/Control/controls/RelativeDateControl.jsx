@@ -37,24 +37,26 @@ export default class RelativeDateControl extends Component {
   }
 
   render () {
-    let { query } = this.props
+    let { lt, gt } = this.props.query
 
     return (
       <div className={cn()}>
         <div className={cn('__gt')}>
           <span className={cn('__label')}>From</span>
           <SingleTimespanInput
-            value={query.gt}
+            value={gt}
             onChange={this.onGtChange}
-            className={cn('__TimeSpanInput')}/>
+            className={cn('__TimeSpanInput')}
+            hint='∞'/>
           <span className={cn('__ago')}>ago</span>
         </div>
         <div className={cn('__gt')}>
           <span className={cn('__label')}>To</span>
           <SingleTimespanInput
-            value={query.lt}
+            value={lt}
             onChange={this.onLtChange}
-            className={cn('__TimeSpanInput')}/>
+            className={cn('__TimeSpanInput')}
+            hint='-∞'/>
           <span className={cn('__ago')}>ago</span>
         </div>
       </div>
