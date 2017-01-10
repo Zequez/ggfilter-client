@@ -345,16 +345,13 @@ export default {
   controller_support: {
     id: 19,
     title: 'Controller support',
-    control: 'FancyRange',
-    controlOptions: {
-      range: [1, 2, 3],
-      label: {
-        '1': 'No',
-        '2': 'Partial',
-        '3': 'Full'
-      },
-      strictlyRangeMode: false
-    },
+    control: false,
+    chip: 'ControllerSupport',
+    shortcuts: [
+      {value: 1},
+      {value: 2},
+      {value: 3}
+    ],
     column: 'Controller',
     alignment: 0
   },
