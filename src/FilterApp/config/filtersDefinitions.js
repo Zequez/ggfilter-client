@@ -429,7 +429,7 @@ export default {
     id: 25,
     title: 'Release year',
     longTitle: 'Precise date of release',
-    control: 'FancyRange',
+    control: 'DateRange',
     controlOptions: options.controls.range.datesAbsolute,
     column: 'Date',
     columnInputs: { value: 'released_at' },
