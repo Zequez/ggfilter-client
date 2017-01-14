@@ -65,11 +65,10 @@ export default class FilterApp extends Component {
 
   render () {
     let {games, filter, columnsWidth, tableWidth, visibleFilters} = this.props
-
     return (
       <div className={th.FilterApp}>
         <AppBar className={th.FilterApp__AppBar}>
-          <h1>Filterrr!</h1>
+          <h1>Filter</h1>
           <QueryChipsList
             filter={filter}
             visibleFilters={visibleFilters}
