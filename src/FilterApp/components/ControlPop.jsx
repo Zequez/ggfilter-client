@@ -164,6 +164,10 @@ export default class ControlPop extends Component {
         onClick={this.onClickShortcut.bind(this, shortcutQuery)}/>
     ))
 
+    const hlButtonTooltip = hl
+      ? 'Switch from highlighting to filtering'
+      : 'Switch from filtering to highlighting'
+
     return (
       <Portal onMount={this.portalDidMount} onUpdate={this.portalDidUpdate}>
         <div className={classNames} style={style} ref='rsa'>
@@ -171,6 +175,7 @@ export default class ControlPop extends Component {
             <div className={th.ControlPop__header}>
               <span className={th.ControlPop__title}>{filter.title}</span>
               <ToggleIcon
+                tooltip={hlButtonTooltip}
                 className={th.ControlPop__ToggleIcon}
                 icon={'highlight'}
                 checked={hl}

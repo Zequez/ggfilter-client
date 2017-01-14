@@ -3,9 +3,11 @@ import React, { PropTypes as t, Component } from 'react'
 import cx from 'classnames'
 import Icon from './Icon'
 import Ripple from './Ripple'
+import TooltipFactory from './Tooltip'
 
-const RippleButton = Ripple({centered: true})('button')
-const RippleIcon = Ripple({centered: true})(Icon)
+const TooltipRippleButton = TooltipFactory(
+  Ripple({centered: true})('button'), {position: 'top'}
+)
 
 export default class ToggleIcon extends Component {
   static propTypes = {
@@ -33,7 +35,7 @@ export default class ToggleIcon extends Component {
     let { checked, className, icon, ...other } = this.props
 
     return (
-      <RippleButton
+      <TooltipRippleButton
         onMouseOut={this.onMouseOut}
         rippleDisabled={checked}
         className={cx(th.ToggleIcon, className, {
@@ -41,7 +43,7 @@ export default class ToggleIcon extends Component {
           [th.ToggleIcon_justUnchecked]: this.state.justUnchecked
         })} {...other}>
         <Icon icon={icon} className={th.ToggleIcon__Icon}/>
-      </RippleButton>
+      </TooltipRippleButton>
     )
   }
 }
