@@ -2,7 +2,7 @@ import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 
 import * as pages from '../pages'
-// import { Lightbox } from 'src/Lightbox'
+import { Lightbox } from 'src/Lightbox'
 import Layout from 'src/Layout'
 
 @connect(
@@ -20,6 +20,7 @@ export default class App extends Component {
     return (
       <Layout>
         <CurrentPage/>
+        <Lightbox/>
       </Layout>
     )
   }
