@@ -33,13 +33,19 @@ export function onClickOutsideOnce (target, cb) {
     const binding = (ev) => {
       if (target !== ev.target && !isParentOf(target, ev.target)) {
         if (cb(ev) !== false) {
-          doc.removeEventListener('click', binding)
+          unbind()
         }
       }
     }
 
+    const unbind = () => doc.removeEventListener('click', binding)
+
     doc.addEventListener('click', binding)
+
+    return unbind
   }
+
+  return () => {}
 }
 
 export function bindGlobalKey (keyCodes, cb) {
@@ -66,4 +72,5 @@ export function bindGlobal (event, binding) {
     doc.addEventListener(event, binding)
     return () => doc.removeEventListener(event, binding)
   }
+  return () => {}
 }

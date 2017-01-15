@@ -1,0 +1,25 @@
+.PopCard
+  +z(PopCard)
+  position: absolute
+  top: 0
+  left: 0
+  transition-duration: 0.25s
+  transition-property: transform, opacity
+  transform-origin: center center
+
+.PopCard_enterFrame
+  transform: scale(0.75)
+  opacity: 0.01
+.PopCard_visibleFrame
+  transform: scale(1)
+  opacity: 1
+.PopCard_leaveFrame
+  transform: scale(0.01)
+  opacity: 0.01
+
+.PopCard_measureFrame
+  composes: PopCard_visibleFrame
+  visibility: hidden
+
+.PopCard_measureFrame, .PopCard_enterFrame
+  transition-duration: 0s
