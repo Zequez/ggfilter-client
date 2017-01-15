@@ -1,20 +1,18 @@
 import th from './FilterApp.sass'
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
-import debounce from 'lodash/debounce'
 
 import definitions from '../lib/definitions'
 
 const { getGames, getMoreGames } = require('../games').actions
 import { setDocWidth } from '../ui/reducer'
 import { setParam } from '../filter/reducer'
-import { getTrueColumnsWidth, getTrueTableWidth, getTab } from '../ui/selectors'
+import { getTab } from '../ui/selectors'
 import { finalFilterSelector, visibleFiltersDefinitionsSelector } from '../filter/selectors'
-import { totalCountSelector } from '../games/selectors'
+import { loadedCountSelector, totalCountSelector } from '../games/selectors'
 
 import Table from './Table/Table'
-// import GamesLoader from './GamesLoader'
-import Shortcuts from './Shortcuts'
+import GamesLoader from './GamesLoader'
 import CategoriesList from './CategoriesList'
 import QueryChipsList from './QueryChipsList'
 
@@ -25,10 +23,9 @@ import { AppBar } from 'src/Layout'
   visibleFilters: visibleFiltersDefinitionsSelector(s),
   games: s.games,
   tags: s.tags,
-  // columnsWidth: getTrueColumnsWidth(s),
-  // tableWidth: getTrueTableWidth(s),
   tab: getTab(s),
-  gamesCount: totalCountSelector(s)
+  gamesLoadedCount: loadedCountSelector(s),
+  gamesTotalCount: totalCountSelector(s)
 }), {
   getGames,
   getMoreGames,
@@ -40,7 +37,8 @@ export default class FilterApp extends Component {
     getGames: t.func,
     getMoreGames: t.func,
     setParam: t.func,
-    gamesCount: t.number
+    gamesLoadedCount: t.number,
+    gamesTotalCount: t.number
   }
 
   componentWillMount () {
@@ -67,11 +65,12 @@ export default class FilterApp extends Component {
   }
 
   render () {
-    let {games, gamesCount, filter, columnsWidth, tableWidth, visibleFilters} = this.props
+    let { games, gamesLoadedCount, gamesTotalCount, filter, columnsWidth,
+      tableWidth, visibleFilters } = this.props
     return (
       <div className={th.FilterApp}>
         <AppBar className={th.FilterApp__AppBar}>
-          <h1>{gamesCount == null ? '???' : gamesCount} games found</h1>
+          <h1>{gamesTotalCount == null ? '???' : gamesTotalCount} games found</h1>
           <QueryChipsList
             filter={filter}
             visibleFilters={visibleFilters}
@@ -85,11 +84,13 @@ export default class FilterApp extends Component {
           columnsWidth={columnsWidth}
           tableWidth={tableWidth}
           visibleFiltersDefinitions={visibleFilters}/>
-        {/*<GamesLoader
+        <GamesLoader
           fetching={games.fetching}
           failed={games.failed}
           lastPage={games.lastPage}
-          onRequestMore={::this.handleRequestMoreGames} />*/}
+          onRequestMore={::this.handleRequestMoreGames}
+          loadedGames={gamesLoadedCount}
+          totalGames={gamesTotalCount}/>
       </div>
     )
   }
