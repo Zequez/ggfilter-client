@@ -4,6 +4,7 @@ import Button from 'shared/components/Button'
 import PopCard from 'shared/components/PopCard'
 import ToggleIcon from 'shared/components/ToggleIcon'
 import { isQueryActive } from '../lib/utils'
+import { bindGlobalKeyOnce } from 'shared/lib/utils'
 
 import Control from './Control'
 import QueryChip from './QueryChip'
@@ -22,11 +23,17 @@ export default class ControlPop extends Component {
     query: true
   }
 
+  globalKeyUnbind = null
   componentWillMount () {
     this.setState({
       hl: isQueryActive(this.props.query) && !!this.props.query.hl,
       query: this.props.query
     })
+    this.globalKeyUnbind = bindGlobalKeyOnce(13, () => this.onClickApply())
+  }
+
+  componentWillUnmount () {
+    this.globalKeyUnbind()
   }
 
   portalDidMount = () => {
