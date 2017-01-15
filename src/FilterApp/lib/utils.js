@@ -6,3 +6,7 @@ export function isQueryEmpty (query) {
   //   (queryKeys.length === 1 && queryKeys[0] === 'hl')
   // )
 }
+
+export function isQueryActive (query) {
+  return query && typeof query === 'object'
+}

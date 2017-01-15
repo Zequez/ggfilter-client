@@ -3,7 +3,7 @@ import React, { Component, PropTypes as t } from 'react'
 import Button from 'shared/components/Button'
 import PopCard from 'shared/components/PopCard'
 import ToggleIcon from 'shared/components/ToggleIcon'
-import { isQueryEmpty } from '../lib/utils'
+import { isQueryActive } from '../lib/utils'
 
 import Control from './Control'
 import QueryChip from './QueryChip'
@@ -18,18 +18,14 @@ export default class ControlPop extends Component {
   }
 
   state = {
-    hl: false
-  }
-
-  componentWillReceiveProps (props) {
-    if (!isQueryEmpty(props.query) && this.state.hl !== !!props.query.hl) {
-      this.setState({hl: !!props.query.hl})
-    }
+    hl: false,
+    query: true
   }
 
   componentWillMount () {
     this.setState({
-      hl: !isQueryEmpty(this.props.query) && !!this.props.query.hl
+      hl: isQueryActive(this.props.query) && !!this.props.query.hl,
+      query: this.props.query
     })
   }
 
@@ -41,38 +37,36 @@ export default class ControlPop extends Component {
     this.refs.popCard.close()
   }
 
-  onChipClear = () => {
-    this.props.onChange(true)
+  onClickHighlight = () => {
+    this.setState({hl: !this.state.hl})
   }
 
-  onClear = () => {
+  onClickClear = () => {
     this.props.onChange(true)
     this.close()
-  }
-
-  onClickHighlight = () => {
-    let { query } = this.props
-    let newHl = !this.state.hl
-    this.setState({hl: newHl})
-    if (!isQueryEmpty(query)) {
-      this.props.onChange({...query, hl: newHl})
-    }
   }
 
   onClickShortcut = (query) => {
+    this.props.onChange(this.finalQuery(query))
     this.close()
-    setTimeout(() => {
-      this.onControlChange(query)
-    }, 250)
   }
 
-  onControlChange = (val) => {
-    this.props.onChange(isQueryEmpty(val) ? val : {...val, hl: this.state.hl})
+  onControlChange = (query) => {
+    this.setState({query})
+  }
+
+  onClickApply = () => {
+    this.props.onChange(this.finalQuery())
+    this.close()
+  }
+
+  finalQuery (query = this.state.query, hl = this.state.hl) {
+    return isQueryActive(query) ? { ...query, hl } : query
   }
 
   render () {
-    const { target, filter, query, onClose, ...other } = this.props //eslint-disable-line no-unused-vars
-    const { hl } = this.state
+    const { target, filter, onClose, ...other } = this.props
+    const { hl, query } = this.state
 
     const shortcuts = filter.shortcuts.map((shortcutQuery, i) => (
       <QueryChip
@@ -112,11 +106,11 @@ export default class ControlPop extends Component {
             </div>
           ) : null}
           <div className={th.ControlPop__actions}>
-            <Button flat disabled={query === true} label='Clear' onClick={this.onClear}/>
+            <Button flat disabled={query === true} label='Clear' onClick={this.onClickClear}/>
             <Button
               flat
-              label='Done'
-              onClick={this.close}
+              label='Apply'
+              onClick={this.onClickApply}
               className={th.ControlList__ControlPop__closeButton}/>
           </div>
         </div>
