@@ -10,6 +10,7 @@ import { setDocWidth } from '../ui/reducer'
 import { setParam } from '../filter/reducer'
 import { getTrueColumnsWidth, getTrueTableWidth, getTab } from '../ui/selectors'
 import { finalFilterSelector, visibleFiltersDefinitionsSelector } from '../filter/selectors'
+import { totalCountSelector } from '../games/selectors'
 
 import Table from './Table/Table'
 // import GamesLoader from './GamesLoader'
@@ -26,7 +27,8 @@ import { AppBar } from 'src/Layout'
   tags: s.tags,
   // columnsWidth: getTrueColumnsWidth(s),
   // tableWidth: getTrueTableWidth(s),
-  tab: getTab(s)
+  tab: getTab(s),
+  gamesCount: totalCountSelector(s)
 }), {
   getGames,
   getMoreGames,
@@ -37,7 +39,8 @@ export default class FilterApp extends Component {
   static propTypes = {
     getGames: t.func,
     getMoreGames: t.func,
-    setParam: t.func
+    setParam: t.func,
+    gamesCount: t.number
   }
 
   componentWillMount () {
@@ -64,11 +67,11 @@ export default class FilterApp extends Component {
   }
 
   render () {
-    let {games, filter, columnsWidth, tableWidth, visibleFilters} = this.props
+    let {games, gamesCount, filter, columnsWidth, tableWidth, visibleFilters} = this.props
     return (
       <div className={th.FilterApp}>
         <AppBar className={th.FilterApp__AppBar}>
-          <h1>Filter</h1>
+          <h1>{gamesCount == null ? '???' : gamesCount} games found</h1>
           <QueryChipsList
             filter={filter}
             visibleFilters={visibleFilters}
