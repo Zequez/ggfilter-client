@@ -1,7 +1,46 @@
-$palette-grey-300: #E0E0E0;
-$palette-grey-100: #F5F5F5;
-$palette-grey-50: #FAFAFA;
 $palette-white: #FFFFFF;
+
+$palette-grey-50: rgb(250, 250, 250);
+$palette-grey-100: rgb(245, 245, 245);
+$palette-grey-200: rgb(238, 238, 238);
+$palette-grey-300: rgb(224, 224, 224);
+$palette-grey-400: rgb(189, 189, 189);
+$palette-grey-500: rgb(158, 158, 158);
+$palette-grey-600: rgb(117, 117, 117);
+$palette-grey-700: rgb(97, 97, 97);
+$palette-grey-800: rgb(66, 66, 66);
+$palette-grey-900: rgb(33, 33, 33);
+
+$palette-cyan-50: rgb(224, 247, 250);
+$palette-cyan-100: rgb(178, 235, 242);
+$palette-cyan-200: rgb(128, 222, 234);
+$palette-cyan-300: rgb(77, 208, 225);
+$palette-cyan-400: rgb(38, 198, 218);
+$palette-cyan-500: rgb(0, 188, 212);
+$palette-cyan-600: rgb(0, 172, 193);
+$palette-cyan-700: rgb(0, 151, 167);
+$palette-cyan-800: rgb(0, 131, 143);
+$palette-cyan-900: rgb(0, 96, 100);
+$palette-cyan-a100: rgb(132, 255, 255);
+$palette-cyan-a200: rgb(24, 255, 255);
+$palette-cyan-a400: rgb(0, 229, 255);
+$palette-cyan-a700: rgb(0, 184, 212);
+
+$palette-deep-orange-50: rgb(251, 233, 231);
+$palette-deep-orange-100: rgb(255, 204, 188);
+$palette-deep-orange-200: rgb(255, 171, 145);
+$palette-deep-orange-300: rgb(255, 138, 101);
+$palette-deep-orange-400: rgb(255, 112, 67);
+$palette-deep-orange-500: rgb(255, 87, 34);
+$palette-deep-orange-600: rgb(244, 81, 30);
+$palette-deep-orange-700: rgb(230, 74, 25);
+$palette-deep-orange-800: rgb(216, 67, 21);
+$palette-deep-orange-900: rgb(191, 54, 12);
+$palette-deep-orange-a100: rgb(255, 158, 128);
+$palette-deep-orange-a200: rgb(255, 110, 64);
+$palette-deep-orange-a400: rgb(255, 61, 0);
+$palette-deep-orange-a700: rgb(221, 44, 0);
+
 
 // Primary & secondary colors
 $color-pri: $palette-cyan-500;
@@ -34,23 +73,7 @@ $color-icon-inactive: $color-text-dis;
 $color-divider: rgba(#000, .12);
 $color-divider-light: rgba(#000, 0.03);
 $color-dimming: $color-divider;
-// $color-divider-alt: rgba(#FFF, 12%);
-
-// react-toolbox variables
-$unit: 10px;
-
-$color-divider: rgba(#000, .12);
-$color-background: $color-mono-1;
-$color-text: rgba(#000, .87);
-$color-text-secondary: rgba(#000, .54);
-
-$color-primary: $palette-cyan-500;
-$color-primary-dark: $palette-cyan-700;
-$color-primary-light: $palette-cyan-100;
-$color-accent: $palette-deep-orange-a400;
-$color-accent-light: $palette-deep-orange-a100;
-$color-accent-dark: $palette-deep-orange-a700;
-
+$color-white: $palette-white;
 
 // Grid
 $g: 8px;
@@ -74,77 +97,6 @@ $font-family-mono: Courier, monospace;
 
 $font-weight-normal: 400;
 $font-weight-medium: 500;
-
-// Font style
-@mixin font-base() {
-  font-family: Roboto, sans-serif;
-  font-weight: 400;
-  // font-size: 14px;
-  font-size: 14px; // Desktop
-  line-height: 100%;
-  color: $color-text-pri;
-  @include media(">tablet") {
-    font-size: 13px;
-  }
-
-}
-@mixin font-display-4() {
-  font-size: 112px;
-  letter-spacing: -10px;
-  color: $color-text-sec; }
-@mixin font-display-3() {
-  font-size: 56px;
-  letter-spacing: -5px;
-  color: $color-text-sec; }
-@mixin font-display-2() {
-  font-size: 45px;
-  line-height: 48px;
-  letter-spacing: 0;
-  color: $color-text-sec; }
-@mixin font-display-1() {
-  font-size: 34px;
-  line-height: 40px;
-  letter-spacing: 0;
-  color: $color-text-sec; }
-@mixin font-headline() {
-  font-size: 24px;
-  line-height: 32px;
-  letter-spacing: 0; }
-@mixin font-title() {
-  font-size: 20px;
-  font-weight: 500;
-  letter-spacing: 0.5px; }
-@mixin font-subheading-1() {
-  // font-size: 16px;
-  font-size: 15px; // Desktop
-  // line-height: 24px;
-  letter-spacing: 0.1px; }
-@mixin font-subheading-2() {
-  // font-size: 16px;
-  font-size: 15px; // Desktop
-  // line-height: 28px;
-  letter-spacing: 0.1px;
-  font-weight: 500; }
-@mixin font-body-1() {
-  font-size: 14px;
-  // line-height: 20px;
-  letter-spacing: 0.1px; }
-@mixin font-body-1-desktop() {
-  font-size: 13px; }
-@mixin font-body-2() {
-  // font-size: 14px;
-  font-size: 13px; // Desktop
-  // line-height: 24px;
-  font-weight: 500; }
-@mixin font-caption() {
-  font-size: 12px;
-  color: $color-text-sec;
-  letter-spacing: 0.2px; }
-@mixin font-button() {
-  font-size: 14px;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 10px; }
 
 // Z-Index
 
@@ -185,30 +137,6 @@ $z:
 
 // Shadows
 
-// $shDialog: 24px;
-// $shDrawer: 16px;
-// $shFabRaised: 12px;
-// $shSubmenu: 9px;
-// $shButtonRaised: 8px;
-// $shFab: 6px;
-// $shAppBar: 4px;
-// $shButton: 2px;
-// $shCard: 2px;
-// $shSwitch: 1px;
-
-$shadow: (
-  dialog: 24px,
-  drawer: 16px,
-  fabRaised: 12px,
-  submenu: 9px,
-  buttonRaised: 8px,
-  fab: 6px,
-  appBar: 4px,
-  button: 2px,
-  card: 2px,
-  switch: 1px
-);
-
 $shadow-dialog: 0 12px 24px rgba(#000, 0.2);
 $shadow-drawer: 0 8px 16px rgba(#000, 0.2);
 $shadow-fabRaised: 0 6px 12px rgba(#000, 0.2);
@@ -219,41 +147,3 @@ $shadow-appBar: 0 2px 4px rgba(#000, 0.2);
 $shadow-button: 0 1px 2px rgba(#000, 0.2);
 $shadow-card: 0 1px 2px rgba(#000, 0.2);
 $shadow-switch: 0 0 1px rgba(#000, 0.2);
-
-@mixin shadow($size) {
-  $s: map-get($shadow, $size);
-  box-shadow: 0 $s*0.5 $s rgba(#000, 0.2);
-};
-
-////////////////////////////////////////
-// Old stuff
-
-$dark-blue:   #1A1932;
-$blue:        #2A354C;
-$ocean-blue:  #3F5864;
-$ocean-green: #63807F;
-$teal:        #8EA8A1;
-$white:       lighten($teal, 20%);
-$red:         #872929;
-$input-white: #fafafa;
-$green:       green;
-$link-blue:   #3c8baf;
-$yellow:      #f1d619;
-$faded-white: mix($white, $blue, 20%);
-
-$color1: $dark-blue;
-$color2: $blue;
-$color3: $ocean-blue;
-$color4: $ocean-green;
-$color5: $teal;
-$color6: $white;
-
-
-$r: 24px;
-
-$font-normal: 16px;
-$font-larger: 20px;
-$font-x-larger: 24px;
-$font-xx-larger: 48px;
-$font-smaller: 12px;
-$font-x-smaller: 8px;

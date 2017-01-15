@@ -15,12 +15,12 @@
     width: $gg
     transition: width 0.5s, box-shadow 0.5s
     &:hover
-      +shadow(drawer)
+      box-shadow: $shadow-drawer
       width: $gg * 4
 
   &.active
     transform: translateX(100%)
-    +shadow(drawer)
+    box-shadow: $shadow-drawer
 
   a
     +font-body-2

@@ -4,7 +4,4 @@
 
 export { default as flex } from 'shared/style/utils/equalflex'
 
-import 'react-toolbox/lib/chip/theme'
-import 'react-toolbox/lib/input/theme'
-
 import 'src/shared/style/global/index'

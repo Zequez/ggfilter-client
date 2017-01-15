@@ -65,7 +65,7 @@
 
 .appBody
   +z(appBody)
-  +shadow(card)
+  box-shadow: $shadow-card
   position: relative
   flex-grow: 1
   display: flex
@@ -84,9 +84,6 @@
     position: relative
     overflow: hidden
     height: $gg
-
-  [data-react-toolbox='ripple']
-    z-index: 2
 
   a
     position: relative
