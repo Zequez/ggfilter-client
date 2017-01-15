@@ -1,0 +1,32 @@
+.Chip
+  height: $g*4
+  margin-right: $g
+  border-radius: $g*2
+  background: $color-mono-4
+  box-shadow: $shadow-card
+  line-height: $g*4
+  white-space: nowrap
+  cursor: pointer
+  &:last-child
+    margin-right: 0
+.Chip__Icon, .Chip__remove
+  display: inline-block
+  line-height: $g*4
+  height: $g*4
+  width: $g*4
+  border-radius: $g*2
+  text-align: center
+  font-size: $font-size-input
+.Chip__Icon
+  background: $color-sec-dark
+  color: $color-text-pri-alt
+  box-shadow: $shadow-switch
+.Chip__remove
+  background: $color-mono-2
+  &:hover
+    background: $color-mono-3
+.Chip__text
+  display: inline-block
+  padding: 0 $g
+  font-weight: $font-weight-medium
+  vertical-align: top

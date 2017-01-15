@@ -8,7 +8,7 @@ import { MODES, setMode } from 'shared/reducers/uiReducer'
 import Link from 'shared/components/RouterLink'
 import { AutoPage } from 'src/Layout'
 
-import Chip from 'react-toolbox/lib/chip'
+import Chip from 'shared/components/Chip'
 import Button from 'shared/components/Button'
 
 import SuggestionsBox from './SuggestionsBox'
@@ -111,8 +111,12 @@ export default class SysreqCalc extends Component {
         {games.length ? (
           <div className={th.chips}>
             {games.map((game, i) => (
-              <Chip key={game.id} deletable onDeleteClick={this.removeGame.bind(this, game)}>
-                {`${game.name} [${game.sysreq_index_centile}]`}
+              <Chip
+                key={game.id}
+                iconText={game.sysreq_index_centile}
+                onRemove={this.removeGame.bind(this, game)}
+                className={th.SysreqCalc__Chip}>
+                {game.name}
               </Chip>
             ))}
           </div>
