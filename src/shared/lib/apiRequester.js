@@ -1,6 +1,6 @@
 import axios from 'axios'
+import NProgress from 'nprogress/nprogress.js'
 import config from 'src/app/config'
-import { start, stop } from 'shared/lib/loadingSpinner'
 import { snakeizeKeys } from 'shared/lib/utils'
 
 const api = axios.create({
@@ -14,18 +14,18 @@ const api = axios.create({
 })
 
 api.interceptors.request.use((config) => {
-  start()
+  NProgress.start()
   return config
 }, (error) => {
-  stop()
+  NProgress.done()
   return Promise.reject(error)
 })
 
 api.interceptors.response.use((response) => {
-  stop()
+  NProgress.done()
   return response
 }, (error) => {
-  stop()
+  NProgress.done()
   return Promise.reject(error)
 })
 
