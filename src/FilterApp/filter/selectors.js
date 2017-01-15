@@ -2,41 +2,23 @@ import { createSelector } from 'reselect'
 import { encode } from '../lib/filterEncoder'
 import { combiner } from './lib/filterMutator'
 import definitions from '../lib/definitions'
-import { isQueryEmpty } from '../lib/utils'
-import defaultFilter from '../config/defaultFilter'
-import masks from '../config/masks'
+import { isQueryActive, isFilterEmpty } from '../lib/utils'
 import { NAME } from './constants'
-import initialState from './initialState'
 
-export const deltaFilterSelector =
-  (s, fragment = false) => fragment ? s : s[NAME]
-
-export const staticSlugSelector = createSelector(
-  deltaFilterSelector,
-  (s) => s.staticSlug
-)
-
-export const filterMasksNames = createSelector(
-  deltaFilterSelector,
-  (s) => s.masks
-)
-
-export const filterMasks = createSelector(
-  filterMasksNames,
-  (names) => names.map((name) => masks[name])
-)
-export const maskedFilterSelector = createSelector(
-  filterMasks,
-  (masksList) => combiner(defaultFilter, ...masksList)
-)
+export const stateSelector = (s) => s[NAME]
+export const baseFilterSelector = (s) => s[NAME].base
+export const deltaFilterSelector = (s) => s[NAME].delta
 
 export const finalFilterSelector = createSelector(
-  maskedFilterSelector,
+  baseFilterSelector,
   deltaFilterSelector,
-  (maskedFilter, filter) => combiner(maskedFilter, filter)
+  (baseFilter, deltaFilter) => combiner(baseFilter, deltaFilter)
 )
 
-export const isDirtySelector = (s) => s[NAME] !== initialState
+export const isDirtySelector = createSelector(
+  deltaFilterSelector,
+  (deltaFilter) => !isFilterEmpty(deltaFilter)
+)
 
 export const paramsSelector = createSelector(
   finalFilterSelector,
@@ -48,7 +30,7 @@ export const activeParamsSelector = createSelector(
   (params) => {
     let newParams = {}
     for (let k in params) {
-      if (!isQueryEmpty(params[k])) {
+      if (isQueryActive(params[k])) {
         newParams[k] = params[k]
       }
     }
@@ -71,7 +53,7 @@ export const queryColumnsSelector = createSelector(
   (visible) => visible.reduce((cols, f) => cols.concat(Object.values(f.columnInputs)), [])
 )
 
-export const encodedFilterSelector = createSelector(
+export const encodedDeltaSelector = createSelector(
   deltaFilterSelector,
   (filter) => encode(filter)
 )

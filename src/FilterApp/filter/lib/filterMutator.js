@@ -22,6 +22,7 @@ export function combiner (...filters) {
  * @returns {filter}
  */
 export function deleteRedundantAttrs (filter, base) {
+  filter = { ...filter }
   filter.params = _deleteRedundantAttrs(filter.params, base.params)
   filter.sort = _deleteRedundantAttrs(filter.sort, base.sort)
   return filter

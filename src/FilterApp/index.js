@@ -1,6 +1,5 @@
 import FilterApp from './components/FilterApp'
 import FilterAppPage from './components/FilterAppPage'
-import TitleGenerator from './components/TitleGenerator'
 import reducer from './reducer'
 
 const filter = require('./filter')
@@ -13,7 +12,6 @@ import * as ui from './ui'
 
 module.exports = {
   FilterApp,
-  TitleGenerator,
   FilterAppPage,
   reducer,
 

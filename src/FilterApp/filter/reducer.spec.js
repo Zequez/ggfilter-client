@@ -1,45 +1,40 @@
 const {
+  SET_BASE,
+  SET_DELTA,
   MUTATE,
-  ADD_MASK,
-  REMOVE_MASK,
   setParam
 } = require('./reducer')
 
 let reducer = require('./reducer').reducer
-function withDefaultFilter (defaultFilter) {
-  jest.mock('../config/defaultFilter', () => defaultFilter)
-  jest.resetModules()
-  reducer = require('./reducer').reducer
-}
-
-jest.mock('../config/masks', () => ({
-  hey: {params: {}, sort: {}},
-  potato: {params: {}, sort: {}},
-  salad: {params: {}, sort: {}}
-}))
+// function withDefaultFilter (defaultFilter) {
+//   jest.mock('./defaultFilter', () => defaultFilter)
+//   jest.mock('./frontPageFilter', () => defaultFilter)
+//   jest.resetModules()
+//   reducer = require('./newReducer').reducer
+// }
 
 describe('FilterApp/filter reducer', () => {
   describe('reducer', () => {
     describe(MUTATE, () => {
-      let initialState = {
-        params: {
-          foo: {bar: true},
-          galaxy: {bar: 'rsa'}
-        },
-        sort: {
-          column: 'steam_id',
-          asc: true
-        },
-        masks: []
-      }
+      it('changes the delta with an empty base', () => {
+        let state = {
+          base: {
+            params: {},
+            sort: {}
+          },
+          delta: {
+            params: {
+              foo: {bar: true},
+              galaxy: {bar: 'rsa'}
+            },
+            sort: {
+              column: 'steam_id',
+              asc: true
+            }
+          }
+        }
 
-      it('should update the state normally', () => {
-        withDefaultFilter({
-          params: {},
-          sort: {}
-        })
-
-        expect(reducer(initialState, {
+        expect(reducer(state, {
           type: MUTATE,
           mask: {
             params: {
@@ -52,32 +47,49 @@ describe('FilterApp/filter reducer', () => {
           }
         }))
         .toEqual({
-          params: {
-            foo: {pen: 'cuck'},
-            galaxy: {bar: 'rsa'},
-            potato: {value: true}
+          base: {
+            params: {},
+            sort: {}
           },
-          sort: {
-            column: 'name',
-            asc: true
-          },
-          masks: []
+          delta: {
+            params: {
+              foo: {pen: 'cuck'},
+              galaxy: {bar: 'rsa'},
+              potato: {value: true}
+            },
+            sort: {
+              column: 'name',
+              asc: true
+            }
+          }
         })
       })
 
-      it('should remove things that are already present in the default filter', () => {
-        withDefaultFilter({
-          params: {
-            foo: { pen: 'cuck' },
-            potato: { value: true }
+      it('should remove things that are already present in the base filter', () => {
+        let state = {
+          base: {
+            params: {
+              foo: { pen: 'cuck' },
+              potato: { value: true }
+            },
+            sort: {
+              column: 'name',
+              asc: false
+            }
           },
-          sort: {
-            column: 'name',
-            asc: false
+          delta: {
+            params: {
+              foo: {bar: true},
+              galaxy: {bar: 'rsa'}
+            },
+            sort: {
+              column: 'steam_id',
+              asc: true
+            }
           }
-        })
+        }
 
-        expect(reducer(initialState, {
+        expect(reducer(state, {
           type: MUTATE,
           mask: {
             params: {
@@ -90,40 +102,25 @@ describe('FilterApp/filter reducer', () => {
           }
         }))
         .toEqual({
-          params: {
-            galaxy: {bar: 'rsa'}
+          base: {
+            params: {
+              foo: { pen: 'cuck' },
+              potato: { value: true }
+            },
+            sort: {
+              column: 'name',
+              asc: false
+            }
           },
-          sort: {
-            asc: true
-          },
-          masks: []
+          delta: {
+            params: {
+              galaxy: {bar: 'rsa'}
+            },
+            sort: {
+              asc: true
+            }
+          }
         })
-      })
-    })
-
-    describe(ADD_MASK, () => {
-      it('should add a mask to the state.masks', () => {
-        withDefaultFilter({
-          params: {},
-          sort: {}
-        })
-
-        let state = {params: {}, sort: {}, masks: ['hey']}
-        expect(reducer(state, {type: ADD_MASK, mask: 'potato'}))
-          .toEqual({params: {}, sort: {}, masks: ['hey', 'potato'], staticSlug: null})
-      })
-    })
-
-    describe(REMOVE_MASK, () => {
-      it('should remove a mask from the state.mask', () => {
-        withDefaultFilter({
-          params: {},
-          sort: {}
-        })
-
-        let state = {params: {}, sort: {}, masks: ['hey', 'potato', 'salad']}
-        expect(reducer(state, {type: REMOVE_MASK, mask: 'potato'}))
-          .toEqual({params: {}, sort: {}, masks: ['hey', 'salad'], staticSlug: null})
       })
     })
   })
@@ -156,7 +153,5 @@ describe('FilterApp/filter reducer', () => {
         })
       )
     })
-
-    // describe('.addTagFilter', function () {})
   })
 })

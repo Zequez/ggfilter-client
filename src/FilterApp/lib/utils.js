@@ -10,3 +10,7 @@ export function isQueryEmpty (query) {
 export function isQueryActive (query) {
   return query && typeof query === 'object'
 }
+
+export function isFilterEmpty (filter) {
+  return Object.keys(filter.params).length + Object.keys(filter.sort).length === 0
+}
