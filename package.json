@@ -121,7 +121,6 @@
     "react-dom": "^15.4",
     "react-draggable": "^2.2.1",
     "react-redux": "^4.4.5",
-    "react-toolbox": "Zequez/react-toolbox#my-fixes-built",
     "redux": "^3.6.0",
     "redux-mediaquery": "^0.10.0",
     "redux-thunk": "^2.1.0",
