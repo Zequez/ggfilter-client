@@ -23,10 +23,8 @@ export default class LocationWatcher {
   unbind () { this.unlisten() }
 
   matchRoute () {
-    let { pathname } = this.location
-
     let actions
-    let route = this.routes.find((r) => actions = r.matchPath(pathname))
+    let route = this.routes.find((r) => actions = r.matchPath(this.location))
 
     if (route) {
       console.info('SelectorRouter: MATCHED ROUTE', route.path)

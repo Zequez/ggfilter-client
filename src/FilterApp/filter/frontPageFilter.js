@@ -2,7 +2,7 @@ import definitions from '../lib/definitions'
 
 export default {
   params: definitions.normalizeParamsOrder({
-    name: true,
+    name: { value: 'civ' },
     tags: true,
     released_at: true,
     lowest_steam_price: true,

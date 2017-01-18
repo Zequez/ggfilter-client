@@ -148,6 +148,8 @@ export function encode (filter) {
 }
 
 export function decode (encodedMinFilter) {
+  if (!encodedMinFilter) return maximize(null)
+
   let [masks, slug] = extractKnownMasks(encodedMinFilter)
 
   let filter

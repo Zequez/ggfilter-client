@@ -1,77 +1,60 @@
-import UrlPattern from 'url-pattern'
+import LocationPattern from './LocationPattern'
 
 export default class Route {
   name = null
-  path = null
-  selectors = []
-  actions = []
-  children = []
 
-  constructor (name, path, selectors, actions, children) {
-    this.name = name
-    this.path = path
-    this.selectors = selectors
-    this.actions = actions
-    this.pathPattern = new UrlPattern(this.path, {segmentValueCharset: 'a-zA-Z0-9_+-'})
-    this.children = children // Doesn't do anything yet
-  }
+  selectors = null
+  actions = null
+  conditions = null
 
-  matchPath (path) {
-    let matches = this.pathPattern.match(path)
-    return matches
-      ? this.createActions(Object.values(matches))
-      : null
-  }
-
-  matchState (state, force = false) {
-    let matches = []
-
-    let iterate = ([selector, matcher]) => {
-      let value = selector(state)
-      let newValue = value
-      if (typeof matcher === 'function') {
-        newValue = matcher(value)
-      } else if (matcher !== undefined) {
-        newValue = value === matcher
-      }
-      matches.push(newValue)
-      return newValue
+  constructor (name, config) {
+    this.config = {
+      name,
+      path: '/',
+      query: {},
+      selectors: (s) => ({}),
+      actions: (dispatch, params, location) => Promise.resolve(),
+      conditions: (s) => true,
+      ...config
     }
 
-    let matched = true
-    if (force) {
-      this.selectors.forEach(iterate)
-    } else {
-      matched = this.selectors.every(iterate)
-    }
+    this.path = this.config.path
+    this.name = this.config.name
+    this.locationPattern = new LocationPattern(this.config.path, this.config.query)
 
-    if (matched) {
-      return this.stringifyArray(matches)
+    // Convert the shortcuts here
+    this.selectors = this.config.selectors
+    this.actions = this.config.actions
+    this.conditions = this.config.conditions
+  }
+
+  matchPath (location) {
+    let params = this.locationPattern.match(location)
+    if (params) {
+      return this.actions(params, location)
     } else {
       return null
     }
   }
 
-  stringify (...params) {
-    return typeof params[0] === 'object'
-      ? this.pathPattern.stringify(params[0])
-      : this.stringifyArray(params)
+  matchState (state, force = false) {
+    if (force || this.conditions(state)) {
+      let params = this.selectors(state)
+      return this.locationPattern.stringify(params)
+    } else {
+      return null
+    }
   }
 
-  stringifyArray (values) {
-    if (!values.length) return this.pathPattern.stringify()
-    let obj = {}
-    let names = this.pathPattern.names
-    values = values.slice(-names.length)
-    names.forEach((name, i) => obj[name] = values[i])
-    return this.pathPattern.stringify(obj)
+  stringify (params) {
+    return this.locationPattern.stringify(params)
   }
 
-  createActions (values) {
-    return this.actions.map((action) => (
-      (typeof action === 'object')
-        ? action
-        : action(...values)
-    ))
+  stringifyFlat (...paramsArray) {
+    let params = {}
+    paramsArray.forEach((val, i) => {
+      params[this.locationPattern.names[i]] = val
+    })
+    return this.stringify(params)
   }
 }

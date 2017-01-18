@@ -30,7 +30,7 @@ export default class Tabs extends Component {
     return (
       <nav className={className} onClick={this.onClick}>
         <ul className={th.Drawer__Items}>
-          <Logo/>
+          <Logo to='root'/>
           <Item to={MODES.filter} label='Filter' icon='filter'/>
           <Item to={MODES.sysreq} label="Sys. Req. Calculator" icon='sysreq'/>
           <Item to={MODES.feedback} label="Feedback" icon='feedback'/>

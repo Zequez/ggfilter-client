@@ -1,3 +1,5 @@
+require('es6-promise').polyfill()
+
 if (!Array.prototype.find) {
   Object.defineProperty(Array.prototype, 'find', {
     value: function (predicate) {

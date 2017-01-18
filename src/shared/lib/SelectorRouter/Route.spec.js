@@ -1,15 +1,6 @@
 import Route from './Route'
 
 describe('SelectorRouter/Route', () => {
-  describe('stringifyArray', () => {
-    it('should stringify the pattern based on an array of values', () => {
-      let sr = new Route('name', '/:foo/:bar/potato/:salad', [], [])
-
-      expect(sr.stringifyArray([true, true, 1, 123, 321, 'HEY', 'weon']))
-        .toBe('/321/HEY/potato/weon')
-    })
-  })
-
   describe('matchState', () => {
     let state = {
       mode: 'potato',
@@ -22,53 +13,79 @@ describe('SelectorRouter/Route', () => {
     let sfilterSelector = (s) => s.sfilter
 
     it('should match the state based on selectors and return the path', () => {
-      let selectors = [
-        [modeSelector, 'potato'],
-        [dirtySelector],
-        [sfilterSelector, (sf) => sf.sid]
-      ]
-      let sr = new Route('name', '/f/:sid', selectors, [])
+      let sr = new Route('name', {
+        path: '/f/:sid',
+        query: {
+          galaxy: ':mode'
+        },
+        selectors: (s) => ({
+          sid: sfilterSelector(s).sid,
+          mode: modeSelector(s)
+        })
+      })
 
-      expect(sr.matchState(state))
-        .toBe('/f/12345')
+      expect(sr.matchState(state)).toBe('/f/12345?galaxy=potato')
     })
 
-    it('should not match if any selector returns false', () => {
-      let selectors = [
-        [modeSelector, 'potato'],
-        [dirtySelector],
-        [sfilterSelector, (sf) => false]
-      ]
-      let sr = new Route('name', '/f/:sid', selectors, [])
-      expect(sr.matchState(state))
-        .toBe(null)
+    it('should not match the state if the condition is not met', () => {
+      let sr = new Route('name', {
+        path: '/f/:sid',
+        selectors: (s) => ({
+          sid: sfilterSelector(s).sid
+        }),
+        conditions: (s) => (dirtySelector(s) === false)
+      })
+
+      expect(sr.matchState(state)).toBe(null)
     })
 
-    it('should continue matching with false selectors with the force option', () => {
-      let dirtySelector = (s) => false
-      let selectors = [
-        [modeSelector, 'potato'],
-        [dirtySelector],
-        [sfilterSelector, (sf) => sf.sid]
-      ]
-      let sr = new Route('name', '/f/:sid', selectors, [])
-      expect(sr.matchState(state, true))
-        .toBe('/f/12345')
+    it('should skip the conditions with the force option', () => {
+      let sr = new Route('name', {
+        path: '/f/:sid',
+        selectors: (s) => ({
+          sid: sfilterSelector(s).sid
+        }),
+        conditions: (s) => (dirtySelector(s) === false)
+      })
+
+      expect(sr.matchState(state, true)).toBe('/f/12345')
     })
   })
 
   describe('matchPath', () => {
-    it('should return the list of decorated actions if matches', () => {
-      let objectAction = {type: 'SET_MODE', mode: 'potato'}
-      let funAction = (sid) => ({type: 'SET_SID', sid})
+    it('should return a function that takes the dispatcher if it matches', () => {
+      let location = {
+        pathname: '/f/123456',
+        query: {potato: '321', hey: 'Arnold'}
+      }
 
-      let sr = new Route('name', '/f/:sid', [], [objectAction, funAction])
+      let actions = jest.fn()
 
-      expect(sr.matchPath('/f/123456'))
-        .toEqual([
-          {type: 'SET_MODE', mode: 'potato'},
-          {type: 'SET_SID', sid: '123456'}
-        ])
+      let sr = new Route('name', {
+        path: '/f/:sid',
+        query: {
+          potato: ':galaxy'
+        },
+        actions: actions
+      })
+
+      sr.matchPath(location)
+
+      expect(actions.mock.calls[0][0]).toEqual({sid: '123456', galaxy: '321'})
+      expect(actions.mock.calls[0][1]).toEqual(location)
+    })
+  })
+
+  describe('stringifyFlat', () => {
+    it('should stringify from an array of values instead of a params object', () => {
+      let sr = new Route('name', {
+        path: '/f/:sid',
+        query: {
+          potato: ':galaxy'
+        }
+      })
+
+      expect(sr.stringifyFlat('1234', 'foo')).toEqual('/f/1234?potato=foo')
     })
   })
 })

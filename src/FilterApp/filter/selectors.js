@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect'
+import frontPageFilter from './frontPageFilter'
 import { encode } from '../lib/filterEncoder'
 import { combiner } from './lib/filterMutator'
 import definitions from '../lib/definitions'
@@ -15,9 +16,19 @@ export const finalFilterSelector = createSelector(
   (baseFilter, deltaFilter) => combiner(baseFilter, deltaFilter)
 )
 
+export const isFrontPageFilter = createSelector(
+  baseFilterSelector,
+  (baseFilter) => baseFilter === frontPageFilter
+)
+
 export const isDirtySelector = createSelector(
   deltaFilterSelector,
   (deltaFilter) => !isFilterEmpty(deltaFilter)
+)
+
+export const sidSelector = createSelector(
+  baseFilterSelector,
+  (baseFilter) => ''
 )
 
 export const paramsSelector = createSelector(

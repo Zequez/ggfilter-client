@@ -1,23 +1,22 @@
 import SelectorRouter from 'shared/lib/SelectorRouter/SelectorRouter'
 
-import { MODES, resetUi, setMode } from 'shared/reducers/uiReducer'
+import { MODES, setMode } from 'shared/reducers/uiReducer'
 
 // TODO: Somehow, don't do this, because we're looking inside FilterApp
 // But if we expose this on src/FilterApp, we get a circular reference
 // Figure it out.
-import { setFilterFromB64, reset as resetFilters } from 'src/FilterApp/filter/reducer'
+import { setFilterFromUrl, reset as resetFilters } from 'src/FilterApp/filter/reducer'
 // import { getFromSid, getFromOfficialSlug } from 'src/FilterApp/sfilter/reducer'
-import { isDirtySelector, encodedDeltaSelector } from 'src/FilterApp/filter/selectors'
+import { encodedDeltaSelector, sidSelector, isFrontPageFilter } from 'src/FilterApp/filter/selectors'
 // import { sfilterSelector, filterIsDirty as sfilterFilterIsDirty } from 'src/FilterApp/sfilter/selectors'
 
 let modeSelector = (s) => s.ui.mode
 
-// Mode route
-let mr = (path, mode, extraSelect = [], extraActions = []) => ([
-  path,
-  [[modeSelector, mode], ...extraSelect],
-  [setMode(mode), ...extraActions]
-])
+let mr = (path, mode) => ({
+  path: path,
+  conditions: (s) => modeSelector(s) === mode,
+  actions: () => setMode(mode)
+})
 
 export default new SelectorRouter({
   sysreq: mr('/system-requirements', MODES.sysreq),
@@ -31,37 +30,35 @@ export default new SelectorRouter({
   about: mr('/about', MODES.about),
   contact: mr('/contact', MODES.contact),
   aboutSysreq: mr('/about-sysreq', MODES.aboutSysreq),
-  // filterOfficial: mr('/:officialSlug', MODES.filter,
-  //   [[sfilterFilterIsDirty, false], [sfilterSelector, (sf) => sf.officialSlug]],
-  //   [getFromOfficialSlug]
-  // ),
-  // filterSid: mr('/f/:filterSid', MODES.filter,
-  //   [[sfilterFilterIsDirty, false], [sfilterSelector, (sf) => sf.sid]],
-  //   [getFromSid]
-  // ),
-  // filterStatic: mr('/:staticSlug', MODES.filter,
-  //   [[staticSlugSelector]],
-  //   [setFilterFromStatic]
-  // ),
-  filterB64: mr('/f/?b=:filterB64', MODES.filter,
-    [[isDirtySelector], [encodedDeltaSelector]],
-    [setFilterFromB64]
-  ),
-  filter: mr('/', MODES.filter),
-  root: ['/', [], [[resetUi], [resetFilters]]]
 
-  // nested: [...mr('/', MODES.potato), {
-  //   official: [':/officialSlug',
-  //     [[sfilterSelector, (sf) => sf.officialSlug]],
-  //     [getFromOfficialSlug]
-  //   ],
-  //   b64: ['/b/:filterB54',
-  //     [[dirtySelector], [encodedFilterSelector]],
-  //     [setFilterFromB64]
-  //   ],
-  //   sid: ['/b/:filterSid',
-  //     [[sfilterSelector, (sf) => sf.sid]],
-  //     [getFromSid]
-  //   ]
-  // }]
+  filter: {
+    path: '/f(/:sid)',
+    query: {
+      b: '(:encoded)'
+    },
+    selectors: (s) => ({
+      sid: sidSelector(s),
+      encoded: encodedDeltaSelector(s)
+    }),
+
+    actions: (params, location) => (dispatch) => {
+      dispatch(setMode(MODES.filter))
+      return dispatch(setFilterFromUrl(params))
+    },
+    conditions: (s) => (
+      modeSelector(s) === MODES.filter &&
+      isFrontPageFilter(s) === false
+    )
+  },
+  root: {
+    path: '/',
+    actions: (params, location) => (dispatch) => {
+      dispatch(setMode(MODES.filter))
+      return dispatch(resetFilters())
+    },
+    conditions: (s) => (
+      modeSelector(s) === MODES.filter &&
+      isFrontPageFilter(s) === true
+    )
+  }
 })

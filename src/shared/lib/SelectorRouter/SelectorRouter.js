@@ -11,7 +11,7 @@ export default class SelectorRouter {
 
   constructor (routes) {
     for (let name in routes) {
-      let route = new Route(name, ...routes[name])
+      let route = new Route(name, routes[name])
       this.routes.push(route)
       this.routesByName[name] = route
     }
@@ -20,7 +20,9 @@ export default class SelectorRouter {
   url (name, ...params) {
     let route = this.routesByName[name]
     if (!route) throw new Error('No such route: ' + name)
-    return route.stringify(...params)
+    return typeof params[0] === 'object'
+      ? route.stringify(params[0])
+      : route.stringifyFlat(...params)
   }
 
   bind (store, history) {
@@ -58,23 +60,23 @@ export default class SelectorRouter {
   _dispatch (actions) {
     this.stateWatcher.stop()
 
-    let promises = []
-    actions.forEach((action) => {
-      let result = this.store.dispatch(action)
-      if (result === false) {
-        // store-induced-404
-        this.history.push('/')
-      } else if (result instanceof Promise) {
-        promises.push(result)
-      }
-    })
-    promises = Promise.all(promises)
+    let promise = this.store.dispatch(actions)
 
-    promises.then(() => { this.stateWatcher.start() })
-    return promises
+    if (promise === false) {
+      this.history.push('/')
+      this.stateWatcher.start()
+    }
+
+    if (typeof promise !== 'object' || typeof promise.then !== 'function') {
+      promise = Promise.resolve()
+    }
+
+    promise.then(() => { this.stateWatcher.start() })
+    return promise
   }
 
   _push (pathname) {
+    if (pathname === '') pathname = '/'
     if (this.locationWatcher.location.pathname !== pathname) {
       this.locationWatcher.stop()
       this.history.push(pathname)

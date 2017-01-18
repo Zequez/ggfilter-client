@@ -13,7 +13,6 @@ import { Provider } from 'react-redux'
 import store from 'src/app/store'
 import router from 'src/app/routes'
 
-const { getGamesIfNoGames } = require('src/FilterApp').actions
 import { setAllTags } from 'shared/reducers/tagsReducer'
 import { getCurrentUser } from 'shared/reducers/authReducer'
 
@@ -33,9 +32,7 @@ getTags().then((tags) => {
 
     router.dispatchInitialActions().then(() => {
       console.info('Finished initial loading of location-induced actions')
-      store.dispatch(getGamesIfNoGames()).then(() => {
-        renderWithHot(App)
-      })
+      renderWithHot(App)
     })
   })
 })
