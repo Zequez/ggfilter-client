@@ -14,8 +14,8 @@ export default class DiscountColumn extends Component {
       <div className={th.DiscountColumn}>
         <div className={cx(th.DiscountColumn__thingy, {
           [th.DiscountColumn__thingy_low]: value < 33,
-          [th.DiscountColumn__thingy_medium]: value > 33 && value < 66,
-          [th.DiscountColumn__thingy_high]: value > 66
+          [th.DiscountColumn__thingy_medium]: value >= 33 && value < 66,
+          [th.DiscountColumn__thingy_high]: value >= 66
         })}>
           <span className={th.__deco}>-</span>
           {value}
