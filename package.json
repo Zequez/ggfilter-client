@@ -1,7 +1,7 @@
 {
   "name": "client",
   "private": true,
-  "version": "0.1.3",
+  "version": "1.0.0",
   "description": "GGFilter client",
   "main": "",
   "scripts": {
@@ -11,8 +11,10 @@
     "_posttest": "npm run lint",
     "serve": "node server.js --env=dev",
     "serve:dist": "node server.js --env=dist",
-    "dist": "npm run copy && ruby ./copy_version_to_gem.rb && NODE_ENV=production webpack --env=dist",
-    "dist:commit": "npm run dist && cd gem && rake commit",
+    "dist:build": "npm run copy && ruby ./copy_version_to_gem.rb && NODE_ENV=production webpack --env=dist",
+    "dist:commit": "cd gem && rake commit",
+    "dist:push": "git push origin master && cd gem && git push origin master",
+    "dist:deploy": "npm run dist:build && npm run dist:commit && npm run dist:push",
     "lint": "eslint ./src",
     "copy": "copyfiles -f ./src/index.html ./src/images/favicon1.png ./src/images/favicon2.png ./gem/app/assets/javascripts/app",
     "clean": "rimraf ./gem/app/assets/*",
