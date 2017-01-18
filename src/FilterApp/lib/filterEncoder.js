@@ -1,7 +1,6 @@
 import invert from 'lodash/invert'
 import { isEmpty } from 'shared/lib/utils'
 import definitions from './definitions'
-import masks from '../config/masks'
 
 const keysMap = {
   value: 'v',
@@ -82,8 +81,7 @@ export function minimize (filter) {
 export function maximize (minFilt) {
   let maximized = {
     params: {},
-    sort: {},
-    masks: []
+    sort: {}
   }
 
   if (!minFilt) return maximized
@@ -116,54 +114,31 @@ const warn = (msg, value) => {
   console.warn(`Error parsing filter: ${msg}`, value)
 }
 
-function extractKnownMasks (encodedMinFilter) {
-  let parts = encodedMinFilter.split('+')
-  let knownMasks = []
-  let other = []
-
-  parts.forEach((part) => {
-    masks[part]
-      ? knownMasks.push(part)
-      : other.push(part)
-  })
-
-  let probablyTheSlug = other.pop()
-  if (other.length) {
-    other.forEach((part) => warn('Unrecognized mask', part))
-  }
-
-  return [knownMasks, probablyTheSlug]
-}
-
 export function encode (filter) {
-  let parts = filter.masks || []
   if (!(isEmpty(filter.params) && isEmpty(filter.sort))) {
     // console.log(filter)
     let minFilter = minimize(filter)
     // console.log(minFilter)
-    let slug = toB64(minFilter)
-    parts = parts.concat(slug)
+    return toB64(minFilter)
+  } else {
+    return ''
   }
-  return parts.join('+')
 }
 
-export function decode (encodedMinFilter) {
-  if (!encodedMinFilter) return maximize(null)
-
-  let [masks, slug] = extractKnownMasks(encodedMinFilter)
+export function decode (encodedDelta) {
+  if (!encodedDelta) return maximize(null)
 
   let filter
-  if (slug) {
+  if (encodedDelta) {
     try {
-      filter = maximize(fromB64(slug))
+      filter = maximize(fromB64(encodedDelta))
     } catch (e) {
-      warn('Malformed encoded filter slug', slug)
+      warn('Malformed encoded filter slug', encodedDelta)
       filter = maximize(null)
     }
   } else {
     filter = maximize(null)
   }
 
-  filter.masks = masks
   return filter
 }

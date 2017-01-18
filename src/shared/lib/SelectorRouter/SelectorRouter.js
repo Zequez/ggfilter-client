@@ -54,7 +54,7 @@ export default class SelectorRouter {
   }
 
   _receiveStateInducedLocationChange (location) {
-    console.info('SelectorRouter: MATCHED STATE, Location: ', location.pathname)
+    console.info('SelectorRouter: MATCHED STATE, Location: ', location.pathname + location.search)
   }
 
   _dispatch (actions) {
@@ -75,11 +75,13 @@ export default class SelectorRouter {
     return promise
   }
 
-  _push (pathname) {
-    if (pathname === '') pathname = '/'
-    if (this.locationWatcher.location.pathname !== pathname) {
+  _push (fullPath) {
+    let location = this.locationWatcher.location
+    let currentFullPath = location.pathname + location.search
+    if (fullPath === '') fullPath = '/'
+    if (fullPath !== currentFullPath) {
       this.locationWatcher.stop()
-      this.history.push(pathname)
+      this.history.push(fullPath)
       this.locationWatcher.start()
     }
   }
