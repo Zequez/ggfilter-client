@@ -28,6 +28,9 @@ export default class LocationWatcher {
 
     if (route) {
       console.info('SelectorRouter: MATCHED ROUTE', route.path)
+      if (route.redirect) {
+        this.history.push(route.redirect)
+      }
       return actions
     } else {
       console.warn('Current location does not match any known route')

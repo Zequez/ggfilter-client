@@ -60,5 +60,8 @@ export default new SelectorRouter({
       modeSelector(s) === MODES.filter &&
       isFrontPageFilter(s) === true
     )
+  },
+  notfound: {
+    redirect: '/'
   }
 })
