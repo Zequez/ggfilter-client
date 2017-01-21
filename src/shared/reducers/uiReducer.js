@@ -13,7 +13,8 @@ export const MODES = {
   help: 'help',
   about: 'about',
   contact: 'contact',
-  aboutSysreq: 'aboutSysreq'
+  aboutSysreq: 'aboutSysreq',
+  logs: 'logs'
 }
 
 // =============================================================================

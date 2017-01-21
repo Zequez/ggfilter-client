@@ -30,6 +30,7 @@ export default new SelectorRouter({
   about: mr('/about', MODES.about),
   contact: mr('/contact', MODES.contact),
   aboutSysreq: mr('/about-sysreq', MODES.aboutSysreq),
+  logs: mr('/logs', MODES.logs),
 
   filter: {
     path: '/f(/:sid)',

@@ -58,3 +58,7 @@ export function getGames (queryFilter) {
 export function getCurrentUser () {
   return api.get(`auth/current_user.json`).then((r) => r.data)
 }
+
+export function getScrapLogs () {
+  return api.get(`scrap_logs.json`).then((response) => response.data)
+}
