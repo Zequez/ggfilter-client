@@ -34,7 +34,8 @@ export default class Tabs extends Component {
           <Item to={MODES.filter} label='Filter' icon='filter'/>
           <Item to={MODES.sysreq} label="Sys. Req. Calculator" icon='sysreq'/>
           <Item to={MODES.feedback} label="Feedback" icon='feedback'/>
-          <Item to={MODES.contribute} label="Contribute" icon='contribute'/>
+          <Item to={MODES.contribute} label="Donations" icon='contribute'/>
+          <Item href='http://zequez.com/about-me/' label="Author" icon='about'/>
         </ul>
         <div className={th.Drawer__Veil}></div>
       </nav>

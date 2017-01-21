@@ -2,10 +2,12 @@ import React from 'react'
 import { AutoPage } from 'src/Layout'
 
 export default () => (
-  <AutoPage className='about-sysreq content-box'>
+  <AutoPage bigHeader card textContent>
     <h2>About the System Requirements Index</h2>
     <p>
-      The System Requirements Index is a *very* coarse number.
+      The System Requirements Index is a <em>*very*</em> coarse number. And it's
+      a scale from 1 to 100, as new games come out with higher requirements, the
+      index for old games is reduced, since it's percentile-based.
     </p>
     <p>
       To calculate it we use a database of video cards benchmarks, and we
@@ -23,11 +25,11 @@ export default () => (
         (neither is GGFilter affiliated with Steam)
       </li>
       <li>
-        Use a complex set of rules to turn the text into a set of standarized tokens
+        Use an algorithm to turn the text into a set of standarized tokens
       </li>
       <li>
         Additionally assign the year of the release of the game as
-        a token, as this is also an indicator of the game system
+        a token, as this is also likely an indicator of the game system
         requirements
       </li>
       <li>
