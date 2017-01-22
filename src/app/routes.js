@@ -30,6 +30,7 @@ export default new SelectorRouter({
   // about: mr('/about', MODES.about),
   // contact: mr('/contact', MODES.contact),
   aboutSysreq: mr('/about-sysreq', MODES.aboutSysreq),
+  oculusSandbox: mr('/oculus-sandbox', MODES.oculusSandbox),
   logs: mr('/logs', MODES.logs),
 
   filter: {

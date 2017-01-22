@@ -14,7 +14,8 @@ export const MODES = {
   about: 'about',
   contact: 'contact',
   aboutSysreq: 'aboutSysreq',
-  logs: 'logs'
+  logs: 'logs',
+  oculusSandbox: 'oculusSandbox'
 }
 
 // =============================================================================
