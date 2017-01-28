@@ -2,7 +2,6 @@ import options from './controlsOptions'
 
 export default {
   name: {
-    id: 1,
     title: 'Name',
     column: 'Link',
     columnInputs: { text: 'name', urlValue: 'steam_id' },
@@ -10,53 +9,81 @@ export default {
     width: 150
   },
   steam_id: {
-    id: 2,
     title: 'Steam ID',
     control: 'Number',
     width: 65,
     alignment: 1
   },
-  images: {
-    id: 3,
-    title: 'Images',
-    control: null,
-    column: 'Images',
-    columnInputs: { 'images': 'images' },
+  oculus_id: {
+    title: 'Steam ID',
+    control: 'Number',
+    width: 65,
+    alignment: 1
+  },
+  tags: {
+    title: 'Tags',
+    control: 'Tags',
+    controlOptions: {
+      tags: [] // We fill this up later, sadly
+    },
+    column: 'Tags',
+    columnActive: true,
+    columnOptions: {
+      tags: [] // We fill this up later, sadly
+    },
+    chip: 'Tags',
+    width: 150,
     sort: false
   },
-  lowest_steam_price: {
-    id: 4,
-    title: 'Steam price (US)',
+
+  // Prices
+  /*************************************/
+
+  stores: {
+    title: 'Stores availability',
+    control: 'Boolean',
+    column: 'Boolean',
+    chip: 'Boolean',
+    width: 24 * 2 + 10,
+    alignment: 0
+  },
+  lowest_price: {
+    title: 'Lowest price',
     control: 'Range',
-    controlOptions: options.controls.range.price,
+    controlOptions: options.controls.price,
     column: 'Price',
-    columnInputs: { price: 'lowest_steam_price', was: 'steam_price' },
+    columnInputs: { price: 'lowest_price', regular: 'steam_price' },
     chip: 'Range',
-    chipOptions: {
-      '': (v) => '$' + Math.floor(v / 100),
-      '1': '$0.01',
-
-      '<->': 'Any price',
-      '0': 'Free',
-      '1-null': 'Non-free',
-
-      '1-*': '≤{ei}',
-      '0-*': '≤{ei} & Free'
-    },
-    shortcuts: [
-      {gt: 0, lt: 0},
-      {gt: 1, lt: null},
-      {gt: 1, lt: 300},
-      {gt: 1, lt: 500},
-      {gt: 1, lt: 1000},
-      {gt: 1, lt: 1500},
-      {gt: 1, lt: 2000}
-    ],
+    chipOptions: options.chips.price,
+    shortcuts: options.shortcuts.price,
     width: 100,
     alignment: 1
   },
-  steam_discount: {
-    id: 5,
+  steam_price: {
+    title: 'Lowest Steam price',
+    control: 'Range',
+    controlOptions: options.controls.price,
+    column: 'Price',
+    columnInputs: { price: 'steam_price', regular: 'steam_price_regular' },
+    chip: 'Range',
+    chipOptions: options.chips.price,
+    shortcuts: options.shortcuts.price,
+    width: 100,
+    alignment: 1
+  },
+  oculus_price: {
+    title: 'Lowest Oculus price',
+    control: 'Range',
+    controlOptions: options.controls.price,
+    column: 'Price',
+    columnInputs: { price: 'oculus_price', regular: 'oculus_price_regular' },
+    chip: 'Range',
+    chipOptions: options.chips.price,
+    shortcuts: options.shortcuts.price,
+    width: 100,
+    alignment: 1
+  },
+  steam_price_discount: {
     title: 'Steam sale',
     control: 'Range',
     controlOptions: {
@@ -66,31 +93,31 @@ export default {
     column: 'Discount',
     columnOptions: { interpolation: '-%s%' },
     chip: 'Range',
-    chipOptions: {
-      '': '{v}%',
-      '0': 'Not on sale',
-      '1->': 'On sale',
-      '100': 'FREE!?'
-    },
-    shortcuts: [
-      {gt: 0, lt: 0},
-      {gt: 1, lt: null},
-      {gt: 100, lt: 100},
-      {gt: 10, lt: null},
-      {gt: 20, lt: null},
-      {gt: 30, lt: null},
-      {gt: 40, lt: null},
-      {gt: 50, lt: null},
-      {gt: 60, lt: null},
-      {gt: 70, lt: null},
-      {gt: 80, lt: null},
-      {gt: 90, lt: null}
-    ],
+    chipOptions: options.chips.discount,
+    shortcuts: options.shortcuts.discount,
     width: 50,
     alignment: 0
   },
+  oculus_price_discount: {
+    title: 'Oculus sale',
+    control: 'Range',
+    controlOptions: {
+      suffix: '%',
+      max: 100
+    },
+    column: 'Discount',
+    columnOptions: { interpolation: '-%s%' },
+    chip: 'Range',
+    chipOptions: options.chips.discount,
+    shortcuts: options.shortcuts.discount,
+    width: 50,
+    alignment: 0
+  },
+
+  // Playtime
+  /*************************************/
+
   playtime_mean: {
-    id: 6,
     title: 'Playtime avg',
     longTitle: 'Playtime average',
     control: 'Range',
@@ -115,7 +142,6 @@ export default {
     alignment: 1
   },
   playtime_median: {
-    id: 7,
     title: 'Playtime median',
     control: 'Range',
     controlOptions: {
@@ -139,7 +165,6 @@ export default {
     alignment: 1
   },
   playtime_sd: {
-    id: 8,
     title: 'Playtime σ',
     longTitle: 'Playtime standard deviation',
     control: 'Range',
@@ -164,7 +189,6 @@ export default {
     alignment: 1
   },
   playtime_rsd: {
-    id: 9,
     title: 'Playtime relative σ',
     longTitle: 'Playtime relative standard deviation',
     control: 'Range',
@@ -189,7 +213,6 @@ export default {
     alignment: 1
   },
   playtime_mean_ftb: {
-    id: 10,
     title: 'Playtime avg / $',
     longTitle: 'Average playtime divided by lowest price',
     control: 'Range',
@@ -214,7 +237,6 @@ export default {
     alignment: 1
   },
   playtime_median_ftb: {
-    id: 11,
     title: 'Playtime median / $',
     longTitle: 'Median playtime divided by lowest price',
     control: 'Range',
@@ -238,8 +260,11 @@ export default {
     width: 60,
     alignment: 1
   },
+
+  // Ratings
+  /*************************************/
+
   metacritic: {
-    id: 12,
     title: 'Metacritic',
     control: 'Range',
     controlOptions: {
@@ -260,10 +285,9 @@ export default {
     width: 60,
     alignment: 1
   },
-  steam_reviews_count: {
-    id: 13,
-    title: '# Steam reviews',
-    longTitle: 'Number of Steam reviews',
+  ratings_count: {
+    title: '# Ratings',
+    longTitle: 'Ratings accross stores',
     control: 'Range',
     chip: 'Range',
     shortcuts: [
@@ -280,9 +304,9 @@ export default {
     width: 60,
     alignment: 1
   },
-  steam_reviews_ratio: {
-    id: 14,
-    title: 'Steam reviews ratio',
+  ratings_ratio: {
+    title: 'Ratings ratio',
+    longTitle: 'Ratings ratio accross stores',
     control: 'Range',
     controlOptions: {
       max: 100,
@@ -291,32 +315,39 @@ export default {
     chip: 'Range',
     chipOptions: { '': '{v}%' },
     column: 'Ratio',
-    columnInputs: { ratio: 'steam_reviews_ratio', total: 'steam_reviews_count' },
-    shortcuts: [
-      {gt: 50, lt: null},
-      {gt: 60, lt: null},
-      {gt: 70, lt: null},
-      {gt: 80, lt: null},
-      {gt: 90, lt: null},
-      {gt: 95, lt: null},
-      {gt: 97, lt: null},
-      {gt: 98, lt: null},
-      {gt: 99, lt: null}
-    ],
+    columnInputs: { ratio: 'ratings_ratio', total: 'ratings_count' },
+    shortcuts: options.shortcuts.ratio,
     width: 100,
     alignment: 0
   },
-  features: {
-    id: 15,
-    title: 'Steam features',
-    control: 'Boolean',
-    column: 'Boolean',
-    chip: 'Boolean',
-    width: 24 * 5 + 10,
-    alignment: 0
-  },
+  // ratings_pct: {
+  //   title: 'Ratings percentile',
+  //   longTitle: 'Average percentile of ratings ratio and number',
+  //   control: 'Range',
+  //   controlOptions: {
+  //     max: 100,
+  //     min: 0
+  //   },
+  //   chip: 'Range',
+  //   chipOptions: { '': '{v}pct' },
+  //   column: 'Percentile',
+  //   shortcuts: options.shortcuts.ratio,
+  //   width: 100,
+  //   alignment: 0
+  // },
+
+  // Flags
+  /*************************************/
+
+  // steam_features: {
+  //   title: 'Steam features',
+  //   control: 'Boolean',
+  //   column: 'Boolean',
+  //   chip: 'Boolean',
+  //   width: 24 * 5 + 10,
+  //   alignment: 0
+  // },
   platforms: {
-    id: 16,
     title: 'Platforms',
     control: 'Boolean',
     column: 'Boolean',
@@ -325,7 +356,6 @@ export default {
     alignment: 0
   },
   players: {
-    id: 17,
     title: 'Players',
     control: 'Boolean',
     column: 'Boolean',
@@ -334,7 +364,6 @@ export default {
     alignment: 0
   },
   vr_platforms: {
-    id: 18,
     title: 'VR platforms',
     control: 'Boolean',
     column: 'Boolean',
@@ -342,52 +371,44 @@ export default {
     width: 24 * 2 + 10,
     alignment: 0
   },
-  controller_support: {
-    id: 19,
-    title: 'Controller support',
-    control: false,
-    chip: 'ControllerSupport',
-    shortcuts: [
-      {value: 1},
-      {value: 2},
-      {value: 3}
-    ],
-    column: 'Controller',
+  controllers: {
+    title: 'Controllers',
+    control: 'Boolean',
+    column: 'Boolean',
+    chip: 'Boolean',
+    width: 24 * 2 + 10,
     alignment: 0
   },
-  steam_thumbnail: {
-    id: 20,
-    title: 'Thumbnail',
-    control: null,
-    column: 'Images',
-    columnInputs: { thumbnail: 'steam_thumbnail', 'images': 'images' },
-    width: 120,
-    sort: false
+  // gamepad: {
+  //   title: 'Gamepad support',
+  //   control: false,
+  //   chip: 'ControllerSupport',
+  //   shortcuts: [
+  //     {value: 1},
+  //     {value: 2},
+  //     {value: 3}
+  //   ],
+  //   column: 'Controller',
+  //   alignment: 0
+  // },
+  vr_modes: {
+    title: 'VR Mode',
+    longTitle: 'Sitting / Standing / Room Scale',
+    control: 'Boolean',
+    column: 'Boolean',
+    chip: 'Boolean',
+    width: 24 * 2 + 10,
+    alignment: 0
   },
-  tags: {
-    id: 21,
-    title: 'Tags',
-    control: 'Tags',
-    controlOptions: {
-      tags: [] // We fill this up later, sadly
-    },
-    column: 'Tags',
-    columnActive: true,
-    columnOptions: {
-      tags: [] // We fill this up later, sadly
-    },
-    chip: 'Tags',
-    width: 150,
-    sort: false
-  },
+
+
   // system_requirements: {
   //   id: 22,
   //   title: 'System Requirements',
   //   column: SystemReqColumn,
   //   width: 600
   // },
-  sysreq_index_centile: {
-    id: 23,
+  sysreq_index_pct: {
     title: 'Sys.Req. Index',
     longTitle: 'System Requirements Index (percentile)',
     control: 'Range',
@@ -412,7 +433,6 @@ export default {
     alignment: 1
   },
   released_at: {
-    id: 24,
     title: 'Released at',
     longTitle: 'Released time ago',
     control: 'RelativeDate',
@@ -422,7 +442,6 @@ export default {
     width: 80
   },
   released_at_absolute: {
-    id: 25,
     title: 'Release year',
     longTitle: 'Precise date of release',
     control: 'DateRange',
@@ -434,36 +453,31 @@ export default {
     width: 100,
     alignment: 1
   },
-  vr_mode: {
-    id: 26,
-    title: 'VR Mode',
-    longTitle: 'Sitting / Standing / Room Scale',
-    control: 'Boolean',
-    column: 'Boolean',
-    chip: 'Boolean',
-    width: 24 * 2 + 10,
+
+  // Boolean
+  /*************************************/
+
+  vr_only: {
+    title: 'VR Only',
+    control: false,
+    column: 'Toggle',
+    chip: 'Toggle',
+    shortcuts: [
+      {value: true},
+      {value: false}
+    ],
+    width: 24 * 2,
     alignment: 0
   },
-  vr_controllers: {
-    id: 27,
-    title: 'VR Controllers',
-    control: 'Boolean',
-    column: 'Boolean',
-    chip: 'Boolean',
-    width: 24 * 2 + 10,
-    alignment: 0
-  },
-  sysreq_video_tokens_values: {
-    id: 28,
-    title: 'Sys.Req. Index Detail',
-    longTitle: 'System Requirements Index detailed tokens',
-    control: null,
-    column: 'SysreqTokensDetails',
-    sort: false,
-    width: 200
-  },
+  // sysreq_video_tokens_values: {
+  //   title: 'Sys.Req. Index Detail',
+  //   longTitle: 'System Requirements Index detailed tokens',
+  //   control: null,
+  //   column: 'SysreqTokensDetails',
+  //   sort: false,
+  //   width: 200
+  // },
   steam_early_access: {
-    id: 29,
     title: 'Early Access',
     control: false,
     column: 'Toggle',
@@ -474,5 +488,24 @@ export default {
     ],
     width: 24 * 2,
     alignment: 0
-  }
+  },
+
+  // Media
+  /*************************************/
+
+  images: {
+    title: 'Images',
+    control: null,
+    column: 'Images',
+    columnInputs: { 'images': 'images' },
+    sort: false
+  },
+  thumbnail: {
+    title: 'Thumbnail',
+    control: null,
+    column: 'Images',
+    columnInputs: { thumbnail: 'thumbnail', 'images': 'images' },
+    width: 120,
+    sort: false
+  },
 }

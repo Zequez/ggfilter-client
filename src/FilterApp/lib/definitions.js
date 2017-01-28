@@ -1,5 +1,6 @@
 import filtersDefinitions from '../config/filtersDefinitions'
 import categoriesDefinitions from '../config/categoriesDefinitions'
+import filtersIds from '../config/filtersIds'
 
 class FilterDefinition {
   id = null
@@ -34,6 +35,11 @@ class FilterDefinition {
 
     for (let attr in args) {
       this[attr] = args[attr]
+    }
+
+    this.id = filtersIds[name]
+    if (!this.id) {
+      console.warn(`Filter ${name} doesn't have an ID`)
     }
   }
 }
@@ -90,7 +96,13 @@ export class Definitions {
   _setCategoriesWithFilters () {
     for (let cat in this.categories) {
       this.categoriesWithFilters[cat] =
-        this.categories[cat].filters.map((filterName) => this.filters[filterName])
+        this.categories[cat].filters.map((filterName) => {
+          if (this.filters[filterName]) {
+            return this.filters[filterName]
+          } else {
+            console.warn(`Filter ${filterName} is not defined`)
+          }
+        })
     }
   }
 

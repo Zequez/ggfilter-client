@@ -39,19 +39,23 @@ $fa-font-path: 'font-awesome/fonts/'
 
 
 // Base filters icons
-+gicon(filter-steam_thumbnail, $fa-var-picture-o)
++gicon(filter-thumbnail, $fa-var-picture-o)
 +gicon(filter-images, $fa-var-file-picture-o)
 +gicon(filter-steam_id, $fa-var-steam)
 +gicon(filter-name, $fa-var-font)
 +gicon(filter-images, $fa-var-image)
-+gicon(filter-sysreq_index_centile, $fa-var-fire)
-+gicon(filter-sysreq_video_tokens_values, $fa-var-tags)
++gicon(filter-sysreq_index_pct, $fa-var-fire)
+// +gicon(filter-sysreq_video_tokens_values, $fa-var-tags)
 +gicon(filter-released_at, $fa-var-calendar-minus-o)
 +gicon(filter-released_at_absolute, $fa-var-calendar)
 +gicon(filter-tags, $fa-var-tags)
++gicon(filter-stores, $fa-var-archive)
 
-+gicon(filter-lowest_steam_price, $fa-var-dollar)
-+gicon(filter-steam_discount, $fa-var-percent)
++gicon(filter-lowest_price, $fa-var-dollar)
++gicon(filter-steam_price, $fa-var-dollar)
++gicon(filter-steam_price_discount, $fa-var-percent)
++gicon(filter-oculus_price, $fa-var-dollar)
++gicon(filter-oculus_price_discount, $fa-var-percent)
 
 +gicon(filter-playtime_mean, $fa-var-clock-o, $fa-var-font)
 +gicon(filter-playtime_median, $fa-var-clock-o)
@@ -61,16 +65,17 @@ $fa-font-path: 'font-awesome/fonts/'
 +gicon(filter-playtime_median_ftb, $fa-var-clock-o, $fa-var-dollar)
 
 +gicon(filter-metacritic, $fa-var-star)
-+gicon(filter-steam_reviews_count, $fa-var-comments)
-+gicon(filter-steam_reviews_ratio, $fa-var-thumbs-o-up)
++gicon(filter-ratings_count, $fa-var-comments)
++gicon(filter-ratings_ratio, $fa-var-thumbs-o-up)
 
-+gicon(filter-features, $fa-var-cubes)
++gicon(filter-steam_features, $fa-var-cubes)
 +gicon(filter-platforms, $fa-var-linux)
 +gicon(filter-players, $fa-var-group)
++gicon(filter-controllers, $fa-var-gamepad)
 +gicon(filter-vr_platforms, $fa-var-desktop)
-+gicon(filter-vr_mode, $fa-var-male)
-+gicon(filter-vr_controllers, $fa-var-gamepad)
-+gicon(filter-controller_support, $fa-var-gamepad)
++gicon(filter-vr_modes, $fa-var-male)
++gicon(filter-vr_only, 'VR')
++gicon(filter-gamepad, $fa-var-gamepad)
 
 +gicon(filter-steam_early_access, $fa-var-exclamation-circle)
 
@@ -121,6 +126,9 @@ $fa-font-path: 'font-awesome/fonts/'
 +gicon(boolean-co_op, $fa-var-user-plus)
 +gicon(boolean-local_co_op, $fa-var-home)
 
++gicon(boolean-stores-steam, $fa-var-steam)
++gicon(boolean-stores-oculus, '⬭')
+
 +gicon(boolean-vive, $fa-var-play-circle)
 :global(.icon-boolean-vive)
   transform-origin: 50% 67%
@@ -129,6 +137,11 @@ $fa-font-path: 'font-awesome/fonts/'
 :global(.icon-boolean-oculus:before)
   display: block
   transform: translateY(-2px)
++gicon(boolean-rift, '⬭')
+:global(.icon-boolean-rift:before)
+  display: block
+  transform: translateY(-2px)
++gicon(boolean-steam, $fa-var-steam)
 
 // .icon-boolean-oculus:before
 //   content: ' '

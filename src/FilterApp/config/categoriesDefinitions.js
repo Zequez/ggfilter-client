@@ -2,28 +2,27 @@ export default {
   gameInfo: {
     title: 'Game Info',
     filters: [
-      'steam_thumbnail',
+      'thumbnail',
       'images',
-      'steam_id',
+      // 'steam_id',
+      // 'oculus_id',
       'name',
       'released_at_absolute',
       'released_at',
       'steam_early_access',
-      'tags'
+      'tags',
+      'sysreq_index_pct'
     ]
   },
-  performance: {
-    title: 'Performance',
+  stores: {
+    title: 'Stores',
     filters: [
-      'sysreq_index_centile',
-      'sysreq_video_tokens_values'
-    ]
-  },
-  price: {
-    title: 'Price',
-    filters: [
-      'lowest_steam_price',
-      'steam_discount'
+      'stores',
+      'lowest_price',
+      'steam_price',
+      'steam_price_discount',
+      'oculus_price',
+      'oculus_price_discount'
     ]
   },
   playtime: {
@@ -40,30 +39,27 @@ export default {
   ratings: {
     title: 'Ratings',
     filters: [
-      'metacritic',
-      'steam_reviews_count',
-      'steam_reviews_ratio'
+      'ratings_count',
+      'ratings_ratio'
     ]
   },
   features: {
     title: 'Features',
     filters: [
-      'features',
+      // 'steam_features',
       'platforms',
       'players',
-      'controller_support'
+      'controllers'
+      // 'gamepad'
     ]
   },
   vr: {
     title: 'VR',
     filters: [
+      'vr_only',
       'vr_platforms',
-      'vr_mode',
-      'vr_controllers'
+      'vr_modes'
     ]
   }
-  // 'Other': [
-  //   'system_requirements'
-  // ]
 
 }

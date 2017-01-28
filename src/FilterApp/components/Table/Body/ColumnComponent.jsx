@@ -32,6 +32,8 @@ export default ({game, filter, setFilter, filterParams}) => {
     ...columnInputValues(game, filter)
   }
 
+  // console.log(filter, filterParams)
+
   if (filter.columnActive) {
     props.setFilter = partial(setFilter, filter.name)
     props.filterParams = (filterParams !== true && filterParams !== false) ? filterParams : undefined

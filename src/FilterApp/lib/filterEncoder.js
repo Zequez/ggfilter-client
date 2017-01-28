@@ -10,7 +10,8 @@ const keysMap = {
   filter: 'c',
   asc: 'a',
   or: 'o',
-  hl: 'h'
+  hl: 'h',
+  mode: 'm'
 }
 
 const charStartFrom = 32

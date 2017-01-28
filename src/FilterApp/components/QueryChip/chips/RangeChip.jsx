@@ -9,9 +9,16 @@ export default class RangeChip extends Component {
       lt: t.number
     }),
     options: t.object
+    // asText: t.boolean
   }
 
+  // static text ({query, options}) {
+  //   return rangeInterpolation(query, options)
+  // }
+
   render () {
+    // if (this.props.asText) return this.text()
+
     return (
       <div className={th.RangeChip}>
         {rangeInterpolation(this.props.query, this.props.options)}

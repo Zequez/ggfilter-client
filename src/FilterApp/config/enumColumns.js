@@ -1,96 +1,83 @@
 export default {
   values: {
-    features: {
-      steam_achievements: 1,
-      steam_trading_cards: 2,
-      // vr_support:          4,
-      steam_workshop: 8,
-      steam_cloud: 16,
-      valve_anti_cheat: 32
+    'stores': {
+      'steam': 1,
+      'oculus': 2
     },
-
-    platforms: {
-      win: 1,
-      mac: 2,
-      linux: 4
+    'players': {
+      'single': 1,
+      'multi': 2,
+      'online': 4,
+      'co_op': 8,
+      'shared': 16,
+      'hotseat': 32,
+      'cross_platform': 64
     },
-
-    players: {
-      single_player: 1,
-      multi_player: 2,
-      co_op: 4,
-      local_co_op: 8
+    'controllers': {
+      'tracked': 1,
+      'gamepad': 2,
+      'keyboard_mouse': 4
     },
-
-    vr_platforms: {
-      vive: 1,
-      oculus: 2
+    'vr_platforms': {
+      'vive': 1,
+      'rift': 2,
+      'osvr': 4
     },
-
-    vr_mode: {
-      seated: 1,
-      standing: 2,
-      room_scale: 4
+    'vr_modes': {
+      'seated': 1,
+      'standing': 2,
+      'room_scale': 4
     },
-
-    vr_controllers: {
-      tracked: 1,
-      gamepad: 2,
-      keyboard_mouse: 4
-    },
-
-    controller_support: {
-      no: 1,
-      partial: 2,
-      full: 3
+    'platforms': {
+      'win': 1,
+      'mac': 2,
+      'linux': 4
     }
+    // 'gamepad': {
+    //   'no': 1,
+    //   'partial': 2,
+    //   'full': 3
+    // }
   },
 
   names: {
-    features: {
-      steam_achievements: 'Steam Achievements',
-      steam_trading_cards: 'Steam Trading Cards',
-      // vr_support:          'VR Support',
-      steam_workshop: 'Steam Workshop',
-      steam_cloud: 'Steam Cloud',
-      valve_anti_cheat: 'VAC (Valve Anti-Cheat)'
+    stores: {
+      steam: 'Steam',
+      oculus: 'Oculus'
     },
-
-    platforms: {
-      win: 'Windows',
-      mac: 'Mac',
-      linux: 'Linux/SteamOS'
-    },
-
     players: {
-      single_player: 'Single player',
-      multi_player: 'Multiplayer',
-      co_op: 'Co-op',
-      local_co_op: 'Local co-op'
+      'single': 'Single Player',
+      'multi': 'Multiplayer',
+      'online': 'Online',
+      'co_op': 'Co-op',
+      'shared': 'Same Computer',
+      'hotseat': 'Hotseat',
+      'cross_platform': 'Cross Platform'
     },
-
-    vr_platforms: {
-      vive: 'HTC Vive',
-      oculus: 'Oculus Rift'
-      // open: 'Open VR'
+    'controllers': {
+      'tracked': 'Tracked controllers',
+      'gamepad': 'Gamepad',
+      'keyboard_mouse': 'Keyboard & mouse'
     },
-
-    vr_mode: {
-      seated: 'Seated',
-      standing: 'Standing',
-      room_scale: 'Room Scale'
+    'vr_platforms': {
+      'vive': 'HTC Vive',
+      'rift': 'Oculus Rift',
+      'osvr': 'Open-Source VR'
     },
-
-    vr_controllers: {
-      tracked: 'Tracked',
-      gamepad: 'Gamepad',
-      keyboard_mouse: 'Keyboard & Mouse'
+    'vr_modes': {
+      'seated': 'Seated',
+      'standing': 'Standing',
+      'room_scale': 'Room scale'
     },
-
-    controller_support: {
-      no: 'No',
-      partial: 'Partial',
-      full: 'Full'
-    }
+    'platforms': {
+      'win': 'Windows',
+      'mac': 'Mac',
+      'linux': 'Linux'
+    },
+    // 'gamepad': {
+    //   'no': 1,
+    //   'partial': 2,
+    //   'full': 3
+    // }
   }
 }

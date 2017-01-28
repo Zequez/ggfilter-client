@@ -15,13 +15,11 @@ const lastYearsDates = (yearsCount) => {
 
 export default {
   controls: {
-    range: {
-      price: {
-        toInput: (value) => value / 100,
-        fromInput: (value) => value * 100,
-        prefix: '$ ',
-        focus: 'max'
-      }
+    price: {
+      toInput: (value) => value / 100,
+      fromInput: (value) => value * 100,
+      prefix: '$ ',
+      focus: 'max'
     }
   },
   shortcuts: {
@@ -39,6 +37,59 @@ export default {
       {gt: null, lt: 365 * 24 * 60 * 60},
       {gt: 0, lt: null}
     ],
-    timeAbsolute: lastYearsDates(10)
+    timeAbsolute: lastYearsDates(10),
+    price: [
+      {gt: 0, lt: 0},
+      {gt: 1, lt: null},
+      {gt: 1, lt: 300},
+      {gt: 1, lt: 500},
+      {gt: 1, lt: 1000},
+      {gt: 1, lt: 1500},
+      {gt: 1, lt: 2000}
+    ],
+    discount: [
+      {gt: 0, lt: 0},
+      {gt: 1, lt: null},
+      {gt: 100, lt: 100},
+      {gt: 10, lt: null},
+      {gt: 20, lt: null},
+      {gt: 30, lt: null},
+      {gt: 40, lt: null},
+      {gt: 50, lt: null},
+      {gt: 60, lt: null},
+      {gt: 70, lt: null},
+      {gt: 80, lt: null},
+      {gt: 90, lt: null}
+    ],
+    ratio: [
+      {gt: 50, lt: null},
+      {gt: 60, lt: null},
+      {gt: 70, lt: null},
+      {gt: 80, lt: null},
+      {gt: 90, lt: null},
+      {gt: 95, lt: null},
+      {gt: 97, lt: null},
+      {gt: 98, lt: null},
+      {gt: 99, lt: null}
+    ]
+  },
+  chips: {
+    price: {
+      '': (v) => '$' + Math.floor(v / 100),
+      '1': '$0.01',
+
+      '<->': 'Any price',
+      '0': 'Free',
+      '1-null': 'Non-free',
+
+      '1-*': '≤{ei}',
+      '0-*': '≤{ei} & Free'
+    },
+    discount: {
+      '': '{v}%',
+      '0': 'Not on sale',
+      '1->': 'On sale',
+      '100': 'FREE!?'
+    }
   }
 }

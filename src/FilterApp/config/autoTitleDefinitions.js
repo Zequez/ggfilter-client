@@ -19,7 +19,7 @@ let basicRange = (rangeInterpol, gtInterpol, ltInterpol, equalInterpol = '') => 
 }
 
 let booleanFilter = (nameKey, wholeInterpol = '%s', valInterpol = '%s') => {
-  return function ({value, or}) {
+  return function ({value, mode}) {
     let values = enumColumns.values[nameKey]
     let names = enumColumns.names[nameKey]
 
@@ -34,7 +34,7 @@ let booleanFilter = (nameKey, wholeInterpol = '%s', valInterpol = '%s') => {
     let textNames = ''
     if (selectedNames.length > 1) {
       let lastName = selectedNames.pop()
-      textNames = selectedNames.join(', ') + (or ? ' or ' : ' and ') + lastName
+      textNames = selectedNames.join(', ') + ' ' + mode + ' ' + lastName
     } else if (selectedNames.length === 1) {
       textNames = selectedNames[0]
     } else {
@@ -45,54 +45,67 @@ let booleanFilter = (nameKey, wholeInterpol = '%s', valInterpol = '%s') => {
   }
 }
 
-export default {
-  platforms: booleanFilter('platforms', 'for %s'),
-  vr_platforms: booleanFilter('vr_platforms', 'for %s', 'the %s'),
-  vr_mode: booleanFilter('vr_mode', 'for %s VR'),
-  vr_controllers: booleanFilter('vr_controllers', 'with %s VR controllers support'),
-  players: booleanFilter('players', 'with %s support'),
-  features: booleanFilter('features', 'with support for %s'),
-  controller_support: ({gt, lt}) => {
-    let v = enumColumns.values.controller_support
-    if (gt === v.no && lt === v.no) return 'with <no controller support>'
-    if (gt === v.partial && lt === v.partial) return 'with <only partial controller support>'
-    if (gt === v.full && lt === v.full) return 'with <full controller support>'
-    if (gt === v.partial && lt === v.full) return 'with <partial or full controller support>'
-    if (gt === v.no && lt === v.partial) return 'with <partial or no controller support>'
-    return ''
-  },
-  name: ({value}) => `with the name <"${h(value)}">`,
-  steam_id: ({value}) => `with the Steam ID <${h(value)}>`,
-  lowest_steam_price: ({gt, lt}) => {
+let priceFilter = (storeName = null) =>
+  ({gt, lt}) => {
     if (lt === 0 && gt === 0) {
-      return `<free> on Steam`
+      return `<free> on ${storeName}`
     } else if (gt === 1 && lt == null) {
-      return `<non-free> on Steam`
+      return `<non-free> on ${storeName}`
     } else if (gt != null && lt == null) {
-      return `with a price <≥$${p(gt)}> on Steam`
+      return `with a price <≥$${p(gt)}> on ${storeName}`
     } else if ((gt == null || gt === 0) && lt != null) {
-      return `with a price <≤$${p(lt)}> on Steam`
+      return `with a price <≤$${p(lt)}> on ${storeName}`
     } else if (gt != null && lt != null) {
-      return `with a price of <$${p(gt)}-${p(lt)}> on Steam`
+      return `with a price of <$${p(gt)}-${p(lt)}> on ${storeName}`
     }
-  },
-  steam_discount: ({gt, lt}) => {
+  }
+
+let discountFilter = (storeName = null) =>
+  ({gt, lt}) => {
     if (lt === 0 && gt === 0) {
-      return `that <aren't on sale> on Steam`
+      return `that <aren't on sale> on ${storeName}`
     } else if (gt === 1 && lt == null) {
       return `<on sale> on Steam`
     } else if (gt === 100 && lt === 100) {
-      return `with <100% discount given away for FREE> on Steam`
+      return `with <100% discount given away for FREE> on ${storeName}`
     } else if (gt === 1 && lt != null) {
-      return `<on sale> on Steam with a discount <≤${h(lt)}%>`
+      return `<on sale> on ${storeName} with a discount <≤${h(lt)}%>`
     } else if (gt != null && (lt == null || lt === 100)) {
-      return `<on sale> on Steam with a discount <≥${h(gt)}%>`
+      return `<on sale> on ${storeName} with a discount <≥${h(gt)}%>`
     } else if ((gt == null || gt === 0) && lt != null) {
-      return `with a discount <≤${h(lt)}%> on Steam`
+      return `with a discount <≤${h(lt)}%> on ${storeName}`
     } else if (gt != null && lt != null) {
-      return `<on sale> on Steam with a discount of <${h(gt)}-${h(lt)}%>`
+      return `<on sale> on ${storeName} with a discount of <${h(gt)}-${h(lt)}%>`
     }
-  },
+  }
+
+export default {
+  stores: booleanFilter('stores', 'available in %s'),
+  platforms: booleanFilter('platforms', 'for %s'),
+  vr_platforms: booleanFilter('vr_platforms', 'for %s', 'the %s'),
+  vr_modes: booleanFilter('vr_mode', 'for %s VR'),
+  controllers: booleanFilter('vr_controllers', 'with %s VR controllers support'),
+  players: booleanFilter('players', 'with %s support'),
+  // steam_features: booleanFilter('features', 'with support for %s'),
+
+  vr_only: ({value}) => value ? '<VR Only>' : '<non VR Only>',
+  // controller_support: ({gt, lt}) => {
+  //   let v = enumColumns.values.controller_support
+  //   if (gt === v.no && lt === v.no) return 'with <no controller support>'
+  //   if (gt === v.partial && lt === v.partial) return 'with <only partial controller support>'
+  //   if (gt === v.full && lt === v.full) return 'with <full controller support>'
+  //   if (gt === v.partial && lt === v.full) return 'with <partial or full controller support>'
+  //   if (gt === v.no && lt === v.partial) return 'with <partial or no controller support>'
+  //   return ''
+  // },
+  name: ({value}) => `with the name <"${h(value)}">`,
+  steam_id: ({value}) => `with the Steam ID <${h(value)}>`,
+  lowest_price: priceFilter('the lowest price'),
+  steam_price: priceFilter('Steam'),
+  oculus_price: priceFilter('Oculus'),
+  steam_price_discount: discountFilter('Steam'),
+  oculus_price_discount: discountFilter('Oculus'),
+
   playtime_mean: basicRange(
     'with an average playtime of <{gt}-{lt}hs>',
     'with an average playtime <≥{gt}hs>',
@@ -123,20 +136,20 @@ export default {
     'with a median playtime / price <≥{gt}hs/$>',
     'with a median playtime / price <≤{lt}hs/$>'
   ),
-  metacritic: basicRange(
-    'with a Metacritic of <{gt}-{lt}>',
-    'with a Metacritic <≥{gt}>',
-    'with a Metacritic <≤{lt}>'
+  // metacritic: basicRange(
+  //   'with a Metacritic of <{gt}-{lt}>',
+  //   'with a Metacritic <≥{gt}>',
+  //   'with a Metacritic <≤{lt}>'
+  // ),
+  ratings_count: basicRange(
+    'with <{gt}-{lt}> ratings across stores',
+    'with <≥{gt}> ratings across stores',
+    'with <≤{lt}> ratings across stores'
   ),
-  steam_reviews_count: basicRange(
-    'with <{gt}-{lt}> reviews on Steam',
-    'with <≥{gt}> reviews on Steam',
-    'with <≤{lt}> reviews on Steam'
-  ),
-  steam_reviews_ratio: basicRange(
-    'with a Steam reviews ratio of <{gt}-{lt}%>',
-    'with a Steam reviews ratio <≥{gt}%>',
-    'with a Steam reviews ratio <≤{lt}%>'
+  ratings_ratio: basicRange(
+    'with a ratings ratio of <{gt}-{lt}%>',
+    'with a ratings ratio <≥{gt}%>',
+    'with a ratings ratio <≤{lt}%>'
   ),
   tags: ({tags}, filter) => {
     tags = tags.map((id) => '<' + h(filter.columnOptions.tags[id]) + '>')
@@ -149,7 +162,7 @@ export default {
       return ''
     }
   },
-  sysreq_index_centile: basicRange(
+  sysreq_index_pct: basicRange(
     'with a system requirements index of <{gt}-{lt}>',
     'with a system requirements index <≥{gt}>',
     'with a system requirements index <≤{lt}>'
