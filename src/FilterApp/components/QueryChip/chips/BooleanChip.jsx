@@ -20,7 +20,7 @@ export default function BooleanChip ({query, name}) {
     }
   }
 
-  let separator = query.or ? ' or ' : ' and '
+  let separator = query.mode
   // let text = words.join(separator)
   let iconsOnly = words.length > 1
   let lastWord = words.length - 1

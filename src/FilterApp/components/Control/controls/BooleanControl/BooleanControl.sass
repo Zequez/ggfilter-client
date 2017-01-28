@@ -1,0 +1,52 @@
+.flexButton
+  display: flex
+  height: 100%
+  align-items: center
+  justify-content: center
+  cursor: pointer
+
+.BooleanControl
+  display: flex
+  align-items: stretch
+  height: $g * 6
+
+.BooleanControl__Operators
+  display: block
+  position: relative
+  width: 100px
+  overflow: hidden
+.BooleanControl__Operators_and
+.BooleanControl__Operators_or
+.BooleanControl__Operators_xor
+.BooleanControl__Operator
+  composes: flexButton
+  height: 100%
+  transition: transform 0.25s
+
+.BooleanControl__Flags
+  display: flex
+
+.BooleanControl__Checkbox
+  composes: flexButton
+  width: 100px
+  position: relative
+  color: $color-text-sec
+  overflow: hidden
+  &:hover
+    background: $color-mono-3
+  &:first-child
+    border-radius: 2px 0 0 2px
+  &:last-child
+    border-radius: 0 2px 2px 0
+.BooleanControl__Checkbox_checked
+  background: $color-mono-2
+  box-shadow: inset 0 1px 3px rgba(#000, 0.06)
+  color: $color-text-pri
+  &:hover
+    background: $color-mono-2
+
+.BooleanControl__Input
+  display: none
+.BooleanControl__Icon
+.BooleanControl__Title
+  display: none

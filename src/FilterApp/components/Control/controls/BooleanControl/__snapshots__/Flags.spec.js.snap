@@ -1,0 +1,65 @@
+exports[`Flags should match snapshot 1`] = `
+<div
+  className="BooleanControl__Flags">
+  <label
+    className="BooleanControl__Checkbox BooleanControl__Checkbox_checked"
+    disabled={false}
+    onClick={[Function]}
+    onMouseDown={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onTouchStart={[Function]}>
+    <input
+      checked={true}
+      className="BooleanControl__Input"
+      onChange={[Function]}
+      type="checkbox" />
+    <i
+      className="BooleanControl__Icon fa icon-boolean-platforms-win" />
+    <span
+      className="BooleanControl__Title">
+      Windows
+    </span>
+  </label>
+  <label
+    className="BooleanControl__Checkbox"
+    disabled={false}
+    onClick={[Function]}
+    onMouseDown={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onTouchStart={[Function]}>
+    <input
+      checked={false}
+      className="BooleanControl__Input"
+      onChange={[Function]}
+      type="checkbox" />
+    <i
+      className="BooleanControl__Icon fa icon-boolean-platforms-mac" />
+    <span
+      className="BooleanControl__Title">
+      Mac
+    </span>
+  </label>
+  <label
+    className="BooleanControl__Checkbox BooleanControl__Checkbox_checked"
+    disabled={false}
+    onClick={[Function]}
+    onMouseDown={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+    onTouchStart={[Function]}>
+    <input
+      checked={true}
+      className="BooleanControl__Input"
+      onChange={[Function]}
+      type="checkbox" />
+    <i
+      className="BooleanControl__Icon fa icon-boolean-platforms-linux" />
+    <span
+      className="BooleanControl__Title">
+      Linux
+    </span>
+  </label>
+</div>
+`;

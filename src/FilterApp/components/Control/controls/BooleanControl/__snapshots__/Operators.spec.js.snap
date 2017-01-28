@@ -1,0 +1,23 @@
+exports[`Operators returns change whenever you click it 1`] = `
+<label
+  className="BooleanControl__Operators BooleanControl__Operators_or"
+  disabled={false}
+  onClick={[Function]}
+  onMouseDown={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  onTouchStart={[Function]}>
+  <span
+    className="BooleanControl__Operator">
+    AND
+  </span>
+  <span
+    className="BooleanControl__Operator BooleanControl__Operator_active">
+    OR
+  </span>
+  <span
+    className="BooleanControl__Operator">
+    XOR
+  </span>
+</label>
+`;
