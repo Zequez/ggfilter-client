@@ -35,5 +35,6 @@ export default {
   oculus_price_discount: 34,
   sysreq_index_pct: 35,
   vr_only: 36,
-  stores: 37
+  stores: 37,
+  best_discount: 38
 }

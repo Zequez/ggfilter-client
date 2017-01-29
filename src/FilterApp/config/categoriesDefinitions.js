@@ -19,6 +19,7 @@ export default {
     filters: [
       'stores',
       'lowest_price',
+      'best_discount',
       'steam_price',
       'steam_price_discount',
       'oculus_price',

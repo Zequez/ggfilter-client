@@ -59,8 +59,23 @@ export default {
     width: 100,
     alignment: 1
   },
+  best_discount: {
+    title: 'Best discount',
+    control: 'Range',
+    controlOptions: {
+      suffix: '%',
+      max: 100
+    },
+    column: 'Discount',
+    columnOptions: { interpolation: '-%s%' },
+    chip: 'Range',
+    chipOptions: options.chips.discount,
+    shortcuts: options.shortcuts.discount,
+    width: 50,
+    alignment: 0
+  },
   steam_price: {
-    title: 'Lowest Steam price',
+    title: 'Steam price',
     control: 'Range',
     controlOptions: options.controls.price,
     column: 'Price',
@@ -72,7 +87,7 @@ export default {
     alignment: 1
   },
   oculus_price: {
-    title: 'Lowest Oculus price',
+    title: 'Oculus price',
     control: 'Range',
     controlOptions: options.controls.price,
     column: 'Price',

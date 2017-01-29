@@ -103,6 +103,7 @@ export default {
   lowest_price: priceFilter('the lowest price'),
   steam_price: priceFilter('Steam'),
   oculus_price: priceFilter('Oculus'),
+  best_discount: discountFilter('some store'),
   steam_price_discount: discountFilter('Steam'),
   oculus_price_discount: discountFilter('Oculus'),
 
