@@ -21,9 +21,7 @@ export default class DataTableBatch extends Component {
   shouldComponentUpdate (np, ns) {
     let p = this.props
     return (
-      np.games !== p.games ||
-      np.filters !== p.filters ||
-      np.filtersParams !== np.filtersParams
+      np.games !== p.games
     )
   }
 
