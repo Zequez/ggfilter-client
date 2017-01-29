@@ -1,4 +1,3 @@
-export FancyRange from './FancyRangeControl/FancyRangeControl'
 export Tags from './TagsControl/TagsControl'
 export Boolean from './BooleanControl'
 export Null from './NullControl'

@@ -5,7 +5,6 @@ import reducer from './reducer'
 const filter = require('./filter')
 const games = require('./games')
 
-import * as sfilter from './sfilter'
 import * as ui from './ui'
 
 // import { encode, decode } from './lib/filterEncoder'
@@ -27,8 +26,5 @@ module.exports = {
 
   },
 
-  editMode: ui.editMode,
-
-  loadFilter: sfilter.loadFilter,
-  selectCurrentFilter: sfilter.selectCurrentFilter
+  editMode: ui.editMode
 }
