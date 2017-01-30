@@ -4,7 +4,7 @@ export default {
   name: {
     title: 'Name',
     column: 'Link',
-    columnInputs: { text: 'name', urlValue: 'steam_id' },
+    columnInputs: { text: 'name', urls: 'urls' },
     columnOptions: { urlTemplate: 'http://store.steampowered.com/app/%s/' },
     width: 150
   },
