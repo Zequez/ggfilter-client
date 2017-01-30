@@ -48,19 +48,22 @@ export default {
     alignment: 0
   },
   lowest_price: {
-    title: 'Lowest price',
+    title: 'Prices',
     control: 'Range',
     controlOptions: options.controls.price,
-    column: 'Price',
-    columnInputs: { price: 'lowest_price', regular: 'steam_price' },
+    column: 'MultiPrice',
+    columnInputs: {
+      prices: 'prices',
+      urls: 'urls'
+    },
     chip: 'Range',
     chipOptions: options.chips.price,
     shortcuts: options.shortcuts.price,
     width: 100,
-    alignment: 1
+    alignment: 0
   },
   best_discount: {
-    title: 'Best discount',
+    title: 'Any discount',
     control: 'Range',
     controlOptions: {
       suffix: '%',
@@ -415,7 +418,6 @@ export default {
     width: 24 * 2 + 10,
     alignment: 0
   },
-
 
   // system_requirements: {
   //   id: 22,

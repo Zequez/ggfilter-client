@@ -1,4 +1,5 @@
 require('es6-promise').polyfill()
+const objectValues = require('object.values')
 
 if (!Array.prototype.find) {
   Object.defineProperty(Array.prototype, 'find', {
@@ -20,4 +21,8 @@ if (!Array.prototype.find) {
       return value
     }
   })
+}
+
+if (!Object.values) {
+  objectValues.shim()
 }
