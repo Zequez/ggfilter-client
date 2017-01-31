@@ -17,7 +17,7 @@ const initialState = {
   // },
   // active: {
   //   name: 'Name of your filter',
-  //   filters: {},
+  //   controls: {},
   //   sorting: {},
   //   columns: [
   //     'steam_id',

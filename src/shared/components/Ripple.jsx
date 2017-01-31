@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 import update from 'immutability-helper'
-import events from 'shared/lib/events'
+import events from 'shared/lib/utils/events'
 import { removeObjectKey } from 'shared/lib/utils'
 
 const defaults = {

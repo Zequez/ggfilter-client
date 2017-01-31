@@ -6,10 +6,4 @@ export { SysreqCalc as sysreq } from 'src/SysreqCalc'
 // import { SavedFiltersManagerGlued } from 'src/SavedFiltersManager'
 
 // Tabs with static content
-export logs from 'src/app/components/static/ScrapLogsTable'
-export sources from 'src/app/components/static/Sources'
-export feedback from 'src/app/components/static/Feedback'
-export contribute from 'src/app/components/static/Contribute'
-export aboutSysreq from 'src/app/components/static/AboutSysreq'
-export about from 'src/app/components/static/About'
-export oculusSandbox from 'src/app/components/static/OculusSandbox'
+export * from '../StaticPages'
