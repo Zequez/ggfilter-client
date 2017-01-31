@@ -36,7 +36,7 @@ export default class ControlButton extends Component {
             onRemove={onRemove}
             onClick={this.openControl}/>
         ) : (
-          <Button flat label='Filter' onClick={this.openControl}/>
+          <Button flat icon='filter' onClick={this.openControl}/>
         )}
         { this.state.open ? (
           <ControlPop
