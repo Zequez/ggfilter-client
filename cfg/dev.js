@@ -27,13 +27,6 @@ config.plugins = config.plugins.concat([
   new webpack.NamedModulesPlugin()
 ])
 
-// Add needed loaders
-config.module.loaders.push({
-  test: /\.(js|jsx)$/,
-  loader: 'babel',
-  include: path.join(__dirname, '/../src')
-})
-
 // let cssLoader = 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass?outputStyle=expanded'
 let cssLoader = 'style!css?modules&importLoaders=1&localIdentName=[folder]_[local]_[hash:base64:3]'
 config.module.loaders.push({

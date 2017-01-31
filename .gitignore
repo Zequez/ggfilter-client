@@ -53,5 +53,8 @@ Thumbs.db
 *.sql
 *.sqlite
 
+# Typescript stuff
+*.map
+
 # The compiled stuff
 /gem/app/assets/*

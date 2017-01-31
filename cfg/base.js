@@ -23,7 +23,7 @@ module.exports = {
     }
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.sass', '.scss', '.css'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.sass', '.scss', '.css'],
     alias: {
       shared: srcPath + 'shared/',
       images: srcPath + 'images/',
@@ -40,6 +40,12 @@ module.exports = {
     //   }
     // ],
     loaders: [
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'babel',
+        include: path.join(__dirname, '/../src')
+      },
+      { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
       {
         test: /\.(png|jpg|gif)$/,
         loader: 'url?limit=8192'

@@ -7,7 +7,6 @@ export const initialState = {
   batches: [],
   fetching: false,
   failed: false,
-  lastPage: false,
   totalCount: null
 }
 
@@ -39,8 +38,7 @@ export function getGames (page = 0) {
           type: GET_GAMES_END,
           games: response.data,
           totalCount: response.totalCount,
-          page: page,
-          lastPage: response.data.length < options.batchSize})
+          page: page})
       }, (error) => {
         return dispatch({type: GET_GAMES_FAILED, page, error})
       })
@@ -77,14 +75,12 @@ export function reducer (state = initialState, action) {
   if (action.type === GET_GAMES_START) {
     state = u(state, {
       fetching: {$set: true},
-      lastPage: {$set: false},
       totalCount: {$set: action.page === 0 ? null : state.totalCount}
     })
   } else if (action.type === GET_GAMES_END) {
     let stateChange = {
       fetching: {$set: false},
       failed: {$set: false},
-      lastPage: {$set: action.lastPage},
       totalCount: {$set: action.totalCount}
     }
 
@@ -99,7 +95,6 @@ export function reducer (state = initialState, action) {
     state = u(state, {
       fetching: {$set: false},
       failed: {$set: true},
-      lastPage: {$set: true},
       totalCount: {$set: 0}
     })
   }
