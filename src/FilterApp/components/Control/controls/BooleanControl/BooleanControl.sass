@@ -13,7 +13,7 @@
 .BooleanControl__Operators
   display: block
   position: relative
-  width: 100px
+  width: 15%
   overflow: hidden
 .BooleanControl__Operators_and
 .BooleanControl__Operators_or
@@ -25,11 +25,12 @@
 
 .BooleanControl__Flags
   display: flex
+  flex-grow: 1
 
 .BooleanControl__Checkbox
   composes: flexButton
-  width: 100px
   position: relative
+  flex-grow: 1
   color: $color-text-sec
   overflow: hidden
   &:hover
