@@ -1,13 +1,15 @@
 .MultiPriceColumn
   display: flex
-
-
+  height: $g*5
+  width: 100%
+  float: left
 
 .__Price
   position: relative
   display: flex
   flex-basis: 100px
-  width: 100px
+  flex-grow: 1
+  border: solid 2px transparent
   justify-content: center
   align-items: center
   color: $color-text-sec
@@ -16,9 +18,10 @@
       color: $color-sec
 
 .__Price_lowest
-  // background-color: $color-sec-light
-  .__current
-    font-size: $font-size-input
+  border-color: $color-mono-3
+  background-color: $color-mono-3
+  // .__current
+    // font-size: $font-size-input
 .__Price_discounted
   justify-content: flex-end
 .__current

@@ -28,6 +28,8 @@ export function getLowest (prices) {
 }
 
 export default class MultiPriceColumn extends Component {
+  static noOverflowContainer = true
+
   static propTypes = {
     prices: t.objectOf(t.shape({
       current: t.number,
