@@ -65,7 +65,6 @@ class Title extends Component {
       [th.TitlesList__Title_sortable]: !!filter.sort
     })
 
-    const iconClass = cx(th.TitlesList__Icon, 'fa', 'icon-filter-' + filter.name)
     const sortIconClass = cx(th.TitlesList__SortIcon, 'fa', 'icon-sort-' + (sort ? 'asc' : 'desc'))
 
     return (
@@ -79,7 +78,7 @@ class Title extends Component {
           {sort != null ? (
             <span className={sortIconClass}></span>
           ) : null}
-          <span className={iconClass}></span>
+
           <span className={th.TitlesList__Text}>
             {filter.title}
           </span>
