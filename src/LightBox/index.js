@@ -1,10 +1,10 @@
 import reducer, { showLightbox } from './reducer'
 import Lightbox from './components/Lightbox'
-import * as constants from './constants'
+import { ID } from './selectors'
 
 module.exports = {
+  ID,
   reducer,
-  constants,
   showLightbox,
   Lightbox
 }
