@@ -1,13 +1,13 @@
 import React from 'react'
 import Batch from './Batch'
 
-export default function Body ({games, filters, filter}) {
+export default function Body ({gamesPages, filters, filter}) {
   let batches = []
-  for (let i = 0; i < games.batches.length; ++i) {
+  for (let i = 0; i < gamesPages.length; ++i) {
     batches.push(
       <Batch
         key={i}
-        games={games.batches[i]}
+        games={gamesPages[i]}
         filters={filters}
         filtersParams={filter.params}/>
     )

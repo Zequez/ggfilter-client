@@ -2,13 +2,10 @@ import th from './GamesLoader.sass'
 import React, { Component, PropTypes as t } from 'react'
 import Button from 'shared/components/Button'
 
-import classNames from 'classnames'
-
 export default class GamesLoader extends Component {
   static propTypes = {
-    fetching: t.bool.isRequired,
     failed: t.bool.isRequired,
-    lastPage: t.bool.isRequired,
+    fetching: t.bool.isRequired,
     onRequestMore: t.func.isRequired,
     loadedGames: t.number,
     totalGames: t.number
@@ -25,21 +22,31 @@ export default class GamesLoader extends Component {
   }
 
   render () {
-    let { fetching, failed, lastPage, loadedGames, totalGames } = this.props
+    let { failed, fetching, loadedGames, totalGames } = this.props
+    let lastPage = totalGames === loadedGames
 
-    let divClass = classNames(th.GamesLoader, {
-      [th.GamesLoader_fetching]: fetching,
-      [th.GamesLoader_failed]: failed,
-      [th.GamesLoader_lastPage]: lastPage
-    })
+    let el = null
+    if (failed) {
+      el = 'Failed to load games'
+    } else if (lastPage) {
+      el = `All ${totalGames} games loaded`
+    } else if (fetching) {
+      el = 'Fetching...'
+    } else {
+      el = (
+        <Button disabled={fetching}>
+          Load more games ({loadedGames}/{totalGames})
+        </Button>
+      )
+    }
 
     return (
       <div
         ref='el'
-        className={divClass}
+        className={th.GamesLoader}
         onClick={this.handleClick.bind(this)}>
         <span className={th.GamesLoader__label}>
-          <Button>Load more games ({loadedGames}/{totalGames})</Button>
+          { el }
         </span>
       </div>
     )

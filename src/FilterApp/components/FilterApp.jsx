@@ -9,7 +9,7 @@ import { setDocWidth } from '../ui/reducer'
 import { setParam } from '../filter/reducer'
 import { getTab } from '../ui/selectors'
 import { finalFilterSelector, visibleFiltersDefinitionsSelector } from '../filter/selectors'
-import { loadedCountSelector, totalCountSelector } from '../games/selectors'
+import * as gameSel from '../games/selectors'
 
 import Table from './Table/Table'
 import GamesLoader from './GamesLoader'
@@ -21,11 +21,13 @@ import { AppBar } from 'src/Layout'
 @connect((s) => ({
   filter: finalFilterSelector(s),
   visibleFilters: visibleFiltersDefinitionsSelector(s),
-  games: s.games,
+  games: gameSel.games(s),
   tags: s.tags,
   tab: getTab(s),
-  gamesLoadedCount: loadedCountSelector(s),
-  gamesTotalCount: totalCountSelector(s)
+  gamesLoadedCount: gameSel.loadedCount(s),
+  gamesTotalCount: gameSel.totalCount(s),
+  gamesFetching: gameSel.isFetching(s),
+  gamesFailed: gameSel.failed(s)
 }), {
   getGames,
   getMoreGames,
@@ -38,7 +40,9 @@ export default class FilterApp extends Component {
     getMoreGames: t.func,
     setParam: t.func,
     gamesLoadedCount: t.number,
-    gamesTotalCount: t.number
+    gamesTotalCount: t.number,
+    gamesFetching: t.bool,
+    gamesFailed: t.bool
   }
 
   componentWillMount () {
@@ -65,32 +69,30 @@ export default class FilterApp extends Component {
   }
 
   render () {
-    let { games, gamesLoadedCount, gamesTotalCount, filter, columnsWidth,
-      tableWidth, visibleFilters } = this.props
+    let p = this.props
+
     return (
       <div className={th.FilterApp}>
         <AppBar className={th.FilterApp__AppBar}>
-          <h1>{gamesTotalCount == null ? '???' : gamesTotalCount} games found</h1>
+          <h1>{p.gamesTotalCount == null ? '???' : p.gamesTotalCount} games found</h1>
           <QueryChipsList
-            filter={filter}
-            visibleFilters={visibleFilters}
+            filter={p.filter}
+            visibleFilters={p.visibleFilters}
             onRemove={this.onRemoveFilter}/>
         </AppBar>
-        {/*<Shortcuts/>*/}
         <CategoriesList/>
         <Table
-          games={games}
-          filter={filter}
-          columnsWidth={columnsWidth}
-          tableWidth={tableWidth}
-          visibleFiltersDefinitions={visibleFilters}/>
+          gamesPages={p.games}
+          filter={p.filter}
+          columnsWidth={p.columnsWidth}
+          tableWidth={p.tableWidth}
+          visibleFiltersDefinitions={p.visibleFilters}/>
         <GamesLoader
-          fetching={games.fetching}
-          failed={games.failed}
-          lastPage={games.lastPage}
+          fetching={p.gamesFetching}
+          failed={p.gamesFailed}
           onRequestMore={::this.handleRequestMoreGames}
-          loadedGames={gamesLoadedCount}
-          totalGames={gamesTotalCount}/>
+          loadedGames={p.gamesLoadedCount}
+          totalGames={p.gamesTotalCount}/>
       </div>
     )
   }

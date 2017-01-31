@@ -16,22 +16,18 @@ export default class Table extends Component {
     }).isRequired,
     // columnsWidth: t.arrayOf(t.number).isRequired,
     // tableWidth: t.number.isRequired,
-    games: t.shape({
-      list: t.array,
-      fetching: t.bool,
-      failed: t.bool
-    }).isRequired
+    gamesPages: t.arrayOf(t.array).isRequired
   }
 
   render () {
     console.logRender('DataTable')
-    let { filter, games, visibleFiltersDefinitions: filters } = this.props
+    let { filter, gamesPages, visibleFiltersDefinitions: filters } = this.props
 
     return (
       <div className={th.Table}>
         <table className={th.Table__table}>
           <Header filters={filters} filter={filter}/>
-          {Body({games, filters, filter})}
+          {Body({gamesPages, filters, filter})}
         </table>
       </div>
     )
