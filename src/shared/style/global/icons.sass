@@ -13,6 +13,7 @@ $fa-font-path: 'font-awesome/fonts/'
 
   font-family: FontAwesome
   font-size: $g*3
+  line-height: $g*3
 
   text-rendering: auto
   -webkit-font-smoothing: antialiased
@@ -26,20 +27,17 @@ $fa-font-path: 'font-awesome/fonts/'
       content: $combined
       font-size: $g*2
 
+// Stores
 +gicon(store-steam, $fa-var-steam)
 +gicon(store-oculus, '⬭')
 
+// Sidebar
 +gicon(menu, $fa-var-bars)
 +gicon(filter, $fa-var-filter)
 +gicon(sysreq, $fa-var-thermometer-three-quarters)
 +gicon(feedback, $fa-var-commenting-o)
 +gicon(contribute, $fa-var-heart)
 +gicon(about, $fa-var-question-circle)
-
-// Table title
-+gicon(sort-asc, $fa-var-arrow-up)
-+gicon(sort-desc, $fa-var-arrow-down)
-
 
 // Base filters icons
 +gicon(filter-thumbnail, $fa-var-picture-o)
@@ -48,7 +46,6 @@ $fa-font-path: 'font-awesome/fonts/'
 +gicon(filter-name, $fa-var-font)
 +gicon(filter-images, $fa-var-image)
 +gicon(filter-sysreq_index_pct, $fa-var-fire)
-// +gicon(filter-sysreq_video_tokens_values, $fa-var-tags)
 +gicon(filter-released_at, $fa-var-calendar-minus-o)
 +gicon(filter-released_at_absolute, $fa-var-calendar)
 +gicon(filter-tags, $fa-var-tags)
@@ -85,89 +82,64 @@ $fa-font-path: 'font-awesome/fonts/'
 +gicon(filter-steam_early_access, $fa-var-exclamation-circle)
 
 
+// Boolean filters icons
+
+// +gicon(boolean-steam_features-steam_achievements, $fa-var-certificate)
+// +gicon(boolean-steam_features-steam_trading_cards, $fa-var-file)
+// +gicon(boolean-steam_features-steam_workshop, $fa-var-wrench)
+// +gicon(boolean-steam_features-steam_cloud, $fa-var-cloud)
+// +gicon(boolean-steam_features-valve_anti_cheat, $fa-var-shield)
+
++gicon(boolean-platforms-win, $fa-var-windows)
++gicon(boolean-platforms-mac, $fa-var-apple)
++gicon(boolean-platforms-linux, $fa-var-linux)
+
++gicon(boolean-players-single, $fa-var-user)
++gicon(boolean-players-multi, $fa-var-users)
++gicon(boolean-players-online, $fa-var-globe)
++gicon(boolean-players-co_op, $fa-var-user-plus)
++gicon(boolean-players-shared, $fa-var-television)
+// +gicon(boolean-players-hostseat, $fa-var-thermometer-full)
+// +gicon(boolean-players-cross_platform, $fa-var-playstation)
+
++gicon(boolean-stores-steam, $fa-var-steam)
+:global(.icon-boolean-stores-oculus:before)
+  content: ' '
+  display: inline-block
+  height: 0.3em
+  width: 0.6em
+  border: solid 0.2em currentColor
+  border-radius: 10px
+
++gicon(boolean-vr_platforms-vive, $fa-var-play-circle)
+:global(.icon-boolean-vr_platforms-vive)
+  // transform-origin: 50% 67%
+  transform: rotate(-90deg)
+:global(.icon-boolean-vr_platforms-rift:before)
+  @extend :global(.icon-boolean-stores-oculus:before)
++gicon(boolean-vr_platforms-osvr, $fa-var-folder-open-o)
+
++gicon(boolean-controllers-tracked, $fa-var-video-camera)
++gicon(boolean-controllers-gamepad, $fa-var-gamepad)
++gicon(boolean-controllers-keyboard_mouse, $fa-var-keyboard-o)
+
++gicon(boolean-vr_modes-seated, $fa-var-wheelchair)
++gicon(boolean-vr_modes-standing, $fa-var-male)
++gicon(boolean-vr_modes-room_scale, $fa-var-street-view)
+
 // Icons in the columns
 +gicon(column-check-circle, $fa-var-check-circle)
 
-// Other icons
+// Table title
++gicon(sort-asc, $fa-var-arrow-up)
++gicon(sort-desc, $fa-var-arrow-down)
 
+// Other icons
 +gicon(dropdown, $fa-var-caret-down)
 +gicon(dropdown-up, $fa-var-caret-up)
 +gicon(remove-tag, $fa-var-times)
 +gicon(remove-chip, $fa-var-times)
 +gicon(highlight, $fa-var-lightbulb-o)
-
-// Sharer tab
-.icon-warning:before
-  content: $fa-var-exclamation-triangle
-
-// Title icons
-.icon-highlight:before
-  content: $fa-var-lightbulb-o
-.icon-close:before
-  content: $fa-var-times
-
-// Tabs
-
-.icon-share:before
-  content: $fa-var-share-alt
-.icon-link:before
-  content: $fa-var-link
-
-// Boolean filters icons
-
-
-+gicon(boolean-steam_achievements, $fa-var-certificate)
-+gicon(boolean-steam_trading_cards, $fa-var-file)
-+gicon(boolean-steam_workshop, $fa-var-wrench)
-+gicon(boolean-steam_cloud, $fa-var-cloud)
-+gicon(boolean-valve_anti_cheat, $fa-var-shield)
-
-+gicon(boolean-win, $fa-var-windows)
-+gicon(boolean-mac, $fa-var-apple)
-+gicon(boolean-linux, $fa-var-linux)
-
-+gicon(boolean-single_player, $fa-var-user)
-+gicon(boolean-multi_player, $fa-var-users)
-+gicon(boolean-co_op, $fa-var-user-plus)
-+gicon(boolean-local_co_op, $fa-var-home)
-
-+gicon(boolean-stores-steam, $fa-var-steam)
-+gicon(boolean-stores-oculus, '⬭')
-
-+gicon(boolean-vive, $fa-var-play-circle)
-:global(.icon-boolean-vive)
-  transform-origin: 50% 67%
-  transform: rotate(-90deg)
-+gicon(boolean-oculus, '⬭')
-:global(.icon-boolean-oculus:before)
-  display: block
-  transform: translateY(-2px)
-+gicon(boolean-rift, '⬭')
-:global(.icon-boolean-rift:before)
-  display: block
-  transform: translateY(-2px)
-+gicon(boolean-steam, $fa-var-steam)
-
-// .icon-boolean-oculus:before
-//   content: ' '
-//   display: inline-block
-//   width: 8px
-//   height: 3px
-//   border: solid 4px $color-text-sec
-//   border-radius: $r/2
-// .boolean-checked
-//   .icon-boolean-oculus:before
-//     border-color: $white
-
-+gicon(boolean-tracked, $fa-var-video-camera)
-+gicon(boolean-gamepad, $fa-var-gamepad)
-+gicon(boolean-keyboard_mouse, $fa-var-keyboard-o)
-
-+gicon(boolean-seated, $fa-var-wheelchair)
-+gicon(boolean-standing, $fa-var-male)
-+gicon(boolean-room_scale, $fa-var-street-view)
-
-// Other
 
 +gicon(toggle-check, $fa-var-check-circle)
 +gicon(toggle-uncheck, $fa-var-times-circle)
@@ -175,9 +147,3 @@ $fa-font-path: 'font-awesome/fonts/'
 
 +gicon(logs-success, $fa-var-check-circle)
 +gicon(logs-failure, $fa-var-times-circle)
-
-// Games loader
-.icon-load-more-left:before
-  content: $fa-var-angle-double-left
-.icon-load-more-right:before
-  content: $fa-var-angle-double-right

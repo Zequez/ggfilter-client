@@ -9,9 +9,9 @@ export default {
       'multi': 2,
       'online': 4,
       'co_op': 8,
-      'shared': 16,
-      'hotseat': 32,
-      'cross_platform': 64
+      'shared': 16
+      // 'hotseat': 32,
+      // 'cross_platform': 64
     },
     'controllers': {
       'tracked': 1,

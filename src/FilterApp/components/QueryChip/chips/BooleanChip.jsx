@@ -27,7 +27,7 @@ export default function BooleanChip ({query, name}) {
 
   let components = []
   words.forEach((word, i) => {
-    components.push(<Icon key={keys[i] + 'i'} icon={'boolean-' + keys[i]}/>)
+    components.push(<Icon key={keys[i] + 'i'} icon={`boolean-${name}-${keys[i]}`}/>)
     if (!iconsOnly) {
       components.push(<span key={keys[i] + 'w'}>{word}</span>)
     }

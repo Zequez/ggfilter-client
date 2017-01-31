@@ -31,7 +31,7 @@ export default class BooleanColumn extends Component {
           <TooltipIcon
             tooltip={this.names[k]}
             key={k}
-            icon={'boolean-' + k}
+            icon={`boolean-${this.props.name}-${k}`}
             className={cx(
               th.BooleanColumn__Icon, {
                 [th.BooleanColumn__Icon_disabled]: !this.checked(this.values[k])
