@@ -49,10 +49,6 @@ export default class FilterApp extends Component {
     this.fillStaticFiltersDefinitionsOptions()
   }
 
-  componentWillUnmount () {
-    window.removeEventListener('resize', this.debouncedResize)
-  }
-
   // This is hacky, but it's now the convention
   fillStaticFiltersDefinitionsOptions () {
     definitions.filters.tags.controlOptions.tags = this.props.tags

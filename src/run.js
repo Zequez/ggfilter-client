@@ -18,7 +18,7 @@ import { getCurrentUser } from 'shared/reducers/authReducer'
 
 import history from 'shared/lib/SelectorRouter/history'
 
-import App from 'src/app/components/App'
+import App from 'src/app/App'
 import { getTags } from 'shared/lib/api'
 
 console.logRender = function (componentName) {

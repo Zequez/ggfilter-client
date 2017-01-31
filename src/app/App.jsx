@@ -1,9 +1,9 @@
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 
-import * as pages from '../pages'
 import { Lightbox } from 'src/Lightbox'
 import Layout from 'src/Layout'
+import * as pages from './pages'
 
 @connect(
   (s) => ({ mode: s.ui.mode })
