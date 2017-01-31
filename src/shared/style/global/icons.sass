@@ -29,7 +29,13 @@ $fa-font-path: 'font-awesome/fonts/'
 
 // Stores
 +gicon(store-steam, $fa-var-steam)
-+gicon(store-oculus, '⬭')
+:global(.icon-store-oculus:before)
+  content: ' '
+  display: inline-block
+  height: 0.3em
+  width: 0.6em
+  border: solid 0.2em currentColor
+  border-radius: 10px
 
 // Sidebar
 +gicon(menu, $fa-var-bars)
@@ -104,19 +110,14 @@ $fa-font-path: 'font-awesome/fonts/'
 
 +gicon(boolean-stores-steam, $fa-var-steam)
 :global(.icon-boolean-stores-oculus:before)
-  content: ' '
-  display: inline-block
-  height: 0.3em
-  width: 0.6em
-  border: solid 0.2em currentColor
-  border-radius: 10px
+  @extend :global(.icon-store-oculus:before)
 
 +gicon(boolean-vr_platforms-vive, $fa-var-play-circle)
 :global(.icon-boolean-vr_platforms-vive)
   // transform-origin: 50% 67%
   transform: rotate(-90deg)
 :global(.icon-boolean-vr_platforms-rift:before)
-  @extend :global(.icon-boolean-stores-oculus:before)
+  @extend :global(.icon-store-oculus:before)
 +gicon(boolean-vr_platforms-osvr, $fa-var-folder-open-o)
 
 +gicon(boolean-controllers-tracked, $fa-var-video-camera)
