@@ -131,4 +131,6 @@ const tooltipFactory = (ComposedComponent, defaultOptions = {}) => (
   }
 )
 
+export const TTDiv = tooltipFactory('div', {position: 'top'})
+
 export default tooltipFactory

@@ -11,6 +11,27 @@ const initialState = {
     params: {},
     sort: {}
   }
+
+  // loaded: {
+  //
+  // },
+  // active: {
+  //   name: 'Name of your filter',
+  //   filters: {},
+  //   sorting: {},
+  //   columns: [
+  //     'steam_id',
+  //     'name',
+  //     'stores_prices'
+  //   ],
+  //   config: {
+  //     stores: ['steam', 'oculus']
+  //   }
+  // },
+  // gamesBatches: {
+  //
+  // }
+
 }
 
 // =============================================================================

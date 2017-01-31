@@ -8,8 +8,7 @@ export default {
     lowest_price: true,
     best_discount: true,
     playtime_median: true,
-    ratings_count: true,
-    ratings_ratio: true
+    ratings_pct: true
   }),
   sort: {
     filter: 'name',

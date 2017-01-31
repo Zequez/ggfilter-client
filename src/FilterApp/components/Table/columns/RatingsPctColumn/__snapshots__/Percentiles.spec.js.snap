@@ -1,0 +1,25 @@
+exports[`RatingsPctColumn Percentiles should match snapshot 1`] = `
+<div
+  className="__Percentiles">
+  <div
+    className="__entil" />
+  <div
+    className="__entil" />
+  <div
+    className="__entil" />
+  <div
+    className="__entil" />
+  <div
+    className="__entil" />
+  <div
+    className="__entil" />
+  <div
+    className="__entil" />
+  <div
+    className="__entil" />
+  <div
+    className="__entil" />
+  <div
+    className="__entil __entil_current" />
+</div>
+`;

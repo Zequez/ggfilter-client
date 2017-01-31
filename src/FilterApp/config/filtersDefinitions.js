@@ -338,21 +338,26 @@ export default {
     width: 100,
     alignment: 0
   },
-  // ratings_pct: {
-  //   title: 'Ratings percentile',
-  //   longTitle: 'Average percentile of ratings ratio and number',
-  //   control: 'Range',
-  //   controlOptions: {
-  //     max: 100,
-  //     min: 0
-  //   },
-  //   chip: 'Range',
-  //   chipOptions: { '': '{v}pct' },
-  //   column: 'Percentile',
-  //   shortcuts: options.shortcuts.ratio,
-  //   width: 100,
-  //   alignment: 0
-  // },
+  ratings_pct: {
+    title: 'Ratings percentile',
+    longTitle: 'Average percentiles of ratings ratio and amount',
+    control: 'Range',
+    controlOptions: {
+      max: 100,
+      min: 0
+    },
+    chip: 'Range',
+    chipOptions: { '': '{v}th' },
+    column: 'RatingsPct',
+    columnInputs: {
+      pct: 'ratings_pct',
+      count: 'ratings_count',
+      ratio: 'ratings_ratio'
+    },
+    shortcuts: options.shortcuts.percentiles,
+    width: 100,
+    alignment: 0
+  },
 
   // Flags
   /*************************************/

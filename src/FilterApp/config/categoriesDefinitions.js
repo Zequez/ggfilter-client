@@ -40,8 +40,9 @@ export default {
   ratings: {
     title: 'Ratings',
     filters: [
+      'ratings_pct',
       'ratings_count',
-      'ratings_ratio'
+      'ratings_ratio'  
     ]
   },
   features: {

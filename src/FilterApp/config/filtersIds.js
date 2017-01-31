@@ -36,5 +36,6 @@ export default {
   sysreq_index_pct: 35,
   vr_only: 36,
   stores: 37,
-  best_discount: 38
+  best_discount: 38,
+  ratings_pct: 39
 }

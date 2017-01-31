@@ -4,15 +4,14 @@ export default {
   params: definitions.normalizeParamsOrder({
     name: true,
     tags: true,
-    released_at: {gt: 365 * 24 * 60 * 60, lt: 0},
+    released_at: true,
     lowest_price: true,
-    best_discount: true,
+    best_discount: {gt: 1, lt: null},
     playtime_median: true,
-    ratings_count: { gt: 100 },
-    ratings_ratio: { gt: 90 }
+    ratings_pct: true
   }),
   sort: {
-    filter: 'playtime_median',
+    filter: 'ratings_pct',
     asc: false
   }
 }

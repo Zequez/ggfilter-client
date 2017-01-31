@@ -152,6 +152,11 @@ export default {
     'with a ratings ratio <≥{gt}%>',
     'with a ratings ratio <≤{lt}%>'
   ),
+  ratings_pct: basicRange(
+    'with a ratings percentile of <{gt}-{lt}th>',
+    'with a ratings percentile <≥{gt}th>',
+    'with a ratings percentile <≤{lt}th>'
+  ),
   tags: ({tags}, filter) => {
     tags = tags.map((id) => '<' + h(filter.columnOptions.tags[id]) + '>')
     if (tags.length > 1) {

@@ -71,6 +71,14 @@ export default {
       {gt: 97, lt: null},
       {gt: 98, lt: null},
       {gt: 99, lt: null}
+    ],
+    percentiles: [
+      {gt: 95, lt: null},
+      {gt: 90, lt: null},
+      {gt: 80, lt: null},
+      {gt: 70, lt: null},
+      {gt: 60, lt: null},
+      {gt: 50, lt: null}
     ]
   },
   chips: {
