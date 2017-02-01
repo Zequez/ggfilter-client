@@ -1,6 +1,6 @@
 import th from './MultiPriceColumn.sass'
 import React, { Component, PropTypes as t } from 'react'
-import stores from '../../../../constants/stores'
+import stores from '../../../../config/storesDefinitions'
 import Price from './Price'
 
 export function getLowest (prices) {
