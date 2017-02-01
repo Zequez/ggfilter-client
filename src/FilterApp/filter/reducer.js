@@ -27,9 +27,6 @@ const initialState = {
   //   config: {
   //     stores: ['steam', 'oculus']
   //   }
-  // },
-  // gamesBatches: {
-  //
   // }
 
 }

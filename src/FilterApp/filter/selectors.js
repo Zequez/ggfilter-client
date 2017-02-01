@@ -4,11 +4,11 @@ import { encode } from '../lib/filterEncoder'
 import { combiner } from './lib/filterMutator'
 import definitions from '../lib/definitions'
 import { isQueryActive, isFilterEmpty } from '../lib/utils'
-import { NAME } from './constants'
 
-export const stateSelector = (s) => s[NAME]
-export const baseFilterSelector = (s) => s[NAME].base
-export const deltaFilterSelector = (s) => s[NAME].delta
+export const ID = 'filter'
+export const stateSelector = (s) => s[ID]
+export const baseFilterSelector = (s) => s[ID].base
+export const deltaFilterSelector = (s) => s[ID].delta
 
 export const finalFilterSelector = createSelector(
   baseFilterSelector,
