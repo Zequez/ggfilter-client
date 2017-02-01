@@ -1,11 +1,11 @@
 import th from '../theme'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'redux-little-router'
 import { snapTo } from 'shared/lib/utils'
 import { getGames } from 'shared/lib/api'
 import { MODES, setMode } from 'shared/reducers/uiReducer'
 
-import Link from 'shared/components/RouterLink'
 import { AutoPage } from 'src/Layout'
 
 import Chip from 'shared/components/Chip'
@@ -127,7 +127,7 @@ export default class SysreqCalc extends Component {
         <p className={th.info}>
           The System Requirements Index is a very coarse number
           that we are working on improving.
-          It's <Link to='aboutSysreq'>calculated by an automated algorithm</Link>.
+          It's <Link href='/about-sysreq'>calculated by an automated algorithm</Link>.
         </p>
         <div className={th.actionBar}>
           <Button

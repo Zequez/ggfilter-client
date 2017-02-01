@@ -3305,6 +3305,16 @@ history@^4.0.0:
     value-equal "^0.1.1"
     warning "^3.0.0"
 
+history@^4.4.1:
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/history/-/history-4.5.1.tgz#44935a51021e3b8e67ebac267a35675732aba569"
+  dependencies:
+    invariant "^2.2.1"
+    loose-envify "^1.2.0"
+    resolve-pathname "^2.0.0"
+    value-equal "^0.2.0"
+    warning "^3.0.0"
+
 hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
@@ -5779,6 +5789,13 @@ query-string@^4.1.0:
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
 
+query-string@^4.2.3:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-4.3.1.tgz#54baada6713eafc92be75c47a731f2ebd09cd11d"
+  dependencies:
+    object-assign "^4.1.0"
+    strict-uri-encode "^1.0.0"
+
 querystring-es3@~0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/querystring-es3/-/querystring-es3-0.2.1.tgz#9ec61f79049875707d69414596fd907a4d711e73"
@@ -6056,6 +6073,15 @@ redux-devtools@^3.3.1:
     react-redux "^4.0.0"
     redux "^3.5.2"
     redux-devtools-instrument "^1.0.1"
+
+redux-little-router:
+  version "12.1.2"
+  resolved "https://registry.yarnpkg.com/redux-little-router/-/redux-little-router-12.1.2.tgz#27544f4c7f97d4430b67c00d2ef75ac80faea2db"
+  dependencies:
+    history "^4.4.1"
+    lodash.assign "^4.2.0"
+    query-string "^4.2.3"
+    url-pattern "^1.0.1"
 
 redux-mediaquery:
   version "0.10.0"
@@ -7140,6 +7166,10 @@ validate-npm-package-license@^3.0.1:
 value-equal@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/value-equal/-/value-equal-0.1.1.tgz#b174df21f203c81e17f2e4d59d3a900024cbef7b"
+
+value-equal@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/value-equal/-/value-equal-0.2.0.tgz#4f41c60a3fc011139a2ec3d3340a8998ae8b69c0"
 
 vary@~1.1.0:
   version "1.1.0"

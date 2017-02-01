@@ -18,52 +18,52 @@ let mr = (path, mode) => ({
   actions: () => setMode(mode)
 })
 
-export default new SelectorRouter({
-  sysreq: mr('/system-requirements', MODES.sysreq),
-  // officialFilters: mr('/interesting-filters', MODES.officialFilters),
-  feedback: mr('/feedback', MODES.feedback),
-  contribute: mr('/donations', MODES.contribute),
-  // sources: mr('/sources', MODES.sources),
-  // myFilters: mr('/your-filters', MODES.myFilters),
-  // tos: mr('/tos', MODES.tos),
-  // help: mr('/help', MODES.help),
-  // about: mr('/about', MODES.about),
-  // contact: mr('/contact', MODES.contact),
-  aboutSysreq: mr('/about-sysreq', MODES.aboutSysreq),
-  oculusSandbox: mr('/oculus-sandbox', MODES.oculusSandbox),
-  logs: mr('/logs', MODES.logs),
-
-  filter: {
-    path: '/f(/:sid)',
-    query: {
-      b: '(:encoded)'
-    },
-    selectors: (s) => ({
-      sid: sidSelector(s),
-      encoded: encodedDeltaSelector(s)
-    }),
-
-    actions: (params, location) => (dispatch) => {
-      dispatch(setMode(MODES.filter))
-      return dispatch(setFilterFromUrl(params))
-    },
-    conditions: (s) => (
-      modeSelector(s) === MODES.filter &&
-      isFrontPageFilter(s) === false
-    )
-  },
-  root: {
-    path: '/',
-    actions: (params, location) => (dispatch) => {
-      dispatch(setMode(MODES.filter))
-      return dispatch(resetFilters())
-    },
-    conditions: (s) => (
-      modeSelector(s) === MODES.filter &&
-      isFrontPageFilter(s) === true
-    )
-  },
-  notfound: {
-    redirect: '/'
-  }
-})
+// export default new SelectorRouter({
+//   sysreq: mr('/system-requirements', MODES.sysreq),
+//   // officialFilters: mr('/interesting-filters', MODES.officialFilters),
+//   feedback: mr('/feedback', MODES.feedback),
+//   contribute: mr('/donations', MODES.contribute),
+//   // sources: mr('/sources', MODES.sources),
+//   // myFilters: mr('/your-filters', MODES.myFilters),
+//   // tos: mr('/tos', MODES.tos),
+//   // help: mr('/help', MODES.help),
+//   // about: mr('/about', MODES.about),
+//   // contact: mr('/contact', MODES.contact),
+//   aboutSysreq: mr('/about-sysreq', MODES.aboutSysreq),
+//   oculusSandbox: mr('/oculus-sandbox', MODES.oculusSandbox),
+//   logs: mr('/logs', MODES.logs),
+//
+//   filter: {
+//     path: '/f(/:sid)',
+//     query: {
+//       b: '(:encoded)'
+//     },
+//     selectors: (s) => ({
+//       sid: sidSelector(s),
+//       encoded: encodedDeltaSelector(s)
+//     }),
+//
+//     actions: (params, location) => (dispatch) => {
+//       dispatch(setMode(MODES.filter))
+//       return dispatch(setFilterFromUrl(params))
+//     },
+//     conditions: (s) => (
+//       modeSelector(s) === MODES.filter &&
+//       isFrontPageFilter(s) === false
+//     )
+//   },
+//   root: {
+//     path: '/',
+//     actions: (params, location) => (dispatch) => {
+//       dispatch(setMode(MODES.filter))
+//       return dispatch(resetFilters())
+//     },
+//     conditions: (s) => (
+//       modeSelector(s) === MODES.filter &&
+//       isFrontPageFilter(s) === true
+//     )
+//   },
+//   notfound: {
+//     redirect: '/'
+//   }
+// })

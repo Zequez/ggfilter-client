@@ -6,16 +6,16 @@ import Layout from 'src/Layout'
 import * as pages from './pages'
 
 @connect(
-  (s) => ({ mode: s.ui.mode })
+  (s) => ({ page: s.router.result.page })
 )
 export default class App extends Component {
   static propTypes = {
-    mode: t.string.isRequired
+    page: t.string.isRequired
   }
 
   render () {
-    const { mode } = this.props
-    const CurrentPage = pages[mode]
+    const { page } = this.props
+    const CurrentPage = pages[page]
 
     return (
       <Layout>

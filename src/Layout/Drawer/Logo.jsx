@@ -1,13 +1,13 @@
 import th from './Drawer.sass'
 import React from 'react'
 import Ripple from 'shared/components/Ripple'
-import RouterLink from 'shared/components/RouterLink'
+import { Link } from 'redux-little-router'
 
-const Logo = ({theme, children, ...props}) => (
+const Logo = ({theme, children, href}) => (
   <li className={th.Drawer__Logo}>
-    <RouterLink {...props} className={th.Drawer__Link}>
+    <Link href={href} className={th.Drawer__Link}>
       <span className={th.Drawer__LogoFirst}>GGF</span><span className={th.Drawer__LogoLast}>ilter</span>
-    </RouterLink>
+    </Link>
     {children}
   </li>
 )

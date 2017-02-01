@@ -9,14 +9,13 @@ import './style'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
+import { initializeCurrentLocation, provideRouter } from 'redux-little-router'
 
 import store from 'src/app/store'
-import router from 'src/app/routes'
+// import router from 'src/app/routes'
 
 import { setAllTags } from 'shared/reducers/tagsReducer'
 import { getCurrentUser } from 'shared/reducers/authReducer'
-
-import history from 'shared/lib/SelectorRouter/history'
 
 import App from 'src/app/App'
 import { getTags } from 'shared/lib/api'
@@ -28,28 +27,28 @@ console.logRender = function (componentName) {
 getTags().then((tags) => {
   store.dispatch(getCurrentUser()).then(() => {
     store.dispatch(setAllTags(tags))
-    router.bind(store, history)
-
-    router.dispatchInitialActions().then(() => {
-      console.info('Finished initial loading of location-induced actions')
-      renderWithHot(App)
-    })
+    const initialLocation = store.getState().router
+    if (initialLocation) {
+      store.dispatch(initializeCurrentLocation(initialLocation))
+    }
+    renderWithHot(App)
   })
 })
 
 function renderWithHot (App) {
+  const AppWithRouter = provideRouter({store})(App)
   ReactDOM.render(
     <Provider store={store}>
-      <App/>
+      <AppWithRouter/>
     </Provider>, document.getElementById('app')
   )
 }
 
-if (module.hot) {
-  module.hot.accept()
-  module.hot.dispose(() => {
-    router.unbind()
-  })
-}
+// if (module.hot) {
+//   module.hot.accept()
+//   module.hot.dispose(() => {
+//     router.unbind()
+//   })
+// }
 
 export default {}

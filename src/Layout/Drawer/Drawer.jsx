@@ -30,12 +30,12 @@ export default class Tabs extends Component {
     return (
       <nav className={className} onClick={this.onClick}>
         <ul className={th.Drawer__Items}>
-          <Logo to='root'/>
-          <Item to={MODES.filter} label='Filter' icon='filter'/>
-          <Item to={MODES.sysreq} label="Sys. Req. Calculator" icon='sysreq'/>
-          <Item to={MODES.feedback} label="Feedback" icon='feedback'/>
-          <Item to={MODES.contribute} label="Donations" icon='contribute'/>
-          <Item href='http://zequez.com/about-me/' label="Author" icon='about'/>
+          <Logo href='/'/>
+          <Item href='/f' label='Filter' icon='filter'/>
+          <Item href='/sysreq' label="Sys. Req. Calculator" icon='sysreq'/>
+          <Item href='/feedback' label="Feedback" icon='feedback'/>
+          <Item href='/donations' label="Donations" icon='contribute'/>
+          <Item href='http://zequez.com/about-me/' target='_blank' label="Author" icon='about'/>
         </ul>
         <div className={th.Drawer__Veil}></div>
       </nav>
