@@ -12,10 +12,20 @@ const initialState = {
     sort: {}
   }
 
-  // loaded: {
-  //
+  // sfilter: {
+  //   sid: '',
+  //   slug: '',
+  //   name: '',
+  //   controls: {},
+  //   sorting: {},
+  //   columns: [],
+  //   config: {},
+  //   secret: '' // Only really exist when you just created it
   // },
-  // active: {
+  // loading: false,
+  // dirty: false,
+  // error: false,
+  // filter: {
   //   name: 'Name of your filter',
   //   controls: {},
   //   sorting: {},
@@ -25,9 +35,11 @@ const initialState = {
   //     'stores_prices'
   //   ],
   //   config: {
-  //     stores: ['steam', 'oculus']
+  //     stores: ['steam', 'oculus'],
+  //     currency: 'USD',
+  //     region: 'US',
   //   }
-  // }
+  // },
 
 }
 
@@ -69,6 +81,9 @@ export const addTagFilter = (tagId) => (dispatch, getState) => {
   dispatch(setParam('tags', newTagsFilter))
 }
 
+export const setFilterFromSid = (sid) => {
+
+}
 export const setFilterFromUrl = (params) => {
   return setDelta(decode(params.encoded))
 }
@@ -77,17 +92,6 @@ export const setDelta = (delta) => ({ type: SET_DELTA, delta, dispatch: getGames
 // =============================================================================
 // Reducer
 // =============================================================================
-
-const fromFrontPage = (s) => {
-  if (s.base === frontPageFilter) {
-    return {
-      base: defaultFilter,
-      delta: deleteRedundantAttrs(frontPageFilter, defaultFilter)
-    }
-  } else {
-    return s
-  }
-}
 
 const reducers = {
   [SWITCH_BASE]: (s, a) => ({

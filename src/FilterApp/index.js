@@ -1,6 +1,7 @@
 import FilterApp from './components/FilterApp'
 import FilterAppPage from './components/FilterAppPage'
 import reducer from './reducer'
+import routing from './routing'
 
 const filter = require('./filter')
 const games = require('./games')
@@ -13,6 +14,7 @@ module.exports = {
   FilterApp,
   FilterAppPage,
   reducer,
+  routing,
 
   actions: {
     setParam: filter.actions.setParam,

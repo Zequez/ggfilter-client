@@ -2,10 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { mediaQueryTracker } from 'redux-mediaquery'
 import { routerForBrowser } from 'redux-little-router'
-import logger from './middlewares/logger'
-// import crashReporter from './middlewares/crashReporter'
-import callAPI from './middlewares/callAPI'
-import andDispatch from './middlewares/andDispatch'
+import middlewares from './middlewares'
 
 import reducer from './reducer'
 import routes from './routes'
@@ -14,7 +11,7 @@ const { routerEnhancer, routerMiddleware } = routerForBrowser({ routes })
 
 const store = createStore(reducer, {}, compose(
   routerEnhancer,
-  applyMiddleware(routerMiddleware, thunkMiddleware, callAPI, andDispatch, logger), //crashReporter
+  applyMiddleware(thunkMiddleware, ...middlewares, routerMiddleware),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 ))
 

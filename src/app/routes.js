@@ -1,11 +1,9 @@
+import { routing as filterAppRouting } from 'src/FilterApp'
+
 export default {
   '/': {
-    title: 'Front page filter',
-    page: 'filter'
-  },
-  '/f(/:sid)': {
-    title: 'Filter',
-    page: 'filter'
+    page: 'filter',
+    ...filterAppRouting
   },
   '/sysreq': {
     title: 'System Requirements Calculator',
