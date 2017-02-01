@@ -8,7 +8,7 @@ import callAPI from './middlewares/callAPI'
 import andDispatch from './middlewares/andDispatch'
 
 import reducer from './reducer'
-import routes from './littleRoutes'
+import routes from './routes'
 
 const { routerEnhancer, routerMiddleware } = routerForBrowser({ routes })
 
