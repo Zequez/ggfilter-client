@@ -23,8 +23,6 @@ import { AppBar } from 'src/Layout'
   definedColumnsList: filterSel.definedColumnsList(s),
   newFilter: filterSel.filter(s),
 
-  filter: filterSel.finalFilterSelector(s),
-  visibleFilters: filterSel.visibleFiltersDefinitionsSelector(s),
   games: gameSel.games(s),
   tags: s.tags,
   tab: getTab(s),

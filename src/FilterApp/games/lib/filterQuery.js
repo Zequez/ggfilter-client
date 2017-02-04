@@ -12,17 +12,25 @@
 //
 // For now we can just imagine that FilterApp/games
 // it's actually a submodule of FilterApp/filter
-const {
-  finalFilterSelector,
-  // queryColumnsSelector,
-  // activeParamsSelector
-} = require('../../filter/selectors')
+import * as filterSel from '../../filter/selectors'
 
 export default function filterQuery (state, page, options) {
-  let filter = finalFilterSelector(state)
-  // let columns = queryColumnsSelector(state)
-  // let params = activeParamsSelector(state)
-  // let sortDir = filter.sort.asc ? 'asc' : 'desc'
+  let controls = filterSel.definedControlsList(state)
+  let controlsParams = filterSel.controlsParams(state)
+  let sorting = filterSel.sorting(state)
+
+  let params = {}
+  controls.forEach((control) => {
+    params[control.name] = controlsParams[control.name] || true
+  })
+
+  let filter = {
+    params: params,
+    sort: {
+      column: sorting.column,
+      asc: !sorting.direction
+    }
+  }
 
   return {
     filter: JSON.stringify(filter),

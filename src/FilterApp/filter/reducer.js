@@ -1,4 +1,3 @@
-import { Map, fromJS } from 'immutable'
 import frontPageFilter from './frontPageFilter'
 import defaultFilter from './defaultFilter'
 import { decode } from '../lib/filterEncoder'
@@ -6,10 +5,6 @@ import { combiner, deleteRedundantAttrs } from './lib/filterMutator'
 const { getGames } = require('../games').actions
 
 const initialState = {
-  // baseSid: '',
-  base: frontPageFilter,
-  delta: frontPageFilter,
-
   // sfilter: {
   //   sid: '',
   //   slug: '',
