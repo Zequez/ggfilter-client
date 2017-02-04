@@ -7,30 +7,29 @@ import TitlesList from './TitlesList'
 
 export default class Header extends Component {
   static propTypes = {
-    filters: t.arrayOf(t.object).isRequired,
-    filter: t.shape({
-      params: t.object.isRequired,
-      sort: t.shape({
-        filter: t.string.isRequired,
-        asc: t.bool.isRequired
-      }).isRequired
-    }).isRequired
+    columns: t.arrayOf(t.object).isRequired,
+    columnsParams: t.object.isRequired,
+    sorting: t.object.isRequired
+    // filter: t.shape({
+    //   params: t.object.isRequired,
+    //   sort: t.shape({
+    //     filter: t.string.isRequired,
+    //     asc: t.bool.isRequired
+    //   }).isRequired
+    // }).isRequired
   }
 
   render () {
-    let { filter, filters } = this.props
+    let { columns, columnsParams, sorting } = this.props
 
     return (
       <thead className={th.Table__Header}>
-        <ColumnsWidthFixator visibleFiltersDefinitions={filters}/>
-        <ControlsList
-          filters={filters}
-          filtersParams={filter.params}/>
+        <ColumnsWidthFixator columns={columns}/>
+        <ControlsList/>
         <TitlesList
-          filters={filters}
-          filtersParams={filter.params}
-          sort={filter.sort.filter}
-          sortAsc={filter.sort.asc}/>
+          columns={columns}
+          columnsParams={columnsParams}
+          sorting={sorting}/>
       </thead>
     )
   }

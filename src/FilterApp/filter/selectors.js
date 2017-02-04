@@ -6,6 +6,30 @@ import definitions from '../lib/definitions'
 import { isQueryActive, isFilterEmpty } from '../lib/utils'
 
 export const ID = 'filter'
+export const base = (s) => s[ID]
+export const filter = createSelector(
+  base,
+  (ss) => ss.filter
+)
+export const controlsList = createSelector(filter, (f) => f.controlsList)
+export const controlsParams = createSelector(filter, (f) => f.controlsParams)
+export const controlsHlMode = createSelector(filter, (f) => f.controlsHlMode)
+export const columnsList = createSelector(filter, (f) => f.columnsList)
+export const columnsParams = createSelector(filter, (f) => f.columnsParams)
+export const sorting = createSelector(filter, (f) => f.sorting)
+export const globalConfig = createSelector(filter, (f) => f.globalConfig)
+
+export const definedControlsList = createSelector(controlsList, (controls) =>
+  controls.map((controlName) => definitions.filters[controlName])
+)
+
+export const definedColumnsList = createSelector(columnsList, (columns) =>
+  columns.map((columnName) => definitions.filters[columnName])
+)
+
+//**************************
+//* OLD SELECTORS
+
 export const stateSelector = (s) => s[ID]
 export const baseFilterSelector = (s) => s[ID].base
 export const deltaFilterSelector = (s) => s[ID].delta

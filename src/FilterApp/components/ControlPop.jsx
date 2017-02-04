@@ -11,8 +11,8 @@ import QueryChip from './QueryChip'
 
 export default class ControlPop extends Component {
   static propTypes = {
-    filter: t.object.isRequired,
-    query: t.oneOfType([t.object, t.bool]).isRequired,
+    control: t.object.isRequired,
+    query: t.object,
     onChange: t.func,
     onClose: t.func.isRequired,
     target: t.object.isRequired // Dom node
@@ -26,7 +26,7 @@ export default class ControlPop extends Component {
   globalKeyUnbind = null
   componentWillMount () {
     this.setState({
-      hl: isQueryActive(this.props.query) && !!this.props.query.hl,
+      hl: this.props.query && !!this.props.query.hl,
       query: this.props.query
     })
     this.globalKeyUnbind = bindGlobalKeyOnce(13, () => this.onClickApply())
@@ -72,15 +72,15 @@ export default class ControlPop extends Component {
   }
 
   render () {
-    const { target, filter, onClose, ...other } = this.props
+    const { target, control, onClose, ...other } = this.props
     const { hl, query } = this.state
 
-    const shortcuts = filter.shortcuts.map((shortcutQuery, i) => (
+    const shortcuts = control.shortcuts.map((shortcutQuery, i) => (
       <QueryChip
         key={i}
         tooltipPre={false}
         icon={false}
-        filter={filter}
+        control={control}
         query={shortcutQuery}
         className={th.ControlPop__Shortcut}
         onClick={this.onClickShortcut.bind(this, shortcutQuery)}/>
@@ -94,7 +94,7 @@ export default class ControlPop extends Component {
       <PopCard originTarget={target} ref='popCard' onClose={onClose} portalDidMount={this.portalDidMount}>
         <div className={th.ControlPop}>
           <div className={th.ControlPop__header}>
-            <span className={th.ControlPop__title}>{filter.title}</span>
+            <span className={th.ControlPop__title}>{control.title}</span>
             <ToggleIcon
               tooltip={hlButtonTooltip}
               className={th.ControlPop__ToggleIcon}
@@ -102,9 +102,9 @@ export default class ControlPop extends Component {
               checked={hl}
               onClick={this.onClickHighlight}/>
           </div>
-          {filter.control !== false ? (
+          {control.control !== false ? (
             <div className={th.ControlPop__body}>
-              <Control {...other} filter={filter} query={query} onChange={this.onControlChange} ref='control'/>
+              <Control {...other} filter={control} query={query} onChange={this.onControlChange} ref='control'/>
             </div>
           ) : null }
           { shortcuts.length ? (

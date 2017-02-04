@@ -7,8 +7,9 @@ import QueryChip from '../../QueryChip'
 
 export default class ControlButton extends Component {
   static propTypes = {
-    filter: t.object,
-    query: t.oneOfType([t.bool, t.object]).isRequired,
+    control: t.object,
+    hl: t.bool,
+    query: t.object,
     onRemove: t.func
   }
 
@@ -26,13 +27,13 @@ export default class ControlButton extends Component {
   }
 
   render () {
-    const { query, filter, onRemove } = this.props
-    return filter.control || filter.shortcuts.length ? (
+    const { query, control, onRemove } = this.props
+    return control.control || control.shortcuts.length ? (
       <div className={th.ControlsList__ControlButton}>
-        { !isQueryEmpty(query) ? (
+        { query ? (
           <QueryChip
             query={query}
-            filter={filter}
+            control={control}
             onRemove={onRemove}
             onClick={this.openControl}/>
         ) : (

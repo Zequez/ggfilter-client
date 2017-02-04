@@ -123,6 +123,7 @@
     "fsevents": "^1.0.14",
     "history": "^4.0.0",
     "immutability-helper": "^2.0.0",
+    "immutable": "^3.8.1",
     "include-media": "^1.4.9",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.15.0",

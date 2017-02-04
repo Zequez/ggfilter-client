@@ -4,7 +4,7 @@ import cx from 'classnames'
 
 class Title extends Component {
   static propTypes = {
-    filter: t.object.isRequired,
+    column: t.object.isRequired,
     sort: t.oneOf([true, false, null]),
     onSort: t.func.isRequired,
     active: t.bool.isRequired,
@@ -14,7 +14,7 @@ class Title extends Component {
   shouldComponentUpdate (np, ns) {
     let p = this.props
     return (
-      np.filter !== p.filter ||
+      np.column !== p.column ||
       np.sort !== p.sort ||
       np.active !== p.active ||
       np.highlightMode !== p.highlightMode ||
@@ -23,7 +23,7 @@ class Title extends Component {
   }
 
   onSort = (ev) => {
-    if (this.props.filter.sort) this.props.onSort(this.props.filter)
+    if (this.props.column.sort) this.props.onSort(this.props.column)
     if (this.props.onClick) this.props.onClick(ev)
   }
 
@@ -31,7 +31,7 @@ class Title extends Component {
     // Prevent the tooltip from firing if the title is not overflowed
     if (this.props.onMouseEnter) {
       let overflow = this.refs.overflow
-      if (overflow.clientWidth < overflow.scrollWidth || this.props.filter.longTitle) {
+      if (overflow.clientWidth < overflow.scrollWidth || this.props.column.longTitle) {
         this.props.onMouseEnter(ev)
       }
     }
@@ -41,7 +41,7 @@ class Title extends Component {
     console.logRender('DataTableTitle')
 
     let {
-      filter,
+      column,
       sort,
       active,
       children,
@@ -53,16 +53,16 @@ class Title extends Component {
       ...other
     } = this.props
 
-    const titleClass = cx(th.TitlesList__Title, filter.name, {
+    const titleClass = cx(th.TitlesList__Title, column.name, {
       [th.TitlesList__Title_sorted]: sort != null,
       // [th.sortAsc]: sort === true,
       // [th.sortDesc]: sort === false,
-      [th.TitlesList__Title_left]: filter.alignment === -1,
-      [th.TitlesList__Title_center]: filter.alignment === 0,
-      [th.TitlesList__Title_right]: filter.alignment === 1,
+      [th.TitlesList__Title_left]: column.alignment === -1,
+      [th.TitlesList__Title_center]: column.alignment === 0,
+      [th.TitlesList__Title_right]: column.alignment === 1,
       [th.TitlesList__Title_active]: active,
       [th.TitlesList__Title_highlighted]: highlightMode,
-      [th.TitlesList__Title_sortable]: !!filter.sort
+      [th.TitlesList__Title_sortable]: !!column.sort
     })
 
     const sortIconClass = cx(th.TitlesList__SortIcon, 'fa', 'icon-sort-' + (sort ? 'asc' : 'desc'))
@@ -80,7 +80,7 @@ class Title extends Component {
           ) : null}
 
           <span className={th.TitlesList__Text}>
-            {filter.title}
+            {column.title}
           </span>
           {children}
         </div>

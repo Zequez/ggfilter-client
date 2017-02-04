@@ -9,23 +9,23 @@ export default class Category extends Component {
   static propTypes = {
     title: t.string.isRequired,
     slug: t.string.isRequired,
-    filters: t.arrayOf(t.object).isRequired,
-    visibleFilters: t.arrayOf(t.string).isRequired,
+    definedControls: t.arrayOf(t.object).isRequired,
+    visibleControls: t.arrayOf(t.string).isRequired,
     onToggle: t.func.isRequired
   }
 
   render () {
-    let { title, slug, filters, visibleFilters } = this.props
+    let { title, slug, definedControls, visibleControls } = this.props
 
     let toggles = []
-    filters.map((filter) => {
-      let active = ~visibleFilters.indexOf(filter.name)
+    definedControls.map((control) => {
+      let active = ~visibleControls.indexOf(control.name)
       toggles.push(
         <TooltipRippledToggle
-          key={filter.name}
+          key={control.name}
           active={!!active}
-          name={filter.name}
-          title={filter.longTitle || filter.title}
+          name={control.name}
+          title={control.longTitle || control.title}
           onToggle={this.props.onToggle}/>
       )
     })

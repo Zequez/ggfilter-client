@@ -4,21 +4,21 @@ import { connect } from 'react-redux'
 import definitions from '../../lib/definitions'
 
 const {
-  selectors: { visibleFiltersSelector },
+  selectors: { controlsList },
   actions: { setParam }
 } = require('../../filter')
 
 import Category from './Category'
 
-@connect((s) => ({visibleFilters: visibleFiltersSelector(s)}), { setParam })
+@connect((s) => ({controlsList: controlsList(s)}), { setParam })
 export default class CategoriesList extends Component {
   static propTypes = {
-    visibleFilters: t.arrayOf(t.string).isRequired,
+    controlsList: t.arrayOf(t.string).isRequired,
     setParam: t.func.isRequired
   }
 
   render () {
-    let { visibleFilters, setParam } = this.props
+    let { controlsList, setParam } = this.props
 
     return (
       <ul className={th.CategoriesList}>
@@ -27,8 +27,8 @@ export default class CategoriesList extends Component {
             key={cat.name}
             title={cat.title}
             slug={cat.name}
-            filters={definitions.categoriesWithFilters[cat.name]}
-            visibleFilters={visibleFilters}
+            definedControls={definitions.categoriesWithFilters[cat.name]}
+            visibleControls={controlsList}
             onToggle={setParam}/>
         ))}
       </ul>

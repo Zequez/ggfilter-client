@@ -9,11 +9,11 @@ import ColumnComponent from './ColumnComponent'
 @connect((s) => ({}), {
   setParam
 })
-export default class DataTableBatch extends Component {
+export default class Batch extends Component {
   static propTypes = {
     games: t.array.isRequired,
-    filters: t.arrayOf(t.object).isRequired,
-    filtersParams: t.object,
+    columns: t.arrayOf(t.object).isRequired,
+    columnsParams: t.object,
 
     setParam: t.func.isRequired
   }
@@ -28,19 +28,19 @@ export default class DataTableBatch extends Component {
   render () {
     console.logRender('DataTableBatch')
 
-    let { games, filters, filtersParams, setParam } = this.props
+    let { games, columns, columnsParams, setParam } = this.props
 
     return (
       <tbody className={th.Body__Batch}>
         {games.map((game) => (
           <tr key={game.id} className={th.Body__Row}>
-            {filters.map((filter) => (
+            {columns.map((column) => (
               <ColumnComponent
-                key={filter.name}
+                key={column.name}
                 game={game}
-                filter={filter}
-                setFilter={setParam}
-                filterParams={filtersParams[filter.name]}/>
+                column={column}
+                setParam={setParam}
+                columnParams={columnsParams[column.name]}/>
             ))}
           </tr>
         ))}

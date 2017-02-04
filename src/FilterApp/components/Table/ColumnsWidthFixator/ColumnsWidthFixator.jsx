@@ -12,7 +12,7 @@ import ResizeHandle from './ResizeHandle'
 
 export default class ColumnsWidthFixator extends Component {
   static propTypes = {
-    visibleFiltersDefinitions: t.arrayOf(t.object)
+    columns: t.arrayOf(t.object)
   }
 
   state = {
@@ -64,7 +64,7 @@ export default class ColumnsWidthFixator extends Component {
 
   render () {
     this.calc = new TableWidthCalculator(
-      this.props.visibleFiltersDefinitions, this.state.deltaWidth, this.state.containerWidth
+      this.props.columns, this.state.deltaWidth, this.state.containerWidth
     )
 
     return (

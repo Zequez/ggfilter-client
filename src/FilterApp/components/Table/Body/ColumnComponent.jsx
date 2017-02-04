@@ -4,39 +4,37 @@ import cx from 'classnames'
 import * as columnsDefinitions from '../columns'
 import { partial } from 'shared/lib/utils'
 
-function columnInputValues (game, filter) {
+function columnInputValues (game, column) {
   var columnInputs = {}
-  for (let inputName in filter.columnInputs) {
-    let columnName = filter.columnInputs[inputName]
+  for (let inputName in column.columnInputs) {
+    let columnName = column.columnInputs[inputName]
     columnInputs[inputName] = game[columnName]
   }
   return columnInputs
 }
 
-export default ({game, filter, setFilter, filterParams}) => {
+export default ({game, column, setParam, columnParams}) => {
   let tdClass = cx(
-    filter.name,
+    column.name,
     th.Body__ColumnComponent, {
-      [th.Body__ColumnComponent_hl]: !!game['hl_' + filter.name],
-      [th.Body__ColumnComponent_left]: filter.alignment === -1,
-      [th.Body__ColumnComponent_center]: filter.alignment === 0,
-      [th.Body__ColumnComponent_right]: filter.alignment === 1
+      [th.Body__ColumnComponent_hl]: !!game['hl_' + column.name],
+      [th.Body__ColumnComponent_left]: column.alignment === -1,
+      [th.Body__ColumnComponent_center]: column.alignment === 0,
+      [th.Body__ColumnComponent_right]: column.alignment === 1
     }
   )
 
-  let Component = columnsDefinitions[filter.column]
+  let Component = columnsDefinitions[column.column]
 
   let props = {
-    options: filter.columnOptions,
-    name: filter.name,
-    ...columnInputValues(game, filter)
+    options: column.columnOptions,
+    name: column.name,
+    ...columnInputValues(game, column)
   }
 
-  // console.log(filter, filterParams)
-
-  if (filter.columnActive) {
-    props.setFilter = partial(setFilter, filter.name)
-    props.filterParams = (filterParams !== true && filterParams !== false) ? filterParams : undefined
+  if (column.columnActive) {
+    props.setParam = partial(setParam, column.name)
+    props.columnParams = (columnParams !== true && columnParams !== false) ? columnParams : undefined
   }
 
   let comp = <Component {...props}/>

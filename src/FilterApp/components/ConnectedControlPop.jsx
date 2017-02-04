@@ -7,12 +7,11 @@ import { setParam } from '../filter/reducer'
 export default class ConnectedControlPop extends Component {
   static propTypes = {
     setParam: t.func.isRequired,
-    filter: t.object.isRequired
+    control: t.object.isRequired
   }
 
   onChange = (value) => {
-    console.log(this.props.filter.name, value)
-    this.props.setParam(this.props.filter.name, value)
+    this.props.setParam(this.props.control.name, value)
   }
 
   render () {

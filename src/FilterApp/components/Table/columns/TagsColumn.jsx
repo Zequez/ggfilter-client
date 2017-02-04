@@ -12,7 +12,7 @@ export default class TagsColumn extends Component {
       tags: t.arrayOf(t.string)
     }).isRequired,
     filterParams: t.object,
-    setFilter: t.func.isRequired
+    setParam: t.func.isRequired
   }
 
   paramsTags () {
@@ -23,7 +23,7 @@ export default class TagsColumn extends Component {
     let paramsTags = this.paramsTags()
 
     if (paramsTags.indexOf(tagId) === -1) {
-      this.props.setFilter({tags: paramsTags.concat(tagId)})
+      this.props.setParam({tags: paramsTags.concat(tagId)})
     }
   }
 

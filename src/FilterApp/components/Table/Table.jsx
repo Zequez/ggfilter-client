@@ -6,28 +6,27 @@ import Body from './Body'
 
 export default class Table extends Component {
   static propTypes = {
-    visibleFiltersDefinitions: t.arrayOf(t.object).isRequired,
-    filter: t.shape({
-      params: t.object.isRequired,
-      sort: t.shape({
-        filter: t.string.isRequired,
-        asc: t.bool.isRequired
-      }).isRequired
+    columns: t.arrayOf(t.object).isRequired,
+    columnsParams: t.object.isRequired,
+    sorting: t.shape({
+      column: t.string,
+      direction: t.bool
     }).isRequired,
-    // columnsWidth: t.arrayOf(t.number).isRequired,
-    // tableWidth: t.number.isRequired,
     gamesPages: t.arrayOf(t.array).isRequired
   }
 
   render () {
     console.logRender('DataTable')
-    let { filter, gamesPages, visibleFiltersDefinitions: filters } = this.props
+    let { gamesPages, columns, columnsParams, sorting } = this.props
 
     return (
       <div className={th.Table}>
         <table className={th.Table__table}>
-          <Header filters={filters} filter={filter}/>
-          {Body({gamesPages, filters, filter})}
+          <Header
+            columns={columns}
+            columnsParams={columnsParams}
+            sorting={sorting}/>
+          {Body({gamesPages, columns, columnsParams})}
         </table>
       </div>
     )

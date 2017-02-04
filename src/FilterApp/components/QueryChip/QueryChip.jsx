@@ -14,7 +14,7 @@ const TooltipDiv = tooltipFactory('div', { position: 'top' })
 export default class QueryChip extends Component {
   static propTypes = {
     query: t.oneOfType([t.object, t.bool]),
-    filter: t.object, // Definition
+    control: t.object, // Definition
     icon: t.bool,
     onRemove: t.func,
     onClick: t.func,
@@ -29,18 +29,18 @@ export default class QueryChip extends Component {
   }
 
   render () {
-    const { query, filter, icon, onRemove,
+    const { query, control, icon, onRemove,
             children, onClick, className, tooltipPre, hl } = this.props
     const queryIsEmpty = isQueryEmpty(query)
 
-    const ChipComponent = chips[filter.chip]
+    const ChipComponent = chips[control.chip]
     const divClassName = cx(th.QueryChip, className, {
       [th.QueryChip_hl]: queryIsEmpty ? !!hl : !!query.hl
     })
 
     let tooltip
     if (!queryIsEmpty) {
-      tooltip = capitalizeFirstLetter(generateQueryTitle(filter, query))
+      tooltip = capitalizeFirstLetter(generateQueryTitle(control, query))
       if (tooltipPre) {
         tooltip = query.hl ? 'Highlighting: ' : 'Filtering by: ' + tooltip
       }
@@ -50,7 +50,7 @@ export default class QueryChip extends Component {
       <TooltipDiv className={divClassName} tooltip={tooltip}>
         { icon ? (
           <Icon
-            icon={'filter-' + filter.name}
+            icon={'filter-' + control.name}
             className={th.QueryChip__Icon}
             onClick={onClick}/>
         ) : null }
@@ -60,8 +60,8 @@ export default class QueryChip extends Component {
             onClick={onClick}>
             <ChipComponent
               query={query}
-              options={filter.chipOptions}
-              name={filter.name}/>
+              options={control.chipOptions}
+              name={control.name}/>
           </span>
         ) : null}
         { !queryIsEmpty && onRemove ? (

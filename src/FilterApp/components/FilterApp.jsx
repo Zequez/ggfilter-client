@@ -8,7 +8,7 @@ const { getGames, getMoreGames } = require('../games').actions
 import { setDocWidth } from '../ui/reducer'
 import { setParam } from '../filter/reducer'
 import { getTab } from '../ui/selectors'
-import { finalFilterSelector, visibleFiltersDefinitionsSelector } from '../filter/selectors'
+import * as filterSel from '../filter/selectors'
 import * as gameSel from '../games/selectors'
 
 import Table from './Table/Table'
@@ -19,8 +19,12 @@ import QueryChipsList from './QueryChipsList'
 import { AppBar } from 'src/Layout'
 
 @connect((s) => ({
-  filter: finalFilterSelector(s),
-  visibleFilters: visibleFiltersDefinitionsSelector(s),
+  definedControlsList: filterSel.definedControlsList(s),
+  definedColumnsList: filterSel.definedColumnsList(s),
+  newFilter: filterSel.filter(s),
+
+  filter: filterSel.finalFilterSelector(s),
+  visibleFilters: filterSel.visibleFiltersDefinitionsSelector(s),
   games: gameSel.games(s),
   tags: s.tags,
   tab: getTab(s),
@@ -66,23 +70,22 @@ export default class FilterApp extends Component {
 
   render () {
     let p = this.props
-
     return (
       <div className={th.FilterApp}>
         <AppBar className={th.FilterApp__AppBar}>
           <h1>{p.gamesTotalCount == null ? '???' : p.gamesTotalCount} games found</h1>
           <QueryChipsList
-            filter={p.filter}
-            visibleFilters={p.visibleFilters}
+            controlsParams={p.newFilter.controlsParams}
             onRemove={this.onRemoveFilter}/>
         </AppBar>
         <CategoriesList/>
         <Table
           gamesPages={p.games}
-          filter={p.filter}
+          columns={p.definedColumnsList}
+          columnsParams={p.newFilter.columnsParams}
           columnsWidth={p.columnsWidth}
-          tableWidth={p.tableWidth}
-          visibleFiltersDefinitions={p.visibleFilters}/>
+          sorting={p.newFilter.sorting}
+          tableWidth={p.tableWidth}/>
         <GamesLoader
           fetching={p.gamesFetching}
           failed={p.gamesFailed}

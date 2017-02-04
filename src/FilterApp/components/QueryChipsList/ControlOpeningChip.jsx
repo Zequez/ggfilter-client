@@ -4,7 +4,7 @@ import ConnectedControlPop from '../ConnectedControlPop'
 
 export default class ControlOpeningChip extends Component {
   static propTypes = {
-    filter: t.object,
+    control: t.object,
     query: t.oneOfType([t.bool, t.object])
   }
 
@@ -22,14 +22,14 @@ export default class ControlOpeningChip extends Component {
   }
 
   render () {
-    let { query, filter } = this.props
+    let { query, control } = this.props
 
     return (
       <QueryChip {...this.props} onClick={this.openControl}>
         { this.state.controlOpen ? (
           <ConnectedControlPop
             query={query}
-            filter={filter}
+            control={control}
             target={this.state.popTarget}
             onClose={this.closeControl}/>
         ) : null }

@@ -1,3 +1,4 @@
+import { Map, fromJS } from 'immutable'
 import frontPageFilter from './frontPageFilter'
 import defaultFilter from './defaultFilter'
 import { decode } from '../lib/filterEncoder'
@@ -7,40 +8,49 @@ const { getGames } = require('../games').actions
 const initialState = {
   // baseSid: '',
   base: frontPageFilter,
-  delta: {
-    params: {},
-    sort: {}
-  }
+  delta: frontPageFilter,
 
   // sfilter: {
   //   sid: '',
   //   slug: '',
   //   name: '',
-  //   controls: {},
-  //   sorting: {},
-  //   columns: [],
-  //   config: {},
+  //   encoded: '',
   //   secret: '' // Only really exist when you just created it
+  //   global_slug: null,
+  //   front_page: null,
   // },
   // loading: false,
   // dirty: false,
   // error: false,
-  // filter: {
-  //   name: 'Name of your filter',
-  //   controls: {},
-  //   sorting: {},
-  //   columns: [
-  //     'steam_id',
-  //     'name',
-  //     'stores_prices'
-  //   ],
-  //   config: {
-  //     stores: ['steam', 'oculus'],
-  //     currency: 'USD',
-  //     region: 'US',
-  //   }
-  // },
+  filter: {
+    name: 'Name of your filter',
 
+    controlsList: [
+      'name', 'tags', 'released_at',
+      'lowest_price', 'best_discount',
+      'playtime_median', 'ratings_pct'
+    ],
+    controlsHlMode: ['lowest_price'],
+    controlsParams: {
+      best_discount: {gt: 1, lt: null}
+    },
+    columnsList: [
+      'name', 'tags', 'released_at',
+      'lowest_price',
+      'playtime_median', 'ratings_pct'
+    ],
+    columnsParams: {},
+    sorting: {
+      column: '',
+      direction: false,
+      nullFirst: false
+    },
+    globalConfig: {
+      stores: ['steam', 'oculus'],
+      currency: 'USD',
+      region: 'US'
+    }
+  }
 }
 
 // =============================================================================
@@ -94,24 +104,26 @@ export const setDelta = (delta) => ({ type: SET_DELTA, delta, dispatch: getGames
 // =============================================================================
 
 const reducers = {
-  [SWITCH_BASE]: (s, a) => ({
-    ...s,
-    base: a.base,
-    delta: deleteRedundantAttrs(combiner(s.base, s.delta), a.base)
-  }),
-  [MUTATE]: (s, a) => ({
-    ...s,
-    delta: deleteRedundantAttrs(combiner(s.delta, a.mask), s.base)
-  }),
-  [SET_DELTA]: (s, a) => ({
-    ...s,
-    delta: deleteRedundantAttrs(a.delta, s.base)
-  }),
-  [SET_BASE]: (s, a) => ({
-    ...s,
-    base: a.base,
-    delta: initialState.delta
-  }),
+  // [SWITCH_BASE]: (s, a) => ({
+  //   ...s,
+  //   base: a.base,
+  //   delta: deleteRedundantAttrs(combiner(s.base, s.delta), a.base)
+  // }),
+  // [MUTATE]: (s, a) => s.updateIn(['delta'], (ss) => ss.set(a.))
+  //
+  // ({
+  //   ...s,
+  //   combiner(s.delta, a.mask)
+  // }),
+  // [SET_DELTA]: (s, a) => ({
+  //   ...s,
+  //   delta: deleteRedundantAttrs(a.delta, s.base)
+  // }),
+  // [SET_BASE]: (s, a) => ({
+  //   ...s,
+  //   base: a.base,
+  //   delta: initialState.delta
+  // }),
   [RESET]: (s, a) => initialState,
   [SAVE]: () => {}
 }

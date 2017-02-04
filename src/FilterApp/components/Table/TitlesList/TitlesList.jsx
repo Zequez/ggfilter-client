@@ -14,10 +14,14 @@ import WrappedTitle from './WrappedTitle'
 })
 export default class TitlesList extends Component {
   static propTypes = {
-    filters: t.arrayOf(t.object).isRequired,
-    filtersParams: t.object.isRequired,
-    sort: t.string.isRequired,
-    sortAsc: t.bool.isRequired,
+    columns: t.arrayOf(t.object).isRequired,
+    columnsParams: t.object.isRequired,
+    sorting: t.shape({
+      column: t.string,
+      direction: t.bool
+    }).isRequired,
+    // sort: t.string.isRequired,
+    // sortAsc: t.bool.isRequired,
 
     setSort: t.func.isRequired,
     setParam: t.func.isRequired,
@@ -28,11 +32,11 @@ export default class TitlesList extends Component {
   shouldComponentUpdate (np, ns) {
     let p = this.props
     return (
-      np.filters !== p.filters ||
-      np.filtersParams !== p.filtersParams ||
+      np.columns !== p.columns ||
+      np.columnsParams !== p.columnsParams ||
       np.columnsWidth.toString() !== p.columnsWidth.toString() ||
-      np.sort.column !== p.sort.column ||
-      np.sort.asc !== p.sort.asc
+      np.sorting.column !== p.sorting.column ||
+      np.sorting.direction !== p.sorting.direction
     )
   }
 
@@ -62,20 +66,20 @@ export default class TitlesList extends Component {
 
   render () {
     console.logRender('DataTableTitles')
-    let { filters, filtersParams, sort, sortAsc } = this.props
+    let { columns, columnsParams, sorting } = this.props
 
-    let titles = filters.map((filter, i) => {
-      let sortStatus = (sort === filter.name) ? sortAsc : null
-      let hasParams = typeof filtersParams[filter.name] === 'object'
-      let highlightMode = hasParams ? !!filtersParams[filter.name].hl : false
+    let titles = columns.map((column, i) => {
+      let sortStatus = (sorting.column === column.name) ? sorting.direction : null
+      let hasParams = !!columnsParams[column.name]
+      // let highlightMode = hasParams ? !!filtersParams[filter.name].hl : false
 
       return (
         <WrappedTitle
-          key={filter.name}
-          filter={filter}
+          key={column.name}
+          column={column}
           sort={sortStatus}
           active={hasParams}
-          highlightMode={highlightMode}
+          highlightMode={false}
           onSort={::this.onSort}/>
       )
     })
