@@ -6,8 +6,6 @@ import routing from './routing'
 const filter = require('./filter')
 const games = require('./games')
 
-import * as ui from './ui'
-
 // import { encode, decode } from './lib/filterEncoder'
 
 module.exports = {
@@ -26,7 +24,5 @@ module.exports = {
 
   lib: {
 
-  },
-
-  editMode: ui.editMode
+  }
 }
