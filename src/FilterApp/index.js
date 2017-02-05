@@ -17,9 +17,9 @@ module.exports = {
   routing,
 
   actions: {
-    setParam: filter.actions.setParam,
-    setSort: filter.actions.setSort,
-    setFilterFromB64: filter.actions.setFilterFromB64,
+    setControl: filter.actions.setControl,
+    setControlParams: filter.actions.setControlParams,
+    setSorting: filter.actions.setSorting,
     resetFilter: filter.actions.reset,
     getGamesIfNoGames: games.actions.getGamesIfNoGames
   },

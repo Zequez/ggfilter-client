@@ -1,10 +1,9 @@
 import th from '../theme'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link } from 'redux-little-router'
+import { Link, PUSH } from 'redux-little-router'
 import { snapTo } from 'shared/lib/utils'
 import { getGames } from 'shared/lib/api'
-import { MODES, setMode } from 'shared/reducers/uiReducer'
 
 import { AutoPage } from 'src/Layout'
 
@@ -15,12 +14,13 @@ import SuggestionsBox from './SuggestionsBox'
 import CalcResult from './CalcResult'
 // import CustomAutocomplete from './CustomAutocomplete'
 
-const { setParam, setSort } = require('src/FilterApp').actions
+const { setControlParams, setSorting, setControl } = require('src/FilterApp').actions
 
 @connect(() => ({}), {
-  setParam,
-  setSort,
-  setMode
+  setControl: setControl,
+  setParam: setControlParams,
+  setSort: setSorting,
+  puthLocation: (payload) => ({type: PUSH, payload})
 })
 export default class SysreqCalc extends Component {
   state = {
@@ -34,7 +34,7 @@ export default class SysreqCalc extends Component {
       filter: JSON.stringify({
         params: {
           name: { value: value },
-          sysreq_index_centile: true
+          sysreq_index_pct: true
         },
         sort: {
           filter: 'name',
@@ -49,13 +49,13 @@ export default class SysreqCalc extends Component {
       var ids = this.state.games.map((g) => g.id)
       return games
         .filter((game) => ids.indexOf(game.id) === -1)
-        .map((game) => [`${game.name} [${game.sysreq_index_centile}]`, game])
+        .map((game) => [`${game.name} [${game.sysreq_index_pct}]`, game])
     })
   }
 
   selectGame = (game) => {
     this.state.games.push(game)
-    this.state.games.sort((g1, g2) => g2.sysreq_index_centile - g1.sysreq_index_centile)
+    this.state.games.sort((g1, g2) => g2.sysreq_index_pct - g1.sysreq_index_pct)
     this.setState({games: this.state.games})
     this.refs.box.clean()
   }
@@ -69,17 +69,18 @@ export default class SysreqCalc extends Component {
     let calcs = this.calculatedValues()
     if (!calcs.mean) return
     let lt = Math.min(100, calcs.mean + calcs.deviation)
-    this.props.setParam('sysreq_index_centile', {gt: 0, lt: snapTo(lt, 5)})
-    this.props.setSort('sysreq_index_centile', false)
-    this.props.setMode(MODES.filter)
+    this.props.setControl('sysreq_index_pct', true)
+    this.props.setParam('sysreq_index_pct', {gt: 0, lt: snapTo(lt, 5)})
+    this.props.setSort('sysreq_index_pct', false)
+    this.props.puthLocation('/f')
   }
 
   calculatedValues () {
     let games = this.state.games
     if (!games.length) return {}
-    if (games.length === 1) return {mean: games[0].sysreq_index_centile, deviation: 10}
+    if (games.length === 1) return {mean: games[0].sysreq_index_pct, deviation: 10}
 
-    let values = games.map(g => g.sysreq_index_centile)
+    let values = games.map(g => g.sysreq_index_pct)
     let len = values.length
     let sum = values.reduce((a, b) => a + b, 0)
     let mean = sum / len
@@ -113,7 +114,7 @@ export default class SysreqCalc extends Component {
             {games.map((game, i) => (
               <Chip
                 key={game.id}
-                iconText={game.sysreq_index_centile}
+                iconText={game.sysreq_index_pct}
                 onRemove={this.removeGame.bind(this, game)}
                 className={th.SysreqCalc__Chip}>
                 {game.name}
