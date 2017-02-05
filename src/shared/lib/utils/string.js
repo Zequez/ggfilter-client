@@ -42,7 +42,7 @@ export function camelizeKeys (obj) {
 }
 
 export function camelCase (snakeCase) {
-  return snakeCase.replace(/(_\w)/g, (m) => m[1].toUpperCase())
+  return snakeCase.replace(/([_-]\w)/g, (m) => m[1].toUpperCase())
 }
 
 export function snakeizeKeys (obj, recursive = true) {

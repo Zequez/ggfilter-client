@@ -1,7 +1,7 @@
 import { u } from 'shared/lib/utils'
 
-import { getGames as apiGetGames } from 'shared/lib/api'
-import filterQuery from './lib/filterQuery'
+import Api from 'shared/lib/Api'
+import filterQuery from '../lib/filterStateToGamesQuery'
 
 export const initialState = {
   batches: [],
@@ -23,21 +23,19 @@ export const GET_GAMES_FAILED = 'FilterApp/games/FAILED'
 // =============================================================================
 
 export function getGames (page = 0) {
-  // return () => Promise.resolve()
   return function (dispatch, getState) {
     let state = getState()
-    // let filter = filterSelector(state)
     let options = state.options
 
     dispatch({type: GET_GAMES_START, page})
 
     let queryFilter = filterQuery(state, page, options)
-    return apiGetGames(queryFilter)
-      .then(response => {
+    return Api.games.index(queryFilter)
+      .then(({data, meta}) => {
         return dispatch({
           type: GET_GAMES_END,
-          games: response.data,
-          totalCount: response.totalCount,
+          games: data,
+          totalCount: Number(meta.paginationCount),
           page: page})
       }, (error) => {
         return dispatch({type: GET_GAMES_FAILED, page, error})

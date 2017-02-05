@@ -18,13 +18,13 @@ import { setAllTags } from 'shared/reducers/tagsReducer'
 import { getCurrentUser } from 'shared/reducers/authReducer'
 
 import App from 'src/app/App'
-import { getTags } from 'shared/lib/api'
+import Api from 'shared/lib/Api'
 
 console.logRender = function (componentName) {
   // console.info(`<${componentName}/>`)
 }
 
-getTags().then((tags) => {
+Api.tags.index().then((tags) => {
   store.dispatch(getCurrentUser()).then(() => {
     store.dispatch(setAllTags(tags))
     const initialLocation = store.getState().router

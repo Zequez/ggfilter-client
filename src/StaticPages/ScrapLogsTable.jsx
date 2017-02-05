@@ -2,7 +2,7 @@ import th from './theme.sass'
 import React, { PropTypes as t, Component } from 'react'
 import cx from 'classnames'
 import { AutoPage } from 'src/Layout'
-import { getScrapLogs } from 'shared/lib/api'
+import Api from 'shared/lib/Api'
 import Icon from 'shared/components/Icon'
 import Button from 'shared/components/Button'
 import { elapsedTime, timeInWords, formatShortDateTime } from 'shared/lib/utils/date'
@@ -21,7 +21,7 @@ export default class ScrapLogsTable extends Component {
   }
 
   load = () => {
-    getScrapLogs().then((logs) => {
+    Api.scrapLogs.index().then((logs) => {
       this.setState({logs})
     })
   }

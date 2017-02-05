@@ -1,5 +1,5 @@
 import { u } from 'shared/lib/utils'
-const api = require('shared/lib/api')
+import Api from 'shared/lib/Api'
 
 export const initialState = {
   currentUser: null
@@ -22,7 +22,7 @@ export const AUTH_CURRENT_USER_FAILURE = 'AUTH_CURRENT_USER_FAILURE'
 
 export const getCurrentUser = () => ({
   types: [AUTH_CURRENT_USER_REQUEST, AUTH_CURRENT_USER_SUCCESS, AUTH_CURRENT_USER_FAILURE],
-  callAPI: () => api.getCurrentUser(),
+  callAPI: () => Api.auth.currentUser(),
   autoCamelize: true
 })
 

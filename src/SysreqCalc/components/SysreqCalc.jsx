@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, PUSH } from 'redux-little-router'
 import { snapTo } from 'shared/lib/utils'
-import { getGames } from 'shared/lib/api'
+import Api from 'shared/lib/Api'
 
 import { AutoPage } from 'src/Layout'
 
@@ -30,7 +30,7 @@ export default class SysreqCalc extends Component {
   filterGames = (value) => {
     if (!value) return []
 
-    return getGames({
+    return Api.games.index({
       filter: JSON.stringify({
         params: {
           name: { value: value },
@@ -44,8 +44,7 @@ export default class SysreqCalc extends Component {
       limit: 8,
       page: 0
     })
-    .then((response) => {
-      let games = response.data
+    .then(({data: games}) => {
       var ids = this.state.games.map((g) => g.id)
       return games
         .filter((game) => ids.indexOf(game.id) === -1)

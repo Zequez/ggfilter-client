@@ -44,3 +44,7 @@ export const addTagFilter = (tagId) => (dispatch, getState) => {
 
   dispatch(setControlParams('tags', newTagsFilter))
 }
+
+export const FETCH_GAMES_REQUEST = 'filter/FETCH_GAMES_REQUEST'
+export const FETCH_GAMES_SUCCESS = 'filter/FETCH_GAMES_SUCCESS'
+export const FETCH_GAMES_FAILURE = 'filter/FETCH_GAMES_FAILURE'

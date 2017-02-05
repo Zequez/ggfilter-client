@@ -140,6 +140,7 @@
     "redux-actions": "^1.2.1",
     "redux-little-router": "^12.1.2",
     "redux-mediaquery": "^0.10.0",
+    "redux-saga": "^0.14.3",
     "redux-thunk": "^2.1.0",
     "remap-istanbul": "^0.7.0",
     "reselect": "^2.5.4",
