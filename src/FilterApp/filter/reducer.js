@@ -3,7 +3,6 @@ import { createAction, handleAction } from 'redux-actions'
 import frontPageFilter from './frontPageFilter'
 import defaultFilter from './defaultFilter'
 import { decode } from '../lib/filterEncoder'
-import { combiner, deleteRedundantAttrs } from './lib/filterMutator'
 const { getGames } = require('../games').actions
 
 const initialState = {
