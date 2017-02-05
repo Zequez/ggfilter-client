@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import definitions from '../lib/definitions'
 
 const { getGames, getMoreGames } = require('../games').actions
-import { setControlParams } from '../filter/reducer'
+import { setControlParams } from '../filter/actions'
 import * as filterSel from '../filter/selectors'
 import * as gameSel from '../games/selectors'
 

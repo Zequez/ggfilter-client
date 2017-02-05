@@ -2,7 +2,7 @@ import th from './Body.sass'
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 
-const { setControlParams } = require('../../../filter/reducer')
+const { setControlParams } = require('../../../filter/actions')
 
 import ColumnComponent from './ColumnComponent'
 

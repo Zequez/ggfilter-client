@@ -1,7 +1,7 @@
 import th from './TitlesList.sass'
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
-import { setSorting } from '../../../filter/reducer'
+import { setSorting } from '../../../filter/actions'
 
 import WrappedTitle from './WrappedTitle'
 

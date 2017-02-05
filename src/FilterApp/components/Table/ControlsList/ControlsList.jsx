@@ -3,7 +3,7 @@ import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { partial } from 'shared/lib/utils'
 
-import { setControlParams } from '../../../filter/reducer'
+import { setControlParams } from '../../../filter/actions'
 import { definedControlsList, controlsParams, controlsHlMode } from '../../../filter/selectors'
 
 import ControlButton from './ControlButton'

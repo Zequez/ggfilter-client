@@ -1,11 +1,10 @@
-import * as reducer from './reducer'
+import reducer from './reducer'
+import * as actions from './actions'
 import * as selectors from './selectors'
-// import FiltersToggles from './components/FiltersToggles'
 
 module.exports = {
-
-  reducer: reducer.reducer,
-  actions: reducer,
   ID: selectors.ID,
+  reducer,
+  actions,
   selectors
 }

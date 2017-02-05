@@ -2,7 +2,7 @@ import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
 import { partial } from 'shared/lib/utils/func'
 import ControlPop from './ControlPop'
-import { setControlParams, setHlMode } from '../filter/reducer'
+import { setControlParams, setHlMode } from '../filter/actions'
 import { controlsParams, controlsHlMode } from '../filter/selectors'
 
 @connect((s) => ({
