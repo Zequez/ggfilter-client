@@ -5,20 +5,20 @@ import definitions from '../../lib/definitions'
 
 const {
   selectors: { controlsList },
-  actions: { setParam }
+  actions: { setControl }
 } = require('../../filter')
 
 import Category from './Category'
 
-@connect((s) => ({controlsList: controlsList(s)}), { setParam })
+@connect((s) => ({controlsList: controlsList(s)}), { setControl })
 export default class CategoriesList extends Component {
   static propTypes = {
     controlsList: t.arrayOf(t.string).isRequired,
-    setParam: t.func.isRequired
+    setControl: t.func.isRequired
   }
 
   render () {
-    let { controlsList, setParam } = this.props
+    let { controlsList, setControl } = this.props
 
     return (
       <ul className={th.CategoriesList}>
@@ -29,7 +29,7 @@ export default class CategoriesList extends Component {
             slug={cat.name}
             definedControls={definitions.categoriesWithFilters[cat.name]}
             visibleControls={controlsList}
-            onToggle={setParam}/>
+            onToggle={setControl}/>
         ))}
       </ul>
     )

@@ -3,7 +3,6 @@ import React, { Component, PropTypes as t } from 'react'
 import Button from 'shared/components/Button'
 import PopCard from 'shared/components/PopCard'
 import ToggleIcon from 'shared/components/ToggleIcon'
-import { isQueryActive } from '../lib/utils'
 import { bindGlobalKeyOnce } from 'shared/lib/utils'
 
 import Control from './Control'
@@ -14,19 +13,21 @@ export default class ControlPop extends Component {
     control: t.object.isRequired,
     query: t.object,
     onChange: t.func,
+    onHlChange: t.func,
     onClose: t.func.isRequired,
+    isHighlighted: t.bool.isRequired,
     target: t.object.isRequired // Dom node
   }
 
   state = {
-    hl: false,
-    query: true
+    hl: null,
+    query: null
   }
 
   globalKeyUnbind = null
   componentWillMount () {
     this.setState({
-      hl: this.props.query && !!this.props.query.hl,
+      hl: this.props.isHighlighted,
       query: this.props.query
     })
     this.globalKeyUnbind = bindGlobalKeyOnce(13, () => this.onClickApply())
@@ -49,12 +50,14 @@ export default class ControlPop extends Component {
   }
 
   onClickClear = () => {
-    this.props.onChange(true)
+    this.props.onChange(null)
+    this.props.onHlChange(false)
     this.close()
   }
 
   onClickShortcut = (query) => {
-    this.props.onChange(this.finalQuery(query))
+    this.props.onChange(query)
+    this.props.onHlChange(this.state.hl)
     this.close()
   }
 
@@ -63,12 +66,9 @@ export default class ControlPop extends Component {
   }
 
   onClickApply = () => {
-    this.props.onChange(this.finalQuery())
+    this.props.onChange(this.state.query)
+    this.props.onHlChange(this.state.hl)
     this.close()
-  }
-
-  finalQuery (query = this.state.query, hl = this.state.hl) {
-    return isQueryActive(query) ? { ...query, hl } : query
   }
 
   render () {
@@ -80,6 +80,7 @@ export default class ControlPop extends Component {
         key={i}
         tooltipPre={false}
         icon={false}
+        hl={hl}
         control={control}
         query={shortcutQuery}
         className={th.ControlPop__Shortcut}
@@ -116,7 +117,7 @@ export default class ControlPop extends Component {
             <Button flat disabled={query === true} label='Clear' onClick={this.onClickClear}/>
             <Button
               flat
-              label='Apply'
+              label='Done'
               onClick={this.onClickApply}
               className={th.ControlList__ControlPop__closeButton}/>
           </div>

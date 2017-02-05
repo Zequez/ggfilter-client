@@ -1,16 +1,12 @@
 import th from './TitlesList.sass'
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
-import { adjustColumnWidth, clearColumnWidth } from '../../../ui/reducer'
-import { setSort, setParam } from '../../../filter/reducer'
+import { setSorting } from '../../../filter/reducer'
 
 import WrappedTitle from './WrappedTitle'
 
 @connect((s) => ({}), {
-  setSort,
-  setParam,
-  adjustColumnWidth,
-  clearColumnWidth
+  setSorting
 })
 export default class TitlesList extends Component {
   static propTypes = {
@@ -20,13 +16,7 @@ export default class TitlesList extends Component {
       column: t.string,
       direction: t.bool
     }).isRequired,
-    // sort: t.string.isRequired,
-    // sortAsc: t.bool.isRequired,
-
-    setSort: t.func.isRequired,
-    setParam: t.func.isRequired,
-    adjustColumnWidth: t.func.isRequired,
-    clearColumnWidth: t.func.isRequired
+    setSorting: t.func
   }
 
   shouldComponentUpdate (np, ns) {
@@ -34,34 +24,18 @@ export default class TitlesList extends Component {
     return (
       np.columns !== p.columns ||
       np.columnsParams !== p.columnsParams ||
-      np.columnsWidth.toString() !== p.columnsWidth.toString() ||
       np.sorting.column !== p.sorting.column ||
       np.sorting.direction !== p.sorting.direction
     )
   }
 
-  onSort (filter, ev) {
-    let asc = this.props.sort === filter.sort ? !this.props.sortAsc : true
-    this.props.setSort(filter.sort, asc)
-  }
-
-  onResize (filter, deltaX) {
-    if (deltaX !== 0) {
-      this.props.adjustColumnWidth(filter.name, deltaX)
+  onSort = (column, ev) => {
+    let sorting = this.props.sorting
+    if (sorting.column === column.name) {
+      this.props.setSorting(column.name, !sorting.direction)
+    } else {
+      this.props.setSorting(column.name, true)
     }
-  }
-
-  onResetResize (filter) {
-    this.props.clearColumnWidth(filter.name)
-  }
-
-  onSetHighlightMode (filter, mode) {
-    let params = this.props.filtersParams[filter.name]
-    this.props.setParam(filter.name, {...params, hl: mode})
-  }
-
-  onClearFilter (filter) {
-    this.props.setParam(filter.name, true)
   }
 
   render () {
@@ -80,7 +54,7 @@ export default class TitlesList extends Component {
           sort={sortStatus}
           active={hasParams}
           highlightMode={false}
-          onSort={::this.onSort}/>
+          onSort={this.onSort}/>
       )
     })
 

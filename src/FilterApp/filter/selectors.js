@@ -28,6 +28,8 @@ export const definedControlsList = createSelector(controlsList, (controls) =>
 export const definedColumnsList = createSelector(columnsList, (columns) =>
   columns.map((columnName) => definitions.filters[columnName])
 )
+export const sortingColumn = createSelector(sorting, (sorting) =>
+  definitions.filters[sorting.column])
 
 //**************************
 //* OLD SELECTORS

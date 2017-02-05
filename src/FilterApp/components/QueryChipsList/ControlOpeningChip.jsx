@@ -1,6 +1,6 @@
 import React, { PropTypes as t, Component } from 'react'
 import QueryChip from '../QueryChip'
-import ConnectedControlPop from '../ConnectedControlPop'
+import ControlPopContainer from '../ControlPopContainer'
 
 export default class ControlOpeningChip extends Component {
   static propTypes = {
@@ -22,13 +22,12 @@ export default class ControlOpeningChip extends Component {
   }
 
   render () {
-    let { query, control } = this.props
+    let { control } = this.props
 
     return (
       <QueryChip {...this.props} onClick={this.openControl}>
         { this.state.controlOpen ? (
-          <ConnectedControlPop
-            query={query}
+          <ControlPopContainer
             control={control}
             target={this.state.popTarget}
             onClose={this.closeControl}/>

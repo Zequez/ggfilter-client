@@ -3,7 +3,7 @@ import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 import { partial } from 'shared/lib/utils'
 
-import { setParam, clearParam } from '../../../filter/reducer'
+import { setControlParams } from '../../../filter/reducer'
 import { definedControlsList, controlsParams, controlsHlMode } from '../../../filter/selectors'
 
 import ControlButton from './ControlButton'
@@ -13,19 +13,18 @@ import ControlButton from './ControlButton'
   controlsParams: controlsParams(s),
   controlsHlMode: controlsHlMode(s)
 }), {
-  setParam,
-  clearParam
+  setControlParams
 })
 export default class ControlsList extends Component {
   static propTypes = {
     controls: t.arrayOf(t.object).isRequired,
     controlsParams: t.object.isRequired,
 
-    setParam: t.func.isRequired
+    setControlParams: t.func.isRequired
   }
 
   render () {
-    let { controls, controlsParams, controlsHlMode, setParam, clearParam } = this.props
+    let { controls, controlsParams, setControlParams, controlsHlMode } = this.props
 
     return (
       <tr className={th.ControlsList}>
@@ -36,8 +35,8 @@ export default class ControlsList extends Component {
                 control={control}
                 hl={!!~controlsHlMode.indexOf(control.name)}
                 query={controlsParams[control.name]}
-                onRemove={partial(clearParam, control.name)}
-                onChange={partial(setParam, control.name)}/>
+                onRemove={partial(setControlParams, control.name, null)}
+                onChange={partial(setControlParams, control.name)}/>
             </div>
           </th>
         ))}

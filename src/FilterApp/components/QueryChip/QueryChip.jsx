@@ -18,7 +18,7 @@ export default class QueryChip extends Component {
     icon: t.bool,
     onRemove: t.func,
     onClick: t.func,
-    hl: t.bool,
+    hl: t.bool.isRequired,
     className: t.string,
     tooltipPre: t.bool
   }
@@ -31,19 +31,15 @@ export default class QueryChip extends Component {
   render () {
     const { query, control, icon, onRemove,
             children, onClick, className, tooltipPre, hl } = this.props
-    const queryIsEmpty = isQueryEmpty(query)
 
     const ChipComponent = chips[control.chip]
     const divClassName = cx(th.QueryChip, className, {
-      [th.QueryChip_hl]: queryIsEmpty ? !!hl : !!query.hl
+      [th.QueryChip_hl]: hl
     })
 
-    let tooltip
-    if (!queryIsEmpty) {
-      tooltip = capitalizeFirstLetter(generateQueryTitle(control, query))
-      if (tooltipPre) {
-        tooltip = query.hl ? 'Highlighting: ' : 'Filtering by: ' + tooltip
-      }
+    let tooltip = capitalizeFirstLetter(generateQueryTitle(control, query))
+    if (tooltipPre) {
+      tooltip = hl ? 'Highlighting: ' : 'Filtering by: ' + tooltip
     }
 
     return (
@@ -54,17 +50,15 @@ export default class QueryChip extends Component {
             className={th.QueryChip__Icon}
             onClick={onClick}/>
         ) : null }
-        { !queryIsEmpty ? (
-          <span
-            className={th.QueryChip__text}
-            onClick={onClick}>
-            <ChipComponent
-              query={query}
-              options={control.chipOptions}
-              name={control.name}/>
-          </span>
-        ) : null}
-        { !queryIsEmpty && onRemove ? (
+        <span
+          className={th.QueryChip__text}
+          onClick={onClick}>
+          <ChipComponent
+            query={query}
+            options={control.chipOptions}
+            name={control.name}/>
+        </span>
+        { onRemove ? (
           <Icon icon='remove-chip' className={th.QueryChip__remove} onClick={onRemove}/>
         ) : null }
         {children}

@@ -1,15 +1,14 @@
 import th from './ControlsList.sass'
 import React, { PropTypes as t, Component } from 'react'
 import Button from 'shared/components/Button'
-import { isQueryEmpty } from '../../../lib/utils'
-import ControlPop from '../../ControlPop'
+import ControlPopContainer from '../../ControlPopContainer'
 import QueryChip from '../../QueryChip'
 
 export default class ControlButton extends Component {
   static propTypes = {
     control: t.object,
-    hl: t.bool,
     query: t.object,
+    hl: t.bool,
     onRemove: t.func
   }
 
@@ -27,12 +26,13 @@ export default class ControlButton extends Component {
   }
 
   render () {
-    const { query, control, onRemove } = this.props
+    const { query, control, onRemove, hl } = this.props
     return control.control || control.shortcuts.length ? (
       <div className={th.ControlsList__ControlButton}>
         { query ? (
           <QueryChip
             query={query}
+            hl={hl}
             control={control}
             onRemove={onRemove}
             onClick={this.openControl}/>
@@ -40,10 +40,10 @@ export default class ControlButton extends Component {
           <Button flat icon='filter' onClick={this.openControl}/>
         )}
         { this.state.open ? (
-          <ControlPop
+          <ControlPopContainer
             onClose={this.closeControl}
             target={this.state.targetDomNode}
-            {...this.props} />
+            control={control}/>
         ) : null }
       </div>
     ) : null

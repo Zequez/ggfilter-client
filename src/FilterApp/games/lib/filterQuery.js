@@ -18,16 +18,22 @@ export default function filterQuery (state, page, options) {
   let controls = filterSel.definedControlsList(state)
   let controlsParams = filterSel.controlsParams(state)
   let sorting = filterSel.sorting(state)
+  let sortingColumn = filterSel.sortingColumn(state)
+  let controlsHlMode = filterSel.controlsHlMode(state)
 
   let params = {}
   controls.forEach((control) => {
-    params[control.name] = controlsParams[control.name] || true
+    let param = controlsParams[control.name]
+    if (param && ~controlsHlMode.indexOf(control.name)) {
+      param = { ...param, hl: true }
+    }
+    params[control.name] = param || true
   })
 
   let filter = {
     params: params,
     sort: {
-      column: sorting.column,
+      filter: sortingColumn.sort,
       asc: !sorting.direction
     }
   }

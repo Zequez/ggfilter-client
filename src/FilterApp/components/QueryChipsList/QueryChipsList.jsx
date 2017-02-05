@@ -5,7 +5,8 @@ import ControlOpeningChip from './ControlOpeningChip'
 
 export default class QueryChipsList extends Component {
   static propTypes = {
-    controlsParams: t.object,
+    controlsHlMode: t.arrayOf(t.string).isRequired,
+    controlsParams: t.object.isRequired,
     onRemove: t.func.isRequired
   }
 
@@ -14,7 +15,7 @@ export default class QueryChipsList extends Component {
   }
 
   render () {
-    let { controlsParams } = this.props
+    let { controlsParams, controlsHlMode } = this.props
 
     let chips = []
     for (let name in controlsParams) {
@@ -23,6 +24,7 @@ export default class QueryChipsList extends Component {
         <div key={name} className={th.QueryChipsList__chipContainer}>
           <ControlOpeningChip
             query={query}
+            hl={!!~controlsHlMode.indexOf(name)}
             control={definitions.filters[name]}
             onRemove={this.onRemove.bind(this, name)}/>
         </div>

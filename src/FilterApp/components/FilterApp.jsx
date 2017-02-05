@@ -5,9 +5,7 @@ import { connect } from 'react-redux'
 import definitions from '../lib/definitions'
 
 const { getGames, getMoreGames } = require('../games').actions
-import { setDocWidth } from '../ui/reducer'
-import { setParam } from '../filter/reducer'
-import { getTab } from '../ui/selectors'
+import { setControlParams } from '../filter/reducer'
 import * as filterSel from '../filter/selectors'
 import * as gameSel from '../games/selectors'
 
@@ -25,7 +23,6 @@ import { AppBar } from 'src/Layout'
 
   games: gameSel.games(s),
   tags: s.tags,
-  tab: getTab(s),
   gamesLoadedCount: gameSel.loadedCount(s),
   gamesTotalCount: gameSel.totalCount(s),
   gamesFetching: gameSel.isFetching(s),
@@ -33,14 +30,13 @@ import { AppBar } from 'src/Layout'
 }), {
   getGames,
   getMoreGames,
-  setDocWidth,
-  setParam
+  setControlParams
 })
 export default class FilterApp extends Component {
   static propTypes = {
     getGames: t.func,
     getMoreGames: t.func,
-    setParam: t.func,
+    setColumnParams: t.func,
     gamesLoadedCount: t.number,
     gamesTotalCount: t.number,
     gamesFetching: t.bool,
@@ -58,12 +54,12 @@ export default class FilterApp extends Component {
     definitions.filters.tags.chipOptions.tags = this.props.tags
   }
 
-  handleRequestMoreGames () {
+  handleRequestMoreGames = () => {
     this.props.getMoreGames()
   }
 
   onRemoveFilter = (name) => {
-    this.props.setParam(name, true)
+    this.props.setControlParams(name, null)
   }
 
   render () {
@@ -73,6 +69,7 @@ export default class FilterApp extends Component {
         <AppBar className={th.FilterApp__AppBar}>
           <h1>{p.gamesTotalCount == null ? '???' : p.gamesTotalCount} games found</h1>
           <QueryChipsList
+            controlsHlMode={p.newFilter.controlsHlMode}
             controlsParams={p.newFilter.controlsParams}
             onRemove={this.onRemoveFilter}/>
         </AppBar>
@@ -87,7 +84,7 @@ export default class FilterApp extends Component {
         <GamesLoader
           fetching={p.gamesFetching}
           failed={p.gamesFailed}
-          onRequestMore={::this.handleRequestMoreGames}
+          onRequestMore={this.handleRequestMoreGames}
           loadedGames={p.gamesLoadedCount}
           totalGames={p.gamesTotalCount}/>
       </div>
