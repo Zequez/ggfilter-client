@@ -22,12 +22,15 @@ export const sorting = createSelector(filter, (f) => f.sorting)
 export const globalConfig = createSelector(filter, (f) => f.globalConfig)
 
 export const definedControlsList = createSelector(controlsList, (controls) =>
-  controls.map((controlName) => definitions.filters[controlName])
+  definitions.sortNames(controls)
+    .map((controlName) => definitions.filters[controlName])
 )
 
-export const definedColumnsList = createSelector(columnsList, (columns) =>
-  columns.map((columnName) => definitions.filters[columnName])
-)
+export const definedColumnsList = definedControlsList // Intentional
+// export const definedColumnsList = createSelector(columnsList, (columns) =>
+//   columns.map((columnName) => definitions.filters[columnName])
+// )
+
 export const sortingColumn = createSelector(sorting, (sorting) =>
   definitions.filters[sorting.column])
 
