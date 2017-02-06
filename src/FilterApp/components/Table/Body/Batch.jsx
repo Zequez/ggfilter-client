@@ -20,9 +20,7 @@ export default class Batch extends Component {
 
   shouldComponentUpdate (np, ns) {
     let p = this.props
-    return (
-      np.games !== p.games
-    )
+    return np.games !== p.games
   }
 
   render () {

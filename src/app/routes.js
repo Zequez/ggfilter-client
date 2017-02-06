@@ -1,10 +1,12 @@
 import { routing as filterAppRouting } from 'src/FilterApp'
 
+let filterAppRoutes = {}
+for (let routeName in filterAppRouting) {
+  filterAppRoutes[routeName] = {...filterAppRouting[routeName], page: 'filter'}
+}
+
 export default {
-  '/': {
-    page: 'filter',
-    ...filterAppRouting
-  },
+  ...filterAppRoutes,
   '/sysreq': {
     title: 'System Requirements Calculator',
     page: 'sysreq'

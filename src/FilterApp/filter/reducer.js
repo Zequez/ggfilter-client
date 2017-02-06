@@ -3,6 +3,10 @@ import { u } from 'shared/lib/utils'
 import * as a from './actions'
 
 const initialState = {
+  sfilter: null,
+  sfilterError: null,
+  sfilterLoading: false,
+
   // sfilter: {
   //   sid: '',
   //   slug: '',
@@ -43,6 +47,13 @@ const initialState = {
       currency: 'USD',
       region: 'US'
     }
+  },
+
+  games: {
+    batches: [],
+    loading: false,
+    error: null,
+    totalCount: null
   }
 }
 
@@ -69,13 +80,14 @@ u.extend('$delete', (key, obj) => {
 })
 
 const reducers = {
+  [a.RESET_FILTER]: (s) => u(s, {filter: {$set: initialState.filter}}),
   [a.SET_CONTROL]: (s, [control, visible]) =>
     u(s, {filter: {controlsList: {$toggle: [control, visible]}}}),
   // [ADD_CONTROL]: (s, p) => u(s, {filter: {controlsList: {$toggle: [p, true]}}}),
   // [REMOVE_CONTROL]: (s, p) => u(s, {
   //   filter: { controlsList: {$toggle: [p, false]} }
   // }),
-  [a.SET_CONTROL_PARAMS]: (s, {control, params}) => params ? u(s, {
+  [a.SET_CONTROL_PARAMS]: (s, [control, params]) => params ? u(s, {
     filter: { controlsParams: { [control]: { $set: params } } }
   }) : u(s, {
     filter: { controlsParams: { $delete: control } }
@@ -86,7 +98,37 @@ const reducers = {
   }),
 
   [a.SET_HL_MODE]: (s, [control, active]) =>
-    u(s, {filter: {controlsHlMode: {$toggle: [control, active]}}})
+    u(s, {filter: {controlsHlMode: {$toggle: [control, active]}}}),
+
+  [a.GET_GAMES_REQUEST]: (s, {page}) =>
+    u(s, {games: {
+      loading: {$set: true},
+      totalCount: {$set: page === 0 ? null : s.games.totalCount}
+    }}),
+
+  [a.GET_GAMES_SUCCESS]: (s, {games, page, totalCount}) => {
+    let stateChange = {games: {
+      loading: {$set: false},
+      error: {$set: null},
+      totalCount: {$set: totalCount}
+    }}
+    if (page === 0) {
+      stateChange.games.batches = {$set: [games]}
+    } else {
+      stateChange.games.batches = {$splice: [[page, 0, games]]}
+    }
+    return u(s, stateChange)
+  },
+
+  [a.GET_GAMES_FAILURE]: (s, error) => u(s, {
+    games: {
+      loading: {$set: false},
+      error: {$set: error},
+      totalCount: {$set: 0},
+      batches: {$set: []}
+    }
+  })
+
 }
 
 export default function reducer (state = initialState, action) {

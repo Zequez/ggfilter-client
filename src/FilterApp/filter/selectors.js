@@ -34,6 +34,47 @@ export const definedColumnsList = definedControlsList // Intentional
 export const sortingColumn = createSelector(sorting, (sorting) =>
   definitions.filters[sorting.column])
 
+export const games = createSelector(base, (b) => b.games)
+export const gamesBatches = createSelector(games, (games) => games.batches)
+export const gamesTotalCount = createSelector(games, (games) => games.totalCount)
+export const gamesCurrentPage = createSelector(gamesBatches, (batches) => batches.length)
+export const gamesLoadedCount = createSelector(gamesBatches, (batches) =>
+  batches.reduce((t, v) => t + v.length, 0))
+export const gamesLoading = createSelector(games, (games) => games.loading)
+export const gamesError = createSelector(games, (games) => games.error)
+export const gamesAllLoaded = createSelector(
+  gamesTotalCount,
+  gamesLoadedCount,
+  (total, loaded) => total === loaded
+)
+export const gamesFailed = createSelector(gamesError, (error) => !!error)
+
+export const filterForApi = createSelector(
+  definedControlsList,
+  controlsParams,
+  sorting,
+  sortingColumn,
+  controlsHlMode,
+  (controls, controlsParams, sorting, sortingColumn, controlsHlMode) => {
+    let params = {}
+    controls.forEach((control) => {
+      let param = controlsParams[control.name]
+      if (param && ~controlsHlMode.indexOf(control.name)) {
+        param = { ...param, hl: true }
+      }
+      params[control.name] = param || true
+    })
+
+    return {
+      params: params,
+      sort: {
+        filter: sortingColumn.sort,
+        asc: !sorting.direction
+      }
+    }
+  }
+)
+
 //**************************
 //* OLD SELECTORS
 

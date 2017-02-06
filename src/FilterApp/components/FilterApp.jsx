@@ -4,10 +4,8 @@ import { connect } from 'react-redux'
 
 import definitions from '../lib/definitions'
 
-const { getGames, getMoreGames } = require('../games').actions
-import { setControlParams } from '../filter/actions'
+import { setControlParams, getGames } from '../filter/actions'
 import * as filterSel from '../filter/selectors'
-import * as gameSel from '../games/selectors'
 
 import Table from './Table/Table'
 import GamesLoader from './GamesLoader'
@@ -21,25 +19,23 @@ import { AppBar } from 'src/Layout'
   definedColumnsList: filterSel.definedColumnsList(s),
   newFilter: filterSel.filter(s),
 
-  games: gameSel.games(s),
+  games: filterSel.gamesBatches(s),
   tags: s.tags,
-  gamesLoadedCount: gameSel.loadedCount(s),
-  gamesTotalCount: gameSel.totalCount(s),
-  gamesFetching: gameSel.isFetching(s),
-  gamesFailed: gameSel.failed(s)
+  gamesLoadedCount: filterSel.gamesLoadedCount(s),
+  gamesTotalCount: filterSel.gamesTotalCount(s),
+  gamesLoading: filterSel.gamesLoading(s),
+  gamesFailed: filterSel.gamesFailed(s)
 }), {
-  getGames,
-  getMoreGames,
+  getMoreGames: getGames,
   setControlParams
 })
 export default class FilterApp extends Component {
   static propTypes = {
-    getGames: t.func,
     getMoreGames: t.func,
     setColumnParams: t.func,
     gamesLoadedCount: t.number,
     gamesTotalCount: t.number,
-    gamesFetching: t.bool,
+    gamesLoading: t.bool,
     gamesFailed: t.bool
   }
 
@@ -82,7 +78,7 @@ export default class FilterApp extends Component {
           sorting={p.newFilter.sorting}
           tableWidth={p.tableWidth}/>
         <GamesLoader
-          fetching={p.gamesFetching}
+          fetching={p.gamesLoading}
           failed={p.gamesFailed}
           onRequestMore={this.handleRequestMoreGames}
           loadedGames={p.gamesLoadedCount}

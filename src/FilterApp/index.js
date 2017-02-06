@@ -4,7 +4,6 @@ import reducer from './reducer'
 import routing from './routing'
 
 const filter = require('./filter')
-const games = require('./games')
 
 // import { encode, decode } from './lib/filterEncoder'
 
@@ -13,13 +12,13 @@ module.exports = {
   FilterAppPage,
   reducer,
   routing,
+  sagas: filter.sagas,
 
   actions: {
     setControl: filter.actions.setControl,
     setControlParams: filter.actions.setControlParams,
     setSorting: filter.actions.setSorting,
-    resetFilter: filter.actions.reset,
-    getGamesIfNoGames: games.actions.getGamesIfNoGames
+    resetFilter: filter.actions.reset
   },
 
   lib: {

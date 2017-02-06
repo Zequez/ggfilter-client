@@ -8,6 +8,8 @@ import middlewares from './middlewares'
 import reducer from './reducer'
 import routes from './routes'
 
+import { sagas as filterAppSagas } from '../FilterApp'
+
 const { routerEnhancer, routerMiddleware } = routerForBrowser({ routes })
 const sagaMiddleware = createSagaMiddleware()
 
@@ -16,6 +18,8 @@ const store = createStore(reducer, {}, compose(
   applyMiddleware(sagaMiddleware, thunkMiddleware, ...middlewares, routerMiddleware),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 ))
+
+sagaMiddleware.run(filterAppSagas)
 
 store.dispatch(mediaQueryTracker({
   isPhone: 'screen and (max-width: 767px)',

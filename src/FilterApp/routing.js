@@ -1,10 +1,13 @@
-// import { fetchGames }
+import { getGames, resetFilter } from './filter/actions'
 
 export default {
   '/': {
-    dispatch: (router) => {}
+    dispatch: () => getGames(0)
   },
-  '/f(/:sid)': {
-    dispatch: ({params}) => { console.log(params.sid) }
+  '/f': {
+    dispatch: () => getGames(0)
+  },
+  '/f/:sid': {
+    dispatch: ({params}) => getGames(0)
   }
 }
