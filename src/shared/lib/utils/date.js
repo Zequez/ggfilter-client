@@ -88,8 +88,8 @@ export function formatShortDateTime (date) {
   let day = padTime0(date.getDate().toString())
   let month = MONTHS[date.getMonth()]
   let year = date.getFullYear()
-  hour = '00'.substring(0, 2 - day.length) + day
-  minute = '00'.substring(0, 2 - day.length) + day
+  hour = '00'.substring(0, 2 - hour.length) + hour
+  minute = '00'.substring(0, 2 - minute.length) + minute
   day = '00'.substring(0, 2 - day.length) + day
   return `${hour}:${minute} - ${day} ${month} ${year}`
 }
