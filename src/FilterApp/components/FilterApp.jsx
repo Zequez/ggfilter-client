@@ -11,6 +11,7 @@ import Table from './Table/Table'
 import GamesLoader from './GamesLoader'
 import CategoriesList from './CategoriesList'
 import QueryChipsList from './QueryChipsList'
+import SfilterBar from './SfilterBar'
 
 import { AppBar } from 'src/Layout'
 
@@ -26,12 +27,14 @@ import { AppBar } from 'src/Layout'
   gamesLoading: filterSel.gamesLoading(s),
   gamesFailed: filterSel.gamesFailed(s)
 }), {
-  getMoreGames: getGames,
+  getGames,
   setControlParams
 })
 export default class FilterApp extends Component {
   static propTypes = {
-    getMoreGames: t.func,
+    games: t.arrayOf(t.array).isRequired,
+
+    getGames: t.func,
     setColumnParams: t.func,
     gamesLoadedCount: t.number,
     gamesTotalCount: t.number,
@@ -51,7 +54,8 @@ export default class FilterApp extends Component {
   }
 
   handleRequestMoreGames = () => {
-    this.props.getMoreGames()
+    let page = this.props.games.length
+    this.props.getGames(page)
   }
 
   onRemoveFilter = (name) => {
@@ -63,7 +67,7 @@ export default class FilterApp extends Component {
     return (
       <div className={th.FilterApp}>
         <AppBar className={th.FilterApp__AppBar}>
-          <h1>{p.gamesTotalCount == null ? '???' : p.gamesTotalCount} games found</h1>
+          <SfilterBar/>
           <QueryChipsList
             controlsHlMode={p.newFilter.controlsHlMode}
             controlsParams={p.newFilter.controlsParams}
