@@ -11,6 +11,11 @@ export const filter = createSelector(
   base,
   (ss) => ss.filter
 )
+
+/********************/
+/* Filter Stuff
+/********************/
+
 export const controlsList = createSelector(filter, (f) => f.controlsList)
 export const controlsParams = createSelector(filter, (f) => f.controlsParams)
 export const controlsHlMode = createSelector(filter, (f) => f.controlsHlMode)
@@ -34,6 +39,22 @@ export const definedColumnsList = definedControlsList // Intentional
 export const sortingColumn = createSelector(sorting, (sorting) =>
   definitions.filters[sorting.column])
 
+/********************/
+/* Sfilter stuff
+/********************/
+
+export const sfilter = createSelector(base, (ss) => ss.sfilter)
+export const sfilterIsDirty = createSelector(sfilter, filter, (sf, f) => sf !== f)
+export const secrets = createSelector(base, () =>
+  window.localStorage.getItem('secrets') && JSON.parse(
+    window.localStorage.getItem('secrets')
+  ) || {}
+)
+
+/********************/
+/* Games
+/********************/
+
 export const games = createSelector(base, (b) => b.games)
 export const gamesBatches = createSelector(games, (games) => games.batches)
 export const gamesTotalCount = createSelector(games, (games) => games.totalCount)
@@ -48,6 +69,10 @@ export const gamesAllLoaded = createSelector(
   (total, loaded) => total === loaded
 )
 export const gamesFailed = createSelector(gamesError, (error) => !!error)
+
+/********************/
+/* Other stuff
+/********************/
 
 export const filterForApi = createSelector(
   definedControlsList,
@@ -74,69 +99,3 @@ export const filterForApi = createSelector(
     }
   }
 )
-
-//**************************
-//* OLD SELECTORS
-
-// export const stateSelector = (s) => s[ID]
-// export const baseFilterSelector = (s) => s[ID].base
-// export const deltaFilterSelector = (s) => s[ID].delta
-//
-// export const finalFilterSelector = createSelector(
-//   baseFilterSelector,
-//   deltaFilterSelector,
-//   (baseFilter, deltaFilter) => combiner(baseFilter, deltaFilter)
-// )
-//
-// export const isFrontPageFilter = createSelector(
-//   baseFilterSelector,
-//   (baseFilter) => baseFilter === frontPageFilter
-// )
-//
-// export const isDirtySelector = createSelector(
-//   deltaFilterSelector,
-//   (deltaFilter) => !isFilterEmpty(deltaFilter)
-// )
-//
-// export const sidSelector = createSelector(
-//   baseFilterSelector,
-//   (baseFilter) => ''
-// )
-//
-// export const paramsSelector = createSelector(
-//   finalFilterSelector,
-//   (filter) => filter.params
-// )
-//
-// export const activeParamsSelector = createSelector(
-//   paramsSelector,
-//   (params) => {
-//     let newParams = {}
-//     for (let k in params) {
-//       if (isQueryActive(params[k])) {
-//         newParams[k] = params[k]
-//       }
-//     }
-//     return newParams
-//   }
-// )
-//
-// export const visibleFiltersSelector = createSelector(
-//   paramsSelector,
-//   (params) => Object.keys(params).filter((v) => params[v] !== false)
-// )
-//
-// export const visibleFiltersDefinitionsSelector = createSelector(
-//   visibleFiltersSelector,
-//   (visible) => visible.map((f) => definitions.filters[f])
-// )
-//
-// export const queryColumnsSelector = createSelector(
-//   visibleFiltersDefinitionsSelector,
-//   (visible) => visible.reduce((cols, f) => cols.concat(Object.values(f.columnInputs)), [])
-// )
-//
-// export const encodedDeltaSelector = createSelector(
-//   deltaFilterSelector,
-//   (filter) => encode(filter)
-// )

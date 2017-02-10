@@ -1,85 +1,12 @@
-import { u } from 'shared/lib/utils'
-
+import { u, createReducer } from 'shared/lib/utils/store'
 import * as a from './actions'
+import initialState from './initialState'
 
-const initialState = {
-  sfilter: null,
-  sfilterError: null,
-  sfilterLoading: false,
+export default createReducer(initialState, {
+  /********************/
+  /* Filter stuff
+  /********************/
 
-  // sfilter: {
-  //   sid: '',
-  //   slug: '',
-  //   name: '',
-  //   encoded: '',
-  //   secret: '' // Only really exist when you just created it
-  //   global_slug: null,
-  //   front_page: null,
-  // },
-  // loading: false,
-  // dirty: false,
-  // error: false,
-  filter: {
-    name: 'Name of your filter',
-
-    controlsList: [
-      'name', 'tags', 'released_at',
-      'lowest_price', 'best_discount',
-      'playtime_median', 'ratings_pct'
-    ],
-    controlsHlMode: ['lowest_price'],
-    controlsParams: {
-      best_discount: {gt: 1, lt: null}
-    },
-    columnsList: [
-      'name', 'tags', 'released_at',
-      'lowest_price',
-      'playtime_median', 'ratings_pct'
-    ],
-    columnsParams: {},
-    sorting: {
-      column: 'ratings_pct',
-      direction: true,
-      nullFirst: false
-    },
-    globalConfig: {
-      stores: ['steam', 'oculus'],
-      currency: 'USD',
-      region: 'US'
-    }
-  },
-
-  games: {
-    batches: [],
-    loading: false,
-    error: null,
-    totalCount: null
-  }
-}
-
-// =============================================================================
-// Reducer
-// =============================================================================
-
-u.extend('$toggle', ([item, val], arr) => {
-  let i = arr.indexOf(item)
-  if ((i === -1 && !val) || (i !== -1 && val)) return arr
-  if (val) {
-    return arr.concat(item)
-  } else {
-    arr = arr.concat([])
-    arr.splice(i, 1)
-    return arr
-  }
-})
-
-u.extend('$delete', (key, obj) => {
-  obj = { ...obj }
-  delete obj[key]
-  return obj
-})
-
-const reducers = {
   [a.RESET_FILTER]: (s) => u(s, {filter: {$set: initialState.filter}}),
   [a.SET_CONTROL]: (s, [control, visible]) =>
     u(s, {filter: {controlsList: {$toggle: [control, visible]}}}),
@@ -92,20 +19,58 @@ const reducers = {
   }) : u(s, {
     filter: { controlsParams: { $delete: control } }
   }),
-
   [a.SET_SORTING]: (s, [column, direction]) => u(s, {
     filter: {sorting: {column: {$set: column}, direction: {$set: direction}}}
   }),
-
   [a.SET_HL_MODE]: (s, [control, active]) =>
     u(s, {filter: {controlsHlMode: {$toggle: [control, active]}}}),
+
+  /********************/
+  /* SFilter management
+  /********************/
+
+  [a.SET_NAME]: (s, name) => u(s, {filter: {name: {$set: name}}}),
+  [a.CREATE_SFILTER_REQUEST]: (s) => u(s, {sfilterLoading: {$set: true}}),
+  [a.CREATE_SFILTER_FAILURE]: (s, error) => u(s, {
+    sfilterLoading: {$set: false},
+    sfilterError: {$set: error}
+  }),
+  [a.CREATE_SFILTER_SUCCESS]: (s, filter) => {
+    // This is a little unconventional but, whatever
+    let secrets = window.localStorage.getItem('secrets')
+    secrets = secrets ? JSON.parse(secrets) : {}
+    secrets[filter.sid] = filter.secret
+    window.localStorage.setItem('secrets', JSON.stringify(secrets))
+
+    return u(s, {
+      sfilter: {$set: filter},
+      sfilterError: {$set: null},
+      sfilterLoading: {$set: false},
+      filter: {$set: filter}
+    })
+  },
+
+  [a.UPDATE_SFILTER_REQUEST]: (s) => u(s, {sfilterLoading: {$set: true}}),
+  [a.UPDATE_SFILTER_FAILURE]: (s, error) => u(s, {
+    sfilterLoading: {$set: false},
+    sfilterError: {$set: error}
+  }),
+  [a.UPDATE_SFILTER_SUCCESS]: (s, filter) => u(s, {
+    sfilter: {$set: filter},
+    sfilterError: {$set: null},
+    sfilterLoading: {$set: false},
+    filter: {$set: filter}
+  }),
+
+  /********************/
+  /* Games
+  /********************/
 
   [a.GET_GAMES_REQUEST]: (s, {page}) =>
     u(s, {games: {
       loading: {$set: true},
       totalCount: {$set: page === 0 ? null : s.games.totalCount}
     }}),
-
   [a.GET_GAMES_SUCCESS]: (s, {games, page, totalCount}) => {
     let stateChange = {games: {
       loading: {$set: false},
@@ -119,7 +84,6 @@ const reducers = {
     }
     return u(s, stateChange)
   },
-
   [a.GET_GAMES_FAILURE]: (s, error) => u(s, {
     games: {
       loading: {$set: false},
@@ -128,11 +92,4 @@ const reducers = {
       batches: {$set: []}
     }
   })
-
-}
-
-export default function reducer (state = initialState, action) {
-  return reducers[action.type]
-    ? reducers[action.type](state, action.payload, action)
-    : state
-}
+})

@@ -1,7 +1,3 @@
-import update from 'immutability-helper'
-
-export var u = update
-
 export function loopNumber (i, val, array) {
   let len = array.length
   i += val

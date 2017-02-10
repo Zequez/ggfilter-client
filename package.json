@@ -24,6 +24,7 @@
     "analyze": "webpack --json --env=dist | ./node_modules/.bin/webpack-bundle-size-analyzer"
   },
   "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>/__mocks__/globalMocks.js",
     "moduleFileExtensions": [
       "js",
       "jsx",

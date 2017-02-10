@@ -1,91 +1,46 @@
-jest.mock('../config/defaultFilter', () => ({
-  params: {
-    hey: { moo: 'yes' }
-  },
-  sort: {
-    column: 'name',
-    asc: true
-  }
-}))
-
-jest.mock('../config/masks', () => ({
-  myMask: {
-    params: {
-      name: {value: 'NOPE'}
-    },
-    sort: {
-      column: 'steam_id'
-    }
-  }
-}))
+import definitions from '../lib/definitions'
 
 const {
-  visibleFiltersSelector,
-  maskedFilterSelector,
-  finalFilterSelector
+  definedControlsList,
+  sfilterIsDirty
 } = require('./selectors')
 
 describe('FilterApp/filter', () => {
-  describe('visibleFiltersSelector', () => {
-    it('should return all the filter names which param is not false', () => {
-      expect(visibleFiltersSelector({
+  describe('definedControlsList', () => {
+    it('should return all defined controls sorted by the defined categories', () => {
+      expect(definedControlsList({
         filter: {
-          params: {
-            foo: 'aaa',
-            bar: false,
-            potato: { salad: 'yes' }
-          },
-          masks: []
+          filter: {
+            controlsList: ['ratings_pct', 'name']
+          }
         }
-      })).toEqual(['hey', 'foo', 'potato'])
+      })).toEqual([definitions.filters.name, definitions.filters.ratings_pct])
     })
   })
 
-  describe('maskedFilterSelector', () => {
-    it('should return the base filter + masks', () => {
-      expect(maskedFilterSelector({
-        filter: {
-          params: {
-            moo: 'meow'
-          },
-          sort: {},
-          masks: ['myMask']
-        }
-      })).toEqual({
-        params: {
-          hey: { moo: 'yes' },
-          name: {value: 'NOPE'}
-        },
-        sort: {
-          column: 'steam_id',
-          asc: true
-        }
-      })
-    })
-  })
+  describe('sfilterIsDirty', () => {
+    it('should return if the loaded sfilter is dirty (based on the filter)', () => {
+      let filter = {
+        name: 'Potato',
+        controlsList: ['super', 'control']
+      }
 
-  describe('finalFilterSelector', () => {
-    it('should return the base filter + masks + extra', () => {
-      expect(finalFilterSelector({
+      expect(sfilterIsDirty({
         filter: {
-          params: {
-            moo: 'meow'
-          },
-          sort: {},
-          masks: ['myMask']
+          sfilter: filter,
+          filter: filter
         }
-      })).toEqual({
-        params: {
-          hey: { moo: 'yes' },
-          name: {value: 'NOPE'},
-          moo: 'meow'
-        },
-        sort: {
-          column: 'steam_id',
-          asc: true
-        },
-        masks: ['myMask']
-      })
+      })).toEqual(false)
+
+      expect(sfilterIsDirty({
+        filter: {
+          sfilter: filter,
+          filter: {
+            name: 'Potato',
+            controlsList: ['super', 'control']
+          }
+        }
+      })).toEqual(true)
     })
   })
 })
