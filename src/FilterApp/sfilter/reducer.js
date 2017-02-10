@@ -1,6 +1,6 @@
 import { u } from 'shared/lib/utils'
 
-const api = require('shared/lib/Api')
+const api = require('src/Api')
 
 const {
   actions: {

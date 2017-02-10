@@ -18,7 +18,7 @@ import { setAllTags } from 'shared/reducers/tagsReducer'
 import { getCurrentUser } from 'shared/reducers/authReducer'
 
 import App from 'src/app/App'
-import Api from 'shared/lib/Api'
+import Api from 'src/Api'
 
 console.logRender = function (componentName) {
   // console.info(`<${componentName}/>`)

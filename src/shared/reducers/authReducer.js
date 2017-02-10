@@ -1,5 +1,5 @@
 import { u } from 'shared/lib/utils'
-import Api from 'shared/lib/Api'
+import Api from 'src/Api'
 
 export const initialState = {
   currentUser: null

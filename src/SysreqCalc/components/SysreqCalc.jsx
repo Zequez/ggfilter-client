@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link, PUSH } from 'redux-little-router'
 import { snapTo } from 'shared/lib/utils'
-import Api from 'shared/lib/Api'
+import Api from 'src/Api'
 
 import { AutoPage } from 'src/Layout'
 

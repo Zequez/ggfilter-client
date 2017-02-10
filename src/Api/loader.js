@@ -37,7 +37,9 @@ export const withMeta = (response) => {
   let meta = {}
   for (let header in headers) {
     if (header[0] === 'x' && header[1] === '-') {
-      meta[camelCase(header.slice(2))] = headers[header]
+      let value = headers[header]
+      if (value.match(/^[0-9]+$/)) value = Number(value)
+      meta[camelCase(header.slice(2))] = value
     }
   }
   return {data, meta}

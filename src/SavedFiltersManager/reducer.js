@@ -1,6 +1,6 @@
 import { u } from 'shared/lib/utils'
 import findIndex from 'lodash/findIndex'
-const api = require('shared/lib/Api')
+const api = require('src/Api')
 
 export const initialState = {
   data: []
