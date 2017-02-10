@@ -1,15 +1,18 @@
+/* @flow */
 import th from './SfilterBar.sass'
-import React, { PropTypes as t, Component } from 'react'
+import React from 'react'
 import Button from 'shared/components/Button'
 
-export default class SaveButtons extends Component {
-  static propTypes = {
-    onCreate: t.func,
-    onUpdate: t.func,
-    isSaved: t.bool,
-    isDirty: t.bool,
-    canUpdate: t.bool
-  }
+type Props = {
+  onCreate: () => void,
+  onUpdate: () => void,
+  isSaved: boolean,
+  isDirty: boolean,
+  canUpdate: boolean
+}
+
+export default class SaveButtons extends React.Component {
+  props : Props
 
   render () {
     let { isSaved, isDirty, canUpdate, onCreate, onUpdate } = this.props
