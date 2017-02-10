@@ -1,33 +1,13 @@
-import { call, select, put, fork, takeEvery, takeLatest } from 'redux-saga/effects'
-import Api from 'shared/lib/Api'
+import { call, select, fork } from 'redux-saga/effects'
+import Api, { sagaCreator } from 'src/Api'
 import * as selectors from './selectors'
 import * as a from './actions'
 
-function apiRequesterCreator (successType, failureType, callApi) {
-  return function* ({payload: requestPayload}) {
-    try {
-      const payload = yield call(callApi, requestPayload)
-      yield put({type: successType, payload})
-    } catch (e) {
-      yield put({type: failureType, payload: e, error: true})
-    }
-  }
-}
-
-function apiSagaCreator (requestType, successType, failureType, callApi) {
-  const requester = apiRequesterCreator(successType, failureType, callApi)
-  function* watchRequest () {
-    yield takeEvery(requestType, requester)
-  }
-  return [requester, watchRequest]
-}
-
-export const [gamesRequest, watchGamesRequest] = apiSagaCreator(
+export const [gamesRequest, watchGamesRequest] = sagaCreator(
   a.GET_GAMES_REQUEST,
   a.GET_GAMES_SUCCESS,
   a.GET_GAMES_FAILURE,
   function* ({page}) {
-    if (page === undefined) page = (yield select(selectors.gamesCurrentPage)) + 1
     const filter = yield select(selectors.filterForApi)
     const {data, meta} = yield call(Api.games.index, {
       filter,
@@ -37,11 +17,31 @@ export const [gamesRequest, watchGamesRequest] = apiSagaCreator(
 
     return {
       games: data,
-      totalCount: Number(meta.paginationCount),
+      totalCount: meta.paginationCount,
       page: page
     }
   })
 
+export const [createFilterRequest, watchCreateFilterRequest] = sagaCreator(
+  a.CREATE_SFILTER_REQUEST,
+  a.CREATE_SFILTER_SUCCESS,
+  a.CREATE_SFILTER_FAILURE,
+  function* (payload) {
+    return yield call(Api.filters.create, payload)
+  }
+)
+
+export const [updateFilterRequest, watchUpdateFilterRequest] = sagaCreator(
+  a.UPDATE_SFILTER_REQUEST,
+  a.UPDATE_SFILTER_SUCCESS,
+  a.UPDATE_SFILTER_FAILURE,
+  function* (payload) {
+    return yield call(Api.filters.update, payload)
+  }
+)
+
 export default function* sagas () {
   yield fork(watchGamesRequest)
+  yield fork(watchCreateFilterRequest)
+  yield fork(watchUpdateFilterRequest)
 }
