@@ -47,7 +47,7 @@ $color-pri: $palette-cyan-500;
 $color-pri-light: $palette-cyan-100;
 $color-pri-dark: $palette-cyan-700;
 $color-sec: $palette-deep-orange-a400;
-$color-sec-light: $palette-deep-orange-a100;
+$color-sec-light: $palette-deep-orange-a200;
 $color-sec-dark: $palette-deep-orange-a700;
 $color-acc: $color-sec;
 $color-acc-light: $color-sec-light;
@@ -72,6 +72,8 @@ $color-icon-active: $color-text-sec;
 $color-icon-inactive: $color-text-dis;
 $color-divider: rgba(#000, .12);
 $color-divider-light: rgba(#000, 0.03);
+$color-divider-alt: rgba(#fff, .20);
+$color-divider-light-alt: rgba(#fff, 0.12);
 $color-dimming: $color-divider;
 $color-white: $palette-white;
 
