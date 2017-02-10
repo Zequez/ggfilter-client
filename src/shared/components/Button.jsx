@@ -11,7 +11,7 @@ class Button extends Component {
     className: t.string,
     raised: t.bool,
     primary: t.bool,
-    accent: t.bool,
+    alt: t.bool,
     label: t.string,
     icon: t.string
   }
@@ -19,7 +19,7 @@ class Button extends Component {
   static defaultProps = {
     raised: true,
     primary: true,
-    accent: true
+    alt: false
   }
 
   onClick = (ev) => {
@@ -28,7 +28,7 @@ class Button extends Component {
   }
 
   render () {
-    let { children, icon, label, flat, raised, primary, accent, disabled, className, ...other } = this.props
+    let { children, icon, label, flat, raised, primary, alt, disabled, className, ...other } = this.props
 
     if (flat) raised = false
 
@@ -37,8 +37,8 @@ class Button extends Component {
         [th.Button_raised]: raised,
         [th.Button_flat]: !raised,
         [th.Button_primary]: primary,
-        [th.Button_accent]: accent,
-        [th.Button_disabled]: disabled
+        [th.Button_disabled]: disabled,
+        [th.Button_alt]: alt
       })} disabled={disabled} {...other} onClick={this.onClick} >
         { icon ? <Icon icon={icon}/> : null }
         {label}
