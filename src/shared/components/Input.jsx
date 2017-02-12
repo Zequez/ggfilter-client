@@ -1,9 +1,11 @@
 import theme from './Input.sass'
 import React, { PropTypes as t, Component } from 'react'
+import { themeExtender } from 'shared/lib/utils/misc'
 import cx from 'classnames'
 
-export const inputWithTheme = (th) => {
-  if (th !== theme) th = { ...theme, ...th }
+export const inputWithTheme = (th, extend) => {
+  th = themeExtender(theme, th, extend)
+
   return class Input extends Component {
     static propTypes = {
       onChange: t.func,
@@ -11,7 +13,8 @@ export const inputWithTheme = (th) => {
       hint: t.string,
       prefix: t.string,
       suffix: t.string,
-      label: t.string
+      label: t.string,
+      disable: t.bool
     }
 
     onChange = (ev) => {
@@ -25,10 +28,11 @@ export const inputWithTheme = (th) => {
     select () { this.refs.input.select() }
 
     render () {
-      let { className, value, hint, prefix, suffix, label, ...other } = this.props
+      let { className, value, hint, prefix, suffix, label, disabled, ...other } = this.props
       let classes = cx(th.Input, {
         [className]: !!className,
-        [th.Input_withText]: !!value
+        [th.Input_withText]: !!value,
+        [th.Input_disabled]: !!disabled
       })
 
       return (
@@ -39,6 +43,7 @@ export const inputWithTheme = (th) => {
               type='text'
               className={th.Input__input}
               ref='input'
+              disabled={disabled}
               {...other}
               value={value || ''}
               onChange={this.onChange}/>

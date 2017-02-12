@@ -50,6 +50,15 @@ export const secrets = createSelector(base, () =>
     window.localStorage.getItem('secrets')
   ) || {}
 )
+export const actualFilterIsDirty = createSelector(sfilter, filter, (sf, f) =>
+  sf.controlsList !== f.controlsList ||
+  sf.controlsHlMode !== f.controlsHlMode ||
+  sf.controlsParams !== f.controlsParams ||
+  sf.columnsList !== f.columnsList ||
+  sf.columnsParams !== f.columnsParams ||
+  sf.sorting !== f.sorting ||
+  sf.globalConfig !== f.globalConfig
+)
 
 /********************/
 /* Games

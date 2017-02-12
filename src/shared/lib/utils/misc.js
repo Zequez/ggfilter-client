@@ -14,3 +14,17 @@ export function snapTo (val, snap) {
   let valr = val % snap
   return valr > snap / 2 ? (val - valr + snap) : (val - valr)
 }
+
+export function themeExtender (original, provided, extend = true) {
+  let th = {}
+  if (original !== provided && extend) {
+    for (let t in original) {
+      if (provided[t]) th[t] = original[t] + ' ' + provided[t]
+      else th[t] = original[t]
+    }
+  } else {
+    th = provided
+  }
+
+  return th
+}

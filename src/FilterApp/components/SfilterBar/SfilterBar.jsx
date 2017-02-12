@@ -12,6 +12,7 @@ type Props = {
   secrets: { [key: string]: string },
   filter: any,
   sfilterIsDirty: boolean,
+  actualFilterIsDirty: boolean,
   currentUser: {
     isAdmin: boolean
   },
@@ -24,6 +25,7 @@ type Props = {
   secrets: filterSel.secrets(s),
   filter: filterSel.filter(s),
   sfilterIsDirty: filterSel.sfilterIsDirty(s),
+  actualFilterIsDirty: filterSel.actualFilterIsDirty(s),
   currentUser: selectCurrentUser(s)
 }), {
   setName: filterAct.setName,
@@ -47,16 +49,21 @@ export default class SfilterBar extends Component {
   }
 
   render () {
-    let { filter, sfilterIsDirty, currentUser, secrets } = this.props
+    let { filter, sfilterIsDirty, currentUser, secrets, actualFilterIsDirty } = this.props
+    let canUpdate = canUpdateFilter(filter, currentUser, secrets)
+    let canEditName = actualFilterIsDirty || canUpdate
 
     return (
       <div className={th.SfilterBar}>
-        <NameEditor value={filter.name} onChange={this.onNameChange}/>
+        <NameEditor
+          value={filter.name}
+          onChange={this.onNameChange}
+          canEdit={canEditName}/>
         <SaveButtons
           onCreate={this.onCreate}
           onUpdate={this.onUpdate}
           isDirty={sfilterIsDirty}
-          canUpdate={canUpdateFilter(filter, currentUser, secrets)}
+          canUpdate={canUpdate}
           isSaved={!!filter.sid}/>
       </div>
     )
