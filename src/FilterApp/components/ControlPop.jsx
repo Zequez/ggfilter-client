@@ -50,14 +50,14 @@ export default class ControlPop extends Component {
   }
 
   onClickClear = () => {
-    this.props.onChange(null)
     this.props.onHlChange(false)
+    this.props.onChange(null)
     this.close()
   }
 
   onClickShortcut = (query) => {
-    this.props.onChange(query)
     this.props.onHlChange(this.state.hl)
+    this.props.onChange(query)
     this.close()
   }
 
@@ -66,8 +66,8 @@ export default class ControlPop extends Component {
   }
 
   onClickApply = () => {
-    this.props.onChange(this.state.query)
     this.props.onHlChange(this.state.hl)
+    this.props.onChange(this.state.query)
     this.close()
   }
 
