@@ -1,13 +1,31 @@
-import { getGames, resetFilter } from './filter/actions'
+import { REPLACE } from 'redux-little-router'
+import * as selectors from './filter/selectors'
+import { getGames, showSfilter, resetFilter } from './filter/actions'
+
+export const urls = {
+  frontPage: () => '/',
+  filter: (filter) => `/f/${filter.sid}` + (filter.nameSlug ? `/${filter.nameSlug}` : '')
+}
 
 export default {
   '/': {
-    dispatch: () => getGames(0)
+    dispatch: () => showSfilter({sid: 0})
   },
   '/f': {
-    dispatch: () => getGames(0)
+    dispatch: (_, getState) => {
+      let filter = selectors.filter(getState())
+      return {
+        type: REPLACE,
+        payload: filter.sid ? urls.filter(filter) : urls.frontPage()
+      }
+    }
   },
-  '/f/:sid': {
-    dispatch: ({params}) => getGames(0)
+  '/f/:sid(/:nameSlug)': {
+    dispatch: ({params}, getState) => {
+      let filter = selectors.filter(getState())
+      if (filter.sid !== params.sid) {
+        return showSfilter({sid: params.sid})
+      }
+    }
   }
 }

@@ -4,7 +4,7 @@ export default function routingDispatch ({ dispatch, getState }) {
   return next => action => {
     if (action.type === LOCATION_CHANGED) {
       if (action.payload.result.dispatch) {
-        let routeAction = action.payload.result.dispatch(action.payload)
+        let routeAction = action.payload.result.dispatch(action.payload, getState)
         if (routeAction) {
           dispatch(routeAction)
         }
