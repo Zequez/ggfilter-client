@@ -6,7 +6,7 @@ export default {
   },
   filters: {
     index: () => get(`/filters.json`),
-    show: ({sid}) => get(`/filters/${sid}.json`),
+    show: ({sid}) => get(`/filters/${sid}.json`).then(camel),
     create: ({filter}) => post(`/filters`,
       {
         payload: snake(filter, false)

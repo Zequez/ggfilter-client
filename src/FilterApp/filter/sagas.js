@@ -1,9 +1,11 @@
-import { call, select, fork } from 'redux-saga/effects'
+import { call, put, select, fork } from 'redux-saga/effects'
+import { PUSH } from 'redux-little-router'
 import Api, { sagaCreator } from 'src/Api'
+import { urls } from '../routing'
 import * as selectors from './selectors'
 import * as a from './actions'
 
-export const [gamesRequest, watchGamesRequest] = sagaCreator(
+export const watchGamesRequest = sagaCreator(
   a.GET_GAMES_REQUEST,
   a.GET_GAMES_SUCCESS,
   a.GET_GAMES_FAILURE,
@@ -22,26 +24,29 @@ export const [gamesRequest, watchGamesRequest] = sagaCreator(
     }
   })
 
-export const [createFilterRequest, watchCreateFilterRequest] = sagaCreator(
+export const watchCreateFilterRequest = sagaCreator(
   a.CREATE_SFILTER_REQUEST,
   a.CREATE_SFILTER_SUCCESS,
   a.CREATE_SFILTER_FAILURE,
-  function* (payload) {
-    return yield call(Api.filters.create, payload)
+  Api.filters.create,
+  function* (result) {
+    yield put({type: PUSH, payload: urls.filter(result)})
   }
 )
 
-export const [updateFilterRequest, watchUpdateFilterRequest] = sagaCreator(
+export const watchUpdateFilterRequest = sagaCreator(
   a.UPDATE_SFILTER_REQUEST,
   a.UPDATE_SFILTER_SUCCESS,
   a.UPDATE_SFILTER_FAILURE,
-  function* (payload) {
-    return yield call(Api.filters.update, payload)
-  }
+  Api.filters.update
 )
 
-export default function* sagas () {
-  yield fork(watchGamesRequest)
-  yield fork(watchCreateFilterRequest)
-  yield fork(watchUpdateFilterRequest)
-}
+export const watchShowFilterRequest = sagaCreator(
+  a.SHOW_SFILTER_REQUEST,
+  a.SHOW_SFILTER_SUCCESS,
+  a.SHOW_SFILTER_FAILURE,
+  Api.filters.show,
+  function* () {
+    yield put(a.getGames(0))
+  }
+)

@@ -1,10 +1,10 @@
 export default function andDispatch ({ dispatch, getState }) {
   return next => action => {
-    if (action.dispatch) {
-      let andDispatch = action.dispatch
-      delete action.dispatch
-      dispatch(action)
-      return dispatch(andDispatch)
+    if (Array.isArray(action)) {
+      console.info(action)
+      let lastResult = null
+      action.forEach((act) => lastResult = dispatch(act))
+      return lastResult
     } else {
       return next(action)
     }

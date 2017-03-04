@@ -1,10 +1,6 @@
 // Automatic Request Games
 function ARG (actionCreator) {
-  return (...inputs) => {
-    let action = actionCreator(...inputs)
-    action.dispatch = getGames(0)
-    return action
-  }
+  return (...inputs) => [actionCreator(...inputs), getGames(0)]
 }
 
 // Identity Action
@@ -39,7 +35,7 @@ export const SET_SORTING = 'filter/SET_SORTING'
 export const SET_HL_MODE = 'filter/SET_HL_MODE'
 export const SET_GLOBAL_CONFIG = 'filter/SET_GLOBAL_CONFIG'
 export const setSorting = ARG(IAM(SET_SORTING))
-export const setHlMode = ARG(IAM(SET_HL_MODE))
+export const setHlMode = IAM(SET_HL_MODE)
 export const setGlobalConfig = ARG(IAM(SET_GLOBAL_CONFIG))
 
 export const addTagFilter = (tagId) => (dispatch, getState) => {
@@ -72,3 +68,9 @@ export const UPDATE_SFILTER_SUCCESS = 'filter/UPDATE_SFILTER_SUCCESS'
 export const UPDATE_SFILTER_FAILURE = 'filter/UPDATE_SFILTER_FAILURE'
 export const updateSfilter = (filter, secret) =>
   ({type: UPDATE_SFILTER_REQUEST, payload: {filter, secret}})
+
+export const SHOW_SFILTER_REQUEST = 'filter/SHOW_SFILTER_REQUEST'
+export const SHOW_SFILTER_SUCCESS = 'filter/SHOW_SFILTER_SUCCESS'
+export const SHOW_SFILTER_FAILURE = 'filter/SHOW_SFILTER_FAILURE'
+export const showSfilter = (sid) =>
+  ({type: SHOW_SFILTER_REQUEST, payload: sid})

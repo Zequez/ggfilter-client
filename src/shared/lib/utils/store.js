@@ -20,6 +20,13 @@ u.extend('$delete', (key, obj) => {
   return obj
 })
 
+export const combineActions = (...types) => {
+  let action = types.pop()
+  let combined = {}
+  types.forEach((type) => combined[type] = action)
+  return combined
+}
+
 export const createReducer =
   (initialState, reducers) =>
   (state = initialState, action) =>

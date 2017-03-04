@@ -1,8 +1,8 @@
-import { u, createReducer } from 'shared/lib/utils/store'
+import { u, createReducer, combineActions as ca } from 'shared/lib/utils/store'
 import * as a from './actions'
 import initialState from './initialState'
 
-export default createReducer(initialState, {
+const reducers = {
   /********************/
   /* Filter stuff
   /********************/
@@ -30,11 +30,35 @@ export default createReducer(initialState, {
   /********************/
 
   [a.SET_NAME]: (s, name) => u(s, {filter: {name: {$set: name}}}),
-  [a.CREATE_SFILTER_REQUEST]: (s) => u(s, {sfilterLoading: {$set: true}}),
-  [a.CREATE_SFILTER_FAILURE]: (s, error) => u(s, {
-    sfilterLoading: {$set: false},
-    sfilterError: {$set: error}
-  }),
+
+  ...ca(
+    a.CREATE_SFILTER_REQUEST,
+    a.UPDATE_SFILTER_REQUEST,
+    a.SHOW_SFILTER_REQUEST,
+    (s) => u(s, {sfilterLoading: {$set: true}})
+  ),
+
+  ...ca(
+    a.CREATE_SFILTER_FAILURE,
+    a.UPDATE_SFILTER_FAILURE,
+    a.SHOW_SFILTER_FAILURE,
+    (s, error) => u(s, {
+      sfilterLoading: {$set: false},
+      sfilterError: {$set: error}
+    })
+  ),
+
+  ...ca(
+    a.UPDATE_SFILTER_SUCCESS,
+    a.SHOW_SFILTER_SUCCESS,
+    (s, filter) => u(s, {
+      sfilter: {$set: filter},
+      sfilterError: {$set: null},
+      sfilterLoading: {$set: false},
+      filter: {$set: filter}
+    })
+  ),
+
   [a.CREATE_SFILTER_SUCCESS]: (s, filter) => {
     // This is a little unconventional but, whatever
     let secrets = window.localStorage.getItem('secrets')
@@ -42,25 +66,8 @@ export default createReducer(initialState, {
     secrets[filter.sid] = filter.secret
     window.localStorage.setItem('secrets', JSON.stringify(secrets))
 
-    return u(s, {
-      sfilter: {$set: filter},
-      sfilterError: {$set: null},
-      sfilterLoading: {$set: false},
-      filter: {$set: filter}
-    })
+    return reducers[a.UPDATE_SFILTER_SUCCESS](s, filter)
   },
-
-  [a.UPDATE_SFILTER_REQUEST]: (s) => u(s, {sfilterLoading: {$set: true}}),
-  [a.UPDATE_SFILTER_FAILURE]: (s, error) => u(s, {
-    sfilterLoading: {$set: false},
-    sfilterError: {$set: error}
-  }),
-  [a.UPDATE_SFILTER_SUCCESS]: (s, filter) => u(s, {
-    sfilter: {$set: filter},
-    sfilterError: {$set: null},
-    sfilterLoading: {$set: false},
-    filter: {$set: filter}
-  }),
 
   /********************/
   /* Games
@@ -92,4 +99,6 @@ export default createReducer(initialState, {
       batches: {$set: []}
     }
   })
-})
+}
+
+export default createReducer(initialState, reducers)
