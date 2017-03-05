@@ -1,14 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { actions } from 'redux-router5'
 import { Page } from 'src/Layout'
 import { sfilter as sfilterSelector } from '../filter/selectors'
-import { showSfilter } from '../filter/actions'
+import { showSfilter, loadFrontPageFilters } from '../filter/actions'
 import FilterApp from './FilterApp'
 
 @connect((s) => ({
   sfilter: sfilterSelector(s)
 }), {
-  showSfilter
+  showSfilter,
+  loadFrontPageFilters,
+  navigateTo: actions.navigateTo
 })
 export default class FilterAppPage extends React.Component {
   propTypes: {
@@ -16,7 +19,9 @@ export default class FilterAppPage extends React.Component {
     slug: React.PropTypes.string,
     showSfilter: React.PropTypes.func,
     loadFrontPageFilters: React.PropTypes.func,
-    sfilter: React.PropTypes.object
+    loadFrontPageFilters: React.PropTypes.func,
+    sfilter: React.PropTypes.object,
+    navigateTo: React.PropTypes.func
   }
 
   componentWillMount () {
@@ -34,11 +39,18 @@ export default class FilterAppPage extends React.Component {
     this.loadSfilter(props)
   }
 
+  componentWillReceiveProps (props) {
+    let { sid, slug, sfilter, navigateTo } = props
+    if (sid && !slug && sfilter && sfilter.nameSlug) {
+      navigateTo('filterFull', {sid: sfilter.sid, slug: sfilter.nameSlug})
+    }
+  }
+
   loadSfilter ({sid, slug, sfilter}) {
     if (sid && (!sfilter || sfilter.sid !== sid)) {
       this.props.showSfilter(sid)
     } else if (!sid && (!sfilter || sfilter.frontPage !== 0)) {
-      this.props.showSfilter('0')
+      this.props.loadFrontPageFilters()
     }
   }
 

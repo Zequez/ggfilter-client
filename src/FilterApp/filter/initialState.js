@@ -46,5 +46,7 @@ export default {
     loading: false,
     error: null,
     totalCount: null
-  }
+  },
+
+  frontPageFilters: []
 }

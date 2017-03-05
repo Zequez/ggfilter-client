@@ -49,3 +49,15 @@ export const watchShowFilterRequest = sagaCreator(
     yield put(a.getGames(0))
   }
 )
+
+export const watchFrontPageFilterRequest = sagaCreator(
+  a.LOAD_FRONT_PAGE_FILTERS_REQUEST,
+  a.LOAD_FRONT_PAGE_FILTERS_SUCCESS,
+  a.LOAD_FRONT_PAGE_FILTERS_FAILURE,
+  function* () {
+    return yield call(Api.filters.index, {frontPage: true})
+  },
+  function* () {
+    yield put(a.getGames(0))
+  }
+)

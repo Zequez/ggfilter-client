@@ -70,6 +70,16 @@ const reducers = {
   },
 
   /********************/
+  /* Front Page Filters
+  /********************/
+
+  [a.LOAD_FRONT_PAGE_FILTERS_SUCCESS]: (s, filters) => u(s, {
+    sfilter: {$set: filters[0]},
+    filter: {$set: filters[0]},
+    frontPageFilters: {$set: filters}
+  }),
+
+  /********************/
   /* Games
   /********************/
 

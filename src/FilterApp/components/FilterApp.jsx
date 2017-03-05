@@ -12,6 +12,7 @@ import GamesLoader from './GamesLoader'
 import CategoriesList from './CategoriesList'
 import QueryChipsList from './QueryChipsList'
 import SfilterBar from './SfilterBar'
+import FrontPageFilters from './FrontPageFilters'
 
 import { AppBar } from 'src/Layout'
 
@@ -73,6 +74,7 @@ export default class FilterApp extends Component {
             controlsParams={p.newFilter.controlsParams}
             onRemove={this.onRemoveFilter}/>
         </AppBar>
+        <FrontPageFilters/>
         <CategoriesList/>
         <Table
           gamesPages={p.games}

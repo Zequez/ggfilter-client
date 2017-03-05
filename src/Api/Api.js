@@ -5,7 +5,7 @@ export default {
     index: (params) => api.get(`games.json`, {params}).then(withMeta)
   },
   filters: {
-    index: () => get(`/filters.json`),
+    index: (params) => get(`/filters.json`, snake(params)).then(camel),
     show: ({sid}) => get(`/filters/${sid}.json`).then(camel),
     create: ({filter}) => post(`/filters`,
       {
