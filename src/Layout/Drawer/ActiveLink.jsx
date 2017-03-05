@@ -1,9 +1,10 @@
 import React, { PropTypes as t, Component } from 'react'
-import { Link } from 'redux-little-router'
-import { connect } from 'react-redux'
+// import { Link, Route } from 'react-router-dom'
+// import { connect } from 'react-redux'
 import cx from 'classnames'
+import Link from 'shared/components/Link'
 
-@connect((s) => ({ router: s.router }))
+// @connect((s) => ({ router: s.router }))
 export default class ActiveLink extends Component {
   static propTypes = {
     href: t.string.isRequired,
@@ -13,17 +14,17 @@ export default class ActiveLink extends Component {
   }
 
   render () {
-    let { href, target, className, activeClassName, children, router } = this.props
-    let Comp = href.startsWith('http') ? 'a' : Link
+    let { href, target, className, activeClassName, children } = this.props
 
-    let classNames = cx(className, {
-      [activeClassName]: router.pathname === href
-    })
+    let classNames = cx(className)
+    // , {
+    //   [activeClassName]: router.pathname === href
+    // })
 
     return (
-      <Comp href={href} target={target} className={classNames}>
+      <Link to={href} target={target} className={classNames}>
         {children}
-      </Comp>
+      </Link>
     )
   }
 }

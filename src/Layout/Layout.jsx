@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { closeDrawer } from './reducer'
 import { drawerOpen } from './selectors'
 
-import Drawer from './Drawer'
+import { Drawer } from './Drawer'
 
 @connect((s) => ({ drawerOpen: drawerOpen(s) }), { closeDrawer })
 export default class Layout extends Component {
@@ -22,7 +22,6 @@ export default class Layout extends Component {
 
   render () {
     let { children, drawerOpen } = this.props
-
     return (
       <div className={th.Layout}>
         <Drawer expanded={drawerOpen} onRequestClose={this.onRequestClose}/>

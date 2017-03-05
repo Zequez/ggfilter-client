@@ -73,4 +73,10 @@ export const SHOW_SFILTER_REQUEST = 'filter/SHOW_SFILTER_REQUEST'
 export const SHOW_SFILTER_SUCCESS = 'filter/SHOW_SFILTER_SUCCESS'
 export const SHOW_SFILTER_FAILURE = 'filter/SHOW_SFILTER_FAILURE'
 export const showSfilter = (sid) =>
-  ({type: SHOW_SFILTER_REQUEST, payload: sid})
+  ({type: SHOW_SFILTER_REQUEST, payload: {sid}})
+
+// export const LOAD_FRONT_PAGE_FILTERS_REQUEST = 'filter/LOAD_FRONT_PAGE_FILTERS_REQUEST'
+// export const LOAD_FRONT_PAGE_FILTERS_SUCCESS = 'filter/LOAD_FRONT_PAGE_FILTERS_SUCCESS'
+// export const LOAD_FRONT_PAGE_FILTERS_FAILURE = 'filter/LOAD_FRONT_PAGE_FILTERS_FAILURE'
+// export const loadFrontPageFilters = (sid) =>
+//   ({type: LOAD_FRONT_PAGE_FILTERS_REQUEST, payload: null})

@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
-
+import { router5Reducer } from 'redux-router5'
 import { reducer as responsive } from 'redux-mediaquery'
+
 import { reducer as layout } from 'src/Layout/reducer'
 import { ID as layoutId } from 'src/Layout/selectors'
 
@@ -12,6 +13,7 @@ import * as FilterApp from 'src/FilterApp'
 import * as Lightbox from 'src/Lightbox'
 
 const reducer = combineReducers({
+  router: router5Reducer,
   responsive,
   tags,
   auth,

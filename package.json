@@ -121,11 +121,12 @@
     "react-draggable": "^2.2.1",
     "react-redux": "^4.4.5",
     "redux": "^3.6.0",
-    "redux-little-router": "^12.1.2",
     "redux-mediaquery": "^0.10.0",
+    "redux-router5": "^4.2.3",
     "redux-saga": "^0.14.3",
     "redux-thunk": "^2.1.0",
     "reselect": "^2.5.4",
+    "router5": "^4.5.1",
     "tslint": "^4.4.2"
   }
 }

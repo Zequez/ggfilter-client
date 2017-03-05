@@ -2,16 +2,17 @@ import th from './Drawer.sass'
 import React, { Component } from 'react'
 import Ripple from 'shared/components/Ripple'
 import Icon from 'shared/components/Icon'
-import ActiveLink from './ActiveLink'
+// import ActiveLink from './ActiveLink'
+import Link from 'shared/components/Link'
 
 class Item extends Component {
   render () {
-    let { href, children, icon, label, target } = this.props
+    let { to, children, icon, label, target } = this.props
 
     return (
       <li className={th.Drawer__Item}>
-        <ActiveLink
-          href={href}
+        <Link
+          to={to}
           target={target}
           className={th.Drawer__Link}
           activeClassName={th.Drawer__Link_active}>
@@ -19,7 +20,7 @@ class Item extends Component {
           <span className={th.Drawer__Label}>
             {label}
           </span>
-        </ActiveLink>
+        </Link>
         {children}
       </li>
     )

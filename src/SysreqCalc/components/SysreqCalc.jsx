@@ -1,7 +1,7 @@
 import th from '../theme'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link, PUSH } from 'redux-little-router'
+import { actions } from 'redux-router5'
 import { snapTo } from 'shared/lib/utils'
 import Api from 'src/Api'
 
@@ -9,6 +9,7 @@ import { AutoPage } from 'src/Layout'
 
 import Chip from 'shared/components/Chip'
 import Button from 'shared/components/Button'
+import Link from 'shared/components/Link'
 
 import SuggestionsBox from './SuggestionsBox'
 import CalcResult from './CalcResult'
@@ -20,7 +21,7 @@ const { setControlParams, setSorting, setControl } = require('src/FilterApp').ac
   setControl: setControl,
   setParam: setControlParams,
   setSort: setSorting,
-  puthLocation: (payload) => ({type: PUSH, payload})
+  puthLocation: actions.navigateTo
 })
 export default class SysreqCalc extends Component {
   state = {
@@ -71,7 +72,7 @@ export default class SysreqCalc extends Component {
     this.props.setControl('sysreq_index_pct', true)
     this.props.setParam('sysreq_index_pct', {gt: 0, lt: snapTo(lt, 5)})
     this.props.setSort('sysreq_index_pct', false)
-    this.props.puthLocation('/f')
+    this.props.puthLocation('filterRedirect')
   }
 
   calculatedValues () {
@@ -127,7 +128,7 @@ export default class SysreqCalc extends Component {
         <p className={th.info}>
           The System Requirements Index is a very coarse number
           that we are working on improving.
-          It's <Link href='/about-sysreq'>calculated by an automated algorithm</Link>.
+          It's <Link to='aboutSysreq'>calculated by an automated algorithm</Link>.
         </p>
         <div className={th.actionBar}>
           <Button

@@ -1,17 +1,15 @@
 import FilterApp from './components/FilterApp'
 import FilterAppPage from './components/FilterAppPage'
+import RedirectToCurrentFilter from './components/RedirectToCurrentFilter'
 import reducer from './reducer'
-import routing from './routing'
 
 const filter = require('./filter')
-
-// import { encode, decode } from './lib/filterEncoder'
 
 module.exports = {
   FilterApp,
   FilterAppPage,
+  RedirectToCurrentFilter,
   reducer,
-  routing,
   sagas: filter.sagas,
 
   actions: {

@@ -2864,16 +2864,6 @@ history@^4.0.0:
     value-equal "^0.1.1"
     warning "^3.0.0"
 
-history@^4.4.1:
-  version "4.5.1"
-  resolved "https://registry.yarnpkg.com/history/-/history-4.5.1.tgz#44935a51021e3b8e67ebac267a35675732aba569"
-  dependencies:
-    invariant "^2.2.1"
-    loose-envify "^1.2.0"
-    resolve-pathname "^2.0.0"
-    value-equal "^0.2.0"
-    warning "^3.0.0"
-
 hoek@2.x.x:
   version "2.16.3"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
@@ -3001,6 +2991,10 @@ immutability-helper:
   resolved "https://registry.yarnpkg.com/immutability-helper/-/immutability-helper-2.0.0.tgz#371657666eacf96f731f9f97e5cccd920b13a5d4"
   dependencies:
     invariant "^2.2.0"
+
+immutable@^3.0.0:
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
 
 imurmurhash@^0.1.4:
   version "0.1.4"
@@ -4611,6 +4605,12 @@ path-parse@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.5.tgz#3c1adf871ea9cd6c9431b6ea2bd74a0ff055c4c1"
 
+path-parser@2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/path-parser/-/path-parser-2.0.2.tgz#ab90ed1053b682681d1120a69208f6f6a6a734c2"
+  dependencies:
+    search-params "~1.3.0"
+
 path-to-regexp@0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/path-to-regexp/-/path-to-regexp-0.1.7.tgz#df604178005f522f15eb4490e7247a1bfaa67f8c"
@@ -5012,13 +5012,6 @@ query-string@^4.1.0:
     object-assign "^4.1.0"
     strict-uri-encode "^1.0.0"
 
-query-string@^4.2.3:
-  version "4.3.1"
-  resolved "https://registry.yarnpkg.com/query-string/-/query-string-4.3.1.tgz#54baada6713eafc92be75c47a731f2ebd09cd11d"
-  dependencies:
-    object-assign "^4.1.0"
-    strict-uri-encode "^1.0.0"
-
 querystring-es3@~0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/querystring-es3/-/querystring-es3-0.2.1.tgz#9ec61f79049875707d69414596fd907a4d711e73"
@@ -5280,18 +5273,17 @@ redux-devtools@^3.3.1:
     redux "^3.5.2"
     redux-devtools-instrument "^1.0.1"
 
-redux-little-router:
-  version "12.1.2"
-  resolved "https://registry.yarnpkg.com/redux-little-router/-/redux-little-router-12.1.2.tgz#27544f4c7f97d4430b67c00d2ef75ac80faea2db"
-  dependencies:
-    history "^4.4.1"
-    lodash.assign "^4.2.0"
-    query-string "^4.2.3"
-    url-pattern "^1.0.1"
-
 redux-mediaquery:
   version "0.10.0"
   resolved "https://registry.yarnpkg.com/redux-mediaquery/-/redux-mediaquery-0.10.0.tgz#500c45176e13fde55ac98fda567fe1ae8a7ebd30"
+
+redux-router5:
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/redux-router5/-/redux-router5-4.2.3.tgz#ace7072ebc0684a1c13a2f11a491df87478a6d98"
+  dependencies:
+    router5.transition-path "~4.0.1"
+  optionalDependencies:
+    immutable "^3.0.0"
 
 redux-saga:
   version "0.14.3"
@@ -5504,6 +5496,24 @@ ripemd160@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ripemd160/-/ripemd160-1.0.1.tgz#93a4bbd4942bc574b69a8fa57c71de10ecca7d6e"
 
+route-node@1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/route-node/-/route-node-1.8.1.tgz#9f6bf024fe569e8b4d3c1ee5277e94364a521dbc"
+  dependencies:
+    path-parser "2.0.2"
+    search-params "~1.3.0"
+
+router5:
+  version "4.5.1"
+  resolved "https://registry.yarnpkg.com/router5/-/router5-4.5.1.tgz#d1103e32849ef70a02cb3ecff553eb84cedd2fac"
+  dependencies:
+    route-node "1.8.1"
+    router5.transition-path "4.0.1"
+
+router5.transition-path@~4.0.1, router5.transition-path@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/router5.transition-path/-/router5.transition-path-4.0.1.tgz#6d61d6b78e233aeff2e68f3b91b9a83338c2f723"
+
 run-async@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/run-async/-/run-async-0.1.0.tgz#c8ad4a5e110661e402a7d21b530e009f25f8e389"
@@ -5552,6 +5562,10 @@ sass-loader@^4.0.2:
 sax@^1.1.4, sax@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
+
+search-params@~1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/search-params/-/search-params-1.3.0.tgz#ba1e1c01dcbd8a2e41a25236f602f2cbf710d688"
 
 select-hose@^2.0.0:
   version "2.0.0"
@@ -6142,10 +6156,6 @@ url-parse@1.0.x:
     querystringify "0.0.x"
     requires-port "1.0.x"
 
-url-pattern@^1.0.1:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/url-pattern/-/url-pattern-1.0.2.tgz#cc7a8bc813558c9ddf56f7b02b8104df436008e9"
-
 url@~0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/url/-/url-0.11.0.tgz#3838e97cfc60521eb73c525a8e55bfdd9e2e28f1"
@@ -6187,10 +6197,6 @@ validate-npm-package-license@^3.0.1:
 value-equal@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/value-equal/-/value-equal-0.1.1.tgz#b174df21f203c81e17f2e4d59d3a900024cbef7b"
-
-value-equal@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/value-equal/-/value-equal-0.2.0.tgz#4f41c60a3fc011139a2ec3d3340a8998ae8b69c0"
 
 vary@~1.1.0:
   version "1.1.0"

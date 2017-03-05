@@ -56,5 +56,8 @@ Thumbs.db
 # Typescript stuff
 *.map
 
+# IDEs and text editors
+.vscode
+
 # The compiled stuff
 /gem/app/assets/*

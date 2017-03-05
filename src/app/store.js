@@ -1,33 +1,38 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { mediaQueryTracker } from 'redux-mediaquery'
-import { routerForBrowser } from 'redux-little-router'
 import createSagaMiddleware from 'redux-saga'
+import { router5Middleware } from 'redux-router5'
 import middlewares from './middlewares'
 
+import router from './router'
 import reducer from './reducer'
-import routes from './routes'
 import sagas from './sagas'
+import mediaQueries from './mediaQueries'
 
-const { routerEnhancer, routerMiddleware } = routerForBrowser({ routes })
 const sagaMiddleware = createSagaMiddleware()
 
-const store = createStore(reducer, {}, compose(
-  routerEnhancer,
-  applyMiddleware(sagaMiddleware, thunkMiddleware, ...middlewares, routerMiddleware),
-  window.devToolsExtension ? window.devToolsExtension() : f => f
-))
+const middlewaresEnhancer = applyMiddleware(
+  sagaMiddleware,
+  thunkMiddleware,
+  ...middlewares,
+  router5Middleware(router)
+)
+
+const devToolsEnhancer = window.devToolsExtension
+  ? window.devToolsExtension()
+  : f => f
+
+const storeEnhancers = [
+  middlewaresEnhancer,
+  devToolsEnhancer
+]
+
+const store = createStore(reducer, {}, compose(...storeEnhancers))
 
 sagaMiddleware.run(sagas)
-
-store.dispatch(mediaQueryTracker({
-  isPhone: 'screen and (max-width: 767px)',
-  isTablet: 'screen and (max-width: 1024px) and (min-width: 768px)',
-  isDesktop: 'screen and (max-width: 1600px) and (min-width: 1025)',
-  isBigDesktop: 'screen and (min-width: 1601px)',
-  innerWidth: true,
-  innerHeight: true
-}))
+store.dispatch(mediaQueryTracker(mediaQueries))
+router.start()
 
 if (module.hot) {
   // Enable Webpack hot module replacement for reducers

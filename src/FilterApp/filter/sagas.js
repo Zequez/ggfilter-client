@@ -1,7 +1,6 @@
 import { call, put, select, fork } from 'redux-saga/effects'
-import { PUSH } from 'redux-little-router'
+import { actions } from 'redux-router5'
 import Api, { sagaCreator } from 'src/Api'
-import { urls } from '../routing'
 import * as selectors from './selectors'
 import * as a from './actions'
 
@@ -29,8 +28,8 @@ export const watchCreateFilterRequest = sagaCreator(
   a.CREATE_SFILTER_SUCCESS,
   a.CREATE_SFILTER_FAILURE,
   Api.filters.create,
-  function* (result) {
-    yield put({type: PUSH, payload: urls.filter(result)})
+  function* (f) {
+    yield put(actions.navigateTo('filterFull', {sid: f.sid, slug: f.nameSlug}))
   }
 )
 
