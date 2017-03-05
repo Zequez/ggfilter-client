@@ -48,6 +48,8 @@ export default class Lightbox extends Component {
   }
 
   onKeyDown = (ev) => {
+    if (!this.isVisible()) return
+
     let i = this.state.selected
     let key = ev.charCode || ev.keyCode
     switch (key) {
@@ -85,11 +87,15 @@ export default class Lightbox extends Component {
     }
   }
 
+  isVisible () {
+    return this.props.media.length > 0
+  }
+
   render () {
     const { media, thumbnails } = this.props
     const { selected, loading } = this.state
 
-    if (!media.length) return (<div></div>)
+    if (!this.isVisible()) return (<div></div>)
 
     const thumbnailsElements = thumbnails.map((t, i) => (
       <li key={i} className={cx(
