@@ -13,18 +13,20 @@ export class Link extends React.Component {
   }
 
   onClick = (ev) => {
-    if (!this.props.to.match(/^https?:\/\//)) {
+    if (!this.isRaw()) {
       ev.preventDefault()
       this.props.navigateTo(this.props.to)
     }
   }
+
+  isRaw = () => !!this.props.to.match(/^https?:\/\//)
 
   render () {
     let { to, children, className, target } = this.props
 
     return (
       <a
-        href={paths(to)}
+        href={this.isRaw() ? to : paths(to)}
         onClick={this.onClick}
         className={className}
         target={target}>
