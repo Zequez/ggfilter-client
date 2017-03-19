@@ -8,4 +8,4 @@ const MenuButton = ({openDrawer}) => (
   <Icon icon='menu' className={th.Layout__MenuButton} onClick={openDrawer}/>
 )
 
-export default connect((s) => ({}), { openDrawer })(MenuButton)
+export default connect(null, { openDrawer })(MenuButton)
