@@ -61,3 +61,7 @@ Thumbs.db
 
 # The compiled stuff
 /gem/app/assets/*
+#*/
+
+stats.json
+stats2.json
