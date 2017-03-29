@@ -73,11 +73,11 @@ const reducers = {
   /* Front Page Filters
   /********************/
 
-  [a.LOAD_FRONT_PAGE_FILTERS_SUCCESS]: (s, filters) => u(s, {
+  [a.LOAD_FRONT_PAGE_FILTERS_SUCCESS]: (s, filters) => filters.length ? u(s, {
     sfilter: {$set: filters[0]},
     filter: {$set: filters[0]},
     frontPageFilters: {$set: filters}
-  }),
+  }) : s,
 
   /********************/
   /* Games

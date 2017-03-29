@@ -60,6 +60,7 @@ Thumbs.db
 .vscode
 
 # The compiled stuff
+/gem/ggfilter_client.gemspec
 /gem/app/assets/*
 #*/
 
