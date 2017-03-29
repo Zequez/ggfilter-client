@@ -74,7 +74,7 @@ export default class FilterApp extends Component {
             controlsParams={p.newFilter.controlsParams}
             onRemove={this.onRemoveFilter}/>
         </AppBar>
-        <FrontPageFilters/>
+        {/*<FrontPageFilters/>*/}
         <CategoriesList/>
         <Table
           gamesPages={p.games}

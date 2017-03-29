@@ -37,11 +37,11 @@ function renderWithHot (App) {
   )
 }
 
-// if (module.hot) {
-//   module.hot.accept()
-//   module.hot.dispose(() => {
-//     router.unbind()
-//   })
-// }
+if (module.hot) {
+  module.hot.accept()
+  // module.hot.dispose(() => {
+  //   router.unbind()
+  // })
+}
 
 export default {}
