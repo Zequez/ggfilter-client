@@ -4,7 +4,7 @@ $fa-font-path: 'font-awesome/fonts/'
 @import "../../../../node_modules/font-awesome/scss/_path"
 @import "../../../../node_modules/font-awesome/scss/_core"
 
-:global(.fa)
+\:global(.fa)
   display: inline-block
   width: $g*3
   height: $g*3
@@ -20,16 +20,16 @@ $fa-font-path: 'font-awesome/fonts/'
   -moz-osx-font-smoothing: grayscale
 
 @mixin gicon($name, $var, $combined: false)
-  :global(.icon-#{$name}:before)
+  \:global(.icon-#{$name}:before)
     content: $var
   @if $combined
-    :global(.icon-#{$name}:after)
+    \:global(.icon-#{$name}:after)
       content: $combined
       font-size: $g*2
 
 // Stores
 +gicon(store-steam, $fa-var-steam)
-:global(.icon-store-oculus:before)
+\:global(.icon-store-oculus:before)
   content: ' '
   display: inline-block
   height: 0.3em
@@ -109,14 +109,14 @@ $fa-font-path: 'font-awesome/fonts/'
 // +gicon(boolean-players-cross_platform, $fa-var-playstation)
 
 +gicon(boolean-stores-steam, $fa-var-steam)
-:global(.icon-boolean-stores-oculus:before)
+\:global(.icon-boolean-stores-oculus:before)
   @extend :global(.icon-store-oculus:before)
 
 +gicon(boolean-vr_platforms-vive, $fa-var-play-circle)
-:global(.icon-boolean-vr_platforms-vive)
+\:global(.icon-boolean-vr_platforms-vive)
   // transform-origin: 50% 67%
   transform: rotate(-90deg)
-:global(.icon-boolean-vr_platforms-rift:before)
+\:global(.icon-boolean-vr_platforms-rift:before)
   @extend :global(.icon-store-oculus:before)
 +gicon(boolean-vr_platforms-osvr, $fa-var-folder-open-o)
 
