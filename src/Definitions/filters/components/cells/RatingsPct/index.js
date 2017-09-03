@@ -1,0 +1,1 @@
+export { RatingsPct } from './RatingsPct';

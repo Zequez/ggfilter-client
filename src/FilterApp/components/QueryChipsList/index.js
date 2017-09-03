@@ -1,1 +1,1 @@
-export default from './QueryChipsList'
+export { default } from './QueryChipsList';

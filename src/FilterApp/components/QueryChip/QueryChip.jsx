@@ -7,7 +7,6 @@ import { isQueryEmpty } from '../../lib/utils'
 
 import Icon from 'shared/components/Icon'
 import tooltipFactory from 'shared/components/Tooltip'
-import * as chips from './chips'
 
 const TooltipDiv = tooltipFactory('div', { position: 'top' })
 
@@ -32,7 +31,7 @@ export default class QueryChip extends Component {
     const { query, control, icon, onRemove,
             children, onClick, className, tooltipPre, hl } = this.props
 
-    const ChipComponent = chips[control.chip]
+    const ChipComponent = control.chip
     const divClassName = cx(th.QueryChip, className, {
       [th.QueryChip_hl]: hl
     })

@@ -1,0 +1,1 @@
+export { MultiPrice } from './MultiPrice';

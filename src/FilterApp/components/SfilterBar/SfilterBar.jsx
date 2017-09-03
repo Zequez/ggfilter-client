@@ -8,18 +8,18 @@ import SaveButtons from './SaveButtons'
 import NameEditor from './NameEditor'
 import { canUpdateFilter } from './utils'
 
-type Props = {
-  secrets: { [key: string]: string },
-  filter: any,
-  sfilterIsDirty: boolean,
-  actualFilterIsDirty: boolean,
-  currentUser: {
-    isAdmin: boolean
-  },
-  setName: () => void,
-  createSfilter: () => void,
-  updateSfilter: () => void
-}
+// type Props = {
+//   secrets: { [key: string]: string },
+//   filter: any,
+//   sfilterIsDirty: boolean,
+//   actualFilterIsDirty: boolean,
+//   currentUser: {
+//     isAdmin: boolean
+//   },
+//   setName: () => void,
+//   createSfilter: () => void,
+//   updateSfilter: () => void
+// }
 
 @connect((s) => ({
   secrets: filterSel.secrets(s),
@@ -33,7 +33,7 @@ type Props = {
   updateSfilter: filterAct.updateSfilter
 })
 export default class SfilterBar extends Component {
-  props : Props
+  // props : Props
 
   onNameChange = (value) => {
     this.props.setName(value)

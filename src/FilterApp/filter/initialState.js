@@ -8,22 +8,31 @@ const filter = {
   name: 'Name of your filter',
 
   controlsList: [
-    'name', 'tags', 'released_at',
-    'lowest_price', 'best_discount',
-    'playtime_median', 'ratings_pct'
+    'Name',
+    'Tags',
+    'RelativeReleaseDate',
+
+    // 'tags', 'released_at',
+    // 'lowest_price', 'best_discount',
+    // 'playtime_median', 'ratings_pct'
   ],
-  controlsHlMode: ['lowest_price'],
+  controlsHlMode: [],
   controlsParams: {
-    best_discount: {gt: 1, lt: null}
+    // best_discount: {gt: 1, lt: null}
+    'Name': { value: 'civ' }
   },
   columnsList: [
-    'name', 'tags', 'released_at',
-    'lowest_price',
-    'playtime_median', 'ratings_pct'
+    'Name',
+    'Tags',
+    'RelativeReleaseDate'
+    // , 'tags', 'released_at',
+    // 'lowest_price',
+    // 'playtime_median', 'ratings_pct'
   ],
   columnsParams: {},
   sorting: {
-    column: 'ratings_pct',
+    // column: 'ratings_pct',
+    column: 'Name',
     direction: true,
     nullFirst: false
   },

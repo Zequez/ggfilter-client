@@ -1,16 +1,15 @@
 import th from './Body.sass'
 import React from 'react'
 import cx from 'classnames'
-import * as columnsDefinitions from '../columns'
 import { partial } from 'shared/lib/utils'
 
-function columnInputValues (game, column) {
-  var columnInputs = {}
-  for (let inputName in column.columnInputs) {
-    let columnName = column.columnInputs[inputName]
-    columnInputs[inputName] = game[columnName]
+function cellInputValues (game, column) {
+  var cellInputs = {}
+  for (let inputName in column.cellInputs) {
+    let columnName = column.cellInputs[inputName]
+    cellInputs[inputName] = game[columnName]
   }
-  return columnInputs
+  return cellInputs
 }
 
 export default ({game, column, setParam, columnParams}) => {
@@ -24,15 +23,11 @@ export default ({game, column, setParam, columnParams}) => {
     }
   )
 
-  let Component = columnsDefinitions[column.column]
+  let Component = column.cell
 
-  let props = {
-    options: column.columnOptions,
-    name: column.name,
-    ...columnInputValues(game, column)
-  }
+  let props = cellInputValues(game, column)
 
-  if (column.columnActive) {
+  if (Component.active) {
     props.setParam = partial(setParam, column.name)
     props.columnParams = (columnParams !== true && columnParams !== false) ? columnParams : undefined
   }

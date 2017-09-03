@@ -1,1 +1,1 @@
-export default from './FrontPageFilters'
+export { default } from './FrontPageFilters';

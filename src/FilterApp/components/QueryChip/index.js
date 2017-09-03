@@ -1,1 +1,1 @@
-export default from './QueryChip'
+export { default } from './QueryChip';

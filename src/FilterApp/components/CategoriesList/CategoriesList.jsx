@@ -1,7 +1,7 @@
 import th from './CategoriesList.sass'
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
-import definitions from '../../lib/definitions'
+import definitions from '../../../Definitions'
 
 const {
   selectors: { controlsList },

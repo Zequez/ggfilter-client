@@ -1,7 +1,6 @@
 import th from './Control.sass'
 import React, { PropTypes as t, Component } from 'react'
 import cx from 'classnames'
-import * as controlsDefinitions from './controls'
 import { isQueryEmpty } from '../../lib/utils'
 
 export default class ControlComponent extends Component {
@@ -25,7 +24,7 @@ export default class ControlComponent extends Component {
       onChange: (value) => onChange(value === null ? true : value)
     }
 
-    let Component = controlsDefinitions[filter.control]
+    let Component = filter.control
 
     return (
       <div className={cx(th.Control, filter.name)}>

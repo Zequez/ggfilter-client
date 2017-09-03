@@ -1,0 +1,58 @@
+.MultiPrice
+  display: flex
+  height: $g*5
+  width: 100%
+  float: left
+
+.__Price
+  position: relative
+  display: flex
+  flex-basis: 100px
+  flex-grow: 1
+  border: solid 2px transparent
+  justify-content: center
+  align-items: center
+  color: $color-text-sec
+  &:hover
+    .__current
+      color: $color-sec
+
+.__Price_lowest
+  border-color: $color-mono-3
+  background-color: $color-mono-3
+  // .__current
+    // font-size: $font-size-input
+.__Price_discounted
+  justify-content: flex-end
+.__current
+  font-weight: $font-weight-medium
+.__regular
+  position: absolute
+  left: $g
+  bottom: 0
+  text-decoration: line-through
+  line-height: $g*2
+  color: $color-text-dis
+  font-size: $font-size-caption
+.__Discount
+  position: absolute
+  left: $g
+  top: 0
+  padding: 0 2px
+  border-radius: 2px
+  background: $color-pri-light
+  font-size: $font-size-caption
+  color: $color-text-pri-alt
+  line-height: $g*2
+  .__deco
+    color: $color-text-sec-alt
+.__Discount_low
+  background: $color-pri-light
+.__Discount_medium
+  background: $color-pri
+.__Discount_high
+  background: $color-pri-dark
+
+.__deco
+  color: $color-text-dis
+  font-size: $font-size-caption

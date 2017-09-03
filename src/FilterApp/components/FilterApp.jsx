@@ -2,7 +2,7 @@ import th from './FilterApp.sass'
 import React, { PropTypes as t, Component } from 'react'
 import { connect } from 'react-redux'
 
-import definitions from '../lib/definitions'
+import definitions from '../../Definitions'
 
 import { setControlParams, getGames } from '../filter/actions'
 import * as filterSel from '../filter/selectors'
@@ -13,6 +13,7 @@ import CategoriesList from './CategoriesList'
 import QueryChipsList from './QueryChipsList'
 import SfilterBar from './SfilterBar'
 import FrontPageFilters from './FrontPageFilters'
+import FiltersPanel from './FiltersPanel'
 
 import { AppBar } from 'src/Layout'
 
@@ -49,9 +50,10 @@ export default class FilterApp extends Component {
 
   // This is hacky, but it's now the convention
   fillStaticFiltersDefinitionsOptions () {
-    definitions.filters.tags.controlOptions.tags = this.props.tags
-    definitions.filters.tags.columnOptions.tags = this.props.tags
-    definitions.filters.tags.chipOptions.tags = this.props.tags
+    definitions.filters.Tags.cell.tags = this.props.tags
+    // definitions.filters.tags.controlOptions.tags = this.props.tags
+    // definitions.filters.tags.columnOptions.tags = this.props.tags
+    // definitions.filters.tags.chipOptions.tags = this.props.tags
   }
 
   handleRequestMoreGames = () => {
@@ -74,6 +76,7 @@ export default class FilterApp extends Component {
             controlsParams={p.newFilter.controlsParams}
             onRemove={this.onRemoveFilter}/>
         </AppBar>
+        {/* <FiltersPanel/>  */}
         {/*<FrontPageFilters/>*/}
         <CategoriesList/>
         <Table

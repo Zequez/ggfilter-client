@@ -98,7 +98,7 @@ export default {
   //   if (gt === v.no && lt === v.partial) return 'with <partial or no controller support>'
   //   return ''
   // },
-  name: ({value}) => `with the name <"${h(value)}">`,
+  Name: ({value}) => `with the name <"${h(value)}">`,
   steam_id: ({value}) => `with the Steam ID <${h(value)}>`,
   lowest_price: priceFilter('the lowest price'),
   steam_price: priceFilter('Steam'),

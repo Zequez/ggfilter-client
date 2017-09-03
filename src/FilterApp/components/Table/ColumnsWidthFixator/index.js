@@ -1,1 +1,1 @@
-export default from './ColumnsWidthFixator'
+export { default } from './ColumnsWidthFixator';

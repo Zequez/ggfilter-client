@@ -14,20 +14,20 @@ export default class ResizeHandle extends Component {
     clientX: 0
   }
 
-  onDrag (ev, cEv) {
+  onDrag = (ev, cEv) => {
     this.setState({clientX: this.state.clientX + cEv.deltaX})
   }
 
-  onDragStart (ev, cEv) {
+  onDragStart = (ev, cEv) => {
     this.startX = cEv.x
   }
 
-  onDragStop (ev, cEv) {
+  onDragStop = (ev, cEv) => {
     this.props.onStop(cEv.x - this.startX)
     this.setState({clientX: 0})
   }
 
-  handleClick (ev) {
+  handleClick = (ev) => {
     ev.stopPropagation()
   }
 
@@ -39,13 +39,13 @@ export default class ResizeHandle extends Component {
 
     return (
       <DraggableCore
-        onDrag={::this.onDrag}
-        onStart={::this.onDragStart}
-        onStop={::this.onDragStop}>
+        onDrag={this.onDrag}
+        onStart={this.onDragStart}
+        onStop={this.onDragStop}>
         <div
           className={className}
           style={style}
-          onClick={::this.handleClick}
+          onClick={this.handleClick}
           onDoubleClick={this.props.onDoubleClick}></div>
       </DraggableCore>
     )

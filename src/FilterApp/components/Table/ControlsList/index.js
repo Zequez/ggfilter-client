@@ -1,1 +1,1 @@
-export default from './ControlsList'
+export { default } from './ControlsList';

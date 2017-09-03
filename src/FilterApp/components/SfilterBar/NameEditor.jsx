@@ -6,14 +6,14 @@ import BigInputTheme from './BigInputTheme'
 
 const Input = inputWithTheme(BigInputTheme)
 
-type Props = {
-  value: string,
-  onChange: () => void,
-  canEdit: boolean
-}
+// type Props = {
+//   value: string,
+//   onChange: () => void,
+//   canEdit: boolean
+// }
 
 export default class NameEditor extends Component {
-  props : Props
+  // props : Props
 
   render () {
     let { value, onChange, canEdit } = this.props

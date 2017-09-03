@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { actions } from 'redux-router5'
 import { Page } from 'src/Layout'
 import { sfilter as sfilterSelector } from '../filter/selectors'
-import { showSfilter, loadFrontPageFilters } from '../filter/actions'
+import { showSfilter, loadFrontPageFilters, getGames } from '../filter/actions'
 import FilterApp from './FilterApp'
 
 @connect((s) => ({
@@ -11,17 +11,19 @@ import FilterApp from './FilterApp'
 }), {
   showSfilter,
   loadFrontPageFilters,
+  getGames,
   navigateTo: actions.navigateTo
 })
 export default class FilterAppPage extends React.Component {
-  propTypes: {
+  static propTypes = {
     sid: React.PropTypes.string,
     slug: React.PropTypes.string,
     showSfilter: React.PropTypes.func,
     loadFrontPageFilters: React.PropTypes.func,
     loadFrontPageFilters: React.PropTypes.func,
     sfilter: React.PropTypes.object,
-    navigateTo: React.PropTypes.func
+    navigateTo: React.PropTypes.func,
+    getGames: React.PropTypes.func
   }
 
   componentWillMount () {
@@ -50,7 +52,8 @@ export default class FilterAppPage extends React.Component {
     if (sid && (!sfilter || sfilter.sid !== sid)) {
       this.props.showSfilter(sid)
     } else if (!sid && (!sfilter || sfilter.frontPage !== 0)) {
-      this.props.loadFrontPageFilters()
+      // this.props.loadFrontPageFilters()
+      this.props.getGames(0)
     }
   }
 

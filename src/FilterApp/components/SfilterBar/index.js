@@ -1,1 +1,1 @@
-export default from './SfilterBar'
+export { default } from './SfilterBar';

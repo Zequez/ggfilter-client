@@ -2,13 +2,13 @@ import React, { Component, PropTypes as t } from 'react'
 import ReactDOM from 'react-dom'
 
 export default class Portal extends Component {
-  static propTypes: {
+  static propTypes = {
     onMount: t.func,
     onUpdate: t.func,
     children: t.node
   }
 
-  portalElement: null
+  portalElement = null
 
   componentDidMount () {
     this.portalEl = document.createElement('div')

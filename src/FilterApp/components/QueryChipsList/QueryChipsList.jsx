@@ -1,6 +1,6 @@
 import th from './QueryChipsList.sass'
 import React, { PropTypes as t, Component } from 'react'
-import definitions from '../../lib/definitions'
+import definitions from '../../../Definitions'
 import ControlOpeningChip from './ControlOpeningChip'
 
 export default class QueryChipsList extends Component {

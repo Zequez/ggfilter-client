@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 // import frontPageFilter from './frontPageFilter'
 // import { encode } from '../lib/filterEncoder'
 // import { combiner } from './lib/filterMutator'
-import definitions from '../lib/definitions'
+import definitions from '../../Definitions'
 // import { isQueryActive, isFilterEmpty } from '../lib/utils'
 
 export const ID = 'filter'
@@ -90,17 +90,21 @@ export const filterForApi = createSelector(
   sortingColumn,
   controlsHlMode,
   (controls, controlsParams, sorting, sortingColumn, controlsHlMode) => {
-    let params = {}
+    let queries = {}
     controls.forEach((control) => {
-      let param = controlsParams[control.name]
-      if (param && ~controlsHlMode.indexOf(control.name)) {
-        param = { ...param, hl: true }
+      let controlParam = controlsParams[control.name]
+      if (controlParam && ~controlsHlMode.indexOf(control.name)) {
+        controlParam = { ...controlParam, hl: true }
       }
-      params[control.name] = param || true
+
+      let outputQueries = control.controlOutputs(controlParam || true)
+      for (let apiFilterName in outputQueries) {
+        queries[apiFilterName] = outputQueries[apiFilterName]
+      }
     })
 
     return {
-      params: params,
+      params: queries,
       sort: {
         filter: sortingColumn.sort,
         asc: !sorting.direction
