@@ -1,5 +1,4 @@
 import Filter from './lib/Filter';
-import { composeConfig } from './lib/composeConfig';
 
 // export { Name } from './Name';
 import { Link } from './components/cells/Link';
@@ -10,6 +9,8 @@ import { BooleanCell } from './components/cells/BooleanCell';
 import { RelativeDate } from './components/controls/RelativeDate';
 import { DateRange } from './components/controls/DateRange';
 import { BooleanCtrl } from './components/controls/BooleanCtrl';
+
+export * from './Flags';
 
 export const Name = new Filter('Name', {
   title: 'Name',
@@ -36,21 +37,6 @@ export const AbsoluteReleaseDate = new Filter('AbsoluteReleaseDate', {
   control: DateRange,
   api: 'released_at_absolute'
 });
-
-export const Platforms = new Filter('Platforms', {
-  title: 'Platforms',
-  cell: BooleanCell,
-  control: BooleanCtrl
-});
-//   platforms: {
-//     title: 'Platforms',
-//     control: 'Boolean',
-//     column: 'Boolean',
-//     chip: 'Boolean',
-//     width: 24 * 3 + 10,
-//     alignment: 0
-//   },
-
 
 // export default {
 //   name: {
@@ -411,70 +397,7 @@ export const Platforms = new Filter('Platforms', {
 //     alignment: 0
 //   },
 
-//   // Flags
-//   /*************************************/
 
-//   // steam_features: {
-//   //   title: 'Steam features',
-//   //   control: 'Boolean',
-//   //   column: 'Boolean',
-//   //   chip: 'Boolean',
-//   //   width: 24 * 5 + 10,
-//   //   alignment: 0
-//   // },
-//   platforms: {
-//     title: 'Platforms',
-//     control: 'Boolean',
-//     column: 'Boolean',
-//     chip: 'Boolean',
-//     width: 24 * 3 + 10,
-//     alignment: 0
-//   },
-//   players: {
-//     title: 'Players',
-//     control: 'Boolean',
-//     column: 'Boolean',
-//     chip: 'Boolean',
-//     width: 24 * 4 + 10,
-//     alignment: 0
-//   },
-//   vr_platforms: {
-//     title: 'VR platforms',
-//     control: 'Boolean',
-//     column: 'Boolean',
-//     chip: 'Boolean',
-//     width: 24 * 2 + 10,
-//     alignment: 0
-//   },
-//   controllers: {
-//     title: 'Controllers',
-//     control: 'Boolean',
-//     column: 'Boolean',
-//     chip: 'Boolean',
-//     width: 24 * 2 + 10,
-//     alignment: 0
-//   },
-//   // gamepad: {
-//   //   title: 'Gamepad support',
-//   //   control: false,
-//   //   chip: 'ControllerSupport',
-//   //   shortcuts: [
-//   //     {value: 1},
-//   //     {value: 2},
-//   //     {value: 3}
-//   //   ],
-//   //   column: 'Controller',
-//   //   alignment: 0
-//   // },
-//   vr_modes: {
-//     title: 'VR Mode',
-//     longTitle: 'Sitting / Standing / Room Scale',
-//     control: 'Boolean',
-//     column: 'Boolean',
-//     chip: 'Boolean',
-//     width: 24 * 2 + 10,
-//     alignment: 0
-//   },
 
 //   // system_requirements: {
 //   //   id: 22,

@@ -49,18 +49,18 @@ export default {
     filters: [
       // 'steam_features',
       'Platforms',
-      // 'players',
-      // 'controllers'
+      'Players',
+      'Controllers'
       // 'gamepad'
     ]
   },
-  // vr: {
-  //   title: 'VR',
-  //   filters: [
-  //     'vr_only',
-  //     'vr_platforms',
-  //     'vr_modes'
-  //   ]
-  // }
+  vr: {
+    title: 'VR',
+    filters: [
+      // 'vr_only',
+      'VrPlatforms',
+      'VrModes'
+    ]
+  }
 
 }

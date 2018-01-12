@@ -82,13 +82,13 @@ let discountFilter = (storeName = null) =>
 export default {
   stores: booleanFilter('stores', 'available in %s'),
   Platforms: booleanFilter('platforms', 'for %s'),
-  vr_platforms: booleanFilter('vr_platforms', 'for %s', 'the %s'),
-  vr_modes: booleanFilter('vr_mode', 'for %s VR'),
-  controllers: booleanFilter('vr_controllers', 'with %s VR controllers support'),
-  players: booleanFilter('players', 'with %s support'),
+  VrPlatforms: booleanFilter('vr_platforms', 'for %s', 'the %s'),
+  VrModes: booleanFilter('vr_mode', 'for %s VR'),
+  Controllers: booleanFilter('vr_controllers', 'with %s VR controllers support'),
+  Players: booleanFilter('players', 'with %s support'),
   // steam_features: booleanFilter('features', 'with support for %s'),
 
-  vr_only: ({value}) => value ? '<VR Only>' : '<non VR Only>',
+  VrOnly: ({value}) => value ? '<VR Only>' : '<non VR Only>',
   // controller_support: ({gt, lt}) => {
   //   let v = enumColumns.values.controller_support
   //   if (gt === v.no && lt === v.no) return 'with <no controller support>'
