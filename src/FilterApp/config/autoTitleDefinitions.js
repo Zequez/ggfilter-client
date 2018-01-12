@@ -80,7 +80,7 @@ let discountFilter = (storeName = null) =>
   }
 
 export default {
-  stores: booleanFilter('stores', 'available in %s'),
+  Stores: booleanFilter('stores', 'available in %s'),
   Platforms: booleanFilter('platforms', 'for %s'),
   VrPlatforms: booleanFilter('vr_platforms', 'for %s', 'the %s'),
   VrModes: booleanFilter('vr_mode', 'for %s VR'),
@@ -100,7 +100,7 @@ export default {
   // },
   Name: ({value}) => `with the name <"${h(value)}">`,
   steam_id: ({value}) => `with the Steam ID <${h(value)}>`,
-  lowest_price: priceFilter('the lowest price'),
+  LowestPrice: priceFilter('the lowest price'),
   steam_price: priceFilter('Steam'),
   oculus_price: priceFilter('Oculus'),
   best_discount: discountFilter('some store'),

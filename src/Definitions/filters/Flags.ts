@@ -31,3 +31,9 @@ export const VrModes = new Filter('VrModes', {
   cell: BooleanCell,
   control: BooleanCtrl
 });
+
+export const Stores = new Filter('Stores', {
+  title: 'Stores',
+  cell: BooleanCell,
+  control: BooleanCtrl
+});

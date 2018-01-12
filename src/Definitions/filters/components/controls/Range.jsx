@@ -1,4 +1,4 @@
-import th from './RangeControl.sass'
+import th from './Range.sass'
 import React, { PropTypes as t, Component } from 'react'
 import NumericInput from 'shared/components/NumericInput'
 
@@ -14,13 +14,13 @@ const defaultOptions = {
   focus: 'min'
 }
 
-export default class RangeControl extends Component {
+export class Range extends Component {
   static propTypes = {
     query: t.shape({
       gt: t.number,
       lt: t.number
     }),
-    options: t.shape({
+    config: t.shape({
       minHint: t.string,
       maxHint: t.string,
       toInput: t.func,
@@ -40,19 +40,19 @@ export default class RangeControl extends Component {
   }
 
   componentWillMount () {
-    this.options = {...defaultOptions, ...this.props.options}
+    this.config = {...defaultOptions, ...this.props.config}
   }
 
   fromInput (value) {
     return value === null || value === Infinity || value === ''
       ? null
-      : this.options.fromInput(value)
+      : this.config.fromInput(value)
   }
 
   toInput (value) {
     return value == null
       ? null
-      : this.options.toInput(value)
+      : this.config.toInput(value)
   }
 
   onMinChange = (value) => {
@@ -75,9 +75,9 @@ export default class RangeControl extends Component {
   }
 
   focus () {
-    if (this.options.focus === 'min') {
+    if (this.config.focus === 'min') {
       this.refs.min.focus()
-    } else if (this.options.focus === 'max') {
+    } else if (this.config.focus === 'max') {
       this.refs.max.focus()
     }
   }
@@ -86,28 +86,28 @@ export default class RangeControl extends Component {
     let { query: { gt, lt } } = this.props
 
     return (
-      <div className={th.RangeControl}>
+      <div className={th.Range}>
         <NumericInput
-          className={th.RangeControl__NumericInput_start}
+          className={th.Range__NumericInput_start}
           value={this.toInput(gt)}
           onChange={this.onMinChange}
-          prefix={this.options.prefix}
-          suffix={this.options.suffix}
-          min={this.options.min}
-          max={this.options.max}
+          prefix={this.config.prefix}
+          suffix={this.config.suffix}
+          min={this.config.min}
+          max={this.config.max}
           selectOnFocus
-          label={this.options.minHint}
+          label={this.config.minHint}
           ref='min'/>
         <NumericInput
-          className={th.RangeControl__NumericInput_end}
+          className={th.Range__NumericInput_end}
           value={this.toInput(lt)}
           onChange={this.onMaxChange}
-          prefix={this.options.prefix}
-          suffix={this.options.suffix}
-          min={this.options.min}
-          max={this.options.max}
+          prefix={this.config.prefix}
+          suffix={this.config.suffix}
+          min={this.config.min}
+          max={this.config.max}
           selectOnFocus
-          label={this.options.maxHint}
+          label={this.config.maxHint}
           ref='max'/>
       </div>
     )

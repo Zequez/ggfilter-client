@@ -13,18 +13,18 @@ export default {
       // 'sysreq_index_pct'
     ]
   },
-  // stores: {
-  //   title: 'Stores',
-  //   filters: [
-  //     'stores',
-  //     'lowest_price',
-  //     'best_discount',
-  //     'steam_price',
-  //     'steam_price_discount',
-  //     'oculus_price',
-  //     'oculus_price_discount'
-  //   ]
-  // },
+  stores: {
+    title: 'Stores',
+    filters: [
+      'Stores',
+      'LowestPrice',
+      // 'best_discount',
+      // 'steam_price',
+      // 'steam_price_discount',
+      // 'oculus_price',
+      // 'oculus_price_discount'
+    ]
+  },
   // playtime: {
   //   title: 'Playtime',
   //   filters: [

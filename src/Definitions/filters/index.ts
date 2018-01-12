@@ -11,6 +11,7 @@ import { DateRange } from './components/controls/DateRange';
 import { BooleanCtrl } from './components/controls/BooleanCtrl';
 
 export * from './Flags';
+export * from './Prices';
 
 export const Name = new Filter('Name', {
   title: 'Name',
@@ -39,12 +40,6 @@ export const AbsoluteReleaseDate = new Filter('AbsoluteReleaseDate', {
 });
 
 // export default {
-//   name: {
-//     title: 'Name',
-//     column: 'Link',
-//     columnInputs: { text: 'name', urls: 'urls' },
-//     columnOptions: { urlTemplate: 'http://store.steampowered.com/app/%s/' },
-//     width: 150
 //   },
 //   steam_id: {
 //     title: 'Steam ID',
@@ -74,101 +69,7 @@ export const AbsoluteReleaseDate = new Filter('AbsoluteReleaseDate', {
 //     sort: false
 //   },
 
-//   // Prices
-//   /*************************************/
 
-//   stores: {
-//     title: 'Stores availability',
-//     control: 'Boolean',
-//     column: 'Boolean',
-//     chip: 'Boolean',
-//     width: 24 * 2 + 10,
-//     alignment: 0
-//   },
-//   lowest_price: {
-//     title: 'Prices',
-//     control: 'Range',
-//     controlOptions: options.controls.price,
-//     column: 'MultiPrice',
-//     columnInputs: {
-//       prices: 'prices',
-//       urls: 'urls'
-//     },
-//     chip: 'Range',
-//     chipOptions: options.chips.price,
-//     shortcuts: options.shortcuts.price,
-//     width: 100,
-//     alignment: 0
-//   },
-//   best_discount: {
-//     title: 'Any discount',
-//     control: 'Range',
-//     controlOptions: {
-//       suffix: '%',
-//       max: 100
-//     },
-//     column: 'Discount',
-//     columnOptions: { interpolation: '-%s%' },
-//     chip: 'Range',
-//     chipOptions: options.chips.discount,
-//     shortcuts: options.shortcuts.discount,
-//     width: 50,
-//     alignment: 0
-//   },
-//   steam_price: {
-//     title: 'Steam price',
-//     control: 'Range',
-//     controlOptions: options.controls.price,
-//     column: 'Price',
-//     columnInputs: { price: 'steam_price', regular: 'steam_price_regular' },
-//     chip: 'Range',
-//     chipOptions: options.chips.price,
-//     shortcuts: options.shortcuts.price,
-//     width: 100,
-//     alignment: 1
-//   },
-//   oculus_price: {
-//     title: 'Oculus price',
-//     control: 'Range',
-//     controlOptions: options.controls.price,
-//     column: 'Price',
-//     columnInputs: { price: 'oculus_price', regular: 'oculus_price_regular' },
-//     chip: 'Range',
-//     chipOptions: options.chips.price,
-//     shortcuts: options.shortcuts.price,
-//     width: 100,
-//     alignment: 1
-//   },
-//   steam_price_discount: {
-//     title: 'Steam sale',
-//     control: 'Range',
-//     controlOptions: {
-//       suffix: '%',
-//       max: 100
-//     },
-//     column: 'Discount',
-//     columnOptions: { interpolation: '-%s%' },
-//     chip: 'Range',
-//     chipOptions: options.chips.discount,
-//     shortcuts: options.shortcuts.discount,
-//     width: 50,
-//     alignment: 0
-//   },
-//   oculus_price_discount: {
-//     title: 'Oculus sale',
-//     control: 'Range',
-//     controlOptions: {
-//       suffix: '%',
-//       max: 100
-//     },
-//     column: 'Discount',
-//     columnOptions: { interpolation: '-%s%' },
-//     chip: 'Range',
-//     chipOptions: options.chips.discount,
-//     shortcuts: options.shortcuts.discount,
-//     width: 50,
-//     alignment: 0
-//   },
 
 //   // Playtime
 //   /*************************************/
