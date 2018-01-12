@@ -186,7 +186,7 @@ export default {
       return ''
     }
   },
-  released_at_absolute: ({gt, lt}) => {
+  AbsoluteReleaseDate: ({gt, lt}) => {
     return `release date`
   },
   steam_early_access: ({value}) => value ? '<early access>' : '<non early access>'

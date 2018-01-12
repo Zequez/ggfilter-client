@@ -1,4 +1,4 @@
-import th from './DateRangeControl.sass'
+import th from './DateRange.sass'
 import React, { PropTypes as t, Component } from 'react'
 import Input from 'shared/components/Input'
 
@@ -19,7 +19,7 @@ const outputToInput = (outputValue) => {
   }
 }
 
-export default class DateRangeControl extends Component {
+export class DateRange extends Component {
   static propTypes = {
     query: t.shape({
       gt: t.number,
@@ -55,19 +55,19 @@ export default class DateRangeControl extends Component {
     let { gt, lt } = this.props.query
 
     return (
-      <div className={th.DateRangeControl}>
-        <div className={th.DateRangeControl__gt}>
-          <span className={th.DateRangeControl__label}>From</span>
+      <div className={th.DateRange}>
+        <div className={th.DateRange__gt}>
+          <span className={th.DateRange__label}>From</span>
           <Input
-            className={th.DateRangeControl__Input}
+            className={th.DateRange__Input}
             type='date'
             value={outputToInput(gt)}
             onChange={this.onGtChange}/>
         </div>
-        <div className={th.DateRangeControl__lt}>
-          <span className={th.DateRangeControl__label}>To</span>
+        <div className={th.DateRange__lt}>
+          <span className={th.DateRange__label}>To</span>
           <Input
-            className={th.DateRangeControl__Input}
+            className={th.DateRange__Input}
             type='date'
             value={outputToInput(lt)}
             onChange={this.onLtChange}/>

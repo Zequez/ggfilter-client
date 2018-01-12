@@ -7,6 +7,7 @@ import { Tags as TagsCell } from './components/cells/Tags';
 import { TimeAgo } from './components/cells/TimeAgo';
 import { DateCell } from './components/cells/DateCell';
 import { RelativeDate } from './components/controls/RelativeDate';
+import { DateRange } from './components/controls/DateRange';
 
 export const Name = new Filter('Name', {
   title: 'Name',
@@ -30,6 +31,7 @@ export const RelativeReleaseDate = new Filter('RelativeReleaseDate', {
 export const AbsoluteReleaseDate = new Filter('AbsoluteReleaseDate', {
   title: 'Release Year',
   cell: DateCell,
+  control: DateRange,
   api: 'released_at'
 });
 
