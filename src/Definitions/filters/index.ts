@@ -6,6 +6,7 @@ import { Link } from './components/cells/Link';
 import { Tags as TagsCell } from './components/cells/Tags';
 import { TimeAgo } from './components/cells/TimeAgo';
 import { DateCell } from './components/cells/DateCell';
+import { RelativeDate } from './components/controls/RelativeDate';
 
 export const Name = new Filter('Name', {
   title: 'Name',
@@ -22,6 +23,7 @@ export const Tags = new Filter('Tags', {
 export const RelativeReleaseDate = new Filter('RelativeReleaseDate', {
   title: 'Released At',
   cell: TimeAgo,
+  control: RelativeDate,
   api: 'released_at'
 });
 

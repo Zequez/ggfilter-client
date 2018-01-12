@@ -1,10 +1,8 @@
-import th from './RelativeDateControl.sass'
+import th from './RelativeDate.sass'
 import React, { PropTypes as t, Component } from 'react'
 import SingleTimespanInput from 'shared/components/SingleTimespanInput'
 
-const cn = (n) => th['RelativeDateControl' + n]
-
-export default class RelativeDateControl extends Component {
+export class RelativeDate extends Component {
   static propTypes = {
     query: t.shape({
       gt: t.number,
@@ -40,24 +38,24 @@ export default class RelativeDateControl extends Component {
     let { lt, gt } = this.props.query
 
     return (
-      <div className={cn()}>
-        <div className={cn('__gt')}>
-          <span className={cn('__label')}>From</span>
+      <div className={th.RelativeDate}>
+        <div className={th.__gt}>
+          <span className={th.__label}>From</span>
           <SingleTimespanInput
             value={gt}
             onChange={this.onGtChange}
-            className={cn('__TimeSpanInput')}
+            className={th.__TimeSpanInput}
             hint='∞'/>
-          <span className={cn('__ago')}>ago</span>
+          <span className={th.__ago}>ago</span>
         </div>
-        <div className={cn('__gt')}>
-          <span className={cn('__label')}>To</span>
+        <div className={th.__gt}>
+          <span className={th.__label}>To</span>
           <SingleTimespanInput
             value={lt}
             onChange={this.onLtChange}
-            className={cn('__TimeSpanInput')}
+            className={th.__TimeSpanInput}
             hint='-∞'/>
-          <span className={cn('__ago')}>ago</span>
+          <span className={th.__ago}>ago</span>
         </div>
       </div>
     )

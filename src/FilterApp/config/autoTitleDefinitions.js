@@ -173,7 +173,7 @@ export default {
     'with a system requirements index <≥{gt}>',
     'with a system requirements index <≤{lt}>'
   ),
-  released_at: ({gt, lt}) => {
+  RelativeReleaseDate: ({gt, lt}) => {
     if (gt === 0 && lt == null) {
       return '<unreleased>'
     } else if (lt === 0 && gt != null) {
