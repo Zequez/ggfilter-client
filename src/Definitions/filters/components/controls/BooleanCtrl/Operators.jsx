@@ -1,4 +1,4 @@
-import th from './BooleanControl.sass'
+import th from './BooleanCtrl.sass'
 import React, { PropTypes as t, Component } from 'react'
 import cx from 'classnames'
 
@@ -24,8 +24,8 @@ export default class Operators extends Component {
     let tooltip = modesTitles.join('/')
 
     let className = cx(
-      th.BooleanControl__Operators,
-      th['BooleanControl__Operators_' + value]
+      th.BooleanCtrl__Operators,
+      th['BooleanCtrl__Operators_' + value]
     )
 
     let valueIndex = modes.indexOf(value)
@@ -42,8 +42,8 @@ export default class Operators extends Component {
           <span
             key={mode}
             style={transform}
-            className={cx(th.BooleanControl__Operator, {
-              [th.BooleanControl__Operator_active]: mode === value
+            className={cx(th.BooleanCtrl__Operator, {
+              [th.BooleanCtrl__Operator_active]: mode === value
             })}>
             {modesTitles[i]}
           </span>

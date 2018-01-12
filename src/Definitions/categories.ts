@@ -44,16 +44,16 @@ export default {
   //     'ratings_ratio'
   //   ]
   // },
-  // features: {
-  //   title: 'Features',
-  //   filters: [
-  //     // 'steam_features',
-  //     'platforms',
-  //     'players',
-  //     'controllers'
-  //     // 'gamepad'
-  //   ]
-  // },
+  features: {
+    title: 'Features',
+    filters: [
+      // 'steam_features',
+      'Platforms',
+      // 'players',
+      // 'controllers'
+      // 'gamepad'
+    ]
+  },
   // vr: {
   //   title: 'VR',
   //   filters: [

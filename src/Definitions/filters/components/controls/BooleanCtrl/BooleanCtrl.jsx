@@ -1,10 +1,10 @@
-import th from './BooleanControl.sass'
+import th from './BooleanCtrl.sass'
 import React, { Component, PropTypes as t } from 'react'
 
 import Operators from './Operators'
 import Flags from './Flags'
 
-export default class BooleanControl extends Component {
+export class BooleanCtrl extends Component {
   static propTypes = {
     query: t.shape({
       value: t.number,
@@ -55,7 +55,7 @@ export default class BooleanControl extends Component {
     let { query } = this.state
 
     return (
-      <div className={th.BooleanControl}>
+      <div className={th.BooleanCtrl}>
         <Flags
           enumType={name}
           value={query.value}

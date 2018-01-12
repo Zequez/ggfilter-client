@@ -81,7 +81,7 @@ let discountFilter = (storeName = null) =>
 
 export default {
   stores: booleanFilter('stores', 'available in %s'),
-  platforms: booleanFilter('platforms', 'for %s'),
+  Platforms: booleanFilter('platforms', 'for %s'),
   vr_platforms: booleanFilter('vr_platforms', 'for %s', 'the %s'),
   vr_modes: booleanFilter('vr_mode', 'for %s VR'),
   controllers: booleanFilter('vr_controllers', 'with %s VR controllers support'),

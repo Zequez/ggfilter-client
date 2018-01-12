@@ -1,6 +1,6 @@
-import th from './BooleanControl.sass'
+import th from './BooleanCtrl.sass'
 import React, { PropTypes as t, Component } from 'react'
-import enumColumns from '../../../../config/enumColumns'
+import enumColumns from '../../../../enumColumns'
 
 import Checkbox from './Checkbox'
 
@@ -37,7 +37,7 @@ export default class Flags extends Component {
     let { enumType } = this.props
 
     return (
-      <div className={th.BooleanControl__Flags}>
+      <div className={th.BooleanCtrl__Flags}>
         {this.enumKeys.map((name) => (
           <Checkbox
             key={name}

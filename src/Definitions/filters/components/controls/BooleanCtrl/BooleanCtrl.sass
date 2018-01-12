@@ -5,29 +5,29 @@
   justify-content: center
   cursor: pointer
 
-.BooleanControl
+.BooleanCtrl
   display: flex
   align-items: stretch
   height: $g * 6
 
-.BooleanControl__Operators
+.BooleanCtrl__Operators
   display: block
   position: relative
   width: 15%
   overflow: hidden
-.BooleanControl__Operators_and
-.BooleanControl__Operators_or
-.BooleanControl__Operators_xor
-.BooleanControl__Operator
+.BooleanCtrl__Operators_and
+.BooleanCtrl__Operators_or
+.BooleanCtrl__Operators_xor
+.BooleanCtrl__Operator
   composes: flexButton
   height: 100%
   transition: transform 0.25s
 
-.BooleanControl__Flags
+.BooleanCtrl__Flags
   display: flex
   flex-grow: 1
 
-.BooleanControl__Checkbox
+.BooleanCtrl__Checkbox
   composes: flexButton
   position: relative
   flex-grow: 1
@@ -39,15 +39,15 @@
     border-radius: 2px 0 0 2px
   &:last-child
     border-radius: 0 2px 2px 0
-.BooleanControl__Checkbox_checked
+.BooleanCtrl__Checkbox_checked
   background: $color-mono-2
   box-shadow: inset 0 1px 3px rgba(#000, 0.06)
   color: $color-text-pri
   &:hover
     background: $color-mono-2
 
-.BooleanControl__Input
+.BooleanCtrl__Input
   display: none
-.BooleanControl__Icon
-.BooleanControl__Title
+.BooleanCtrl__Icon
+.BooleanCtrl__Title
   display: none

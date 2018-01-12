@@ -1,8 +1,8 @@
-import th from './BooleanControl.sass'
+import th from './BooleanCtrl.sass'
 import React, { PropTypes as t, Component } from 'react'
 import cx from 'classnames'
 
-import enumColumns from '../../../../config/enumColumns'
+import enumColumns from '../../../../enumColumns'
 import TooltipLabel from './TooltipLabel'
 import Icon from 'shared/components/Icon'
 
@@ -23,8 +23,8 @@ export default class Checkbox extends Component {
 
     let title = enumColumns.names[enumType][name]
     let icon = `boolean-${enumType}-${name}`
-    let className = cx(th.BooleanControl__Checkbox, {
-      [th.BooleanControl__Checkbox_checked]: value
+    let className = cx(th.BooleanCtrl__Checkbox, {
+      [th.BooleanCtrl__Checkbox_checked]: value
     })
 
     return (
@@ -33,12 +33,12 @@ export default class Checkbox extends Component {
         tooltip={title}
         rippleDisabled={value}>
         <input
-          className={th.BooleanControl__Input}
+          className={th.BooleanCtrl__Input}
           type='checkbox'
           checked={value}
           onChange={this.onChange}/>
-        <Icon icon={icon} className={th.BooleanControl__Icon}/>
-        <span className={th.BooleanControl__Title}>{title}</span>
+        <Icon icon={icon} className={th.BooleanCtrl__Icon}/>
+        <span className={th.BooleanCtrl__Title}>{title}</span>
       </TooltipLabel>
     )
   }

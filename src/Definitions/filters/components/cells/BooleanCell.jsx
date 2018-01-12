@@ -1,13 +1,13 @@
 import th from './columns.sass'
 import React, { Component, PropTypes as t } from 'react'
-import enumColumns from '../../../config/enumColumns'
+import enumColumns from '../../../enumColumns'
 import cx from 'classnames'
 import Icon from 'shared/components/Icon'
 import tooltipFactory from 'shared/components/Tooltip'
 
 const TooltipIcon = tooltipFactory(Icon, { position: 'top' })
 
-export class Boolean extends Component {
+export class BooleanCell extends Component {
   static propTypes = {
     value: t.number.isRequired,
     name: t.string.isRequired

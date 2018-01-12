@@ -6,8 +6,10 @@ import { Link } from './components/cells/Link';
 import { Tags as TagsCell } from './components/cells/Tags';
 import { TimeAgo } from './components/cells/TimeAgo';
 import { DateCell } from './components/cells/DateCell';
+import { BooleanCell } from './components/cells/BooleanCell';
 import { RelativeDate } from './components/controls/RelativeDate';
 import { DateRange } from './components/controls/DateRange';
+import { BooleanCtrl } from './components/controls/BooleanCtrl';
 
 export const Name = new Filter('Name', {
   title: 'Name',
@@ -32,8 +34,22 @@ export const AbsoluteReleaseDate = new Filter('AbsoluteReleaseDate', {
   title: 'Release Year',
   cell: DateCell,
   control: DateRange,
-  api: 'released_at'
+  api: 'released_at_absolute'
 });
+
+export const Platforms = new Filter('Platforms', {
+  title: 'Platforms',
+  cell: BooleanCell,
+  control: BooleanCtrl
+});
+//   platforms: {
+//     title: 'Platforms',
+//     control: 'Boolean',
+//     column: 'Boolean',
+//     chip: 'Boolean',
+//     width: 24 * 3 + 10,
+//     alignment: 0
+//   },
 
 
 // export default {

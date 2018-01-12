@@ -9,6 +9,7 @@ function cellInputValues (game, column) {
     let columnName = column.cellInputs[inputName]
     cellInputs[inputName] = game[columnName]
   }
+  cellInputs.name = column.name
   return cellInputs
 }
 
