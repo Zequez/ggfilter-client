@@ -1,6 +1,6 @@
 import React, { Component, PropTypes as t } from 'react'
 
-export default class ToggleControl extends Component {
+export default class Toggle extends Component {
   static propTypes = {
     query: t.shape({
       value: t.boolean

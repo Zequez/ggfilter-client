@@ -1,4 +1,6 @@
 import * as React from 'react';
+import * as th from './Text.sass';
+import Input from 'shared/components/Input';
 
 type QueryType = {
   value: string
@@ -10,11 +12,17 @@ type PropTypes = {
 };
 
 export class Text extends React.Component<PropTypes, null> {
-  onChange = (ev: React.SyntheticEvent<HTMLInputElement>) => {
-    this.props.onChange({value: ev.currentTarget.value});
+  onChange = (value) => {
+    this.props.onChange({value: value});
   }
 
   render() {
-    return <input type='text' onChange={this.onChange}/>;
+    return (
+      <div className={th.Text}>
+        <Input
+          onChange={this.onChange}
+          hint='Search games by name'/>
+      </div>
+    );
   }
 }

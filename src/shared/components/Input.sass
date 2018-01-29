@@ -9,76 +9,76 @@
   height: $g*4
   border-bottom: solid 1px $color-divider
 
-  &_disabled
-    .Input__input
-      color: $color-text-dis
+._disabled
+  .__input
+    color: $color-text-dis
 
-  &__alignContainer
-    display: flex
-    position: relative
+.__alignContainer
+  display: flex
+  position: relative
 
-  &__input
-    order: 2
-    flex-grow: 1
-    display: block
-    height: $g * 4
-    width: 100%
-    padding: $g 0
-    border: none
-    background: transparent
-    &:focus
-      outline: none
-      & ~ .Input__focusLine
-        transform: scaleX(1)
+.__input
+  order: 2
+  flex-grow: 1
+  display: block
+  height: $g * 4
+  width: 100%
+  padding: $g 0
+  border: none
+  background: transparent
+  &:focus
+    outline: none
+    & ~ .__focusLine
+      transform: scaleX(1)
 
-  &__prefixContainer
-    order: 1
-    flex-shrink: 1
-    position: relative
-  &__suffix
-    composes: labelLike
-    order: 3
-    flex-shrink: 1
+.__prefixContainer
+  order: 1
+  flex-shrink: 1
+  position: relative
+.__suffix
+  composes: labelLike
+  order: 3
+  flex-shrink: 1
 
-  &__prefix
-    composes: labelLike
-    white-space: pre
-  &__hint
-    composes: labelLike
-    position: absolute
-    left: 100%
-    top: 0
-    white-space: nowrap
-    opacity: 1
-    transition: opacity 0.25s
-    pointer-events: none
-  &__label
-    position: absolute
-    left: 100%
-    top: 0
-    height: 100%
-    display: flex
-    align-items: center
-    white-space: nowrap
-    color: $color-text-sec
-    font-size: $font-size-input
-    transition: top 0.25s, left 0.25s, font-size 0.25s
-    pointer-events: none
+.__prefix
+  composes: labelLike
+  white-space: pre
+.__hint
+  composes: labelLike
+  position: absolute
+  left: 100%
+  top: 0
+  white-space: nowrap
+  opacity: 1
+  transition: opacity 0.25s
+  pointer-events: none
+.__label
+  position: absolute
+  left: 100%
+  top: 0
+  height: 100%
+  display: flex
+  align-items: center
+  white-space: nowrap
+  color: $color-text-sec
+  font-size: $font-size-input
+  transition: top 0.25s, left 0.25s, font-size 0.25s
+  pointer-events: none
 
-  &__focusLine
-    position: absolute
-    bottom: 0px
-    left: 0
-    height: 2px
-    width: 100%
-    background: $color-pri
-    transform: scaleX(0)
-    transition: transform 0.25s
+.__focusLine
+  position: absolute
+  bottom: 0px
+  left: 0
+  height: 2px
+  width: 100%
+  background: $color-pri
+  transform: scaleX(0)
+  transition: transform 0.25s
 
-  &_withText
-    .Input__hint
-      opacity: 0
-  &_withText .Input__label, .Input__input:focus + .Input__prefixContainer .Input__label
-    left: 0
-    top: -$g*2
-    font-size: $font-size-caption
+._withText
+  .__hint
+    opacity: 0
+._withText .__label, .__input:focus + .__prefixContainer .__label
+  left: 0
+  top: -$g*2
+  font-size: $font-size-caption

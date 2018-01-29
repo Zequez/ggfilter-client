@@ -66,3 +66,5 @@ Thumbs.db
 
 stats.json
 stats2.json
+
+*.sass.d.ts

@@ -54,6 +54,9 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.WatchIgnorePlugin([
+      /sass\.d\.ts$/
+    ]),
     new webpack.LoaderOptionsPlugin({
       options: {
         context: __dirname,

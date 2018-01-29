@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "outDir": "./dist/",
     "sourceMap": true,
     "noImplicitAny": false,
@@ -17,7 +18,10 @@
     "lib": [
       "es2015", "es2017", "dom"
     ],
-    "typeRoots": ["node_modules/@types"]
+    "typeRoots": ["node_modules/@types"],
+    "paths": {
+      "shared/*": ["src/shared/*"]
+    }
   },
   "include": [
     "./src/**/*"
