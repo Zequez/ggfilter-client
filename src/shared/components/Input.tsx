@@ -1,7 +1,7 @@
-import theme from './Input.sass';
-import React, { PropTypes as t } from 'react';
+import * as theme from './Input.sass';
+import * as React from 'react';
 import { themeExtender } from 'shared/lib/utils/misc';
-import cx from 'classnames';
+import * as cx from 'classnames';
 
 type PropTypes = {
   onChange: (value: string) => void,
@@ -14,8 +14,8 @@ type PropTypes = {
   value?: string
 };
 
-export const inputWithTheme = (th, extend) => {
-  th = themeExtender(theme, th, extend);
+export const inputWithTheme = (th: {[K in keyof typeof theme]: string}) => {
+  th = themeExtender(theme, th);
 
   return class Input extends React.Component<PropTypes, null> {
     private input: HTMLInputElement;
@@ -34,8 +34,8 @@ export const inputWithTheme = (th, extend) => {
       let { className, value, hint, prefix, suffix, label, disabled, ...other } = this.props;
       let classes = cx(th.Input, {
         [className]: !!className,
-        [th.Input_withText]: !!value,
-        [th.Input_disabled]: !!disabled
+        [th._withText]: !!value,
+        [th._disabled]: !!disabled
       });
 
       return (
@@ -71,4 +71,4 @@ export const inputWithTheme = (th, extend) => {
   };
 };
 
-export default inputWithTheme(theme, {});
+export default inputWithTheme(theme);

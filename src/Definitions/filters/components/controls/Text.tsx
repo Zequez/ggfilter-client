@@ -20,6 +20,7 @@ export class Text extends React.Component<PropTypes, null> {
     return (
       <div className={th.Text}>
         <Input
+          value={this.props.query.value}
           onChange={this.onChange}
           hint='Search games by name'/>
       </div>
