@@ -157,8 +157,8 @@ export default {
     'with a ratings percentile <≥{gt}th>',
     'with a ratings percentile <≤{lt}th>'
   ),
-  tags: ({tags}, filter) => {
-    tags = tags.map((id) => '<' + h(filter.columnOptions.tags[id]) + '>')
+  Tags: ({tags}, filter) => {
+    tags = tags.map((id) => '<' + h(filter.control.tags[id]) + '>')
     if (tags.length > 1) {
       let lastTag = tags.pop()
       return 'tagged as ' + tags.join(', ') + ' and ' + lastTag

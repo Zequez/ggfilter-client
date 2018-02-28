@@ -6,6 +6,7 @@ import { Tags as TagsCell } from './components/cells/Tags';
 import { TimeAgo } from './components/cells/TimeAgo';
 import { DateCell } from './components/cells/DateCell';
 import { BooleanCell } from './components/cells/BooleanCell';
+import { TagsControl } from './components/controls/TagsControl/TagsControl';
 import { RelativeDate } from './components/controls/RelativeDate';
 import { DateRange } from './components/controls/DateRange';
 import { BooleanCtrl } from './components/controls/BooleanCtrl';
@@ -22,7 +23,8 @@ export const Name = new Filter('Name', {
 
 export const Tags = new Filter('Tags', {
   title: 'Tags',
-  cell: TagsCell
+  cell: TagsCell,
+  control: TagsControl
 });
 
 export const RelativeReleaseDate = new Filter('RelativeReleaseDate', {

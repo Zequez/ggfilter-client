@@ -1,5 +1,7 @@
 import { api, withMeta, get, post, patch, del, snake, camel } from './loader'
 
+let tagsCache = null
+
 export default {
   games: {
     index: (params) => api.get(`games.json`, {params}).then(withMeta)
@@ -19,7 +21,9 @@ export default {
     delete: ({sid, secret}) => del(`/filters/${sid}.json`, { secret })
   },
   tags: {
-    index: () => get(`tags.json`)
+    index: () => tagsCache
+      ? new Promise.resolve(tagsCache)
+      : get(`tags.json`).then((tags) => tagsCache = tags)
   },
   auth: {
     currentUser: () => get(`auth/current_user.json`)

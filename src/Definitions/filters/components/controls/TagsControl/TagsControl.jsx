@@ -1,19 +1,19 @@
 import th from './TagsControl.sass'
-import React, { Component, PropTypes as t } from 'react'
+import React, { PropTypes as t } from 'react'
+import { connect } from 'react-redux'
 
 import SelectedTags from './SelectedTags'
 import TagsSelector from './TagsSelector'
 import Input from 'shared/components/Input'
 
-export default class TagsControl extends Component {
+export class TagsControl extends React.Component {
+  static tags = [];
+
   static propTypes = {
     query: t.shape({
       tags: t.arrayOf(t.number),
       reject: t.arrayOf(t.number)
     }),
-    options: t.shape({
-      tags: t.arrayOf(t.string)
-    }).isRequired,
     onChange: t.func.isRequired
   }
 
@@ -91,7 +91,7 @@ export default class TagsControl extends Component {
       paddingLeft: this.state.selectedWidth
     }
 
-    let tags = this.props.options.tags || [] // FIIIIIXX!
+    const tags = TagsControl.tags || [] // FIIIIIXX!
 
     return (
       <div className={th.TagsControl}>
@@ -118,3 +118,7 @@ export default class TagsControl extends Component {
     )
   }
 }
+
+// export const ConnectedTagsControl = connect((s) => ({
+//   tagsList: s.tags
+// }), null)(TagsControl)

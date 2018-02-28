@@ -51,6 +51,7 @@ export default class FilterApp extends Component {
   // This is hacky, but it's now the convention
   fillStaticFiltersDefinitionsOptions () {
     definitions.filters.Tags.cell.tags = this.props.tags
+    definitions.filters.Tags.control.tags = this.props.tags
     // definitions.filters.tags.controlOptions.tags = this.props.tags
     // definitions.filters.tags.columnOptions.tags = this.props.tags
     // definitions.filters.tags.chipOptions.tags = this.props.tags
