@@ -1,7 +1,7 @@
 import Filter from './lib/Filter';
 import { composeConfig } from './lib/composeConfig';
 import { Price } from './components/cells/Price';
-import { MultiPrice } from './components/cells/MultiPrice';
+import { MultiPrice, MonoPrice } from './components/cells/MultiPrice';
 import { Discount } from './components/cells/Discount';
 import { Range } from './components/controls/Range';
 
@@ -14,12 +14,15 @@ const priceOptions = {
 
 export const LowestPrice = new Filter('LowestPrice', {
   title: 'Price',
-  cell: MultiPrice,
+  cell: MonoPrice,
   cellInputs: {
     prices: 'prices',
     urls: 'urls'
   },
   control: composeConfig(Range, priceOptions),
+  alignment: -1,
+  boundInputs: { stores: 'Stores' },
+  width: 65
 });
 
 export const Prices = new Filter('Prices', {
@@ -29,9 +32,7 @@ export const Prices = new Filter('Prices', {
     prices: 'prices',
     urls: 'urls'
   },
-  boundInputs: {
-    stores: 'Stores'
-  },
+  boundInputs: { stores: 'Stores' },
   control: undefined
 });
 

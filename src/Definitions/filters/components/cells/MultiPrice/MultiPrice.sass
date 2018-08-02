@@ -13,16 +13,20 @@
   justify-content: center
   align-items: center
   color: $color-text-sec
-  &:hover
-    .__current
-      color: $color-sec
+.MultiPrice_monoprice
+  .__Price:first-child
+    flex-basis: 220px
+a.__Price:hover
+  .__current
+    color: $color-sec
 
-.__Price_lowest
-  border-color: $color-mono-3
-  background-color: $color-mono-3
-  // .__current
-    // font-size: $font-size-input
-.__Price_discounted
+.__Price_lower
+  border-color: rgba($color-green, 0.05)
+  background-color: rgba($color-green, 0.05)
+.__Price_higher
+  border-color: rgba($color-red, 0.05)
+  background-color: rgba($color-red, 0.05)
+.__Price_text.__Price_discounted
   justify-content: flex-end
 .__current
   font-weight: $font-weight-medium
