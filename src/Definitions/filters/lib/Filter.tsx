@@ -51,7 +51,7 @@ export default class Filter {
     }
 
     if (!this.api) this.api = snakeCase(name);
-    if (!this.sort) this.sort = this.api;
+    if (this.sort !== undefined) this.sort = this.api;
     if (!this.controlOutputs) this.controlOutputs = (query) => ({[this.api]: query});
     if (!this.cellInputs) this.cellInputs = {value: this.api};
   }

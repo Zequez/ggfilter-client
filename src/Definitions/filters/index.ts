@@ -1,18 +1,35 @@
 import Filter from './lib/Filter';
 
-// export { Name } from './Name';
+import { BooleanCell } from './components/cells/BooleanCell';
+import { DateCell } from './components/cells/DateCell';
+import { ImagesCell } from './components/cells/ImagesCell';
 import { Link } from './components/cells/Link';
 import { Tags as TagsCell } from './components/cells/Tags';
 import { TimeAgo } from './components/cells/TimeAgo';
-import { DateCell } from './components/cells/DateCell';
-import { BooleanCell } from './components/cells/BooleanCell';
-import { TagsControl } from './components/controls/TagsControl/TagsControl';
-import { RelativeDate } from './components/controls/RelativeDate';
-import { DateRange } from './components/controls/DateRange';
+
 import { BooleanCtrl } from './components/controls/BooleanCtrl';
+import { DateRange } from './components/controls/DateRange';
+import { RelativeDate } from './components/controls/RelativeDate';
+import { TagsControl } from './components/controls/TagsControl/TagsControl';
 
 export * from './Flags';
 export * from './Prices';
+
+export const Images = new Filter('Images', {
+  title: 'Screenshots',
+  cell: ImagesCell,
+  cellInputs: { images: 'images' },
+  sort: undefined,
+  width: 30
+});
+
+export const Thumbnail = new Filter('Thumbnail', {
+  title: 'Thumbnail',
+  cell: ImagesCell,
+  cellInputs: { thumbnail: 'thumbnail', 'images': 'images' },
+  sort: undefined,
+  width: 30
+});
 
 export const Name = new Filter('Name', {
   title: 'Name',

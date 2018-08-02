@@ -2,8 +2,8 @@ export default {
   gameInfo: {
     title: 'Game Info',
     filters: [
-      // 'thumbnail',
-      // 'images',
+      'Thumbnail',
+      'Images',
       'Name',
       'Tags',
       'RelativeReleaseDate',

@@ -13,7 +13,7 @@ function cellInputValues (game, column) {
   return cellInputs
 }
 
-export default ({game, column, setParam, columnParams}) => {
+export default ({game, column, setParam, columnParams, lightbox}) => {
   let tdClass = cx(
     column.name,
     th.Body__ColumnComponent, {
@@ -31,6 +31,10 @@ export default ({game, column, setParam, columnParams}) => {
   if (Component.active) {
     props.setParam = partial(setParam, column.name)
     props.columnParams = (columnParams !== true && columnParams !== false) ? columnParams : undefined
+  }
+
+  if (Component.lightbox) {
+    props.lightbox = lightbox
   }
 
   let comp = <Component {...props}/>

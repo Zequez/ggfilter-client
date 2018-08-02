@@ -3,11 +3,13 @@ import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
 
 const { setControlParams } = require('../../../filter/actions')
+const { showLightbox } = require('src/Lightbox')
 
 import ColumnComponent from './ColumnComponent'
 
 @connect((s) => ({}), {
-  setControlParams
+  setControlParams,
+  showLightbox
 })
 export default class Batch extends Component {
   static propTypes = {
@@ -15,7 +17,8 @@ export default class Batch extends Component {
     columns: t.arrayOf(t.object).isRequired,
     columnsParams: t.object,
 
-    setControlParams: t.func.isRequired
+    setControlParams: t.func.isRequired,
+    showLightbox: t.func.isRequired
   }
 
   shouldComponentUpdate (np, ns) {
@@ -26,7 +29,7 @@ export default class Batch extends Component {
   render () {
     console.logRender('DataTableBatch')
 
-    let { games, columns, columnsParams, setControlParams } = this.props
+    let { games, columns, columnsParams, setControlParams, showLightbox } = this.props
 
     return (
       <tbody className={th.Body__Batch}>
@@ -38,6 +41,7 @@ export default class Batch extends Component {
                 game={game}
                 column={column}
                 setParam={setControlParams}
+                lightbox={showLightbox}
                 columnParams={columnsParams[column.name]}/>
             ))}
           </tr>

@@ -1,22 +1,22 @@
 import th from './columns.sass'
 import React, { Component, PropTypes as t } from 'react'
 import { connect } from 'react-redux'
-import { showLightbox } from 'src/Lightbox'
 
 @connect()
-export class Images extends Component {
+export class ImagesCell extends Component {
   static noOverflowContainer = true
+  static lightbox = true
 
   static propTypes = {
     thumbnail: t.string,
     images: t.arrayOf(t.string),
-    dispatch: t.func.isRequired
+    lightbox: t.func.isRequired
   }
 
   static defaultProps = { images: [] }
 
-  showLightbox = () => {
-    this.props.dispatch(showLightbox(this.props.images, this.imagesThumbnails()))
+  lightbox = () => {
+    this.props.lightbox(this.props.images, this.imagesThumbnails())
   }
 
   imagesThumbnails () {
@@ -31,8 +31,10 @@ export class Images extends Component {
 
   render () {
     return (
-      <div className={th.Images}>
-        <img src={this.thumbnail()} onClick={this.showLightbox}/>
+      <div className={th.ImagesCell}>
+        <div className={th.ImagesCell__cropper}>
+          <img src={this.thumbnail()} onClick={this.lightbox}/>
+        </div>
       </div>
     )
   }
