@@ -11,6 +11,7 @@ const filter = {
     'Name',
     'Tags',
     'RelativeReleaseDate',
+    'Stores'
 
     // 'tags', 'released_at',
     // 'lowest_price', 'best_discount',
@@ -19,7 +20,8 @@ const filter = {
   controlsHlMode: [],
   controlsParams: {
     // best_discount: {gt: 1, lt: null}
-    'Name': { value: 'civ' }
+    'Name': { value: 'civ' },
+    'Stores': { value: 3, mode: 'or' }
   },
   columnsList: [
     'Name',

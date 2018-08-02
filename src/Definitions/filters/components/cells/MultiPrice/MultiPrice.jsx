@@ -1,6 +1,7 @@
 import th from './MultiPrice.sass'
 import React, { Component, PropTypes as t } from 'react'
-import stores from '../../../../storesDefinitions'
+import storesDefinitions from '../../../../storesDefinitions'
+import enumColumns from '../../../../enumColumns'
 import Price from './Price'
 
 export function getLowest (prices) {
@@ -35,17 +36,31 @@ export class MultiPrice extends Component {
       current: t.number,
       regular: t.number
     })).isRequired,
-    urls: t.objectOf(t.string).isRequired
+    urls: t.objectOf(t.string).isRequired,
+    stores: t.object
   }
 
   render () {
-    let { prices, urls } = this.props
+    let { prices, urls, stores } = this.props
 
     let lowestStores = getLowest(prices)
 
+    let visibleStores = []
+    if (stores) {
+      storesDefinitions.forEach((store) => {
+        if ((stores.value & enumColumns.values.Stores[store]) > 0) {
+          visibleStores.push(store)
+        }
+      })
+    }
+
+    if (!visibleStores.length) {
+      visibleStores = storesDefinitions
+    }
+
     return (
       <div className={th.MultiPrice}>
-        {stores.map((store) =>
+        {visibleStores.map((store) =>
           <Price
             key={store}
             price={prices[store]}

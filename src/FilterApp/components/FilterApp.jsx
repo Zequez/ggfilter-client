@@ -83,7 +83,7 @@ export default class FilterApp extends Component {
         <Table
           gamesPages={p.games}
           columns={p.definedColumnsList}
-          columnsParams={p.newFilter.columnsParams}
+          columnsParams={p.newFilter.controlsParams}
           columnsWidth={p.columnsWidth}
           sorting={p.newFilter.sorting}
           tableWidth={p.tableWidth}/>

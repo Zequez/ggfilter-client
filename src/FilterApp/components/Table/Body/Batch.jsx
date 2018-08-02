@@ -42,7 +42,7 @@ export default class Batch extends Component {
                 column={column}
                 setParam={setControlParams}
                 lightbox={showLightbox}
-                columnParams={columnsParams[column.name]}/>
+                params={columnsParams}/>
             ))}
           </tr>
         ))}

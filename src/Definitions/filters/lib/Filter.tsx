@@ -7,6 +7,7 @@ import { Raw as RawChip } from '../components/chips/Raw';
 type ReactComponentType = React.StatelessComponent<any> | React.ComponentClass<any>;
 type ControlOutputs = (query: object) => {[k: string]: object};
 type CellInputs = {[k: string]: string};
+type BoundInputs = {[k: string]: string};
 
 type Arguments = {
   api?: string;
@@ -19,6 +20,7 @@ type Arguments = {
   controlOutputs?: ControlOutputs;
   cell?: ReactComponentType;
   cellInputs?: CellInputs;
+  boundInputs?: BoundInputs;
   chip?: ReactComponentType;
   shortcuts?: object[];
 };
@@ -38,6 +40,8 @@ export default class Filter {
 
   cell: ReactComponentType = RawCell;
   cellInputs: CellInputs = null;
+
+  boundInputs: BoundInputs = {};
 
   chip: ReactComponentType = RawChip;
 

@@ -13,13 +13,26 @@ const priceOptions = {
 };
 
 export const LowestPrice = new Filter('LowestPrice', {
-  title: 'Prices',
+  title: 'Price',
   cell: MultiPrice,
   cellInputs: {
     prices: 'prices',
     urls: 'urls'
   },
   control: composeConfig(Range, priceOptions),
+});
+
+export const Prices = new Filter('Prices', {
+  title: 'Prices',
+  cell: MultiPrice,
+  cellInputs: {
+    prices: 'prices',
+    urls: 'urls'
+  },
+  boundInputs: {
+    stores: 'Stores'
+  },
+  control: undefined
 });
 
 //   best_discount: {

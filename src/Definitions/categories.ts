@@ -9,7 +9,6 @@ export default {
       'RelativeReleaseDate',
       'AbsoluteReleaseDate'
       // 'steam_early_access',
-      // 'tags',
       // 'sysreq_index_pct'
     ]
   },
@@ -18,11 +17,8 @@ export default {
     filters: [
       'Stores',
       'LowestPrice',
-      // 'best_discount',
-      // 'steam_price',
-      // 'steam_price_discount',
-      // 'oculus_price',
-      // 'oculus_price_discount'
+      'Prices',
+      // 'Discount', // Filter only
     ]
   },
   // playtime: {

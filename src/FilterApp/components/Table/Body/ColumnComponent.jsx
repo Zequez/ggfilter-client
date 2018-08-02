@@ -3,17 +3,29 @@ import React from 'react'
 import cx from 'classnames'
 import { partial } from 'shared/lib/utils'
 
-function cellInputValues (game, column) {
+function cellInputValues (column, params, game) {
   var cellInputs = {}
   for (let inputName in column.cellInputs) {
     let columnName = column.cellInputs[inputName]
     cellInputs[inputName] = game[columnName]
   }
   cellInputs.name = column.name
+
+  for (let inputName in column.boundInputs) {
+    let paramName = column.boundInputs[inputName]
+    let val = params[paramName]
+
+    cellInputs[inputName] = (val !== true && val !== false) ? val : undefined
+  }
+
+  // if (column.boundParams) {
+  //   props.columnParams = (columnParams !== true && columnParams !== false) ? columnParams : undefined
+  // }
+
   return cellInputs
 }
 
-export default ({game, column, setParam, columnParams, lightbox}) => {
+export default ({game, column, setParam, params, lightbox}) => {
   let tdClass = cx(
     column.name,
     th.Body__ColumnComponent, {
@@ -26,11 +38,10 @@ export default ({game, column, setParam, columnParams, lightbox}) => {
 
   let Component = column.cell
 
-  let props = cellInputValues(game, column)
+  let props = cellInputValues(column, params, game)
 
   if (Component.active) {
     props.setParam = partial(setParam, column.name)
-    props.columnParams = (columnParams !== true && columnParams !== false) ? columnParams : undefined
   }
 
   if (Component.lightbox) {

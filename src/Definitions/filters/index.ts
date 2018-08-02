@@ -41,7 +41,10 @@ export const Name = new Filter('Name', {
 export const Tags = new Filter('Tags', {
   title: 'Tags',
   cell: TagsCell,
-  control: TagsControl
+  control: TagsControl,
+  boundInputs: {
+    filterParams: 'Tags'
+  }
 });
 
 export const RelativeReleaseDate = new Filter('RelativeReleaseDate', {
