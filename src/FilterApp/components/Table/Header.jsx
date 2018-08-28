@@ -25,7 +25,7 @@ export default class Header extends Component {
     return (
       <thead className={th.Table__Header}>
         <ColumnsWidthFixator columns={columns}/>
-        <ControlsList/>
+        {/* <ControlsList/> */}
         <TitlesList
           columns={columns}
           columnsParams={columnsParams}

@@ -1,5 +1,5 @@
-import * as filters from './filters';
-import categories from './categories';
-import { Definitions } from './Definitions';
+import Filter from './filters/lib/Filter';
+import definitions, { FiltersNames, CategoriesNames, Category, FiltersMap, CategoriesMap } from './Definitions';
 
-export default new Definitions(filters as any, categories);
+export { FiltersNames, CategoriesNames, Category, Filter, FiltersMap, CategoriesMap };
+export default definitions;

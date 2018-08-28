@@ -1,4 +1,4 @@
-import Filter from './lib/Filter';
+import AnonFilter from './lib/AnonFilter';
 import { composeConfig } from './lib/composeConfig';
 import { Price } from './components/cells/Price';
 import { MultiPrice, MonoPrice } from './components/cells/MultiPrice';
@@ -12,7 +12,8 @@ const priceOptions = {
   focus: 'max'
 };
 
-export const LowestPrice = new Filter('LowestPrice', {
+export const LowestPrice = new AnonFilter({
+  api: 'lowest_price',
   title: 'Price',
   cell: MonoPrice,
   cellInputs: {
@@ -25,7 +26,8 @@ export const LowestPrice = new Filter('LowestPrice', {
   width: 65
 });
 
-export const Prices = new Filter('Prices', {
+export const Prices = new AnonFilter({
+  api: 'prices',
   title: 'Prices',
   cell: MultiPrice,
   cellInputs: {

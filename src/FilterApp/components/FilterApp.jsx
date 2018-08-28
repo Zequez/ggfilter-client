@@ -14,6 +14,7 @@ import QueryChipsList from './QueryChipsList'
 import SfilterBar from './SfilterBar'
 import FrontPageFilters from './FrontPageFilters'
 import FiltersPanel from './FiltersPanel'
+import Configurator from './Configurator'
 
 import { AppBar } from 'src/Layout'
 
@@ -50,8 +51,11 @@ export default class FilterApp extends Component {
 
   // This is hacky, but it's now the convention
   fillStaticFiltersDefinitionsOptions () {
-    definitions.filters.Tags.cell.tags = this.props.tags
-    definitions.filters.Tags.control.tags = this.props.tags
+    let TagsFilter = definitions.filters.get('Tags');
+
+    TagsFilter.cell.tags =  this.props.tags;
+    TagsFilter.control.tags = this.props.tags;
+
     // definitions.filters.tags.controlOptions.tags = this.props.tags
     // definitions.filters.tags.columnOptions.tags = this.props.tags
     // definitions.filters.tags.chipOptions.tags = this.props.tags
@@ -79,7 +83,8 @@ export default class FilterApp extends Component {
         </AppBar>
         {/* <FiltersPanel/>  */}
         {/*<FrontPageFilters/>*/}
-        <CategoriesList/>
+        {/* <CategoriesList/> */}
+        <Configurator/>
         <Table
           gamesPages={p.games}
           columns={p.definedColumnsList}

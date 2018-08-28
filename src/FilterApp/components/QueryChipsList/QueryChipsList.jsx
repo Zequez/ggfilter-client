@@ -25,7 +25,7 @@ export default class QueryChipsList extends Component {
           <ControlOpeningChip
             query={query}
             hl={!!~controlsHlMode.indexOf(name)}
-            control={definitions.filters[name]}
+            control={definitions.filters.get(name)}
             onRemove={this.onRemove.bind(this, name)}/>
         </div>
       )

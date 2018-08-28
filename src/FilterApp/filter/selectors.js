@@ -28,7 +28,7 @@ export const globalConfig = createSelector(filter, (f) => f.globalConfig)
 
 export const definedControlsList = createSelector(controlsList, (controls) =>
   definitions.sortNames(controls)
-    .map((controlName) => definitions.filters[controlName])
+    .map((controlName) => definitions.filters.get(controlName))
 )
 
 export const definedColumnsList = definedControlsList // Intentional
@@ -37,7 +37,7 @@ export const definedColumnsList = definedControlsList // Intentional
 // )
 
 export const sortingColumn = createSelector(sorting, (sorting) =>
-  definitions.filters[sorting.column])
+  definitions.filters.get(sorting.column));
 
 /********************/
 /* Sfilter stuff

@@ -1,4 +1,4 @@
-import Filter from './lib/Filter';
+import AnonFilter from './lib/AnonFilter';
 
 import { BooleanCell } from './components/cells/BooleanCell';
 import { DateCell } from './components/cells/DateCell';
@@ -15,7 +15,8 @@ import { TagsControl } from './components/controls/TagsControl/TagsControl';
 export * from './Flags';
 export * from './Prices';
 
-export const Images = new Filter('Images', {
+export const Images = new AnonFilter({
+  api: 'images',
   title: 'Screenshots',
   cell: ImagesCell,
   cellInputs: { images: 'images' },
@@ -23,7 +24,8 @@ export const Images = new Filter('Images', {
   width: 30
 });
 
-export const Thumbnail = new Filter('Thumbnail', {
+export const Thumbnail = new AnonFilter({
+  api: 'thumbnail',
   title: 'Thumbnail',
   cell: ImagesCell,
   cellInputs: { thumbnail: 'thumbnail', 'images': 'images' },
@@ -31,14 +33,16 @@ export const Thumbnail = new Filter('Thumbnail', {
   width: 30
 });
 
-export const Name = new Filter('Name', {
+export const Name = new AnonFilter({
+  api: 'name',
   title: 'Name',
   cell: Link,
   cellInputs: { text: 'name', urls: 'urls' },
   width: 150
 });
 
-export const Tags = new Filter('Tags', {
+export const Tags = new AnonFilter({
+  api: 'tags',
   title: 'Tags',
   cell: TagsCell,
   control: TagsControl,
@@ -47,18 +51,18 @@ export const Tags = new Filter('Tags', {
   }
 });
 
-export const RelativeReleaseDate = new Filter('RelativeReleaseDate', {
+export const RelativeReleaseDate = new AnonFilter({
+  api: 'released_at',
   title: 'Released At',
   cell: TimeAgo,
   control: RelativeDate,
-  api: 'released_at'
 });
 
-export const AbsoluteReleaseDate = new Filter('AbsoluteReleaseDate', {
+export const AbsoluteReleaseDate = new AnonFilter({
+  api: 'released_at_absolute',
   title: 'Release Year',
   cell: DateCell,
   control: DateRange,
-  api: 'released_at_absolute'
 });
 
 // export default {

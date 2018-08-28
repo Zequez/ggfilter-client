@@ -1,22 +1,30 @@
+import * as filters from './filters';
+import categories from './categories';
 import Filter from './filters/lib/Filter';
+import { filter } from '../FilterApp/filter/selectors';
 
-export type FiltersMap = {[k: string]: Filter};
-export type Category = { title: string, filters: string[] };
-export type CategoriesMap = {[k: string]: Category};
+export type FiltersNames = keyof typeof filters; // Sorry, much simpler than using a generic type everywhere
+export type FiltersMap = Map<FiltersNames, Filter>;
+export type CategoriesNames = keyof typeof categories;
+export type Category = { title: string, name: CategoriesNames, filters: FiltersNames[] };
+export type CategoriesMap = Map<CategoriesNames, Category>;
 
 export class Definitions {
   filters: FiltersMap;
   categories: CategoriesMap;
   categoriesList: Category[] = [];
-  categoriesWithFilters: {[k: string]: Filter[]} = {};
+  categoriesWithFilters: Map<CategoriesNames, Filter[]> = new Map();
   private sortedFilters: Filter[] = [];
-  private sortedFiltersNames: string[] = [];
+  private sortedFiltersNames: FiltersNames[] = [];
 
   constructor (filters: FiltersMap, categories: CategoriesMap) {
+    filters.forEach((filter, name) => filter.name = name);
+    categories.forEach((category, name) => category.name = name);
+
     this.filters = filters;
     this.categories = categories;
+    this.categoriesList = Array.from(categories.values());
 
-    this.extendCategories(categories);
     this.setCategoriesWithFilters();
     this.setSortedFilters();
     this.setSortedFiltersNames();
@@ -37,28 +45,20 @@ export class Definitions {
     return this.sortedFiltersNames.filter((v) => names.indexOf(v) !== -1);
   }
 
-  private extendCategories (categoriesDefinitions) {
-    for (let name in categoriesDefinitions) {
-      categoriesDefinitions[name].name = name;
-      this.categoriesList.push(categoriesDefinitions[name]);
-    }
-  }
-
   private setCategoriesWithFilters () {
-    for (let cat in this.categories) {
-      this.categoriesWithFilters[cat] =
-        this.categories[cat].filters.map((filterName) => {
-          if (this.filters[filterName]) {
-            return this.filters[filterName];
-          } else {
-            console.warn(`Filter ${filterName} is not defined`);
-          }
-        });
-    }
+    this.categories.forEach((category, categoryName) => {
+      this.categoriesWithFilters.set(
+        categoryName,
+        category.filters.map((filterName) => {
+          if (!this.filters.get(filterName)) throw `Filter ${filterName} is not defined`;
+          return this.filters.get(filterName);
+        })
+      );
+    });
   }
 
   private setSortedFilters () {
-    this.sortedFilters = Object.values(this.categoriesWithFilters)
+    this.sortedFilters = Array.from(this.categoriesWithFilters.values())
       .reduce((filters, moreFilters) => filters.concat(moreFilters));
   }
 
@@ -66,3 +66,8 @@ export class Definitions {
     this.sortedFiltersNames = this.sortedFilters.map((f) => f.name);
   }
 }
+
+let namedFilters = new Map(<[FiltersNames, Filter][]>Object.entries(filters));
+let mappedCategories = new Map(<[CategoriesNames, Category][]>Object.entries(categories));
+
+export default new Definitions(namedFilters, mappedCategories);
