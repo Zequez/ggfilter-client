@@ -14,8 +14,8 @@ export class Definitions {
   categories: CategoriesMap;
   categoriesList: Category[] = [];
   categoriesWithFilters: Map<CategoriesNames, Filter[]> = new Map();
-  private sortedFilters: Filter[] = [];
-  private sortedFiltersNames: FiltersNames[] = [];
+  sortedFilters: Filter[] = [];
+  sortedFiltersNames: FiltersNames[] = [];
 
   constructor (filters: FiltersMap, categories: CategoriesMap) {
     filters.forEach((filter, name) => filter.name = name);

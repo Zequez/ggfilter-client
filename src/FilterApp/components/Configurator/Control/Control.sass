@@ -1,0 +1,34 @@
+@import "../../../../../node_modules/font-awesome/scss/_variables"
+
+.Control
+  margin-bottom: $g
+  &_active
+    border-left: solid 2px blue
+.Title
+  padding: 0 $g
+  line-height: $g*4
+  color: $color-text-sec
+.Icons
+  float: right
+  \:global(.fa)
+    font-size: 16px
+.IconFilterHl
+  /**/
+  &:before
+    content: $fa-var-filter
+  &_active
+    color: $color-text-pri
+  &_hl:before
+    content: $fa-var-lightbulb-o
+.IconVisible
+  &:before
+    content: $fa-var-eye-slash
+  &_active:before
+    color: $color-text-pri
+    content: $fa-var-eye
+.IconClear
+  /**/
+.IconFineTune
+  /**/
+.Widget
+  padding: $g

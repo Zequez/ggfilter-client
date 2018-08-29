@@ -1,29 +1,31 @@
-import { u, createReducer, combineActions as ca } from 'shared/lib/utils/store'
-import * as a from './actions'
-import initialState from './initialState'
+import { u, createReducer, combineActions as ca } from 'shared/lib/utils/store';
+import * as a from './actions';
+import initialState from './initialState';
+import { currentSortRaw } from './selectors';
 
 const reducers = {
   /********************/
   /* Filter stuff
   /********************/
 
-  [a.RESET_FILTER]: (s) => u(s, {filter: {$set: initialState.filter}}),
-  [a.SET_CONTROL]: (s, [control, visible]) =>
-    u(s, {filter: {controlsList: {$toggle: [control, visible]}}}),
-  // [ADD_CONTROL]: (s, p) => u(s, {filter: {controlsList: {$toggle: [p, true]}}}),
-  // [REMOVE_CONTROL]: (s, p) => u(s, {
-  //   filter: { controlsList: {$toggle: [p, false]} }
-  // }),
-  [a.SET_CONTROL_PARAMS]: (s, [control, params]) => params ? u(s, {
-    filter: { controlsParams: { [control]: { $set: params } } }
-  }) : u(s, {
-    filter: { controlsParams: { $delete: control } }
+  // [a.RESET_FILTER]: (s) => u(s, {filter: {$set: initialState.filter}}),
+  [a.SET_COLUMN]: (s, [filter, column]) => u(s, {
+    filter: {configuration: { [filter]: { column: { $set: column } } } }
   }),
-  [a.SET_SORTING]: (s, [column, direction]) => u(s, {
-    filter: {sorting: {column: {$set: column}, direction: {$set: direction}}}
+  [a.SET_QUERY]: (s, [filter, query]) => u(s, {
+    filter: {configuration: { [filter]: { query: { $set: query } } } }
   }),
-  [a.SET_HL_MODE]: (s, [control, active]) =>
-    u(s, {filter: {controlsHlMode: {$toggle: [control, active]}}}),
+  [a.SET_SORT]: (s: typeof initialState, [filter, sort]) => {
+    return u(s, {
+      filter: { configuration: {
+        [currentSortRaw(s.filter.configuration)]: { sort: { $set: null } },
+        [filter]: { sort: { $set: sort } }
+      } }
+    });
+  },
+  [a.SET_HL]: (s, [filter, hl]) => u(s, {
+    filter: { configuration: { [filter]: { hl: { $set: hl } } } }
+  }),
 
   /********************/
   /* SFilter management
@@ -61,12 +63,12 @@ const reducers = {
 
   [a.CREATE_SFILTER_SUCCESS]: (s, filter) => {
     // This is a little unconventional but, whatever
-    let secrets = window.localStorage.getItem('secrets')
-    secrets = secrets ? JSON.parse(secrets) : {}
-    secrets[filter.sid] = filter.secret
-    window.localStorage.setItem('secrets', JSON.stringify(secrets))
+    let secretString = window.localStorage.getItem('secrets');
+    let secrets = secretString ? <object>JSON.parse(secretString) : {};
+    secrets[filter.sid] = filter.secret;
+    window.localStorage.setItem('secrets', JSON.stringify(secrets));
 
-    return reducers[a.UPDATE_SFILTER_SUCCESS](s, filter)
+    return reducers[a.UPDATE_SFILTER_SUCCESS](s, filter);
   },
 
   /********************/
@@ -88,18 +90,19 @@ const reducers = {
       loading: {$set: true},
       totalCount: {$set: page === 0 ? null : s.games.totalCount}
     }}),
-  [a.GET_GAMES_SUCCESS]: (s, {games, page, totalCount}) => {
+  [a.GET_GAMES_SUCCESS]: (s: typeof initialState, {games, page, totalCount}) => {
     let stateChange = {games: {
       loading: {$set: false},
       error: {$set: null},
-      totalCount: {$set: totalCount}
-    }}
+      totalCount: {$set: totalCount},
+      batches: {}
+    }};
     if (page === 0) {
-      stateChange.games.batches = {$set: [games]}
+      stateChange.games.batches = {$set: [games]};
     } else {
-      stateChange.games.batches = {$splice: [[page, 0, games]]}
+      stateChange.games.batches = {$splice: [[page, 0, games]]};
     }
-    return u(s, stateChange)
+    return u(s, stateChange);
   },
   [a.GET_GAMES_FAILURE]: (s, error) => u(s, {
     games: {
@@ -109,6 +112,6 @@ const reducers = {
       batches: {$set: []}
     }
   })
-}
+};
 
-export default createReducer(initialState, reducers)
+export default createReducer(initialState, reducers);

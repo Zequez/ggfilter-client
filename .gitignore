@@ -68,3 +68,5 @@ stats.json
 stats2.json
 
 *.sass.d.ts
+*.scss.d.ts
+*.css.d.ts

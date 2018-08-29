@@ -28,82 +28,20 @@ export const LowestPrice = new AnonFilter({
 
 export const Prices = new AnonFilter({
   api: 'prices',
-  title: 'Prices',
+  title: 'All Prices',
+  control: null,
   cell: MultiPrice,
   cellInputs: {
     prices: 'prices',
     urls: 'urls'
   },
-  boundInputs: { stores: 'Stores' },
-  control: undefined
+  boundInputs: { stores: 'Stores' }
 });
 
-//   best_discount: {
-//     title: 'Any discount',
-//     control: 'Range',
-//     controlOptions: {
-//       suffix: '%',
-//       max: 100
-//     },
-//     column: 'Discount',
-//     columnOptions: { interpolation: '-%s%' },
-//     chip: 'Range',
-//     chipOptions: options.chips.discount,
-//     shortcuts: options.shortcuts.discount,
-//     width: 50,
-//     alignment: 0
-//   },
-//   steam_price: {
-//     title: 'Steam price',
-//     control: 'Range',
-//     controlOptions: options.controls.price,
-//     column: 'Price',
-//     columnInputs: { price: 'steam_price', regular: 'steam_price_regular' },
-//     chip: 'Range',
-//     chipOptions: options.chips.price,
-//     shortcuts: options.shortcuts.price,
-//     width: 100,
-//     alignment: 1
-//   },
-//   oculus_price: {
-//     title: 'Oculus price',
-//     control: 'Range',
-//     controlOptions: options.controls.price,
-//     column: 'Price',
-//     columnInputs: { price: 'oculus_price', regular: 'oculus_price_regular' },
-//     chip: 'Range',
-//     chipOptions: options.chips.price,
-//     shortcuts: options.shortcuts.price,
-//     width: 100,
-//     alignment: 1
-//   },
-//   steam_price_discount: {
-//     title: 'Steam sale',
-//     control: 'Range',
-//     controlOptions: {
-//       suffix: '%',
-//       max: 100
-//     },
-//     column: 'Discount',
-//     columnOptions: { interpolation: '-%s%' },
-//     chip: 'Range',
-//     chipOptions: options.chips.discount,
-//     shortcuts: options.shortcuts.discount,
-//     width: 50,
-//     alignment: 0
-//   },
-//   oculus_price_discount: {
-//     title: 'Oculus sale',
-//     control: 'Range',
-//     controlOptions: {
-//       suffix: '%',
-//       max: 100
-//     },
-//     column: 'Discount',
-//     columnOptions: { interpolation: '-%s%' },
-//     chip: 'Range',
-//     chipOptions: options.chips.discount,
-//     shortcuts: options.shortcuts.discount,
-//     width: 50,
-//     alignment: 0
-//   },
+export const BestDiscount = new AnonFilter({
+  title: 'On Sale',
+  control: composeConfig(Range, {suffix: '%', max: 100}),
+  cell: null,
+  width: 50,
+  alignment: 0
+});

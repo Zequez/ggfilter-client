@@ -50,7 +50,7 @@ export default {
       multi: 'Multiplayer',
       online: 'Online',
       co_op: 'Co-op',
-      shared: 'Same Computer',
+      shared: 'Local Multiplayer',
       hotseat: 'Hotseat',
       cross_platform: 'Cross Platform'
     },

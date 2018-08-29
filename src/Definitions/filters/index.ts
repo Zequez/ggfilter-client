@@ -18,6 +18,7 @@ export * from './Prices';
 export const Images = new AnonFilter({
   api: 'images',
   title: 'Screenshots',
+  control: null,
   cell: ImagesCell,
   cellInputs: { images: 'images' },
   sort: undefined,
@@ -27,6 +28,7 @@ export const Images = new AnonFilter({
 export const Thumbnail = new AnonFilter({
   api: 'thumbnail',
   title: 'Thumbnail',
+  control: null,
   cell: ImagesCell,
   cellInputs: { thumbnail: 'thumbnail', 'images': 'images' },
   sort: undefined,

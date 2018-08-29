@@ -1,7 +1,7 @@
 .Configurator
   display: grid
-  grid-template-columns: 17% 17% 17% 17% 17% 16%
-  grid-template-rows: auto auto auto
+  grid-template-columns: 20% 20% 20% 20% 20%
+  grid-template-rows: auto
   margin: $g*3
   border-radius: 2px
   box-shadow: $shadow-card
@@ -14,10 +14,6 @@
   overflow: hidden
   // &:first-child .title
   //   border-left: none
-  &:nth-child(1)
-
-  &:last-child
-
 
 .__Title
   padding: $g*2
@@ -29,69 +25,46 @@
   overflow: hidden
   text-overflow: ellipsis
 
+// .__Columns
+//   overflow-y: auto
+//   max-height: 150px
+//   box-shadow: inset $shadow-card
+//   background: rgba(#000, 0.01)
+//   color: $color-text-sec
 
-  // &__TogglesList
-  //   display: flex
-  //   margin-top: -1px
-  //   color: $color-text-sec
+// .__Column
+//   padding: $g
+//   cursor: pointer
+//   &_selected
+//     background: $color-pri-light
 
-  // &__Toggle
-  //   position: relative
-  //   display: flex
-  //   flex-grow: 1
-  //   max-width: $gg*2
-  //   margin-left: -1px
-  //   color: $color-text-dis
-  //   color: mix-opacify($color-text-dis, $color-mono-2)
-  //   white-space: nowrap
-  //   text-align: center
-  //   overflow: hidden
-  //   input
-  //     display: none
-  //   label
-  //     display: block
-  //     padding: $g 0
-  //     width: 100%
-  //     border: solid 1px transparent
-  //     border-bottom: none
-  //     cursor: pointer
-  //     overflow: hidden
-  //   &:hover
-  //     background: $color-mono-3
-  // &__Toggle_active
-  //   color: mix-opacify($color-text-sec, $color-mono-4)
-  //   background: $color-mono-2
-  //   box-shadow: inset 0 1px 3px rgba(#000, 0.06)
-  //   border-color: mix-opacify($color-divider, $color-mono-4)
-  //   &:hover
-  //     background: $color-mono-2
++media('<big-desktop', '>tablet')
+  .Configurator
+    grid-template-columns: 25% 25% 25% 25%
+    grid-template-rows: auto auto
+  .__Section
+    grid-row-start: 1
+    grid-row-end: 3
+  .__Section:nth-child(2)
+    grid-column-start: 2
+    grid-row-end: 2
+  .__Section:nth-child(3)
+    grid-column-start: 2
+    grid-row-start: 2
 
-  // &__Toggle:first-child
-  //   margin-left: 0
-  //   border-left: none
-  // &__Toggle:last-child
-  //   border-right: none
-  // &__Category:first-child .CategoriesList__Toggle:first-child
-  //   // margin-left: 0
-  //   border-left: none
-  // &__Category:last-child .CategoriesList__Toggle:last-child
-  //   border-right: none
-
-  // &__ToggleTitle
-  //   display: none
-
-  // &__Icon
-  //   letter-spacing: -5px
-  //   margin-left: -5px
-
-+media('<big-desktop')
++media('<desktop', '>tablet')
   .Configurator
     grid-template-columns: 33% 34% 33%
-
-+media('<desktop')
-  .Configurator
-    grid-template-columns: 50% 50%
+  .__Section:nth-child(4)
+    grid-column-start: 3
+    grid-row-end: 2
+  .__Section:nth-child(5)
+    grid-column-start: 3
+    grid-row-start: 2
 
 +media('<tablet')
   .Configurator
     grid-template-columns: 100%
+  .__Section
+    grid-row-start: auto
+    grid-row-end: auto

@@ -29,6 +29,7 @@ export default class AnonFilter {
   title: string = null;
   description: string = null;
   sort: string = null;
+  fineTune: boolean = false;
 
   width: number = 100;
   alignment: -1 | 0 | 1 = -1;

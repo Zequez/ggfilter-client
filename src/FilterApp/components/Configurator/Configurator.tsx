@@ -1,38 +1,53 @@
 import * as React from 'react';
+import * as cx from 'classnames';
 import * as th from './Configurator.sass';
 import Section from './Section';
+import Control from './Control/Control';
+import { FiltersConfiguration } from '../../filter/initialState';
 
-import definitions from '../../../Definitions';
-
-// type ControlsNames = 'name' | 'price';
-
+import definitions, { Category, Filter, FiltersNames } from '../../../Definitions';
 
 interface ConfiguratorProps {
-  // controlsSections: [key: string]: ;
-  // controlsData: {[k: Controls]: object};
-  // controlsData: Map<ControlsNames, object>;
-  // controls: object[];
-  onControlChange: (control: string, data: object) => {};
-  // columnsSections: string[];
-  // columns: string[];
-  selectedColumns: string[];
-  onColumnsChange: (selectedColumns: string[]) => {};
+  configuration: FiltersConfiguration;
+  onQueryChange: (filter: FiltersNames, query: object) => void;
+  onColumnChange: (filter: FiltersNames, column: boolean) => void;
+  onHlChange: (filter: FiltersNames, hl: boolean) => void;
 }
 
-export default class Configurator extends React.Component {
+export default class Configurator extends React.Component<ConfiguratorProps> {
+  categoryControlFilters (category: Category) {
+    return category.filters.filter((filterName) =>
+      !!definitions.filters.get(filterName).control
+    ).map((filterName) => definitions.filters.get(filterName));
+  }
+
+  categoryColumnOnlyFilters (category: Category) {
+    return category.filters.filter((filterName) =>
+      !definitions.filters.get(filterName).control
+    ).map((filterName) => definitions.filters.get(filterName));
+  }
+
+  control (filter: Filter) {
+    return <Control
+      key={filter.name}
+      config={this.props.configuration[filter.name]}
+      filter={filter}
+      onQueryChange={() => {}}
+      onVisibilityChange={() => {}}
+      onHlChange={() => {}}/>;
+  }
+
   render () {
+    let { configuration } = this.props;
+
     return <div className={th.Configurator}>
       {definitions.categoriesList.map((category) =>
         <Section title={category.title} key={category.name}>
-          {category.filters.map((filterName) =>
-            <div key={filterName}>{filterName}</div>
-          )}
+          {this.categoryControlFilters(category).map((filter) => this.control(filter))}
+          {/* <hr/> */}
+          {this.categoryColumnOnlyFilters(category).map((filter) => this.control(filter))}
         </Section>
       )}
-
-      <Section title='Columns'>
-        All the columns
-      </Section>
     </div>;
   }
 }

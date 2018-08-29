@@ -28,7 +28,7 @@ config.plugins = config.plugins.concat([
 ])
 
 // let cssLoader = 'style!css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!sass?outputStyle=expanded'
-let cssLoader = 'style!typings-for-css-modules-loader?namedExport&camelCase&modules&importLoaders=1&localIdentName=[folder]_[local]_[hash:base64:3]'
+let cssLoader = 'style!typings-for-css-modules-loader?-minimize&namedExport&camelCase&modules&importLoaders=1&localIdentName=[folder]_[local]_[hash:base64:3]'
 config.module.loaders.push({
   test: /\.css/,
   loader: cssLoader

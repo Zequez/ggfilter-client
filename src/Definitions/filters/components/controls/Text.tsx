@@ -7,20 +7,22 @@ type QueryType = {
 };
 
 type PropTypes = {
-  query: QueryType,
+  query?: QueryType,
   onChange: (query: QueryType) => void
 };
 
 export class Text extends React.Component<PropTypes, null> {
   onChange = (value) => {
-    this.props.onChange({value: value});
+    this.props.onChange(value ? {value: value} : null);
   }
 
   render() {
+    let { query } = this.props;
+
     return (
       <div className={th.Text}>
         <Input
-          value={this.props.query.value}
+          value={query && query.value}
           onChange={this.onChange}
           hint='Search games by name'/>
       </div>

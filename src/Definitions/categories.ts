@@ -17,7 +17,7 @@ export default {
     filters: [
       'LowestPrice',
       'Prices',
-      // 'Discount',
+      'BestDiscount',
     ]
   },
   availability: {
@@ -41,7 +41,6 @@ export default {
   features: {
     title: 'Features',
     filters: [
-      'Platforms',
       'Players',
       'Controllers',
       'VrModes'
