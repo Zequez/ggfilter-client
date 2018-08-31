@@ -10,11 +10,9 @@ import * as filterSel from '../filter/selectors';
 
 import Table from './Table/Table';
 import GamesLoader from './GamesLoader';
-import CategoriesList from './CategoriesList';
 import QueryChipsList from './QueryChipsList';
 import SfilterBar from './SfilterBar';
 import FrontPageFilters from './FrontPageFilters';
-import FiltersPanel from './FiltersPanel';
 import Configurator from './Configurator';
 
 import { AppBar } from 'src/Layout';
