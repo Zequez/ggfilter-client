@@ -14,7 +14,8 @@ type Arguments = {
   title?: string;
   description?: string;
   sort?: Columns;
-  width?: number;
+  width?: number | ((query: {}) => number);
+  widthStretch?: boolean;
   alignment?: -1 | 0 | 1;
   control?: ReactComponentType;
   controlOutputs?: ControlOutputs;
@@ -32,7 +33,8 @@ export default class AnonFilter {
   sort: Columns = null;
   fineTune: boolean = false;
 
-  width: number = 100;
+  width: number | ((query: {}) => number) = 100;
+  widthStretch: boolean;
   alignment: -1 | 0 | 1 = -1;
 
   control: ReactComponentType = TextControl;

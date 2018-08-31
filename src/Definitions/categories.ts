@@ -16,7 +16,7 @@ export default {
     title: 'Pricing',
     filters: [
       'LowestPrice',
-      'Prices',
+      // 'Prices',
       'BestDiscount',
     ]
   },

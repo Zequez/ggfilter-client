@@ -4,8 +4,7 @@ import * as th from './Table.sass';
 import { FiltersConfiguration } from '../../filter';
 import { FiltersNames } from '../../../Definitions';
 
-// import ColumnsWidthFixator from './ColumnsWidthFixator';
-import ControlsList from './ControlsList';
+import NewColumnsWidthFixator from './NewColumnsWidthFixator';
 import TitlesList from './TitlesList';
 
 type HeaderProps = {
@@ -17,7 +16,7 @@ export default class Header extends React.Component<HeaderProps> {
   render () {
     return (
       <thead className={th.Table__Header}>
-        {/* <ColumnsWidthFixator columns={columns}/> */}
+        <NewColumnsWidthFixator configuration={this.props.configuration}/>
         <TitlesList
           configuration={this.props.configuration}
           setSort={this.props.setSort}/>

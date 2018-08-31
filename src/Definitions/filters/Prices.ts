@@ -1,4 +1,5 @@
 import AnonFilter from './lib/AnonFilter';
+import enums from '../enumColumns';
 import { composeConfig } from './lib/composeConfig';
 import { Price } from './components/cells/Price';
 import { MultiPrice, MonoPrice } from './components/cells/MultiPrice';
@@ -23,7 +24,7 @@ export const LowestPrice = new AnonFilter({
   control: composeConfig(Range, priceOptions),
   alignment: -1,
   boundInputs: { stores: 'Stores' },
-  width: 65
+  width: 130
 });
 
 export const Prices = new AnonFilter({
@@ -35,13 +36,13 @@ export const Prices = new AnonFilter({
     prices: 'prices',
     urls: 'urls'
   },
-  boundInputs: { stores: 'Stores' }
+  boundInputs: { stores: 'Stores' },
+  width: 130
 });
 
 export const BestDiscount = new AnonFilter({
   title: 'On Sale',
   control: composeConfig(Range, {suffix: '%', max: 100}),
   cell: null,
-  width: 50,
   alignment: 0
 });

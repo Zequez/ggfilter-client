@@ -22,7 +22,7 @@ export const Images = new AnonFilter({
   cell: ImagesCell,
   cellInputs: { images: 'images' },
   sort: undefined,
-  width: 30
+  width: 100
 });
 
 export const Thumbnail = new AnonFilter({
@@ -32,7 +32,7 @@ export const Thumbnail = new AnonFilter({
   cell: ImagesCell,
   cellInputs: { thumbnail: 'thumbnail', 'images': 'images' },
   sort: undefined,
-  width: 30
+  width: 100
 });
 
 export const Name = new AnonFilter({
@@ -40,7 +40,8 @@ export const Name = new AnonFilter({
   title: 'Name',
   cell: Link,
   cellInputs: { text: 'name', urls: 'urls' },
-  width: 150
+  width: 150,
+  widthStretch: true
 });
 
 export const Tags = new AnonFilter({
@@ -50,7 +51,8 @@ export const Tags = new AnonFilter({
   control: TagsControl,
   boundInputs: {
     filterParams: 'Tags'
-  }
+  },
+  width: 250
 });
 
 export const RelativeReleaseDate = new AnonFilter({
@@ -58,6 +60,7 @@ export const RelativeReleaseDate = new AnonFilter({
   title: 'Released At',
   cell: TimeAgo,
   control: RelativeDate,
+  width: 150
 });
 
 export const AbsoluteReleaseDate = new AnonFilter({
@@ -65,6 +68,7 @@ export const AbsoluteReleaseDate = new AnonFilter({
   title: 'Release Year',
   cell: DateCell,
   control: DateRange,
+  width: 150
 });
 
 // export default {
