@@ -8,27 +8,26 @@
   padding: 0 $g
   line-height: $g*4
   color: $color-text-sec
+
 .Icons
   float: right
   \:global(.fa)
     font-size: 16px
-.IconFilterHl
-  /**/
-  &:before
-    content: $fa-var-filter
-  &_active
+  ._active
     color: $color-text-pri
-  &_hl:before
-    content: $fa-var-lightbulb-o
-.IconVisible
-  &:before
-    content: $fa-var-eye-slash
-  &_active:before
-    color: $color-text-pri
+
+.IconHl:before
+  content: $fa-var-lightbulb-o
+.IconFilter:before
+  content: $fa-var-filter
+.IconColumn:before
+  content: $fa-var-eye-slash
+  &._active
     content: $fa-var-eye
-.IconClear
-  /**/
+.IconClear:before
+  content: $fa-var-trash
 .IconFineTune
   /**/
+
 .Widget
   padding: $g

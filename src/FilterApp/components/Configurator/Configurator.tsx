@@ -3,7 +3,7 @@ import * as cx from 'classnames';
 import * as th from './Configurator.sass';
 import Section from './Section';
 import Control from './Control/Control';
-import { FiltersConfiguration } from '../../filter/initialState';
+import { FiltersConfiguration } from '../../filter';
 
 import definitions, { Category, Filter, FiltersNames } from '../../../Definitions';
 
@@ -32,9 +32,9 @@ export default class Configurator extends React.Component<ConfiguratorProps> {
       key={filter.name}
       config={this.props.configuration[filter.name]}
       filter={filter}
-      onQueryChange={() => {}}
-      onVisibilityChange={() => {}}
-      onHlChange={() => {}}/>;
+      onQueryChange={(query) => this.props.onQueryChange(filter.name, query)}
+      onColumnChange={(column) => this.props.onColumnChange(filter.name, column)}
+      onHlChange={(hl) => this.props.onHlChange(filter.name, hl)}/>;
   }
 
   render () {

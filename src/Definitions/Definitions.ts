@@ -2,6 +2,7 @@ import * as filters from './filters';
 import categories from './categories';
 import Filter from './filters/lib/Filter';
 import { filter } from '../FilterApp/filter/selectors';
+import { Columns } from '../Api';
 
 export type FiltersNames = keyof typeof filters; // Sorry, much simpler than using a generic type everywhere
 export type FiltersMap = Map<FiltersNames, Filter>;

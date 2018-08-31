@@ -1,14 +1,16 @@
 import * as React from 'react';
 import * as cx from 'classnames';
 import * as th from './Control.sass';
-import { FilterConfig } from '../../../filter/initialState';
+import { FilterConfig } from '../../../filter';
 import { Filter } from '../../../../Definitions';
+import ToggleIcon from './ToggleIcon';
+import Toggle from '../../../../Definitions/filters/components/controls/Toggle';
 
 interface ControlProps {
   filter: Filter;
   config: FilterConfig;
   onQueryChange: (query: {} | null) => void;
-  onVisibilityChange: (visibility: boolean) => void;
+  onColumnChange: (column: boolean) => void;
   onHlChange: (hl: boolean) => void;
 }
 
@@ -29,13 +31,21 @@ export default class Control extends React.Component<ControlProps> {
       <div className={th.Title}>
         {filter.title}
         <div className={th.Icons}>
-          {iff(filter.cell) && <i className={cx('fa', th.IconVisible, { [th.IconVisible_active]: config.column })}/>}
-          <i className={cx('fa', th.IconFilterHl, {
-            [th.IconFilterHl_active]: !!config.query,
-            [th.IconFilterHl_hl]: config.hl
-          })}/>
-          {iff(filter.fineTune) && <i className={cx('fa', th.IconFineTune)}/>}
-          {iff(config.query) && <i className={cx('fa', th.IconClear)}/>}
+          <ToggleIcon
+            iff={!!filter.cell}
+            icon='Column'
+            value={config.column}
+            onToggle={this.props.onColumnChange}/>
+          <ToggleIcon
+            icon={config.hl ? 'Hl' : 'Filter'}
+            value={config.hl}
+            active={!!config.query}
+            onToggle={this.props.onHlChange}/>
+          <ToggleIcon
+            iff={!!config.query}
+            icon='Clear'
+            value={!!config.query}
+            onToggle={() => this.props.onQueryChange(null)}/>
         </div>
       </div>
       {iff(filter.control) &&

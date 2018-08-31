@@ -21,7 +21,7 @@ const reducer = combineReducers({
   [Lightbox.ID]: Lightbox.reducer,
   // [SavedFiltersManager.constants.NAME]: SavedFiltersManager.reducer,
   [layoutId]: layout,
-  ...FilterApp.reducer
+  [FilterApp.ID]: FilterApp.reducer
 })
 
 export default reducer

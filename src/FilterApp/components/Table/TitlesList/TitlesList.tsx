@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as th from './TitlesList.sass';
 
-import { FiltersConfiguration } from '../../../filter/initialState';
+import { FiltersConfiguration } from '../../../filter';
 import definitions, { FiltersNames }  from '../../../../Definitions';
 
 import Title from './Title';
@@ -32,16 +32,17 @@ export default class TitlesList extends React.Component<TitlesListProps> {
 
     let titles = [];
 
-    for (let filterName in configuration) {
-      let config = configuration[filterName as FiltersNames];
+    for (let a in configuration) {
+      let filterName = a as FiltersNames;
+      let config = configuration[filterName];
       if (config.column) {
-        let filter = definitions.filters.get(filterName as FiltersNames);
+        let filter = definitions.filters.get(filterName);
         titles.push (
           <Title
             key={filterName}
             filter={filter}
             config={config}
-            onSort={() => this.onSort(filterName as FiltersNames)}/>
+            onSort={() => this.onSort(filterName)}/>
         );
       }
     }

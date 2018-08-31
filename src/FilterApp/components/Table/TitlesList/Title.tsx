@@ -3,7 +3,7 @@ import * as th from './TitlesList.sass';
 import * as cx from 'classnames';
 
 import { Filter }  from '../../../../Definitions';
-import { FilterConfig }  from '../../../filter/initialState';
+import { FilterConfig }  from '../../../filter';
 
 type TitleProps = {
   filter: Filter;

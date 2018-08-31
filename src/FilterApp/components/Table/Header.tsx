@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as th from './Table.sass';
 
-import { FiltersConfiguration } from '../../filter/initialState';
+import { FiltersConfiguration } from '../../filter';
 import { FiltersNames } from '../../../Definitions';
 
 // import ColumnsWidthFixator from './ColumnsWidthFixator';

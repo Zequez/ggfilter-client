@@ -1,18 +1,19 @@
 import * as React from 'react';
+import { Filters, Columns } from '../../../Api';
 import { Text as TextControl } from '../components/controls/Text';
 import { Raw as RawCell } from '../components/cells/Raw';
 import { Raw as RawChip } from '../components/chips/Raw';
 
 type ReactComponentType = React.StatelessComponent<any> | React.ComponentClass<any>;
 type ControlOutputs = (query: object) => {[k: string]: object};
-type CellInputs = {[k: string]: string};
+type CellInputs = {[k: string]: Columns};
 type BoundInputs = {[k: string]: string};
 
 type Arguments = {
-  api?: string;
+  api?: Filters;
   title?: string;
   description?: string;
-  sort?: string;
+  sort?: Columns;
   width?: number;
   alignment?: -1 | 0 | 1;
   control?: ReactComponentType;
@@ -25,10 +26,10 @@ type Arguments = {
 };
 
 export default class AnonFilter {
-  api: string = null;
+  api: Filters = null;
   title: string = null;
   description: string = null;
-  sort: string = null;
+  sort: Columns = null;
   fineTune: boolean = false;
 
   width: number = 100;
@@ -51,8 +52,8 @@ export default class AnonFilter {
       this[attr] = args[attr];
     }
 
-    if (this.sort !== undefined) this.sort = this.api;
+    if (this.sort !== undefined) this.sort = <Columns> this.api;
     if (!this.controlOutputs) this.controlOutputs = (query) => ({[this.api]: query});
-    if (!this.cellInputs) this.cellInputs = {value: this.api};
+    if (!this.cellInputs) this.cellInputs = {value: <Columns> this.api};
   }
 }

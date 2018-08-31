@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import definitions, { FiltersNames }  from '../../Definitions';
 
 import * as a from '../filter/actions';
-import { FiltersConfiguration } from '../filter/initialState';
+import { FiltersConfiguration } from '../filter';
 import * as filterSel from '../filter/selectors';
 
 import Table from './Table/Table';

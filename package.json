@@ -109,6 +109,7 @@
     "fsevents": "^1.0.14",
     "history": "^4.0.0",
     "immutability-helper": "^2.0.0",
+    "immutable": "^3.8.2",
     "include-media": "^1.4.9",
     "lodash": "^4.15.0",
     "node-sass": "^4.5.3",
