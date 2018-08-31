@@ -19,7 +19,7 @@ export class MultiPrice extends Component {
     let { prices, urls, stores } = this.props
 
     let availableInStores = Object.keys(prices)
-    let selectedStores = storesListFromFlag(stores.value)
+    let selectedStores = storesListFromFlag(stores && stores.value)
     let lowestStores = getLowest(prices)
 
     if (lowestStores.length === selectedStores.length) {
