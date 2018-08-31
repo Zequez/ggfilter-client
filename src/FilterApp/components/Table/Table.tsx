@@ -1,34 +1,30 @@
 import * as React from 'react';
 import * as th from './Table.sass';
 
-import { FiltersConfiguration } from '../../filter';
+import { FiltersConfiguration, Game } from '../../filter';
 import { FiltersNames } from '../../../Definitions';
 
 import Header from './Header';
-// import Body from './Body';
+import Body from './Body';
 
 type TableProps = {
-  gamesPages: object[][];
+  gamesPages: Game[][];
   configuration: FiltersConfiguration;
   setSort: (filter: FiltersNames, sort: boolean) => void;
+  setQuery: (filter: FiltersNames, query: {}) => void;
 };
 
 export default class Table extends React.Component<TableProps> {
   render () {
-    let { configuration, gamesPages } = this.props;
-
-    // Object.entries(configuration).forEach(())
-
-    // let columns = Object.values(configuration).filter((filterConf) => filterConf.column);
-
+    let { configuration, gamesPages, setSort, setQuery } = this.props;
 
     return (
       <div className={th.Table}>
         <table className={th.Table__table}>
           <Header
-            setSort={this.props.setSort}
+            setSort={setSort}
             configuration={configuration}/>
-          {/* {Body({gamesPages, configuration})} */}
+          {Body({gamesPages, configuration, setQuery})}
         </table>
       </div>
     );

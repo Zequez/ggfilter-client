@@ -80,14 +80,14 @@ export const filterForApi = createSelector(
       let filter = definitions.filters.get(filterName);
 
       if (config.query) {
-        query.params[filter.api] = config.query;
+        query.params[filter.api] = {...config.query, hl: config.hl};
       }
 
       if (config.column) {
         query.columns = query.columns.concat(Object.values(filter.cellInputs));
       }
 
-      if (config.sort) {
+      if (config.sort != null) {
         query.sort = { column: filter.sort, asc: !config.sort };
       }
     }

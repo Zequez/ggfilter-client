@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import definitions, { FiltersNames }  from '../../Definitions';
 
 import * as a from '../filter/actions';
-import { FiltersConfiguration } from '../filter';
+import { FiltersConfiguration, Game } from '../filter';
 import * as filterSel from '../filter/selectors';
 
 import Table from './Table/Table';
@@ -21,7 +21,7 @@ import { AppBar } from 'src/Layout';
 import { Dispatch } from '../../../node_modules/redux';
 
 interface StateProps {
-  games: object[][];
+  games: Game[][];
   gamesTotalCount: number;
   gamesLoadedCount: number;
   gamesLoading: boolean;
@@ -83,8 +83,9 @@ class FilterApp extends React.Component<FilterAppProps> {
           configuration={p.configuration}/>
         <Table
           gamesPages={p.games}
+          configuration={p.configuration}
           setSort={p.setSort}
-          configuration={p.configuration}/>
+          setQuery={p.setQuery}/>
 
           {/* columns={p.definedColumnsList}
           columnsParams={p.newFilter.controlsParams}

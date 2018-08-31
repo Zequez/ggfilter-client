@@ -29,6 +29,10 @@ export interface Filter {
   configuration: FiltersConfiguration;
 };
 
+export interface Game {
+  id: number;
+};
+
 export interface State {
   sfilter: Filter;
   sfilterError: string;
@@ -37,7 +41,7 @@ export interface State {
   filter: Filter;
 
   games: {
-    batches: object[][];
+    batches: Game[][];
     loading: boolean;
     error: string;
     totalCount: number;

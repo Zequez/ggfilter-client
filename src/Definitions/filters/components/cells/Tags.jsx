@@ -12,7 +12,7 @@ export class Tags extends Component {
   static propTypes = {
     value: t.arrayOf(t.number).isRequired,
     filterParams: t.object,
-    setParam: t.func.isRequired
+    setQuery: t.func.isRequired
   }
 
   paramsTags () {
@@ -23,7 +23,7 @@ export class Tags extends Component {
     let paramsTags = this.paramsTags()
 
     if (paramsTags.indexOf(tagId) === -1) {
-      this.props.setParam({tags: paramsTags.concat(tagId)})
+      this.props.setQuery({tags: paramsTags.concat(tagId)})
     }
   }
 

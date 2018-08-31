@@ -7,7 +7,7 @@ import { Raw as RawChip } from '../components/chips/Raw';
 type ReactComponentType = React.StatelessComponent<any> | React.ComponentClass<any>;
 type ControlOutputs = (query: object) => {[k: string]: object};
 type CellInputs = {[k: string]: Columns};
-type BoundInputs = {[k: string]: string};
+type BoundInputs = {[k: string]: string}; // String value should actually be FilterNames
 
 type Arguments = {
   api?: Filters;
