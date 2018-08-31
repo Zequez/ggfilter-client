@@ -60,15 +60,16 @@ export const RelativeReleaseDate = new AnonFilter({
   title: 'Released At',
   cell: TimeAgo,
   control: RelativeDate,
-  width: 150
+  width: 120
 });
 
 export const AbsoluteReleaseDate = new AnonFilter({
   api: 'released_at_absolute',
+  cellInputs: { value: 'released_at' },
   title: 'Release Year',
   cell: DateCell,
   control: DateRange,
-  width: 150
+  width: 120
 });
 
 // export default {
