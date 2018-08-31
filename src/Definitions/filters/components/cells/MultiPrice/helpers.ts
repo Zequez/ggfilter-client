@@ -38,8 +38,9 @@ export function bestDiscountPrice(stores, prices) {
   return bestDiscount;
 }
 
-export function storesListFromFlag(storesFlag: number) {
+export function storesListFromFlag(storesFlag?: number) {
   let stores: string[] = [];
+  if (storesFlag == null) return storesDefinitions;
   storesDefinitions.forEach((store) => {
     if ((storesFlag & enumColumns.values.Stores[store]) > 0) {
       stores.push(store);

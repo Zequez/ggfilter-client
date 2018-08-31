@@ -21,7 +21,7 @@ export class MonoPrice extends Component {
     let { prices, urls, stores } = this.props
 
     let availableInStores = Object.keys(prices)
-    let selectedStores = storesListFromFlag(stores.value)
+    let selectedStores = storesListFromFlag(stores && stores.value)
     let lowestStores = getLowest(prices)
     let price = bestDiscountPrice(lowestStores, prices)
     let allTheSame = lowestStores.length === selectedStores.length

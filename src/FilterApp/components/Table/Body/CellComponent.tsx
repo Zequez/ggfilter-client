@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as th from './Body.sass';
 import * as cx from 'classnames';
 import { FiltersConfiguration } from '../../../filter';
-import { Filter } from '../../../../Definitions';
+import { Filter, FiltersNames } from '../../../../Definitions';
 import { partial } from 'shared/lib/utils';
 
 function cellInputValues (filter: Filter, configuration: FiltersConfiguration, game: {}) {
@@ -14,8 +14,9 @@ function cellInputValues (filter: Filter, configuration: FiltersConfiguration, g
   cellInputs['name'] = filter.name;
 
   for (let inputName in filter.boundInputs) {
-    let paramName = filter.boundInputs[inputName];
-    cellInputs[inputName] = configuration[paramName];
+    let paramName = filter.boundInputs[inputName] as FiltersNames;
+    let filterConfig = configuration[paramName];
+    cellInputs[inputName] = filterConfig && filterConfig.query;
   }
 
   return cellInputs;
@@ -45,7 +46,7 @@ export default ({game, filter, configuration, setQuery, setLightbox}: CellCompon
   let props = cellInputValues(filter, configuration, game);
 
   if (Component['active']) {
-    props['setQuery'] = partial(setQuery, filter.name);
+    props['setQuery'] = setQuery;
   }
 
   if (Component['lightbox']) {
