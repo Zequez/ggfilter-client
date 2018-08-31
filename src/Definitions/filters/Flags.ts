@@ -3,12 +3,18 @@ import enums from '../enumColumns';
 import { BooleanCell } from './components/cells/BooleanCell';
 import { BooleanCtrl } from './components/controls/BooleanCtrl';
 
+const iconWidth = 28;
+const extraWidth = 16;
+function getWidth (key) {
+  return extraWidth + Object.keys(enums.names[key]).length * iconWidth;
+}
+
 export const Platforms = new AnonFilter({
   api: 'platforms',
   title: 'Platforms',
   cell: BooleanCell,
   control: BooleanCtrl,
-  width: Object.keys(enums.names.Platforms).length * 20
+  width: getWidth('Platforms')
 });
 
 export const Players = new AnonFilter({
@@ -16,7 +22,7 @@ export const Players = new AnonFilter({
   title: 'Players',
   cell: BooleanCell,
   control: BooleanCtrl,
-  width: Object.keys(enums.names.Players).length * 20
+  width: getWidth('Players')
 });
 
 export const VrPlatforms = new AnonFilter({
@@ -24,7 +30,7 @@ export const VrPlatforms = new AnonFilter({
   title: 'VR Platforms',
   cell: BooleanCell,
   control: BooleanCtrl,
-  width: Object.keys(enums.names.VrPlatforms).length * 20
+  width: getWidth('VrPlatforms')
 });
 
 export const Controllers = new AnonFilter({
@@ -32,7 +38,7 @@ export const Controllers = new AnonFilter({
   title: 'Controllers',
   cell: BooleanCell,
   control: BooleanCtrl,
-  width: Object.keys(enums.names.Controllers).length * 20
+  width: getWidth('Controllers')
 });
 
 export const VrModes = new AnonFilter({
@@ -40,7 +46,7 @@ export const VrModes = new AnonFilter({
   title: 'VR Modes',
   cell: BooleanCell,
   control: BooleanCtrl,
-  width: Object.keys(enums.names.VrModes).length * 20
+  width: getWidth('VrModes')
 });
 
 export const Stores = new AnonFilter({
@@ -48,5 +54,5 @@ export const Stores = new AnonFilter({
   title: 'Stores',
   cell: BooleanCell,
   control: BooleanCtrl,
-  width: Object.keys(enums.names.Stores).length * 20
+  width: getWidth('Stores')
 });

@@ -50,9 +50,7 @@ export default {
       multi: 'Multiplayer',
       online: 'Online',
       co_op: 'Co-op',
-      shared: 'Local Multiplayer',
-      hotseat: 'Hotseat',
-      cross_platform: 'Cross Platform'
+      shared: 'Local Multiplayer'
     },
     Controllers: {
       tracked: 'Tracked controllers',
