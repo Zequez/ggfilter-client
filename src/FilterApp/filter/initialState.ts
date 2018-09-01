@@ -1,13 +1,14 @@
 import definitions, { FiltersNames } from '../../Definitions';
-import { Filter, State } from './stateTypes';
+import { HyperFilter, State } from './stateTypes';
 import configuration from './initialConfiguration';
 
-const filter: Filter = {
+const filter: HyperFilter = {
   sid: null,
   nameSlug: null,
   userId: null,
+  parent: null,
 
-  name: 'Name of your filter',
+  name: null,
 
   configuration: configuration,
 };

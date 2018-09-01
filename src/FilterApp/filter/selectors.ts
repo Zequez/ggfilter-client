@@ -5,7 +5,7 @@ import { State, FiltersConfiguration, FilterConfig } from './stateTypes';
 
 export const ID = 'filter';
 export const base = (s) => <State> s[ID];
-export const filter = createSelector(
+export const hyperFilter = createSelector(
   base,
   (ss) => ss.filter
 );
@@ -14,7 +14,7 @@ export const filter = createSelector(
 /* Filter Stuff
 /********************/
 
-export const configuration = createSelector(filter, (f) => f.configuration);
+export const configuration = createSelector(hyperFilter, (f) => f.configuration);
 export const currentSortRaw = (configuration: FiltersConfiguration) => {
   let filterName: keyof  typeof configuration;
   for (filterName in configuration) {
@@ -30,13 +30,13 @@ export const currentSort = createSelector(configuration, currentSortRaw);
 /********************/
 
 export const sfilter = createSelector(base, (ss) => ss.sfilter);
-export const sfilterIsDirty = createSelector(sfilter, filter, (sf, f) => sf !== f);
+export const sfilterIsDirty = createSelector(sfilter, hyperFilter, (sf, f) => sf !== f);
 export const secrets = createSelector(base, () =>
   window.localStorage.getItem('secrets') && JSON.parse(
     window.localStorage.getItem('secrets')
   ) || {}
 );
-export const actualFilterIsDirty = createSelector(sfilter, filter, (sf, f) => true );
+export const actualFilterIsDirty = createSelector(sfilter, hyperFilter, (sf, f) => true );
 
 /********************/
 /* Games

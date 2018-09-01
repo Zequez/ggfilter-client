@@ -23,7 +23,7 @@ import { canUpdateFilter } from './utils'
 
 @connect((s) => ({
   secrets: filterSel.secrets(s),
-  filter: filterSel.filter(s),
+  filter: filterSel.hyperFilter(s),
   sfilterIsDirty: filterSel.sfilterIsDirty(s),
   actualFilterIsDirty: filterSel.actualFilterIsDirty(s),
   currentUser: selectCurrentUser(s)

@@ -21,12 +21,13 @@ export type FiltersConfiguration = {
   [key in FiltersNames]: FilterConfig
 };
 
-export interface Filter {
+export interface HyperFilter {
   sid: string;
   nameSlug: string;
   userId: string;
   name: string;
   configuration: FiltersConfiguration;
+  parent: string;
 };
 
 export interface Game {
@@ -34,11 +35,11 @@ export interface Game {
 };
 
 export interface State {
-  sfilter: Filter;
+  sfilter: HyperFilter;
   sfilterError: string;
   sfilterLoading: boolean;
 
-  filter: Filter;
+  filter: HyperFilter;
 
   games: {
     batches: Game[][];

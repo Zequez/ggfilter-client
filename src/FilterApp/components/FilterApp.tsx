@@ -5,18 +5,16 @@ import { connect } from 'react-redux';
 import definitions, { FiltersNames }  from '../../Definitions';
 
 import * as a from '../filter/actions';
-import { FiltersConfiguration, Game } from '../filter';
+import { FiltersConfiguration, HyperFilter, Game } from '../filter';
 import * as filterSel from '../filter/selectors';
 
 import Table from './Table/Table';
 import GamesLoader from './GamesLoader';
 import QueryChipsList from './QueryChipsList';
-import SfilterBar from './SfilterBar';
 import FrontPageFilters from './FrontPageFilters';
 import Configurator from './Configurator';
 
 import { AppBar } from 'src/Layout';
-import { Dispatch } from '../../../node_modules/redux';
 
 interface StateProps {
   games: Game[][];
@@ -25,6 +23,7 @@ interface StateProps {
   gamesLoading: boolean;
   gamesFailed: boolean;
   configuration: FiltersConfiguration;
+  hyperFilter: HyperFilter;
   tags: string[];
 }
 
@@ -64,16 +63,11 @@ class FilterApp extends React.Component<FilterAppProps> {
     let p = this.props;
     return (
       <div className={th.FilterApp}>
-        {/* <AppBar className={th.FilterApp__AppBar}>
-          <SfilterBar/>
-          <QueryChipsList
-            controlsHlMode={p.newFilter.controlsHlMode}
-            controlsParams={p.newFilter.controlsParams}
-            onRemove={this.onRemoveFilter}/>
-        </AppBar> */}
-        {/* <FiltersPanel/>  */}
-        {/*<FrontPageFilters/>*/}
-        {/* <CategoriesList/> */}
+        <AppBar className={th.FilterApp__AppBar}>
+          <h2>{p.hyperFilter.name}</h2>
+          <QueryChipsList configuration={p.configuration} onRemove={this.onRemoveFilter}/>
+        </AppBar>
+        {/* <FrontPageFilters/> */}
         <Configurator
           onQueryChange={p.setQuery}
           onColumnChange={p.setColumn}
@@ -84,12 +78,6 @@ class FilterApp extends React.Component<FilterAppProps> {
           configuration={p.configuration}
           setSort={p.setSort}
           setQuery={p.setQuery}/>
-
-          {/* columns={p.definedColumnsList}
-          columnsParams={p.newFilter.controlsParams}
-          columnsWidth={p.columnsWidth}
-          sorting={p.newFilter.sorting}
-          tableWidth={p.tableWidth}/> */}
         {/* <GamesLoader
           fetching={p.gamesLoading}
           failed={p.gamesFailed}
@@ -103,6 +91,7 @@ class FilterApp extends React.Component<FilterAppProps> {
 
 export default connect<StateProps, DispatchProps, {}>((s) => ({
   configuration: filterSel.configuration(s),
+  hyperFilter: filterSel.hyperFilter(s),
   games: filterSel.gamesBatches(s),
   tags: s.tags,
   gamesLoadedCount: filterSel.gamesLoadedCount(s),

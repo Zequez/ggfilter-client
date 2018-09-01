@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-export function Raw ({query}) {
+export function Raw ({config}) {
   return (
-    <div>"{query.value}"</div>
+    <div>"{config.query.value}"</div>
   );
 }
