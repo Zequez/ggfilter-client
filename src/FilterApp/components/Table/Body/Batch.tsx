@@ -9,6 +9,7 @@ interface BatchType {
   games: Game[];
   configuration: FiltersConfiguration;
   setQuery: (filter: FiltersNames, query: object) => void;
+  setLightbox: (images: string[], thumbnails: string[]) => void;
 };
 
 export default class Batch extends React.Component<BatchType> {
@@ -21,10 +22,6 @@ export default class Batch extends React.Component<BatchType> {
     // console.logRender('DataTableBatch')
 
     let { games, configuration, setQuery } = this.props;
-
-    function setLightbox (aaa) {
-      console.log('Lightbox bitch!', aaa);
-    }
 
     let columns = extractColumns(configuration);
 
@@ -39,7 +36,7 @@ export default class Batch extends React.Component<BatchType> {
                 filter={filter}
                 configuration={configuration}
                 setQuery={(query) => this.props.setQuery(filter.name, query)}
-                setLightbox={setLightbox}/>
+                setLightbox={this.props.setLightbox}/>
             )}
           </tr>
         )}

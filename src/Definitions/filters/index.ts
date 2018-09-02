@@ -22,7 +22,7 @@ export const Images = new AnonFilter({
   cell: ImagesCell,
   cellInputs: { images: 'images' },
   sort: undefined,
-  width: 100
+  width: 120
 });
 
 export const Thumbnail = new AnonFilter({
@@ -32,7 +32,7 @@ export const Thumbnail = new AnonFilter({
   cell: ImagesCell,
   cellInputs: { thumbnail: 'thumbnail', 'images': 'images' },
   sort: undefined,
-  width: 100
+  width: 120
 });
 
 export const Name = new AnonFilter({

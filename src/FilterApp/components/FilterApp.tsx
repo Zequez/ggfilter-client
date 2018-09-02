@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import definitions, { FiltersNames }  from '../../Definitions';
 
 import * as a from '../filter/actions';
+import { showLightbox } from '../../Lightbox';
 import { FiltersConfiguration, HyperFilter, Game } from '../filter';
 import * as filterSel from '../filter/selectors';
 
@@ -33,6 +34,7 @@ interface DispatchProps {
   setColumn: (filter: FiltersNames, column: boolean) => void;
   setHl: (filter: FiltersNames, hl: boolean) => void;
   setSort: (filter: FiltersNames, direction: boolean) => void;
+  setLightbox: (images: string[], thumbnails: string[]) => void;
 }
 
 type FilterAppProps = StateProps & DispatchProps;
@@ -77,7 +79,8 @@ class FilterApp extends React.Component<FilterAppProps> {
           gamesPages={p.games}
           configuration={p.configuration}
           setSort={p.setSort}
-          setQuery={p.setQuery}/>
+          setQuery={p.setQuery}
+          setLightbox={p.setLightbox}/>
         <GamesLoader
           fetching={p.gamesLoading}
           failed={p.gamesFailed}
@@ -103,5 +106,6 @@ export default connect<StateProps, DispatchProps, {}>((s) => ({
   setQuery: a.setQuery,
   setColumn: a.setColumn,
   setHl: a.setHl,
-  setSort: a.setSort
+  setSort: a.setSort,
+  setLightbox: showLightbox
 })(FilterApp);

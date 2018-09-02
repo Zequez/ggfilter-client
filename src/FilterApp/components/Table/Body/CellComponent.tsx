@@ -27,7 +27,7 @@ interface CellComponentProps {
   filter: Filter;
   configuration: FiltersConfiguration;
   setQuery: (query: object) => void;
-  setLightbox: (images: string[]) => void;
+  setLightbox: (images: string[], thumbnails: string[]) => void;
 };
 
 export default ({game, filter, configuration, setQuery, setLightbox}: CellComponentProps) => {

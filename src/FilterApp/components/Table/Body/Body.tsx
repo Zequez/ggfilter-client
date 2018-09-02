@@ -7,9 +7,10 @@ interface BodyProps {
   gamesPages: Game[][];
   configuration: FiltersConfiguration;
   setQuery: (filter: FiltersNames, query: {}) => void;
+  setLightbox: (images: string[], thumbnails: string[]) => void;
 }
 
-export default function Body ({gamesPages, configuration, setQuery}: BodyProps) {
+export default function Body ({gamesPages, configuration, setQuery, setLightbox}: BodyProps) {
   let batches = [];
   for (let i = 0; i < gamesPages.length; ++i) {
     batches.push(
@@ -17,7 +18,8 @@ export default function Body ({gamesPages, configuration, setQuery}: BodyProps) 
         key={i}
         games={gamesPages[i]}
         configuration={configuration}
-        setQuery={setQuery}/>
+        setQuery={setQuery}
+        setLightbox={setLightbox}/>
     );
   }
 

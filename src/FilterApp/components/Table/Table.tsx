@@ -12,11 +12,12 @@ type TableProps = {
   configuration: FiltersConfiguration;
   setSort: (filter: FiltersNames, sort: boolean) => void;
   setQuery: (filter: FiltersNames, query: {}) => void;
+  setLightbox: (images: string[], thumbnails: string[]) => void;
 };
 
 export default class Table extends React.Component<TableProps> {
   render () {
-    let { configuration, gamesPages, setSort, setQuery } = this.props;
+    let { configuration, gamesPages, setSort, setQuery, setLightbox } = this.props;
 
     return (
       <div className={th.Table}>
@@ -24,7 +25,7 @@ export default class Table extends React.Component<TableProps> {
           <Header
             setSort={setSort}
             configuration={configuration}/>
-          {Body({gamesPages, configuration, setQuery})}
+          {Body({gamesPages, configuration, setQuery, setLightbox})}
         </table>
       </div>
     );
