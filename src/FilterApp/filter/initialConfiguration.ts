@@ -2,13 +2,13 @@ import definitions, { FiltersNames } from '../../Definitions';
 import { FiltersConfiguration, FilterConfig, PartialFilterConfig } from './stateTypes';
 
 const initialConfigurationValues: {[key in FiltersNames]?: PartialFilterConfig} = {
-  Name: {
-    column: true,
-    sort: true,
-    query: { value: 'civ' }
-  },
+  Name: { column: true },
   Tags: { column: true },
-  LowestPrice: { column: true }
+  RelativeReleaseDate: { column: true, sort: true },
+  BestDiscount: { query: {gt: 1, lt: null} },
+  // PlaytimeMedian: true,
+  LowestPrice: { column: true },
+  // RatingsPct: { column: true }
 };
 
 const filterConf: FilterConfig = {
