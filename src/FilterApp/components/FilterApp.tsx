@@ -78,12 +78,12 @@ class FilterApp extends React.Component<FilterAppProps> {
           configuration={p.configuration}
           setSort={p.setSort}
           setQuery={p.setQuery}/>
-        {/* <GamesLoader
+        <GamesLoader
           fetching={p.gamesLoading}
           failed={p.gamesFailed}
           onRequestMore={this.handleRequestMoreGames}
           loadedGames={p.gamesLoadedCount}
-          totalGames={p.gamesTotalCount}/> */}
+          totalGames={p.gamesTotalCount}/>
       </div>
     );
   }
