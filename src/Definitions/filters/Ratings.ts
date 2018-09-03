@@ -14,7 +14,7 @@ export const RatingsRatio = new AnonFilter({
   control: composeConfig(Pct, {
     labelMin: 'Lower',
     labelMax: 'Higher',
-    pctValues: [1,2,3,4,5,6,7,8,9,10]
+    pctValues: ['0%', '20%', '50%', '70%', '80%', '90%', '95%', '97.5%', '98%', '99%']
   }),
   alignment: -1,
   boundInputs: { stores: 'Stores' },

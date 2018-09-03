@@ -27,7 +27,7 @@ export default class Control extends React.Component<ControlProps> {
       onChange: this.props.onQueryChange
     };
 
-    return <div className={th.Control}>
+    return <div className={cx(th.Control, {[th.Control_active]: !!config.query})}>
       <div className={th.Title}>
         {filter.title}
         <div className={th.Icons}>

@@ -4,27 +4,51 @@ import * as cx from 'classnames';
 import { Range } from '../../../../Api';
 
 const UNSTICKY_TIME = 1000;
-const BLOCKS = 10;
+const BLOCKS = 20;
+const RANGE = 100;
+const STICKY = true;
 
 interface PctProps {
   query: Range;
   onChange: (query: Range) => void;
+  config: {
+    labelMin: string;
+    labelMax: string;
+    pctValues: string[];
+  };
 }
 
 interface PctState {
   dragStart: number;
   dragEnd: number;
   currentBlock: number;
-  dragStartTime: number;
   justFinishedDragging: boolean;
   stickyTimeout: number;
 };
 
-function getBlock(ev: React.SyntheticEvent<HTMLDivElement>) {
+function getEvBlock(ev: React.SyntheticEvent<HTMLElement>) {
   return parseInt(ev.target['dataset'].block);
 }
 
-function nan (val: number): number { return val === null ? NaN : val; }
+function rangeText (start: number, end: number, labels?: string[]) {
+  if (!start || !end) return '';
+  let val = (v) => labels ? labels[v - 1] : `${Math.floor((1 / BLOCKS) * (v - 1) * RANGE)}p`;
+  return val(start) + (end === BLOCKS ? '+' : `-${val(end + 1)}`);
+}
+
+function Block (i, dragStart, dragEnd, gt, lt) {
+  let highlight = dragStart && i >= dragStart && i <= dragEnd;
+  let selected = gt && i >= gt && i <= lt;
+  return <div
+    key={i}
+    className={cx(th.__block, {
+      [th.__block_highlighted]: highlight,
+      [th.__block_selected]: selected,
+      [th.__block_dragging]: !!dragStart,
+    })}
+    data-block={i}>
+  </div>;
+}
 
 export default class Pct extends React.Component<PctProps, PctState> {
   static defaultProps = {
@@ -34,76 +58,99 @@ export default class Pct extends React.Component<PctProps, PctState> {
     }
   };
 
-  state = {
+  state: PctState = {
     dragStart: null,
     dragEnd: null,
     currentBlock: null,
-    dragStartTime: null,
     justFinishedDragging: false,
     stickyTimeout: null
   };
 
-  onMove = (ev: React.SyntheticEvent<HTMLDivElement>) => {
-    let block = getBlock(ev);
+  componentDidMount () {
+    window.addEventListener('mouseup', this.onWindowMouseCatch);
+  }
 
-    if (block !== this.state.currentBlock) {
+  componentWillUnmount () {
+    window.removeEventListener('mouseup', this.onWindowMouseCatch);
+  }
+
+  onWindowMouseCatch = () => {
+    if (this.state.dragStart !== null) {
+      this.onDragEnd();
+    }
+  }
+
+  onMove = (ev: React.SyntheticEvent<HTMLElement>) => {
+    this.clearStickyTimeout();
+    let evBlock = getEvBlock(ev);
+    let { dragStart, dragEnd, currentBlock, stickyTimeout } = this.state;
+
+    if (evBlock !== currentBlock) {
       this.setState({justFinishedDragging: false});
     }
 
-    if (this.state.dragStart !== null) {
-      this.setState({dragEnd: block});
+    if (dragStart && (evBlock !== dragStart || dragEnd)) {
+      this.setState({dragEnd: evBlock});
     }
 
-    this.setState({currentBlock: block});
-    clearTimeout(this.state.stickyTimeout);
+    this.setState({currentBlock: evBlock});
   }
 
-  onMouseOut = (ev: React.SyntheticEvent<HTMLDivElement>) => {
+  onMouseOut = (ev: React.SyntheticEvent<HTMLElement>) => {
+    this.clearStickyTimeout();
     this.setState({currentBlock: null, justFinishedDragging: false});
-    clearTimeout(this.state.stickyTimeout);
   }
 
-  onDragStart = (ev: React.SyntheticEvent<HTMLDivElement>) => {
-    let block = getBlock(ev);
-    this.setState({dragStart: block, dragEnd: null, dragStartTime: new Date().valueOf()});
-    let timeout = window.setTimeout(() => {
-      this.setState({dragEnd: block});
-    }, UNSTICKY_TIME);
-    this.setState({stickyTimeout: timeout});
+  onDragStart = (ev: React.SyntheticEvent<HTMLElement>) => {
+    this.setState({
+      dragStart: getEvBlock(ev),
+      dragEnd: null
+    });
+    this.setStickyTimeout();
   }
 
-  onDragEnd = (ev: React.SyntheticEvent<HTMLDivElement>) => {
-    let [dragStart, dragEnd] = this.computedStartEnd();
+  onDragEnd = (ev?: React.SyntheticEvent<HTMLElement>) => {
+    this.clearStickyTimeout();
     this.setState({dragStart: null, dragEnd: null, justFinishedDragging: true});
-    this.props.onChange({gt: dragStart, lt: dragEnd});
-    clearTimeout(this.state.stickyTimeout);
+    if (ev) ev.stopPropagation();
+
+    let [dragStart, dragEnd] = this.computedStartEnd();
+    if ((dragStart === 1 && dragEnd === BLOCKS) || !dragStart || !dragEnd) {
+      this.props.onChange(null);
+    } else {
+      this.props.onChange({gt: dragStart, lt: dragEnd});
+    }
   }
 
   computedStartEnd () {
-    let { dragStart, dragEnd } = this.state;
-    if (dragStart != null) {
-      if (dragEnd == null) dragEnd = BLOCKS - 1;
+    let { dragStart, dragEnd, currentBlock, justFinishedDragging } = this.state;
+    if (dragStart) {
+      if (!dragEnd && STICKY) dragEnd = BLOCKS;
       if (dragStart > dragEnd) [dragStart, dragEnd] = [dragEnd, dragStart];
     }
+
+    if (!dragStart && !dragEnd && currentBlock && !justFinishedDragging) {
+      dragStart = currentBlock;
+      if (STICKY) dragEnd = BLOCKS;
+    }
+
     return [dragStart, dragEnd];
   }
+
+  setStickyTimeout () {
+    this.setState({stickyTimeout: window.setTimeout(() =>
+      this.setState({dragEnd: this.state.dragStart}), UNSTICKY_TIME)
+    });
+  }
+  clearStickyTimeout () { clearTimeout(this.state.stickyTimeout); }
 
   render () {
     let blocks = Array(BLOCKS).fill(0);
     let [dragStart, dragEnd] = this.computedStartEnd();
-    let { gt, lt } = this.props.query;
-    let { currentBlock, justFinishedDragging } = this.state;
-    dragStart = nan(dragStart);
-    dragEnd = nan(dragEnd);
-    gt = nan(gt);
-    lt = nan(lt);
+    let { query: { gt, lt }, config } = this.props;
 
-    let isDragging = !isNaN(dragStart);
-
-    if (isNaN(dragStart) && isNaN(dragEnd) && currentBlock != null && !justFinishedDragging) {
-      dragStart = currentBlock;
-      dragEnd = BLOCKS - 1;
-    }
+    let pctText = rangeText(dragStart || gt, dragEnd || lt);
+    let labelText = rangeText(dragStart || gt, dragEnd || lt, config.pctValues);
 
     return (
       <div className={th.Pct}>
@@ -113,21 +160,15 @@ export default class Pct extends React.Component<PctProps, PctState> {
           onMouseMove={this.onMove}
           onMouseDown={this.onDragStart}
           onMouseUp={this.onDragEnd}>
-          {blocks.map((_, i) =>
-            <div
-              key={i}
-              className={cx(th.__block, {
-                [th.__block_highlighted]: (i >= dragStart && i <= dragEnd),
-                [th.__block_selected]: (i >= gt && i <= lt),
-                [th.__block_dragging]: isDragging,
-              })}
-              data-block={i}>
-            </div>
-          )}
+          {blocks.map((_, i) => Block(i + 1, dragStart, dragEnd, gt, lt))}
         </div>
-        <div className={th.__value}></div>
+        <div className={th.__value}>
+          {pctText}<br/>
+          {labelText}
+        </div>
         <div className={th.__labels}>
-
+          <div className={th.__labelMin}>{config.labelMin}</div>
+          <div className={th.__labelMax}>{config.labelMax}</div>
         </div>
       </div>
     );
