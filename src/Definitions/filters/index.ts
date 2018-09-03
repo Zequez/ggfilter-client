@@ -14,6 +14,7 @@ import { TagsControl } from './components/controls/TagsControl/TagsControl';
 
 export * from './Flags';
 export * from './Prices';
+export * from './Ratings';
 
 export const Images = new AnonFilter({
   api: 'images',

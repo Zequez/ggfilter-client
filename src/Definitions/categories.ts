@@ -31,7 +31,7 @@ export default {
   rating: {
     title: 'Ratings',
     filters: [
-      // 'ratings_pct',
+      'RatingsRatio',
       // 'ratings_count',
       // 'ratings_ratio',
       // 'playtime_median',
