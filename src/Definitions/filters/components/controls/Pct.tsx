@@ -154,21 +154,23 @@ export default class Pct extends React.Component<PctProps, PctState> {
 
     return (
       <div className={th.Pct}>
-        <div
-          className={th.__blocks}
-          onMouseOut={this.onMouseOut}
-          onMouseMove={this.onMove}
-          onMouseDown={this.onDragStart}
-          onMouseUp={this.onDragEnd}>
-          {blocks.map((_, i) => Block(i + 1, dragStart, dragEnd, gt, lt))}
+        <div className={th.__bar}>
+          <div
+            className={th.__blocks}
+            onMouseOut={this.onMouseOut}
+            onMouseMove={this.onMove}
+            onMouseDown={this.onDragStart}
+            onMouseUp={this.onDragEnd}>
+            {blocks.map((_, i) => Block(i + 1, dragStart, dragEnd, gt, lt))}
+          </div>
+          <div className={th.__labels}>
+            <div className={th.__labelMin}>{config.labelMin}</div>
+            <div className={th.__labelMax}>{config.labelMax}</div>
+          </div>
         </div>
         <div className={th.__value}>
           {pctText}<br/>
           {labelText}
-        </div>
-        <div className={th.__labels}>
-          <div className={th.__labelMin}>{config.labelMin}</div>
-          <div className={th.__labelMax}>{config.labelMax}</div>
         </div>
       </div>
     );
