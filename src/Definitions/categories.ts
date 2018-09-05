@@ -36,6 +36,7 @@ export default {
       'RatingsCount',
       'Playtime',
       'PlaytimeDisparity',
+      'PlaytimeForTheBuck'
       // 'playtime_median',
       // 'playtime_median_ftb'
     ]

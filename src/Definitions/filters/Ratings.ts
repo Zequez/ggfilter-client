@@ -17,7 +17,7 @@ export const RatingsRatio = new AnonFilter({
     labelMax: 'Higher',
     percentiles: PERCENTILES_BOTH,
     apiPercentiles: 'ratingsRatio',
-    interpolation: (v) => `${Math.round(v * 100) / 100}%`
+    interpolation: (v) => `${v}%`
   }),
   alignment: 1,
   width: 130
@@ -46,7 +46,7 @@ export const Playtime = new AnonFilter({
     labelMax: 'Higher',
     percentiles: PERCENTILES_HIGH,
     apiPercentiles: 'playtimeMedian',
-    interpolation: (v) => `${Math.round(v * 10) / 10}hs`
+    interpolation: (v) => `${v}hs`
   }),
   alignment: 1,
   width: 130
@@ -61,8 +61,24 @@ export const PlaytimeDisparity = new AnonFilter({
     labelMax: 'Higher',
     percentiles: PERCENTILES_LOW,
     apiPercentiles: 'playtimeSd',
-    interpolation: (v) => `${Math.round(v * 10) / 10}hs`,
+    interpolation: (v) => `${v}hs`,
     sticky: 'first'
+  }),
+  alignment: 1,
+  width: 130
+});
+
+export const PlaytimeForTheBuck = new AnonFilter({
+  api: 'playtime_median_ftb', // TODO: Change
+  title: 'Playtime For The Buck',
+  cell: null,
+  control: composeConfig(Pct, {
+    labelMin: 'Lower',
+    labelMax: 'Higher',
+    percentiles: PERCENTILES_HIGH,
+    apiPercentiles: 'playtimeMedianFtb',
+    interpolation: (v) => `${v}hs/$`,
+    sticky: 'last'
   }),
   alignment: 1,
   width: 130
