@@ -15,7 +15,7 @@ export const RatingsRatio = new AnonFilter({
     labelMin: 'Lower',
     labelMax: 'Higher',
     percentiles: 'ratingsRatio',
-    pctValues: ['0%', '20%', '50%', '70%', '80%', '90%', '95%', '97.5%', '98%', '99%']
+    interpolation: (v) => `${Math.round(v * 100) / 100}%`
   }),
   alignment: -1,
   boundInputs: { stores: 'Stores' },

@@ -16,6 +16,7 @@ interface PctProps {
     labelMax: string;
     percentiles: string;
     pctValues: string[];
+    interpolation: (v: number) => string;
   };
 }
 
@@ -68,7 +69,7 @@ export default class Pct extends React.Component<PctProps, PctState> {
   calc: PctCalc;
 
   componentWillMount () {
-    this.calc = new PctCalc(PERCENTILES, STICKY);
+    this.calc = new PctCalc(PERCENTILES, STICKY, this.props.config.interpolation);
     api.percentiles.index().then((percentiles) => {
       this.calc.setLabels(percentiles[this.props.config.percentiles]);
     });
@@ -146,25 +147,22 @@ export default class Pct extends React.Component<PctProps, PctState> {
 
     return (
       <div className={th.Pct}>
-        <div className={th.__bar}>
-          <div
-            className={th.__blocks}
-            onMouseOut={this.onMouseOut}
-            onMouseMove={this.onMove}
-            onMouseDown={this.onDragStart}
-            onMouseUp={this.onDragEnd}>
-            {this.calc.eachBlock((block, size) =>
-              Block(block, size, startBlock || hoverStartBlock, endBlock || hoverEndBlock, gtBlock, ltBlock))}
-          </div>
-          <div className={th.__labels}>
-            <div className={th.__labelMin}>{this.props.config.labelMin}</div>
-            <div className={th.__labelMax}>{this.props.config.labelMax}</div>
-          </div>
+        <div
+          className={th.__blocks}
+          onMouseOut={this.onMouseOut}
+          onMouseMove={this.onMove}
+          onMouseDown={this.onDragStart}
+          onMouseUp={this.onDragEnd}>
+          {this.calc.eachBlock((block, size) =>
+            Block(block, size, startBlock || hoverStartBlock, endBlock || hoverEndBlock, gtBlock, ltBlock))}
         </div>
-        <div className={th.__value}>
-          {pct}
-          <br/>
-          {label}
+        <div className={th.__labels}>
+          <div className={th.__labelMin}>{this.props.config.labelMin}</div>
+          <div className={th.__labelMax}>{this.props.config.labelMax}</div>
+          <div className={th.__value}>
+            {pct} {label && label !== 'All' ? `(${label})` : ''}
+          </div>
+
         </div>
       </div>
     );

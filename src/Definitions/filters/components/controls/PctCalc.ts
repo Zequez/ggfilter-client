@@ -3,18 +3,20 @@ import { Range } from '../../../../Api';
 export default class PctCalc {
   private gtRanges: number[];
   private ltRanges: number[];
-  private labels: string[];
+  private labels: any[];
   private sticky: boolean;
+  private interpolation: (n: any) => string = (n) => n.toString();
 
-  constructor (divisions: number[], sticky: true) {
+  constructor (divisions: number[], sticky: true, interpolation?: (n: any) => string) {
     this.gtRanges = divisions;
     this.ltRanges = this.gtRanges.concat([100]);
     this.ltRanges.shift();
     this.sticky = sticky;
+    if (interpolation) this.interpolation = interpolation;
   }
 
   setLabels (labels: string[]) {
-    this.labels = labels;
+    this.labels = labels.map((l) => this.interpolation(l));
   }
 
   eachBlock (cb: (block: number, size: number) => any) {
