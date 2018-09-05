@@ -4,6 +4,7 @@ import { Tags } from '../../../../../Api';
 
 import SelectedTags from './SelectedTags';
 import TagsSelector from './TagsSelector';
+import ModeSelector from './ModeSelector';
 import Input from 'shared/components/Input';
 
 type TagsControlProps = {
@@ -67,6 +68,10 @@ export class TagsControl extends React.Component<TagsControlProps, TagsControlSt
     this.onChange({reject: this.props.query.reject.concat([tag])});
   }
 
+  onChangeMode = (mode: 'or' | 'and') => {
+    this.onChange({mode});
+  }
+
   onRemoveTag = (tag) => {
     let tags = this.props.query.tags.concat([]);
     tags.splice(tags.indexOf(tag), 1);
@@ -121,6 +126,10 @@ export class TagsControl extends React.Component<TagsControlProps, TagsControlSt
             onChange={this.onTextChange}
             ref='input'/>
         </TagsSelector>
+        <ModeSelector
+          modes={['and', 'or']}
+          mode={this.props.query.mode}
+          onChange={this.onChangeMode}/>
         <SelectedTags
           tags={this.props.query.tags}
           onRemove={this.onRemoveTag}/>

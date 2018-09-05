@@ -33,7 +33,8 @@ const rippleFactory = (options = {}) => {
         rippleCentered: PropTypes.bool,
         rippleClassName: PropTypes.string,
         rippleMultiple: PropTypes.bool,
-        rippleSpread: PropTypes.number
+        rippleSpread: PropTypes.number,
+        className: PropTypes.string
       }
 
       static defaultProps = {
