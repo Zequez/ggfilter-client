@@ -1,7 +1,6 @@
 .TagsControl
   position: relative
   padding: $g
-  white-space: nowrap
   text-align: left
 
   input
@@ -9,26 +8,11 @@
     z-index: 10
 
   &__SelectedTags
-    overflow: hidden
-    position: absolute
-    left: $g
-    top: $g*2
-    bottom: 0px
-    padding-right: 2px
-    max-width: 75%
-    z-index: 15
-
+    span
+      margin-top: $g
 
   &__TagsSelector
     position: relative
-
-  &__Tag
-    padding: 0 $g/2
-    background: $color-mono-4
-    cursor: pointer
-  &__Tag_focused
-    background: $color-pri-light
-    color: $color-white
 
   &__FloatingMenu
     position: absolute

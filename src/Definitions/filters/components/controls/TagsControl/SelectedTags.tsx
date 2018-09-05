@@ -5,7 +5,7 @@ import MicroTag from 'shared/components/MicroTag';
 type SelectedTagsProps = {
   tags: string[];
   onRemove: (tag: string) => void;
-  onWidthChange: (width: number) => void;
+  onWidthChange?: (width: number) => void;
 };
 
 
@@ -15,10 +15,12 @@ export default class SelectedTags extends React.Component<SelectedTagsProps> {
   }
 
   componentDidUpdate () {
-    this.refs.ul['scrollLeft'] = 9999;
+    if (this.props.onWidthChange) {
+      this.refs.ul['scrollLeft'] = 9999;
     setTimeout(() => {
       this.props.onWidthChange(this.refs.ul['clientWidth']);
     }, 0);
+    }
   }
 
   shouldComponentUpdate (np) {

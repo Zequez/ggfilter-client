@@ -108,11 +108,6 @@ export class TagsControl extends React.Component<TagsControlProps, TagsControlSt
 
     return (
       <div className={th.TagsControl}>
-        <SelectedTags
-          tags={this.props.query.tags}
-          onWidthChange={this.onSelectedWidthChange}
-          onRemove={this.onRemoveTag}/>
-
         <TagsSelector
           tags={tags}
           selectedTags={this.props.query.tags}
@@ -121,12 +116,14 @@ export class TagsControl extends React.Component<TagsControlProps, TagsControlSt
           onReject={this.rejectTag}>
           <Input
             value={this.state.text}
-            style={inputStyle}
-            hint={this.props.query.tags.length ? null : 'Filter games by tag'}
+            hint='Filter games by tag'
             onKeyDown={this.onKeyDown}
             onChange={this.onTextChange}
             ref='input'/>
         </TagsSelector>
+        <SelectedTags
+          tags={this.props.query.tags}
+          onRemove={this.onRemoveTag}/>
       </div>
     );
   }
