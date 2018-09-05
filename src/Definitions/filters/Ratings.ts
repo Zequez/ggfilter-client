@@ -3,8 +3,9 @@ import AnonFilter from './lib/AnonFilter';
 import { composeConfig } from './lib/composeConfig';
 import Pct from './components/controls/Pct';
 
-const PERCENTILES = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 96, 97, 98, 99];
-const PERCENTILES_2 = [0, 1, 2, 3, 4, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95];
+const PERCENTILES_BOTH = [0, 1, 2, 3, 4, 5, 10, 15, 20, 25, 50, 75, 80, 85, 90, 95, 96, 97, 98, 99];
+const PERCENTILES_HIGH = [0, 10, 20, 30, 40, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 96, 97, 98, 99];
+const PERCENTILES_LOW = [0, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 95, 96, 97, 98, 99];
 
 export const RatingsRatio = new AnonFilter({
   api: 'ratings_pct',
@@ -13,7 +14,7 @@ export const RatingsRatio = new AnonFilter({
   control: composeConfig(Pct, {
     labelMin: 'Lower',
     labelMax: 'Higher',
-    percentiles: PERCENTILES,
+    percentiles: PERCENTILES_BOTH,
     apiPercentiles: 'ratingsRatio',
     interpolation: (v) => `${Math.round(v * 100) / 100}%`
   }),
@@ -28,7 +29,7 @@ export const RatingsCount = new AnonFilter({
   control: composeConfig(Pct, {
     labelMin: 'Less',
     labelMax: 'More',
-    percentiles: PERCENTILES,
+    percentiles: PERCENTILES_HIGH,
     apiPercentiles: 'ratingsCount'
   }),
   alignment: 1,
@@ -42,7 +43,7 @@ export const Playtime = new AnonFilter({
   control: composeConfig(Pct, {
     labelMin: 'Lower',
     labelMax: 'Higher',
-    percentiles: PERCENTILES,
+    percentiles: PERCENTILES_HIGH,
     apiPercentiles: 'playtimeMedian',
     interpolation: (v) => `${Math.round(v * 10) / 10}hs`
   }),
@@ -57,7 +58,7 @@ export const PlaytimeDisparity = new AnonFilter({
   control: composeConfig(Pct, {
     labelMin: 'Lower',
     labelMax: 'Higher',
-    percentiles: PERCENTILES_2,
+    percentiles: PERCENTILES_LOW,
     apiPercentiles: 'playtimeSd',
     interpolation: (v) => `${Math.round(v * 10) / 10}hs`,
     sticky: 'first'

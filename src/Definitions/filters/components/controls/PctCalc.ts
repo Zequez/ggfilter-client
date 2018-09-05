@@ -64,8 +64,8 @@ export default class PctCalc {
   private endToLabel = (n: number) => n ? this.labels[this.ltRanges[n - 1]] : null;
   private startToQuery = (n: number) => n ? this.gtRanges[n - 1] : null;
   private endToQuery = (n: number) => n ? this.ltRanges[n - 1] : null;
-  private queryToStart = (n: number) => n != null ? this.gtRanges.indexOf(n) + 1 : null;
-  private queryToEnd = (n: number) => n != null ? this.ltRanges.indexOf(n) + 1 : null;
+  private queryToStart = (n: number) => n != null ? this.gtRanges.indexOf(n) + 1 || null : null;
+  private queryToEnd = (n: number) => n != null ? this.ltRanges.indexOf(n) + 1 || null : null;
 
   private prettyRange (s: number, e: number, sl: number, el: number, interpolator: (n: any) => string, pct: boolean) {
     if (s === 1 && e === this.ltRanges.length) {
