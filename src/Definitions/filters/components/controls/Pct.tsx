@@ -4,7 +4,7 @@ import * as cx from 'classnames';
 import api, { Range } from '../../../../Api';
 import PctCalc from './PctCalc';
 
-const UNSTICKY_TIME = 1000;
+const UNSTICKY_TIME = 600;
 
 interface PctProps {
   query: Range;
@@ -14,6 +14,7 @@ interface PctProps {
     labelMax: string;
     apiPercentiles: string;
     pctValues: string[];
+    showLabel: boolean;
     percentiles: number[];
     interpolation: (v: number) => string;
     sticky?: 'first' | 'last';
@@ -135,6 +136,7 @@ export default class Pct extends React.Component<PctProps, PctState> {
   clearStickyTimeout () { clearTimeout(this.state.stickyTimeout); }
 
   render () {
+    let { config } = this.props;
     let { dragStart, dragEnd, currentBlock, justFinishedDragging } = this.state;
     let [gtBlock, ltBlock] = this.calc.blocksFromQuery(this.props.query);
     let [startBlock, endBlock] = this.calc.normalize(dragStart, dragEnd);
@@ -157,10 +159,10 @@ export default class Pct extends React.Component<PctProps, PctState> {
             Block(block, size, startBlock || hoverStartBlock, endBlock || hoverEndBlock, gtBlock, ltBlock))}
         </div>
         <div className={th.__labels}>
-          <div className={th.__labelMin}>{this.props.config.labelMin}</div>
-          <div className={th.__labelMax}>{this.props.config.labelMax}</div>
+          <div className={th.__labelMin}>{config.labelMin}</div>
+          <div className={th.__labelMax}>{config.labelMax}</div>
           <div className={th.__value}>
-            {pct} {label && label !== 'All' ? `(${label})` : ''}
+            {pct} {config.showLabel && label && label !== 'All' ? `(${label})` : ''}
           </div>
 
         </div>

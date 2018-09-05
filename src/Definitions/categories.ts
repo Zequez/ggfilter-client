@@ -25,7 +25,8 @@ export default {
     filters: [
       'Stores',
       'Platforms',
-      'VrPlatforms'
+      'VrPlatforms',
+      'SystemRequirements'
     ]
   },
   rating: {
