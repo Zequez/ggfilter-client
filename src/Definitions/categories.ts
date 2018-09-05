@@ -32,8 +32,9 @@ export default {
     title: 'Ratings',
     filters: [
       'RatingsRatio',
-      // 'ratings_count',
-      // 'ratings_ratio',
+      'RatingsCount',
+      'Playtime',
+      'PlaytimeDisparity',
       // 'playtime_median',
       // 'playtime_median_ftb'
     ]

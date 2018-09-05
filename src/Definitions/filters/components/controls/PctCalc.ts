@@ -4,19 +4,20 @@ export default class PctCalc {
   private gtRanges: number[];
   private ltRanges: number[];
   private labels: any[];
-  private sticky: boolean;
-  private interpolation: (n: any) => string = (n) => n.toString();
+  private sticky: 'first' | 'last' | null = 'last';
+  private interpolation: (n: any) => string = (n) => `${n}`;
+  private pInterpolation = (n: any) => `p${n}`;
 
-  constructor (divisions: number[], sticky: true, interpolation?: (n: any) => string) {
+  constructor (divisions: number[], sticky: 'first' | 'last', interpolation?: (n: any) => string) {
     this.gtRanges = divisions;
     this.ltRanges = this.gtRanges.concat([100]);
     this.ltRanges.shift();
-    this.sticky = sticky;
+    if (sticky) this.sticky = sticky;
     if (interpolation) this.interpolation = interpolation;
   }
 
   setLabels (labels: string[]) {
-    this.labels = labels.map((l) => this.interpolation(l));
+    this.labels = labels;
   }
 
   eachBlock (cb: (block: number, size: number) => any) {
@@ -35,13 +36,13 @@ export default class PctCalc {
   label (start: number, end: number) {
     [start, end] = this.normalize(start, end);
     return this.labels && start
-      ? this.prettyRange(start, end, this.startToLabel(start), this.endToLabel(end))
+      ? this.prettyRange(start, end, this.startToLabel(start), this.endToLabel(end), this.interpolation, false)
       : '';
   }
 
   pct (start: number, end: number) {
     [start, end] = this.normalize(start, end);
-    return start ? this.prettyRange(start, end, this.startToPct(start), this.endToPct(end)) : '';
+    return start ? this.prettyRange(start, end, this.startToPct(start), this.endToPct(end), this.pInterpolation, true) : '';
   }
 
   blocksFromQuery (query: Range) {
@@ -50,15 +51,15 @@ export default class PctCalc {
 
   normalize (start: number, end: number) {
     if (start) {
-      if (!end && this.sticky) end = this.ltRanges.length;
+      if (!end && this.sticky) end = this.sticky === 'last' ? this.ltRanges.length : 1;
       if (start > end) [start, end] = [end, start];
     }
 
     return [start, end];
   }
 
-  private startToPct = (n: number) => n ? `${this.gtRanges[n - 1]}p` : null;
-  private endToPct = (n: number) => n ? `${this.ltRanges[n - 1] - 1}p` : null;
+  private startToPct = (n: number) => n ? `${this.gtRanges[n - 1]}` : null;
+  private endToPct = (n: number) => n ? `${this.ltRanges[n - 1] - 1}` : null;
   private startToLabel = (n: number) => n ? `${this.labels[this.gtRanges[n - 1]]}` : null;
   private endToLabel = (n: number) => n ? `${this.labels[this.ltRanges[n - 1]]}` : null;
   private startToQuery = (n: number) => n ? this.gtRanges[n - 1] : null;
@@ -66,17 +67,17 @@ export default class PctCalc {
   private queryToStart = (n: number) => n != null ? this.gtRanges.indexOf(n) + 1 : null;
   private queryToEnd = (n: number) => n != null ? this.ltRanges.indexOf(n) + 1 : null;
 
-  private prettyRange (s: number, e: number, sl: string, el: string) {
+  private prettyRange (s: number, e: number, sl: string, el: string, interpolator: (n: any) => string, pct: boolean) {
     if (s === 1 && e === this.ltRanges.length) {
       return 'All';
     } else if (s === 1) {
-      return `≤${el}`;
+      return pct ? `≤${interpolator(el)}` : `<${interpolator(el)}`;
     } else if (e === this.ltRanges.length) {
-      return `${sl}+`;
+      return `${interpolator(sl)}+`;
     } else if (sl === el) {
       return sl;
     } else {
-      return `${sl}-${el}`;
+      return pct ? `${interpolator(sl)}-${el}` : `${sl}-${interpolator(el)}`;
     }
   }
 }

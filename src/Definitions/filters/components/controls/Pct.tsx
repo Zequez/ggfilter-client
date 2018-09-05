@@ -17,6 +17,7 @@ interface PctProps {
     percentiles: string;
     pctValues: string[];
     interpolation: (v: number) => string;
+    sticky?: 'first' | 'last';
   };
 }
 
@@ -69,7 +70,7 @@ export default class Pct extends React.Component<PctProps, PctState> {
   calc: PctCalc;
 
   componentWillMount () {
-    this.calc = new PctCalc(PERCENTILES, STICKY, this.props.config.interpolation);
+    this.calc = new PctCalc(PERCENTILES, this.props.config.sticky, this.props.config.interpolation);
     api.percentiles.index().then((percentiles) => {
       this.calc.setLabels(percentiles[this.props.config.percentiles]);
     });
