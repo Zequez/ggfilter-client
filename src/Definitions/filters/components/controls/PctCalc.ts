@@ -58,16 +58,16 @@ export default class PctCalc {
     return [start, end];
   }
 
-  private startToPct = (n: number) => n ? `${this.gtRanges[n - 1]}` : null;
-  private endToPct = (n: number) => n ? `${this.ltRanges[n - 1] - 1}` : null;
-  private startToLabel = (n: number) => n ? `${this.labels[this.gtRanges[n - 1]]}` : null;
-  private endToLabel = (n: number) => n ? `${this.labels[this.ltRanges[n - 1]]}` : null;
+  private startToPct = (n: number) => n ? this.gtRanges[n - 1] : null;
+  private endToPct = (n: number) => n ? this.ltRanges[n - 1] - 1 : null;
+  private startToLabel = (n: number) => n ? this.labels[this.gtRanges[n - 1]] : null;
+  private endToLabel = (n: number) => n ? this.labels[this.ltRanges[n - 1]] : null;
   private startToQuery = (n: number) => n ? this.gtRanges[n - 1] : null;
   private endToQuery = (n: number) => n ? this.ltRanges[n - 1] : null;
   private queryToStart = (n: number) => n != null ? this.gtRanges.indexOf(n) + 1 : null;
   private queryToEnd = (n: number) => n != null ? this.ltRanges.indexOf(n) + 1 : null;
 
-  private prettyRange (s: number, e: number, sl: string, el: string, interpolator: (n: any) => string, pct: boolean) {
+  private prettyRange (s: number, e: number, sl: number, el: number, interpolator: (n: any) => string, pct: boolean) {
     if (s === 1 && e === this.ltRanges.length) {
       return 'All';
     } else if (s === 1) {

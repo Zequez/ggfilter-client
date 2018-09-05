@@ -5,8 +5,6 @@ import api, { Range } from '../../../../Api';
 import PctCalc from './PctCalc';
 
 const UNSTICKY_TIME = 1000;
-const STICKY = true;
-const PERCENTILES = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 96, 97, 98, 99];
 
 interface PctProps {
   query: Range;
@@ -14,8 +12,9 @@ interface PctProps {
   config: {
     labelMin: string;
     labelMax: string;
-    percentiles: string;
+    apiPercentiles: string;
     pctValues: string[];
+    percentiles: number[];
     interpolation: (v: number) => string;
     sticky?: 'first' | 'last';
   };
@@ -70,9 +69,9 @@ export default class Pct extends React.Component<PctProps, PctState> {
   calc: PctCalc;
 
   componentWillMount () {
-    this.calc = new PctCalc(PERCENTILES, this.props.config.sticky, this.props.config.interpolation);
+    this.calc = new PctCalc(this.props.config.percentiles, this.props.config.sticky, this.props.config.interpolation);
     api.percentiles.index().then((percentiles) => {
-      this.calc.setLabels(percentiles[this.props.config.percentiles]);
+      this.calc.setLabels(percentiles[this.props.config.apiPercentiles]);
     });
   }
 
