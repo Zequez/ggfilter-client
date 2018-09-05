@@ -75,7 +75,7 @@ export const SystemRequirements = new AnonFilter({
   control: composeConfig(Pct, {
     labelMin: 'Potato',
     labelMax: 'Spaceship',
-    showLabel: false,
+    hideLabel: true,
     percentiles: PERCENTILES_CENTILES,
     apiPercentiles: 'sysreqIndex',
     sticky: 'first'

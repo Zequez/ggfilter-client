@@ -14,7 +14,7 @@ interface PctProps {
     labelMax: string;
     apiPercentiles: string;
     pctValues: string[];
-    showLabel: boolean;
+    hideLabel: boolean;
     percentiles: number[];
     interpolation: (v: number) => string;
     sticky?: 'first' | 'last';
@@ -162,7 +162,7 @@ export default class Pct extends React.Component<PctProps, PctState> {
           <div className={th.__labelMin}>{config.labelMin}</div>
           <div className={th.__labelMax}>{config.labelMax}</div>
           <div className={th.__value}>
-            {pct} {config.showLabel && label && label !== 'All' ? `(${label})` : ''}
+            {pct} {!config.hideLabel && label && label !== 'All' ? `(${label})` : ''}
           </div>
 
         </div>

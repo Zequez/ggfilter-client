@@ -71,7 +71,7 @@ export default class PctCalc {
     if (s === 1 && e === this.ltRanges.length) {
       return 'All';
     } else if (s === 1) {
-      return pct ? `≤${interpolator(el)}` : `<${interpolator(el)}`;
+      return pct ? `<${interpolator(el + 1)}` : `<${interpolator(el)}`;
     } else if (e === this.ltRanges.length) {
       return `${interpolator(sl)}+`;
     } else if (sl === el) {
