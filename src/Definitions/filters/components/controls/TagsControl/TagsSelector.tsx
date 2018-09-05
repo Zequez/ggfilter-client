@@ -77,6 +77,7 @@ export default class TagsSelector extends React.Component<TagsSelectorProps, Tag
             <FloatingMenu
               className={th.TagsControl__FloatingMenu}
               options={options}
+              onAltAction={this.props.onReject}
               selected={this.state.focusedTag}
               onSelect={this.select}
             />

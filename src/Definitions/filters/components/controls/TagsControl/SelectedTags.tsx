@@ -4,7 +4,9 @@ import MicroTag from 'shared/components/MicroTag';
 
 type SelectedTagsProps = {
   tags: string[];
+  reject: string[];
   onRemove: (tag: string) => void;
+  onRemoveReject: (tag: string) => void;
   onWidthChange?: (width: number) => void;
 };
 
@@ -25,14 +27,21 @@ export default class SelectedTags extends React.Component<SelectedTagsProps> {
 
   shouldComponentUpdate (np) {
     let tp = this.props;
-    return (tp.tags !== np.tags)
+    return (tp.tags !== np.tags || tp.reject !== np.reject);
   }
 
   render () {
-    const { tags } = this.props;
+    const { tags, reject } = this.props;
 
     return (
       <div className={th.TagsControl__SelectedTags} ref='ul'>
+        {reject.map(tag =>
+          <MicroTag
+            alt={true}
+            key={tag}
+            tag={tag}
+            onDelete={this.props.onRemoveReject}/>
+        )}
         {tags.map(tag =>
           <MicroTag
             key={tag}

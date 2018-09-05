@@ -15,23 +15,25 @@ interface ButtonProps {
   icon?: string;
   disabled?: boolean;
   flat?: boolean;
-  onClick?: (event: React.SyntheticEvent<EventTarget>) => void;
+  mini?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
 class Button extends React.Component<ButtonProps> {
   static defaultProps = {
     raised: true,
     primary: true,
-    alt: false
+    alt: false,
+    mini: false
   };
 
-  onClick = (ev: React.SyntheticEvent<EventTarget>) => {
+  onClick = (ev: React.MouseEvent<HTMLElement>) => {
     this.refs.button['blur']();
     if (this.props.onClick) this.props.onClick(ev);
   }
 
   render () {
-    let { children, icon, label, flat, raised, primary, alt, disabled, className, ...other } = this.props;
+    let { children, icon, label, flat, raised, primary, mini, alt, disabled, className, ...other } = this.props;
 
     if (flat) raised = false;
 
@@ -40,6 +42,8 @@ class Button extends React.Component<ButtonProps> {
         [th.Button_raised]: raised,
         [th.Button_flat]: !raised,
         [th.Button_primary]: primary,
+        [th.Button_secondary]: !primary,
+        [th.Button_mini]: mini,
         [th.Button_disabled]: disabled,
         [th.Button_alt]: alt
       })} disabled={disabled} {...other} onClick={this.onClick} >

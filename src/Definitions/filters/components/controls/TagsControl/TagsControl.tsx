@@ -55,7 +55,13 @@ export class TagsControl extends React.Component<TagsControlProps, TagsControlSt
   // }
 
   onChange (query: Partial<Tags>) {
-    this.props.onChange(query ? {...this.props.query, ...query} : null);
+    if (query) {
+      query = {...this.props.query, ...query};
+      if (query.tags.length === 0 && query.reject.length === 0 && query.mode === TagsControl.defaultProps.query.mode) {
+        query = null;
+      }
+    }
+    this.props.onChange(query);
   }
 
   selectTag = (tag: string) => {
@@ -72,14 +78,17 @@ export class TagsControl extends React.Component<TagsControlProps, TagsControlSt
     this.onChange({mode});
   }
 
-  onRemoveTag = (tag) => {
+  onRemoveTag = (tag: string) => {
     let tags = this.props.query.tags.concat([]);
     tags.splice(tags.indexOf(tag), 1);
-    if (tags.length) {
-      this.onChange({tags});
-    } else {
-      this.onChange(null);
-    }
+    this.onChange({tags});
+  }
+
+  onRemoveReject = (tag: string) => {
+    console.log(tag);
+    let reject = this.props.query.reject.concat([]);
+    reject.splice(reject.indexOf(tag), 1);
+    this.onChange({reject});
   }
 
   onTextChange = (value) => {
@@ -88,15 +97,6 @@ export class TagsControl extends React.Component<TagsControlProps, TagsControlSt
 
   onSelectedWidthChange = (width) => {
     this.setState({selectedWidth: width});
-  }
-
-  onKeyDown = (ev) => {
-    if (ev.keyCode === 8) { // Backspace
-      let tags = this.props.query.tags;
-      if (!this.state.text && tags.length) {
-        this.onRemoveTag(tags[tags.length - 1]);
-      }
-    }
   }
 
   focus () {
@@ -115,14 +115,13 @@ export class TagsControl extends React.Component<TagsControlProps, TagsControlSt
       <div className={th.TagsControl}>
         <TagsSelector
           tags={tags}
-          selectedTags={this.props.query.tags}
+          selectedTags={this.props.query.tags.concat(this.props.query.reject)}
           search={this.state.text}
           onSelect={this.selectTag}
           onReject={this.rejectTag}>
           <Input
             value={this.state.text}
             hint='Filter games by tag'
-            onKeyDown={this.onKeyDown}
             onChange={this.onTextChange}
             ref='input'/>
         </TagsSelector>
@@ -132,6 +131,8 @@ export class TagsControl extends React.Component<TagsControlProps, TagsControlSt
           onChange={this.onChangeMode}/>
         <SelectedTags
           tags={this.props.query.tags}
+          reject={this.props.query.reject}
+          onRemoveReject={this.onRemoveReject}
           onRemove={this.onRemoveTag}/>
       </div>
     );

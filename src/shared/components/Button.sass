@@ -55,6 +55,13 @@
     box-shadow: none!important
     cursor: default
 
+.Button_mini
+  background: $color-sec
+  padding: 0 $g / 2
+  min-width: 0
+  height: auto
+  line-height: $g*2
+  font-size: 10px
 
 .Button_alt
   &:hover, &:focus
@@ -64,6 +71,10 @@
 .Button_primary
   /**/
 
+.Button_secondary
+  background: $color-sec
+  &:hover, &:focus
+    background: $color-sec-light
 
 .Button_disabled
   background: transparent

@@ -11,10 +11,25 @@
   overflow: hidden
   +z(FloatingMenu)
   &__Item
-    padding: $g*2.5 $g*2
+    display: flex
+    align-items: center
+    height: $g*5
+    padding: 0 $g*2
     cursor: pointer
     &:hover
       background: $color-mono-2
+    span
+      flex-grow: 1
+      padding-right: $g
+    button
+      // background: $color-sec
+      // padding: 0 $g / 2
+      // min-width: 0
+      // height: auto
+      // line-height: $g*2
+      // font-size: 10px
+      // &:hover
+      //   background: $color-sec-light
 
   &__Item_selected
     background: $color-mono-2

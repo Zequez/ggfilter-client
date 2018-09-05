@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as th from './FloatingMenu.sass';
 import * as cx from 'classnames';
+import Button from './Button';
 import { onClickOutsideOnce } from 'shared/lib/utils';
 
 type OptionVal = string | number;
@@ -8,6 +9,7 @@ type FloatingMenuProps = {
   options: [OptionVal, OptionVal][];
   selected: OptionVal;
   onSelect: (OptionVal) => void;
+  onAltAction?: (OptionVal) => void;
   onClose?: () => void;
   style?: {};
   className?: string;
@@ -20,6 +22,11 @@ export default class FloatingMenu extends React.Component<FloatingMenuProps> {
 
   onClick (value: OptionVal, ev: React.MouseEvent<HTMLElement>) {
     this.props.onSelect(value);
+    ev.stopPropagation();
+  }
+
+  onAltAction (value: OptionVal, ev: React.MouseEvent<HTMLElement>) {
+    this.props.onAltAction(value);
     ev.stopPropagation();
   }
 
@@ -36,7 +43,10 @@ export default class FloatingMenu extends React.Component<FloatingMenuProps> {
               [th.FloatingMenu__Item_selected]: value === this.props.selected
             })}
           >
-            {label}
+            <span>{label}</span>
+            {this.props.onAltAction ?
+              <Button primary={false} mini={true} onClick={(ev) => this.onAltAction(value, ev)}>Exclude</Button>
+            : null}
           </li>
         ))}
       </ul>
