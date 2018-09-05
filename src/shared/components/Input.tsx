@@ -3,21 +3,23 @@ import * as React from 'react';
 import { themeExtender } from 'shared/lib/utils/misc';
 import * as cx from 'classnames';
 
-type PropTypes = {
-  onChange: (value: string) => void,
-  className?: string,
-  hint?: string,
-  prefix?: string,
-  suffix?: string,
-  label?: string,
-  disabled?: boolean,
-  value?: string
+type InputPropTypes = {
+  onChange: (value: string) => void;
+  className?: string;
+  hint?: string;
+  prefix?: string;
+  suffix?: string;
+  label?: string;
+  disabled?: boolean;
+  value?: string;
+  style?: any;
+  onKeyDown?: any
 };
 
 export const inputWithTheme = (th: {[K in keyof typeof theme]: string}) => {
   th = themeExtender(theme, th);
 
-  return class Input extends React.Component<PropTypes, null> {
+  return class Input extends React.Component<InputPropTypes, null> {
     private input: HTMLInputElement;
 
     onChange = (ev: React.SyntheticEvent<HTMLInputElement>) => {

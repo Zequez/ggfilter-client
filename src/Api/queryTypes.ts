@@ -18,7 +18,9 @@ export interface Boolean {
 }
 
 export interface Tags {
-  tags: number[];
+  tags: string[];
+  reject: string[];
+  mode: 'and' | 'or' | 'xor';
   hl?: boolean;
 }
 

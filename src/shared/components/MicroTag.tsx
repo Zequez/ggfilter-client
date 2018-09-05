@@ -7,10 +7,10 @@ interface MicroTagParams {
   tag: string;
   deco?: string;
   children?: any;
-  onDelete?: () => void;
+  onDelete?: (tag: string) => void;
   onClick?: () => void;
-  className: string;
-  highlighted: boolean;
+  className?: string;
+  highlighted?: boolean;
 };
 
 export default ({tag, deco, children, onDelete, onClick, className, highlighted, ...other}: MicroTagParams) => (
@@ -25,7 +25,7 @@ export default ({tag, deco, children, onDelete, onClick, className, highlighted,
     {children}
     {deco ? <span className={th.MicroTag__deco}>{deco}</span> : null}
     {onDelete ? (
-      <Icon className={th.MicroTag__delete} icon='remove-tag' onClick={onDelete}/>
+      <Icon className={th.MicroTag__delete} icon='remove-tag' onClick={() => onDelete(tag)}/>
     ) : null}
   </span>
 );
