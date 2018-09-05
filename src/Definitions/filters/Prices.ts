@@ -41,6 +41,7 @@ export const Prices = new AnonFilter({
 });
 
 export const BestDiscount = new AnonFilter({
+  api: 'best_discount',
   title: 'On Sale',
   control: composeConfig(Range, {suffix: '%', max: 100}),
   cell: null,

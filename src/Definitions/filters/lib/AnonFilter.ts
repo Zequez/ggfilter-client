@@ -10,7 +10,7 @@ type CellInputs = {[k: string]: Columns};
 type BoundInputs = {[k: string]: string}; // String value should actually be FilterNames
 
 type Arguments = {
-  api?: Filters;
+  api: Filters;
   title?: string;
   description?: string;
   sort?: Columns;

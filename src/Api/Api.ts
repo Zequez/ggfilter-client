@@ -1,6 +1,5 @@
-import { api, withMeta, get, post, patch, del, snake, camel } from './loader'
-
-let tagsCache = null
+import { api, withMeta, get, post, patch, del, snake, camel, cached } from './loader'
+import { actionBar } from '../SysreqCalc/theme.sass';
 
 export default {
   games: {
@@ -21,9 +20,10 @@ export default {
     delete: ({sid, secret}) => del(`/filters/${sid}.json`, { secret })
   },
   tags: {
-    index: () => tagsCache
-      ? new Promise.resolve(tagsCache)
-      : get(`tags.json`).then((tags) => tagsCache = tags)
+    index: () => cached(get, 'tags.json')
+  },
+  percentiles: {
+    index: () => cached(get, 'percentiles.json')
   },
   auth: {
     currentUser: () => get(`auth/current_user.json`)

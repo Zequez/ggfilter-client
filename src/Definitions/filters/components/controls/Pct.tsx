@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as th from './Pct.sass';
 import * as cx from 'classnames';
-import { Range } from '../../../../Api';
+import api, { Range } from '../../../../Api';
+import PctCalc from './PctCalc';
 
 const UNSTICKY_TIME = 1000;
-const BLOCKS = 20;
-const RANGE = 100;
 const STICKY = true;
+const PERCENTILES = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 96, 97, 98, 99];
 
 interface PctProps {
   query: Range;
@@ -14,6 +14,7 @@ interface PctProps {
   config: {
     labelMin: string;
     labelMax: string;
+    percentiles: string;
     pctValues: string[];
   };
 }
@@ -30,30 +31,28 @@ function getEvBlock(ev: React.SyntheticEvent<HTMLElement>) {
   return parseInt(ev.target['dataset'].block);
 }
 
-function rangeText (start: number, end: number, labels?: string[]) {
-  if (!start || !end) return '';
-  let val = (v) => labels ? labels[v - 1] : `${Math.floor((1 / BLOCKS) * (v - 1) * RANGE)}p`;
-  return val(start) + (end === BLOCKS ? '+' : `-${val(end + 1)}`);
-}
-
-function Block (i, dragStart, dragEnd, gt, lt) {
-  let highlight = dragStart && i >= dragStart && i <= dragEnd;
+function Block (i, size, start, end, gt, lt) {
+  let highlight = start && i >= start && i <= end;
   let selected = gt && i >= gt && i <= lt;
+  let style = {flexBasis: size};
   return <div
     key={i}
+    style={style}
     className={cx(th.__block, {
       [th.__block_highlighted]: highlight,
       [th.__block_selected]: selected,
-      [th.__block_dragging]: !!dragStart,
+      [th.__block_dragging]: !!start,
     })}
     data-block={i}>
   </div>;
 }
 
 export default class Pct extends React.Component<PctProps, PctState> {
+  static percentiles: {} = null;
+
   static defaultProps = {
     query: {
-      gt: null,
+      gte: null,
       lt: null
     }
   };
@@ -65,6 +64,15 @@ export default class Pct extends React.Component<PctProps, PctState> {
     justFinishedDragging: false,
     stickyTimeout: null
   };
+
+  calc: PctCalc;
+
+  componentWillMount () {
+    this.calc = new PctCalc(PERCENTILES, STICKY);
+    api.percentiles.index().then((percentiles) => {
+      this.calc.setLabels(percentiles[this.props.config.percentiles]);
+    });
+  }
 
   componentDidMount () {
     window.addEventListener('mouseup', this.onWindowMouseCatch);
@@ -114,27 +122,8 @@ export default class Pct extends React.Component<PctProps, PctState> {
     this.setState({dragStart: null, dragEnd: null, justFinishedDragging: true});
     if (ev) ev.stopPropagation();
 
-    let [dragStart, dragEnd] = this.computedStartEnd();
-    if ((dragStart === 1 && dragEnd === BLOCKS) || !dragStart || !dragEnd) {
-      this.props.onChange(null);
-    } else {
-      this.props.onChange({gt: dragStart, lt: dragEnd});
-    }
-  }
-
-  computedStartEnd () {
-    let { dragStart, dragEnd, currentBlock, justFinishedDragging } = this.state;
-    if (dragStart) {
-      if (!dragEnd && STICKY) dragEnd = BLOCKS;
-      if (dragStart > dragEnd) [dragStart, dragEnd] = [dragEnd, dragStart];
-    }
-
-    if (!dragStart && !dragEnd && currentBlock && !justFinishedDragging) {
-      dragStart = currentBlock;
-      if (STICKY) dragEnd = BLOCKS;
-    }
-
-    return [dragStart, dragEnd];
+    let { dragStart, dragEnd } = this.state;
+    this.props.onChange(this.calc.query(dragStart, dragEnd));
   }
 
   setStickyTimeout () {
@@ -145,12 +134,15 @@ export default class Pct extends React.Component<PctProps, PctState> {
   clearStickyTimeout () { clearTimeout(this.state.stickyTimeout); }
 
   render () {
-    let blocks = Array(BLOCKS).fill(0);
-    let [dragStart, dragEnd] = this.computedStartEnd();
-    let { query: { gt, lt }, config } = this.props;
+    let { dragStart, dragEnd, currentBlock, justFinishedDragging } = this.state;
+    let [gtBlock, ltBlock] = this.calc.blocksFromQuery(this.props.query);
+    let [startBlock, endBlock] = this.calc.normalize(dragStart, dragEnd);
+    let [hoverStartBlock, hoverEndBlock] = justFinishedDragging ? [null, null] : this.calc.normalize(currentBlock, null);
+    let textStart = startBlock || hoverStartBlock || gtBlock;
+    let textEnd = endBlock || hoverEndBlock || ltBlock;
+    let pct = this.calc.pct(textStart, textEnd);
+    let label = this.calc.label(textStart, textEnd);
 
-    let pctText = rangeText(dragStart || gt, dragEnd || lt);
-    let labelText = rangeText(dragStart || gt, dragEnd || lt, config.pctValues);
 
     return (
       <div className={th.Pct}>
@@ -161,16 +153,18 @@ export default class Pct extends React.Component<PctProps, PctState> {
             onMouseMove={this.onMove}
             onMouseDown={this.onDragStart}
             onMouseUp={this.onDragEnd}>
-            {blocks.map((_, i) => Block(i + 1, dragStart, dragEnd, gt, lt))}
+            {this.calc.eachBlock((block, size) =>
+              Block(block, size, startBlock || hoverStartBlock, endBlock || hoverEndBlock, gtBlock, ltBlock))}
           </div>
           <div className={th.__labels}>
-            <div className={th.__labelMin}>{config.labelMin}</div>
-            <div className={th.__labelMax}>{config.labelMax}</div>
+            <div className={th.__labelMin}>{this.props.config.labelMin}</div>
+            <div className={th.__labelMax}>{this.props.config.labelMax}</div>
           </div>
         </div>
         <div className={th.__value}>
-          {pctText}<br/>
-          {labelText}
+          {pct}
+          <br/>
+          {label}
         </div>
       </div>
     );

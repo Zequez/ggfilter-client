@@ -4,8 +4,10 @@ export interface Exact {
 }
 
 export interface Range {
-  gt: number;
-  lt: number;
+  gt?: number;
+  lt?: number;
+  gte?: number;
+  lte?: number;
   hl?: boolean;
 }
 
