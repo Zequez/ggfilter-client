@@ -6,8 +6,7 @@ export default {
       'Images',
       'Name',
       'Tags',
-      'RelativeReleaseDate',
-      'AbsoluteReleaseDate'
+      'ReleaseDate',
       // 'steam_early_access',
       // 'sysreq_index_pct'
     ]

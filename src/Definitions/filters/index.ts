@@ -10,6 +10,7 @@ import { TimeAgo } from './components/cells/TimeAgo';
 import { BooleanCtrl } from './components/controls/BooleanCtrl';
 import { DateRange } from './components/controls/DateRange';
 import { RelativeDate } from './components/controls/RelativeDate';
+import { DateCtrl } from './components/controls/DateCtrl/DateCtrl';
 import { TagsControl } from './components/controls/TagsControl/TagsControl';
 
 export * from './Flags';
@@ -54,6 +55,14 @@ export const Tags = new AnonFilter({
     filterParams: 'Tags'
   },
   width: 250
+});
+
+export const ReleaseDate = new AnonFilter({
+  api: 'released_at',
+  title: 'Release Date',
+  cell: TimeAgo,
+  control: DateCtrl,
+  width: 120
 });
 
 export const RelativeReleaseDate = new AnonFilter({

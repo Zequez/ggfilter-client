@@ -4,7 +4,7 @@ import { FiltersConfiguration, FilterConfig, PartialFilterConfig } from './state
 const initialConfigurationValues: {[key in FiltersNames]?: PartialFilterConfig} = {
   Name: { column: true },
   Tags: { column: true },
-  RelativeReleaseDate: { column: true, sort: true },
+  ReleaseDate: { column: true, sort: true },
   BestDiscount: { query: {gt: 1, lt: null} },
   // PlaytimeMedian: true,
   LowestPrice: { column: true },
