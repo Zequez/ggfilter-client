@@ -1,15 +1,10 @@
 import AnonFilter from './lib/AnonFilter';
 
-import { BooleanCell } from './components/cells/BooleanCell';
-import { DateCell } from './components/cells/DateCell';
 import { ImagesCell } from './components/cells/ImagesCell';
 import { Link } from './components/cells/Link';
 import { Tags as TagsCell } from './components/cells/Tags';
 import { TimeAgo } from './components/cells/TimeAgo';
 
-import { BooleanCtrl } from './components/controls/BooleanCtrl';
-import { DateRange } from './components/controls/DateRange';
-import { RelativeDate } from './components/controls/RelativeDate';
 import { DateCtrl } from './components/controls/DateCtrl/DateCtrl';
 import { TagsControl } from './components/controls/TagsControl/TagsControl';
 
@@ -60,25 +55,8 @@ export const Tags = new AnonFilter({
 export const ReleaseDate = new AnonFilter({
   api: 'released_at',
   title: 'Release Date',
-  cell: TimeAgo,
+  cell: TimeAgo, // DateCell
   control: DateCtrl,
-  width: 120
-});
-
-export const RelativeReleaseDate = new AnonFilter({
-  api: 'released_at',
-  title: 'Released At',
-  cell: TimeAgo,
-  control: RelativeDate,
-  width: 120
-});
-
-export const AbsoluteReleaseDate = new AnonFilter({
-  api: 'released_at_absolute',
-  cellInputs: { value: 'released_at' },
-  title: 'Release Year',
-  cell: DateCell,
-  control: DateRange,
   width: 120
 });
 
