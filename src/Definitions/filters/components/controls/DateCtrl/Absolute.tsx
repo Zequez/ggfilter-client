@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as th from './DateCtrl.sass';
+import Picker from './Picker';
 
 type AbsoluteProps = {
   from: string;
@@ -65,28 +66,22 @@ export default class Absolute extends React.Component<AbsoluteProps, null> {
       return years.length > 1 ? years : null;
     },
     months: (bottom?: string) => {
-      let months = [
-        ['1', 'January'],
-        ['2', 'Febraury'],
-        ['3', 'March'],
-        ['4', 'April'],
-        ['5', 'May'],
-        ['6', 'June'],
-        ['7', 'July'],
-        ['8', 'August'],
-        ['9', 'September'],
-        ['10', 'October'],
-        ['11', 'November'],
-        ['12', 'December']
-      ];
+      let months = [];
+      let countFrom = bottom ? parseInt(bottom) + 1 : 1;
+      for (let i = countFrom; i <= 12; ++i) months.push([i.toString(), i.toString()]);
 
-      if (bottom) months = months.slice(months.findIndex((m) => m[0] === bottom) + 1);
+      // if (bottom) months = months.slice(months.findIndex((m) => m[0] === bottom) + 1);
 
-      months.unshift(['', 'Month']);
+      months.unshift(['', '']);
 
       return months.length > 1 ? months : null;
     }
   };
+
+  shortcutsYears = () => {
+    let year = new Date().getFullYear();
+    return [(year - 1).toString(), year.toString()];
+  }
 
   render () {
     let { fromY, fromM, toY, toM } = this.propsToState();
@@ -95,8 +90,11 @@ export default class Absolute extends React.Component<AbsoluteProps, null> {
     let toYears = fromY && this.options.years(fromY);
     let toMonths = toY && this.options.months(fromY === toY ? fromM : '');
 
+    let shortcutYears = this.shortcutsYears();
+
     return (
       <div className={th.Absolute}>
+        {shortcutYears.map((year) => Picker(year, '', fromY, year, (fromY) => this.onChange({fromY})))}
         <span>From</span>
         {Selector(fromY, fromYears, (fromY) => this.onChange({fromY}))}
         {fromY && Selector(fromM, fromMonths, (fromM) => this.onChange({fromM}))}

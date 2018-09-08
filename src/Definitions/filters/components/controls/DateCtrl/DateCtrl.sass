@@ -4,23 +4,23 @@
 .Relative
   display: flex
   justify-content: space-around
-  .picker
-    display: inline-block
-    padding: $g/2 $g
-    background: $color-mono-2
-    border-radius: $g*2
-    line-height: $g*2
-    cursor: pointer
-    color: $color-text-sec
-    font-size: 12px
-    &.active
-      background: $color-pri
-      color: $color-text-pri-alt
-    &:last-child
-      margin-right: 0
   select
     height: $g*3
 
+.Picker
+  display: inline-block
+  padding: $g/2 $g
+  background: $color-mono-2
+  border-radius: $g*2
+  line-height: $g*2
+  cursor: pointer
+  color: $color-text-sec
+  font-size: 12px
+  &.active
+    background: $color-pri
+    color: $color-text-pri-alt
+  &:last-child
+    margin-right: 0
 
 .Absolute
   display: flex

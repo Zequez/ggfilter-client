@@ -2,9 +2,7 @@ import * as React from 'react';
 import * as th from './DateCtrl.sass';
 import * as cx from 'classnames';
 
-import tooltipFactory from 'shared/components/Tooltip';
-
-const Span = tooltipFactory('span', {position: 'top'}) as any;
+import Picker from './Picker';
 
 interface RelativeProps {
   backCount: number;
@@ -91,14 +89,6 @@ export default class Relative extends React.Component<RelativeProps, null> {
     );
   }
 }
-
-const Picker = (text: string, textLong: string, currentVal: string, val: string, onClick: (val: string) => void) =>
-  <Span
-    tooltip={textLong}
-    className={cx(th.picker, {[th.active]: currentVal === val})}
-    onClick={() => {if (currentVal !== val) onClick(val); }}>
-    {text}
-  </Span>;
 
 const Option = (val: number) =>
   <option key={val} value={val}>{val}</option>;
