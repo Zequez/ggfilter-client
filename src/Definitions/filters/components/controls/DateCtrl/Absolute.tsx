@@ -13,8 +13,9 @@ type State = {
   fromY: string;
   fromM: string;
   toY: string;
-  toM: string;
 };
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 export default class Absolute extends React.Component<AbsoluteProps, null> {
   propsToState (): State {
@@ -22,37 +23,24 @@ export default class Absolute extends React.Component<AbsoluteProps, null> {
 
     let [fromY, fromM] = from && from.split('-') || ['', ''];
     if (from === to) to = '';
-    let [toY, toM] = to && to.split('-') || ['', ''];
+    let [toY] = to && to.split('-') || [''];
 
-    return { fromY, fromM, toY, toM };
+    return { fromY, fromM, toY };
   }
 
   onChange (deltaState: Partial<State>) {
-    let { fromY, fromM, toY, toM } = {...this.propsToState(), ...deltaState} as State;
+    let { fromY, fromM, toY } = {...this.propsToState(), ...deltaState} as State;
 
-    if (!fromY) toY = '';
-    if (!fromM) toM = '';
-
-    if (fromY && toY) {
-      if (parseInt(fromY) > parseInt(toY)) {
-        toY = '';
-        toM = '';
-      } else if (fromY === toY && fromM && toM) {
-        if (parseInt(fromM) >= parseInt(toM)) {
-          toM = '';
-          // toM = fromM === '12' ? '' : (parseInt(fromM) + 1).toString();
-        }
-      }
+    if (!fromY) {
+      toY = '';
+      fromM = '';
+    } else if (toY && parseInt(fromY) > parseInt(toY)) {
+      toY = '';
     }
 
-    if (!toY) toM = '';
-    if (!fromY) fromM = '';
+    let from = fromY + (fromM ? '-' + fromM : '');
 
-    let from = [fromY, fromM].filter((v) => !!v).join('-');
-    let to = [toY, toM].filter((v) => !!v).join('-');
-    if (!to) to = from;
-
-    this.props.onChange(from, to);
+    this.props.onChange(from || null, toY || from || null);
   }
 
   options = {
@@ -62,19 +50,13 @@ export default class Absolute extends React.Component<AbsoluteProps, null> {
       for (let i = lastYear; i >= this.props.startYear; --i) {
         years.push([i.toString(), i.toString()]);
       }
-      if (bottom) years = years.slice(0, years.findIndex((y) => y[0] === bottom) + 1);
+      if (bottom) years = years.slice(0, years.findIndex((y) => y[0] === bottom));
       return years.length > 1 ? years : null;
     },
-    months: (bottom?: string) => {
-      let months = [];
-      let countFrom = bottom ? parseInt(bottom) + 1 : 1;
-      for (let i = countFrom; i <= 12; ++i) months.push([i.toString(), i.toString()]);
-
-      // if (bottom) months = months.slice(months.findIndex((m) => m[0] === bottom) + 1);
-
-      months.unshift(['', '']);
-
-      return months.length > 1 ? months : null;
+    months: () => {
+      let months = [['', '']];
+      for (let i = 1; i <= 12; ++i) months.push([i.toString(), MONTHS[i - 1]]);
+      return months;
     }
   };
 
@@ -84,11 +66,11 @@ export default class Absolute extends React.Component<AbsoluteProps, null> {
   }
 
   render () {
-    let { fromY, fromM, toY, toM } = this.propsToState();
+    let { fromY, fromM, toY } = this.propsToState();
     let fromYears = this.options.years();
-    let fromMonths = fromY && this.options.months();
-    let toYears = fromY && this.options.years(fromY);
-    let toMonths = toY && this.options.months(fromY === toY ? fromM : '');
+    let fromMonths = fromY && !toY && this.options.months();
+    let toYears = fromY && !fromM && this.options.years(fromY);
+    // let toMonths = toY && this.options.months(fromY === toY ? fromM : '');
 
     let shortcutYears = this.shortcutsYears();
 
@@ -97,10 +79,10 @@ export default class Absolute extends React.Component<AbsoluteProps, null> {
         {shortcutYears.map((year) => Picker(year, '', fromY, year, (fromY) => this.onChange({fromY})))}
         <span>From</span>
         {Selector(fromY, fromYears, (fromY) => this.onChange({fromY}))}
-        {fromY && Selector(fromM, fromMonths, (fromM) => this.onChange({fromM}))}
+        {fromMonths && Selector(fromM, fromMonths, (fromM) => this.onChange({fromM}))}
         {toYears && <span>to</span>}
         {toYears && Selector(toY, toYears, (toY) => this.onChange({toY}))}
-        {toMonths && Selector(toM, toMonths, (toM) => this.onChange({toM}))}
+        {/* {toMonths && Selector(toM, toMonths, (toM) => this.onChange({toM}))} */}
       </div>
     );
   }
