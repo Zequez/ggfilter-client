@@ -2,6 +2,7 @@ import AnonFilter from './lib/AnonFilter';
 
 import { composeConfig } from './lib/composeConfig';
 import Pct from './components/controls/Pct';
+import SysreqIndex from './components/cells/SysreqIndex';
 
 const PERCENTILES_BOTH = [0, 1, 2, 3, 4, 5, 10, 15, 20, 25, 50, 75, 80, 85, 90, 95, 96, 97, 98, 99];
 const PERCENTILES_HIGH = [0, 10, 20, 30, 40, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 96, 97, 98, 99];
@@ -87,7 +88,7 @@ export const PlaytimeForTheBuck = new AnonFilter({
 export const SystemRequirements = new AnonFilter({
   api: 'sysreq_index_pct',
   title: 'System Requirements',
-  cell: null,
+  cell: SysreqIndex,
   control: composeConfig(Pct, {
     labelMin: 'Potato',
     labelMax: 'Spaceship',
