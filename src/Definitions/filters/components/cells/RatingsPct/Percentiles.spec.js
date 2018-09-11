@@ -1,6 +1,6 @@
-import React from 'react'
-import renderer from 'react-test-renderer'
-import Percentiles, { getCurrentColumn } from './Percentiles'
+import React from 'react';
+import renderer from 'react-test-renderer';
+import Percentiles, { getCurrentColumn } from './Percentiles';
 
 describe('RatingsPctColumn Percentiles', () => {
   describe('getCurrentColumn', () => {

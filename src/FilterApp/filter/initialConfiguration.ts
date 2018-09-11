@@ -8,6 +8,7 @@ const initialConfigurationValues: {[key in FiltersNames]?: PartialFilterConfig} 
   BestDiscount: { query: {gt: 1, lt: null} },
   // PlaytimeMedian: true,
   LowestPrice: { column: true },
+  RatingsRatio: { column: true }
   // RatingsPct: { column: true }
 };
 

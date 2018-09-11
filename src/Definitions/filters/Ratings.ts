@@ -3,6 +3,7 @@ import AnonFilter from './lib/AnonFilter';
 import { composeConfig } from './lib/composeConfig';
 import Pct from './components/controls/Pct';
 import SysreqIndex from './components/cells/SysreqIndex';
+import RatingsPct from './components/cells/RatingsPct/RatingsPct';
 
 const PERCENTILES_BOTH = [0, 1, 2, 3, 4, 5, 10, 15, 20, 25, 50, 75, 80, 85, 90, 95, 96, 97, 98, 99];
 const PERCENTILES_HIGH = [0, 10, 20, 30, 40, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 96, 97, 98, 99];
@@ -12,7 +13,8 @@ const PERCENTILES_CENTILES = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90];
 export const RatingsRatio = new AnonFilter({
   api: 'ratings_pct',
   title: 'Ratings Ratio',
-  cell: null,
+  cell: RatingsPct,
+  cellInputs: { count: 'ratings_count', count_pct: 'ratings_pct', ratio: 'ratings_ratio', ratio_pct: 'ratings_pct' },
   control: composeConfig(Pct, {
     labelMin: 'Lower',
     labelMax: 'Higher',
@@ -20,7 +22,7 @@ export const RatingsRatio = new AnonFilter({
     apiPercentiles: 'ratingsRatio',
     interpolation: (v) => `${v}%`
   }),
-  alignment: 1,
+  alignment: 0,
   width: 130
 });
 
