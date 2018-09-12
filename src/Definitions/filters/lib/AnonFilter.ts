@@ -30,7 +30,7 @@ export default class AnonFilter {
   api: Filters = null;
   title: string = null;
   description: string = null;
-  sort: Columns = null;
+  sort: Columns = undefined;
   fineTune: boolean = false;
 
   width: number | ((query: {}) => number) = 100;
@@ -54,7 +54,7 @@ export default class AnonFilter {
       this[attr] = args[attr];
     }
 
-    if (this.sort !== undefined) this.sort = <Columns> this.api;
+    if (this.sort === undefined) this.sort = <Columns> this.api;
     if (!this.controlOutputs) this.controlOutputs = (query) => ({[this.api]: query});
     if (!this.cellInputs) this.cellInputs = {value: <Columns> this.api};
   }

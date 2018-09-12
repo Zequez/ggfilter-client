@@ -4,6 +4,7 @@ import { composeConfig } from './lib/composeConfig';
 import Pct from './components/controls/Pct';
 import SysreqIndex from './components/cells/SysreqIndex';
 import RatingsPct from './components/cells/RatingsPct/RatingsPct';
+import PlaytimePct from './components/cells/PlaytimePct/PlaytimePct';
 
 const PERCENTILES_BOTH = [0, 1, 2, 3, 4, 5, 10, 15, 20, 25, 50, 75, 80, 85, 90, 95, 96, 97, 98, 99];
 const PERCENTILES_HIGH = [0, 10, 20, 30, 40, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 96, 97, 98, 99];
@@ -22,12 +23,13 @@ export const RatingsRatio = new AnonFilter({
     apiPercentiles: 'ratingsRatio',
     interpolation: (v) => `${v}%`
   }),
+  sort: 'ratings_ratio',
   alignment: 0,
-  width: 130
+  width: 200
 });
 
 export const RatingsCount = new AnonFilter({
-  api: 'ratings_count_pct', // TODO: Change
+  api: 'ratings_count_pct',
   title: 'Ratings Quantity',
   cell: null,
   control: composeConfig(Pct, {
@@ -41,9 +43,17 @@ export const RatingsCount = new AnonFilter({
 });
 
 export const Playtime = new AnonFilter({
-  api: 'ratings_pct', // TODO: Change
+  api: 'playtime_median_pct',
   title: 'Playtime',
-  cell: null,
+  cell: PlaytimePct,
+  cellInputs: {
+    playtime: 'playtime_median',
+    playtimePct: 'playtime_median_pct',
+    disparity: 'playtime_sd',
+    disparityPct: 'playtime_sd_pct',
+    playtimeFtb: 'playtime_median_ftb',
+    playtimeFtbPct: 'playtime_median_ftb_pct'
+  },
   control: composeConfig(Pct, {
     labelMin: 'Lower',
     labelMax: 'Higher',
@@ -51,8 +61,8 @@ export const Playtime = new AnonFilter({
     apiPercentiles: 'playtimeMedian',
     interpolation: (v) => `${v}hs`
   }),
-  alignment: 1,
-  width: 130
+  alignment: 0,
+  width: 220
 });
 
 export const PlaytimeDisparity = new AnonFilter({

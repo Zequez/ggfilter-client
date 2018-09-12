@@ -1,7 +1,9 @@
 type Columns =
   'name' |
   'playtime_mean' |
+  'playtime_mean_pct' |
   'playtime_median' |
+  'playtime_median_pct' |
   'playtime_sd' |
   'playtime_sd_pct' |
   'playtime_rsd' |

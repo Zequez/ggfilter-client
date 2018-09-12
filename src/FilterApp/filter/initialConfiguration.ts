@@ -5,8 +5,9 @@ const initialConfigurationValues: {[key in FiltersNames]?: PartialFilterConfig} 
   Name: { column: true },
   Tags: { column: true },
   ReleaseDate: { column: true, sort: true },
-  BestDiscount: { query: {gt: 1, lt: null} },
-  // PlaytimeMedian: true,
+  // BestDiscount: { query: {gt: 1, lt: null} },
+  RatingsCount: { query: { gte: 70, lt: 100 } },
+  Playtime: { column: true },
   LowestPrice: { column: true },
   RatingsRatio: { column: true }
   // RatingsPct: { column: true }

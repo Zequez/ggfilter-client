@@ -18,7 +18,7 @@ export const Images = new AnonFilter({
   control: null,
   cell: ImagesCell,
   cellInputs: { images: 'images' },
-  sort: undefined,
+  sort: null,
   width: 120
 });
 
@@ -28,7 +28,7 @@ export const Thumbnail = new AnonFilter({
   control: null,
   cell: ImagesCell,
   cellInputs: { thumbnail: 'thumbnail', 'images': 'images' },
-  sort: undefined,
+  sort: null,
   width: 120
 });
 
@@ -46,6 +46,7 @@ export const Tags = new AnonFilter({
   title: 'Tags',
   cell: TagsCell,
   control: TagsControl,
+  sort: null,
   boundInputs: {
     filterParams: 'Tags'
   },

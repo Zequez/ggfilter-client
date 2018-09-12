@@ -1,0 +1,68 @@
+@import "../../../../../../node_modules/font-awesome/scss/_variables"
+
+.PlaytimePct
+  display: flex
+  line-height: $g*4
+  height: $g*4
+.Time, .Ftb
+  flex: 1 1 50px
+  position: relative
+  border: solid 1px $color-mono-2
+  border-radius: $g/2
+  span
+    position: relative
+    z-index: 2
+  .bar
+    position: absolute
+    z-index: 1
+    top: $g/2
+    bottom: $g/2
+    border-radius: $g/2
+.Disparity
+  flex: 0 0 $g*2
+  position: relative
+  \:global(.fa)
+    position: absolute
+    top: 0
+    left: -$g
+    z-index: 20
+    width: $g*4
+    height: $g*4
+    border-radius: $g*2
+    background: $color-mono-2
+    line-height: $g*4
+    &:before
+      content: $fa-var-clock-o
+  &_level1
+    \:global(.fa)
+      background-color: mix($color-green, $color-mono-2, 15%)
+  &_level2
+    \:global(.fa)
+      background-color: mix($color-green, $color-mono-2, 0%)
+  &_level3
+    \:global(.fa)
+      background-color: mix($color-red, $color-mono-2, 15%)
+.Time
+  padding-left: $g
+  border-top-right-radius: 0
+  border-bottom-right-radius: 0
+  border-right: 0
+  text-align: left
+  .bar
+    right: 0
+    border-top-right-radius: 0
+    border-bottom-right-radius: 0
+    background-color: $color-pri-light
+.Ftb
+  padding-right: $g
+  border-left: 0
+  border-top-left-radius: 0
+  border-bottom-left-radius: 0
+  text-align: right
+  .bar
+    left: 0
+    border-top-left-radius: 0
+    border-bottom-left-radius: 0
+    background-color: mix($color-green, $color-pri-light, 20%)
+.deco
+  color: $color-text-dis
