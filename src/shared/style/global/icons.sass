@@ -1,8 +1,13 @@
-$fa-font-path: 'font-awesome/fonts/'
-@import "../../../../node_modules/font-awesome/scss/_variables"
-@import "../../../../node_modules/font-awesome/scss/_mixins"
-@import "../../../../node_modules/font-awesome/scss/_path"
-@import "../../../../node_modules/font-awesome/scss/_core"
+@font-face
+  font-family: 'Fontello'
+  src: url('../fontello/font/fontello.eot?29723396')
+  src: url('../fontello/font/fontello.eot?29723396#iefix') format('embedded-opentype'),
+  url('../fontello/font/fontello.woff2?29723396') format('woff2'),
+  url('../fontello/font/fontello.woff?29723396') format('woff'),
+  url('../fontello/font/fontello.ttf?29723396') format('truetype'),
+  url('../fontello/font/fontello.svg?29723396#fontello') format('svg')
+  font-weight: normal
+  font-style: normal
 
 \:global(.fa)
   display: inline-block
@@ -11,7 +16,7 @@ $fa-font-path: 'font-awesome/fonts/'
 
   text-align: center
 
-  font-family: FontAwesome
+  font-family: Fontello
   font-size: $g*3
   line-height: $g*3
 
@@ -28,56 +33,48 @@ $fa-font-path: 'font-awesome/fonts/'
       font-size: $g*2
 
 // Stores
-+gicon(store-steam, $fa-var-steam)
-\:global(.icon-store-oculus:before)
-  content: ' '
-  display: inline-block
-  height: 0.3em
-  width: 0.6em
-  border: solid 0.2em currentColor
-  border-radius: 10px
++gicon(store-steam, $fa-var-steam-squared)
++gicon(store-oculus, $fa-var-oculus)
 
 // Sidebar
-+gicon(menu, $fa-var-bars)
+// +gicon(menu, $fa-var-bars)
 +gicon(filter, $fa-var-filter)
-+gicon(sysreq, $fa-var-thermometer-three-quarters)
++gicon(sysreq, $fa-var-thermometer-2)
 +gicon(feedback, $fa-var-commenting-o)
 +gicon(contribute, $fa-var-heart)
-+gicon(about, $fa-var-question-circle)
++gicon(about, $fa-var-question-circle-o)
 
 // Base filters icons
-+gicon(filter-Thumbnail, $fa-var-picture-o)
-+gicon(filter-steam_id, $fa-var-steam)
++gicon(filter-Thumbnail, $fa-var-picture)
++gicon(filter-steam_id, $fa-var-steam-squared)
 +gicon(filter-Name, $fa-var-font)
-+gicon(filter-Images, $fa-var-image)
++gicon(filter-Images, $fa-var-picture)
 +gicon(filter-sysreq_index_pct, $fa-var-fire)
-+gicon(filter-RelativeReleaseDate, $fa-var-calendar-minus-o)
++gicon(filter-RelativeReleaseDate, $fa-var-calendar)
 +gicon(filter-AbsoluteReleaseDate, $fa-var-calendar)
 +gicon(filter-Tags, $fa-var-tags)
-+gicon(filter-Stores, $fa-var-archive)
++gicon(filter-Stores, $fa-var-box)
 
 +gicon(filter-LowestPrice, $fa-var-dollar)
 +gicon(filter-Prices, $fa-var-dollar + $fa-var-dollar)
 +gicon(filter-BestDiscount, $fa-var-percent)
 
-+gicon(filter-Playtime, $fa-var-clock-o)
-+gicon(filter-PlaytimeDisparity, $fa-var-clock-o, 'σ')
++gicon(filter-Playtime, $fa-var-clock)
++gicon(filter-PlaytimeDisparity, $fa-var-clock, 'σ')
 
 +gicon(filter-metacritic, $fa-var-star)
-+gicon(filter-RatingsCount, $fa-var-comments)
-+gicon(filter-RatingsRatio, $fa-var-thumbs-o-up)
-+gicon(filter-ratings_pct, $fa-var-star-half-o)
++gicon(filter-RatingsCount, $fa-var-commenting-o)
++gicon(filter-RatingsRatio, $fa-var-thumbs-up)
++gicon(filter-ratings_pct, $fa-var-thumbs-up)
 
 +gicon(filter-steam_features, $fa-var-cubes)
 +gicon(filter-Platforms, $fa-var-linux)
-+gicon(filter-Players, $fa-var-group)
++gicon(filter-Players, $fa-var-users)
 +gicon(filter-Controllers, $fa-var-gamepad)
-+gicon(filter-VrPlatforms, $fa-var-desktop)
++gicon(filter-VrPlatforms, $fa-var-laptop)
 +gicon(filter-VrModes, $fa-var-male)
 +gicon(filter-VrOnly, 'VR')
 +gicon(filter-Gamepad, $fa-var-gamepad)
-
-+gicon(filter-steam_early_access, $fa-var-exclamation-circle)
 
 
 // Boolean filters icons
@@ -100,43 +97,36 @@ $fa-font-path: 'font-awesome/fonts/'
 // +gicon(boolean-Players-hostseat, $fa-var-thermometer-full)
 // +gicon(boolean-Players-cross_platform, $fa-var-playstation)
 
-+gicon(boolean-Stores-steam, $fa-var-steam)
++gicon(boolean-Stores-steam, $fa-var-steam-squared)
 \:global(.icon-boolean-Stores-oculus:before)
   @extend :global(.icon-store-oculus:before)
 
-+gicon(boolean-VrPlatforms-vive, $fa-var-play-circle)
-\:global(.icon-boolean-VrPlatforms-vive)
-  // transform-origin: 50% 67%
-  transform: rotate(-90deg)
-\:global(.icon-boolean-VrPlatforms-rift:before)
-  @extend :global(.icon-store-oculus:before)
-+gicon(boolean-VrPlatforms-osvr, $fa-var-folder-open-o)
++gicon(boolean-VrPlatforms-vive, $fa-var-htc-vive)
++gicon(boolean-VrPlatforms-rift, $fa-var-oculus)
++gicon(boolean-VrPlatforms-osvr, $fa-var-osvr)
 
-+gicon(boolean-Controllers-tracked, $fa-var-video-camera)
++gicon(boolean-Controllers-tracked, $fa-var-videocam)
 +gicon(boolean-Controllers-gamepad, $fa-var-gamepad)
-+gicon(boolean-Controllers-keyboard_mouse, $fa-var-keyboard-o)
++gicon(boolean-Controllers-keyboard_mouse, $fa-var-keyboard)
 
-+gicon(boolean-VrModes-seated, 'Ⴙ')
++gicon(boolean-VrModes-seated, $fa-var-chair)
 +gicon(boolean-VrModes-standing, $fa-var-male)
 +gicon(boolean-VrModes-room_scale, $fa-var-street-view)
 
-// Icons in the columns
-+gicon(column-check-circle, $fa-var-check-circle)
-
 // Table title
-+gicon(sort-asc, $fa-var-arrow-up)
-+gicon(sort-desc, $fa-var-arrow-down)
++gicon(sort-asc, $fa-var-sort-up)
++gicon(sort-desc, $fa-var-sort-down)
 
 // Other icons
-+gicon(dropdown, $fa-var-caret-down)
-+gicon(dropdown-up, $fa-var-caret-up)
-+gicon(remove-tag, $fa-var-times)
-+gicon(remove-chip, $fa-var-times)
-+gicon(highlight, $fa-var-lightbulb-o)
++gicon(dropdown, $fa-var-down-dir)
++gicon(dropdown-up, $fa-var-up-dir)
++gicon(remove-tag, $fa-var-cancel)
++gicon(remove-chip, $fa-var-cancel)
++gicon(highlight, $fa-var-lightbulb)
 
-+gicon(toggle-check, $fa-var-check-circle)
-+gicon(toggle-uncheck, $fa-var-times-circle)
-+gicon(delete, $fa-var-times-circle)
++gicon(toggle-check, $fa-var-ok-circled)
++gicon(toggle-uncheck, $fa-var-cancel-circled)
++gicon(delete, $fa-var-cancel-circled)
 
-+gicon(logs-success, $fa-var-check-circle)
-+gicon(logs-failure, $fa-var-times-circle)
++gicon(logs-success, $fa-var-ok-circled)
++gicon(logs-failure, $fa-var-cancel-circled)

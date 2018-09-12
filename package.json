@@ -21,7 +21,8 @@
     "release:major": "npm version major && npm publish && git push --follow-tags",
     "release:minor": "npm version minor && npm publish && git push --follow-tags",
     "release:patch": "npm version patch && npm publish && git push --follow-tags",
-    "analyze": "webpack --json --env=dist | ./node_modules/.bin/webpack-bundle-size-analyzer"
+    "analyze": "webpack --json --env=dist | ./node_modules/.bin/webpack-bundle-size-analyzer",
+    "fontello-sass-vars": "node src/shared/style/fontello/sass_vars.js"
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/__mocks__/globalMocks.js",
