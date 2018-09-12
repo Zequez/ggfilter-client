@@ -11,10 +11,10 @@ const PERCENTILES_LOW = [0, 1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 9
 const PERCENTILES_CENTILES = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90];
 
 export const RatingsRatio = new AnonFilter({
-  api: 'ratings_pct',
+  api: 'ratings_ratio_pct',
   title: 'Ratings Ratio',
   cell: RatingsPct,
-  cellInputs: { count: 'ratings_count', count_pct: 'ratings_pct', ratio: 'ratings_ratio', ratio_pct: 'ratings_pct' },
+  cellInputs: { count: 'ratings_count', count_pct: 'ratings_count_pct', ratio: 'ratings_ratio', ratio_pct: 'ratings_ratio_pct' },
   control: composeConfig(Pct, {
     labelMin: 'Lower',
     labelMax: 'Higher',
@@ -27,7 +27,7 @@ export const RatingsRatio = new AnonFilter({
 });
 
 export const RatingsCount = new AnonFilter({
-  api: 'ratings_pct', // TODO: Change
+  api: 'ratings_count_pct', // TODO: Change
   title: 'Ratings Quantity',
   cell: null,
   control: composeConfig(Pct, {
@@ -56,7 +56,7 @@ export const Playtime = new AnonFilter({
 });
 
 export const PlaytimeDisparity = new AnonFilter({
-  api: 'ratings_pct', // TODO: Change
+  api: 'playtime_sd_pct', // TODO: Change
   title: 'Playtime Disparity',
   cell: null,
   control: composeConfig(Pct, {
@@ -72,7 +72,7 @@ export const PlaytimeDisparity = new AnonFilter({
 });
 
 export const PlaytimeForTheBuck = new AnonFilter({
-  api: 'playtime_median_ftb', // TODO: Change
+  api: 'playtime_median_ftb_pct', // TODO: Change
   title: 'Playtime For The Buck',
   cell: null,
   control: composeConfig(Pct, {

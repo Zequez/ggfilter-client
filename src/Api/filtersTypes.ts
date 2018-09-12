@@ -12,15 +12,24 @@ type Filters =
   'lowest_price' |
   'best_discount' |
   'ratings_count' |
+  'ratings_count_pct' |
   'ratings_ratio' |
+  'ratings_ratio_pct' |
   'ratings_pct' |
   'metacritic' |
   'tags' |
   'playtime_mean' |
+  'playtime_mean_pct' |
   'playtime_median' |
+  'playtime_median_pct' |
+  'playtime_sd' |
+  'playtime_sd_pct' |
   'playtime_rsd' |
+  'playtime_rsd_pct' |
   'playtime_mean_ftb' |
+  'playtime_mean_ftb_pct' |
   'playtime_median_ftb' |
+  'playtime_median_ftb_pct' |
   'steam_early_access' |
   'vr_only' |
   'sysreq_index' |

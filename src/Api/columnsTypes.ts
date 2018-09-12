@@ -3,9 +3,13 @@ type Columns =
   'playtime_mean' |
   'playtime_median' |
   'playtime_sd' |
+  'playtime_sd_pct' |
   'playtime_rsd' |
+  'playtime_rsd_pct' |
   'playtime_mean_ftb' |
+  'playtime_mean_ftb_pct' |
   'playtime_median_ftb' |
+  'playtime_median_ftb_pct' |
   'steam_game_id' |
   'tags' |
   'oculus_game_id' |
@@ -17,9 +21,11 @@ type Columns =
   'oculus_price_discount' |
   'lowest_price' |
   'ratings_count' |
+  'ratings_count_pct' |
   'positive_ratings_count' |
   'negative_ratings_count' |
   'ratings_ratio' |
+  'ratings_ratio_pct' |
   'released_at' |
   'players' |
   'controllers' |
