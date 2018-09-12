@@ -61,9 +61,14 @@ class WidthCalculator {
   }
 
   filterWidth (filter: Filter) {
-    return typeof filter.width === 'function'
-      ? filter.width.call(null, this.configuration[filter.name].query) as number
-      : filter.width;
+    if (typeof filter.width === 'function') {
+      let widthParams = {};
+      for (let target in filter.boundInputs) {
+        let filterName = filter.boundInputs[target] as FiltersNames;
+        widthParams[target] = this.configuration[filterName].query;
+      }
+      return filter.width(this.configuration[filter.name].query, widthParams);
+    } else return filter.width;
   }
 
   indexOfFilterThatStretches () {

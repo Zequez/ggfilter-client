@@ -48,7 +48,7 @@ export class BooleanCtrl extends Component {
     if (query.value) {
       this.props.onChange(query)
     } else {
-      this.props.onChange(false)
+      this.props.onChange(null)
     }
   }
 

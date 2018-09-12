@@ -1,4 +1,4 @@
-export const names = {
+const names = {
   steam: {
     name: 'Steam'
   },
@@ -7,4 +7,6 @@ export const names = {
   }
 };
 
-export default Object.keys(names);
+export type Stores = keyof typeof names;
+export const storesKeys = Object.keys(names) as Stores[];
+export default names;

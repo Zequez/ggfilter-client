@@ -35,7 +35,7 @@ export default class PlaytimePct extends React.Component<PlaytimePctProps, null>
         <TTDiv
           className={cx(th.Disparity, th[`Disparity_level${disparityLevel}`])}
           tooltip={(Math.round(disparity * 10) / 10).toString() + `hs disparity (${disparityWord})`}>
-          <i className='fa'></i>
+          <span><i className='fa'></i></span>
         </TTDiv>
         {playtimeFtb ? <div className={th.Ftb}>
           <div className={th.bar} style={{width: `${playtimeFtbPct + 1}%`}}></div>

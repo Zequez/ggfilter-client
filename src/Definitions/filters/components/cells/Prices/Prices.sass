@@ -1,0 +1,88 @@
+// .MultiPrice
+//   display: flex
+//   height: $g*5
+//   width: 100%
+//   float: left
+
+.MonoPrice
+  display: flex
+  height: $g*4
+  .Price
+    flex: 0 0 100px
+  .IconPrice
+    flex: 1 1 $g*4
+
+.Price
+  position: relative
+  display: flex
+  border: solid 2px transparent
+  justify-content: center
+  align-items: center
+  color: $color-text-sec
+  text-align: center
+
+  &_lower
+    border-color: rgba($color-green, 0.05)
+    background-color: rgba($color-green, 0.05)
+  &_higher
+    border-color: rgba($color-red, 0.05)
+    background-color: rgba($color-red, 0.05)
+  &_discounted
+    /**/
+
+a.Price:hover
+  .Price__current
+    color: $color-sec
+
+.Price__was
+  display: flex
+  flex-direction: column
+  flex: 1 1 10px
+  line-height: $g*2
+
+.Price__current
+  font-weight: $font-weight-medium
+  flex: 1 1 10px
+.Price__regular
+  flex: 1 1 10px
+  text-decoration: line-through
+  line-height: $g*2
+  color: $color-text-dis
+  font-size: $font-size-caption
+
+.IconPrice
+  display: flex
+  text-align: center
+  justify-content: center
+  align-items: center
+  color: $color-text-sec
+  &_lower
+    color: $color-text-pri
+  &_higher
+    color: $color-text-dis
+  &_na
+    color: rgba($color-text-dis, 0.1)
+  &_discounted
+    /**/
+
+.Discount
+  flex: 1 1 10px
+.Discount > span
+  padding: 0 2px
+  border-radius: 2px
+  background: $color-pri-light
+  font-size: $font-size-caption
+  color: $color-text-pri-alt
+  line-height: $g*2
+  .__deco
+    color: $color-text-sec-alt
+.Discount_low > span
+  background: $color-pri-light
+.Discount_medium > span
+  background: $color-pri
+.Discount_high > span
+  background: $color-pri-dark
+
+.__deco
+  color: $color-text-dis
+  font-size: $font-size-caption

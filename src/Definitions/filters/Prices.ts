@@ -1,9 +1,8 @@
 import AnonFilter from './lib/AnonFilter';
 import enums from '../enumColumns';
+import { storesKeys } from '../storesDefinitions';
 import { composeConfig } from './lib/composeConfig';
-import { Price } from './components/cells/Price';
-import { MultiPrice, MonoPrice } from './components/cells/MultiPrice';
-import { Discount } from './components/cells/Discount';
+import MonoPrice from './components/cells/Prices/MonoPrice';
 import { Range } from './components/controls/Range';
 
 const priceOptions = {
@@ -19,26 +18,32 @@ export const LowestPrice = new AnonFilter({
   cell: MonoPrice,
   cellInputs: {
     prices: 'prices',
-    urls: 'urls'
+    urls: 'urls',
+    stores: 'stores'
   },
   control: composeConfig(Range, priceOptions),
   alignment: -1,
-  boundInputs: { stores: 'Stores' },
-  width: 130
+  boundInputs: { selectedStores: 'Stores' },
+  width: ((_, q) => {
+    let selectedStores = q['selectedStores'] && q['selectedStores']['value']['toString'](2).replace(/0/g, '').length;
+    let spaces = selectedStores || storesKeys.length;
+    if (spaces === 1) spaces = 0;
+    return 108 + spaces * 32;
+  })
 });
 
-export const Prices = new AnonFilter({
-  api: 'prices',
-  title: 'All Prices',
-  control: null,
-  cell: MultiPrice,
-  cellInputs: {
-    prices: 'prices',
-    urls: 'urls'
-  },
-  boundInputs: { stores: 'Stores' },
-  width: 130
-});
+// export const Prices = new AnonFilter({
+//   api: 'prices',
+//   title: 'All Prices',
+//   control: null,
+//   cell: MultiPrice,
+//   cellInputs: {
+//     prices: 'prices',
+//     urls: 'urls'
+//   },
+//   boundInputs: { stores: 'Stores' },
+//   width: 130
+// });
 
 export const BestDiscount = new AnonFilter({
   api: 'best_discount',

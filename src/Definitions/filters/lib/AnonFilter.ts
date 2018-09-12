@@ -14,7 +14,7 @@ type Arguments = {
   title?: string;
   description?: string;
   sort?: Columns;
-  width?: number | ((query: {}) => number);
+  width?: number | ((query: {}, boundParams: {}) => number);
   widthStretch?: boolean;
   alignment?: -1 | 0 | 1;
   control?: ReactComponentType;
@@ -33,7 +33,7 @@ export default class AnonFilter {
   sort: Columns = undefined;
   fineTune: boolean = false;
 
-  width: number | ((query: {}) => number) = 100;
+  width: number | ((query: {}, boundParams: {}) => number) = 100;
   widthStretch: boolean;
   alignment: -1 | 0 | 1 = -1;
 

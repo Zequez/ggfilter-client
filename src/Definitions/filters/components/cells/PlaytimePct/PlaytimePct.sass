@@ -19,7 +19,7 @@
 .Disparity
   flex: 0 0 $g*2
   position: relative
-  \:global(.fa)
+  span
     position: absolute
     top: 0
     left: -$g
@@ -29,17 +29,19 @@
     border-radius: $g*2
     background: $color-mono-2
     line-height: $g*4
+  \:global(.fa)
+    line-height: $g*4
     &:before
       content: $fa-var-clock
   &_level1
     \:global(.fa)
-      background-color: mix($color-green, $color-mono-2, 15%)
+      transform: scale(0.75)
   &_level2
     \:global(.fa)
-      background-color: mix($color-green, $color-mono-2, 0%)
+      transform: scale(1)
   &_level3
     \:global(.fa)
-      background-color: mix($color-red, $color-mono-2, 15%)
+      transform: scale(1.25)
 .Time
   padding-left: $g
   border-top-right-radius: 0
@@ -61,7 +63,7 @@
     left: 0
     border-top-left-radius: 0
     border-bottom-left-radius: 0
-    background-color: mix($color-green, $color-pri-light, 20%)
+    background-color: mix($color-green, $color-pri-light, 15%)
 .deco
   color: $color-text-dis
   font-size: $font-size-caption
