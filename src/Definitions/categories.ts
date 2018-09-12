@@ -14,9 +14,8 @@ export default {
   pricing: {
     title: 'Pricing',
     filters: [
-      'LowestPrice',
-      // 'Prices',
-      'BestDiscount',
+      'Price',
+      'Discount',
     ]
   },
   availability: {

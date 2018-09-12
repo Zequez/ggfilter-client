@@ -9,8 +9,9 @@ type Filters =
   'steam_price_discount' |
   'oculus_price' |
   'oculus_price_discount' |
-  'lowest_price' |
-  'best_discount' |
+  'price' |
+  'price_discount' |
+  'price_regular' |
   'ratings_count' |
   'ratings_count_pct' |
   'ratings_ratio' |

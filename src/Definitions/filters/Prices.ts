@@ -12,8 +12,8 @@ const priceOptions = {
   focus: 'max'
 };
 
-export const LowestPrice = new AnonFilter({
-  api: 'lowest_price',
+export const Price = new AnonFilter({
+  api: 'price',
   title: 'Price',
   cell: MonoPrice,
   cellInputs: {
@@ -45,8 +45,8 @@ export const LowestPrice = new AnonFilter({
 //   width: 130
 // });
 
-export const BestDiscount = new AnonFilter({
-  api: 'best_discount',
+export const Discount = new AnonFilter({
+  api: 'price_discount',
   title: 'On Sale',
   control: composeConfig(Range, {suffix: '%', max: 100}),
   cell: null,
