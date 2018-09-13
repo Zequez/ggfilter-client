@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Filters, Columns } from '../../../Api';
 import { Text as TextControl } from '../components/controls/Text';
 import { Raw as RawCell } from '../components/cells/Raw';
-import { Raw as RawChip } from '../components/chips/Raw';
+import RawChip from '../components/chips/RawChip';
 
 type ReactComponentType = React.StatelessComponent<any> | React.ComponentClass<any>;
 type ControlOutputs = (query: object) => {[k: string]: object};

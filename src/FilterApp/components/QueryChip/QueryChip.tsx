@@ -39,7 +39,7 @@ export default class QueryChip extends React.Component<QueryChipProps> {
     // }
 
     return (
-      <TTDiv className={cx(th.QueryChip, {[th._hl]: config.hl})} tooltip={tooltip}>
+      <TTDiv className={cx(th.QueryChip, {[th._hl]: config.hl})} position='bottom' tooltip={tooltip}>
         <Icon
           icon={'filter-' + filter.name}
           className={th.__Icon}/>

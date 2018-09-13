@@ -8,6 +8,8 @@ import { TimeAgo } from './components/cells/TimeAgo';
 import { DateCtrl } from './components/controls/DateCtrl/DateCtrl';
 import { TagsControl } from './components/controls/TagsControl/TagsControl';
 
+import TagsChip from './components/chips/TagsChip';
+
 export * from './Flags';
 export * from './Prices';
 export * from './Ratings';
@@ -47,6 +49,7 @@ export const Tags = new AnonFilter({
   cell: TagsCell,
   control: TagsControl,
   sort: null,
+  chip: TagsChip,
   boundInputs: {
     filterParams: 'Tags'
   },

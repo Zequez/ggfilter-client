@@ -3,7 +3,7 @@ import * as th from './MicroTag.sass';
 import * as cx from 'classnames';
 import Icon from 'shared/components/Icon';
 
-interface MicroTagParams {
+type MicroTagParams = {
   tag: string;
   deco?: string;
   children?: any;
