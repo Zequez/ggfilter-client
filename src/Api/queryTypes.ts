@@ -12,7 +12,7 @@ export interface Range {
 }
 
 export interface Boolean {
-  value: number;
+  value: string[];
   mode: 'and' | 'or' | 'xor';
   hl?: boolean;
 }

@@ -1,12 +1,12 @@
 import AnonFilter from './lib/Filter';
 import enums from '../enumColumns';
-import { BooleanCell } from './components/cells/BooleanCell';
-import { BooleanCtrl } from './components/controls/BooleanCtrl';
+import BooleanCell from './components/cells/BooleanCell';
+import BooleanCtrl from './components/controls/BooleanCtrl/BooleanCtrl';
 
 const iconWidth = 28;
 const extraWidth = 16;
 function getWidth (key) {
-  return extraWidth + Object.keys(enums.names[key]).length * iconWidth;
+  return extraWidth + Object.keys(enums[key]).length * iconWidth;
 }
 
 export const Platforms = new AnonFilter({

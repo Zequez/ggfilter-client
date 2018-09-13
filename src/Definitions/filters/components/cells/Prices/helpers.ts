@@ -43,16 +43,17 @@ export function bestDiscountPrice(stores: Stores[], prices: Prices) {
   return bestDiscount;
 }
 
-export function storesListFromFlag(storesFlag?: number) {
-  let stores: Stores[] = [];
-  if (storesFlag == null) return storesKeys;
-  storesKeys.forEach((store) => {
-    if ((storesFlag & enumColumns.values.Stores[store]) > 0) {
-      stores.push(store);
-    }
-  });
-  return stores;
-}
+// export function storesListFromFlag(stores?: Stores[]) {
+//   return stores || [];
+//   // let stores: Stores[] = [];
+//   // if (storesFlag == null) return storesKeys;
+//   // storesKeys.forEach((store) => {
+//   //   if ((storesFlag & enumColumns.values.Stores[store]) > 0) {
+//   //     stores.push(store);
+//   //   }
+//   // });
+//   // return stores;
+// }
 
 export function parsePrice(price: Price): {current: string, regular: string, discount: number} {
   return {
@@ -67,10 +68,10 @@ export class StoresPricesCalc {
   selectedStores: Stores[];
   allPrices: Prices;
 
-  constructor (availableStores: number, selectedStoresQuery: {value: number}, allPrices: Prices) {
-    this.stores = storesListFromFlag(availableStores);
+  constructor (availableStores: Stores[], selectedStoresQuery: {value: Stores[]}, allPrices: Prices) {
+    this.stores = availableStores;
     this.allPrices = allPrices;
-    this.selectedStores = storesListFromFlag(selectedStoresQuery && selectedStoresQuery.value);
+    this.selectedStores = (selectedStoresQuery && selectedStoresQuery.value) || storesKeys;
     if (!this.selectedStores.length) this.selectedStores = this.stores;
   }
 

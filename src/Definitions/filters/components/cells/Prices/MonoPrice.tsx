@@ -10,8 +10,8 @@ import { Prices, StoresPricesCalc } from './helpers';
 type MonoPriceProps = {
   prices: Prices,
   urls: {[key in Stores]: string},
-  selectedStores: { value: number },
-  stores: number;
+  selectedStores: { value: Stores[] },
+  stores: Stores[];
 };
 
 export default class MonoPrice extends React.Component<MonoPriceProps> {

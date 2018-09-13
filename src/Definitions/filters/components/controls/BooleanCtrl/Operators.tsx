@@ -1,37 +1,38 @@
-import th from './BooleanCtrl.sass'
-import React, { PropTypes as t, Component } from 'react'
-import cx from 'classnames'
+import * as React from 'react';
+import * as th from './BooleanCtrl.sass';
+import * as cx from 'classnames';
 
 import TooltipLabel from './TooltipLabel'
 
-export default class Operators extends Component {
-  static propTypes = {
-    modes: t.arrayOf(t.oneOf(['and', 'or', 'xor'])).isRequired,
-    value: t.oneOf(['and', 'or', 'xor']).isRequired,
-    onChange: t.func.isRequired
-  }
+export type Mode = 'and' | 'or' | 'xor';
+type OperatorsProps = {
+  modes: Mode[];
+  value: Mode;
+  onChange: (mode: Mode) => void;
+};
 
+export default class Operators extends React.Component<OperatorsProps> {
   onClick = () => {
-    let { value, modes } = this.props
-    let newMode = modes[modes.indexOf(value) + 1] || modes[0]
-    this.props.onChange && this.props.onChange(newMode)
+    let { value, modes } = this.props;
+    let newMode = modes[modes.indexOf(value) + 1] || modes[0];
+    this.props.onChange && this.props.onChange(newMode);
   }
 
   render () {
-    let { modes, value } = this.props
+    let { modes, value } = this.props;
 
-    let modesTitles = modes.map((m) => m.toUpperCase())
-    let tooltip = modesTitles.join('/')
+    let modesTitles = modes.map((m) => m.toUpperCase());
+    let tooltip = modesTitles.join('/');
 
     let className = cx(
       th.BooleanCtrl__Operators,
       th['BooleanCtrl__Operators_' + value]
-    )
+    );
 
-    let valueIndex = modes.indexOf(value)
+    let valueIndex = modes.indexOf(value);
     let transform = {
       transform: `translateY(-${100 * valueIndex}%)`
-    }
+    };
 
     return (
       <TooltipLabel
