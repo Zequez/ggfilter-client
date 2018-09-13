@@ -14,6 +14,7 @@ type InputPropTypes = {
   value?: string;
   style?: any;
   onKeyDown?: any
+  onBlur?: any;
 };
 
 export const inputWithTheme = (th: {[K in keyof typeof theme]: string}) => {

@@ -6,7 +6,7 @@
   "main": "",
   "scripts": {
     "start": "node server.js --env=dev",
-    "test": "jest",
+    "test": "NODE_ENV=test jest",
     "debugtest": "node --debug-brk ./node_modules/karma/bin/karma start",
     "_posttest": "npm run lint",
     "serve": "node server.js --env=dev",
@@ -26,12 +26,18 @@
   },
   "jest": {
     "setupTestFrameworkScriptFile": "<rootDir>/__mocks__/globalMocks.js",
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest",
+      "^.+\\.tsx?$": "ts-jest"
+    },
     "moduleFileExtensions": [
+      "ts",
+      "tsx",
       "js",
       "jsx",
       "json"
     ],
-    "testRegex": "spec\\.(js|jsx)$",
+    "testRegex": "spec\\.(jsx?|tsx?)$",
     "moduleNameMapper": {
       "^.+\\.(jpg|jpeg|png|gif)$": "<rootDir>/__mocks__/fileMock.js",
       "^.+\\.(css|less|sass|scss)$": "identity-obj-proxy",
@@ -46,6 +52,7 @@
   "author": "Zequez",
   "devDependencies": {
     "@types/classnames": "^0.0.32",
+    "@types/jest": "^23.3.2",
     "@types/lodash": "^4.14.74",
     "@types/node": "^7.0.4",
     "@types/react": "^16.0.5",
@@ -94,6 +101,7 @@
     "sinon": "^1.17.6",
     "style-loader": "^0.13.1",
     "teaspoon": "^6.4.3",
+    "ts-jest": "^23.1.4",
     "tslint": "^4.4.2",
     "typescript": "^2.6.2",
     "typings-for-css-modules-loader": "^1.7.0",

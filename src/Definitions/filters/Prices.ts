@@ -4,6 +4,7 @@ import { storesKeys } from '../storesDefinitions';
 import { composeConfig } from './lib/composeConfig';
 import MonoPrice from './components/cells/Prices/MonoPrice';
 import { Range } from './components/controls/Range';
+import PriceCtrl from './components/controls/PriceCtrl/PriceCtrl';
 
 const priceOptions = {
   toInput: (value) => value / 100,
@@ -21,7 +22,7 @@ export const Price = new AnonFilter({
     urls: 'urls',
     stores: 'stores'
   },
-  control: composeConfig(Range, priceOptions),
+  control: PriceCtrl,
   alignment: -1,
   boundInputs: { selectedStores: 'Stores' },
   width: ((_, q) => {
