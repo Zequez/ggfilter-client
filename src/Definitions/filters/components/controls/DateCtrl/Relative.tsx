@@ -70,14 +70,15 @@ export default class Relative extends React.Component<RelativeProps, null> {
   onChangeUnit = (unit: keyof typeof UNITS) => this.stateToProps({unit});
 
   render () {
-    let { backCount } = this.props;
+    let { backCount, from, to } = this.props;
+    let active = from != null || to != null;
     let options = [];
     for (let i = 0; i < backCount; i++) options.push(Option(i + 1));
 
     let { n, axis, unit } = this.propsToState();
 
     return (
-      <div className={th.Relative}>
+      <div className={cx(th.Relative, {[th.Relative_active]: active})}>
         {Picker('Last', null, axis, 'last', this.onChangeAxis)}
         {Picker('Next', null, axis, 'next', this.onChangeAxis)}
         <select onChange={this.onChangeNumber} value={n}>{options}</select>

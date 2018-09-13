@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as th from './DateCtrl.sass';
+import * as cx from 'classnames';
 import Relative from './Relative';
 import Absolute from './Absolute';
 
@@ -33,7 +34,7 @@ export class DateCtrl extends React.Component<DateCtrlProps> {
     let aTo = !relative ? lte as string : null;
 
     return (
-      <div className={th.DateCtrl}>
+      <div className={cx(th.DateCtrl, {[th.DateCtrl_active]: !!query})}>
         <Relative backCount={10} from={rFrom} to={rTo} onChange={this.onChange}/>
         <Absolute startYear={1970} from={aFrom} to={aTo} onChange={this.onChange}/>
       </div>
