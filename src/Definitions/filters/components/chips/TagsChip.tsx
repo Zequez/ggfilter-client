@@ -5,7 +5,7 @@ import MicroTag from 'shared/components/MicroTag';
 import { Tags } from '../../../../Api';
 
 type TagsChipProps = {
-  config: {query: Tags}
+  query: Tags
 };
 
 function mapWithSpace<T, K> (arr: T[], spaceWord: string, callback: (val: T) => K) {
@@ -18,16 +18,16 @@ function mapWithSpace<T, K> (arr: T[], spaceWord: string, callback: (val: T) => 
   return result as K[];
 }
 
-export default function TagsChip ({config}: TagsChipProps) {
-  let separator = config.query.mode === 'or' ? ' or ' : ' ';
+export default function TagsChip ({query}: TagsChipProps) {
+  let separator = query.mode === 'or' ? ' or ' : ' ';
 
   return (
     <div className={th.TagsChip}>
-      {mapWithSpace(config.query.reject, ' ', (tag) =>
+      {mapWithSpace(query.reject, ' ', (tag) =>
         <MicroTag key={tag} tag={tag} className={th.TagsChip__MicroTag} alt={true}/>
       )}
       <span> </span>
-      {mapWithSpace(config.query.tags, separator, (tag) =>
+      {mapWithSpace(query.tags, separator, (tag) =>
         <MicroTag key={tag} tag={tag} className={th.TagsChip__MicroTag}/>
       )}
     </div>

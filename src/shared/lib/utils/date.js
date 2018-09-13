@@ -20,7 +20,24 @@ export function timeAgo (date) {
   return timeInWords((new Date().valueOf() - date.valueOf()) / 1000)
 }
 
+// const TIMESPANS = {
+//   s: 1,
+//   m: 60,
+//   h: 60 * 60,
+//   d: 60 * 60 * 24,
+//   w: 60 * 60 * 24 * 7,
+//   mo: 60 * 60 * 24 * 30,
+//   y: 60 * 60 * 24 * 365
+// };
+// const TIMESPANS_WORDING = {
+//   short: ['s', 'm', 'h', 'd', 'w', 'mo', 'y'],
+//   long: ['second', 'minute', 'hour', 'day', 'week', 'month', 'year'],
+//   plural: ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years']
+// }
+
 export function timeInWords (time, useOne = true, shorthands = false) {
+  let words = '';
+
   let timespans = shorthands ? [
     [1, 's'],
     [60, 'm'],
@@ -42,25 +59,28 @@ export function timeInWords (time, useOne = true, shorthands = false) {
   let negative = time < 0
   if (negative) time = -time
 
-  let words = timeInWordsFromTimespans(time, timespans.reverse(), useOne, shorthands)
+  words = timeInWordsFromTimespans(time, timespans.concat([]).reverse(), true, useOne, shorthands)
+  if (!words) words = timeInWordsFromTimespans(time, timespans.reverse(), false, useOne, shorthands)
 
   return negative ? `[${words}]` : words
 }
 
-export function timeInWordsFromTimespans (time, timespans, useOne = false, shorthands = false) {
+export function timeInWordsFromTimespans (time, timespans, whole, useOne, shorthands) {
+  if (time < 1) return null ;
+
   let span = timespans[0]
-  let result = Math.floor(time / span[0])
-  // let rest = time % span[0]
+  let result = whole ? time / span[0] : Math.floor(time / span[0])
+  let rest = time % span[0]
+  let word = (result === 1 || shorthands) ? span[1] : span[1] + 's';
+  let num = result === 1 && !useOne ? '' : result.toString();
 
-  if (result === 1 && !shorthands) {
-    return useOne ? `${result} ${span[1]}` : span[1]
-  } else if (timespans.length === 1 || result >= 1) {
-    return shorthands ? `${result}${span[1]}` : `${result} ${span[1]}s`
+  if ((whole && rest !== 0) || result < 1) {
+    timespans.shift();
+    if (timespans.length === 0) return null;
+    return timeInWordsFromTimespans(time, timespans, whole, useOne, shorthands);
+  } else {
+    return `${num} ${word}`
   }
-
-  timespans.shift()
-
-  return timeInWordsFromTimespans(time, timespans, useOne, shorthands)
 }
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']

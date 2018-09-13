@@ -45,10 +45,7 @@ export default class QueryChip extends React.Component<QueryChipProps> {
           className={th.__Icon}/>
         <span
           className={th.__text}>
-          <ChipComponent
-            config={config}
-            options={{}}
-            name={filter.name}/>
+          <ChipComponent query={config.query} name={filter.name}/>
         </span>
         { onRemove ? (
           <Icon icon='remove-chip' className={th.__remove} onClick={onRemove}/>

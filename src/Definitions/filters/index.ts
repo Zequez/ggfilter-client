@@ -9,6 +9,7 @@ import { DateCtrl } from './components/controls/DateCtrl/DateCtrl';
 import { TagsControl } from './components/controls/TagsControl/TagsControl';
 
 import TagsChip from './components/chips/TagsChip';
+import DateChip from './components/chips/DateChip';
 
 export * from './Flags';
 export * from './Prices';
@@ -61,6 +62,7 @@ export const ReleaseDate = new AnonFilter({
   title: 'Release Date',
   cell: TimeAgo, // DateCell
   control: DateCtrl,
+  chip: DateChip,
   width: 120
 });
 
