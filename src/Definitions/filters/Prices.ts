@@ -5,6 +5,7 @@ import { composeConfig } from './lib/composeConfig';
 import MonoPrice from './components/cells/Prices/MonoPrice';
 import { Range } from './components/controls/Range';
 import PriceCtrl from './components/controls/PriceCtrl/PriceCtrl';
+import DiscountCtrl from './components/controls/DiscountCtrl';
 
 const priceOptions = {
   toInput: (value) => value / 100,
@@ -33,23 +34,10 @@ export const Price = new AnonFilter({
   })
 });
 
-// export const Prices = new AnonFilter({
-//   api: 'prices',
-//   title: 'All Prices',
-//   control: null,
-//   cell: MultiPrice,
-//   cellInputs: {
-//     prices: 'prices',
-//     urls: 'urls'
-//   },
-//   boundInputs: { stores: 'Stores' },
-//   width: 130
-// });
-
 export const Discount = new AnonFilter({
   api: 'price_discount',
-  title: 'On Sale',
-  control: composeConfig(Range, {suffix: '%', max: 100}),
+  title: 'On Sale %',
+  control: DiscountCtrl,
   cell: null,
   alignment: 0
 });
