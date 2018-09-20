@@ -18,18 +18,31 @@ function mapWithSpace<T, K> (arr: T[], spaceWord: string, callback: (val: T) => 
   return result as K[];
 }
 
-export default function TagsChip ({query}: TagsChipProps) {
-  let separator = query.mode === 'or' ? ' or ' : ' ';
+export default class TagsChip extends React.Component<TagsChipProps, null> {
+  static title = (query: Tags) => {
+    let tagsText = query.tags && query.tags.length &&
+      (query.mode === 'or' ? query.tags.join(' or ') : query.tags.join(', '));
+    let excludeText = query.reject && query.reject.length && query.reject.join(', ');
+    if (tagsText && excludeText)
+      return `With tags ${tagsText} but excluding ${excludeText}`;
+    else if (tagsText && !excludeText) return `With tags ${tagsText}`;
+    else return `Excluding tags ${excludeText}`;
+  }
 
-  return (
-    <div className={th.TagsChip}>
-      {mapWithSpace(query.reject, ' ', (tag) =>
-        <MicroTag key={tag} tag={tag} className={th.TagsChip__MicroTag} alt={true}/>
-      )}
-      <span> </span>
+  render () {
+    let { query } = this.props;
+    let separator = query.mode === 'or' ? ' or ' : ' ';
+
+    return (
+      <div className={th.TagsChip}>
       {mapWithSpace(query.tags, separator, (tag) =>
         <MicroTag key={tag} tag={tag} className={th.TagsChip__MicroTag}/>
       )}
+      <span> </span>
+      {mapWithSpace(query.reject, ' ', (tag) =>
+        <MicroTag key={tag} tag={tag} className={th.TagsChip__MicroTag} alt={true}/>
+      )}
     </div>
-  );
+    );
+  }
 }
