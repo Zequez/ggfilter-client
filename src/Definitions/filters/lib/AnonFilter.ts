@@ -23,7 +23,7 @@ type Arguments = {
   cellInputs?: CellInputs;
   boundInputs?: BoundInputs;
   chip?: ReactComponentType;
-  chipTitle?: (query: {}) => string;
+  chipTitle?: (query: {}, name: string, title: string) => string;
   shortcuts?: object[];
 };
 
@@ -47,7 +47,7 @@ export default class AnonFilter {
   boundInputs: BoundInputs = {};
 
   chip: ReactComponentType = RawChip;
-  chipTitle?: (query: {}) => string;
+  chipTitle?: (query: {}, name: string, title: string) => string;
 
   shortcuts: object[] = [];
 

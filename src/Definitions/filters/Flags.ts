@@ -2,6 +2,7 @@ import AnonFilter from './lib/Filter';
 import enums from '../enumColumns';
 import BooleanCell from './components/cells/BooleanCell';
 import BooleanCtrl from './components/controls/BooleanCtrl/BooleanCtrl';
+import BooleanChip from './components/chips/BooleanChip';
 
 const iconWidth = 28;
 const extraWidth = 16;
@@ -14,6 +15,7 @@ export const Platforms = new AnonFilter({
   title: 'Platforms',
   cell: BooleanCell,
   control: BooleanCtrl,
+  chip: BooleanChip,
   width: getWidth('Platforms')
 });
 
@@ -22,6 +24,7 @@ export const Players = new AnonFilter({
   title: 'Players',
   cell: BooleanCell,
   control: BooleanCtrl,
+  chip: BooleanChip,
   width: getWidth('Players')
 });
 
@@ -30,6 +33,7 @@ export const VrPlatforms = new AnonFilter({
   title: 'VR Platforms',
   cell: BooleanCell,
   control: BooleanCtrl,
+  chip: BooleanChip,
   width: getWidth('VrPlatforms')
 });
 
@@ -38,6 +42,7 @@ export const Controllers = new AnonFilter({
   title: 'Controllers',
   cell: BooleanCell,
   control: BooleanCtrl,
+  chip: BooleanChip,
   width: getWidth('Controllers')
 });
 
@@ -46,6 +51,7 @@ export const VrModes = new AnonFilter({
   title: 'VR Modes',
   cell: BooleanCell,
   control: BooleanCtrl,
+  chip: BooleanChip,
   width: getWidth('VrModes')
 });
 
@@ -54,5 +60,6 @@ export const Stores = new AnonFilter({
   title: 'Stores',
   cell: BooleanCell,
   control: BooleanCtrl,
+  chip: BooleanChip,
   width: getWidth('Stores')
 });

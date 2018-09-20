@@ -1,4 +1,4 @@
-export default {
+const columns = {
   Stores: {
     steam: 'Steam',
     oculus: 'Oculus'
@@ -35,4 +35,14 @@ export default {
   //   partial: 2,
   //   full: 3
   // }
+};
+
+export default columns;
+
+export function sorter (name: string, values: string[]) {
+  let sorted: string[] = [];
+  for (let key in columns[name]) {
+    if (values.indexOf(key) !== -1) sorted.push(key);
+  }
+  return sorted;
 };
