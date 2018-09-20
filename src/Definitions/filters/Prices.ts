@@ -6,6 +6,7 @@ import MonoPrice from './components/cells/Prices/MonoPrice';
 import { Range } from './components/controls/Range';
 import PriceCtrl from './components/controls/PriceCtrl/PriceCtrl';
 import DiscountCtrl from './components/controls/DiscountCtrl';
+import PriceChip from './components/chips/PriceChip';
 
 const priceOptions = {
   toInput: (value) => value / 100,
@@ -24,6 +25,7 @@ export const Price = new AnonFilter({
     stores: 'stores'
   },
   control: PriceCtrl,
+  chip: PriceChip,
   alignment: -1,
   boundInputs: { selectedStores: 'Stores' },
   width: ((_, q) => {

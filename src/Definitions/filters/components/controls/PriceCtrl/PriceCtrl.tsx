@@ -29,6 +29,7 @@ export default class PriceCtrl extends React.Component<PriceCtrlProps, PriceCtrl
   setLessThan = (val: number) => {
     let query = this.props.query ? {...this.props.query} : {};
     query.lte = val;
+    if (this.props.query == null) query.gt = 0;
     this.props.onChange(query);
   }
 
