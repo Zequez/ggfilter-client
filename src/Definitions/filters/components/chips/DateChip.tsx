@@ -14,7 +14,8 @@ type DateChipProps = {
 };
 
 export default class DateChip extends React.Component<DateChipProps> {
-  static title = (query: Query) => {
+  static title = (props: DateChipProps) => {
+    let { query } = props;
     return `Released ${DateChip.text(query).toLowerCase()}`;
   }
 

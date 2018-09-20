@@ -10,3 +10,42 @@
     line-height: $g*4
 // .BooleanChip__separator
   // color: $color-text-sec
+
+.PctChip
+  position: relative
+  width: 100px
+  height: $g*2
+  margin: $g 0
+  border-radius: 2px
+  // border: solid 1px $color-mono-1
+  background: rgba(#000, 0.03)
+  overflow: hidden
+  &:after
+    content: ' '
+    position: absolute
+    z-index: 2
+    left: 0
+    right: 0
+    top: 0
+    bottom: 0
+    border-radius: 2px
+    box-shadow: inset 0 0 3px rgba(#000, 0.3)
+
+    $stops: ()
+    $c1: transparent
+    $c2: rgba(#000, 0.1)
+    // $stops: $c1 0%, $c1 9%, $c2 9%, $c2 10%, etc
+    @for $i from 0 through 9
+      $stops: join($stops, ($c1 percentage(($i * 10) / 100), $c1 percentage((($i + 1) * 10 - 1) / 100), $c2 percentage((($i + 1) * 10 - 1) / 100), $c2 percentage((($i + 1) * 10) / 100)), comma)
+      // $stops: join($stops, ($c1 percentage((($i - 1) * 10)/100) + 1, $c1 percentage(($i*10)/100)), comma)
+      // $stops: join($stops, ($c1 percentage(($i - 1)/100) + 1, $c1 percentage($i/100), $c2 percentage($i/100), $c2 percentage($i/100) + 1), comma)
+    background-image: linear-gradient(to right, $stops)
+
+  &__bar
+    height: 100%
+    width: 100%
+    background-image: linear-gradient(to right, mix($color-red, $color-pri, 70%), mix($color-green, $color-pri, 60%))
+
+  &_lowerIsBetter
+    .PctChip__bar
+      background-image: linear-gradient(to left, mix($color-red, $color-pri, 70%), mix($color-green, $color-pri, 60%))

@@ -8,6 +8,7 @@ type ReactComponentType = React.StatelessComponent<any> | React.ComponentClass<a
 type ControlOutputs = (query: object) => {[k: string]: object};
 type CellInputs = {[k: string]: Columns};
 type BoundInputs = {[k: string]: string}; // String value should actually be FilterNames
+type chipProps = {query: {}, name: string, title: string, config: {}};
 
 type Arguments = {
   api: Filters;
@@ -23,7 +24,8 @@ type Arguments = {
   cellInputs?: CellInputs;
   boundInputs?: BoundInputs;
   chip?: ReactComponentType;
-  chipTitle?: (query: {}, name: string, title: string) => string;
+  chipConfig?: {};
+  chipTitle?: (props: chipProps) => string;
   shortcuts?: object[];
 };
 
@@ -47,7 +49,8 @@ export default class AnonFilter {
   boundInputs: BoundInputs = {};
 
   chip: ReactComponentType = RawChip;
-  chipTitle?: (query: {}, name: string, title: string) => string;
+  chipConfig?: {};
+  chipTitle?: (props: chipProps) => string;
 
   shortcuts: object[] = [];
 

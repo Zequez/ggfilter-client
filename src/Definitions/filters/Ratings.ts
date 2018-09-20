@@ -5,6 +5,7 @@ import Pct from './components/controls/Pct';
 import SysreqIndex from './components/cells/SysreqIndex';
 import RatingsPct from './components/cells/RatingsPct/RatingsPct';
 import PlaytimePct from './components/cells/PlaytimePct/PlaytimePct';
+import PctChip from './components/chips/PctChip';
 
 const PERCENTILES_BOTH = [0, 1, 2, 3, 4, 5, 10, 15, 20, 25, 50, 75, 80, 85, 90, 95, 96, 97, 98, 99];
 const PERCENTILES_HIGH = [0, 10, 20, 30, 40, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 96, 97, 98, 99];
@@ -23,7 +24,9 @@ export const RatingsRatio = new AnonFilter({
     apiPercentiles: 'ratingsRatio',
     interpolation: (v) => `${v}%`
   }),
+  chip: PctChip,
   sort: 'ratings_ratio',
+  chipConfig: {interpolation: (v) => `${v}%`, apiPercentiles: 'ratingsRatio'},
   alignment: 0,
   width: 200
 });
@@ -38,6 +41,8 @@ export const RatingsCount = new AnonFilter({
     percentiles: PERCENTILES_HIGH,
     apiPercentiles: 'ratingsCount'
   }),
+  chip: PctChip,
+  chipConfig: {apiPercentiles: 'ratingsCount'},
   alignment: 1,
   width: 130
 });
@@ -61,6 +66,8 @@ export const Playtime = new AnonFilter({
     apiPercentiles: 'playtimeMedian',
     interpolation: (v) => `${v}hs`
   }),
+  chip: PctChip,
+  chipConfig: {interpolation: (v) => `${v}hs`, apiPercentiles: 'playtimeMedian'},
   alignment: 0,
   width: 220
 });
@@ -77,6 +84,8 @@ export const PlaytimeDisparity = new AnonFilter({
     interpolation: (v) => `${v}hs`,
     sticky: 'first'
   }),
+  chip: PctChip,
+  chipConfig: {lowerIsBetter: true, interpolation: (v) => `${v}hs`, apiPercentiles: 'playtimeSd'},
   alignment: 1,
   width: 130
 });
@@ -93,6 +102,8 @@ export const PlaytimeForTheBuck = new AnonFilter({
     interpolation: (v) => `${v}hs/$`,
     sticky: 'last'
   }),
+  chip: PctChip,
+  chipConfig: {interpolation: (v) => `${v}hs/$`, apiPercentiles: 'playtimeMedianFtb'},
   alignment: 1,
   width: 130
 });
@@ -109,6 +120,8 @@ export const SystemRequirements = new AnonFilter({
     apiPercentiles: 'sysreqIndex',
     sticky: 'first'
   }),
+  chip: PctChip,
+  chipConfig: {apiPercentiles: 'sysreqIndex'},
   alignment: 1,
   width: 130
 });

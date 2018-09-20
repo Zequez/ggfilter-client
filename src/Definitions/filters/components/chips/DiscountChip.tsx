@@ -6,7 +6,8 @@ interface DiscountChipProps {
 }
 
 export default class DiscountChip extends React.Component<DiscountChipProps> {
-  static title = (query: Range) => {
+  static title = (props: DiscountChipProps) => {
+    let { query } = props;
     let text = DiscountChip.text(query);
     return `On sale ${text.replace('On sale', '').toLowerCase()}`;
   }

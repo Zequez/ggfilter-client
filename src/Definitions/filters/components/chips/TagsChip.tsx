@@ -19,7 +19,8 @@ function mapWithSpace<T, K> (arr: T[], spaceWord: string, callback: (val: T) => 
 }
 
 export default class TagsChip extends React.Component<TagsChipProps, null> {
-  static title = (query: Tags) => {
+  static title = (props: TagsChipProps) => {
+    let { query } = props;
     let tagsText = query.tags && query.tags.length &&
       (query.mode === 'or' ? query.tags.join(' or ') : query.tags.join(', '));
     let excludeText = query.reject && query.reject.length && query.reject.join(', ');

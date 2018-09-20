@@ -28,16 +28,23 @@ export default class QueryChip extends React.Component<QueryChipProps> {
     //         children, onClick, className, tooltipPre, hl } = this.props
 
     const ChipComponent = filter.chip;
+    const chipElement = <ChipComponent
+      query={config.query}
+      name={filter.name}
+      title={filter.title}
+      config={filter.chipConfig}/>;
     // const divClassName = cx(th.QueryChip, {
     //   [th.QueryChip_hl]: config.hl
     // });
 
+    console.log(chipElement.props);
+
     // let tooltip = capitalizeFirstLetter(generateQueryTitle(control, query));
     let tooltip = '';
     if (filter.chipTitle) {
-      tooltip = filter.chipTitle(config.query, filter.title, filter.title);
+      tooltip = filter.chipTitle(chipElement.props);
     } else if (ChipComponent['title']) {
-      tooltip = ChipComponent['title'](config.query, filter.name, filter.title);
+      tooltip = ChipComponent['title'](chipElement.props);
     }
     // if (tooltipPre) {
     //   tooltip = hl ? 'Highlighting: ' : 'Filtering by: ' + tooltip
@@ -50,7 +57,7 @@ export default class QueryChip extends React.Component<QueryChipProps> {
           className={th.__Icon}/>
         <span
           className={th.__text}>
-          <ChipComponent query={config.query} name={filter.name}/>
+          {chipElement}
         </span>
         { onRemove ? (
           <Icon icon='remove-chip' className={th.__remove} onClick={onRemove}/>

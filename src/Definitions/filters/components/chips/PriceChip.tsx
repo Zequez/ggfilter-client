@@ -7,8 +7,8 @@ interface PriceChipProps {
 }
 
 export default class PriceChip extends React.Component<PriceChipProps> {
-  static title = (query: Range) => {
-    let text = PriceChip.text(query)
+  static title = (props: PriceChipProps) => {
+    let text = PriceChip.text(props)
       .replace(/≤([^\s]+)/, '$1 or less')
       .replace('<', 'less than ')
       .replace(/≥([^\s]+)/, '$1 or more')
@@ -18,7 +18,8 @@ export default class PriceChip extends React.Component<PriceChipProps> {
     return `For ${text}`;
   }
 
-  static text = (query: Range) => {
+  static text = (props: PriceChipProps) => {
+    let { query } = props;
     if (query.lte && query.gt === 0) {
       return `≤$${query.lte / 100}`;
     } else if (query.lte && query.gt == null && query.gte == null) {
@@ -41,9 +42,7 @@ export default class PriceChip extends React.Component<PriceChipProps> {
 
   render () {
     return (
-      <span>
-        {PriceChip.text(this.props.query)}
-      </span>
+      <span>{PriceChip.text(this.props)}</span>
     );
   }
 }
