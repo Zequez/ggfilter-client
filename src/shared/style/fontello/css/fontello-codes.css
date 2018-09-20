@@ -52,3 +52,5 @@
 .icon-eye-off:before { content: '\53'; } /* 'S' */
 .icon-trash:before { content: '\54'; } /* 'T' */
 .icon-circle-notch:before { content: '\55'; } /* 'U' */
+.icon-sort-alt-up:before { content: '\56'; } /* 'V' */
+.icon-sort-alt-down:before { content: '\57'; } /* 'W' */

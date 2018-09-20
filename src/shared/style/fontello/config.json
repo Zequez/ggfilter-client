@@ -355,6 +355,18 @@
       "css": "circle-notch",
       "code": 85,
       "src": "fontawesome"
+    },
+    {
+      "uid": "0cd2582b8c93719d066ee0affd02ac78",
+      "css": "sort-alt-up",
+      "code": 86,
+      "src": "fontawesome"
+    },
+    {
+      "uid": "27b13eff5eb0ca15e01a6e65ffe6eeec",
+      "css": "sort-alt-down",
+      "code": 87,
+      "src": "fontawesome"
     }
   ]
 }
