@@ -40,6 +40,7 @@ export const Name = new AnonFilter({
   title: 'Name',
   cell: Link,
   cellInputs: { text: 'name', urls: 'urls' },
+  chipTitle: (query: {value: string}) => `Named ${query.value}`,
   width: 150,
   widthStretch: true
 });
