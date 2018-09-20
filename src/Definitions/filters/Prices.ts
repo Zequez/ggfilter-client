@@ -7,6 +7,7 @@ import { Range } from './components/controls/Range';
 import PriceCtrl from './components/controls/PriceCtrl/PriceCtrl';
 import DiscountCtrl from './components/controls/DiscountCtrl';
 import PriceChip from './components/chips/PriceChip';
+import DiscountChip from './components/chips/DiscountChip';
 
 const priceOptions = {
   toInput: (value) => value / 100,
@@ -41,5 +42,6 @@ export const Discount = new AnonFilter({
   title: 'On Sale %',
   control: DiscountCtrl,
   cell: null,
+  chip: DiscountChip,
   alignment: 0
 });
