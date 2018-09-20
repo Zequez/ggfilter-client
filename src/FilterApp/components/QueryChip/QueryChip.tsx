@@ -3,8 +3,6 @@ import * as th from './QueryChip.sass';
 import * as cx from 'classnames';
 import { FilterConfig } from '../../filter';
 import { Filter } from '../../../Definitions';
-import { capitalizeFirstLetter } from 'shared/lib/utils';
-import generateQueryTitle from '../../lib/generateQueryTitle';
 
 import Icon from 'shared/components/Icon';
 import { TTDiv } from 'shared/components/Tooltip';
@@ -37,19 +35,13 @@ export default class QueryChip extends React.Component<QueryChipProps> {
     //   [th.QueryChip_hl]: config.hl
     // });
 
-    console.log(chipElement.props);
 
-    // let tooltip = capitalizeFirstLetter(generateQueryTitle(control, query));
     let tooltip = '';
     if (filter.chipTitle) {
       tooltip = filter.chipTitle(chipElement.props);
     } else if (ChipComponent['title']) {
       tooltip = ChipComponent['title'](chipElement.props);
     }
-    // if (tooltipPre) {
-    //   tooltip = hl ? 'Highlighting: ' : 'Filtering by: ' + tooltip
-    // }
-
     return (
       <TTDiv className={cx(th.QueryChip, {[th._hl]: config.hl})} position='bottom' tooltip={tooltip}>
         <Icon

@@ -9,8 +9,10 @@
   cursor: pointer
   &:last-child
     margin-right: 0
+.QueryChip_sort .__Icon
+  background: $color-pri-dark
+  border: solid 2px darken($color-pri-dark, 7%)
 .__Icon, .__remove
-  line-height: $g*4
   height: $g*4
   width: $g*4
   border-radius: $g*2
@@ -18,11 +20,14 @@
   font-size: $font-size-input
 .__Icon
   composes: __export_QueryChip__icons from global
+  line-height: $g*4 - 4px
   background: $color-sec-dark
+  border: solid 2px darken($color-sec-dark, 7%)
   color: $color-text-pri-alt
   box-shadow: $shadow-switch
 .__remove
   composes: __export_QueryChip__icons from global
+  line-height: $g*4
   background: $color-mono-2
   &:hover
     background: $color-mono-3
@@ -36,4 +41,4 @@
     border: solid $g/2 $color-sec
     background: $color-mono-3
     color: $color-text-pri
-    line-height: $g*3
+    line-height: $g*3 - 4px

@@ -8,10 +8,12 @@ import Icon from 'shared/components/Icon';
 interface BooleanChipProps {
   query: Boolean;
   name: string;
+  title: string;
 }
 
 export default class BooleanChip extends React.Component<BooleanChipProps> {
-  static title = (query: Boolean, name: string, title: string) => {
+  static title = (props: BooleanChipProps) => {
+    let { query, name, title } = props;
     let values = sorter(name, query.value).map((v) => enumColumns[name][v]);
     return `${title} ` + values.join(` ${query.mode} `);
   }

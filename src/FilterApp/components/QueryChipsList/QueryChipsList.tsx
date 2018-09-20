@@ -3,6 +3,7 @@ import * as th from './QueryChipsList.sass';
 import definitions, { FiltersNames } from '../../../Definitions';
 import { FiltersConfiguration } from '../../filter';
 import QueryChip from '../QueryChip';
+import SortQueryChip from '../QueryChip/SortQueryChip';
 
 interface QueryChipsListProps {
   configuration: FiltersConfiguration;
@@ -13,6 +14,7 @@ export default class QueryChipsList extends React.Component<QueryChipsListProps>
   render () {
     let { configuration } = this.props;
 
+    let sortChip: JSX.Element = null;
     let chips = [];
     for (let a in configuration) {
       let filterName = a as FiltersNames;
@@ -27,6 +29,10 @@ export default class QueryChipsList extends React.Component<QueryChipsListProps>
           </div>
         );
       }
+      if (config.sort != null) {
+        let filter = definitions.filters.get(filterName);
+        sortChip = <SortQueryChip title={filter.title} asc={config.sort}/>
+      }
     }
 
     return chips.length ? (
@@ -35,6 +41,7 @@ export default class QueryChipsList extends React.Component<QueryChipsListProps>
           Filters
         </div>
         {chips}
+        {sortChip}
       </div>
     ) : null;
   }
