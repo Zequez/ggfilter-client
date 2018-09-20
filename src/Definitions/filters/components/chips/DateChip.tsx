@@ -2,7 +2,8 @@ import * as React from 'react';
 import { timeInWords } from 'shared/lib/utils/date';
 import {
   formatShortDate as format,
-  isFirstDayOfTheYear as isFD
+  isFirstDayOfTheYear as isFD,
+  MONTHS
 } from 'shared/lib/utils/date';
 
 const year = (date) => date.getUTCFullYear();
@@ -13,6 +14,10 @@ type DateChipProps = {
 };
 
 export default class DateChip extends React.Component<DateChipProps> {
+  static title = (query: Query) => {
+    return `Released ${DateChip.text(query).toLowerCase()}`;
+  }
+
   static text = (query: Query) => {
     let { gte, lte } = query;
     if (typeof gte === 'number' || typeof lte === 'number') {
@@ -25,24 +30,18 @@ export default class DateChip extends React.Component<DateChipProps> {
       } else if (lte != null && gte != null) {
         return `Between ${timeInWords(gte)} and ${timeInWords(lte)} ago`;
       }
-    } else {
-      // let gtd, ltd: Date;
-      // if (gte != null) gtd = new Date(gte * 1000);
-      // if (lte != null) ltd = new Date(lte * 1000);
-
-      // if (gte != null && lte == null) {
-      //   return isFD(gte)
-      //     ? `≥ ${year(gtd)}`
-      //     : `After ${format(gtd)}`;
-      // } else if (lte != null && gte == null) {
-      //   return isFD(ltd)
-      //     ? `≤ ${year(ltd) - 1}`
-      //     : `Before ${format(ltd)}`;
-      // } else if (lte != null && gte != null) {
-      //   return isFD(gtd) && isFD(ltd)
-      //     ? (year(gtd) === year(ltd) - 1 ? year(gtd) : `${year(gtd)}-${year(ltd) - 1}`)
-      //     : `Between ${format(gtd)} and ${format(ltd)}`;
-      // }
+    } else if (typeof gte === 'string' || typeof lte === 'string') {
+      if (gte != null && lte == null) {
+        return `After ${gte}`;
+      } else if (lte != null && gte == null) {
+        return `Before ${lte}`;
+      } else if (gte === lte) {
+        let [year, month] = gte.split('-');
+        if (month) return `On ${MONTHS[parseInt(month) - 1]} ${year}`;
+        else return `On ${gte}`;
+      } else {
+        return `Between ${gte} and ${lte}`;
+      }
     }
   }
 

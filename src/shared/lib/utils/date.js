@@ -83,7 +83,7 @@ export function timeInWordsFromTimespans (time, timespans, whole, useOne, shorth
   }
 }
 
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+export const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 export function formatShortDate (date) {
   let [year, month, day] = formatShortDateArray(date)
   return `${day} ${month} ${year}`

@@ -33,7 +33,10 @@ export default class QueryChip extends React.Component<QueryChipProps> {
     // });
 
     // let tooltip = capitalizeFirstLetter(generateQueryTitle(control, query));
-    let tooltip = 'Placeholder';
+    let tooltip = '';
+    if (ChipComponent['title']) {
+      tooltip = ChipComponent['title'](config.query);
+    }
     // if (tooltipPre) {
     //   tooltip = hl ? 'Highlighting: ' : 'Filtering by: ' + tooltip
     // }
