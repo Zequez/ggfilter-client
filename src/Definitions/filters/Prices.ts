@@ -30,7 +30,7 @@ export const Price = new AnonFilter({
   alignment: -1,
   boundInputs: { selectedStores: 'Stores' },
   width: ((_, q) => {
-    let selectedStores = q['selectedStores'] && q['selectedStores']['value']['toString'](2).replace(/0/g, '').length;
+    let selectedStores = q['selectedStores'] && q['selectedStores']['value'].length;
     let spaces = selectedStores || storesKeys.length;
     if (spaces === 1) spaces = 0;
     return 108 + spaces * 32;
