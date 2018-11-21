@@ -8,16 +8,16 @@ import Page from './Page'
 import AppBar from './AppBar'
 
 export default class AutoPage extends Component {
-  static propTypes = {
-    title: t.string,
-    className: t.string,
+  // static propTypes = {
+  //   title: t.string,
+  //   className: t.string,
 
-    bigHeader: t.bool,
-    card: t.bool,
-    textContent: t.bool,
+  //   bigHeader: t.bool,
+  //   card: t.bool,
+  //   textContent: t.bool,
 
-    children: t.node.isRequired
-  }
+  //   children: t.node.isRequired
+  // }
 
   render () {
     const { title, card, naked, textContent, children, className } = this.props

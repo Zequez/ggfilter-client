@@ -6,10 +6,10 @@ import Input from 'shared/components/Input'
 import SuggestionsDropdown from './SuggestionsDropdown'
 
 export default class SuggestionsBox extends Component {
-  static propTypes = {
-    filter: t.func.isRequired,
-    onSelect: t.func.isRequired
-  }
+  // static propTypes = {
+  //   filter: t.func.isRequired,
+  //   onSelect: t.func.isRequired
+  // }
 
   state = {
     value: '',

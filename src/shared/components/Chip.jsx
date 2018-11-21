@@ -8,15 +8,15 @@ import tooltipFactory from 'shared/components/Tooltip'
 const TooltipDiv = tooltipFactory('div', { position: 'top' })
 
 export default class Chip extends Component {
-  static propTypes = {
-    icon: t.string,
-    iconText: t.oneOfType([t.string, t.number]),
-    onRemove: t.func,
-    onClick: t.func,
-    className: t.string,
-    tooltip: t.string,
-    children: t.any
-  }
+  // static propTypes = {
+  //   icon: t.string,
+  //   iconText: t.oneOfType([t.string, t.number]),
+  //   onRemove: t.func,
+  //   onClick: t.func,
+  //   className: t.string,
+  //   tooltip: t.string,
+  //   children: t.any
+  // }
 
   static defaultProps = {
     onClick: () => {}

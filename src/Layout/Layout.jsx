@@ -5,9 +5,9 @@ import { connect } from 'react-redux'
 import { Drawer } from './Drawer'
 
 export default class Layout extends Component {
-  static propTypes = {
-    children: t.node
-  }
+  // static propTypes = {
+  //   children: t.node
+  // }
 
   render () {
     let { children } = this.props

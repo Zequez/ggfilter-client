@@ -1,16 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { routeNodeSelector, actions } from 'redux-router5'
+import { createRouteNodeSelector, actions } from 'redux-router5'
 import { paths } from 'src/app/router'
 
 export class Link extends React.Component {
-  static propTypes = {
-    to: React.PropTypes.string.isRequired,
-    children: React.PropTypes.node.isRequired,
-    className: React.PropTypes.string,
-    navigateTo: React.PropTypes.func.isRequired,
-    target: React.PropTypes.string
-  }
+  // static propTypes = {
+  //   to: React.PropTypes.string.isRequired,
+  //   children: React.PropTypes.node.isRequired,
+  //   className: React.PropTypes.string,
+  //   navigateTo: React.PropTypes.func.isRequired,
+  //   target: React.PropTypes.string
+  // }
 
   onClick = (ev) => {
     if (!this.isRaw()) {
@@ -37,7 +37,7 @@ export class Link extends React.Component {
 }
 
 export default connect((s) => ({
-  ...routeNodeSelector('')(s)
+  ...createRouteNodeSelector('')(s)
 }), {
   navigateTo: actions.navigateTo
 })(Link)

@@ -2,11 +2,11 @@ import React, { Component, PropTypes as t } from 'react'
 import ReactDOM from 'react-dom'
 
 export default class Portal extends Component {
-  static propTypes = {
-    onMount: t.func,
-    onUpdate: t.func,
-    children: t.node
-  }
+  // static propTypes = {
+  //   onMount: t.func,
+  //   onUpdate: t.func,
+  //   children: t.node
+  // }
 
   portalElement = null
 

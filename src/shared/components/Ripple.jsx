@@ -24,18 +24,18 @@ const rippleFactory = (options = {}) => {
 
   return ComposedComponent => {
     class RippledComponent extends Component {
-      static propTypes = {
-        children: PropTypes.any,
-        disabled: PropTypes.bool,
-        rippleDisabled: PropTypes.bool,
-        onRippleEnded: PropTypes.func,
-        ripple: PropTypes.bool,
-        rippleCentered: PropTypes.bool,
-        rippleClassName: PropTypes.string,
-        rippleMultiple: PropTypes.bool,
-        rippleSpread: PropTypes.number,
-        className: PropTypes.string
-      }
+      // static propTypes = {
+      //   children: PropTypes.any,
+      //   disabled: PropTypes.bool,
+      //   rippleDisabled: PropTypes.bool,
+      //   onRippleEnded: PropTypes.func,
+      //   ripple: PropTypes.bool,
+      //   rippleCentered: PropTypes.bool,
+      //   rippleClassName: PropTypes.string,
+      //   rippleMultiple: PropTypes.bool,
+      //   rippleSpread: PropTypes.number,
+      //   className: PropTypes.string
+      // }
 
       static defaultProps = {
         disabled: false,

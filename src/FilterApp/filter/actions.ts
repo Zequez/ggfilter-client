@@ -59,7 +59,7 @@ export const updateSfilter = (filter, secret) =>
 export const SHOW_SFILTER_REQUEST = 'filter/SHOW_SFILTER_REQUEST';
 export const SHOW_SFILTER_SUCCESS = 'filter/SHOW_SFILTER_SUCCESS';
 export const SHOW_SFILTER_FAILURE = 'filter/SHOW_SFILTER_FAILURE';
-export const showSfilter = (sid) =>
+export const showSfilter = (sid: string) =>
   ({type: SHOW_SFILTER_REQUEST, payload: {sid}});
 
 export const LOAD_FRONT_PAGE_FILTERS_REQUEST = 'filter/LOAD_FRONT_PAGE_FILTERS_REQUEST';

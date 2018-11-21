@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { actions } from 'redux-router5'
+import { actions } from 'router5'
 import { sfilter as sfilterSel } from '../filter/selectors'
 
 @connect((s) => ({

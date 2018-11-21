@@ -2,13 +2,13 @@ import th from './columns'
 import React, { Component, PropTypes as t } from 'react'
 
 export class Raw extends Component {
-  static propTypes = {
-    value: t.any,
-    config: t.shape({
-      interpolation: t.string,
-      round: t.number
-    })
-  }
+  // static propTypes = {
+  //   value: t.any,
+  //   config: t.shape({
+  //     interpolation: t.string,
+  //     round: t.number
+  //   })
+  // }
 
   static defaultProps = {
     config: {

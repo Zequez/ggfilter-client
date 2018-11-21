@@ -13,12 +13,12 @@ import Logo from './Logo'
 
 @connect((s) => ({ expanded: drawerOpen(s) }), { onRequestClose: closeDrawer })
 export default class Drawer extends Component {
-  static propTypes = {
-    onRequestClose: t.func,
-    expanded: t.bool,
-    headerTo: t.string,
-    children: t.node
-  }
+  // static propTypes = {
+  //   onRequestClose: t.func,
+  //   expanded: t.bool,
+  //   headerTo: t.string,
+  //   children: t.node
+  // }
 
   onClick = () => {
     if (this.props.expanded) {

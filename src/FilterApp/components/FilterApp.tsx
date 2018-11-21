@@ -96,7 +96,7 @@ export default connect<StateProps, DispatchProps, {}>((s) => ({
   configuration: filterSel.configuration(s),
   hyperFilter: filterSel.hyperFilter(s),
   games: filterSel.gamesBatches(s),
-  tags: s.tags,
+  tags: s['tags'],
   gamesLoadedCount: filterSel.gamesLoadedCount(s),
   gamesTotalCount: filterSel.gamesTotalCount(s),
   gamesLoading: filterSel.gamesLoading(s),

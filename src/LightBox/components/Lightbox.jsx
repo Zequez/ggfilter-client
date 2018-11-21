@@ -12,11 +12,11 @@ import { showLightbox } from '../reducer'
   thumbnails: getThumbs(s)
 }), { onClose: showLightbox })
 export default class Lightbox extends Component {
-  static propTypes = {
-    media: t.arrayOf(t.string).isRequired,
-    thumbnails: t.arrayOf(t.string).isRequired,
-    onClose: t.func
-  }
+  // static propTypes = {
+  //   media: t.arrayOf(t.string).isRequired,
+  //   thumbnails: t.arrayOf(t.string).isRequired,
+  //   onClose: t.func
+  // }
 
   static defaultProps = {
     onClose: () => {}

@@ -5,17 +5,16 @@ import RedirectToCurrentFilter from './components/RedirectToCurrentFilter';
 import { ID } from './filter/selectors';
 import reducer from './filter/reducer';
 import * as sagas from './filter/sagas';
-import * as actions from './filter/actions';
+import * as a from './filter/actions';
 
-module.exports = {
-  Main: FilterAppPage,
-  ID: ID,
-  reducer: reducer,
-  sagas: sagas,
-
-  actions: {
-    setColumn: actions.setColumn,
-    setQuery: actions.setQuery,
-    setSort: actions.setSort
-  }
+export const Main = FilterAppPage;
+export {
+  ID,
+  reducer,
+  sagas
+};
+export const actions = {
+  setColumn: a.setColumn,
+  setQuery: a.setQuery,
+  setSort: a.setSort
 };

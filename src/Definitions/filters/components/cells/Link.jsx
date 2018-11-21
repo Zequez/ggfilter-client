@@ -4,10 +4,10 @@ import React, { Component, PropTypes as t } from 'react'
 import Icon from 'shared/components/Icon'
 
 export class Link extends Component {
-  static propTypes = {
-    text: t.string,
-    urls: t.object
-  }
+  // static propTypes = {
+  //   text: t.string,
+  //   urls: t.object
+  // }
 
   render () {
     let { text, urls } = this.props

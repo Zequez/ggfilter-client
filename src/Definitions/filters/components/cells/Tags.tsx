@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as th from './columns.sass';
 
-import { partial } from 'shared/lib/utils';
+import { partial } from 'shared/lib/utils/func';
 
 import MicroTag from 'shared/components/MicroTag';
 

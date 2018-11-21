@@ -20,9 +20,9 @@ function travelToNumber (start, end, cb, time = 0) {
 }
 
 export default class EasingNumber extends Component {
-  static propTypes = {
-    number: t.number.isRequired
-  }
+  // static propTypes = {
+  //   number: t.number.isRequired
+  // }
 
   state = {
     number: 0

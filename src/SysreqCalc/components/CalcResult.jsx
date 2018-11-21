@@ -4,10 +4,10 @@ import React, { PropTypes as t, Component } from 'react'
 import EasingNumber from './EasingNumber'
 
 export default class CalcResult extends Component {
-  static propTypes = {
-    mean: t.number.isRequired,
-    deviation: t.number
-  }
+  // static propTypes = {
+  //   mean: t.number.isRequired,
+  //   deviation: t.number
+  // }
 
   render () {
     let { mean, deviation } = this.props

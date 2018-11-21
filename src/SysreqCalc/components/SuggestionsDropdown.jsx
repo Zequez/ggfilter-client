@@ -3,21 +3,21 @@ import React, { Component, PropTypes as t } from 'react'
 import { partial, loopNumber } from 'shared/lib/utils'
 
 export default class SuggestionsDropdown extends Component {
-  static propTypes = {
-    /**
-     * List of strings to search in
-     */
-    list: t.arrayOf(t.string).isRequired,
-    /**
-     * Items associated with the #list prop, it should
-     * be the same length. It will be passed along in the callback
-     */
-    listValues: t.array,
-    /**
-     * Callback called when the user selects an item
-     */
-    onSelect: t.func.isRequired
-  }
+  // static propTypes = {
+  //   /**
+  //    * List of strings to search in
+  //    */
+  //   list: t.arrayOf(t.string).isRequired,
+  //   /**
+  //    * Items associated with the #list prop, it should
+  //    * be the same length. It will be passed along in the callback
+  //    */
+  //   listValues: t.array,
+  //   /**
+  //    * Callback called when the user selects an item
+  //    */
+  //   onSelect: t.func.isRequired
+  // }
 
   state = { focused: 0, visible: false }
   found = []

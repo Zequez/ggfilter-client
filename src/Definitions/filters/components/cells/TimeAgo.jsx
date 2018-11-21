@@ -3,9 +3,9 @@ import React, { Component, PropTypes as t } from 'react'
 import { relativeTimeInWords } from 'shared/lib/utils'
 
 export class TimeAgo extends Component {
-  static propTypes = {
-    value: t.any
-  }
+  // static propTypes = {
+  //   value: t.any
+  // }
 
   timePastLabel (text) {
     let [, value, unit] = text.match(/(\d+) (.*)/)
