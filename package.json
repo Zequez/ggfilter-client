@@ -5,11 +5,11 @@
   "description": "GGFilter client",
   "main": "",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline --env=dev",
+    "start": "NODE_ENV=development webpack-dev-server --hot --inline",
     "test": "NODE_ENV=test jest",
     "debugtest": "node --debug-brk ./node_modules/karma/bin/karma start",
     "_posttest": "npm run lint",
-    "dist:build": "npm run copy && ruby ./copy_version_to_gem.rb && NODE_ENV=production webpack --env=dist",
+    "dist:build": "npm run copy && ruby ./copy_version_to_gem.rb && NODE_ENV=production webpack",
     "dist:commit": "cd ../client-gem && rake commit",
     "dist:push": "git push origin master && cd ../client-gem && git push origin master",
     "dist:deploy": "npm run dist:build && npm run dist:commit && npm run dist:push",
@@ -19,7 +19,7 @@
     "release:major": "npm version major && npm publish && git push --follow-tags",
     "release:minor": "npm version minor && npm publish && git push --follow-tags",
     "release:patch": "npm version patch && npm publish && git push --follow-tags",
-    "analyze": "webpack --json --env=dist | ./node_modules/.bin/webpack-bundle-size-analyzer",
+    "analyze": "NODE_ENV=development webpack --json | ./node_modules/.bin/webpack-bundle-size-analyzer",
     "fontello-sass-vars": "node src/shared/style/fontello/sass_vars.js"
   },
   "jest": {
@@ -87,6 +87,7 @@
     "fsevents": "^2.0.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^23.6.0",
+    "mini-css-extract-plugin": "^0.4.5",
     "minimist": "^1.2.0",
     "node-sass": "^4.10.0",
     "null-loader": "^0.1.1",
