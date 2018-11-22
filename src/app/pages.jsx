@@ -21,7 +21,6 @@ const Pages = {
   logs: () => <staticPage.logs/>,
   sources: () => <staticPage.sources/>,
   feedback: () => <staticPage.feedback/>,
-  donations: () => <staticPage.contribute/>
 }
 
 function Root({route}) {

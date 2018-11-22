@@ -21,8 +21,6 @@ export default class App extends React.Component {
           <DrawerItem to='filterRedirect' label='Filter' icon='filter'/>
           <DrawerItem to='sysreq' label="Sys. Req. Calculator" icon='sysreq'/>
           <DrawerItem to='feedback' label="Feedback" icon='feedback'/>
-          <DrawerItem to='donations' label="Donations" icon='contribute'/>
-          <DrawerItem to='http://zequez.com/about-me/' target='_blank' label="Author" icon='about'/>
         </Drawer>
         <Pages/>
         <Lightbox/>
