@@ -23,41 +23,41 @@ export const watchGamesRequest = sagaCreator(
     }
   })
 
-export const watchCreateFilterRequest = sagaCreator(
-  a.CREATE_SFILTER_REQUEST,
-  a.CREATE_SFILTER_SUCCESS,
-  a.CREATE_SFILTER_FAILURE,
-  Api.filters.create,
-  function* (f) {
-    yield put(actions.navigateTo('filterFull', {sid: f.sid, slug: f.nameSlug}))
-  }
-)
+// export const watchCreateFilterRequest = sagaCreator(
+//   a.CREATE_SFILTER_REQUEST,
+//   a.CREATE_SFILTER_SUCCESS,
+//   a.CREATE_SFILTER_FAILURE,
+//   Api.filters.create,
+//   function* (f) {
+//     yield put(actions.navigateTo('filterFull', {sid: f.sid, slug: f.nameSlug}))
+//   }
+// )
 
-export const watchUpdateFilterRequest = sagaCreator(
-  a.UPDATE_SFILTER_REQUEST,
-  a.UPDATE_SFILTER_SUCCESS,
-  a.UPDATE_SFILTER_FAILURE,
-  Api.filters.update
-)
+// export const watchUpdateFilterRequest = sagaCreator(
+//   a.UPDATE_SFILTER_REQUEST,
+//   a.UPDATE_SFILTER_SUCCESS,
+//   a.UPDATE_SFILTER_FAILURE,
+//   Api.filters.update
+// )
 
-export const watchShowFilterRequest = sagaCreator(
-  a.SHOW_SFILTER_REQUEST,
-  a.SHOW_SFILTER_SUCCESS,
-  a.SHOW_SFILTER_FAILURE,
-  Api.filters.show,
-  function* () {
-    yield put(a.getGames(0))
-  }
-)
+// export const watchShowFilterRequest = sagaCreator(
+//   a.SHOW_SFILTER_REQUEST,
+//   a.SHOW_SFILTER_SUCCESS,
+//   a.SHOW_SFILTER_FAILURE,
+//   Api.filters.show,
+//   function* () {
+//     yield put(a.getGames(0))
+//   }
+// )
 
-export const watchFrontPageFilterRequest = sagaCreator(
-  a.LOAD_FRONT_PAGE_FILTERS_REQUEST,
-  a.LOAD_FRONT_PAGE_FILTERS_SUCCESS,
-  a.LOAD_FRONT_PAGE_FILTERS_FAILURE,
-  function* () {
-    return yield call(Api.filters.index, {frontPage: true})
-  },
-  function* () {
-    yield put(a.getGames(0))
-  }
-)
+// export const watchFrontPageFilterRequest = sagaCreator(
+//   a.LOAD_FRONT_PAGE_FILTERS_REQUEST,
+//   a.LOAD_FRONT_PAGE_FILTERS_SUCCESS,
+//   a.LOAD_FRONT_PAGE_FILTERS_FAILURE,
+//   function* () {
+//     return yield call(Api.filters.index, {frontPage: true})
+//   },
+//   function* () {
+//     yield put(a.getGames(0))
+//   }
+// )

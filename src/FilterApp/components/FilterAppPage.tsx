@@ -1,21 +1,19 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { actions } from 'redux-router5';
 import { Page } from 'src/Layout';
-import { sfilter as sfilterSelector } from '../filter/selectors';
+import { hyperFilter } from '../filter/selectors';
 import { HyperFilter } from '../filter/stateTypes';
-import { showSfilter, loadFrontPageFilters, getGames } from '../filter/actions';
+import { getGames, loadFilter, navigateToFilter } from '../filter/actions';
 import FilterApp from './FilterApp';
 
 interface StateProps {
-  sfilter: HyperFilter;
+  hyperFilter: HyperFilter;
 }
 
 interface DispatchProps {
-  showSfilter: (sid: string) => void;
-  loadFrontPageFilters: () => void;
   getGames: (page: number) => void;
-  navigateTo: typeof actions.navigateTo;
+  loadFilter: (sid: string) => void;
+  navigateToFilter: (filter: HyperFilter) => void;
 }
 
 type FilterAppPageProps = StateProps & DispatchProps & {
@@ -24,19 +22,8 @@ type FilterAppPageProps = StateProps & DispatchProps & {
 };
 
 class FilterAppPage extends React.Component<FilterAppPageProps> {
-  // static propTypes = {
-  //   sid: React.PropTypes.string,
-  //   slug: React.PropTypes.string,
-  //   showSfilter: React.PropTypes.func,
-  //   loadFrontPageFilters: React.PropTypes.func,
-  //   loadFrontPageFilters: React.PropTypes.func,
-  //   sfilter: React.PropTypes.object,
-  //   navigateTo: React.PropTypes.func,
-  //   getGames: React.PropTypes.func
-  // }
-
   componentWillMount () {
-    this.loadSfilter(this.props);
+    this.loadFilter(this.props);
   }
 
   shouldComponentUpdate (np) {
@@ -47,23 +34,34 @@ class FilterAppPage extends React.Component<FilterAppPageProps> {
   }
 
   componentWillUpdate (props) {
-    this.loadSfilter(props)
+    this.loadFilter(props);
   }
 
-  componentWillReceiveProps (props) {
-    let { sid, slug, sfilter, navigateTo } = props;
-    if (sid && !slug && sfilter && sfilter.nameSlug) {
-      navigateTo('filterFull', {sid: sfilter.sid, slug: sfilter.nameSlug})
-    }
-  }
+  // componentWillReceiveProps (props) {
+  //   // let { sid, slug, sfilter, navigateTo } = props;
+  //   // if (sid && !slug && sfilter && sfilter.nameSlug) {
+  //   //   navigateTo('filterFull', {sid: sfilter.sid, slug: sfilter.nameSlug})
+  //   // }
+  // }
 
-  loadSfilter ({sid, slug, sfilter}) {
-    if (sid && (!sfilter || sfilter.sid !== sid)) {
-      this.props.showSfilter(sid);
-    } else if (!sid && (!sfilter || sfilter.frontPage !== 0)) {
-      // this.props.loadFrontPageFilters()
-      this.props.getGames(0);
+  loadFilter ({sid, slug, hyperFilter}) {
+    if (!sid) {
+      if (hyperFilter.sid) {
+        if (hyperFilter.parentId) {
+          this.props.navigateToFilter(hyperFilter);
+        }
+      } else {
+        this.props.loadFilter('0');
+      }
+    } else if (hyperFilter.sid !== sid) {
+      this.props.loadFilter(sid);
     }
+    // if (sid && (!hyperFilter || hyperFilter.sid !== sid)) {
+
+    // } else if (!sid && (!sfilter || sfilter.frontPage !== 0)) {
+    //   // this.props.loadFrontPageFilters()
+    //   this.props.getGames(0);
+    // }
   }
 
   render () {
@@ -76,10 +74,9 @@ class FilterAppPage extends React.Component<FilterAppPageProps> {
 }
 
 export default connect<StateProps, DispatchProps, {}>((s) => ({
-  sfilter: sfilterSelector(s)
+  hyperFilter: hyperFilter(s)
 }), {
-  showSfilter,
-  loadFrontPageFilters,
   getGames,
-  navigateTo: actions.navigateTo
+  loadFilter,
+  navigateToFilter
 })(FilterAppPage);

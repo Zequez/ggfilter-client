@@ -7,12 +7,12 @@ import SortQueryChip from '../QueryChip/SortQueryChip';
 
 interface QueryChipsListProps {
   configuration: FiltersConfiguration;
-  onRemove: (filter: FiltersNames) => void;
+  onRemove?: (filter: FiltersNames) => void;
 }
 
 export default class QueryChipsList extends React.Component<QueryChipsListProps> {
   render () {
-    let { configuration } = this.props;
+    let { configuration, onRemove } = this.props;
 
     let sortChip: JSX.Element = null;
     let chips = [];
@@ -25,21 +25,23 @@ export default class QueryChipsList extends React.Component<QueryChipsListProps>
             <QueryChip
               config={config}
               filter={definitions.filters.get(filterName)}
-              onRemove={() => this.props.onRemove(filterName)}/>
+              onRemove={this.props.onRemove ? () => this.props.onRemove(filterName) : null}/>
           </div>
         );
       }
       if (config.sort != null) {
         let filter = definitions.filters.get(filterName);
-        sortChip = <SortQueryChip title={filter.title} asc={config.sort}/>
+        sortChip = <div className={th.QueryChipsList__chipContainer}>
+          <SortQueryChip title={filter.title} asc={config.sort}/>
+        </div>;
       }
     }
 
     return chips.length ? (
       <div className={th.QueryChipsList}>
-        <div className={th.QueryChipsList__titleLabel}>
+        {onRemove ? <div className={th.QueryChipsList__titleLabel}>
           Filters
-        </div>
+        </div> : null}
         {chips}
         {sortChip}
       </div>

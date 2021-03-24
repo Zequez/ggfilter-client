@@ -2,19 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createRouteNodeSelector } from 'redux-router5';
 
-import { FilterApp, RedirectToCurrentFilter } from 'src/FilterApp';
+import { FilterAppPage, RedirectToCurrentFilter } from 'src/FilterApp';
+import { FrontPage } from 'src/FrontPage';
 import { SysreqCalc } from 'src/SysreqCalc';
 import * as staticPage from '../StaticPages';
-import WIP from './WIP';
 
 
 const Pages = {
-  root: () => <FilterApp/>,
-  // filterSid: ({sid}) => <div></div> <FilterApp sid={sid}/>,
-  // filterFull: ({sid, slug}) => <FilterApp sid={sid} slug={slug}/>,
-  filterSid: ({sid}) => WIP,
-  filterFull: ({sid, slug}) => WIP,
-  filterRedirect: () => <RedirectToCurrentFilter/>,
+  root: () => <FrontPage/>,
+  filterSid: ({sid}) => <FilterAppPage sid={sid}/>,
+  filterFull: ({sid, slug}) => <FilterAppPage sid={sid} slug={slug}/>,
+  filterPlain: () => <FilterAppPage/>,
   sysreq: () => <SysreqCalc/>,
 
   aboutSysreq: () => <staticPage.aboutSysreq/>,

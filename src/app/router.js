@@ -3,7 +3,7 @@ import browserPlugin from 'router5/plugins/browser'
 
 export const routes = [
   { name: 'root', path: '/' },
-  { name: 'filterRedirect', path: '/f' },
+  { name: 'filterPlain', path: '/f' },
   { name: 'filterSid', path: '/f/:sid' },
   { name: 'filterFull', path: '/f/:sid/:slug' },
   { name: 'sysreq', path: '/sysreq' },

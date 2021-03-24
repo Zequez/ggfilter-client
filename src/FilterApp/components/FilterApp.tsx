@@ -75,18 +75,22 @@ class FilterApp extends React.Component<FilterAppProps> {
           onColumnChange={p.setColumn}
           onHlChange={p.setHl}
           configuration={p.configuration}/>
-        <Table
-          gamesPages={p.games}
-          configuration={p.configuration}
-          setSort={p.setSort}
-          setQuery={p.setQuery}
-          setLightbox={p.setLightbox}/>
-        <GamesLoader
-          fetching={p.gamesLoading}
-          failed={p.gamesFailed}
-          onRequestMore={this.handleRequestMoreGames}
-          loadedGames={p.gamesLoadedCount}
-          totalGames={p.gamesTotalCount}/>
+        {p.games.length ? (
+          <Table
+            gamesPages={p.games}
+            configuration={p.configuration}
+            setSort={p.setSort}
+            setQuery={p.setQuery}
+            setLightbox={p.setLightbox}/>
+        ) : null}
+        {p.games.length ? (
+          <GamesLoader
+            fetching={p.gamesLoading}
+            failed={p.gamesFailed}
+            onRequestMore={this.handleRequestMoreGames}
+            loadedGames={p.gamesLoadedCount}
+            totalGames={p.gamesTotalCount}/>
+        ) : null}
       </div>
     );
   }

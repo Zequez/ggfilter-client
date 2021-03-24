@@ -1,0 +1,84 @@
+.FrontPage
+  /**/
+
+.topBackground
+  height: $gg*2
+  background: $color-pri
+
+.content
+  margin: -$gg $gg 0 $gg
+  padding: $g*3
+  border-radius: 2px
+  background: $color-mono-4
+  box-shadow: $shadow-card
+
+  h2
+    font-size: $font-size-headline
+    line-height: $g*3*2
+.FiltersList
+  margin-bottom: $g*3
+  ul
+    display: grid
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr) )
+    grid-gap: $g*3 $g*3
+
+.seeAllOfEm
+  text-align: right
+  line-height: $gg
+
+.FilterCard
+  // margin: 0 $g*3 $g*3 0
+  display: flex
+  flex-direction: column
+  border-radius: 2px
+  background: $color-mono-4
+  box-shadow: $shadow-card
+
+.cardHeader
+  display: flex
+  background: $color-pri-dark
+  padding: 0 $g 0 $g
+  border-top-left-radius: 2px
+  border-top-right-radius: 2px
+
+  h3
+    flex-grow: 1
+    font-size: $font-size-title
+    color: $color-text-pri-alt
+    text-shadow: 0px -1px 0px rgba(#000, 0.2)
+    line-height: $gg
+
+.cardBody
+  padding: 0 $g
+  flex-grow: 1
+
+.cardFooter
+  background: $color-mono-3
+  padding: $g
+  display: flex
+  .buttons
+    display: flex
+    flex-grow: 1
+    justify-content: flex-end
+    a
+      margin-left: $g
+
+  .gamesCounter
+    display: flex
+    align-items: center
+    justify-content: flex-start
+
+  .totalGames, .totalOnSale
+    height: $g*3
+    padding: 0 $g
+    border-radius: $g*3/2
+    box-shadow: $shadow-card
+    line-height: $g*3
+    text-transform: uppercase
+  .totalGames
+    background: $color-mono-4
+  .totalOnSale
+    margin-left: $g
+    background: $color-pri
+    color: $color-text-pri-alt
+    text-shadow: 0px -1px 0px rgba(#000, 0.2)

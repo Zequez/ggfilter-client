@@ -6,16 +6,14 @@ export interface FilterConfig {
   hl: boolean;
   column: boolean;
   sort: boolean | null;
-  fineTuned: boolean;
-};
+}
 
 export interface PartialFilterConfig {
   query?: {} | null;
   hl?: boolean;
   column?: boolean;
   sort?: boolean | null;
-  fineTuned?: boolean;
-};
+}
 
 export type FiltersConfiguration = {
   [key in FiltersNames]: FilterConfig
@@ -23,16 +21,16 @@ export type FiltersConfiguration = {
 
 export interface HyperFilter {
   sid: string;
-  nameSlug: string;
-  userId: string;
   name: string;
+  slug: string;
+  parentId: number;
+  ownershipHash: string;
   configuration: FiltersConfiguration;
-  parent: string;
-};
+}
 
 export interface Game {
   id: number;
-};
+}
 
 export interface State {
   sfilter: HyperFilter;
@@ -40,6 +38,7 @@ export interface State {
   sfilterLoading: boolean;
 
   filter: HyperFilter;
+  ownershipHashes: {[k: string]: string};
 
   games: {
     batches: Game[][];
@@ -49,4 +48,4 @@ export interface State {
   };
 
   frontPageFilters: object[];
-};
+}

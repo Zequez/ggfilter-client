@@ -1,7 +1,9 @@
 import definitions, { FiltersNames } from '../../Definitions';
 import { FiltersConfiguration, FilterConfig, PartialFilterConfig } from './stateTypes';
 
-const initialConfigurationValues: {[key in FiltersNames]?: PartialFilterConfig} = {
+export type PartialFiltersConfiguration = {[key in FiltersNames]?: PartialFilterConfig};
+
+const initialConfigurationValues: PartialFiltersConfiguration = {
   Name: { column: true },
   Tags: { column: true },
   ReleaseDate: { column: true, sort: true },
@@ -17,18 +19,31 @@ const filterConf: FilterConfig = {
   query: null,
   hl: false,
   column: false,
-  sort: null,
-  fineTuned: false
+  sort: null
 };
 
-let configuration = {};
+export function extendConfiguration (partialConf: PartialFiltersConfiguration) {
+  let configuration = {};
 
-definitions.sortedFiltersNames.forEach((filterName) => {
-  configuration[filterName] = Object.assign(
-    {},
-    filterConf,
-    initialConfigurationValues[filterName] || {}
-  );
-});
+  definitions.sortedFiltersNames.forEach((filterName) => {
+    configuration[filterName] = Object.assign(
+      {},
+      filterConf,
+      partialConf[filterName] || {}
+    );
+  });
 
-export default <FiltersConfiguration> configuration;
+  return <FiltersConfiguration> configuration;
+}
+
+export default extendConfiguration(initialConfigurationValues);
+
+// definitions.sortedFiltersNames.forEach((filterName) => {
+//   configuration[filterName] = Object.assign(
+//     {},
+//     filterConf,
+//     initialConfigurationValues[filterName] || {}
+//   );
+// });
+
+// export default <FiltersConfiguration> configuration;

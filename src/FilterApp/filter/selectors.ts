@@ -61,40 +61,41 @@ export const gamesFailed = createSelector(gamesError, (error) => !!error);
 /* Other stuff
 /********************/
 
-export const filterForApi = createSelector(
-  configuration,
-  currentSort,
-  (configuration, currentSort) => {
-    let query: Query = {
-      params: {},
-      columns: [],
-      sort: {
-        column: null,
-        asc: null
-      }
-    };
+export const configurationToQuery = (configuration: FiltersConfiguration) => {
+  let query: Query = {
+    params: {},
+    columns: [],
+    sort: {
+      column: null,
+      asc: null
+    }
+  };
 
-    let filterName: keyof typeof configuration;
-    for (filterName in configuration) {
-      let config = configuration[filterName];
-      let filter = definitions.filters.get(filterName);
+  let filterName: keyof typeof configuration;
+  for (filterName in configuration) {
+    let config = configuration[filterName];
+    let filter = definitions.filters.get(filterName);
 
-      if (config.query) {
-        query.params[filter.api] = {...config.query, hl: config.hl};
-      }
-
-      if (config.column) {
-        query.columns = query.columns.concat(Object.values(filter.cellInputs));
-      }
-
-      if (config.sort != null) {
-        query.sort = { column: filter.sort, asc: !config.sort };
-      }
+    if (config.query) {
+      query.params[filter.api] = {...config.query, hl: config.hl};
     }
 
-    query.columns = query.columns.filter((val, index, self) =>
-      self.indexOf(val) === index);
+    if (config.column) {
+      query.columns = query.columns.concat(Object.values(filter.cellInputs));
+    }
 
-    return query;
+    if (config.sort != null) {
+      query.sort = { column: filter.sort, asc: !config.sort };
+    }
   }
+
+  query.columns = query.columns.filter((val, index, self) =>
+    self.indexOf(val) === index);
+
+  return query;
+};
+
+export const filterForApi = createSelector(
+  configuration,
+  (configuration) => configurationToQuery(configuration)
 );

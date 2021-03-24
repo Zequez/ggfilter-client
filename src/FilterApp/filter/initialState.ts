@@ -4,13 +4,11 @@ import configuration from './initialConfiguration';
 
 const filter: HyperFilter = {
   sid: null,
-  nameSlug: null,
-  userId: null,
-  parent: null,
-
   name: null,
-
+  slug: null,
+  parentId: null,
   configuration: configuration,
+  ownershipHash: null
 };
 
 const initialState: State = {
@@ -19,6 +17,7 @@ const initialState: State = {
   sfilterLoading: false,
 
   filter: filter,
+  ownershipHashes: localStorage.ownershipHashes ? JSON.parse(localStorage.ownershipHashes) : {},
 
   games: {
     batches: [],

@@ -10,7 +10,7 @@ import { TTDiv } from 'shared/components/Tooltip';
 interface QueryChipProps {
   config: FilterConfig;
   filter: Filter;
-  onRemove: () => void;
+  onRemove?: () => void;
 }
 
 export default class QueryChip extends React.Component<QueryChipProps> {

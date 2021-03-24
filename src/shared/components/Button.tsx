@@ -16,6 +16,7 @@ interface ButtonProps {
   disabled?: boolean;
   flat?: boolean;
   mini?: boolean;
+  link?: string;
   onClick?: (event: React.MouseEvent<HTMLElement>) => void;
 }
 
@@ -33,12 +34,14 @@ class Button extends React.Component<ButtonProps> {
   }
 
   render () {
-    let { children, icon, label, flat, raised, primary, mini, alt, disabled, className, ...other } = this.props;
+    let { children, icon, label, flat, raised, primary, mini, alt, disabled, link, className, ...other } = this.props;
 
     if (flat) raised = false;
 
+    let Elem = link ? 'a' : 'button';
+
     return (
-      <button ref='button' className={cx(th.Button, className, {
+      <Elem ref='button' href={link} className={cx(th.Button, className, {
         [th.Button_raised]: raised,
         [th.Button_flat]: !raised,
         [th.Button_primary]: primary,
@@ -50,7 +53,7 @@ class Button extends React.Component<ButtonProps> {
         { icon ? <Icon icon={icon}/> : null }
         {label}
         {children}
-      </button>
+      </Elem>
     );
   }
 }

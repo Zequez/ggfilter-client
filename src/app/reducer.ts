@@ -11,6 +11,7 @@ const ui = require('shared/reducers/uiReducer').reducer;
 // import * as SavedFiltersManager from 'src/SavedFiltersManager'
 import * as FilterApp from 'src/FilterApp';
 import * as Lightbox from 'src/Lightbox';
+import * as FrontPage from 'src/FrontPage';
 
 const reducer = combineReducers({
   router: router5Reducer,
@@ -21,7 +22,8 @@ const reducer = combineReducers({
   [Lightbox.ID]: Lightbox.reducer,
   // [SavedFiltersManager.constants.NAME]: SavedFiltersManager.reducer,
   [layoutId]: layout,
-  [FilterApp.ID]: FilterApp.reducer
+  [FilterApp.ID]: FilterApp.reducer,
+  [FrontPage.ID]: FrontPage.reducer
 });
 
 export default reducer;

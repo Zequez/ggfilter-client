@@ -13,7 +13,8 @@ import { Provider } from 'react-redux'
 import store from 'src/app/store'
 
 import { setAllTags } from 'shared/reducers/tagsReducer'
-import { getCurrentUser } from 'shared/reducers/authReducer'
+import { actions as filterAppActions } from 'src/FilterApp';
+// import { getCurrentUser } from 'shared/reducers/authReducer'
 
 import App from 'src/app/App'
 import Api from 'src/Api'
@@ -22,11 +23,9 @@ console.logRender = function (componentName) {
   // console.info(`<${componentName}/>`)
 }
 
-Api.tags.index().then((tags) => {
-  store.dispatch(getCurrentUser()).then(() => {
-    store.dispatch(setAllTags(tags))
-    renderWithHot(App)
-  })
+Promise.all([Api.tags.index()]).then(([tags]) => {
+  store.dispatch(setAllTags(tags));
+  renderWithHot(App);
 })
 
 function renderWithHot (App) {

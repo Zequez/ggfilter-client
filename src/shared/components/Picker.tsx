@@ -17,7 +17,7 @@ type PickerProps<T> = {
 export default class Picker<T> extends React.Component<PickerProps<T>> {
   render () {
     let { text, tooltip, value, currentValue, onClick } = this.props;
-    let active = currentValue === value;
+    let active = currentValue && JSON.stringify(currentValue) === JSON.stringify(value);
     return <Span
       tooltip={tooltip}
       className={cx(th.Picker, {[th.active]: active})}
